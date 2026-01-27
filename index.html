@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL CUCHILLOS ARTESANALES - Cuchillos hechos a mano</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-links">
+                    <a href="#">CÓMO COMPRAR</a>
+                    <a href="#">FORMAS DE PAGO</a>
+                    <a href="#">MÉTODOS DE ENVÍO</a>
+                </div>
+                <div class="top-actions">
+                    <select class="currency-selector">
+                        <option value="ARS">ARS $</option>
+                        <option value="USD">USD</option>
+                    </select>
+                    <select class="language-selector">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                    </select>
+                    <div class="favorites">
+                        <i class="far fa-heart"></i>
+                        <span class="favorites-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <div class="nav-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <h1>GL CUCHILLOS ARTESANALES</h1>
+                    </div>
+                </div>
+                
+                <div class="nav-center">
+                    <ul class="nav-menu">
+                        <li><a href="#" class="active">Inicio</a></li>
+                        <li class="dropdown">
+                            <a href="#">Cuchillos <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h4>Cuchillos</h4>
+                                    <a href="#">Cuchillos de chef</a>
+                                    <a href="#">Cuchillos de caza</a>
+                                    <a href="#">Cuchillos decorativos</a>
+                                    <a href="#">Cuchillos tácticos</a>
+                                    <a href="#">Cuchillos plegables</a>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h4>Juegos</h4>
+                                    <a href="#">Juegos parrilleros</a>
+                                    <a href="#">Juegos de cocina</a>
+                                    <a href="#">Caja 6 juegos cuchillo y tenedor</a>
+                                    <a href="#">Juegos cuchillo y tenedor alpaca</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">Mangos <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h4>Materiales de mangos</h4>
+                                    <a href="#">Madera noble</a>
+                                    <a href="#">Cuerno y asta</a>
+                                    <a href="#">Resina epoxi</a>
+                                    <a href="#">Micarta</a>
+                                    <a href="#">Madera estabilizada</a>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h4>Estilos</h4>
+                                    <a href="#">Tradicionales</a>
+                                    <a href="#">Modernos</a>
+                                    <a href="#">Personalizados</a>
+                                    <a href="#">Con incrustaciones</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">Materiales <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h4>Aceros</h4>
+                                    <a href="#">Acero al carbono</a>
+                                    <a href="#">Acero inoxidable</a>
+                                    <a href="#">Acero Damasco</a>
+                                    <a href="#">Acero de alta aleación</a>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h4>Herramientas</h4>
+                                    <a href="#">Forjas</a>
+                                    <a href="#">Piedras de afilar</a>
+                                    <a href="#">Accesorios</a>
+                                    <a href="#">Kits de mantenimiento</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#">Artesanías</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Regalos corporativos</a></li>
+                        <li><a href="#">Catálogos</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar cuchillos...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-actions">
+                        <a href="#" class="login-btn">
+                            <i class="far fa-user"></i> Iniciar sesión
+                        </a>
+                        <a href="#" class="cart-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Cuchillos Artesanales de Alta Calidad</h2>
+            <p>Hechos a mano por maestros cuchilleros con más de 40 años de experiencia</p>
+            <a href="#" class="btn-primary">Ver Colección</a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Categorías Destacadas</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #8B4513;"></div>
+                    <h3>Cuchillos de Chef</h3>
+                    <p>Precisión para profesionales</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #D2691E;"></div>
+                    <h3>Cuchillos de Caza</h3>
+                    <p>Robustos y confiables</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #A0522D;"></div>
+                    <h3>Mangos Artesanales</h3>
+                    <p>Diseños únicos</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #CD853F;"></div>
+                    <h3>Juegos Completos</h3>
+                    <p>Para tu cocina o colección</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Cuchillos Destacados</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Productos se cargarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>GL CUCHILLOS ARTESANALES</h2>
+                <p>Somos una familia de artesanos especializados en la fabricación de cuchillos de alta calidad desde 1980. Cada pieza es única, forjada a mano con los mejores materiales y atención al detalle.</p>
+                <p>Nuestros cuchillos combinan técnicas tradicionales con diseños contemporáneos, garantizando durabilidad, funcionalidad y belleza.</p>
+                <a href="#" class="btn-secondary">Nuestra Historia</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>GL CUCHILLOS ARTESANALES</h3>
+                    <p>Fabricantes de cuchillos artesanales de alta calidad desde 1980.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>CATEGORÍAS</h4>
+                    <ul>
+                        <li><a href="#">Cuchillos</a></li>
+                        <li><a href="#">Mangos</a></li>
+                        <li><a href="#">Materiales</a></li>
+                        <li><a href="#">Artesanías</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>INFORMACIÓN</h4>
+                    <ul>
+                        <li><a href="#">Cómo comprar</a></li>
+                        <li><a href="#">Formas de pago</a></li>
+                        <li><a href="#">Métodos de envío</a></li>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>CONTACTO</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Artesanos 1234</li>
+                        <li><i class="fas fa-phone"></i> +54 11 1234-5678</li>
+                        <li><i class="fas fa-envelope"></i> info@glcuchillos.com</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 9-18hs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Los items del carrito se cargarán dinámicamente -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Tu carrito está vacío</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">$0</span>
+            </div>
+            <button class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Favorites Sidebar -->
+    <div class="favorites-sidebar">
+        <div class="favorites-header">
+            <h3>Favoritos</h3>
+            <button class="close-favorites">&times;</button>
+        </div>
+        <div class="favorites-items">
+            <!-- Los items favoritos se cargarán dinámicamente -->
+            <div class="empty-favorites">
+                <i class="far fa-heart"></i>
+                <p>No tienes favoritos</p>
+            </div>
+        </div>
+    </div>
+    <div class="favorites-overlay"></div>
+
+    <!-- Login Modal -->
+    <div class="login-modal">
+        <div class="login-content">
+            <button class="close-login">&times;</button>
+            <h3>Iniciar Sesión</h3>
+            <form id="login-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Contraseña" required>
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+            <p>¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+        </div>
+    </div>
+    <div class="login-overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
