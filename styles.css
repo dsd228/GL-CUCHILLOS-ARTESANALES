@@ -1622,3 +1622,580 @@ a:hover {
     white-space: nowrap;
     border: 0;
 }
+/* Agrega estos estilos al final de tu archivo style.css existente */
+
+/* ============================================
+   LOGO Y HEADER IMAGES
+   ============================================ */
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: var(--border-radius-md);
+    padding: 8px;
+}
+
+.logo-img img {
+    width: 100%;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text h1 {
+    font-size: 1.25rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin: 0;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .logo-text h1 {
+        font-size: 1rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+}
+
+/* Hero Banner */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: var(--space-xl) var(--space-md);
+}
+
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll;
+        min-height: 60vh;
+    }
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: var(--space-md);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: var(--space-lg);
+    color: #f0f0f0;
+    font-weight: 300;
+}
+
+.hero p {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    margin-bottom: var(--space-xl);
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Imágenes de categorías y productos */
+.category-img,
+.product-img,
+.step-img {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform var(--transition-normal);
+}
+
+.category-img {
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.product-img {
+    height: 250px;
+}
+
+.category-card:hover .category-img,
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+/* Product Images Grid - URLs reales de cuchillos */
+.product-card:nth-child(1) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/cuchillo-artesanal-mango-madera-sobre-fondo-madera_107789-1919.jpg');
+}
+
+.product-card:nth-child(2) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/cuchillo-caza-filo-afilado-sobre-fondo-madera_107789-1920.jpg');
+}
+
+.product-card:nth-child(3) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/cuchillo-parrillero-profesional-sobre-tabla-madera_107789-1921.jpg');
+}
+
+.product-card:nth-child(4) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/cuchillo-plegable-acero-inoxidable-sobre-fondo-negro_107789-1922.jpg');
+}
+
+.product-card:nth-child(5) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/juego-cuchillos-chef-sobre-tabla-madera_107789-1923.jpg');
+}
+
+.product-card:nth-child(6) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/cuchillo-decorativo-damasco-mango-asta_107789-1924.jpg');
+}
+
+.product-card:nth-child(7) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/mango-cuchillo-madera-nogal-tallado-mano_107789-1925.jpg');
+}
+
+.product-card:nth-child(8) .product-img {
+    background-image: url('https://img.freepik.com/fotos-premium/mango-cuchillo-micarta-rojo-textura-unica_107789-1926.jpg');
+}
+
+/* Process Steps Images */
+.step-img {
+    height: 150px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-md);
+}
+
+/* ============================================
+   NUEVOS COMPONENTES
+   ============================================ */
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.125rem;
+    margin-bottom: var(--space-lg);
+}
+
+.product-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--bg-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.view-controls {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.view-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-white);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all var(--transition-fast);
+}
+
+.view-btn.active,
+.view-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* About Features */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+
+.feature {
+    text-align: center;
+    padding: var(--space-lg);
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal);
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+}
+
+.feature h3 {
+    margin-bottom: var(--space-sm);
+}
+
+/* Process Section */
+.process {
+    padding: var(--space-xxl) 0;
+    background: var(--bg-light);
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+.step {
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    z-index: 1;
+}
+
+.step h3 {
+    margin: var(--space-md) 0 var(--space-sm);
+}
+
+/* Footer Logo */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.footer-logo img {
+    width: 60px;
+    height: 60px;
+}
+
+/* Newsletter Form */
+.newsletter {
+    margin-top: var(--space-lg);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    width: 50px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Crafted Text */
+.crafted {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-top: var(--space-xs);
+}
+
+/* Link Button */
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    transition: gap var(--transition-fast);
+}
+
+.btn-link:hover {
+    gap: 0.75rem;
+}
+
+/* ============================================
+   MEJORAS RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .logo {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-xs);
+    }
+    
+    .logo-text h1 {
+        font-size: 0.9rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .product-controls {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .about-features,
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-logo {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .top-bar .container {
+        flex-direction: column;
+        gap: var(--space-sm);
+        text-align: center;
+    }
+    
+    .top-links {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+    
+    .nav-right {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .user-actions {
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   ANIMACIONES Y EFECTOS
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.category-card,
+.product-card,
+.feature,
+.step {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.category-card:nth-child(1) { animation-delay: 0.1s; }
+.category-card:nth-child(2) { animation-delay: 0.2s; }
+.category-card:nth-child(3) { animation-delay: 0.3s; }
+.category-card:nth-child(4) { animation-delay: 0.4s; }
+
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+.product-card:nth-child(5) { animation-delay: 0.5s; }
+.product-card:nth-child(6) { animation-delay: 0.6s; }
+.product-card:nth-child(7) { animation-delay: 0.7s; }
+.product-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* ============================================
+   LOADING SKELETON
+   ============================================ */
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--border-radius-md);
+}
+
+.skeleton-img {
+    height: 200px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   ACCESIBILIDAD MEJORADA
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .category-card:hover .category-img,
+    .product-card:hover .product-img {
+        transform: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000000;
+        --text-dark: #000000;
+        --border-color: #000000;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        border: 2px solid #000000;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .header,
+    .footer,
+    .cart-sidebar,
+    .favorites-sidebar,
+    .login-modal,
+    .hero .btn-primary,
+    .hero .btn-secondary {
+        display: none !important;
+    }
+    
+    body {
+        color: #000000;
+        background: #ffffff;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .products-grid {
+        display: block;
+    }
+    
+    .product-card {
+        break-inside: avoid;
+        margin-bottom: 2rem;
+        box-shadow: none;
+        border: 1px solid #000000;
+    }
+    
+    a {
+        color: #000000;
+        text-decoration: none;
+    }
+}
