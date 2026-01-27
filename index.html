@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GL CUCHILLOS ARTESANALES - Cuchillos hechos a mano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>GL CUCHILLOS ARTESANALES - Cuchillos Hechos a Mano</title>
+    <meta name="description" content="Cuchillos artesanales de alta calidad hechos a mano por maestros cuchilleros con más de 40 años de experiencia. Envíos a todo el país.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload de imágenes críticas -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+    <link rel="preload" as="image" href="https://img.freepik.com/fotos-premium/cuchillo-artesanal-mango-madera-sobre-fondo-madera_107789-1919.jpg">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
+        <!-- Barra Superior -->
         <div class="top-bar">
             <div class="container">
                 <div class="top-links">
-                    <a href="#">CÓMO COMPRAR</a>
-                    <a href="#">FORMAS DE PAGO</a>
-                    <a href="#">MÉTODOS DE ENVÍO</a>
+                    <a href="#how-to-buy">CÓMO COMPRAR</a>
+                    <a href="#payment-methods">FORMAS DE PAGO</a>
+                    <a href="#shipping-methods">MÉTODOS DE ENVÍO</a>
                 </div>
+                
                 <div class="top-actions">
                     <select class="currency-selector">
                         <option value="ARS">ARS $</option>
@@ -35,19 +53,31 @@
             </div>
         </div>
         
+        <!-- Navegación Principal -->
         <nav class="main-nav">
-            <div class="container">
+            <div class="container nav-container">
                 <div class="nav-left">
-                    <button class="menu-toggle">
-                        <i class="fas fa-bars"></i>
+                    <button class="menu-toggle" aria-label="Menú principal">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
-                    <div class="logo">
-                        <h1>GL CUCHILLOS ARTESANALES</h1>
-                    </div>
+                    
+                    <!-- Logo con imagen -->
+                    <a href="#" class="logo">
+                        <div class="logo-img">
+                            <img src="https://img.icons8.com/color/96/000000/knife.png" alt="GL CUCHILLOS ARTESANALES Logo" width="40" height="40">
+                        </div>
+                        <div class="logo-text">
+                            <h1>GL CUCHILLOS ARTESANALES</h1>
+                            <p class="logo-subtitle">Artesanía en acero desde 1980</p>
+                        </div>
+                    </a>
                 </div>
                 
-                <div class="nav-center">
-                    <ul class="nav-menu">
+                <!-- Menú de navegación -->
+                <div class="nav-menu">
+                    <ul>
                         <li><a href="#" class="active">Inicio</a></li>
                         <li class="dropdown">
                             <a href="#">Cuchillos <i class="fas fa-chevron-down"></i></a>
@@ -117,15 +147,20 @@
                 </div>
                 
                 <div class="nav-right">
+                    <!-- Búsqueda -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar cuchillos...">
-                        <button><i class="fas fa-search"></i></button>
+                        <input type="text" class="search-input" placeholder="Buscar cuchillos, mangos, materiales...">
+                        <button class="search-button" aria-label="Buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
+                    
+                    <!-- Acciones de usuario -->
                     <div class="user-actions">
                         <a href="#" class="login-btn">
-                            <i class="far fa-user"></i> Iniciar sesión
+                            <i class="far fa-user"></i> <span class="login-text">Iniciar sesión</span>
                         </a>
-                        <a href="#" class="cart-btn">
+                        <a href="#" class="cart-btn" aria-label="Carrito de compras">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">0</span>
                         </a>
@@ -135,62 +170,147 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Banner Hero -->
+    <section class="hero" id="main-content">
         <div class="hero-content">
-            <h2>Cuchillos Artesanales de Alta Calidad</h2>
-            <p>Hechos a mano por maestros cuchilleros con más de 40 años de experiencia</p>
-            <a href="#" class="btn-primary">Ver Colección</a>
+            <h1>GL CUCHILLOS ARTESANALES</h1>
+            <p class="hero-subtitle">Forjados a mano con pasión y precisión desde 1980</p>
+            <p>Cada cuchillo es una obra única, creada con los mejores aceros y maderas seleccionadas</p>
+            <a href="#products" class="btn-primary">Descubrir Colección</a>
+            <a href="#about" class="btn-secondary">Nuestra Historia</a>
         </div>
     </section>
 
-    <!-- Featured Categories -->
+    <!-- Categorías Destacadas -->
     <section class="categories">
         <div class="container">
-            <h2 class="section-title">Categorías Destacadas</h2>
+            <h2 class="section-title">Nuestras Especialidades</h2>
+            <p class="section-subtitle">Descubre nuestra gama de productos artesanales</p>
+            
             <div class="categories-grid">
                 <div class="category-card">
-                    <div class="category-img" style="background-color: #8B4513;"></div>
+                    <div class="category-img" style="background-image: url('https://img.freepik.com/fotos-premium/cuchillo-chef-profesional-sobre-tabla-madera_207634-154.jpg');"></div>
                     <h3>Cuchillos de Chef</h3>
-                    <p>Precisión para profesionales</p>
+                    <p>Precisión para profesionales y aficionados</p>
+                    <a href="#" class="btn-link">Ver colección →</a>
                 </div>
+                
                 <div class="category-card">
-                    <div class="category-img" style="background-color: #D2691E;"></div>
+                    <div class="category-img" style="background-image: url('https://img.freepik.com/fotos-premium/cuchillo-caza-sobre-fondo-madera-rustica_207634-157.jpg');"></div>
                     <h3>Cuchillos de Caza</h3>
-                    <p>Robustos y confiables</p>
+                    <p>Robustos y confiables para actividades al aire libre</p>
+                    <a href="#" class="btn-link">Ver colección →</a>
                 </div>
+                
                 <div class="category-card">
-                    <div class="category-img" style="background-color: #A0522D;"></div>
+                    <div class="category-img" style="background-image: url('https://img.freepik.com/fotos-premium/mangos-cuchillo-madera-artesanales-sobre-mesa-madera_207634-152.jpg');"></div>
                     <h3>Mangos Artesanales</h3>
-                    <p>Diseños únicos</p>
+                    <p>Diseños únicos en maderas nobles y materiales especiales</p>
+                    <a href="#" class="btn-link">Ver colección →</a>
                 </div>
+                
                 <div class="category-card">
-                    <div class="category-img" style="background-color: #CD853F;"></div>
+                    <div class="category-img" style="background-image: url('https://img.freepik.com/fotos-premium/juego-cuchillos-sobre-tabla-madera_207634-151.jpg');"></div>
                     <h3>Juegos Completos</h3>
-                    <p>Para tu cocina o colección</p>
+                    <p>Sets para cocina, parrilla y colección</p>
+                    <a href="#" class="btn-link">Ver colección →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products">
+    <!-- Productos Destacados -->
+    <section class="products" id="products">
         <div class="container">
-            <h2 class="section-title">Cuchillos Destacados</h2>
+            <div class="section-header">
+                <h2 class="section-title">Cuchillos Destacados</h2>
+                <p class="section-subtitle">Nuestras creaciones más solicitadas</p>
+                <div class="product-controls">
+                    <span class="product-count">Mostrando 8 productos</span>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="grid" aria-label="Vista en cuadrícula">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" aria-label="Vista en lista">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="products-grid" id="products-grid">
-                <!-- Productos se cargarán dinámicamente con JavaScript -->
+                <!-- Los productos se cargan dinámicamente con JavaScript -->
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn-secondary">Ver Todos los Productos</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about">
+    <!-- Sobre Nosotros -->
+    <section class="about" id="about">
         <div class="container">
             <div class="about-content">
-                <h2>GL CUCHILLOS ARTESANALES</h2>
-                <p>Somos una familia de artesanos especializados en la fabricación de cuchillos de alta calidad desde 1980. Cada pieza es única, forjada a mano con los mejores materiales y atención al detalle.</p>
-                <p>Nuestros cuchillos combinan técnicas tradicionales con diseños contemporáneos, garantizando durabilidad, funcionalidad y belleza.</p>
-                <a href="#" class="btn-secondary">Nuestra Historia</a>
+                <h2>La Tradición de la Forja Artesanal</h2>
+                <p>En <strong>GL CUCHILLOS ARTESANALES</strong> llevamos más de cuatro décadas perfeccionando el arte de la cuchillería. Cada pieza que creamos es el resultado de horas de dedicación, conocimientos transmitidos de generación en generación y un profundo respeto por los materiales.</p>
+                
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-fire"></i>
+                        <h3>Forja Tradicional</h3>
+                        <p>Técnicas centenarias combinadas con tecnología moderna</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-gem"></i>
+                        <h3>Materiales Premium</h3>
+                        <p>Aceros de alta calidad y maderas seleccionadas a mano</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-award"></i>
+                        <h3>Garantía de por Vida</h3>
+                        <p>Confianza en cada producto que sale de nuestro taller</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn-primary mt-4">Conoce Nuestro Proceso</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso de Fabricación -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Nuestro Proceso Artesanal</h2>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-img" style="background-image: url('https://img.freepik.com/fotos-premium/forjado-acero-taller-herrero_207634-158.jpg');"></div>
+                    <h3>Selección del Acero</h3>
+                    <p>Elegimos cuidadosamente el acero según el tipo de cuchillo</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-img" style="background-image: url('https://img.freepik.com/fotos-premium/herrero-forjando-metal-yunque_207634-159.jpg');"></div>
+                    <h3>Forjado a Mano</h3>
+                    <p>Cada hoja es forjada individualmente con martillo y yunque</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-img" style="background-image: url('https://img.freepik.com/fotos-premium/artesano-tallando-mango-madera-cuchillo_207634-160.jpg');"></div>
+                    <h3>Fabricación del Mango</h3>
+                    <p>Maderas nobles son talladas y pulidas a mano</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-img" style="background-image: url('https://img.freepik.com/fotos-premium/afilado-cuchillo-piedra-afiladora_207634-161.jpg');"></div>
+                    <h3>Afiliado y Pulido</h3>
+                    <p>Terminación perfecta con piedras naturales</p>
+                </div>
             </div>
         </div>
     </section>
@@ -200,24 +320,32 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>GL CUCHILLOS ARTESANALES</h3>
-                    <p>Fabricantes de cuchillos artesanales de alta calidad desde 1980.</p>
+                    <div class="footer-logo">
+                        <img src="https://img.icons8.com/color/96/000000/knife.png" alt="GL CUCHILLOS Logo" width="60" height="60">
+                        <h3>GL CUCHILLOS ARTESANALES</h3>
+                    </div>
+                    <p>Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia.</p>
+                    
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                
                 <div class="footer-column">
                     <h4>CATEGORÍAS</h4>
                     <ul>
-                        <li><a href="#">Cuchillos</a></li>
-                        <li><a href="#">Mangos</a></li>
-                        <li><a href="#">Materiales</a></li>
-                        <li><a href="#">Artesanías</a></li>
-                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Cuchillos de Chef</a></li>
+                        <li><a href="#">Cuchillos de Caza</a></li>
+                        <li><a href="#">Cuchillos Decorativos</a></li>
+                        <li><a href="#">Juegos Completos</a></li>
+                        <li><a href="#">Mangos Artesanales</a></li>
+                        <li><a href="#">Materiales y Herramientas</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
                     <h4>INFORMACIÓN</h4>
                     <ul>
@@ -225,36 +353,48 @@
                         <li><a href="#">Formas de pago</a></li>
                         <li><a href="#">Métodos de envío</a></li>
                         <li><a href="#">Preguntas frecuentes</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Política de garantía</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
                     <h4>CONTACTO</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Av. Artesanos 1234</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Taller Artesanal 1234, Buenos Aires</li>
                         <li><i class="fas fa-phone"></i> +54 11 1234-5678</li>
                         <li><i class="fas fa-envelope"></i> info@glcuchillos.com</li>
-                        <li><i class="fas fa-clock"></i> Lun-Vie: 9-18hs</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 9-18hs / Sáb: 9-13hs</li>
                     </ul>
+                    
+                    <div class="newsletter">
+                        <h5>Suscríbete a nuestro boletín</h5>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Tu email" required>
+                            <button type="submit">→</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+                <p class="crafted">Hecho a mano en Argentina 🇦🇷</p>
             </div>
         </div>
     </footer>
 
-    <!-- Shopping Cart Sidebar -->
+    <!-- Carrito de Compras -->
     <div class="cart-sidebar">
         <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <button class="close-cart">&times;</button>
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
         </div>
         <div class="cart-items">
-            <!-- Los items del carrito se cargarán dinámicamente -->
             <div class="empty-cart">
                 <i class="fas fa-shopping-cart"></i>
                 <p>Tu carrito está vacío</p>
+                <a href="#products" class="btn-primary">Ver Productos</a>
             </div>
         </div>
         <div class="cart-footer">
@@ -263,21 +403,22 @@
                 <span class="total-price">$0</span>
             </div>
             <button class="btn-checkout">Finalizar Compra</button>
+            <a href="#" class="btn-link">Continuar Comprando</a>
         </div>
     </div>
     <div class="cart-overlay"></div>
 
-    <!-- Favorites Sidebar -->
+    <!-- Favoritos -->
     <div class="favorites-sidebar">
         <div class="favorites-header">
-            <h3>Favoritos</h3>
-            <button class="close-favorites">&times;</button>
+            <h3><i class="fas fa-heart"></i> Favoritos</h3>
+            <button class="close-favorites" aria-label="Cerrar favoritos">&times;</button>
         </div>
         <div class="favorites-items">
-            <!-- Los items favoritos se cargarán dinámicamente -->
             <div class="empty-favorites">
                 <i class="far fa-heart"></i>
                 <p>No tienes favoritos</p>
+                <a href="#products" class="btn-primary">Descubrir Productos</a>
             </div>
         </div>
     </div>
@@ -286,9 +427,9 @@
     <!-- Login Modal -->
     <div class="login-modal">
         <div class="login-content">
-            <button class="close-login">&times;</button>
+            <button class="close-login" aria-label="Cerrar login">&times;</button>
             <h3>Iniciar Sesión</h3>
-            <form id="login-form">
+            <form id="login-form" class="login-form">
                 <input type="email" placeholder="Email" required>
                 <input type="password" placeholder="Contraseña" required>
                 <button type="submit" class="btn-primary">Ingresar</button>
@@ -298,6 +439,31 @@
     </div>
     <div class="login-overlay"></div>
 
+    <!-- JavaScript -->
     <script src="script.js"></script>
+    
+    <!-- Google Analytics (ejemplo) -->
+    <script>
+        // Analytics simulado para demostración
+        console.log('GL CUCHILLOS ARTESANALES - Sitio cargado correctamente');
+        
+        // Lazy loading para imágenes
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('.lazy-load');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('lazy-loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
 </body>
 </html>
