@@ -1063,3 +1063,176 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     init();
 });
+// ============================================
+// FUNCIONALIDAD PARA FILTROS DE PRODUCTOS
+// ============================================
+
+function setupProductFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card-full');
+    
+    if (filterButtons.length === 0) return;
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remover clase active de todos los botones
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Agregar clase active al botón clickeado
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Filtrar productos
+            productCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (filterValue === 'all' || filterValue === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // Mostrar notificación
+            const filterNames = {
+                'all': 'todos los productos',
+                'caza': 'cuchillos de caza',
+                'parrilla': 'cuchillos parrilleros',
+                'decorativos': 'cuchillos decorativos'
+            };
+            
+            if (filterValue !== 'all') {
+                showNotification(`Mostrando ${filterNames[filterValue]}`, 'info');
+            }
+        });
+    });
+}
+
+// ============================================
+// FUNCIONALIDAD PARA SERVICIOS
+// ============================================
+
+function setupServices() {
+    const serviceButtons = document.querySelectorAll('.btn-service');
+    
+    serviceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const serviceType = this.getAttribute('data-service');
+            const serviceNames = {
+                'personalizacion': 'Personalización Total',
+                'afilado': 'Afilado Profesional',
+                'reparacion': 'Reparación y Restauración',
+                'asesoria': 'Asesoría Técnica'
+            };
+            
+            // Mostrar modal de servicio (puedes implementar esto después)
+            showServiceModal(serviceType, serviceNames[serviceType]);
+            
+            // Notificación temporal
+            showNotification(`Solicitud enviada para: ${serviceNames[serviceType]}`, 'success');
+        });
+    });
+}
+
+function showServiceModal(serviceType, serviceName) {
+    // Aquí puedes implementar un modal más adelante
+    // Por ahora redirigimos a WhatsApp con un mensaje predeterminado
+    const message = `Hola, me interesa el servicio de ${serviceName}. ¿Podrían darme más información?`;
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Usar setTimeout para que primero se vea la notificación
+    setTimeout(() => {
+        window.open(`https://wa.me/5493843458340?text=${encodedMessage}`, '_blank');
+    }, 1000);
+}
+
+// ============================================
+// FUNCIONALIDAD PARA VER DETALLES DE PRODUCTO
+// ============================================
+
+function setupProductDetails() {
+    const detailButtons = document.querySelectorAll('.btn-details');
+    
+    detailButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product');
+            
+            // Aquí puedes implementar la navegación a una página de detalle
+            // Por ahora mostramos un modal/notificación
+            const productNames = {
+                'caza-tactico': 'Caza Táctico',
+                'chef-parrillero': 'Chef Parrillero',
+                'juego-parrillero-m': 'Juego Parrillero M',
+                'verijero': 'Verijero',
+                'caza-campo': 'Caza de Campo',
+                'coleccionista': 'Modelo Coleccionista'
+            };
+            
+            showNotification(`Viendo detalles de: ${productNames[productId]}`, 'info');
+            
+            // Scroll a la sección de detalles si existe
+            const detailSection = document.getElementById('producto-detalle');
+            if (detailSection) {
+                detailSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// ============================================
+// INICIALIZACIÓN DE NUEVAS FUNCIONALIDADES
+// ============================================
+
+function initNewSections() {
+    console.log('Inicializando nuevas secciones...');
+    
+    // Configurar filtros de productos
+    setupProductFilters();
+    
+    // Configurar botones de servicios
+    setupServices();
+    
+    // Configurar botones de ver detalles
+    setupProductDetails();
+    
+    // Añadir estilos iniciales para animaciones
+    const productCards = document.querySelectorAll('.product-card-full');
+    productCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    });
+    
+    // Animar entrada de productos
+    setTimeout(() => {
+        productCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 300);
+}
+
+// ============================================
+// INTEGRAR CON TU CÓDIGO EXISTENTE
+// ============================================
+
+// En tu función init() existente, agregar:
+function init() {
+    // ... tu código existente ...
+    
+    // Después de inicializar todo, agregar:
+    initNewSections();
+    
+    // ... resto de tu código ...
+}
