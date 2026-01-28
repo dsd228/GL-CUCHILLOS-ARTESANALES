@@ -1,0 +1,4308 @@
+[file name]: productos.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Catálogo de Productos - GL CUCHILLOS ARTESANALES</title>
+    <meta name="description" content="Catálogo completo de cuchillos artesanales. Chef, caza, parrilla y decorativos. Envíos a todo Argentina.">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/logo-180x180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#8B4513">
+</head>
+<body>
+    <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
+
+    <!-- Header (mismo que index.html) -->
+    <header class="header">
+        <div class="info-bar">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-left">
+                        <span><i class="fas fa-truck"></i> Envíos a todo el país</span>
+                        <span><i class="fas fa-shield-alt"></i> Garantía de por vida</span>
+                        <span><i class="fas fa-credit-card"></i> 12 cuotas sin interés</span>
+                    </div>
+                    <div class="info-right">
+                        <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                        <select class="language-selector">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <div class="container">
+                <div class="nav-container">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" class="logo-img" width="50" height="50">
+                            <div class="logo-text">
+                                <h1>GL CUCHILLOS</h1>
+                                <span class="logo-subtitle">ARTESANALES</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <ul class="nav-menu">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="productos.html" class="active"><i class="fas fa-utensils"></i> Productos</a></li>
+                        <li class="dropdown">
+                            <a href="#"><i class="fas fa-hands-helping"></i> Servicios <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-column">
+                                    <h4>Nuestros Servicios</h4>
+                                    <a href="servicios.html#talleres"><i class="fas fa-hammer"></i> Talleres Artesanales</a>
+                                    <a href="servicios.html#personalizacion"><i class="fas fa-magic"></i> Personalización</a>
+                                    <a href="servicios.html#afilado"><i class="fas fa-cut"></i> Servicio de Afilado</a>
+                                    <a href="servicios.html#reparacion"><i class="fas fa-tools"></i> Reparación</a>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h4>Para Clientes</h4>
+                                    <a href="servicios.html#garantia"><i class="fas fa-award"></i> Garantía</a>
+                                    <a href="servicios.html#envios"><i class="fas fa-shipping-fast"></i> Envíos</a>
+                                    <a href="servicios.html#pagos"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                        <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                        <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    </ul>
+
+                    <div class="user-actions">
+                        <div class="search-container">
+                            <button class="search-btn" aria-label="Buscar productos">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-box">
+                                <input type="text" placeholder="Buscar cuchillos..." class="search-input" aria-label="Campo de búsqueda">
+                                <button class="search-submit" aria-label="Ejecutar búsqueda"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <a href="#cuenta" class="user-btn" aria-label="Mi cuenta">
+                            <i class="far fa-user"></i>
+                        </a>
+                        
+                        <a href="#favoritos" class="wishlist-btn" aria-label="Favoritos">
+                            <i class="far fa-heart"></i>
+                            <span class="wishlist-count">0</span>
+                        </a>
+                        
+                        <a href="#carrito" class="cart-btn" aria-label="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        
+                        <button class="menu-toggle" aria-label="Abrir menú principal" aria-expanded="false">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menú Mobile -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="40" height="40">
+                <span>GL CUCHILLOS</span>
+            </div>
+            <button class="close-menu" aria-label="Cerrar menú">&times;</button>
+        </div>
+        <div class="mobile-menu-content">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="productos.html" class="active"><i class="fas fa-utensils"></i> Productos</a></li>
+                <li><a href="servicios.html"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+            
+            <div class="mobile-info">
+                <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                <a href="mailto:info@glcuchillos.com"><i class="fas fa-envelope"></i> info@glcuchillos.com</a>
+                <div class="social-mobile">
+                    <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-overlay"></div>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Hero del Catálogo -->
+        <section class="hero hero-catalogo">
+            <div class="hero-slide active">
+                <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Catálogo <span class="highlight">Completo</span></h1>
+                        <p class="hero-subtitle">Explora nuestra colección completa de cuchillos artesanales</p>
+                        <div class="hero-actions">
+                            <a href="#catalogo" class="btn btn-primary">
+                                <i class="fas fa-shopping-bag"></i> Ver Productos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros de Categorías -->
+        <section class="catalog-filters">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <h3><i class="fas fa-filter"></i> Filtros</h3>
+                        <div class="filter-options">
+                            <div class="filter-category">
+                                <h4>Categoría</h4>
+                                <div class="filter-checkboxes">
+                                    <label>
+                                        <input type="checkbox" name="category" value="chef" checked>
+                                        <span>Chef</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="category" value="caza" checked>
+                                        <span>Caza</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="category" value="parrilla" checked>
+                                        <span>Parrilla</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="category" value="decorativos" checked>
+                                        <span>Decorativos</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-price">
+                                <h4>Precio</h4>
+                                <div class="price-range">
+                                    <input type="range" min="0" max="300000" value="0" class="price-min">
+                                    <input type="range" min="0" max="300000" value="300000" class="price-max">
+                                </div>
+                                <div class="price-values">
+                                    <span>Min: $<span id="price-min-value">0</span></span>
+                                    <span>Max: $<span id="price-max-value">300.000</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-material">
+                                <h4>Material</h4>
+                                <select class="material-select">
+                                    <option value="all">Todos los materiales</option>
+                                    <option value="acero">Acero al Carbono</option>
+                                    <option value="inox">Acero Inoxidable</option>
+                                    <option value="damasco">Acero Damasco</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button class="btn btn-primary" id="apply-filters">
+                                    <i class="fas fa-check"></i> Aplicar Filtros
+                                </button>
+                                <button class="btn btn-outline" id="reset-filters">
+                                    <i class="fas fa-redo"></i> Restablecer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="products-container">
+                        <div class="products-header">
+                            <h2 id="catalogo">Productos Disponibles</h2>
+                            <div class="sort-options">
+                                <select class="sort-select">
+                                    <option value="featured">Destacados</option>
+                                    <option value="price-low">Precio: Menor a Mayor</option>
+                                    <option value="price-high">Precio: Mayor a Menor</option>
+                                    <option value="newest">Más Nuevos</option>
+                                    <option value="popular">Más Populares</option>
+                                </select>
+                                <div class="view-options">
+                                    <button class="view-btn active" data-view="grid">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button class="view-btn" data-view="list">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Grid de Productos -->
+                        <div class="catalog-grid" id="products-grid">
+                            <!-- Los productos se cargan dinámicamente con JavaScript -->
+                        </div>
+                        
+                        <!-- Paginación -->
+                        <div class="pagination">
+                            <button class="pagination-btn prev" disabled>
+                                <i class="fas fa-chevron-left"></i> Anterior
+                            </button>
+                            <div class="page-numbers">
+                                <span class="page-number active">1</span>
+                                <span class="page-number">2</span>
+                                <span class="page-number">3</span>
+                                <span class="page-dots">...</span>
+                                <span class="page-number">8</span>
+                            </div>
+                            <button class="pagination-btn next">
+                                Siguiente <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparador de Productos -->
+        <section class="product-comparison">
+            <div class="container">
+                <h2 class="section-title">Comparador de <span class="highlight">Productos</span></h2>
+                <p class="section-subtitle">Selecciona hasta 3 productos para comparar características</p>
+                
+                <div class="comparison-container">
+                    <div class="comparison-slots">
+                        <div class="slot empty" data-slot="1">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar producto</span>
+                        </div>
+                        <div class="slot empty" data-slot="2">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar producto</span>
+                        </div>
+                        <div class="slot empty" data-slot="3">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar producto</span>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-table" style="display: none;">
+                        <!-- La tabla se genera dinámicamente -->
+                    </div>
+                    
+                    <div class="comparison-actions">
+                        <button class="btn btn-primary" id="compare-btn" disabled>
+                            <i class="fas fa-chart-bar"></i> Comparar Productos
+                        </button>
+                        <button class="btn btn-outline" id="clear-comparison">
+                            <i class="fas fa-trash"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características Destacadas -->
+        <section class="features-catalog">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Garantía Extendida</h3>
+                        <p>Todos nuestros productos incluyen garantía de por vida contra defectos de fabricación.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Envío Gratis</h3>
+                        <p>Envío gratis en compras superiores a $500.000 a todo el país.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Personalización</h3>
+                        <p>Personaliza tu cuchillo con grabados, materiales especiales y diseños únicos.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>30 Días Devolución</h3>
+                        <p>Si no estás satisfecho, puedes devolver el producto en los primeros 30 días.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (mismo que index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="50" height="50">
+                        <div>
+                            <h3>GL CUCHILLOS</h3>
+                            <span>ARTESANALES</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html?category=chef">Cuchillos de Chef</a></li>
+                        <li><a href="productos.html?category=caza">Cuchillos de Caza</a></li>
+                        <li><a href="productos.html?category=parrilla">Cuchillos Parrilleros</a></li>
+                        <li><a href="productos.html?category=decorativos">Cuchillos Decorativos</a></li>
+                        <li><a href="productos.html?category=juegos">Juegos Completos</a></li>
+                        <li><a href="productos.html?category=mangos">Mangos Artesanales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="#proceso">Nuestro Proceso</a></li>
+                        <li><a href="talleres.html">Talleres</a></li>
+                        <li><a href="#trabajo">Trabajá con Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="#como-comprar">Cómo Comprar</a></li>
+                        <li><a href="#envios">Envíos y Entregas</a></li>
+                        <li><a href="#pagos">Formas de Pago</a></li>
+                        <li><a href="#garantia">Garantía</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Online, Argentina</p>
+                        <p><i class="fas fa-phone"></i> +54 9 3843 458340</p>
+                        <p><i class="fas fa-envelope"></i> info@glcuchillos.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 9-18hs | Sáb: 9-13hs</p>
+                    </div>
+                    
+                    <div class="newsletter">
+                        <h5>Suscríbete a nuestro newsletter</h5>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Tu correo electrónico" required aria-label="Email para newsletter">
+                            <button type="submit" aria-label="Suscribirse"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-cc-amex" title="American Express"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fas fa-money-bill-wave" title="Efectivo"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Tu carrito está vacío</p>
+                <a href="#catalogo" class="btn btn-primary">Ver Productos</a>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">$0</span>
+            </div>
+            <button class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Modal de Comparación -->
+    <div class="modal" id="comparison-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Comparación de Productos</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="comparison-modal-body">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="catalog-script.js"></script>
+</body>
+</html>
+[file content end]
+
+[file name]: servicios.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Servicios Especializados - GL CUCHILLOS ARTESANALES</title>
+    <meta name="description" content="Servicios de personalización, afilado, reparación y asesoría técnica para cuchillos artesanales. Expertos en mantenimiento y restauración.">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/logo-180x180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#8B4513">
+</head>
+<body>
+    <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="info-bar">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-left">
+                        <span><i class="fas fa-truck"></i> Envíos a todo el país</span>
+                        <span><i class="fas fa-shield-alt"></i> Garantía de por vida</span>
+                        <span><i class="fas fa-credit-card"></i> 12 cuotas sin interés</span>
+                    </div>
+                    <div class="info-right">
+                        <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                        <select class="language-selector">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <div class="container">
+                <div class="nav-container">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" class="logo-img" width="50" height="50">
+                            <div class="logo-text">
+                                <h1>GL CUCHILLOS</h1>
+                                <span class="logo-subtitle">ARTESANALES</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <ul class="nav-menu">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="productos.html"><i class="fas fa-utensils"></i> Productos</a></li>
+                        <li><a href="servicios.html" class="active"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                        <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                        <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                        <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    </ul>
+
+                    <div class="user-actions">
+                        <div class="search-container">
+                            <button class="search-btn" aria-label="Buscar productos">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-box">
+                                <input type="text" placeholder="Buscar cuchillos..." class="search-input" aria-label="Campo de búsqueda">
+                                <button class="search-submit" aria-label="Ejecutar búsqueda"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <a href="#cuenta" class="user-btn" aria-label="Mi cuenta">
+                            <i class="far fa-user"></i>
+                        </a>
+                        
+                        <a href="#favoritos" class="wishlist-btn" aria-label="Favoritos">
+                            <i class="far fa-heart"></i>
+                            <span class="wishlist-count">0</span>
+                        </a>
+                        
+                        <a href="#carrito" class="cart-btn" aria-label="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        
+                        <button class="menu-toggle" aria-label="Abrir menú principal" aria-expanded="false">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menú Mobile -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="40" height="40">
+                <span>GL CUCHILLOS</span>
+            </div>
+            <button class="close-menu" aria-label="Cerrar menú">&times;</button>
+        </div>
+        <div class="mobile-menu-content">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="productos.html"><i class="fas fa-utensils"></i> Productos</a></li>
+                <li><a href="servicios.html" class="active"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+            
+            <div class="mobile-info">
+                <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                <a href="mailto:info@glcuchillos.com"><i class="fas fa-envelope"></i> info@glcuchillos.com</a>
+                <div class="social-mobile">
+                    <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-overlay"></div>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Hero de Servicios -->
+        <section class="hero hero-servicios">
+            <div class="hero-slide active">
+                <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1572705784735-67d31e3ce67e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Servicios <span class="highlight">Especializados</span></h1>
+                        <p class="hero-subtitle">Soluciones completas para tus cuchillos, desde personalización hasta mantenimiento profesional</p>
+                        <div class="hero-actions">
+                            <a href="#servicios" class="btn btn-primary">
+                                <i class="fas fa-tools"></i> Explorar Servicios
+                            </a>
+                            <a href="https://wa.me/5493843458340" target="_blank" class="btn btn-secondary">
+                                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Principales -->
+        <section class="services-main" id="servicios">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nuestros <span class="highlight">Servicios</span></h2>
+                    <p class="section-subtitle">Expertos en mantenimiento, reparación y personalización de cuchillos artesanales</p>
+                </div>
+                
+                <div class="services-tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="personalizacion">
+                            <i class="fas fa-user-cog"></i> Personalización
+                        </button>
+                        <button class="tab-btn" data-tab="afilado">
+                            <i class="fas fa-cut"></i> Afilado Profesional
+                        </button>
+                        <button class="tab-btn" data-tab="reparacion">
+                            <i class="fas fa-tools"></i> Reparación
+                        </button>
+                        <button class="tab-btn" data-tab="asesoria">
+                            <i class="fas fa-hands-helping"></i> Asesoría
+                        </button>
+                    </div>
+                    
+                    <div class="tabs-content">
+                        <!-- Personalización -->
+                        <div class="tab-pane active" id="personalizacion">
+                            <div class="service-detail">
+                                <div class="service-image">
+                                    <img src="https://images.unsplash.com/photo-1576589476480-db77dbbf3adf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Personalización de cuchillos" loading="lazy">
+                                </div>
+                                <div class="service-info">
+                                    <h3>Personalización Total</h3>
+                                    <p>Crea el cuchillo perfecto para ti. Desde el diseño inicial hasta el acabado final, trabajamos contigo para hacer realidad tu visión.</p>
+                                    
+                                    <div class="service-features-grid">
+                                        <div class="feature-item">
+                                            <i class="fas fa-pencil-ruler"></i>
+                                            <h4>Diseño Personalizado</h4>
+                                            <p>Desarrollamos el diseño según tus necesidades específicas.</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-gem"></i>
+                                            <h4>Materiales Premium</h4>
+                                            <p>Selección entre maderas exóticas, aceros especiales y acabados únicos.</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-graduation-cap"></i>
+                                            <h4>Grabado Láser</h4>
+                                            <p>Incluye grabado de iniciales, logos o diseños personalizados.</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-award"></i>
+                                            <h4>Certificado de Autenticidad</h4>
+                                            <p>Cada pieza personalizada incluye certificado numerado.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="service-pricing">
+                                        <h4>Desde $15.000</h4>
+                                        <p>El precio final depende de los materiales y complejidad del diseño.</p>
+                                    </div>
+                                    
+                                    <div class="service-actions">
+                                        <button class="btn btn-primary btn-quote" data-service="personalizacion">
+                                            <i class="fas fa-file-signature"></i> Solicitar Cotización
+                                        </button>
+                                        <button class="btn btn-outline btn-gallery">
+                                            <i class="fas fa-images"></i> Ver Proyectos
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Afilado Profesional -->
+                        <div class="tab-pane" id="afilado">
+                            <div class="service-detail">
+                                <div class="service-image">
+                                    <img src="https://images.unsplash.com/photo-1550675897-3f0a0eda8b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Afilado profesional" loading="lazy">
+                                </div>
+                                <div class="service-info">
+                                    <h3>Afilado Profesional</h3>
+                                    <p>Recupera el filo perfecto de tus cuchillos con técnicas tradicionales y equipamiento especializado.</p>
+                                    
+                                    <div class="service-process">
+                                        <h4>Nuestro Proceso de Afilado</h4>
+                                        <ol>
+                                            <li><strong>Evaluación inicial:</strong> Análisis del estado de la hoja</li>
+                                            <li><strong>Limpieza profunda:</strong> Remoción de óxido y residuos</li>
+                                            <li><strong>Afilado progresivo:</strong> Desde grano grueso a fino</li>
+                                            <li><strong>Pulido final:</strong> Para un acabado espejo</li>
+                                            <li><strong>Prueba de corte:</strong> Verificación del filo perfecto</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <div class="pricing-table">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo de Cuchillo</th>
+                                                    <th>Precio Unitario</th>
+                                                    <th>Precio x Juego (3+)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Cuchillos de Chef</td>
+                                                    <td>$2.500</td>
+                                                    <td>$2.000 c/u</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cuchillos Parrilleros</td>
+                                                    <td>$1.800</td>
+                                                    <td>$1.500 c/u</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cuchillos de Caza</td>
+                                                    <td>$3.000</td>
+                                                    <td>$2.500 c/u</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cuchillos Decorativos</td>
+                                                    <td>$4.000</td>
+                                                    <td>$3.500 c/u</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="service-actions">
+                                        <button class="btn btn-primary btn-schedule" data-service="afilado">
+                                            <i class="fas fa-calendar-alt"></i> Agendar Afilado
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reparación -->
+                        <div class="tab-pane" id="reparacion">
+                            <div class="service-detail">
+                                <div class="service-image">
+                                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Reparación de cuchillos" loading="lazy">
+                                </div>
+                                <div class="service-info">
+                                    <h3>Reparación y Restauración</h3>
+                                    <p>Devolvemos a la vida cuchillos dañados o antiguos con técnicas artesanales de restauración.</p>
+                                    
+                                    <div class="repair-types">
+                                        <h4>Tipos de Reparación</h4>
+                                        <div class="repair-grid">
+                                            <div class="repair-type">
+                                                <h5><i class="fas fa-hammer"></i> Cambio de Mangos</h5>
+                                                <p>Reemplazo de mangos dañados por nuevos de madera, asta o micarta.</p>
+                                                <span class="price-tag">Desde $8.000</span>
+                                            </div>
+                                            <div class="repair-type">
+                                                <h5><i class="fas fa-ruler"></i> Rectificación de Hojas</h5>
+                                                <p>Enderezado y recuperación de hojas dobladas o con mellas profundas.</p>
+                                                <span class="price-tag">Desde $5.000</span>
+                                            </div>
+                                            <div class="repair-type">
+                                                <h5><i class="fas fa-history"></i> Restauración Antigua</h5>
+                                                <p>Recuperación de cuchillos antiguos manteniendo su carácter histórico.</p>
+                                                <span class="price-tag">Desde $12.000</span>
+                                            </div>
+                                            <div class="repair-type">
+                                                <h5><i class="fas fa-shield-alt"></i> Refuerzo Estructural</h5>
+                                                <p>Fortificación de puntos débiles y prevención de futuros daños.</p>
+                                                <span class="price-tag">Desde $3.500</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="service-warranty">
+                                        <h4><i class="fas fa-award"></i> Garantía en Reparaciones</h4>
+                                        <p>Todas nuestras reparaciones incluyen 6 meses de garantía por los materiales y mano de obra.</p>
+                                    </div>
+                                    
+                                    <div class="service-actions">
+                                        <button class="btn btn-primary btn-repair" data-service="reparacion">
+                                            <i class="fas fa-tools"></i> Solicitar Diagnóstico
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Asesoría -->
+                        <div class="tab-pane" id="asesoria">
+                            <div class="service-detail">
+                                <div class="service-image">
+                                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Asesoría técnica" loading="lazy">
+                                </div>
+                                <div class="service-info">
+                                    <h3>Asesoría Técnica Personalizada</h3>
+                                    <p>Te guiamos en la selección, uso y mantenimiento adecuado de tus cuchillos.</p>
+                                    
+                                    <div class="consultation-options">
+                                        <h4>Modalidades de Asesoría</h4>
+                                        <div class="consultation-grid">
+                                            <div class="consultation-option">
+                                                <div class="option-header">
+                                                    <i class="fas fa-video"></i>
+                                                    <h5>Virtual</h5>
+                                                    <span class="price-tag">$3.500</span>
+                                                </div>
+                                                <ul>
+                                                    <li><i class="fas fa-check"></i> Videollamada de 60 minutos</li>
+                                                    <li><i class="fas fa-check"></i> Análisis remoto de tu colección</li>
+                                                    <li><i class="fas fa-check"></i> Recomendaciones personalizadas</li>
+                                                    <li><i class="fas fa-check"></i> Guía de mantenimiento digital</li>
+                                                </ul>
+                                                <button class="btn btn-outline btn-book">Reservar</button>
+                                            </div>
+                                            
+                                            <div class="consultation-option">
+                                                <div class="option-header">
+                                                    <i class="fas fa-home"></i>
+                                                    <h5>En Taller</h5>
+                                                    <span class="price-tag">$5.000</span>
+                                                </div>
+                                                <ul>
+                                                    <li><i class="fas fa-check"></i> Visita personalizada al taller</li>
+                                                    <li><i class="fas fa-check"></i> Demostración práctica de técnicas</li>
+                                                    <li><i class="fas fa-check"></i> Manos a la obra con supervisión</li>
+                                                    <li><i class="fas fa-check"></i> Materiales incluidos</li>
+                                                </ul>
+                                                <button class="btn btn-outline btn-book">Reservar</button>
+                                            </div>
+                                            
+                                            <div class="consultation-option featured">
+                                                <div class="option-header">
+                                                    <i class="fas fa-crown"></i>
+                                                    <h5>Premium</h5>
+                                                    <span class="price-tag">$8.000</span>
+                                                </div>
+                                                <ul>
+                                                    <li><i class="fas fa-check"></i> Todo lo de las modalidades anteriores</li>
+                                                    <li><i class="fas fa-check"></i> Plan de mantenimiento anual</li>
+                                                    <li><i class="fas fa-check"></i> Descuento 20% en servicios</li>
+                                                    <li><i class="fas fa-check"></i> Prioridad en atenciones</li>
+                                                </ul>
+                                                <button class="btn btn-primary btn-book">Reservar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="service-actions">
+                                        <button class="btn btn-primary btn-consult" data-service="asesoria">
+                                            <i class="fas fa-comments"></i> Solicitar Asesoría
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proceso de Trabajo -->
+        <section class="work-process">
+            <div class="container">
+                <h2 class="section-title">Nuestro <span class="highlight">Proceso de Trabajo</span></h2>
+                
+                <div class="process-steps-horizontal">
+                    <div class="process-step-h">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Consulta Inicial</h3>
+                            <p>Analizamos tus necesidades y evaluamos el estado de tus cuchillos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step-h">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Presupuesto</h3>
+                            <p>Te enviamos un presupuesto detallado sin compromiso.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step-h">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Aprobación</h3>
+                            <p>Confirmas el presupuesto y agendamos el servicio.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step-h">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Ejecución</h3>
+                            <p>Realizamos el servicio con los más altos estándares de calidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step-h">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Entrega</h3>
+                            <p>Te entregamos el trabajo terminado con garantía incluida.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes -->
+        <section class="faq-services">
+            <div class="container">
+                <h2 class="section-title">Preguntas <span class="highlight">Frecuentes</span></h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cuánto tiempo toma un servicio de afilado?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>El tiempo varía según el tipo de cuchillo y su estado. Generalmente, un afilado profesional toma entre 24 y 48 horas hábiles. Para juegos completos, puede tomar hasta 3 días hábiles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Puedo personalizar un cuchillo que ya tengo?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, podemos personalizar cuchillos existentes con grabados, cambio de mangos, o modificaciones en la hoja. Primero evaluamos si el cuchillo es apto para la modificación deseada.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Hacen envíos para servicios de reparación?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, ofrecemos servicio de envío y retorno para reparaciones. El costo del envío depende de tu ubicación y está incluido en el presupuesto final.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué garantía ofrecen en los servicios?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Personalización: 1 año. Afilado: 6 meses. Reparaciones: 6 meses. Asesoría: satisfacción garantizada o reembolso parcial.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Necesito una cita para llevar mis cuchillos?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Recomendamos agendar cita previa para una mejor atención. Sin embargo, también atendemos por orden de llegada de lunes a viernes de 9 a 18 hs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="cta-services">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para darle nueva vida a tus cuchillos?</h2>
+                    <p>Contáctanos hoy mismo para una consulta gratuita y descubre cómo podemos ayudarte.</p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/5493843458340" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Directo
+                        </a>
+                        <a href="tel:+5493843458340" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Llamar Ahora
+                        </a>
+                        <button class="btn btn-outline btn-email">
+                            <i class="fas fa-envelope"></i> Enviar Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="50" height="50">
+                        <div>
+                            <h3>GL CUCHILLOS</h3>
+                            <span>ARTESANALES</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="servicios.html#personalizacion">Personalización</a></li>
+                        <li><a href="servicios.html#afilado">Afilado Profesional</a></li>
+                        <li><a href="servicios.html#reparacion">Reparación</a></li>
+                        <li><a href="servicios.html#asesoria">Asesoría Técnica</a></li>
+                        <li><a href="#mantenimiento">Mantenimiento Preventivo</a></li>
+                        <li><a href="#restauracion">Restauración Antigua</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="#proceso">Nuestro Proceso</a></li>
+                        <li><a href="talleres.html">Talleres</a></li>
+                        <li><a href="#trabajo">Trabajá con Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="#como-comprar">Cómo Comprar</a></li>
+                        <li><a href="#envios">Envíos y Entregas</a></li>
+                        <li><a href="#pagos">Formas de Pago</a></li>
+                        <li><a href="#garantia">Garantía</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Online, Argentina</p>
+                        <p><i class="fas fa-phone"></i> +54 9 3843 458340</p>
+                        <p><i class="fas fa-envelope"></i> info@glcuchillos.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 9-18hs | Sáb: 9-13hs</p>
+                    </div>
+                    
+                    <div class="newsletter">
+                        <h5>Suscríbete a nuestro newsletter</h5>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Tu correo electrónico" required aria-label="Email para newsletter">
+                            <button type="submit" aria-label="Suscribirse"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-cc-amex" title="American Express"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fas fa-money-bill-wave" title="Efectivo"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Tu carrito está vacío</p>
+                <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">$0</span>
+            </div>
+            <button class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Modal de Cotización -->
+    <div class="modal" id="quote-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Cotización</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="quote-form">
+                    <div class="form-group">
+                        <label for="service-type">Servicio de interés</label>
+                        <select id="service-type" required>
+                            <option value="">Seleccionar servicio</option>
+                            <option value="personalizacion">Personalización</option>
+                            <option value="afilado">Afilado Profesional</option>
+                            <option value="reparacion">Reparación</option>
+                            <option value="asesoria">Asesoría Técnica</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Descripción del trabajo</label>
+                        <textarea id="description" rows="4" placeholder="Describe lo que necesitas..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-name">Nombre completo</label>
+                        <input type="text" id="contact-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-phone">Teléfono</label>
+                        <input type="tel" id="contact-phone" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="services-script.js"></script>
+</body>
+</html>
+[file content end]
+
+[file name]: contacto.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Contacto - GL CUCHILLOS ARTESANALES</title>
+    <meta name="description" content="Contacta con nuestros artesanos. Consultas, pedidos personalizados, servicios de afilado y reparación. WhatsApp: +54 9 3843 458340">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/logo-180x180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#8B4513">
+</head>
+<body>
+    <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="info-bar">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-left">
+                        <span><i class="fas fa-truck"></i> Envíos a todo el país</span>
+                        <span><i class="fas fa-shield-alt"></i> Garantía de por vida</span>
+                        <span><i class="fas fa-credit-card"></i> 12 cuotas sin interés</span>
+                    </div>
+                    <div class="info-right">
+                        <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                        <select class="language-selector">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <div class="container">
+                <div class="nav-container">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" class="logo-img" width="50" height="50">
+                            <div class="logo-text">
+                                <h1>GL CUCHILLOS</h1>
+                                <span class="logo-subtitle">ARTESANALES</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <ul class="nav-menu">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="productos.html"><i class="fas fa-utensils"></i> Productos</a></li>
+                        <li><a href="servicios.html"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                        <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                        <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                        <li><a href="contacto.html" class="active"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    </ul>
+
+                    <div class="user-actions">
+                        <div class="search-container">
+                            <button class="search-btn" aria-label="Buscar productos">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-box">
+                                <input type="text" placeholder="Buscar cuchillos..." class="search-input" aria-label="Campo de búsqueda">
+                                <button class="search-submit" aria-label="Ejecutar búsqueda"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <a href="#cuenta" class="user-btn" aria-label="Mi cuenta">
+                            <i class="far fa-user"></i>
+                        </a>
+                        
+                        <a href="#favoritos" class="wishlist-btn" aria-label="Favoritos">
+                            <i class="far fa-heart"></i>
+                            <span class="wishlist-count">0</span>
+                        </a>
+                        
+                        <a href="#carrito" class="cart-btn" aria-label="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        
+                        <button class="menu-toggle" aria-label="Abrir menú principal" aria-expanded="false">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menú Mobile -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="40" height="40">
+                <span>GL CUCHILLOS</span>
+            </div>
+            <button class="close-menu" aria-label="Cerrar menú">&times;</button>
+        </div>
+        <div class="mobile-menu-content">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="productos.html"><i class="fas fa-utensils"></i> Productos</a></li>
+                <li><a href="servicios.html"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                <li><a href="contacto.html" class="active"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+            
+            <div class="mobile-info">
+                <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                <a href="mailto:info@glcuchillos.com"><i class="fas fa-envelope"></i> info@glcuchillos.com</a>
+                <div class="social-mobile">
+                    <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-overlay"></div>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Hero de Contacto -->
+        <section class="hero hero-contacto">
+            <div class="hero-slide active">
+                <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1576086961377-3889c8b3d410?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Contáctanos</h1>
+                        <p class="hero-subtitle">Estamos aquí para ayudarte con tus proyectos, consultas y servicios</p>
+                        <div class="hero-contact-info">
+                            <div class="contact-method">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>
+                                    <h4>WhatsApp</h4>
+                                    <a href="https://wa.me/5493843458340">+54 9 3843 458340</a>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Teléfono</h4>
+                                    <a href="tel:+5493843458340">+54 9 3843 458340</a>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:info@glcuchillos.com">info@glcuchillos.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto -->
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h2>Información de Contacto</h2>
+                        
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h3>Ubicación</h3>
+                                    <p>Taller Principal: Córdoba, Argentina</p>
+                                    <p class="note">*Trabajamos principalmente online con envíos a todo el país</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-detail">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h3>Horarios de Atención</h3>
+                                    <p><strong>Lunes a Viernes:</strong> 9:00 - 18:00 hs</p>
+                                    <p><strong>Sábados:</strong> 9:00 - 13:00 hs</p>
+                                    <p><strong>Domingos:</strong> Cerrado</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-detail">
+                                <div class="detail-icon">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h3>Envíos</h3>
+                                    <p>Realizamos envíos a todo Argentina mediante:</p>
+                                    <ul>
+                                        <li>Correo Argentino</li>
+                                        <li>OCA</li>
+                                        <li>Andreani</li>
+                                        <li>Moto Mensajería (Córdoba Capital)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-detail">
+                                <div class="detail-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h3>Atención Personalizada</h3>
+                                    <p>Para visitas al taller, recomendamos agendar cita previa para brindarte la mejor atención.</p>
+                                    <button class="btn btn-outline btn-schedule">
+                                        <i class="fas fa-calendar-alt"></i> Agendar Visita
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-contact">
+                            <h3>Síguenos en Redes</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/gonzalo.londero.3/" class="social-icon" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                    <span>Instagram</span>
+                                </a>
+                                <a href="https://www.facebook.com/Gonzafcf" class="social-icon" aria-label="Facebook">
+                                    <i class="fab fa-facebook"></i>
+                                    <span>Facebook</span>
+                                </a>
+                                <a href="https://wa.me/5493843458340" class="social-icon" aria-label="WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                <a href="#youtube" class="social-icon" aria-label="YouTube">
+                                    <i class="fab fa-youtube"></i>
+                                    <span>YouTube</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-wrapper">
+                        <h2>Envíanos un Mensaje</h2>
+                        <p>Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
+                        
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Nombre completo *</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Teléfono *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Asunto *</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="">Seleccionar motivo</option>
+                                        <option value="consulta">Consulta general</option>
+                                        <option value="personalizacion">Personalización</option>
+                                        <option value="afilado">Servicio de afilado</option>
+                                        <option value="reparacion">Reparación</option>
+                                        <option value="compra">Consulta de compra</option>
+                                        <option value="mayorista">Pedido mayorista</option>
+                                        <option value="taller">Talleres y cursos</option>
+                                        <option value="trabajo">Trabajar con nosotros</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Mensaje *</label>
+                                <textarea id="message" name="message" rows="6" placeholder="Describe tu consulta o proyecto..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="file-upload">Adjuntar archivos (opcional)</label>
+                                <div class="file-upload">
+                                    <input type="file" id="file-upload" name="file" accept="image/*,.pdf,.doc,.docx">
+                                    <label for="file-upload" class="file-label">
+                                        <i class="fas fa-paperclip"></i>
+                                        <span>Adjuntar fotos o documentos</span>
+                                    </label>
+                                    <div class="file-list"></div>
+                                </div>
+                                <small>Puedes adjuntar imágenes de referencia, fotos de cuchillos para reparar, etc. Máx. 10MB</small>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <label for="newsletter">Deseo suscribirme al newsletter para recibir novedades y ofertas</label>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="privacy" name="privacy" required>
+                                <label for="privacy">Acepto la <a href="#politica-privacidad">Política de Privacidad</a> *</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                            </button>
+                            
+                            <div class="form-note">
+                                <p><small>* Los campos marcados con asterisco son obligatorios</small></p>
+                            </div>
+                        </form>
+                        
+                        <div class="contact-alternative">
+                            <h3>¿Prefieres contacto directo?</h3>
+                            <div class="alternative-buttons">
+                                <a href="https://wa.me/5493843458340" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp Directo
+                                </a>
+                                <a href="tel:+5493843458340" class="btn btn-phone">
+                                    <i class="fas fa-phone"></i> Llamar Ahora
+                                </a>
+                                <a href="mailto:info@glcuchillos.com" class="btn btn-email">
+                                    <i class="fas fa-envelope"></i> Enviar Email
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes de Contacto -->
+        <section class="contact-faq">
+            <div class="container">
+                <h2 class="section-title">Preguntas <span class="highlight">Frecuentes</span></h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cuál es el tiempo de respuesta?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Respondemos todas las consultas en menos de 24 horas hábiles. Para WhatsApp y llamadas telefónicas, la respuesta es inmediata durante horario de atención.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo puedo agendar una visita al taller?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Puedes agendar una visita a través del formulario de contacto seleccionando "Agendar visita" o contactándonos por WhatsApp. Te confirmaremos la disponibilidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Hacen envíos internacionales?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, realizamos envíos internacionales. El costo y tiempo de entrega varían según el destino. Contáctanos para obtener un presupuesto personalizado.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Puedo ver los productos en persona antes de comprar?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, puedes visitar nuestro taller con cita previa. También podemos enviarte fotos detalladas y videos de cualquier producto que te interese.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Ofrecen factura A?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, emitimos factura A para empresas. Solo necesitamos los datos fiscales completos al momento de realizar el pedido.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Tienen showroom o tienda física?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Trabajamos principalmente desde nuestro taller artesanal. Las visitas son con cita previa para ofrecerte atención personalizada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa y Ubicación -->
+        <section class="location-map">
+            <div class="container">
+                <h2 class="section-title">Nuestra <span class="highlight">Ubicación</span></h2>
+                
+                <div class="map-container">
+                    <div class="map-info">
+                        <h3>Zona de Cobertura</h3>
+                        <p>Atendemos clientes en todo Argentina con envíos a domicilio. Nuestro taller está ubicado en Córdoba, desde donde trabajamos para todo el país.</p>
+                        
+                        <div class="coverage-list">
+                            <h4>Principales zonas de entrega:</h4>
+                            <div class="coverage-items">
+                                <span class="coverage-item">Córdoba Capital</span>
+                                <span class="coverage-item">Buenos Aires</span>
+                                <span class="coverage-item">Mendoza</span>
+                                <span class="coverage-item">Santa Fe</span>
+                                <span class="coverage-item">Tucumán</span>
+                                <span class="coverage-item">Salta</span>
+                                <span class="coverage-item">Rosario</span>
+                                <span class="coverage-item">Mar del Plata</span>
+                            </div>
+                        </div>
+                        
+                        <div class="shipping-info">
+                            <h4><i class="fas fa-shipping-fast"></i> Tiempos de entrega aproximados:</h4>
+                            <ul>
+                                <li><strong>Córdoba Capital:</strong> 24-48 horas</li>
+                                <li><strong>GBA y CABA:</strong> 3-5 días hábiles</li>
+                                <li><strong>Interior del país:</strong> 5-8 días hábiles</li>
+                                <li><strong>Zonas alejadas:</strong> 8-12 días hábiles</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="map-embed">
+                        <!-- Aquí iría un mapa embed de Google Maps -->
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Mapa interactivo de nuestra ubicación</p>
+                            <small>*(Para ver la ubicación exacta, contáctanos directamente)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="cta-contact">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para comenzar tu proyecto?</h2>
+                    <p>Contáctanos hoy mismo y descubre cómo podemos ayudarte a crear el cuchillo perfecto para ti.</p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/5493843458340" target="_blank" class="btn btn-primary btn-large">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Directo
+                        </a>
+                        <a href="tel:+5493843458340" class="btn btn-secondary btn-large">
+                            <i class="fas fa-phone"></i> Llamar Ahora
+                        </a>
+                        <button class="btn btn-outline btn-large btn-quote">
+                            <i class="fas fa-file-signature"></i> Solicitar Presupuesto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="50" height="50">
+                        <div>
+                            <h3>GL CUCHILLOS</h3>
+                            <span>ARTESANALES</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html?category=chef">Cuchillos de Chef</a></li>
+                        <li><a href="productos.html?category=caza">Cuchillos de Caza</a></li>
+                        <li><a href="productos.html?category=parrilla">Cuchillos Parrilleros</a></li>
+                        <li><a href="productos.html?category=decorativos">Cuchillos Decorativos</a></li>
+                        <li><a href="productos.html?category=juegos">Juegos Completos</a></li>
+                        <li><a href="productos.html?category=mangos">Mangos Artesanales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="#proceso">Nuestro Proceso</a></li>
+                        <li><a href="talleres.html">Talleres</a></li>
+                        <li><a href="#trabajo">Trabajá con Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="#como-comprar">Cómo Comprar</a></li>
+                        <li><a href="#envios">Envíos y Entregas</a></li>
+                        <li><a href="#pagos">Formas de Pago</a></li>
+                        <li><a href="#garantia">Garantía</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#terminos">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Online, Argentina</p>
+                        <p><i class="fas fa-phone"></i> +54 9 3843 458340</p>
+                        <p><i class="fas fa-envelope"></i> info@glcuchillos.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 9-18hs | Sáb: 9-13hs</p>
+                    </div>
+                    
+                    <div class="newsletter">
+                        <h5>Suscríbete a nuestro newsletter</h5>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Tu correo electrónico" required aria-label="Email para newsletter">
+                            <button type="submit" aria-label="Suscribirse"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-cc-amex" title="American Express"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fas fa-money-bill-wave" title="Efectivo"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Tu carrito está vacío</p>
+                <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">$0</span>
+            </div>
+            <button class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>¡Mensaje Enviado!</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4>Gracias por contactarnos</h4>
+                <p>Hemos recibido tu mensaje y nos pondremos en contacto contigo en menos de 24 horas hábiles.</p>
+                <div class="confirmation-actions">
+                    <button class="btn btn-primary close-confirmation">Aceptar</button>
+                    <a href="https://wa.me/5493843458340" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="contact-script.js"></script>
+</body>
+</html>
+[file content end]
+
+[file name]: catalog-script.js
+[file content begin]
+// ============================================
+// SCRIPT PARA CATÁLOGO DE PRODUCTOS
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Catálogo de productos cargado');
+    
+    // Base de datos de productos del catálogo
+    const catalogProducts = [
+        // Cuchillos de Chef
+        {
+            id: 'chef-001',
+            name: 'Chef Santoku',
+            category: 'chef',
+            price: 45000,
+            image: 'https://images.unsplash.com/photo-1558464356-08f9c4d8d9b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo santoku japonés, hoja de acero inoxidable VG-10, mango de pakkawood',
+            material: 'inox',
+            rating: 4.8,
+            reviews: 32,
+            stock: 12,
+            tags: ['más vendido', 'japonés'],
+            specs: {
+                length: '18cm',
+                weight: '220g',
+                steel: 'VG-10',
+                hardness: '60 HRC'
+            }
+        },
+        {
+            id: 'chef-002',
+            name: 'Chef Gyuto',
+            category: 'chef',
+            price: 52000,
+            image: 'https://images.unsplash.com/photo-1595535373196-3a6b6228c1a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo gyuto profesional, hoja de acero al carbono, mango de nogal',
+            material: 'acero',
+            rating: 4.9,
+            reviews: 28,
+            stock: 8,
+            tags: ['premium'],
+            specs: {
+                length: '21cm',
+                weight: '250g',
+                steel: 'Acero al carbono',
+                hardness: '58-59 HRC'
+            }
+        },
+        {
+            id: 'chef-003',
+            name: 'Chef Deshuesador',
+            category: 'chef',
+            price: 38000,
+            image: 'https://images.unsplash.com/photo-1540337706098-f14d12b47d56?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo deshuesador flexible, ideal para carnes y aves',
+            material: 'inox',
+            rating: 4.5,
+            reviews: 19,
+            stock: 15,
+            tags: [],
+            specs: {
+                length: '15cm',
+                weight: '180g',
+                steel: 'Acero inoxidable',
+                hardness: '56 HRC'
+            }
+        },
+        
+        // Cuchillos de Caza
+        {
+            id: 'caza-001',
+            name: 'Caza Táctico Pro',
+            category: 'caza',
+            price: 65000,
+            image: 'https://images.unsplash.com/photo-1559678471-8e82abe50464?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo táctico de caza, hoja de acero 1095, mango micarta texturizado',
+            material: 'acero',
+            rating: 4.7,
+            reviews: 42,
+            stock: 6,
+            tags: ['táctico', 'resistente'],
+            specs: {
+                length: '22cm',
+                weight: '320g',
+                steel: '1095',
+                hardness: '58-60 HRC'
+            }
+        },
+        {
+            id: 'caza-002',
+            name: 'Caza de Campo',
+            category: 'caza',
+            price: 55000,
+            image: 'https://images.unsplash.com/photo-1556804745-13b08adc8a66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo versátil para campo, hoja drop point, mango de nogal con virola latón',
+            material: 'acero',
+            rating: 4.6,
+            reviews: 31,
+            stock: 10,
+            tags: ['campo'],
+            specs: {
+                length: '20cm',
+                weight: '280g',
+                steel: 'O1',
+                hardness: '57-59 HRC'
+            }
+        },
+        
+        // Parrilleros
+        {
+            id: 'parrilla-001',
+            name: 'Parrillero XL',
+            category: 'parrilla',
+            price: 35000,
+            image: 'https://images.unsplash.com/photo-1559678471-8e82abe50464?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo parrillero extra largo, ideal para cortes grandes de carne',
+            material: 'inox',
+            rating: 4.8,
+            reviews: 56,
+            stock: 18,
+            tags: ['más vendido'],
+            specs: {
+                length: '25cm',
+                weight: '310g',
+                steel: 'Acero inoxidable',
+                hardness: '55 HRC'
+            }
+        },
+        {
+            id: 'parrilla-002',
+            name: 'Juego Parrillero Familiar',
+            category: 'parrilla',
+            price: 95000,
+            image: 'https://images.unsplash.com/photo-1557674200-8e0cdf6d6c95?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Set completo de 4 piezas: cuchillo parrillero, tenedor, cuchillo chef y afilador',
+            material: 'inox',
+            rating: 4.9,
+            reviews: 48,
+            stock: 7,
+            tags: ['combo', 'oferta'],
+            specs: {
+                pieces: '4',
+                weight: '850g',
+                material: 'Acero inoxidable + nogal',
+                includes: 'Estuche de madera'
+            }
+        },
+        
+        // Decorativos
+        {
+            id: 'deco-001',
+            name: 'Damasco Artístico',
+            category: 'decorativos',
+            price: 120000,
+            image: 'https://images.unsplash.com/photo-1548443768-8c6b8b8b8b8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuchillo decorativo con patrón damasco único, mango de asta de ciervo',
+            material: 'damasco',
+            rating: 5.0,
+            reviews: 23,
+            stock: 3,
+            tags: ['exclusivo', 'colección'],
+            specs: {
+                length: '28cm',
+                weight: '350g',
+                steel: 'Damasco de 256 capas',
+                hardness: '59-61 HRC'
+            }
+        },
+        {
+            id: 'deco-002',
+            name: 'Verijero Clásico',
+            category: 'decorativos',
+            price: 85000,
+            image: 'https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            description: 'Patrón verijero tradicional, mango de itín con incrustaciones de plata',
+            material: 'acero',
+            rating: 4.7,
+            reviews: 17,
+            stock: 5,
+            tags: ['tradicional'],
+            specs: {
+                length: '26cm',
+                weight: '320g',
+                steel: 'Acero al carbono',
+                hardness: '58 HRC'
+            }
+        }
+    ];
+    
+    // Variables de estado
+    let currentProducts = [...catalogProducts];
+    let currentView = 'grid';
+    let currentPage = 1;
+    let productsPerPage = 9;
+    let comparisonProducts = [];
+    
+    // Elementos del DOM
+    const elements = {
+        productsGrid: document.getElementById('products-grid'),
+        filterButtons: document.querySelectorAll('.filter-btn'),
+        categoryCheckboxes: document.querySelectorAll('input[name="category"]'),
+        priceMin: document.querySelector('.price-min'),
+        priceMax: document.querySelector('.price-max'),
+        priceMinValue: document.getElementById('price-min-value'),
+        priceMaxValue: document.getElementById('price-max-value'),
+        materialSelect: document.querySelector('.material-select'),
+        applyFiltersBtn: document.getElementById('apply-filters'),
+        resetFiltersBtn: document.getElementById('reset-filters'),
+        sortSelect: document.querySelector('.sort-select'),
+        viewButtons: document.querySelectorAll('.view-btn'),
+        comparisonSlots: document.querySelectorAll('.slot'),
+        compareBtn: document.getElementById('compare-btn'),
+        clearComparisonBtn: document.getElementById('clear-comparison'),
+        comparisonTable: document.querySelector('.comparison-table'),
+        paginationPrev: document.querySelector('.pagination-btn.prev'),
+        paginationNext: document.querySelector('.pagination-btn.next'),
+        pageNumbers: document.querySelector('.page-numbers')
+    };
+    
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    function init() {
+        console.log('Inicializando catálogo...');
+        
+        // Configurar rango de precios
+        setupPriceRange();
+        
+        // Configurar event listeners
+        setupEventListeners();
+        
+        // Renderizar productos iniciales
+        renderProducts();
+        
+        // Actualizar paginación
+        updatePagination();
+        
+        // Cargar filtros desde URL si existen
+        loadFiltersFromURL();
+    }
+    
+    // ============================================
+    // CONFIGURACIÓN DE EVENT LISTENERS
+    // ============================================
+    function setupEventListeners() {
+        // Filtros de categoría
+        elements.filterButtons.forEach(btn => {
+            btn.addEventListener('click', handleFilterButton);
+        });
+        
+        // Checkboxes de categoría
+        elements.categoryCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', handleCategoryChange);
+        });
+        
+        // Rango de precios
+        elements.priceMin.addEventListener('input', updatePriceValues);
+        elements.priceMax.addEventListener('input', updatePriceValues);
+        
+        // Aplicar filtros
+        elements.applyFiltersBtn.addEventListener('click', applyFilters);
+        elements.resetFiltersBtn.addEventListener('click', resetFilters);
+        
+        // Ordenamiento
+        elements.sortSelect.addEventListener('change', handleSortChange);
+        
+        // Vista (grid/list)
+        elements.viewButtons.forEach(btn => {
+            btn.addEventListener('click', handleViewChange);
+        });
+        
+        // Comparador de productos
+        elements.comparisonSlots.forEach(slot => {
+            slot.addEventListener('click', handleSlotClick);
+        });
+        
+        elements.compareBtn.addEventListener('click', showComparison);
+        elements.clearComparisonBtn.addEventListener('click', clearComparison);
+        
+        // Paginación
+        elements.paginationPrev.addEventListener('click', goToPrevPage);
+        elements.paginationNext.addEventListener('click', goToNextPage);
+        
+        // Números de página
+        elements.pageNumbers.addEventListener('click', handlePageClick);
+        
+        // Agregar productos al carrito desde el catálogo
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-add-cart')) {
+                const productId = e.target.closest('.product-card-catalog').dataset.id;
+                addToCartFromCatalog(productId);
+            }
+            
+            if (e.target.closest('.btn-wishlist')) {
+                const productId = e.target.closest('.product-card-catalog').dataset.id;
+                toggleWishlistFromCatalog(productId);
+            }
+        });
+    }
+    
+    // ============================================
+    // FUNCIONALIDADES DE FILTRADO
+    // ============================================
+    function setupPriceRange() {
+        // Valores iniciales
+        const minPrice = 0;
+        const maxPrice = 300000;
+        
+        elements.priceMin.min = minPrice;
+        elements.priceMin.max = maxPrice;
+        elements.priceMax.min = minPrice;
+        elements.priceMax.max = maxPrice;
+        
+        updatePriceValues();
+    }
+    
+    function updatePriceValues() {
+        elements.priceMinValue.textContent = formatPrice(parseInt(elements.priceMin.value));
+        elements.priceMaxValue.textContent = formatPrice(parseInt(elements.priceMax.value));
+    }
+    
+    function handleFilterButton(e) {
+        const filterValue = e.target.dataset.filter;
+        
+        // Actualizar botones activos
+        elements.filterButtons.forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        
+        // Actualizar checkboxes según filtro
+        updateCategoryCheckboxes(filterValue);
+        
+        // Aplicar filtro
+        applyFilters();
+    }
+    
+    function updateCategoryCheckboxes(filterValue) {
+        elements.categoryCheckboxes.forEach(checkbox => {
+            if (filterValue === 'all') {
+                checkbox.checked = true;
+            } else if (filterValue === checkbox.value) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        });
+    }
+    
+    function handleCategoryChange() {
+        // Si todos están desmarcados, marcar "all"
+        const checkedBoxes = Array.from(elements.categoryCheckboxes).filter(cb => cb.checked);
+        if (checkedBoxes.length === 0) {
+            elements.categoryCheckboxes.forEach(cb => cb.checked = true);
+        }
+    }
+    
+    function applyFilters() {
+        console.log('Aplicando filtros...');
+        
+        // Obtener categorías seleccionadas
+        const selectedCategories = Array.from(elements.categoryCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+        
+        // Obtener rango de precios
+        const minPrice = parseInt(elements.priceMin.value);
+        const maxPrice = parseInt(elements.priceMax.value);
+        
+        // Obtener material seleccionado
+        const selectedMaterial = elements.materialSelect.value;
+        
+        // Filtrar productos
+        currentProducts = catalogProducts.filter(product => {
+            // Filtrar por categoría
+            if (!selectedCategories.includes('all') && !selectedCategories.includes(product.category)) {
+                return false;
+            }
+            
+            // Filtrar por precio
+            if (product.price < minPrice || product.price > maxPrice) {
+                return false;
+            }
+            
+            // Filtrar por material
+            if (selectedMaterial !== 'all' && product.material !== selectedMaterial) {
+                return false;
+            }
+            
+            return true;
+        });
+        
+        // Aplicar ordenamiento actual
+        applySorting();
+        
+        // Resetear a página 1
+        currentPage = 1;
+        
+        // Renderizar productos
+        renderProducts();
+        
+        // Actualizar paginación
+        updatePagination();
+        
+        // Actualizar URL con filtros
+        updateURLWithFilters();
+        
+        // Mostrar notificación
+        showNotification(`Mostrando ${currentProducts.length} productos`, 'info');
+    }
+    
+    function resetFilters() {
+        console.log('Restableciendo filtros...');
+        
+        // Restablecer checkboxes
+        elements.categoryCheckboxes.forEach(cb => {
+            cb.checked = true;
+        });
+        
+        // Restablecer rango de precios
+        elements.priceMin.value = 0;
+        elements.priceMax.value = 300000;
+        updatePriceValues();
+        
+        // Restablecer material
+        elements.materialSelect.value = 'all';
+        
+        // Restablecer botón de filtro activo
+        elements.filterButtons.forEach(btn => {
+            if (btn.dataset.filter === 'all') {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // Aplicar filtros
+        applyFilters();
+    }
+    
+    // ============================================
+    // ORDENAMIENTO
+    // ============================================
+    function handleSortChange() {
+        applySorting();
+        renderProducts();
+    }
+    
+    function applySorting() {
+        const sortValue = elements.sortSelect.value;
+        
+        switch(sortValue) {
+            case 'price-low':
+                currentProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                currentProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'newest':
+                // Simular productos nuevos (IDs más altos)
+                currentProducts.sort((a, b) => b.id.localeCompare(a.id));
+                break;
+            case 'popular':
+                currentProducts.sort((a, b) => b.rating - a.rating);
+                break;
+            default: // 'featured'
+                // Orden por defecto (mantener orden original con featured primero)
+                currentProducts.sort((a, b) => {
+                    const aFeatured = a.tags.includes('más vendido') || a.tags.includes('premium');
+                    const bFeatured = b.tags.includes('más vendido') || b.tags.includes('premium');
+                    
+                    if (aFeatured && !bFeatured) return -1;
+                    if (!aFeatured && bFeatured) return 1;
+                    return 0;
+                });
+        }
+    }
+    
+    // ============================================
+    // VISTA (GRID/LIST)
+    // ============================================
+    function handleViewChange(e) {
+        const viewType = e.target.closest('.view-btn').dataset.view;
+        
+        // Actualizar botones activos
+        elements.viewButtons.forEach(btn => {
+            if (btn.dataset.view === viewType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // Cambiar vista
+        currentView = viewType;
+        renderProducts();
+    }
+    
+    // ============================================
+    // RENDERIZADO DE PRODUCTOS
+    // ============================================
+    function renderProducts() {
+        if (!elements.productsGrid) return;
+        
+        // Calcular productos para la página actual
+        const startIndex = (currentPage - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        const productsToShow = currentProducts.slice(startIndex, endIndex);
+        
+        // Limpiar grid
+        elements.productsGrid.innerHTML = '';
+        
+        if (productsToShow.length === 0) {
+            elements.productsGrid.innerHTML = `
+                <div class="no-products">
+                    <i class="fas fa-search"></i>
+                    <h3>No se encontraron productos</h3>
+                    <p>Intenta ajustar los filtros de búsqueda</p>
+                    <button class="btn btn-primary" id="reset-filters-btn">Restablecer Filtros</button>
+                </div>
+            `;
+            
+            // Agregar event listener al botón de reset
+            document.getElementById('reset-filters-btn')?.addEventListener('click', resetFilters);
+            return;
+        }
+        
+        // Renderizar cada producto
+        productsToShow.forEach(product => {
+            const productElement = createProductElement(product);
+            elements.productsGrid.appendChild(productElement);
+        });
+        
+        // Añadir clase de vista
+        elements.productsGrid.className = `catalog-grid ${currentView}-view`;
+    }
+    
+    function createProductElement(product) {
+        const isInComparison = comparisonProducts.some(p => p.id === product.id);
+        
+        const productElement = document.createElement('div');
+        productElement.className = 'product-card-catalog';
+        productElement.dataset.id = product.id;
+        productElement.dataset.category = product.category;
+        
+        // Formatear precio
+        const formattedPrice = formatPrice(product.price);
+        
+        // Crear badges
+        const badges = product.tags.map(tag => 
+            `<span class="product-badge">${tag}</span>`
+        ).join('');
+        
+        // Crear rating
+        const ratingStars = createRatingStars(product.rating);
+        
+        // Crear botón de comparación si no está ya en comparación
+        const compareButton = isInComparison ? 
+            '<button class="btn-compare added" disabled><i class="fas fa-check"></i> En comparación</button>' :
+            `<button class="btn-compare" data-id="${product.id}"><i class="fas fa-balance-scale"></i> Comparar</button>`;
+        
+        // Vista Grid (por defecto)
+        if (currentView === 'grid') {
+            productElement.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    ${badges}
+                    <button class="quick-view" data-id="${product.id}">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="product-info">
+                    <div class="product-header">
+                        <h3 class="product-title">${product.name}</h3>
+                        <span class="product-category">${getCategoryName(product.category)}</span>
+                    </div>
+                    <p class="product-description">${product.description}</p>
+                    
+                    <div class="product-specs">
+                        <span><i class="fas fa-ruler"></i> ${product.specs.length}</span>
+                        <span><i class="fas fa-weight"></i> ${product.specs.weight}</span>
+                        <span><i class="fas fa-fire"></i> ${product.specs.steel}</span>
+                    </div>
+                    
+                    <div class="product-rating">
+                        ${ratingStars}
+                        <span>(${product.reviews})</span>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="current-price">$${formattedPrice}</span>
+                        ${product.stock < 5 ? '<span class="low-stock">¡Quedan pocos!</span>' : ''}
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-add-cart" data-id="${product.id}">
+                            <i class="fas fa-cart-plus"></i> Agregar
+                        </button>
+                        <button class="btn-wishlist" data-id="${product.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        ${compareButton}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Vista Lista
+            productElement.innerHTML = `
+                <div class="product-list-view">
+                    <div class="product-image-list">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${badges}
+                    </div>
+                    
+                    <div class="product-info-list">
+                        <div class="product-header-list">
+                            <h3 class="product-title">${product.name}</h3>
+                            <span class="product-category">${getCategoryName(product.category)}</span>
+                        </div>
+                        
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="product-details-list">
+                            <div class="details-column">
+                                <h4>Especificaciones:</h4>
+                                <ul>
+                                    <li><strong>Largo:</strong> ${product.specs.length}</li>
+                                    <li><strong>Peso:</strong> ${product.specs.weight}</li>
+                                    <li><strong>Acero:</strong> ${product.specs.steel}</li>
+                                    <li><strong>Dureza:</strong> ${product.specs.hardness || 'N/A'}</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="details-column">
+                                <h4>Calificaciones:</h4>
+                                <div class="product-rating">
+                                    ${ratingStars}
+                                    <span>${product.rating}/5 (${product.reviews} reseñas)</span>
+                                </div>
+                                
+                                <div class="stock-info">
+                                    <i class="fas fa-box"></i>
+                                    <span>Disponibles: ${product.stock} unidades</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-action-list">
+                        <div class="product-price-list">
+                            <span class="current-price">$${formattedPrice}</span>
+                            ${product.stock < 5 ? '<span class="low-stock">Stock limitado</span>' : ''}
+                        </div>
+                        
+                        <div class="action-buttons-list">
+                            <button class="btn-add-cart" data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                            <button class="btn-wishlist" data-id="${product.id}">
+                                <i class="far fa-heart"></i> Favoritos
+                            </button>
+                            ${compareButton}
+                            <button class="btn-details-list" data-id="${product.id}">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Agregar event listeners a los botones dentro del producto
+        const compareBtn = productElement.querySelector('.btn-compare:not(.added)');
+        if (compareBtn) {
+            compareBtn.addEventListener('click', function() {
+                addToComparison(product);
+            });
+        }
+        
+        const quickViewBtn = productElement.querySelector('.quick-view');
+        if (quickViewBtn) {
+            quickViewBtn.addEventListener('click', function() {
+                showQuickView(product);
+            });
+        }
+        
+        const detailsBtn = productElement.querySelector('.btn-details-list');
+        if (detailsBtn) {
+            detailsBtn.addEventListener('click', function() {
+                showQuickView(product);
+            });
+        }
+        
+        return productElement;
+    }
+    
+    function createRatingStars(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        
+        let starsHTML = '';
+        
+        // Estrellas llenas
+        for (let i = 0; i < fullStars; i++) {
+            starsHTML += '<i class="fas fa-star"></i>';
+        }
+        
+        // Media estrella
+        if (hasHalfStar) {
+            starsHTML += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        // Estrellas vacías
+        for (let i = 0; i < emptyStars; i++) {
+            starsHTML += '<i class="far fa-star"></i>';
+        }
+        
+        return starsHTML;
+    }
+    
+    function getCategoryName(categoryKey) {
+        const categories = {
+            'chef': 'Chef',
+            'caza': 'Caza',
+            'parrilla': 'Parrilla',
+            'decorativos': 'Decorativo'
+        };
+        return categories[categoryKey] || categoryKey;
+    }
+    
+    // ============================================
+    // COMPARADOR DE PRODUCTOS
+    // ============================================
+    function handleSlotClick(e) {
+        const slot = e.currentTarget;
+        if (!slot.classList.contains('empty')) return;
+        
+        // Mostrar modal de selección de productos
+        showProductSelectionModal(slot.dataset.slot);
+    }
+    
+    function showProductSelectionModal(slotNumber) {
+        // Crear modal de selección
+        const modal = document.createElement('div');
+        modal.className = 'modal selection-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Seleccionar Producto para Comparar</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-selection-list">
+                        ${currentProducts.map(product => `
+                            <div class="selection-item" data-id="${product.id}" data-slot="${slotNumber}">
+                                <img src="${product.image}" alt="${product.name}">
+                                <div class="selection-info">
+                                    <h4>${product.name}</h4>
+                                    <p>${product.description}</p>
+                                    <span class="price">$${formatPrice(product.price)}</span>
+                                </div>
+                                <button class="btn-select" data-id="${product.id}" data-slot="${slotNumber}">
+                                    Seleccionar
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Agregar event listeners
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        modal.querySelectorAll('.btn-select').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const slotNum = this.dataset.slot;
+                
+                const product = catalogProducts.find(p => p.id === productId);
+                if (product) {
+                    addToComparison(product, parseInt(slotNum));
+                    modal.remove();
+                }
+            });
+        });
+        
+        // Cerrar al hacer clic fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.remove();
+            }
+        });
+    }
+    
+    function addToComparison(product, slotNumber = null) {
+        // Verificar si ya está en comparación
+        if (comparisonProducts.some(p => p.id === product.id)) {
+            showNotification(`${product.name} ya está en la comparación`, 'warning');
+            return;
+        }
+        
+        // Si no se especifica slot, encontrar uno vacío
+        if (!slotNumber) {
+            for (let i = 0; i < elements.comparisonSlots.length; i++) {
+                if (elements.comparisonSlots[i].classList.contains('empty')) {
+                    slotNumber = i + 1;
+                    break;
+                }
+            }
+        }
+        
+        // Si no hay slots disponibles
+        if (!slotNumber || comparisonProducts.length >= 3) {
+            showNotification('Máximo 3 productos en comparación', 'warning');
+            return;
+        }
+        
+        // Agregar producto a la comparación
+        comparisonProducts.push({
+            ...product,
+            slot: slotNumber
+        });
+        
+        // Actualizar slot
+        const slot = document.querySelector(`.slot[data-slot="${slotNumber}"]`);
+        if (slot) {
+            slot.classList.remove('empty');
+            slot.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <div class="slot-info">
+                    <h4>${product.name}</h4>
+                    <span>$${formatPrice(product.price)}</span>
+                </div>
+                <button class="remove-slot" data-slot="${slotNumber}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Agregar event listener al botón de remover
+            slot.querySelector('.remove-slot').addEventListener('click', function(e) {
+                e.stopPropagation();
+                removeFromComparison(parseInt(this.dataset.slot));
+            });
+        }
+        
+        // Actualizar botón de comparar
+        updateCompareButton();
+        
+        // Actualizar botones de comparación en los productos
+        updateProductCompareButtons();
+        
+        showNotification(`${product.name} agregado a la comparación`, 'success');
+    }
+    
+    function removeFromComparison(slotNumber) {
+        // Encontrar y remover producto
+        const index = comparisonProducts.findIndex(p => p.slot === slotNumber);
+        if (index !== -1) {
+            const removedProduct = comparisonProducts.splice(index, 1)[0];
+            
+            // Resetear slot
+            const slot = document.querySelector(`.slot[data-slot="${slotNumber}"]`);
+            if (slot) {
+                slot.classList.add('empty');
+                slot.innerHTML = `
+                    <i class="fas fa-plus"></i>
+                    <span>Agregar producto</span>
+                `;
+                
+                // Reagregar event listener
+                slot.addEventListener('click', handleSlotClick);
+            }
+            
+            // Actualizar botón de comparar
+            updateCompareButton();
+            
+            // Actualizar botones de comparación en los productos
+            updateProductCompareButtons();
+            
+            // Si la tabla de comparación está visible, actualizarla
+            if (!elements.comparisonTable.style.display || elements.comparisonTable.style.display === 'block') {
+                updateComparisonTable();
+            }
+            
+            showNotification(`${removedProduct.name} removido de la comparación`, 'info');
+        }
+    }
+    
+    function updateCompareButton() {
+        const compareBtn = elements.compareBtn;
+        
+        if (comparisonProducts.length >= 2) {
+            compareBtn.disabled = false;
+            compareBtn.textContent = `Comparar (${comparisonProducts.length})`;
+        } else {
+            compareBtn.disabled = true;
+            compareBtn.textContent = 'Comparar Productos';
+        }
+    }
+    
+    function updateProductCompareButtons() {
+        // Actualizar botones en productos existentes
+        document.querySelectorAll('.btn-compare').forEach(btn => {
+            const productId = btn.dataset.id;
+            const isInComparison = comparisonProducts.some(p => p.id === productId);
+            
+            if (isInComparison) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-check"></i> En comparación';
+                btn.classList.add('added');
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-balance-scale"></i> Comparar';
+                btn.classList.remove('added');
+            }
+        });
+    }
+    
+    function showComparison() {
+        if (comparisonProducts.length < 2) {
+            showNotification('Selecciona al menos 2 productos para comparar', 'warning');
+            return;
+        }
+        
+        updateComparisonTable();
+        elements.comparisonTable.style.display = 'block';
+        
+        // Scroll a la tabla
+        elements.comparisonTable.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function updateComparisonTable() {
+        if (comparisonProducts.length < 2) {
+            elements.comparisonTable.style.display = 'none';
+            return;
+        }
+        
+        // Ordenar productos por slot
+        const sortedProducts = [...comparisonProducts].sort((a, b) => a.slot - b.slot);
+        
+        // Crear tabla de comparación
+        let tableHTML = `
+            <table class="comparison-table-content">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        ${sortedProducts.map(product => `
+                            <th>
+                                <div class="comparison-product-header">
+                                    <img src="${product.image}" alt="${product.name}">
+                                    <h4>${product.name}</h4>
+                                    <span class="price">$${formatPrice(product.price)}</span>
+                                </div>
+                            </th>
+                        `).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Categoría</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>${getCategoryName(product.category)}</td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Precio</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>$${formatPrice(product.price)}</td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Largo</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>${product.specs.length}</td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Peso</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>${product.specs.weight}</td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Acero</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>${product.specs.steel}</td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Calificación</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>
+                                ${createRatingStars(product.rating)}
+                                <span>${product.rating}/5</span>
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td><strong>Stock</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>${product.stock} unidades</td>
+                        `).join('')}
+                    </tr>
+                    <tr class="actions-row">
+                        <td><strong>Acciones</strong></td>
+                        ${sortedProducts.map(product => `
+                            <td>
+                                <button class="btn-add-cart" data-id="${product.id}">
+                                    <i class="fas fa-cart-plus"></i> Agregar
+                                </button>
+                                <button class="btn-remove-comparison" data-slot="${product.slot}">
+                                    <i class="fas fa-times"></i> Remover
+                                </button>
+                            </td>
+                        `).join('')}
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        
+        elements.comparisonTable.innerHTML = tableHTML;
+        
+        // Agregar event listeners a los botones de la tabla
+        elements.comparisonTable.querySelectorAll('.btn-add-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                addToCartFromCatalog(productId);
+            });
+        });
+        
+        elements.comparisonTable.querySelectorAll('.btn-remove-comparison').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const slotNumber = parseInt(this.dataset.slot);
+                removeFromComparison(slotNumber);
+            });
+        });
+    }
+    
+    function clearComparison() {
+        // Remover todos los productos de la comparación
+        while (comparisonProducts.length > 0) {
+            const product = comparisonProducts[0];
+            removeFromComparison(product.slot);
+        }
+        
+        // Ocultar tabla
+        elements.comparisonTable.style.display = 'none';
+        
+        showNotification('Comparación limpiada', 'info');
+    }
+    
+    // ============================================
+    // PAGINACIÓN
+    // ============================================
+    function updatePagination() {
+        const totalPages = Math.ceil(currentProducts.length / productsPerPage);
+        
+        // Actualizar botones de navegación
+        elements.paginationPrev.disabled = currentPage === 1;
+        elements.paginationNext.disabled = currentPage === totalPages;
+        
+        // Actualizar números de página
+        updatePageNumbers(totalPages);
+    }
+    
+    function updatePageNumbers(totalPages) {
+        if (totalPages <= 1) {
+            elements.pageNumbers.style.display = 'none';
+            return;
+        }
+        
+        elements.pageNumbers.style.display = 'flex';
+        
+        let pagesHTML = '';
+        const maxVisiblePages = 5;
+        
+        if (totalPages <= maxVisiblePages) {
+            // Mostrar todas las páginas
+            for (let i = 1; i <= totalPages; i++) {
+                pagesHTML += `
+                    <span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                        ${i}
+                    </span>
+                `;
+            }
+        } else {
+            // Lógica para mostrar páginas con ellipsis
+            if (currentPage <= 3) {
+                for (let i = 1; i <= 4; i++) {
+                    pagesHTML += `
+                        <span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                            ${i}
+                        </span>
+                    `;
+                }
+                pagesHTML += '<span class="page-dots">...</span>';
+                pagesHTML += `
+                    <span class="page-number" data-page="${totalPages}">
+                        ${totalPages}
+                    </span>
+                `;
+            } else if (currentPage >= totalPages - 2) {
+                pagesHTML += `
+                    <span class="page-number" data-page="1">
+                        1
+                    </span>
+                `;
+                pagesHTML += '<span class="page-dots">...</span>';
+                for (let i = totalPages - 3; i <= totalPages; i++) {
+                    pagesHTML += `
+                        <span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                            ${i}
+                        </span>
+                    `;
+                }
+            } else {
+                pagesHTML += `
+                    <span class="page-number" data-page="1">
+                        1
+                    </span>
+                `;
+                pagesHTML += '<span class="page-dots">...</span>';
+                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                    pagesHTML += `
+                        <span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                            ${i}
+                        </span>
+                    `;
+                }
+                pagesHTML += '<span class="page-dots">...</span>';
+                pagesHTML += `
+                    <span class="page-number" data-page="${totalPages}">
+                        ${totalPages}
+                    </span>
+                `;
+            }
+        }
+        
+        elements.pageNumbers.innerHTML = pagesHTML;
+    }
+    
+    function goToPrevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderProducts();
+            updatePagination();
+            scrollToProducts();
+        }
+    }
+    
+    function goToNextPage() {
+        const totalPages = Math.ceil(currentProducts.length / productsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderProducts();
+            updatePagination();
+            scrollToProducts();
+        }
+    }
+    
+    function handlePageClick(e) {
+        const pageElement = e.target.closest('.page-number');
+        if (!pageElement) return;
+        
+        const page = parseInt(pageElement.dataset.page);
+        if (page !== currentPage) {
+            currentPage = page;
+            renderProducts();
+            updatePagination();
+            scrollToProducts();
+        }
+    }
+    
+    function scrollToProducts() {
+        const productsSection = document.querySelector('.catalog-filters');
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
+    // ============================================
+    // FUNCIONALIDADES ADICIONALES
+    // ============================================
+    function showQuickView(product) {
+        // Crear modal de vista rápida
+        const modal = document.createElement('div');
+        modal.className = 'modal quickview-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${product.name}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="quickview-content">
+                        <div class="quickview-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="quickview-info">
+                            <div class="quickview-price">
+                                <span class="price">$${formatPrice(product.price)}</span>
+                                <span class="category">${getCategoryName(product.category)}</span>
+                            </div>
+                            
+                            <div class="quickview-rating">
+                                ${createRatingStars(product.rating)}
+                                <span>${product.rating}/5 (${product.reviews} reseñas)</span>
+                            </div>
+                            
+                            <p class="quickview-description">${product.description}</p>
+                            
+                            <div class="quickview-specs">
+                                <h4>Especificaciones:</h4>
+                                <ul>
+                                    <li><strong>Largo:</strong> ${product.specs.length}</li>
+                                    <li><strong>Peso:</strong> ${product.specs.weight}</li>
+                                    <li><strong>Acero:</strong> ${product.specs.steel}</li>
+                                    ${product.specs.hardness ? `<li><strong>Dureza:</strong> ${product.specs.hardness}</li>` : ''}
+                                    <li><strong>Stock disponible:</strong> ${product.stock} unidades</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="quickview-actions">
+                                <button class="btn btn-primary btn-add-cart-quick" data-id="${product.id}">
+                                    <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                </button>
+                                <button class="btn btn-outline btn-wishlist-quick" data-id="${product.id}">
+                                    <i class="far fa-heart"></i> Agregar a favoritos
+                                </button>
+                                <button class="btn btn-outline btn-compare-quick" data-id="${product.id}">
+                                    <i class="fas fa-balance-scale"></i> Comparar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Agregar event listeners
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        modal.querySelector('.btn-add-cart-quick').addEventListener('click', function() {
+            addToCartFromCatalog(product.id);
+            modal.remove();
+        });
+        
+        modal.querySelector('.btn-wishlist-quick').addEventListener('click', function() {
+            toggleWishlistFromCatalog(product.id);
+        });
+        
+        modal.querySelector('.btn-compare-quick').addEventListener('click', function() {
+            addToComparison(product);
+            modal.remove();
+        });
+        
+        // Cerrar al hacer clic fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.remove();
+            }
+        });
+    }
+    
+    function addToCartFromCatalog(productId) {
+        // Esta función se integraría con el carrito principal
+        // Por ahora mostramos una notificación
+        const product = catalogProducts.find(p => p.id === productId);
+        if (product) {
+            showNotification(`✅ ${product.name} añadido al carrito`, 'success');
+            
+            // Aquí se integraría con el carrito global
+            // addToCart(product);
+        }
+    }
+    
+    function toggleWishlistFromCatalog(productId) {
+        // Esta función se integraría con la wishlist principal
+        const product = catalogProducts.find(p => p.id === productId);
+        if (product) {
+            // Por ahora mostramos una notificación
+            showNotification(`❤️ ${product.name} agregado a favoritos`, 'success');
+            
+            // Aquí se integraría con la wishlist global
+            // toggleWishlist(product);
+        }
+    }
+    
+    // ============================================
+    // MANEJO DE URL Y FILTROS
+    // ============================================
+    function loadFiltersFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Cargar categoría desde URL
+        const category = urlParams.get('category');
+        if (category) {
+            // Activar filtro correspondiente
+            elements.filterButtons.forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.click();
+                }
+            });
+        }
+        
+        // Cargar otros parámetros si existen
+        // ... (puedes expandir esto según necesites)
+    }
+    
+    function updateURLWithFilters() {
+        // Obtener categoría activa
+        const activeFilter = document.querySelector('.filter-btn.active');
+        const category = activeFilter ? activeFilter.dataset.filter : 'all';
+        
+        // Actualizar URL sin recargar la página
+        const url = new URL(window.location);
+        url.searchParams.set('category', category);
+        window.history.replaceState({}, '', url);
+    }
+    
+    // ============================================
+    // UTILIDADES
+    // ============================================
+    function formatPrice(price) {
+        return price.toLocaleString('es-AR');
+    }
+    
+    function showNotification(message, type = 'info') {
+        // Usar la función de notificación del script principal si existe
+        if (typeof window.showNotification === 'function') {
+            window.showNotification(message, type);
+        } else {
+            // Notificación simple si no existe la función global
+            const notification = document.createElement('div');
+            notification.className = `notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#38A169' : type === 'error' ? '#E53E3E' : '#8B4513'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 9999;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    }
+    
+    // ============================================
+    // INICIALIZAR
+    // ============================================
+    init();
+});
+[file content end]
+
+[file name]: services-script.js
+[file content begin]
+// ============================================
+// SCRIPT PARA PÁGINA DE SERVICIOS
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página de servicios cargada');
+    
+    // Elementos del DOM
+    const elements = {
+        tabButtons: document.querySelectorAll('.tab-btn'),
+        tabPanes: document.querySelectorAll('.tab-pane'),
+        quoteButtons: document.querySelectorAll('.btn-quote'),
+        scheduleButtons: document.querySelectorAll('.btn-schedule'),
+        repairButtons: document.querySelectorAll('.btn-repair'),
+        consultButtons: document.querySelectorAll('.btn-consult'),
+        bookButtons: document.querySelectorAll('.btn-book'),
+        faqQuestions: document.querySelectorAll('.faq-question'),
+        emailButton: document.querySelector('.btn-email'),
+        scheduleVisitButton: document.querySelector('.btn-schedule'),
+        quoteForm: document.getElementById('quote-form'),
+        quoteModal: document.getElementById('quote-modal'),
+        closeModalButtons: document.querySelectorAll('.close-modal')
+    };
+    
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    function init() {
+        console.log('Inicializando servicios...');
+        
+        // Configurar event listeners
+        setupEventListeners();
+        
+        // Verificar parámetros de URL
+        checkURLParameters();
+        
+        // Inicializar FAQs
+        initFAQs();
+    }
+    
+    // ============================================
+    // CONFIGURACIÓN DE EVENT LISTENERS
+    // ============================================
+    function setupEventListeners() {
+        // Tabs de servicios
+        elements.tabButtons.forEach(button => {
+            button.addEventListener('click', handleTabClick);
+        });
+        
+        // Botones de cotización
+        elements.quoteButtons.forEach(button => {
+            button.addEventListener('click', handleQuoteClick);
+        });
+        
+        // Botones de agendar
+        elements.scheduleButtons.forEach(button => {
+            button.addEventListener('click', handleScheduleClick);
+        });
+        
+        // Botones de reparación
+        elements.repairButtons.forEach(button => {
+            button.addEventListener('click', handleRepairClick);
+        });
+        
+        // Botones de asesoría
+        elements.consultButtons.forEach(button => {
+            button.addEventListener('click', handleConsultClick);
+        });
+        
+        // Botones de reservar (asesoría)
+        elements.bookButtons.forEach(button => {
+            button.addEventListener('click', handleBookClick);
+        });
+        
+        // Botón de email
+        if (elements.emailButton) {
+            elements.emailButton.addEventListener('click', handleEmailClick);
+        }
+        
+        // Botón de agendar visita
+        if (elements.scheduleVisitButton) {
+            elements.scheduleVisitButton.addEventListener('click', handleScheduleVisitClick);
+        }
+        
+        // Formulario de cotización
+        if (elements.quoteForm) {
+            elements.quoteForm.addEventListener('submit', handleQuoteSubmit);
+        }
+        
+        // Cerrar modales
+        elements.closeModalButtons.forEach(button => {
+            button.addEventListener('click', closeAllModals);
+        });
+        
+        // Cerrar modales al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                closeAllModals();
+            }
+        });
+        
+        // Cerrar modales con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAllModals();
+            }
+        });
+    }
+    
+    // ============================================
+    // TABS DE SERVICIOS
+    // ============================================
+    function handleTabClick(e) {
+        const tabId = e.currentTarget.dataset.tab;
+        
+        // Remover clase active de todos los botones
+        elements.tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        // Agregar clase active al botón clickeado
+        e.currentTarget.classList.add('active');
+        
+        // Ocultar todos los paneles
+        elements.tabPanes.forEach(pane => {
+            pane.classList.remove('active');
+        });
+        
+        // Mostrar el panel correspondiente
+        const targetPane = document.getElementById(tabId);
+        if (targetPane) {
+            targetPane.classList.add('active');
+            
+            // Scroll suave al panel
+            setTimeout(() => {
+                targetPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }
+    
+    // ============================================
+    // BOTONES DE ACCIÓN
+    // ============================================
+    function handleQuoteClick(e) {
+        e.preventDefault();
+        const serviceType = e.currentTarget.dataset.service;
+        showQuoteModal(serviceType);
+    }
+    
+    function handleScheduleClick(e) {
+        e.preventDefault();
+        const serviceType = e.currentTarget.dataset.service;
+        
+        // Crear mensaje para WhatsApp
+        const message = `Hola, me interesa agendar un servicio de ${getServiceName(serviceType)}. ¿Podrían indicarme disponibilidad?`;
+        openWhatsApp(message);
+    }
+    
+    function handleRepairClick(e) {
+        e.preventDefault();
+        const serviceType = e.currentTarget.dataset.service;
+        
+        // Crear mensaje para WhatsApp
+        const message = `Hola, necesito un diagnóstico para reparación de cuchillo. ¿Cómo puedo enviar fotos o coordinar una evaluación?`;
+        openWhatsApp(message);
+    }
+    
+    function handleConsultClick(e) {
+        e.preventDefault();
+        const serviceType = e.currentTarget.dataset.service;
+        showQuoteModal(serviceType);
+    }
+    
+    function handleBookClick(e) {
+        e.preventDefault();
+        const button = e.currentTarget;
+        const option = button.closest('.consultation-option');
+        const optionName = option.querySelector('h5').textContent;
+        
+        // Crear mensaje para WhatsApp
+        const message = `Hola, me interesa reservar la asesoría ${optionName}. ¿Podrían darme más información sobre disponibilidad?`;
+        openWhatsApp(message);
+    }
+    
+    function handleEmailClick(e) {
+        e.preventDefault();
+        const subject = 'Consulta sobre servicios - GL Cuchillos Artesanales';
+        const body = 'Hola, me interesa conocer más sobre sus servicios. Por favor, envíenme más información.';
+        window.location.href = `mailto:info@glcuchillos.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+    
+    function handleScheduleVisitClick(e) {
+        e.preventDefault();
+        
+        // Crear mensaje para WhatsApp
+        const message = `Hola, me gustaría agendar una visita al taller. ¿Podrían indicarme horarios disponibles?`;
+        openWhatsApp(message);
+    }
+    
+    // ============================================
+    // MODAL DE COTIZACIÓN
+    // ============================================
+    function showQuoteModal(serviceType) {
+        const modal = elements.quoteModal;
+        if (!modal) return;
+        
+        // Actualizar select de servicio si existe
+        const serviceSelect = modal.querySelector('#service-type');
+        if (serviceSelect) {
+            serviceSelect.value = serviceType;
+        }
+        
+        // Mostrar modal
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Enfocar primer campo
+        setTimeout(() => {
+            const firstInput = modal.querySelector('input, select, textarea');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }, 100);
+    }
+    
+    function handleQuoteSubmit(e) {
+        e.preventDefault();
+        
+        // Obtener datos del formulario
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        
+        // Validación básica
+        if (!data['service-type'] || !data.description || !data['contact-name'] || !data['contact-email'] || !data['contact-phone']) {
+            showNotification('Por favor completa todos los campos obligatorios', 'error');
+            return;
+        }
+        
+        // Mostrar loading
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        submitButton.disabled = true;
+        
+        // Simular envío (en producción, aquí iría una petición AJAX)
+        setTimeout(() => {
+            // Resetear formulario
+            e.target.reset();
+            
+            // Restaurar botón
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+            
+            // Cerrar modal
+            closeAllModals();
+            
+            // Mostrar confirmación
+            showNotification('✅ Cotización enviada. Te contactaremos en menos de 24 horas.', 'success');
+            
+            // También enviar por WhatsApp (opcional)
+            const serviceName = getServiceName(data['service-type']);
+            const whatsappMessage = `Nueva cotización solicitada:\n\nServicio: ${serviceName}\nNombre: ${data['contact-name']}\nTeléfono: ${data['contact-phone']}\nEmail: ${data['contact-email']}\n\nDescripción: ${data.description}`;
+            
+            // Guardar en localStorage para seguimiento
+            saveQuoteRequest(data);
+            
+        }, 1500);
+    }
+    
+    function closeAllModals() {
+        // Cerrar todos los modales
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+        
+        // Restaurar scroll del body
+        document.body.style.overflow = '';
+    }
+    
+    // ============================================
+    // FAQs
+    // ============================================
+    function initFAQs() {
+        elements.faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Cerrar otras respuestas
+                elements.faqQuestions.forEach(otherQuestion => {
+                    if (otherQuestion !== this) {
+                        otherQuestion.classList.remove('active');
+                        otherQuestion.nextElementSibling.style.maxHeight = '0';
+                        otherQuestion.querySelector('i').classList.remove('fa-chevron-up');
+                        otherQuestion.querySelector('i').classList.add('fa-chevron-down');
+                    }
+                });
+                
+                // Alternar respuesta actual
+                this.classList.toggle('active');
+                
+                if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                    answer.style.maxHeight = '0';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    }
+    
+    // ============================================
+    // VERIFICACIÓN DE PARÁMETROS URL
+    // ============================================
+    function checkURLParameters() {
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        
+        // Verificar si hay un servicio específico en la URL
+        const service = urlParams.get('service') || window.location.hash.substring(1);
+        
+        if (service && ['personalizacion', 'afilado', 'reparacion', 'asesoria'].includes(service)) {
+            // Encontrar y activar el tab correspondiente
+            const tabButton = document.querySelector(`.tab-btn[data-tab="${service}"]`);
+            if (tabButton) {
+                tabButton.click();
+                
+                // Scroll al servicio después de un breve delay
+                setTimeout(() => {
+                    document.getElementById(service)?.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+    }
+    
+    // ============================================
+    // UTILIDADES
+    // ============================================
+    function getServiceName(serviceKey) {
+        const services = {
+            'personalizacion': 'Personalización Total',
+            'afilado': 'Afilado Profesional',
+            'reparacion': 'Reparación y Restauración',
+            'asesoria': 'Asesoría Técnica'
+        };
+        return services[serviceKey] || serviceKey;
+    }
+    
+    function openWhatsApp(message) {
+        const encodedMessage = encodeURIComponent(message);
+        const phoneNumber = '5493843458340';
+        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+    }
+    
+    function saveQuoteRequest(data) {
+        // Guardar en localStorage para seguimiento
+        const requests = JSON.parse(localStorage.getItem('gl_quote_requests') || '[]');
+        requests.push({
+            ...data,
+            date: new Date().toISOString(),
+            status: 'pending'
+        });
+        localStorage.setItem('gl_quote_requests', JSON.stringify(requests));
+    }
+    
+    function showNotification(message, type = 'info') {
+        // Usar la función de notificación del script principal si existe
+        if (typeof window.showNotification === 'function') {
+            window.showNotification(message, type);
+        } else {
+            // Notificación simple
+            const notification = document.createElement('div');
+            notification.className = `notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#38A169' : type === 'error' ? '#E53E3E' : '#8B4513'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 9999;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    }
+    
+    // ============================================
+    // INICIALIZAR
+    // ============================================
+    init();
+});
+[file content end]
+
+[file name]: contact-script.js
+[file content begin]
+// ============================================
+// SCRIPT PARA PÁGINA DE CONTACTO
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página de contacto cargada');
+    
+    // Elementos del DOM
+    const elements = {
+        contactForm: document.getElementById('contactForm'),
+        fileUpload: document.getElementById('file-upload'),
+        fileList: document.querySelector('.file-list'),
+        submitButton: document.querySelector('.btn-submit'),
+        confirmationModal: document.getElementById('confirmation-modal'),
+        closeModalButtons: document.querySelectorAll('.close-modal, .close-confirmation'),
+        quoteButton: document.querySelector('.btn-quote'),
+        faqQuestions: document.querySelectorAll('.faq-question'),
+        alternativeButtons: document.querySelectorAll('.alternative-buttons a'),
+        mapPlaceholder: document.querySelector('.map-placeholder')
+    };
+    
+    // Variables de estado
+    let uploadedFiles = [];
+    
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    function init() {
+        console.log('Inicializando contacto...');
+        
+        // Configurar event listeners
+        setupEventListeners();
+        
+        // Inicializar map placeholder
+        initMapPlaceholder();
+        
+        // Inicializar FAQs
+        initFAQs();
+        
+        // Verificar si hay parámetros en la URL
+        checkURLParameters();
+    }
+    
+    // ============================================
+    // CONFIGURACIÓN DE EVENT LISTENERS
+    // ============================================
+    function setupEventListeners() {
+        // Formulario de contacto
+        if (elements.contactForm) {
+            elements.contactForm.addEventListener('submit', handleFormSubmit);
+            
+            // Validación en tiempo real
+            setupFormValidation();
+        }
+        
+        // Subida de archivos
+        if (elements.fileUpload) {
+            elements.fileUpload.addEventListener('change', handleFileUpload);
+        }
+        
+        // Botón de presupuesto
+        if (elements.quoteButton) {
+            elements.quoteButton.addEventListener('click', handleQuoteClick);
+        }
+        
+        // Botones alternativos de contacto
+        if (elements.alternativeButtons) {
+            elements.alternativeButtons.forEach(button => {
+                button.addEventListener('click', handleAlternativeContact);
+            });
+        }
+        
+        // Cerrar modales
+        if (elements.closeModalButtons) {
+            elements.closeModalButtons.forEach(button => {
+                button.addEventListener('click', closeModal);
+            });
+        }
+        
+        // Cerrar modal al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
+        
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    }
+    
+    // ============================================
+    // FORMULARIO DE CONTACTO
+    // ============================================
+    function setupFormValidation() {
+        const inputs = elements.contactForm.querySelectorAll('input, select, textarea');
+        
+        inputs.forEach(input => {
+            // Validación al perder foco
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            // Limpiar error al escribir
+            input.addEventListener('input', function() {
+                clearError(this);
+            });
+        });
+    }
+    
+    function validateField(field) {
+        const value = field.value.trim();
+        const fieldName = field.getAttribute('name') || field.id;
+        
+        // Remover error anterior
+        clearError(field);
+        
+        // Validaciones específicas por tipo de campo
+        switch(fieldName) {
+            case 'name':
+                if (!value) {
+                    showError(field, 'El nombre es obligatorio');
+                    return false;
+                }
+                if (value.length < 2) {
+                    showError(field, 'El nombre debe tener al menos 2 caracteres');
+                    return false;
+                }
+                break;
+                
+            case 'email':
+                if (!value) {
+                    showError(field, 'El email es obligatorio');
+                    return false;
+                }
+                if (!isValidEmail(value)) {
+                    showError(field, 'Por favor ingresa un email válido');
+                    return false;
+                }
+                break;
+                
+            case 'phone':
+                if (!value) {
+                    showError(field, 'El teléfono es obligatorio');
+                    return false;
+                }
+                if (!isValidPhone(value)) {
+                    showError(field, 'Por favor ingresa un teléfono válido');
+                    return false;
+                }
+                break;
+                
+            case 'subject':
+                if (!value) {
+                    showError(field, 'Por favor selecciona un asunto');
+                    return false;
+                }
+                break;
+                
+            case 'message':
+                if (!value) {
+                    showError(field, 'El mensaje es obligatorio');
+                    return false;
+                }
+                if (value.length < 10) {
+                    showError(field, 'Por favor describe tu consulta con más detalle');
+                    return false;
+                }
+                break;
+        }
+        
+        return true;
+    }
+    
+    function showError(field, message) {
+        // Remover error anterior si existe
+        clearError(field);
+        
+        // Crear elemento de error
+        const error = document.createElement('div');
+        error.className = 'field-error';
+        error.textContent = message;
+        error.style.cssText = `
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        `;
+        
+        // Insertar después del campo
+        field.parentNode.appendChild(error);
+        
+        // Marcar campo como inválido
+        field.classList.add('error');
+    }
+    
+    function clearError(field) {
+        // Remover clase de error
+        field.classList.remove('error');
+        
+        // Remover mensaje de error si existe
+        const error = field.parentNode.querySelector('.field-error');
+        if (error) {
+            error.remove();
+        }
+    }
+    
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    function isValidPhone(phone) {
+        // Aceptar números argentinos y internacionales
+        const re = /^[+]?[0-9\s\-\(\)]{8,}$/;
+        return re.test(phone.replace(/\s/g, ''));
+    }
+    
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        // Validar todos los campos
+        const fields = elements.contactForm.querySelectorAll('input, select, textarea');
+        let isValid = true;
+        
+        fields.forEach(field => {
+            if (!validateField(field)) {
+                isValid = false;
+            }
+        });
+        
+        // Verificar checkbox de privacidad
+        const privacyCheckbox = elements.contactForm.querySelector('#privacy');
+        if (!privacyCheckbox.checked) {
+            showError(privacyCheckbox, 'Debes aceptar la política de privacidad');
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            showNotification('Por favor corrige los errores en el formulario', 'error');
+            return;
+        }
+        
+        // Obtener datos del formulario
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Agregar archivos si existen
+        if (uploadedFiles.length > 0) {
+            data.files = uploadedFiles.map(file => file.name);
+        }
+        
+        // Mostrar loading
+        showLoading(true);
+        
+        // Simular envío (en producción, aquí iría una petición AJAX)
+        setTimeout(() => {
+            // Guardar en localStorage para seguimiento
+            saveContactRequest(data);
+            
+            // Resetear formulario
+            e.target.reset();
+            
+            // Limpiar archivos subidos
+            uploadedFiles = [];
+            updateFileList();
+            
+            // Ocultar loading
+            showLoading(false);
+            
+            // Mostrar confirmación
+            showConfirmationModal(data);
+            
+        }, 2000);
+    }
+    
+    // ============================================
+    // SUBIDA DE ARCHIVOS
+    // ============================================
+    function handleFileUpload(e) {
+        const files = Array.from(e.target.files);
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        
+        // Validar cada archivo
+        files.forEach(file => {
+            // Verificar tamaño
+            if (file.size > maxSize) {
+                showNotification(`El archivo ${file.name} es muy grande (máximo 10MB)`, 'error');
+                return;
+            }
+            
+            // Verificar tipo
+            if (!allowedTypes.includes(file.type)) {
+                showNotification(`El tipo de archivo ${file.name} no está permitido`, 'error');
+                return;
+            }
+            
+            // Verificar si ya fue subido
+            if (uploadedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                showNotification(`El archivo ${file.name} ya fue subido`, 'warning');
+                return;
+            }
+            
+            // Agregar a la lista
+            uploadedFiles.push(file);
+        });
+        
+        // Actualizar lista visual
+        updateFileList();
+        
+        // Resetear input
+        e.target.value = '';
+    }
+    
+    function updateFileList() {
+        if (!elements.fileList) return;
+        
+        elements.fileList.innerHTML = '';
+        
+        if (uploadedFiles.length === 0) {
+            elements.fileList.innerHTML = '<p class="no-files">No hay archivos seleccionados</p>';
+            return;
+        }
+        
+        uploadedFiles.forEach((file, index) => {
+            const fileElement = document.createElement('div');
+            fileElement.className = 'file-item';
+            fileElement.innerHTML = `
+                <div class="file-info">
+                    <i class="fas ${getFileIcon(file.type)}"></i>
+                    <div>
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size">${formatFileSize(file.size)}</span>
+                    </div>
+                </div>
+                <button class="remove-file" data-index="${index}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            elements.fileList.appendChild(fileElement);
+        });
+        
+        // Agregar event listeners a los botones de eliminar
+        elements.fileList.querySelectorAll('.remove-file').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                uploadedFiles.splice(index, 1);
+                updateFileList();
+            });
+        });
+    }
+    
+    function getFileIcon(fileType) {
+        if (fileType.startsWith('image/')) {
+            return 'fa-image';
+        } else if (fileType === 'application/pdf') {
+            return 'fa-file-pdf';
+        } else if (fileType.includes('word')) {
+            return 'fa-file-word';
+        } else {
+            return 'fa-file';
+        }
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // ============================================
+    // BOTONES DE ACCIÓN
+    // ============================================
+    function handleQuoteClick(e) {
+        e.preventDefault();
+        
+        // Redirigir a la página de servicios
+        window.location.href = 'servicios.html#personalizacion';
+    }
+    
+    function handleAlternativeContact(e) {
+        e.preventDefault();
+        
+        const button = e.currentTarget;
+        const buttonType = button.classList.contains('btn-whatsapp') ? 'whatsapp' :
+                          button.classList.contains('btn-phone') ? 'phone' : 'email';
+        
+        // Obtener datos del formulario si existen
+        const formData = getFormData();
+        
+        let message = '';
+        let url = '';
+        
+        switch(buttonType) {
+            case 'whatsapp':
+                message = createWhatsAppMessage(formData);
+                url = `https://wa.me/5493843458340?text=${encodeURIComponent(message)}`;
+                break;
+                
+            case 'phone':
+                url = 'tel:+5493843458340';
+                break;
+                
+            case 'email':
+                const subject = encodeURIComponent('Consulta desde formulario de contacto');
+                const body = createEmailMessage(formData);
+                url = `mailto:info@glcuchillos.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+                break;
+        }
+        
+        // Abrir en nueva pestaña para WhatsApp, misma pestaña para teléfono/email
+        if (buttonType === 'whatsapp') {
+            window.open(url, '_blank');
+        } else {
+            window.location.href = url;
+        }
+    }
+    
+    function getFormData() {
+        // Obtener datos del formulario si existen
+        const data = {};
+        
+        if (elements.contactForm) {
+            const form = elements.contactForm;
+            data.name = form.querySelector('#name')?.value || '';
+            data.email = form.querySelector('#email')?.value || '';
+            data.phone = form.querySelector('#phone')?.value || '';
+            data.subject = form.querySelector('#subject')?.value || '';
+            data.message = form.querySelector('#message')?.value || '';
+        }
+        
+        return data;
+    }
+    
+    function createWhatsAppMessage(formData) {
+        let message = 'Hola, me contacto desde la web de GL Cuchillos.\n\n';
+        
+        if (formData.name) message += `*Nombre:* ${formData.name}\n`;
+        if (formData.phone) message += `*Teléfono:* ${formData.phone}\n`;
+        if (formData.email) message += `*Email:* ${formData.email}\n`;
+        if (formData.subject) {
+            const subjectText = getSubjectText(formData.subject);
+            message += `*Asunto:* ${subjectText}\n`;
+        }
+        if (formData.message) message += `\n*Mensaje:*\n${formData.message}\n`;
+        
+        message += '\nPor favor, contáctenme para más información. ¡Gracias!';
+        
+        return message;
+    }
+    
+    function createEmailMessage(formData) {
+        let message = 'Hola, me contacto desde la web de GL Cuchillos.\n\n';
+        
+        if (formData.name) message += `Nombre: ${formData.name}\n`;
+        if (formData.phone) message += `Teléfono: ${formData.phone}\n`;
+        if (formData.email) message += `Email: ${formData.email}\n`;
+        if (formData.subject) {
+            const subjectText = getSubjectText(formData.subject);
+            message += `Asunto: ${subjectText}\n`;
+        }
+        if (formData.message) message += `\nMensaje:\n${formData.message}\n`;
+        
+        message += '\nPor favor, contáctenme para más información.\n\nSaludos cordiales.';
+        
+        return message;
+    }
+    
+    function getSubjectText(subjectValue) {
+        const subjects = {
+            'consulta': 'Consulta general',
+            'personalizacion': 'Personalización',
+            'afilado': 'Servicio de afilado',
+            'reparacion': 'Reparación',
+            'compra': 'Consulta de compra',
+            'mayorista': 'Pedido mayorista',
+            'taller': 'Talleres y cursos',
+            'trabajo': 'Trabajar con nosotros',
+            'otro': 'Otro'
+        };
+        
+        return subjects[subjectValue] || subjectValue;
+    }
+    
+    // ============================================
+    // MODAL DE CONFIRMACIÓN
+    // ============================================
+    function showConfirmationModal(data) {
+        if (!elements.confirmationModal) return;
+        
+        // Mostrar modal
+        elements.confirmationModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Opcional: Personalizar contenido del modal con datos
+        const modalBody = elements.confirmationModal.querySelector('.modal-body');
+        if (data.name && modalBody) {
+            const greeting = modalBody.querySelector('h4');
+            if (greeting) {
+                greeting.textContent = `¡Gracias ${data.name.split(' ')[0]}!`;
+            }
+        }
+    }
+    
+    function closeModal() {
+        // Cerrar todos los modales
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+        
+        // Restaurar scroll del body
+        document.body.style.overflow = '';
+    }
+    
+    // ============================================
+    // MAPA Y UBICACIÓN
+    // ============================================
+    function initMapPlaceholder() {
+        if (!elements.mapPlaceholder) return;
+        
+        // Agregar interacción al placeholder
+        elements.mapPlaceholder.addEventListener('click', function() {
+            // En producción, aquí se mostraría un mapa interactivo
+            // Por ahora, redirigir a Google Maps
+            window.open('https://www.google.com/maps/search/cuchilleros+artesanales+cordoba+argentina/', '_blank');
+        });
+    }
+    
+    // ============================================
+    // FAQs
+    // ============================================
+    function initFAQs() {
+        if (!elements.faqQuestions) return;
+        
+        elements.faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Cerrar otras respuestas
+                elements.faqQuestions.forEach(otherQuestion => {
+                    if (otherQuestion !== this) {
+                        otherQuestion.classList.remove('active');
+                        otherQuestion.nextElementSibling.style.maxHeight = '0';
+                        otherQuestion.querySelector('i').classList.remove('fa-chevron-up');
+                        otherQuestion.querySelector('i').classList.add('fa-chevron-down');
+                    }
+                });
+                
+                // Alternar respuesta actual
+                this.classList.toggle('active');
+                
+                if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                    answer.style.maxHeight = '0';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    }
+    
+    // ============================================
+    // VERIFICACIÓN DE PARÁMETROS URL
+    // ============================================
+    function checkURLParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Pre-llenar formulario si hay parámetros
+        const name = urlParams.get('name');
+        const email = urlParams.get('email');
+        const subject = urlParams.get('subject');
+        
+        if (name && elements.contactForm) {
+            const nameField = elements.contactForm.querySelector('#name');
+            if (nameField) nameField.value = decodeURIComponent(name);
+        }
+        
+        if (email && elements.contactForm) {
+            const emailField = elements.contactForm.querySelector('#email');
+            if (emailField) emailField.value = decodeURIComponent(email);
+        }
+        
+        if (subject && elements.contactForm) {
+            const subjectField = elements.contactForm.querySelector('#subject');
+            if (subjectField) subjectField.value = decodeURIComponent(subject);
+        }
+    }
+    
+    // ============================================
+    // UTILIDADES
+    // ============================================
+    function showLoading(show) {
+        if (!elements.submitButton) return;
+        
+        if (show) {
+            elements.submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            elements.submitButton.disabled = true;
+        } else {
+            elements.submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensaje';
+            elements.submitButton.disabled = false;
+        }
+    }
+    
+    function saveContactRequest(data) {
+        // Guardar en localStorage para seguimiento
+        const requests = JSON.parse(localStorage.getItem('gl_contact_requests') || '[]');
+        requests.push({
+            ...data,
+            date: new Date().toISOString(),
+            status: 'pending'
+        });
+        localStorage.setItem('gl_contact_requests', JSON.stringify(requests));
+        
+        // También guardar para newsletter si está marcado
+        if (data.newsletter && data.email) {
+            const subscribers = JSON.parse(localStorage.getItem('gl_newsletter') || '[]');
+            if (!subscribers.some(sub => sub.email === data.email)) {
+                subscribers.push({
+                    email: data.email,
+                    name: data.name,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('gl_newsletter', JSON.stringify(subscribers));
+            }
+        }
+    }
+    
+    function showNotification(message, type = 'info') {
+        // Usar la función de notificación del script principal si existe
+        if (typeof window.showNotification === 'function') {
+            window.showNotification(message, type);
+        } else {
+            // Notificación simple
+            const notification = document.createElement('div');
+            notification.className = `notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#38A169' : type === 'error' ? '#E53E3E' : '#8B4513'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 9999;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    }
+    
+    // ============================================
+    // INICIALIZAR
+    // ============================================
+    init();
+});
+[file content end]
