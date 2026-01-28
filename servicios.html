@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Servicios | GL CUCHILLOS ARTESANALES</title>
+    <meta name="description" content="Servicios especializados de personalización, afilado, reparación y asesoría para tus cuchillos artesanales">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Skip link -->
+    <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
+
+    <!-- Header (mismo que index.html) -->
+    <header class="header">
+        <div class="info-bar">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-left">
+                        <span><i class="fas fa-truck"></i> Envíos a todo el país</span>
+                        <span><i class="fas fa-shield-alt"></i> Garantía de por vida</span>
+                        <span><i class="fas fa-credit-card"></i> 12 cuotas sin interés</span>
+                    </div>
+                    <div class="info-right">
+                        <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
+                        <select class="language-selector">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <div class="container">
+                <div class="nav-container">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" class="logo-img" width="50" height="50">
+                            <div class="logo-text">
+                                <h1>GL CUCHILLOS</h1>
+                                <span class="logo-subtitle">ARTESANALES</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Navegación -->
+                    <ul class="nav-menu">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="productos.html"><i class="fas fa-utensils"></i> Productos</a></li>
+                        <li><a href="servicios.html" class="active"><i class="fas fa-hands-helping"></i> Servicios</a></li>
+                        <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
+                        <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
+                        <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    </ul>
+
+                    <!-- Acciones de Usuario -->
+                    <div class="user-actions">
+                        <div class="search-container">
+                            <button class="search-btn" aria-label="Buscar productos"><i class="fas fa-search"></i></button>
+                        </div>
+                        <a href="#carrito" class="cart-btn" aria-label="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        <button class="menu-toggle" aria-label="Abrir menú principal" aria-expanded="false">
+                            <span></span><span></span><span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menú Mobile (similar al index) -->
+    <div class="mobile-menu">
+        <!-- Contenido similar al index -->
+    </div>
+    <div class="mobile-overlay"></div>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Hero Banner Servicios -->
+        <section class="page-hero" id="servicios">
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-title">Nuestros <span class="highlight">Servicios</span></h1>
+                    <p class="page-subtitle">Soluciones especializadas para cuidar, mantener y personalizar tus cuchillos artesanales</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicio 1: Personalización -->
+        <section class="service-detail" id="personalizacion">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h2>Personalización Total</h2>
+                    <p class="service-tagline">Crea el cuchillo de tus sueños, hecho a tu medida y estilo</p>
+                </div>
+                
+                <div class="service-content">
+                    <div class="service-image">
+                        <img src="images/personalizacion.jpg" alt="Proceso de personalización de cuchillos" loading="lazy">
+                    </div>
+                    <div class="service-description">
+                        <h3>¿Qué incluye nuestro servicio de personalización?</h3>
+                        <p>Diseñamos y fabricamos cuchillos únicos según tus especificaciones. Desde la elección del acero hasta el último detalle del mango, todo se adapta a tus necesidades.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-drafting-compass"></i>
+                                <div>
+                                    <h4>Diseño desde Cero</h4>
+                                    <p>Colaboramos contigo en el diseño de la hoja, forma, tamaño y ergonomía</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-layer-group"></i>
+                                <div>
+                                    <h4>Selección de Materiales</h4>
+                                    <p>Elige entre diferentes aceros, maderas, materiales sintéticos y acabados</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-engraving"></i>
+                                <div>
+                                    <h4>Grabado Personalizado</h4>
+                                    <p>Incluye iniciales, logos o mensajes especiales grabados en la hoja o mango</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-gift"></i>
+                                <div>
+                                    <h4>Presentación Especial</h4>
+                                    <p>Caja de regalo personalizada y certificado de autenticidad</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="https://wa.me/5493843458340?text=Hola,%20me%20interesa%20personalizar%20un%20cuchillo" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Solicitar Cotización
+                            </a>
+                            <span class="service-time"><i class="fas fa-clock"></i> Tiempo estimado: 4-6 semanas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicio 2: Afilado -->
+        <section class="service-detail alt-bg" id="afilado">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h2>Afilado Profesional</h2>
+                    <p class="service-tagline">Devolvemos el filo perfecto a tus cuchillos con técnicas tradicionales</p>
+                </div>
+                
+                <div class="service-content reverse">
+                    <div class="service-description">
+                        <h3>Nuestro Proceso de Afilado</h3>
+                        <p>Utilizamos técnicas japonesas y europeas con piedras de diferentes granos para lograr un filo perfecto y duradero.</p>
+                        
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4>Evaluación</h4>
+                                <p>Analizamos el estado del filo y el tipo de acero</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4>Rectificación</h4>
+                                <p>Corregimos imperfecciones en el filo si es necesario</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4>Afilado</h4>
+                                <p>Afilamos con piedras de grano medio a fino</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <h4>Pulido</h4>
+                                <p>Pulimos el filo para un acabado perfecto</p>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-table">
+                            <h4>Tarifas de Afilado</h4>
+                            <table>
+                                <tr>
+                                    <td>Cuchillos de chef (hasta 25cm)</td>
+                                    <td>$5.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Cuchillos de parrilla</td>
+                                    <td>$4.500</td>
+                                </tr>
+                                <tr>
+                                    <td>Cuchillos de caza</td>
+                                    <td>$6.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Tijeras y herramientas</td>
+                                    <td>$3.500</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>Pack de 3 cuchillos</td>
+                                    <td>$12.000</td>
+                                </tr>
+                            </table>
+                            <p class="note"><i class="fas fa-info-circle"></i> Incluye limpieza básica y asesoría de mantenimiento</p>
+                        </div>
+                    </div>
+                    <div class="service-image">
+                        <img src="images/afilado.jpg" alt="Proceso de afilado profesional" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicio 3: Reparación -->
+        <section class="service-detail" id="reparacion">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h2>Reparación y Restauración</h2>
+                    <p class="service-tagline">Damos nueva vida a tus cuchillos dañados o con historia</p>
+                </div>
+                
+                <div class="service-content">
+                    <div class="service-image">
+                        <img src="images/reparacion.jpg" alt="Proceso de reparación de cuchillos" loading="lazy">
+                    </div>
+                    <div class="service-description">
+                        <h3>¿Qué podemos reparar?</h3>
+                        <p>Nuestro taller está equipado para solucionar todo tipo de problemas en cuchillos artesanales e industriales.</p>
+                        
+                        <div class="repair-services">
+                            <div class="repair-category">
+                                <h4><i class="fas fa-hammer"></i> Reparaciones Comunes</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Cambio de mangos rotos o gastados</li>
+                                    <li><i class="fas fa-check"></i> Rectificación de hojas torcidas</li>
+                                    <li><i class="fas fa-check"></i> Reparación de puntas rotas</li>
+                                    <li><i class="fas fa-check"></i> Soldadura y reconstrucción</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="repair-category">
+                                <h4><i class="fas fa-history"></i> Restauración</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Limpieza profunda de óxido</li>
+                                    <li><i class="fas fa-check"></i> Restauración de cuchillos antiguos</li>
+                                    <li><i class="fas fa-check"></i> Renovación de acabados</li>
+                                    <li><i class="fas fa-check"></i> Conservación de piezas históricas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <h4>Importante</h4>
+                                <p>Para cuchillos con valor sentimental o histórico, ofrecemos consulta gratuita para evaluar el mejor enfoque de restauración.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="contacto.html" class="btn btn-primary">
+                                <i class="fas fa-envelope"></i> Enviar Fotos para Evaluación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Garantía y Envíos -->
+        <section class="additional-services">
+            <div class="container">
+                <h2 class="section-title">Otros <span class="highlight">Servicios</span></h2>
+                
+                <div class="services-grid-small">
+                    <div class="service-small" id="garantia">
+                        <div class="service-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Garantía de Por Vida</h3>
+                        <p>Todos nuestros cuchillos tienen garantía contra defectos de fabricación. Consulta los términos y condiciones.</p>
+                        <a href="#garantia-detalles" class="btn-text">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="service-small" id="envios">
+                        <div class="service-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Envíos Nacionales</h3>
+                        <p>Enviamos a todo el país con seguimiento online. Envío gratis en compras superiores a $500.000.</p>
+                        <a href="#envios-detalles" class="btn-text">Ver zonas y costos <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="service-small" id="pagos">
+                        <div class="service-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3>Formas de Pago</h3>
+                        <p>Aceptamos todas las tarjetas, transferencias, Mercado Pago y efectivo. Hasta 12 cuotas sin interés.</p>
+                        <a href="#pagos-detalles" class="btn-text">Ver opciones <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="service-small" id="asesoria">
+                        <div class="service-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Asesoría Técnica</h3>
+                        <p>Te ayudamos a elegir el cuchillo perfecto según tu uso y necesidades. Consulta gratuita.</p>
+                        <a href="contacto.html" class="btn-text">Agendar consulta <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para darle nueva vida a tus cuchillos?</h2>
+                    <p>Contáctanos hoy mismo para evaluar tu caso particular</p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/5493843458340" class="btn btn-primary" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="contacto.html" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Formulario
+                        </a>
+                        <a href="tel:+5493843458340" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> Llamar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (igual al index) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="50" height="50">
+                        <div>
+                            <h3>GL CUCHILLOS</h3>
+                            <span>ARTESANALES</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">Forjando tradición y calidad desde 1980.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="servicios.html#personalizacion">Personalización</a></li>
+                        <li><a href="servicios.html#afilado">Afilado Profesional</a></li>
+                        <li><a href="servicios.html#reparacion">Reparación</a></li>
+                        <li><a href="servicios.html#asesoria">Asesoría Técnica</a></li>
+                        <li><a href="servicios.html#garantia">Garantía</a></li>
+                        <li><a href="servicios.html#envios">Envíos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +54 9 3843 458340</p>
+                        <p><i class="fas fa-envelope"></i> info@glcuchillos.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 9-18hs</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
