@@ -2254,3 +2254,294 @@ body.landscape .hero {
         animation: slideUp 0.3s ease-out;
     }
 }
+/* ============================================
+   CATÁLOGO COMPLETO DE PRODUCTOS
+   ============================================ */
+
+.full-products {
+    padding: var(--space-xxl) 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-light);
+}
+
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--white);
+    border: 2px solid var(--gray-light);
+    border-radius: var(--radius-full);
+    color: var(--gray-dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 120px;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.products-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.product-card-full {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--gray-light);
+    position: relative;
+}
+
+.product-card-full:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+.product-specs {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--gray);
+}
+
+.product-specs span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.product-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.btn-details {
+    flex: 1;
+    background: var(--white);
+    color: var(--dark);
+    border: 2px solid var(--gray-light);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+}
+
+.btn-details:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ============================================
+   SERVICIOS ESPECIALIZADOS
+   ============================================ */
+
+.our-services {
+    padding: var(--space-xxl) 0;
+    background: var(--light);
+    border-top: 1px solid var(--gray-light);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+    color: var(--white);
+    font-size: 2rem;
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+    color: var(--dark);
+}
+
+.service-card p {
+    color: var(--gray);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+}
+
+.service-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: var(--space-md);
+    padding: 0;
+}
+
+.service-features li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: 0.5rem;
+    color: var(--gray-dark);
+    font-size: 0.875rem;
+}
+
+.service-features i {
+    color: var(--success);
+    font-size: 0.875rem;
+}
+
+.btn-service {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: auto;
+}
+
+.btn-service:hover {
+    background: var(--primary);
+}
+
+.service-cta {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--white);
+    margin-top: var(--space-xl);
+}
+
+.service-cta h3 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-sm);
+    color: var(--white);
+}
+
+.service-cta p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto var(--space-lg);
+}
+
+.service-cta .btn-primary {
+    background: var(--white);
+    color: var(--primary);
+    border: none;
+}
+
+.service-cta .btn-primary:hover {
+    background: var(--gray-light);
+    color: var(--primary-dark);
+}
+
+/* ============================================
+   RESPONSIVE PARA NUEVAS SECCIONES
+   ============================================ */
+
+@media (max-width: 768px) {
+    .category-filters {
+        gap: var(--space-xs);
+    }
+    
+    .filter-btn {
+        min-width: 100px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .products-grid-full {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--space-md);
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-cta {
+        padding: var(--space-lg);
+    }
+    
+    .service-cta h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid-full {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-actions {
+        flex-direction: column;
+    }
+    
+    .btn-details {
+        width: 100%;
+    }
+    
+    .service-cta {
+        padding: var(--space-md);
+    }
+}
