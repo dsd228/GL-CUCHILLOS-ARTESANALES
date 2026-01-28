@@ -108,7 +108,88 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     function init() {
         console.log('Inicializando funcionalidades completas...');
-        
+        // ============================================
+// FUNCIONALIDAD PARA VER DETALLES DE PRODUCTO
+// ============================================
+
+function setupProductDetails() {
+    const detailButtons = document.querySelectorAll('.btn-details');
+    
+    detailButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product');
+            
+            // Aquí puedes implementar la navegación a una página de detalle
+            // Por ahora mostramos un modal/notificación
+            const productNames = {
+                'caza-tactico': 'Caza Táctico',
+                'chef-parrillero': 'Chef Parrillero',
+                'juego-parrillero-m': 'Juego Parrillero M',
+                'verijero': 'Verijero',
+                'caza-campo': 'Caza de Campo',
+                'coleccionista': 'Modelo Coleccionista'
+            };
+            
+            showNotification(`Viendo detalles de: ${productNames[productId]}`, 'info');
+            
+            // Scroll a la sección de detalles si existe
+            const detailSection = document.getElementById('producto-detalle');
+            if (detailSection) {
+                detailSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// ============================================
+// INICIALIZACIÓN DE NUEVAS FUNCIONALIDADES
+// ============================================
+
+function initNewSections() {
+    console.log('Inicializando nuevas secciones...');
+    
+    // Configurar filtros de productos
+    setupProductFilters();
+    
+    // Configurar botones de servicios
+    setupServices();
+    
+    // Configurar botones de ver detalles
+    setupProductDetails();
+    
+    // Añadir estilos iniciales para animaciones
+    const productCards = document.querySelectorAll('.product-card-full');
+    productCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    });
+    
+    // Animar entrada de productos
+    setTimeout(() => {
+        productCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 300);
+}
+
+// ============================================
+// INTEGRAR CON TU CÓDIGO EXISTENTE
+// ============================================
+
+// En tu función init() existente, agregar:
+function init() {
+    // ... tu código existente ...
+    
+    // Después de inicializar todo, agregar:
+    initNewSections();
+    
+    // ... resto de tu código ...
+}
+
         // Cargar datos del localStorage
         loadFromStorage();
         
@@ -1155,84 +1236,3 @@ function showServiceModal(serviceType, serviceName) {
     }, 1000);
 }
 
-// ============================================
-// FUNCIONALIDAD PARA VER DETALLES DE PRODUCTO
-// ============================================
-
-function setupProductDetails() {
-    const detailButtons = document.querySelectorAll('.btn-details');
-    
-    detailButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-product');
-            
-            // Aquí puedes implementar la navegación a una página de detalle
-            // Por ahora mostramos un modal/notificación
-            const productNames = {
-                'caza-tactico': 'Caza Táctico',
-                'chef-parrillero': 'Chef Parrillero',
-                'juego-parrillero-m': 'Juego Parrillero M',
-                'verijero': 'Verijero',
-                'caza-campo': 'Caza de Campo',
-                'coleccionista': 'Modelo Coleccionista'
-            };
-            
-            showNotification(`Viendo detalles de: ${productNames[productId]}`, 'info');
-            
-            // Scroll a la sección de detalles si existe
-            const detailSection = document.getElementById('producto-detalle');
-            if (detailSection) {
-                detailSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-}
-
-// ============================================
-// INICIALIZACIÓN DE NUEVAS FUNCIONALIDADES
-// ============================================
-
-function initNewSections() {
-    console.log('Inicializando nuevas secciones...');
-    
-    // Configurar filtros de productos
-    setupProductFilters();
-    
-    // Configurar botones de servicios
-    setupServices();
-    
-    // Configurar botones de ver detalles
-    setupProductDetails();
-    
-    // Añadir estilos iniciales para animaciones
-    const productCards = document.querySelectorAll('.product-card-full');
-    productCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    });
-    
-    // Animar entrada de productos
-    setTimeout(() => {
-        productCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }, 300);
-}
-
-// ============================================
-// INTEGRAR CON TU CÓDIGO EXISTENTE
-// ============================================
-
-// En tu función init() existente, agregar:
-function init() {
-    // ... tu código existente ...
-    
-    // Después de inicializar todo, agregar:
-    initNewSections();
-    
-    // ... resto de tu código ...
-}
