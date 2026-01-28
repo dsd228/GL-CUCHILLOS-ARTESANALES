@@ -553,13 +553,19 @@ function init() {
         });
         
         // 14. PREVENIR CLIC EN ENLACES VACÍOS
-        document.querySelectorAll('a[href="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                showNotification('Esta sección está en desarrollo', 'info');
-            });
+        document.querySelectorAll('a[href="#"]:not([data-no-prevent])').forEach(link => {
+    // Solo si no es un enlace real a una página
+    if (!link.getAttribute('data-real-link')) {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Mostrar notificación solo si es realmente una sección que no existe
+            const href = link.getAttribute('href');
+            if (href === '#') {
+                showNotification('Próximamente disponible', 'info');
+            }
         });
     }
+}); }
     
     function setupDesktopDropdowns() {
         elements.dropdowns.forEach(dropdown => {
