@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('GL CUCHILLOS ARTESANALES - Sitio completamente funcional');
+    console.log('GL CUCHILLOS ARTESANALES - Sitio completamente funcional y responsive');
     
     // ============================================
-    // VARIABLES GLOBALES Y DATOS DE PRODUCTOS
+    // VARIABLES GLOBALES Y DATOS
     // ============================================
     let cart = [];
     let wishlist = [];
+    let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    // Base de datos de productos (simulada)
+    // Base de datos de productos
     const productsDB = {
         'chef-damasco': {
             id: 'p001',
@@ -95,11 +96,15 @@ document.addEventListener('DOMContentLoaded', function() {
         viewAllBtn: document.querySelector('a[href="#"] .fa-arrow-right')?.closest('.btn'),
         
         newsletterForm: document.querySelector('.newsletter-form'),
-        languageSelector: document.querySelector('.language-selector')
+        languageSelector: document.querySelector('.language-selector'),
+        
+        // Nuevos elementos para responsive
+        dropdowns: document.querySelectorAll('.dropdown'),
+        allInputs: document.querySelectorAll('input, select, textarea')
     };
     
     // ============================================
-    // INICIALIZACIÓN
+    // INICIALIZACIÓN COMPLETA
     // ============================================
     function init() {
         console.log('Inicializando funcionalidades completas...');
@@ -109,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Configurar todos los event listeners
         setupEventListeners();
+        
+        // Inicializar funcionalidades responsive
+        initResponsive();
         
         // Actualizar contadores
         updateCounters();
@@ -121,12 +129,163 @@ document.addEventListener('DOMContentLoaded', function() {
         // Añadir atributos data-id a los productos
         addProductDataAttributes();
         
-        console.log('✅ Sitio completamente funcional');
+        // Configurar dropdowns desktop
+        setupDesktopDropdowns();
+        
+        console.log('✅ Sitio completamente funcional y responsive');
         
         // Mostrar notificación de bienvenida
         setTimeout(() => {
             showNotification('✨ ¡Bienvenido a GL Cuchillos Artesanales!', 'info');
         }, 1000);
+    }
+    
+    // ============================================
+    // FUNCIONALIDADES RESPONSIVE
+    // ============================================
+    function initResponsive() {
+        // Configurar altura del viewport
+        setViewportHeight();
+        
+        // Prevenir zoom en iOS
+        preventIOSZoom();
+        
+        // Configurar eventos según dispositivo
+        setupResponsiveEvents();
+        
+        // Swipe gestures para móvil
+        if (isTouchDevice) {
+            setupSwipeGestures();
+        }
+        
+        // Escuchar cambios de orientación
+        window.addEventListener('orientationchange', handleOrientationChange);
+        window.addEventListener('resize', debounce(setViewportHeight, 250));
+        
+        // Escuchar cambios en el teclado virtual
+        window.addEventListener('resize', handleVirtualKeyboard);
+    }
+    
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    function preventIOSZoom() {
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'INPUT' || 
+                e.target.tagName === 'SELECT' || 
+                e.target.tagName === 'TEXTAREA') {
+                // Ya manejado por CSS
+            }
+        }, { passive: true });
+    }
+    
+    function setupResponsiveEvents() {
+        // Ajustar eventos según dispositivo
+        if (isTouchDevice) {
+            elements.allInputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    // Scroll suave al input
+                    setTimeout(() => {
+                        input.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 300);
+                });
+            });
+        }
+    }
+    
+    function setupSwipeGestures() {
+        let startX, startY;
+        let isSwiping = false;
+        
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isSwiping = false;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (!startX || !startY) return;
+            
+            const currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            
+            if (Math.abs(diffX) > 10) {
+                isSwiping = true;
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        document.addEventListener('touchend', (e) => {
+            if (!startX || !startY || !isSwiping) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // Solo considerar swipe horizontal
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    // Swipe izquierda - cerrar carrito si está abierto
+                    if (elements.cartSidebar.classList.contains('active')) {
+                        closeCart();
+                    }
+                } else {
+                    // Swipe derecha - cerrar menú si está abierto
+                    if (elements.mobileMenu.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }
+            }
+            
+            startX = null;
+            startY = null;
+            isSwiping = false;
+        }, { passive: true });
+    }
+    
+    function handleOrientationChange() {
+        const isPortrait = window.innerHeight > window.innerWidth;
+        
+        if (isPortrait) {
+            document.body.classList.add('portrait');
+            document.body.classList.remove('landscape');
+        } else {
+            document.body.classList.add('landscape');
+            document.body.classList.remove('portrait');
+        }
+        
+        // Recalcular altura del viewport
+        setViewportHeight();
+    }
+    
+    function handleVirtualKeyboard() {
+        if (document.activeElement.tagName === 'INPUT' || 
+            document.activeElement.tagName === 'TEXTAREA') {
+            // Scroll al input activo
+            document.activeElement.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+    }
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
     
     // ============================================
@@ -160,6 +319,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // 1. NAVEGACIÓN MOBILE
         if (elements.menuToggle) {
             elements.menuToggle.addEventListener('click', toggleMobileMenu);
+            elements.menuToggle.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                toggleMobileMenu();
+            }, { passive: false });
         }
         
         if (elements.closeMenu) {
@@ -170,12 +333,20 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.mobileOverlay.addEventListener('click', closeMobileMenu);
         }
         
-        // 2. DROPDOWNS MOBILE
+        // 2. DROPDOWNS MOBILE (SOLO 2)
         elements.mobileDropdowns.forEach(dropdown => {
             const toggle = dropdown.querySelector('a');
             toggle.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 dropdown.classList.toggle('active');
+                
+                // Cerrar otros dropdowns
+                elements.mobileDropdowns.forEach(other => {
+                    if (other !== dropdown && other.classList.contains('active')) {
+                        other.classList.remove('active');
+                    }
+                });
             });
         });
         
@@ -225,6 +396,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // 5. ACCIONES DE PRODUCTOS
         elements.addToCartBtns.forEach(btn => {
             btn.addEventListener('click', handleAddToCart);
+            // Agregar evento táctil para mejor feedback
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+            });
         });
         
         elements.wishlistBtns.forEach(btn => {
@@ -263,10 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.languageSelector.addEventListener('change', handleLanguageChange);
         }
         
-        // 11. NAVEGACIÓN DESKTOP (hover dropdowns)
-        setupDesktopDropdowns();
-        
-        // 12. CERRAR CON ESCAPE
+        // 11. CERRAR CON ESCAPE
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeMobileMenu();
@@ -275,42 +452,106 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // 13. BOTÓN "VER TODOS LOS PRODUCTOS"
+        // 12. BOTÓN "VER TODOS LOS PRODUCTOS"
         if (elements.viewAllBtn) {
             elements.viewAllBtn.closest('.btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 showNotification('Explora todos nuestros productos en la sección de Tienda', 'info');
-                // Scroll suave a la tienda (simulado)
-                document.querySelector('[href*="Tienda"]')?.click();
+                // Scroll suave a la tienda
+                document.querySelector('#productos')?.scrollIntoView({ behavior: 'smooth' });
             });
         }
+        
+        // 13. CERRAR DROPDOWNS AL HACER CLIC FUERA (MOBILE)
+        document.addEventListener('click', (e) => {
+            elements.mobileDropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('active') && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+        
+        // 14. PREVENIR CLIC EN ENLACES VACÍOS
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification('Esta sección está en desarrollo', 'info');
+            });
+        });
+    }
+    
+    function setupDesktopDropdowns() {
+        elements.dropdowns.forEach(dropdown => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            dropdown.addEventListener('mouseenter', () => {
+                menu.style.display = 'grid';
+                setTimeout(() => {
+                    menu.style.opacity = '1';
+                    menu.style.transform = 'translateY(0)';
+                }, 10);
+            });
+            
+            dropdown.addEventListener('mouseleave', () => {
+                menu.style.opacity = '0';
+                menu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    menu.style.display = 'none';
+                }, 200);
+            });
+            
+            // Inicializar estilos
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-10px)';
+            menu.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        });
     }
     
     // ============================================
     // FUNCIONALIDADES DE INTERFAZ
     // ============================================
     function toggleMobileMenu() {
-        elements.mobileMenu.classList.toggle('active');
+        const isActive = elements.mobileMenu.classList.toggle('active');
         elements.mobileOverlay.classList.toggle('active');
-        document.body.style.overflow = elements.mobileMenu.classList.contains('active') ? 'hidden' : '';
+        elements.menuToggle.setAttribute('aria-expanded', isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
+        
+        // Feedback táctil
+        if (isTouchDevice) {
+            elements.menuToggle.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                elements.menuToggle.style.transform = '';
+            }, 150);
+        }
     }
     
     function closeMobileMenu() {
         elements.mobileMenu.classList.remove('active');
         elements.mobileOverlay.classList.remove('active');
+        elements.menuToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        
+        // Cerrar todos los dropdowns mobile
+        elements.mobileDropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+        });
     }
     
     function toggleSearch() {
-        elements.searchBox.classList.toggle('active');
-        if (elements.searchBox.classList.contains('active')) {
+        const isActive = elements.searchBox.classList.toggle('active');
+        if (isActive) {
             elements.searchInput.focus();
+            // Agregar clase al body para prevenir scroll
+            document.body.classList.add('search-open');
+        } else {
+            document.body.classList.remove('search-open');
         }
     }
     
     function closeSearch() {
         elements.searchBox.classList.remove('active');
         elements.searchInput.value = '';
+        document.body.classList.remove('search-open');
     }
     
     function handleSearch() {
@@ -388,6 +629,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Actualizar stock simulado
         productData.stock -= 1;
+        
+        // Si el carrito está abierto, actualizar
+        if (elements.cartSidebar.classList.contains('active')) {
+            renderCartItems();
+        }
     }
     
     function handleWishlist(e) {
@@ -414,12 +660,14 @@ document.addEventListener('DOMContentLoaded', function() {
             wishlist.splice(existingIndex, 1);
             btn.classList.remove('active');
             btn.innerHTML = '<i class="far fa-heart"></i>';
+            btn.setAttribute('aria-label', 'Agregar a favoritos');
             showNotification(`${product.name} removido de favoritos`, 'info');
         } else {
             // Agregar
             wishlist.push(product);
             btn.classList.add('active');
             btn.innerHTML = '<i class="fas fa-heart"></i>';
+            btn.setAttribute('aria-label', 'Remover de favoritos');
             showNotification(`❤️ ${product.name} añadido a favoritos`, 'success');
         }
         
@@ -456,16 +704,16 @@ document.addEventListener('DOMContentLoaded', function() {
             cartHTML += `
                 <div class="cart-item" data-index="${index}">
                     <div class="cart-item-image">
-                        <img src="${item.image}" alt="${item.name}" loading="lazy">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy" width="80" height="80">
                     </div>
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
                         <div class="cart-item-price">$${item.price.toLocaleString()}</div>
                         <div class="cart-item-quantity">
-                            <button class="quantity-btn minus" data-index="${index}">-</button>
+                            <button class="quantity-btn minus" data-index="${index}" aria-label="Disminuir cantidad">-</button>
                             <span>${item.quantity}</span>
-                            <button class="quantity-btn plus" data-index="${index}">+</button>
-                            <button class="remove-btn" data-index="${index}">
+                            <button class="quantity-btn plus" data-index="${index}" aria-label="Aumentar cantidad">+</button>
+                            <button class="remove-btn" data-index="${index}" aria-label="Eliminar producto">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -537,6 +785,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Simulación de checkout
         showNotification('🛒 Procesando tu pedido...', 'info');
         
+        // Mostrar loading en el botón
+        elements.checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+        elements.checkoutBtn.disabled = true;
+        
         setTimeout(() => {
             showNotification(`✅ Pedido confirmado por $${total.toLocaleString()}`, 'success');
             
@@ -545,6 +797,11 @@ document.addEventListener('DOMContentLoaded', function() {
             saveToStorage();
             updateCounters();
             renderCartItems();
+            
+            // Resetear botón
+            elements.checkoutBtn.innerHTML = 'Finalizar Compra';
+            elements.checkoutBtn.disabled = false;
+            
             closeCart();
             
             // Simular envío de email
@@ -593,6 +850,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!email || !validateEmail(email)) {
             showNotification('Por favor ingresa un email válido', 'error');
+            emailInput.focus();
             return;
         }
         
@@ -619,20 +877,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             showNotification('Cambiando a Español', 'info');
         }
-    }
-    
-    function setupDesktopDropdowns() {
-        const dropdowns = document.querySelectorAll('.dropdown');
-        
-        dropdowns.forEach(dropdown => {
-            dropdown.addEventListener('mouseenter', () => {
-                dropdown.querySelector('.dropdown-menu').style.display = 'grid';
-            });
-            
-            dropdown.addEventListener('mouseleave', () => {
-                dropdown.querySelector('.dropdown-menu').style.display = 'none';
-            });
-        });
     }
     
     // ============================================
@@ -675,10 +919,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function animateButton(button) {
-        button.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            button.style.transform = '';
-        }, 150);
+        if (!isTouchDevice) {
+            // Animación para desktop
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 150);
+        } else {
+            // Feedback táctil
+            button.classList.add('active');
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 150);
+        }
     }
     
     // ============================================
@@ -703,7 +956,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="notification-content">
                 <i class="fas fa-${icons[type] || 'info-circle'}"></i>
                 <span>${message}</span>
-                <button class="notification-close"><i class="fas fa-times"></i></button>
+                <button class="notification-close" aria-label="Cerrar notificación"><i class="fas fa-times"></i></button>
             </div>
         `;
         
@@ -727,7 +980,8 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 9999;
             transform: translateX(120%);
             transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            max-width: 400px;
+            max-width: 90vw;
+            width: 350px;
             overflow: hidden;
             font-family: var(--font-body);
         `;
@@ -761,6 +1015,8 @@ document.addEventListener('DOMContentLoaded', function() {
             justify-content: center;
             border-radius: 50%;
             transition: all 0.2s ease;
+            min-width: 24px;
+            min-height: 24px;
         `;
         
         closeBtn.addEventListener('mouseenter', () => {
