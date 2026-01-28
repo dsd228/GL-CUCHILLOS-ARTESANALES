@@ -2545,3 +2545,176 @@ body.landscape .hero {
         padding: var(--space-md);
     }
 }
+/* ============================================
+   FIX PARA NAVEGACIÓN DESKTOP - NO SE JUNTAN
+   ============================================ */
+
+@media (min-width: 1024px) {
+    .nav-container {
+        gap: var(--space-lg); /* Más espacio entre logo, menú y acciones */
+        padding: 0.75rem 0;
+    }
+    
+    .nav-menu {
+        flex: 1; /* Ocupa espacio disponible */
+        justify-content: center;
+        margin: 0 var(--space-md);
+        gap: 0.75rem; /* Espacio entre items del menú */
+        min-width: 0; /* Previene overflow */
+    }
+    
+    .nav-menu > li {
+        flex-shrink: 0; /* Previene que se encojan */
+    }
+    
+    .nav-menu a {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.95rem; /* Texto ligeramente más pequeño */
+        white-space: nowrap; /* Previene saltos de línea */
+    }
+    
+    .user-actions {
+        flex-shrink: 0; /* Previene que se encoja */
+        gap: 0.5rem; /* Menos espacio entre iconos */
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 0.25rem;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.25rem; /* Logo más pequeño */
+    }
+    
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .nav-menu {
+        gap: 1rem; /* Más espacio en pantallas grandes */
+    }
+    
+    .nav-menu a {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* FIX para dropdowns */
+.dropdown-menu {
+    min-width: 280px !important; /* Dropdowns más angostos */
+    grid-template-columns: 1fr !important; /* Una columna en mobile */
+}
+
+@media (min-width: 1024px) {
+    .dropdown-menu {
+        grid-template-columns: repeat(3, 1fr) !important; /* 3 columnas en desktop */
+        min-width: 600px !important;
+    }
+}
+/* ============================================
+   FIX PARA MOBILE - ORDEN CORRECTO
+   ============================================ */
+
+@media (max-width: 1023px) {
+    .nav-container {
+        gap: var(--space-sm);
+        padding: 0.5rem 0;
+    }
+    
+    .user-actions {
+        order: 3; /* Acciones al final */
+        margin-left: auto;
+    }
+    
+    .search-container {
+        order: 1; /* Lupa primero */
+    }
+    
+    .action-buttons {
+        order: 2; /* Iconos después de la lupa */
+        display: flex;
+        gap: 0.25rem;
+    }
+    
+    .menu-toggle {
+        order: 4; /* Hamburguesa al final */
+        margin-left: var(--space-xs);
+    }
+    
+    /* Logo más pequeño en mobile */
+    .logo-text h1 {
+        font-size: 1rem !important;
+        line-height: 1.1;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.6rem !important;
+    }
+    
+    .logo-img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
+
+/* Para móviles muy pequeños */
+@media (max-width: 480px) {
+    .user-actions {
+        gap: 0.25rem;
+    }
+    
+    .user-btn,
+    .wishlist-btn,
+    .cart-btn,
+    .search-btn {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 1rem !important;
+    }
+    
+    .logo-link {
+        gap: 0.5rem;
+    }
+    
+    .logo-text {
+        max-width: 100px; /* Previene que el logo ocupe mucho espacio */
+    }
+}
+/* ============================================
+   FIX PARA MENÚ MOBILE - DENTRO DE PANTALLA
+   ============================================ */
+
+.mobile-menu {
+    max-width: 100% !important; /* No sale de la pantalla */
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important; /* Altura dinámica */
+    left: -100% !important;
+}
+
+.mobile-menu-content {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: env(safe-area-inset-bottom) !important; /* Notch safe */
+}
+
+.mobile-menu.active {
+    transform: translateX(100%) !important;
+}
+
+/* Asegurar que todo quepa */
+.mobile-main-nav {
+    flex: 1 !important;
+    overflow-y: auto !important;
+}
+
+.mobile-info {
+    flex-shrink: 0 !important;
+    padding-bottom: var(--space-md) !important;
+}
