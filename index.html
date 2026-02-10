@@ -1,983 +1,627 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- VIEWPORT MEJORADO -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GL CUCHILLOS ARTESANALES - Cuchillos Hechos a Mano | Argentina</title>
-    <meta name="description" content="Cuchillos artesanales de alta calidad. Forjados a mano en Argentina desde 1980. Envíos a todo el país.">
+    <meta name="description" content="Cuchillos artesanales de alta calidad forjados a mano en Argentina desde 1980. Envíos a todo el país.">
     
-    <!-- Favicon -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    
-    <!-- Iconos Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts para tipografía -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Manifest para PWA -->
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- Apple touch icon -->
-    <link rel="apple-touch-icon" href="images/logo-180x180.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#8B4513">
 </head>
 <body>
-    <!-- Skip link para accesibilidad -->
-    <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">GL</span>
+                <div class="logo-text">
+                    <span class="logo-main">GL CUCHILLOS</span>
+                    <span class="logo-sub">ARTESANALES</span>
+                </div>
+            </a>
 
-    <!-- Header Fijo -->
-    <header class="header">
-        <!-- Barra Superior Informativa -->
-        <div class="info-bar">
-            <div class="container">
-                <div class="info-content">
-                    <div class="info-left">
-                        <span><i class="fas fa-truck"></i> Envíos a todo el país</span>
-                        <span><i class="fas fa-shield-alt"></i> Garantía de por vida</span>
-                        <span><i class="fas fa-credit-card"></i> 12 cuotas sin interés</span>
-                    </div>
-                    <div class="info-right">
-                        <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
-                        <select class="language-selector">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                        </select>
-                    </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#coleccion" class="nav-link">Colección</a>
+                <a href="#proceso" class="nav-link">Proceso</a>
+                <a href="#testimonios" class="nav-link">Testimonios</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="cartBtn" aria-label="Carrito">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <span class="hero-badge">DESDE 1980</span>
+            <h1 class="hero-title">
+                Maestría Artesanal<br>
+                en Cada Hoja
+            </h1>
+            <p class="hero-text">
+                Cuchillos forjados a mano con tradición familiar argentina.<br>
+                Cada pieza es única, hecha con pasión y dedicación absoluta.
+            </p>
+            <div class="hero-cta">
+                <a href="#coleccion" class="btn btn-primary">
+                    Explorar Colección
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14m-7-7 7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#proceso" class="btn btn-secondary">Ver Proceso</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Años de experiencia</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Cuchillos creados</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Satisfacción garantizada</div>
                 </div>
             </div>
         </div>
+        <div class="hero-image">
+            <div class="hero-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&q=85" alt="Cuchillo artesanal" class="hero-img">
+            </div>
+        </div>
+    </section>
 
-        <!-- Navegación Principal SIMPLIFICADA -->
-        <nav class="main-nav" aria-label="Navegación principal">
-            <div class="container">
-                <div class="nav-container">
-                    <!-- Logo -->
-                    <div class="logo">
-                        <a href="index.html" class="logo-link">
-                            <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" class="logo-img" width="50" height="50">
-                            <div class="logo-text">
-                                <h1>GL CUCHILLOS</h1>
-                                <span class="logo-subtitle">ARTESANALES</span>
-                            </div>
-                        </a>
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
                     </div>
+                    <h3>Hecho a Mano</h3>
+                    <p>Cada cuchillo forjado individualmente con técnicas tradicionales</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Garantía de por Vida</h3>
+                    <p>Respaldamos la calidad de cada pieza que sale de nuestro taller</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Envío a Todo el País</h3>
+                    <p>Delivery seguro con seguimiento en toda Argentina</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                    </div>
+                    <h3>12 Cuotas sin Interés</h3>
+                    <p>Financiación flexible para hacer realidad tu inversión</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Navegación Desktop - CORREGIDA -->
-                    <ul class="nav-menu">
-                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-                        
-                        <li class="dropdown">
-                            <a href="productos.html"><i class="fas fa-utensils"></i> Productos <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-column">
-                                    <h4>Tipos de Cuchillos</h4>
-                                    <a href="productos.html#chef"><i class="fas fa-chef-hat"></i> Chef Profesional</a>
-                                    <a href="productos.html#caza"><i class="fas fa-campground"></i> Caza y Aventura</a>
-                                    <a href="productos.html#parrilla"><i class="fas fa-fire"></i> Parrilla y Asado</a>
-                                    <a href="productos.html#decorativos"><i class="fas fa-gem"></i> Decorativos</a>
-                                </div>
-                                <div class="dropdown-column">
-                                    <h4>Colecciones</h4>
-                                    <a href="productos.html#juegos"><i class="fas fa-box"></i> Juegos Completos</a>
-                                    <a href="productos.html#edicion"><i class="fas fa-crown"></i> Edición Limitada</a>
-                                    <a href="productos.html#personalizados"><i class="fas fa-user-cog"></i> Personalizados</a>
-                                </div>
-                                <div class="dropdown-column">
-                                    <h4>Por Material</h4>
-                                    <a href="productos.html#carbono"><i class="fas fa-fire-flame-curved"></i> Acero al Carbono</a>
-                                    <a href="productos.html#inox"><i class="fas fa-shield"></i> Acero Inoxidable</a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="dropdown">
-                            <a href="servicios.html"><i class="fas fa-hands-helping"></i> Servicios <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-column">
-                                    <h4>Nuestros Servicios</h4>
-                                    <a href="servicios.html#talleres"><i class="fas fa-hammer"></i> Talleres Artesanales</a>
-                                    <a href="servicios.html#personalizacion"><i class="fas fa-magic"></i> Personalización</a>
-                                    <a href="servicios.html#afilado"><i class="fas fa-cut"></i> Servicio de Afilado</a>
-                                    <a href="servicios.html#reparacion"><i class="fas fa-tools"></i> Reparación</a>
-                                </div>
-                                <div class="dropdown-column">
-                                    <h4>Para Clientes</h4>
-                                    <a href="servicios.html#garantia"><i class="fas fa-award"></i> Garantía</a>
-                                    <a href="servicios.html#envios"><i class="fas fa-shipping-fast"></i> Envíos</a>
-                                    <a href="servicios.html#pagos"><i class="fas fa-credit-card"></i> Formas de Pago</a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <!-- OPCIONES DIRECTAS -->
-                        <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
-                        <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
-                        <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
-                    </ul>
+    <!-- Collection -->
+    <section class="collection" id="coleccion">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">NUESTRA COLECCIÓN</span>
+                <h2 class="section-title">Obras Maestras Artesanales</h2>
+                <p class="section-text">Cada cuchillo cuenta una historia única de pasión y dedicación</p>
+            </div>
 
-                    <!-- Acciones de Usuario -->
-                    <div class="user-actions">
-                        <div class="search-container">
-                            <button class="search-btn" aria-label="Buscar productos">
-                                <i class="fas fa-search"></i>
+            <div class="collection-grid">
+                <!-- Product Card 1 -->
+                <article class="product-card" data-product="chef-damasco">
+                    <div class="product-badge">Más Vendido</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85" alt="Chef Damasco" loading="lazy">
+                        <div class="product-overlay">
+                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
                             </button>
-                            <div class="search-box">
-                                <input type="text" placeholder="Buscar cuchillos..." class="search-input" aria-label="Campo de búsqueda">
-                                <button class="search-submit" aria-label="Ejecutar búsqueda"><i class="fas fa-search"></i></button>
-                            </div>
+                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
                         </div>
-                        
-                        <a href="#cuenta" class="user-btn" aria-label="Mi cuenta">
-                            <i class="far fa-user"></i>
-                        </a>
-                        
-                        <a href="#favoritos" class="wishlist-btn" aria-label="Favoritos">
-                            <i class="far fa-heart"></i>
-                            <span class="wishlist-count">0</span>
-                        </a>
-                        
-                        <a href="#carrito" class="cart-btn" aria-label="Carrito de compras">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
-                        </a>
-                        
-                        <!-- Menú Hamburguesa Mobile -->
-                        <button class="menu-toggle" aria-label="Abrir menú principal" aria-expanded="false">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
                     </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+                    <div class="product-info">
+                        <div class="product-category">Chef Profesional</div>
+                        <h3 class="product-name">Chef Damasco</h3>
+                        <p class="product-description">Acero Damasco con mango de olivo estabilizado</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="reviews">(42)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$24.500</span>
+                                <span class="installments">12 cuotas de $2.041</span>
+                            </div>
+                            <button class="btn-add-cart">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                                </svg>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </article>
 
-    <!-- Menú Mobile SIMPLIFICADO Y CORREGIDO -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-header">
-            <div class="logo">
-                <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="40" height="40">
-                <span>GL CUCHILLOS</span>
+                <!-- Product Card 2 -->
+                <article class="product-card" data-product="caza-tactico">
+                    <div class="product-badge new">Nuevo</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1559678471-8e82abe50464?w=600&q=85" alt="Caza Táctico" loading="lazy">
+                        <div class="product-overlay">
+                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Caza & Aventura</div>
+                        <h3 class="product-name">Caza Táctico</h3>
+                        <p class="product-description">Acero al carbono 1095 con mango micarta</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="reviews">(28)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$18.900</span>
+                                <span class="installments">12 cuotas de $1.575</span>
+                            </div>
+                            <button class="btn-add-cart">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                                </svg>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product Card 3 -->
+                <article class="product-card" data-product="juego-parrillero">
+                    <div class="product-badge sale">Oferta</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1557674200-8e0cdf6d6c95?w=600&q=85" alt="Juego Parrillero" loading="lazy">
+                        <div class="product-overlay">
+                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Parrilla & Asado</div>
+                        <h3 class="product-name">Juego Parrillero</h3>
+                        <p class="product-description">Set de 3 cuchillos + tenedor, mangos de nogal</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="reviews">(56)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$32.500</span>
+                                <span class="installments">12 cuotas de $2.708</span>
+                            </div>
+                            <button class="btn-add-cart">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                                </svg>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product Card 4 -->
+                <article class="product-card" data-product="decorativo-damasco">
+                    <div class="product-badge exclusive">Exclusivo</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595838698419-51a55cf9aa90?w=600&q=85" alt="Damasco Decorativo" loading="lazy">
+                        <div class="product-overlay">
+                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Pieza de Colección</div>
+                        <h3 class="product-name">Damasco Decorativo</h3>
+                        <p class="product-description">Patrón damasco único con mango de asta de ciervo</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="reviews">(19)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$42.000</span>
+                                <span class="installments">12 cuotas de $3.500</span>
+                            </div>
+                            <button class="btn-add-cart">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                                </svg>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <button class="close-menu" aria-label="Cerrar menú">&times;</button>
+
+            <div class="section-cta">
+                <a href="#coleccion" class="btn btn-outline">
+                    Ver Colección Completa
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14m-7-7 7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
-        <div class="mobile-menu-content">
-            <ul class="mobile-main-nav">
-                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-                
-                <li class="mobile-dropdown">
-                    <a href="productos.html"><i class="fas fa-utensils"></i> Productos <i class="fas fa-chevron-down"></i></a>
-                    <div class="mobile-submenu">
-                        <a href="productos.html#chef"><i class="fas fa-chef-hat"></i> Chef Profesional</a>
-                        <a href="productos.html#caza"><i class="fas fa-campground"></i> Caza y Aventura</a>
-                        <a href="productos.html#parrilla"><i class="fas fa-fire"></i> Parrilla y Asado</a>
-                        <a href="productos.html#decorativos"><i class="fas fa-gem"></i> Decorativos</a>
-                        <a href="productos.html#juegos"><i class="fas fa-box"></i> Juegos Completos</a>
-                        <a href="productos.html#personalizados"><i class="fas fa-user-cog"></i> Personalizados</a>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="proceso">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">NUESTRO PROCESO</span>
+                <h2 class="section-title">Del Acero a la Obra Maestra</h2>
+                <p class="section-text">Un proceso artesanal perfeccionado durante décadas</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
                     </div>
-                </li>
-                
-                <li class="mobile-dropdown">
-                    <a href="servicios.html"><i class="fas fa-hands-helping"></i> Servicios <i class="fas fa-chevron-down"></i></a>
-                    <div class="mobile-submenu">
-                        <a href="servicios.html#talleres"><i class="fas fa-hammer"></i> Talleres Artesanales</a>
-                        <a href="servicios.html#personalizacion"><i class="fas fa-magic"></i> Personalización</a>
-                        <a href="servicios.html#afilado"><i class="fas fa-cut"></i> Servicio de Afilado</a>
-                        <a href="servicios.html#garantia"><i class="fas fa-award"></i> Garantía</a>
-                        <a href="servicios.html#envios"><i class="fas fa-shipping-fast"></i> Envíos</a>
-                        <a href="servicios.html#pagos"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+                    <h3 class="step-title">Selección del Acero</h3>
+                    <p class="step-text">Elegimos los mejores aceros al carbono y damasco, garantizando calidad excepcional.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                        </svg>
                     </div>
-                </li>
-                
-                <!-- OPCIONES DIRECTAS -->
-                <li><a href="talleres.html"><i class="fas fa-hammer"></i> Talleres</a></li>
-                <li><a href="nosotros.html"><i class="fas fa-info-circle"></i> Nosotros</a></li>
-                <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
-                
-                <!-- ENLACES RÁPIDOS -->
-                <li><a href="productos.html#ofertas"><i class="fas fa-tag"></i> Ofertas</a></li>
-                <li><a href="productos.html#nuevos"><i class="fas fa-star"></i> Nuevos</a></li>
-                <li><a href="blog.html"><i class="fas fa-book"></i> Blog</a></li>
-            </ul>
-            
-            <div class="mobile-info">
-                <a href="tel:+5493843458340"><i class="fas fa-phone"></i> +54 9 3843 458340</a>
-                <a href="mailto:info@glcuchillos.com"><i class="fas fa-envelope"></i> info@glcuchillos.com</a>
-                <div class="social-mobile">
-                    <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <h3 class="step-title">Forjado Artesanal</h3>
+                    <p class="step-text">Cada hoja es forjada a mano en nuestra fragua, usando técnicas tradicionales.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="step-title">Tratamiento Térmico</h3>
+                    <p class="step-text">Proceso preciso de temple y revenido para dureza y flexibilidad óptimas.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="step-title">Acabado Final</h3>
+                    <p class="step-text">Pulido, afilado profesional y montaje del mango artesanal único.</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mobile-overlay"></div>
+    </section>
 
-    <!-- Contenido Principal -->
-    <main id="main-content">
-        <!-- Hero Banner -->
-        <section class="hero">
-            <div class="hero-slide active">
-                <div class="hero-image" style="background-image: url('images/banner.jpg');">
-                    <div class="hero-overlay"></div>
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Listo para tu Cuchillo Artesanal?</h2>
+                <p class="cta-text">Consultá por pedidos personalizados o visitá nuestro taller</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/5493843458340" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                        Contactar por WhatsApp
+                    </a>
+                    <a href="#coleccion" class="btn btn-secondary">Ver Catálogo</a>
                 </div>
-                <div class="container">
-                    <div class="hero-content">
-                        <h1 class="hero-title">Forjamos <span class="highlight">Pasión</span> en Cada Hoja</h1>
-                        <p class="hero-subtitle">Cuchillos artesanales de alta calidad, hechos a mano en Argentina desde 1980</p>
-                        <div class="hero-actions">
-                            <a href="#productos" class="btn btn-primary">
-                                <i class="fas fa-shopping-cart"></i> Ver Colección
-                            </a>
-                            <a href="talleres.html" class="btn btn-secondary">
-                                <i class="fas fa-hammer"></i> Conoce Nuestro Proceso
-                            </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">TESTIMONIOS</span>
+                <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Increíble calidad. Compré el cuchillo de chef y superó todas mis expectativas. El balance y filo son perfectos."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez" loading="lazy">
+                        <div>
+                            <div class="author-name">Carlos Rodríguez</div>
+                            <div class="author-role">Chef Profesional</div>
                         </div>
-                        <div class="hero-features">
-                            <div class="feature">
-                                <i class="fas fa-award"></i>
-                                <span>Garantía de por Vida</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-shipping-fast"></i>
-                                <span>Envío Gratis +$500.000</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-credit-card"></i>
-                                <span>12 Cuotas Sin Interés</span>
-                            </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"El juego parrillero es espectacular. Todos en mi familia quedaron maravillados con la artesanía y calidad."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María González" loading="lazy">
+                        <div>
+                            <div class="author-name">María González</div>
+                            <div class="author-role">Cliente desde 2019</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Colecciono cuchillos hace 20 años. La maestría artesanal de GL es de lo mejor que he visto en Argentina."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Juan Pérez" loading="lazy">
+                        <div>
+                            <div class="author-name">Juan Pérez</div>
+                            <div class="author-role">Coleccionista</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Productos Destacados -->
-        <section class="featured-products" id="productos">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Cuchillos <span class="highlight">Destacados</span></h2>
-                    <p class="section-subtitle">Nuestras creaciones más solicitadas por coleccionistas y chefs</p>
-                </div>
-                
-                <div class="products-grid">
-                    <!-- Producto 1 -->
-                    <div class="product-card">
-                        <div class="product-badge">Más Vendido</div>
-                        <div class="product-image">
-                            <img src="images/chefdamasco.jpg" alt="Chef Parrillero XL - Cuchillo profesional de acero Inox" loading="lazy" width="300" height="200">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Chef Parrillero</h3>
-                            <p class="product-description">Hoja de acero Inox, mango de madera de olivo estabilizada</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(42 reseñas)</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$150.500</span>
-                                <span class="original-price">$159.500</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart" aria-label="Agregar Chef Parrillero XL al carrito">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-wishlist" aria-label="Agregar a favoritos">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 2 -->
-                    <div class="product-card">
-                        <div class="product-badge">Nuevo</div>
-                        <div class="product-image">
-                            <img src="images/caza.jpg" alt="Caza Táctico - Cuchillo de caza con mango micarta" loading="lazy" width="300" height="200">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Caza Táctico</h3>
-                            <p class="product-description">Acero al carbono 1095, mango micarta con textura antideslizante</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>(28 reseñas)</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$150.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart" aria-label="Agregar Caza Táctico al carrito">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-wishlist" aria-label="Agregar a favoritos">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 3 -->
-                    <div class="product-card">
-                        <div class="product-badge">Oferta</div>
-                        <div class="product-image">
-                            <img src="images/parrillero.png" alt="Juego Parrillero - Set de cuchillo y tenedor" loading="lazy" width="300" height="200">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Juego Parrillero M</h3>
-                            <p class="product-description">Set de cuchillo + tenedor, acero inoxidable, mangos de olivo</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(56 reseñas)</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$100.500</span>
-                                <span class="original-price">$108.900</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart" aria-label="Agregar Juego Parrillero al carrito">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-wishlist" aria-label="Agregar a favoritos">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 4 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="images/damasco.jpg" alt="Verijero - Cuchillo decorativo con patrones únicos" loading="lazy" width="300" height="200">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Verijero</h3>
-                            <p class="product-description">Patrón verijero único, mango de Itin con incrustaciones</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(19 reseñas)</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$110.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart" aria-label="Agregar Verijero al carrito">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-wishlist active" aria-label="Remover de favoritos">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center">
-                    <a href="productos.html" class="btn btn-outline">
-                        Ver Todos los Productos <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Catálogo Completo de Productos -->
-        <section class="full-products" id="productos-completos">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Catálogo <span class="highlight">Completo</span></h2>
-                    <p class="section-subtitle">Explora nuestra colección completa de cuchillos artesanales</p>
-                </div>
-                
-                <!-- Filtros de Categoría -->
-                <div class="category-filters">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="caza">Caza</button>
-                    <button class="filter-btn" data-filter="parrilla">Parrilla</button>
-                    <button class="filter-btn" data-filter="decorativos">Decorativos</button>
-                </div>
-                
-                <!-- Grid de Productos Completo -->
-                <div class="products-grid-full">
-                    <!-- Producto 1: CAZA -->
-                    <div class="product-card-full" data-category="caza">
-                        <div class="product-badge">Popular</div>
-                        <div class="product-image">
-                            <img src="images/caza-tactico.jpg" alt="Caza Táctico - Acero 1095" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Caza Táctico</h3>
-                            <p class="product-description">Acero al carbono 1095, mango micarta texturizado antideslizante</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-ruler"></i> 22cm</span>
-                                <span><i class="fas fa-weight"></i> 280g</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$150.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="caza-tactico">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 2: PARRILLA -->
-                    <div class="product-card-full" data-category="parrilla">
-                        <div class="product-badge">Más Vendido</div>
-                        <div class="product-image">
-                            <img src="images/chef-parrillero.jpg" alt="Chef Parrillero - Acero Inox" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Chef Parrillero</h3>
-                            <p class="product-description">Hoja acero inoxidable, mango madera de olivo estabilizada</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-ruler"></i> 25cm</span>
-                                <span><i class="fas fa-weight"></i> 310g</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$150.500</span>
-                                <span class="original-price">$159.500</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="chef-parrillero">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 3: PARRILLA -->
-                    <div class="product-card-full" data-category="parrilla">
-                        <div class="product-image">
-                            <img src="images/juego-parrillero-m.jpg" alt="Juego Parrillero M" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Juego Parrillero M</h3>
-                            <p class="product-description">Set cuchillo + tenedor, acero inox, mangos de olivo</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-box"></i> 2 piezas</span>
-                                <span><i class="fas fa-weight"></i> 480g</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$100.500</span>
-                                <span class="original-price">$108.900</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="juego-parrillero-m">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 4: DECORATIVOS -->
-                    <div class="product-card-full" data-category="decorativos">
-                        <div class="product-badge">Exclusivo</div>
-                        <div class="product-image">
-                            <img src="images/verijero.jpg" alt="Verijero Decorativo" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Verijero</h3>
-                            <p class="product-description">Patrón verijero único, mango de Itín con incrustaciones</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-ruler"></i> 28cm</span>
-                                <span><i class="fas fa-weight"></i> 320g</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$110.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="verijero">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 5: CAZA -->
-                    <div class="product-card-full" data-category="caza">
-                        <div class="product-badge">Nuevo</div>
-                        <div class="product-image">
-                            <img src="images/caza-campo.jpg" alt="Caza de Campo" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Caza de Campo</h3>
-                            <p class="product-description">Acero 1095 templado, mango de nogal con virola latón</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-ruler"></i> 20cm</span>
-                                <span><i class="fas fa-weight"></i> 260g</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$135.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="caza-campo">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Producto 6: DECORATIVOS -->
-                    <div class="product-card-full" data-category="decorativos">
-                        <div class="product-image">
-                            <img src="images/coleccionista.jpg" alt="Modelo Coleccionista" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Modelo Coleccionista</h3>
-                            <p class="product-description">Diseño exclusivo, mango de asta con detalles en plata</p>
-                            <div class="product-specs">
-                                <span><i class="fas fa-ruler"></i> 30cm</span>
-                                <span><i class="fas fa-gem"></i> Edición Limitada</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">$185.000</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn-add-cart">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
-                                <button class="btn-details" data-product="coleccionista">
-                                    <i class="fas fa-eye"></i> Ver
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center">
-                    <a href="contacto.html" class="btn btn-primary">
-                        <i class="fas fa-comments"></i> Consultar por Modelos Especiales
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Categorías -->
-        <section class="categories">
-            <div class="container">
-                <h2 class="section-title">Explora por <span class="highlight">Categoría</span></h2>
-                
-                <div class="categories-grid">
-                    <a href="productos.html#chef" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-chef-hat"></i>
-                        </div>
-                        <h3>Cuchillos de Chef</h3>
-                        <p>Precisión profesional para tu cocina</p>
-                        <span class="category-count">12 productos</span>
-                    </a>
-                    
-                    <a href="productos.html#caza" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-campground"></i>
-                        </div>
-                        <h3>Cuchillos de Caza</h3>
-                        <p>Resistentes y confiables</p>
-                        <span class="category-count">8 productos</span>
-                    </a>
-                    
-                    <a href="productos.html#parrilla" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h3>Parrilleros</h3>
-                        <p>Para tus mejores asados</p>
-                        <span class="category-count">6 productos</span>
-                    </a>
-                    
-                    <a href="productos.html#decorativos" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>Decorativos</h3>
-                        <p>Piezas de colección</p>
-                        <span class="category-count">10 productos</span>
-                    </a>
-                    
-                    <a href="productos.html#mangos" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-tree"></i>
-                        </div>
-                        <h3>Mangos</h3>
-                        <p>Personaliza tu cuchillo</p>
-                        <span class="category-count">15 productos</span>
-                    </a>
-                    
-                    <a href="productos.html#materiales" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Materiales</h3>
-                        <p>Aceros y herramientas</p>
-                        <span class="category-count">20 productos</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Proceso Artesanal -->
-        <section class="process" id="talleres">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Artesanía <span class="highlight">Hecha a Mano</span></h2>
-                    <p class="section-subtitle">Cada cuchillo es una obra única creada con pasión y dedicación</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">01</div>
-                        <div class="step-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h3>Selección del Acero</h3>
-                        <p>Elegimos cuidadosamente el mejor acero según el uso del cuchillo</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">02</div>
-                        <div class="step-icon">
-                            <i class="fas fa-hammer"></i>
-                        </div>
-                        <h3>Forjado</h3>
-                        <p>Forjamos cada hoja individualmente con técnicas tradicionales</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">03</div>
-                        <div class="step-icon">
-                            <i class="fas fa-hand-sparkles"></i>
-                        </div>
-                        <h3>Tallado del Mango</h3>
-                        <p>Cada mango es tallado y pulido a mano con maderas seleccionadas</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">04</div>
-                        <div class="step-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>Acabado Final</h3>
-                        <p>Pulido y afilado meticuloso para un acabado perfecto</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Nuestros Servicios -->
-        <section class="our-services" id="nuestros-servicios">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Servicios <span class="highlight">Especializados</span></h2>
-                    <p class="section-subtitle">Más allá de vender cuchillos, ofrecemos soluciones completas para tus necesidades</p>
-                </div>
-                
-                <div class="services-grid">
-                    <!-- Servicio 1: PERSONALIZACIÓN -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-user-cog"></i>
-                        </div>
-                        <h3>Personalización Total</h3>
-                        <p>Crea el cuchillo de tus sueños. Elige acero, tipo de mango, detalles y acabados.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Diseño desde cero</li>
-                            <li><i class="fas fa-check"></i> Selección de materiales</li>
-                            <li><i class="fas fa-check"></i> Grabado personalizado</li>
-                            <li><i class="fas fa-check"></i> Asesoría técnica</li>
-                        </ul>
-                        <button class="btn-service" data-service="personalizacion">
-                            <i class="fas fa-pencil-alt"></i> Solicitar Cotización
-                        </button>
-                    </div>
-                    
-                    <!-- Servicio 2: AFILADO -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-cut"></i>
-                        </div>
-                        <h3>Afilado Profesional</h3>
-                        <p>Devolvemos el filo perfecto a tus cuchillos con técnicas tradicionales y equipos especializados.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Para todo tipo de aceros</li>
-                            <li><i class="fas fa-check"></i> Técnicas japonesas y europeas</li>
-                            <li><i class="fas fa-check"></i> Incluye limpieza y mantenimiento</li>
-                            <li><i class="fas fa-check"></i> Garantía de filo prolongado</li>
-                        </ul>
-                        <button class="btn-service" data-service="afilado">
-                            <i class="fas fa-tools"></i> Agendar Servicio
-                        </button>
-                    </div>
-                    
-                    <!-- Servicio 3: REPARACIÓN -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Reparación y Restauración</h3>
-                        <p>¿Cuchillo dañado o con historia? Lo reparamos, restauramos y devolvemos a su esplendor.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Cambio de mangos</li>
-                            <li><i class="fas fa-check"></i> Rectificación de hojas</li>
-                            <li><i class="fas fa-check"></i> Restauración de antiguos</li>
-                            <li><i class="fas fa-check"></i> Mantenimiento preventivo</li>
-                        </ul>
-                        <button class="btn-service" data-service="reparacion">
-                            <i class="fas fa-hammer"></i> Consultar Reparación
-                        </button>
-                    </div>
-                    
-                    <!-- Servicio 4: ASESORÍA -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <h3>Asesoría Técnica</h3>
-                        <p>Te guiamos en la elección, uso y mantenimiento de tus cuchillos. Expertos a tu disposición.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Elección por uso específico</li>
-                            <li><i class="fas fa-check"></i> Tips de mantenimiento</li>
-                            <li><i class="fas fa-check"></i> Cuidado de diferentes aceros</li>
-                            <li><i class="fas fa-check"></i> Presencial o virtual</li>
-                        </ul>
-                        <button class="btn-service" data-service="asesoria">
-                            <i class="fas fa-comments"></i> Solicitar Asesoría
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="service-cta">
-                    <div class="cta-content">
-                        <h3>¿Necesitas algo específico?</h3>
-                        <p>Contáctanos directamente para discutir proyectos especiales, pedidos por mayor o necesidades particulares.</p>
-                        <a href="https://wa.me/5493843458340" class="btn btn-primary" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp Directo
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonios -->
-        <section class="testimonials">
-            <div class="container">
-                <h2 class="section-title">Lo que dicen <span class="highlight">nuestros clientes</span></h2>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"El mejor cuchillo de chef que he tenido. El balance es perfecto y mantiene el filo como el primer día."</p>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de Chef Carlos" loading="lazy" width="50" height="50">
-                            <div>
-                                <h4>Chef Carlos Rodríguez</h4>
-                                <span>Restaurante La Cabrera</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="testimonial-text">"Compré el juego parrillero y es increíble la calidad. Mis amigos siempre preguntan dónde los conseguí."</p>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de María" loading="lazy" width="50" height="50">
-                            <div>
-                                <h4>María González</h4>
-                                <span>Cliente desde 2019</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"Colecciono cuchillos hace 20 años y los de GL son de lo mejor que he visto en artesanía argentina."</p>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Foto de Juan" loading="lazy" width="50" height="50">
-                            <div>
-                                <h4>Juan Pérez</h4>
-                                <span>Coleccionista</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contacto">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
                     <div class="footer-logo">
-                        <img src="images/logo.jpg" alt="GL CUCHILLOS ARTESANALES" width="50" height="50">
-                        <div>
-                            <h3>GL CUCHILLOS</h3>
-                            <span>ARTESANALES</span>
+                        <span class="logo-icon">GL</span>
+                        <div class="logo-text">
+                            <span class="logo-main">GL CUCHILLOS</span>
+                            <span class="logo-sub">ARTESANALES</span>
                         </div>
                     </div>
-                    <p class="footer-description">
-                        Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <p class="footer-text">Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-                
+
                 <div class="footer-column">
                     <h4>Productos</h4>
                     <ul>
-                        <li><a href="productos.html#chef">Cuchillos de Chef</a></li>
-                        <li><a href="productos.html#caza">Cuchillos de Caza</a></li>
-                        <li><a href="productos.html#parrilla">Cuchillos Parrilleros</a></li>
-                        <li><a href="productos.html#decorativos">Cuchillos Decorativos</a></li>
-                        <li><a href="productos.html#juegos">Juegos Completos</a></li>
-                        <li><a href="productos.html#mangos">Mangos Artesanales</a></li>
+                        <li><a href="#coleccion">Cuchillos de Chef</a></li>
+                        <li><a href="#coleccion">Cuchillos de Caza</a></li>
+                        <li><a href="#coleccion">Juegos Parrilleros</a></li>
+                        <li><a href="#coleccion">Piezas Decorativas</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h4>Empresa</h4>
                     <ul>
-                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
-                        <li><a href="talleres.html">Nuestro Proceso</a></li>
-                        <li><a href="talleres.html">Talleres</a></li>
-                        <li><a href="#trabajo">Trabajá con Nosotros</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#proceso">Nuestro Proceso</a></li>
+                        <li><a href="#inicio">Sobre Nosotros</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-column">
-                    <h4>Ayuda</h4>
-                    <ul>
-                        <li><a href="#como-comprar">Cómo Comprar</a></li>
-                        <li><a href="servicios.html#envios">Envíos y Entregas</a></li>
-                        <li><a href="servicios.html#pagos">Formas de Pago</a></li>
-                        <li><a href="servicios.html#garantia">Garantía</a></li>
-                        <li><a href="#faq">Preguntas Frecuentes</a></li>
-                        <li><a href="#terminos">Términos y Condiciones</a></li>
-                    </ul>
-                </div>
-                
+
                 <div class="footer-column">
                     <h4>Contacto</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt"></i> Online, Argentina</p>
-                        <p><i class="fas fa-phone"></i> +54 9 3843 458340</p>
-                        <p><i class="fas fa-envelope"></i> info@glcuchillos.com</p>
-                        <p><i class="fas fa-clock"></i> Lun-Vie: 9-18hs | Sáb: 9-13hs</p>
-                    </div>
-                    
-                    <div class="newsletter">
-                        <h5>Suscríbete a nuestro newsletter</h5>
-                        <form class="newsletter-form">
-                            <input type="email" placeholder="Tu correo electrónico" required aria-label="Email para newsletter">
-                            <button type="submit" aria-label="Suscribirse"><i class="fas fa-paper-plane"></i></button>
-                        </form>
-                    </div>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Online, Argentina
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            +54 9 3843 458340
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            Lun-Vie: 9-18hs | Sáb: 9-13hs
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>&copy; 2023 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa" title="Visa"></i>
-                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
-                    <i class="fab fa-cc-amex" title="American Express"></i>
-                    <i class="fab fa-cc-paypal" title="PayPal"></i>
-                    <i class="fas fa-money-bill-wave" title="Efectivo"></i>
+                <p>&copy; 2025 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
+                <div class="footer-payment">
+                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
+                        <rect width="48" height="32" rx="4" fill="#1A1F71"/>
+                        <text x="24" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">VISA</text>
+                    </svg>
+                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
+                        <rect width="48" height="32" rx="4" fill="#EB001B"/>
+                        <circle cx="24" cy="16" r="10" fill="#FF5F00"/>
+                    </svg>
+                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
+                        <rect width="48" height="32" rx="4" fill="#00A3E0"/>
+                        <text x="24" y="20" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">AMEX</text>
+                    </svg>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Carrito -->
-    <div class="cart-sidebar">
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
-            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
-            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
+            <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                Tu Carrito
+            </h3>
+            <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">×</button>
         </div>
-        <div class="cart-items">
+        <div class="cart-items" id="cartItems">
             <div class="empty-cart">
-                <i class="fas fa-shopping-cart"></i>
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
                 <p>Tu carrito está vacío</p>
-                <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+                <a href="#coleccion" class="btn btn-primary">Explorar Productos</a>
             </div>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
-                <span class="total-price">$0</span>
+                <span class="total-amount" id="cartTotal">$0</span>
             </div>
-            <button class="btn-checkout">Finalizar Compra</button>
+            <button class="btn btn-primary btn-full" id="checkoutBtn">
+                Finalizar Compra
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14m-7-7 7 7-7 7"/>
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="cart-overlay"></div>
 
-    <!-- JavaScript -->
+    <!-- Cart Overlay -->
+    <div class="overlay" id="cartOverlay"></div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5493843458340" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
