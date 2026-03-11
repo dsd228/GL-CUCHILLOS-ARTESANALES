@@ -702,7 +702,31 @@ select.form-select option{background:var(--surface)}
             <input type="text" class="form-input" id="cfg-s1l" placeholder="Piezas entregadas">
           </div>
         </div>
+
+        <!-- NUEVO: Imagen del hero -->
+        <div class="form-row">
+          <label class="form-label">Imagen principal del hero (opcional)</label>
+          <label class="img-upload-zone" id="hero-img-zone">
+            <div class="upload-idle" id="hero-upload-idle">
+              <i class="fas fa-camera upload-icon"></i>
+              <p class="upload-title">Arrastrá una foto o hacé clic</p>
+              <p class="upload-sub">JPG, PNG, WEBP</p>
+              <span class="upload-formats">Máx. 2MB · Se convierte a Base64</span>
+            </div>
+            <div class="upload-preview" id="hero-upload-preview" style="display:none">
+              <img id="hero-upload-img" src="" alt="">
+              <button class="upload-clear" onclick="clearHeroImg(event)">×</button>
+              <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+            </div>
+            <input type="file" id="hero-img-file" accept="image/*" style="display:none" onchange="onHeroFileChange(this)">
+          </label>
+          <details class="url-fallback">
+            <summary><i class="fas fa-link"></i> O pegá una URL de imagen</summary>
+            <input type="text" class="form-input" id="hero-img-url" placeholder="https://..." oninput="onHeroUrlInput(this.value)">
+          </details>
+        </div>
       </div>
+
       <div class="cfg-card">
         <h3>🔐 Cambiar contraseña</h3>
         <p>Actualizá la contraseña del panel admin</p>
@@ -1391,7 +1415,7 @@ function renderSpecs() {
 }
 
 /* ══════════════════════════════════════════
-   IMAGE
+   IMAGE (para productos)
 ══════════════════════════════════════════ */
 document.getElementById('img-zone').addEventListener('click', e => {
   if (e.target.classList.contains('upload-clear')) return;
@@ -1429,6 +1453,33 @@ function clearImgState() {
 }
 
 /* ══════════════════════════════════════════
+   HERO IMAGE (nuevo)
+══════════════════════════════════════════ */
+function onHeroFileChange(input) { if(input.files[0]) processHeroFile(input.files[0]); }
+function processHeroFile(f) {
+  if (f.size > 2*1024*1024) { toast('Imagen muy grande (máx 2MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => showHeroImgPreview(e.target.result);
+  r.readAsDataURL(f);
+}
+function onHeroUrlInput(url) { if(url) showHeroImgPreview(url); else clearHeroImgState(); }
+function showHeroImgPreview(src) {
+  document.getElementById('hero-upload-img').src = src;
+  document.getElementById('hero-upload-preview').style.display = 'block';
+  document.getElementById('hero-upload-idle').style.display = 'none';
+  document.getElementById('hero-img-zone').classList.add('has-image');
+}
+function clearHeroImg(e) { e&&e.stopPropagation(); clearHeroImgState(); }
+function clearHeroImgState() {
+  document.getElementById('hero-upload-img').src = '';
+  document.getElementById('hero-upload-preview').style.display = 'none';
+  document.getElementById('hero-upload-idle').style.display = 'block';
+  document.getElementById('hero-img-zone').classList.remove('has-image');
+  document.getElementById('hero-img-url').value = '';
+  document.getElementById('hero-img-file').value = '';
+}
+
+/* ══════════════════════════════════════════
    PROMOTIONS
 ══════════════════════════════════════════ */
 function selTipo(t) {
@@ -1440,7 +1491,6 @@ function selTipo(t) {
 }
 
 function openNewPromo() {
-  // Show generic promo (will target first product by default - or show all)
   if (!data.products.length) { toast('Primero creá un producto','err'); return; }
   openPromoModal(data.products[0].id);
 }
@@ -1483,6 +1533,9 @@ function fillSettings() {
   sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
   sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
   sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
+  // Hero image
+  if (s.heroImage) showHeroImgPreview(s.heroImage);
+  else clearHeroImgState();
 }
 function saveSettings() {
   const gv = id => document.getElementById(id)?.value?.trim()||'';
@@ -1491,6 +1544,13 @@ function saveSettings() {
     heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
     heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
   });
+  // Hero image
+  const previewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
+  const imgSrc = document.getElementById('hero-upload-img').src;
+  const urlVal = document.getElementById('hero-img-url').value.trim();
+  const heroImage = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
+  data.settings.heroImage = heroImage;
+
   persist(); toast('Configuración guardada ✓');
 }
 
