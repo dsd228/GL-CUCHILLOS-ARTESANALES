@@ -445,6 +445,1725 @@ nav.scrolled .nav-burger{opacity:1}
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
+.prod-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .5s var(--ease);
+}
+.prod:hover .prod-img img{transform:scale(1.04)}
+.prod-slash{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--steel);transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.prod:hover .prod-slash{transform:scaleX(1)}
+.prod-badge{
+  position:absolute;top:1rem;left:1rem;
+  font-size:.5rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  padding:.25rem .65rem;
+}
+.badge-avail{background:var(--steel);color:#F0E6D6}
+.badge-custom{background:transparent;color:var(--steel);border:1px solid rgba(78,99,110,.4)}
+.badge-intl{background:var(--ink);color:#F0E6D6}
+.badge-unavail{background:transparent;color:#9A7858;border:1px solid var(--line)}
+.prod-body{padding:1.6rem 1.8rem 2rem}
+.prod-cat{
+  font-size:.55rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:.5rem;
+}
+.prod-name{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:1.6rem;color:var(--ink);margin-bottom:.5rem;line-height:1.1;
+  letter-spacing:-.02em;
+}
+.prod-desc{font-size:.88rem;color:var(--mid);line-height:1.75;margin-bottom:1.4rem}
+.prod-specs{
+  display:flex;gap:.6rem;flex-wrap:wrap;
+  padding-bottom:1.2rem;border-bottom:1px solid var(--line);
+  margin-bottom:1.2rem;
+}
+.prod-spec{
+  font-size:.55rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.25rem .6rem;border:1px solid var(--line);color:var(--mid);
+}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.prod-price{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.3rem;color:var(--ink);
+}
+.prod-price small{
+  font-family:'DM Sans',sans-serif;font-style:normal;
+  display:block;font-size:.62rem;color:var(--faint);font-weight:400;margin-top:.1rem;
+}
+.prod-btn{
+  font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.55rem 1.1rem;
+  background:transparent;color:var(--ink);
+  border:1px solid var(--line2);
+  transition:background .2s,color .2s,border-color .2s;
+  display:inline-flex;align-items:center;gap:.4rem;flex-shrink:0;
+}
+.prod-btn:hover{background:var(--steel);color:#F0E6D6;border-color:var(--steel)}
+
+/* ── PROCESS ── */
+.process-section{
+  background:linear-gradient(160deg,#1E1006 0%,#1A1208 50%,#1C1410 100%);
+  padding:clamp(5rem,10vh,8rem) 0;
+  position:relative;overflow:hidden;
+}
+.process-section::before{
+  content:'FORJA';position:absolute;
+  right:-5%;top:50%;transform:translateY(-50%);
+  font-family:'Fraunces',serif;font-style:italic;font-weight:900;
+  font-size:clamp(10rem,22vw,22rem);color:rgba(78,99,110,.07);
+  pointer-events:none;line-height:1;letter-spacing:-.05em;white-space:nowrap;
+}
+.process-inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 clamp(1.5rem,4vw,4rem);
+}
+.process-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,6vw,8rem);margin-top:4rem;align-items:start;
+}
+.process-steps{display:flex;flex-direction:column}
+.step{
+  display:grid;grid-template-columns:52px 1fr;gap:1.5rem;
+  padding:2.2rem 0;border-bottom:1px solid #2C1C0A;
+  transition:background .2s;cursor:default;
+}
+.step:first-child{padding-top:0}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step-n{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:3rem;color:#2C3840;line-height:1;
+  transition:color .35s;
+}
+.step:hover .step-n{color:var(--steel)}
+.step-title{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.2rem;color:#F0E6D6;margin-bottom:.45rem;line-height:1.2;
+}
+.step-body{font-size:.9rem;color:#6B5040;line-height:1.8}
+.process-panel{
+  position:sticky;top:6rem;
+  background:#1F1208;border:1px solid #2C1C0A;
+  aspect-ratio:3/4;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;position:relative;
+}
+.process-panel::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 65%,rgba(240,215,170,.05) 0%,transparent 60%);
+}
+.process-panel-art{width:45%;opacity:.35;position:relative;z-index:1}
+.process-panel-label{
+  position:absolute;bottom:2rem;left:2rem;right:2rem;
+  border-top:1px solid #2C1C0A;padding-top:1.2rem;
+  z-index:2;
+}
+.process-panel-top{
+  font-size:.52rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#4A2E18;
+  margin-bottom:.4rem;
+}
+.process-panel-val{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:2rem;color:#F0E6D6;line-height:1;
+}
+
+/* ── HOW TO ORDER ── */
+.order-section{
+  background:var(--paper);
+  padding:clamp(5rem,10vh,8rem) 0;
+}
+.order-inner{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+.order-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  margin-top:4rem;
+}
+.ord-step{
+  background:var(--paper);
+  padding:3rem 2rem 3.5rem;
+  position:relative;transition:background .25s;overflow:hidden;
+}
+.ord-step:hover{background:var(--paper2)}
+.ord-bg-n{
+  position:absolute;top:1rem;right:1.5rem;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:900;
+  font-size:5.5rem;color:rgba(44,24,8,.04);line-height:1;
+  transition:color .3s;pointer-events:none;
+}
+.ord-step:hover .ord-bg-n{color:rgba(44,24,8,.08)}
+.ord-icon{
+  width:40px;height:40px;border:1px solid rgba(78,99,110,.3);
+  display:grid;place-items:center;margin-bottom:1.5rem;
+  color:var(--steel);opacity:.9;
+}
+.ord-title{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.3rem;color:var(--ink);margin-bottom:.7rem;line-height:1.2;
+}
+.ord-body{font-size:.88rem;color:var(--mid);line-height:1.78}
+
+/* ── MATERIALS ── */
+.materials-section{
+  background:linear-gradient(175deg,#1C1208 0%,#180E04 50%,#1E1410 100%);
+  padding:clamp(5rem,10vh,8rem) 0;
+}
+.materials-inner{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+.mat-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:rgba(110,136,152,.1);
+  border:1px solid rgba(110,136,152,.1);
+  margin-top:4rem;
+}
+.mat-item{
+  background:#1C1208;
+  padding:3.5rem 3rem;
+  display:grid;grid-template-columns:68px 1fr;gap:2.5rem;
+  align-items:start;transition:background .25s;
+}
+.mat-item:hover{background:#221610}
+.mat-icon{
+  width:68px;height:68px;
+  border:1px solid rgba(110,136,152,.25);
+  display:grid;place-items:center;
+  color:var(--steel-light);opacity:.75;flex-shrink:0;
+}
+.mat-h{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.4rem;color:#F0E6D6;margin-bottom:.5rem;line-height:1.1;
+}
+.mat-h em{font-style:normal;font-weight:400;color:var(--steel2)}
+.mat-body{font-size:.9rem;color:#7A6048;line-height:1.8;margin-bottom:1.2rem}
+.mat-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.mat-tag{
+  font-size:.52rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:.22rem .6rem;border:1px solid rgba(110,136,152,.2);color:var(--steel2);
+}
+
+/* ── TESTIMONIALS ── */
+.testi-section{
+  background:var(--paper);
+  padding:clamp(5rem,10vh,8rem) 0;
+}
+.testi-inner{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  margin-top:4rem;
+}
+.testi{
+  background:var(--paper);padding:2.5rem 2.2rem;
+  transition:background .25s;position:relative;overflow:hidden;
+}
+.testi:hover{background:var(--paper2)}
+.testi-open-quote{
+  font-family:'Fraunces',serif;font-weight:800;font-style:italic;
+  font-size:4rem;color:rgba(44,24,8,.07);line-height:1;
+  margin-bottom:.5rem;display:block;line-height:.8;
+}
+.testi-stars{display:flex;gap:3px;margin-bottom:1.2rem}
+.testi-star{
+  width:10px;height:10px;background:var(--steel);
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+.testi-quote{
+  font-size:.93rem;font-style:italic;font-weight:400;
+  color:var(--ink);line-height:1.8;margin-bottom:1.6rem;
+}
+.testi-author{display:flex;align-items:center;gap:.9rem;border-top:1px solid var(--line);padding-top:1.2rem}
+.testi-av{
+  width:38px;height:38px;border-radius:50%;background:var(--steel);
+  display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1rem;color:#F0E6D6;flex-shrink:0;
+}
+.testi-name{font-size:.88rem;font-weight:600;color:var(--ink)}
+.testi-loc{font-size:.6rem;color:var(--faint);font-style:italic;margin-top:.1rem}
+
+/* ── FAQ ── */
+.faq-section{
+  background:var(--paper2);
+  padding:clamp(5rem,10vh,8rem) 0;
+  border-top:1px solid var(--line);
+}
+.faq-inner{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+.faq-layout{
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:clamp(3rem,6vw,8rem);margin-top:4rem;
+  align-items:start;
+}
+.faq-sidebar{position:sticky;top:6rem}
+.faq-sidebar-text{font-size:.93rem;color:var(--mid);line-height:1.8;margin-bottom:2rem}
+.faq-list{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+.faq-item{
+  background:var(--paper2);padding:1.8rem 2rem;
+  cursor:default;transition:background .2s;
+}
+.faq-item:hover{background:var(--paper)}
+.faq-q{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.05rem;color:var(--ink);margin-bottom:.7rem;line-height:1.3;
+}
+.faq-a{font-size:.9rem;color:var(--mid);line-height:1.8}
+.faq-n{
+  font-size:.55rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:.6rem;display:block;
+}
+
+/* ── CTA ── */
+.cta-section{
+  background:linear-gradient(135deg,#180E04 0%,#1C1410 40%,#1A1208 100%);
+  padding:clamp(6rem,14vh,10rem) clamp(1.5rem,4vw,4rem);
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'GL';position:absolute;
+  left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:'Fraunces',serif;font-style:italic;font-weight:900;
+  font-size:clamp(14rem,35vw,38rem);color:rgba(78,99,110,.06);
+  pointer-events:none;letter-spacing:-.05em;line-height:1;
+}
+.cta-inner{position:relative;z-index:2}
+.cta-tag{
+  font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--steel2);display:flex;align-items:center;justify-content:center;gap:.6rem;
+  margin-bottom:2rem;
+}
+.cta-tag::before,.cta-tag::after{content:'';width:20px;height:1px;background:var(--steel)}
+.cta-h2{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:900;
+  font-size:clamp(3.5rem,9vw,9rem);
+  color:#F0E6D6;line-height:.9;letter-spacing:-.03em;
+  margin-bottom:1.2rem;
+}
+.cta-sub{
+  font-size:1rem;font-style:italic;color:var(--steel2);max-width:400px;
+  margin:0 auto 3rem;line-height:1.7;font-weight:300;
+}
+.cta-acts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.85rem 2.2rem;
+  background:#25D366;color:#FFF;
+  transition:background .2s,transform .15s;
+}
+.btn-wa:hover{background:#1fbb59;transform:translateY(-2px)}
+.btn-ig{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-size:.68rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+  padding:.85rem 2.2rem;
+  background:transparent;color:var(--steel2);border:1px solid rgba(110,136,152,.3);
+  transition:border-color .2s,color .2s;
+}
+.btn-ig:hover{border-color:var(--steel-light);color:#F0E6D6}
+.cta-contacts{
+  display:flex;gap:4rem;justify-content:center;flex-wrap:wrap;
+  margin-top:5rem;padding-top:4rem;
+  border-top:1px solid rgba(110,136,152,.12);
+}
+.cta-contact{}
+.cta-contact-l{
+  font-size:.52rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--steel2);margin-bottom:.5rem;
+}
+.cta-contact-v{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+  font-size:1rem;color:#F0E6D6;
+}
+
+/* ── ENVIOS STRIP ── */
+.envios-strip{
+  background:var(--paper);
+  border-top:1px solid var(--line);
+  padding:clamp(4rem,8vh,6rem) 0;
+}
+.envios-inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,6vw,8rem);align-items:center;
+}
+.envios-text .sec-tag{margin-bottom:.8rem}
+.envios-h3{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:clamp(2rem,4vw,3.8rem);color:var(--ink);
+  line-height:1.0;letter-spacing:-.02em;margin-bottom:1.5rem;
+}
+.envios-desc{font-size:.93rem;color:var(--mid);line-height:1.8;margin-bottom:2rem}
+.envios-list{display:flex;flex-direction:column;gap:.85rem}
+.envios-feat{display:flex;align-items:flex-start;gap:.9rem}
+.envios-dot{
+  width:18px;height:18px;border:1px solid var(--line2);flex-shrink:0;
+  display:grid;place-items:center;margin-top:.15rem;
+}
+.envios-dot::after{content:'';width:5px;height:5px;background:var(--ink);border-radius:50%}
+.envios-feat-t{font-size:.92rem;color:var(--mid);line-height:1.7}
+.envios-feat-t strong{color:var(--ink);font-weight:600}
+.envios-countries{
+  margin-top:2rem;display:flex;flex-wrap:wrap;gap:.4rem;
+}
+.country-tag{
+  font-size:.55rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;border:1px solid var(--line);color:var(--faint);
+  transition:border-color .2s,color .2s;
+}
+.country-tag:hover{border-color:var(--ink);color:var(--ink)}
+.envios-map{display:flex;align-items:center;justify-content:center}
+.envios-map-art{
+  width:100%;max-width:260px;opacity:.3;
+  filter:contrast(1.2);
+}
+
+/* ── FOOTER ── */
+footer{
+  background:#120A02;
+  border-top:1px solid rgba(110,136,152,.1);
+  padding:clamp(4rem,8vh,6rem) 0 2.5rem;
+}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 clamp(1.5rem,4vw,4rem);
+}
+.foot-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;
+  gap:3rem;padding-bottom:3.5rem;
+  border-bottom:1px solid rgba(44,28,10,.8);
+}
+.foot-brand-logo{display:flex;align-items:center;gap:12px;margin-bottom:1.2rem}
+.foot-logo-mark{
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(110,136,152,.2);
+  display:grid;place-items:center;
+}
+.foot-logo-mark span{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:.8rem;color:#F0E6D6;
+}
+.foot-logo-name{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:.95rem;color:#F0E6D6;
+}
+.foot-logo-name small{
+  display:block;font-family:'DM Sans',sans-serif;font-style:normal;
+  font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+  color:#4A2E18;margin-top:.15rem;font-weight:400;
+}
+.foot-desc{font-size:.88rem;color:#5A3C24;line-height:1.8;max-width:240px;margin-bottom:1.5rem}
+.foot-tagline{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:.9rem;color:#1A1A1A;
+}
+.socials{display:flex;gap:.4rem;margin-top:1.5rem}
+.soc{
+  width:34px;height:34px;border:1px solid rgba(110,136,152,.2);
+  display:grid;place-items:center;color:var(--steel);
+  transition:border-color .2s,color .2s;
+}
+.soc:hover{border-color:var(--steel-light);color:#F0E6D6}
+.foot-col h5{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+  font-size:.78rem;color:#F0E6D6;margin-bottom:1.2rem;
+}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.foot-col li a{
+  font-size:.88rem;color:var(--steel);transition:color .2s;
+  display:flex;align-items:center;gap:.4rem;
+}
+.foot-col li a:hover{color:#F0E6D6}
+.foot-col li a::before{content:'';width:0;height:1px;background:#F0E6D6;transition:width .2s;flex-shrink:0}
+.foot-col li a:hover::before{width:10px}
+.foot-col address{font-style:normal;display:flex;flex-direction:column;gap:.9rem}
+.foot-col address strong{
+  font-size:.52rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(110,136,152,.5);display:block;margin-bottom:.1rem;
+}
+.foot-col address p{font-size:.88rem;color:var(--steel)}
+.foot-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:2rem;flex-wrap:wrap;gap:1rem;
+}
+.foot-copy{font-size:.62rem;color:rgba(110,136,152,.3);letter-spacing:.06em}
+.foot-made{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:.82rem;color:rgba(180,130,80,.2);
+}
+
+/* ── WA FLOAT ── */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:600;
+  display:flex;align-items:center;gap:.6rem;
+  background:#25D366;color:#FFF;
+  padding:.7rem 1.4rem;
+  font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:0 4px 24px rgba(37,211,102,.25);
+  transition:background .2s,transform .15s;
+}
+.wa-float:hover{background:#1fbb59;transform:translateY(-2px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .foot-top{grid-template-columns:1fr 1fr}
+  .process-grid{grid-template-columns:1fr}
+  .process-panel{display:none}
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;padding-bottom:clamp(2rem,4vh,3rem)}
+  .hero-visual{display:none}
+  .about-strip{grid-template-columns:1fr}
+  .about-label{display:none}
+  .numbers-inner{grid-template-columns:repeat(2,1fr)}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .order-steps{grid-template-columns:repeat(2,1fr)}
+  .mat-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .faq-layout{grid-template-columns:1fr}
+  .envios-inner{grid-template-columns:1fr}
+  .envios-map{display:none}
+}
+@media(max-width:640px){
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+  .prod-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .order-steps{grid-template-columns:1fr}
+  .numbers-inner{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr}
+  .cta-contacts{gap:2rem}
+  .hero-h1{font-size:clamp(3.2rem,13vw,5rem)}
+  .mat-item{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- MOBILE NAV -->
+<div class="mob" id="mob">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#coleccion" onclick="closeMob()">Colección</a>
+  <div class="mob-line"></div>
+  <a href="#historia" onclick="closeMob()">Historia</a>
+  <a href="#proceso" onclick="closeMob()">Proceso</a>
+  <a href="#encargo" onclick="closeMob()">Encargar</a>
+  <a href="#envios" onclick="closeMob()">Envíos</a>
+  <div class="mob-line"></div>
+  <span class="mob-sub">WhatsApp 3843-458340</span>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark"><span>GL</span></div>
+    <span class="nav-wordmark">GL Cuchillos</span>
+  </a>
+  <div class="nav-links">
+    <a href="#coleccion">Colección</a>
+    <a href="#historia">Historia</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#encargo">Encargar</a>
+    <a href="#envios">Envíos</a>
+  </div>
+  <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" target="_blank" class="nav-cta">
+    Consultar →
+  </a>
+  <button class="nav-burger" id="navBurger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-tag" id="hero-tag">Salta, Argentina · Desde 2014</p>
+      <h1 class="hero-h1">
+        Forjado<br>
+        a mano.<br>
+        <span class="line-sm" id="hero-subtitle">Piezas únicas que duran toda la vida.</span>
+      </h1>
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <span class="hero-stat-n" id="hero-stat1">+10</span>
+          <span class="hero-stat-l" id="hero-stat1-label">Años de oficio</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-n">100%</span>
+          <span class="hero-stat-l">Artesanal</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-n" id="hero-stat3">5+</span>
+          <span class="hero-stat-l" id="hero-stat3-label">Países</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#coleccion" class="btn-primary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Ver colección
+        </a>
+        <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20hacer%20un%20encargo" target="_blank" class="btn-ghost" id="hero-wa">WhatsApp →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-knife-wrap">
+        <svg viewBox="0 0 340 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Blade -->
+          <path d="M170 42 L318 228 Q332 255 318 272 L170 262 Z" fill="url(#hblade)"/>
+          <path d="M170 42 L318 228 Q332 255 318 272" stroke="rgba(247,244,239,.2)" stroke-width="1" fill="none"/>
+          <!-- Blade fuller line -->
+          <path d="M174 58 L304 234" stroke="rgba(247,244,239,.07)" stroke-width="1.5" fill="none"/>
+          <!-- Bolster -->
+          <rect x="157" y="255" width="26" height="13" rx="1" fill="url(#hbolster)"/>
+          <!-- Handle -->
+          <path d="M160 268 Q158 348 163 448 L179 448 Q184 348 182 268 Z" fill="url(#hhandle)"/>
+          <!-- Wood grain -->
+          <path d="M164 278 Q165 358 165 438" stroke="rgba(240,215,170,.05)" stroke-width="1.8" fill="none"/>
+          <path d="M172 278 Q172 358 172 438" stroke="rgba(247,244,239,.03)" stroke-width="1.2" fill="none"/>
+          <!-- Rivets -->
+          <circle cx="171" cy="308" r="4.5" fill="url(#hrivet)"/>
+          <circle cx="171" cy="365" r="4.5" fill="url(#hrivet)"/>
+          <circle cx="171" cy="422" r="4.5" fill="url(#hrivet)"/>
+          <!-- GL -->
+          <text x="52" y="155" font-family="Fraunces, serif" font-size="82" fill="rgba(247,244,239,.03)" font-style="italic" font-weight="900">GL</text>
+          <defs>
+            <linearGradient id="hblade" x1="170" y1="42" x2="332" y2="272" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="rgba(180,180,180,.08)"/>
+              <stop offset="45%" stop-color="rgba(220,220,220,.5)"/>
+              <stop offset="100%" stop-color="rgba(160,160,160,.65)"/>
+            </linearGradient>
+            <linearGradient id="hbolster" x1="157" y1="261" x2="183" y2="268" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2A2A2A"/>
+              <stop offset="50%" stop-color="#AAAAAA"/>
+              <stop offset="100%" stop-color="#2A2A2A"/>
+            </linearGradient>
+            <linearGradient id="hhandle" x1="160" y1="268" x2="184" y2="268" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#121212"/>
+              <stop offset="30%" stop-color="#2A2A2A"/>
+              <stop offset="65%" stop-color="#1A1A1A"/>
+              <stop offset="100%" stop-color="#180E04"/>
+            </linearGradient>
+            <radialGradient id="hrivet" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#CCCCCC"/>
+              <stop offset="100%" stop-color="#555555"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <div class="hero-badge-wrap">
+          <div class="hero-badge-tag">Enviado a</div>
+          <div class="hero-badge-val">Alemania 🇩🇪</div>
+          <div class="hero-badge-sub">Juego Parrillero XL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Forjado a mano<span class="ticker-dot"></span></span>
+      <span class="ticker-item">100% Artesanal<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Nakiri · Parrillero · Caza · Facón<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Envíos a todo Argentina<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Exportamos al mundo<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Desde Salta, Argentina<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Personalización total<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Calidad garantizada<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Forjado a mano<span class="ticker-dot"></span></span>
+      <span class="ticker-item">100% Artesanal<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Nakiri · Parrillero · Caza · Facón<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Envíos a todo Argentina<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Exportamos al mundo<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Desde Salta, Argentina<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Personalización total<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Calidad garantizada<span class="ticker-dot"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NUMBERS ════════════════════════════════════ -->
+<div class="numbers">
+  <div class="numbers-inner">
+    <div class="num-item rv">
+      <span class="num-n">+10</span>
+      <span class="num-l">Años de forja</span>
+      <div class="num-divider"></div>
+    </div>
+    <div class="num-item rv d1">
+      <span class="num-n">∞</span>
+      <span class="num-l">Piezas únicas</span>
+      <div class="num-divider"></div>
+    </div>
+    <div class="num-item rv d2">
+      <span class="num-n">5+</span>
+      <span class="num-l">Países de exportación</span>
+      <div class="num-divider"></div>
+    </div>
+    <div class="num-item rv d3">
+      <span class="num-n">100%</span>
+      <span class="num-l">Satisfacción garantizada</span>
+      <div class="num-divider"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══════════════════════════════════════ -->
+<div class="about-strip dark-zone" id="historia">
+  <div class="about-label">Historia · Artesano</div>
+  <div class="about-content">
+    <h2 class="about-h2 rv">El artesano<br>detrás <em>del filo.</em></h2>
+    <div class="about-body rv d1">
+      <p>Gonzalo Londero es un <strong>maestro cuchillero</strong> de Salta, Argentina. Más de una década forjando piezas únicas a mano — lo que empezó como pasión se convirtió en un oficio de precisión y respeto profundo por el material.</p>
+      <p>Cada cuchillo que sale de su taller lleva horas de trabajo silencioso: el golpe preciso del martillo sobre el acero al rojo vivo, el lijado paciente del mango, el afilado final que convierte el metal bruto en un instrumento verdadero.</p>
+      <p>Las piezas de GL Cuchillos llegan a toda Argentina y al exterior. Algunas viajan a Alemania, otras recorren el país para llegar a quienes entienden que <strong>lo bueno no se fabrica en serie.</strong></p>
+    </div>
+    <div class="about-sig rv d2">
+      <div class="about-sig-av">G</div>
+      <div>
+        <div class="about-sig-name">Gonzalo Londero</div>
+        <div class="about-sig-sub">Maestro cuchillero · Salta, Argentina</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRODUCTS ══════════════════════════════════ -->
+<section class="products-section" id="coleccion">
+  <div class="sec-header">
+    <div>
+      <p class="sec-tag rv">Colección</p>
+      <h2 class="sec-h2 rv d1">Piezas <em>únicas,</em><br>hechas para durar.</h2>
+    </div>
+    <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20ver%20el%20catálogo%20completo" class="sec-link rv" target="_blank" id="catalogo-link">Catálogo completo →</a>
+  </div>
+  <div class="prod-grid" id="prod-grid"></div>
+</section>
+
+<!-- ══ PROCESS ════════════════════════════════════ -->
+<section class="process-section dark-zone" id="proceso">
+  <div class="process-inner">
+    <div class="sec-header" style="padding:0 0 0 0;max-width:none">
+      <div>
+        <p class="sec-tag dk rv">El proceso</p>
+        <h2 class="sec-h2 dk rv d1">Del acero bruto<br>a la <em>pieza final.</em></h2>
+      </div>
+    </div>
+    <div class="process-grid">
+      <div class="process-steps">
+        <div class="step rv">
+          <div class="step-n">01</div>
+          <div>
+            <h4 class="step-title">Selección del acero</h4>
+            <p class="step-body">El uso final determina el material. No es lo mismo un cuchillo de caza que uno de cocina. La elección correcta del acero define todo lo que viene después.</p>
+          </div>
+        </div>
+        <div class="step rv d1">
+          <div class="step-n">02</div>
+          <div>
+            <h4 class="step-title">Forja a temperatura</h4>
+            <p class="step-body">El acero se lleva al rojo vivo y se golpea en el yunque. Es el momento más físico y crítico. Una temperatura incorrecta puede arruinar la pieza antes de empezar.</p>
+          </div>
+        </div>
+        <div class="step rv d2">
+          <div class="step-n">03</div>
+          <div>
+            <h4 class="step-title">Temple y revenido</h4>
+            <p class="step-body">El temple endurece el acero. El revenido reduce la fragilidad. Este equilibrio es el secreto de un buen filo: duro sin quebrarse. Gonzalo lo hace a mano.</p>
+          </div>
+        </div>
+        <div class="step rv d3">
+          <div class="step-n">04</div>
+          <div>
+            <h4 class="step-title">Conformado del mango</h4>
+            <p class="step-body">La madera se corta y pule a medida. Los remaches se colocan uno a uno. El equilibrio se chequea a mano. Si no se siente bien, se vuelve a trabajar.</p>
+          </div>
+        </div>
+        <div class="step rv d4">
+          <div class="step-n">05</div>
+          <div>
+            <h4 class="step-title">Afilado y acabado final</h4>
+            <p class="step-body">Piedras de grano progresivo hasta un filo que corta papel. Acabado satinado, mate o espejado. Cada pieza se inspecciona a mano antes de salir del taller.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-panel" style="position:sticky;top:5rem;aspect-ratio:3/4;background:#1F1208;border:1px solid #2C1C0A;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(240,215,170,.05) 0%,transparent 55%)"></div>
+        <svg class="process-panel-art" viewBox="0 0 260 460" fill="none" style="width:42%;opacity:.3;position:relative;z-index:1">
+          <path d="M130 30 L242 174 Q252 196 240 210 L130 204Z" fill="rgba(240,215,170,.55)"/>
+          <rect x="120" y="198" width="20" height="10" rx="1" fill="rgba(240,215,170,.35)"/>
+          <path d="M122 208 Q121 278 125 368 L137 368 Q140 278 139 208Z" fill="rgba(240,215,170,.2)"/>
+          <circle cx="130" cy="248" r="3.5" fill="rgba(240,215,170,.35)"/>
+          <circle cx="130" cy="298" r="3.5" fill="rgba(240,215,170,.35)"/>
+          <circle cx="130" cy="344" r="3.5" fill="rgba(240,215,170,.35)"/>
+        </svg>
+        <div class="process-panel-label" style="position:absolute;bottom:2rem;left:2rem;right:2rem;border-top:1px solid #2C1C0A;padding-top:1.2rem;z-index:2">
+          <div class="process-panel-top" style="font-size:.52rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#4A2E18;margin-bottom:.4rem">Tiempo promedio</div>
+          <div class="process-panel-val" style="font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:2rem;color:#F0E6D6;line-height:1">48 horas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW TO ORDER ══════════════════════════════ -->
+<section class="order-section" id="encargo">
+  <div class="order-inner">
+    <div class="sec-header" style="padding:0 0 0 0;max-width:none">
+      <div>
+        <p class="sec-tag rv">¿Cómo encargar?</p>
+        <h2 class="sec-h2 rv d1">Simple, directo,<br><em>sin intermediarios.</em></h2>
+      </div>
+    </div>
+    <div class="order-steps">
+      <div class="ord-step rv">
+        <div class="ord-bg-n">01</div>
+        <div class="ord-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h4 class="ord-title">Contacto inicial</h4>
+        <p class="ord-body">Escribinos por WhatsApp o Instagram. Contanos qué tipo de pieza querés y para qué uso. Sin formularios, sin esperas.</p>
+      </div>
+      <div class="ord-step rv d1">
+        <div class="ord-bg-n">02</div>
+        <div class="ord-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h4 class="ord-title">Diseño y precio</h4>
+        <p class="ord-body">Charlamos los detalles: acero, largo de hoja, madera, extras. Te damos un presupuesto claro ese mismo día.</p>
+      </div>
+      <div class="ord-step rv d2">
+        <div class="ord-bg-n">03</div>
+        <div class="ord-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h4 class="ord-title">Gonzalo forja</h4>
+        <p class="ord-body">Tiempo según la pieza: 2 a 8 semanas. Te mandamos fotos del progreso. Sin sorpresas.</p>
+      </div>
+      <div class="ord-step rv d3">
+        <div class="ord-bg-n">04</div>
+        <div class="ord-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><path d="m16 8 5 0 3 4v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h4 class="ord-title">Entrega y garantía</h4>
+        <p class="ord-body">Tu pieza llega embalada con cuidado con certificado de autenticidad. Si algo no está perfecto, lo resolvemos.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3.5rem" class="rv">
+      <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20encargar%20una%20pieza" target="_blank" class="btn-primary" style="display:inline-flex" id="order-wa">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Iniciar encargo por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MATERIALS ══════════════════════════════════ -->
+<section class="materials-section dark-zone" id="materiales">
+  <div class="materials-inner">
+    <div class="sec-header" style="padding:0 0 0 0;max-width:none">
+      <div>
+        <p class="sec-tag dk rv">Los materiales</p>
+        <h2 class="sec-h2 dk rv d1">Acero y madera.<br><em>Sin compromiso.</em></h2>
+      </div>
+    </div>
+    <div class="mat-grid">
+      <div class="mat-item rv">
+        <div class="mat-icon">
+          <svg width="30" height="30" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M22 4 L40 22 L22 40 L4 22 Z"/><path d="M22 10 L34 22 L22 34 L10 22 Z"/></svg>
+        </div>
+        <div>
+          <h3 class="mat-h">Acero <em>1075</em></h3>
+          <p class="mat-body">Acero al carbono de media aleación. Alta tenacidad, excelente retención de filo. El preferido para piezas de trabajo real: caza, parrilla, campo.</p>
+          <div class="mat-tags"><span class="mat-tag">Alta dureza</span><span class="mat-tag">Fácil afilado</span><span class="mat-tag">Uso intensivo</span></div>
+        </div>
+      </div>
+      <div class="mat-item rv d1">
+        <div class="mat-icon">
+          <svg width="30" height="30" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="22" cy="22" r="18"/><circle cx="22" cy="22" r="8"/><line x1="22" y1="4" x2="22" y2="14"/><line x1="22" y1="30" x2="22" y2="40"/></svg>
+        </div>
+        <div>
+          <h3 class="mat-h">Acero <em>inoxidable</em></h3>
+          <p class="mat-body">440C y alto carbono inox. Resistencia a la corrosión sin sacrificar filo. Ideal para cocina profesional y regalos. Mantenimiento mínimo.</p>
+          <div class="mat-tags"><span class="mat-tag">Anticorrosión</span><span class="mat-tag">Cocina</span><span class="mat-tag">Regalo</span></div>
+        </div>
+      </div>
+      <div class="mat-item rv d2">
+        <div class="mat-icon">
+          <svg width="30" height="30" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 38 L12 16 Q12 6 22 4 Q32 6 32 16 L32 38"/><path d="M8 38 L36 38"/><path d="M16 22 Q22 18 28 22"/><path d="M16 28 Q22 24 28 28"/></svg>
+        </div>
+        <div>
+          <h3 class="mat-h">Maderas <em>nobles</em></h3>
+          <p class="mat-body">Quebracho colorado, lapacho, guayacán y asta natural. Cada mango se selecciona a mano — tan durable como el acero, tan bello como la pieza merece.</p>
+          <div class="mat-tags"><span class="mat-tag">Quebracho</span><span class="mat-tag">Lapacho</span><span class="mat-tag">Guayacán</span><span class="mat-tag">Asta</span></div>
+        </div>
+      </div>
+      <div class="mat-item rv d3">
+        <div class="mat-icon">
+          <svg width="30" height="30" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M8 36 Q8 28 14 24 Q20 20 22 12 Q24 20 30 24 Q36 28 36 36"/><path d="M6 36 L38 36"/></svg>
+        </div>
+        <div>
+          <h3 class="mat-h">Acabados <em>artesanales</em></h3>
+          <p class="mat-body">Remaches de bronce o alpaca. Grabados en hoja con nombre, iniciales o diseño personalizado. Vainas de cuero cosidas a mano. Cada detalle es tuyo.</p>
+          <div class="mat-tags"><span class="mat-tag">Remaches bronce</span><span class="mat-tag">Grabado</span><span class="mat-tag">Vaina cuero</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════ -->
+<section class="testi-section" id="testimonios">
+  <div class="testi-inner">
+    <div class="sec-header" style="padding:0 0 0 0;max-width:none;margin-bottom:0">
+      <div>
+        <p class="sec-tag rv">Testimonios</p>
+        <h2 class="sec-h2 rv d1">Lo que dicen<br><em>quienes ya tienen una.</em></h2>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi rv">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">El facón es una obra de arte. Mango de guayacán, hoja brillante y equilibrio perfecto. En el asado todos me preguntaron de dónde lo saqué.</p>
+        <div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Roberto M.</div><div class="testi-loc">Tucumán, Argentina</div></div></div>
+      </div>
+      <div class="testi rv d1">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">El nakiri llegó a Alemania en perfecto estado. La calidad supera a cuchillos europeos que costaron el doble. Gonzalo es un artista del acero.</p>
+        <div class="testi-author"><div class="testi-av">M</div><div><div class="testi-name">Michael H.</div><div class="testi-loc">Múnich, Alemania 🇩🇪</div></div></div>
+      </div>
+      <div class="testi rv d2">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">Trabajo en campo y necesitaba algo que aguante. El cuchillo de caza lleva dos años de uso intenso y sigue perfecto. Filo, balance y material de primera.</p>
+        <div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">Juan P.</div><div class="testi-loc">Salta, Argentina</div></div></div>
+      </div>
+      <div class="testi rv d3">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">Encargué un set de mesa para regalarle a mi papá. Llegó impecable con una presentación increíble. Lloramos todos. Vale cada centavo.</p>
+        <div class="testi-author"><div class="testi-av">C</div><div><div class="testi-name">Carla V. — Gracias Luciana</div><div class="testi-loc">Buenos Aires, Argentina</div></div></div>
+      </div>
+      <div class="testi rv d4">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">Gonzalo es muy atento, explica cada detalle y cumple los tiempos. El resultado superó mis expectativas. Ya encargué la segunda pieza.</p>
+        <div class="testi-author"><div class="testi-av">L</div><div><div class="testi-name">Lucas F.</div><div class="testi-loc">Córdoba, Argentina</div></div></div>
+      </div>
+      <div class="testi rv d5">
+        <span class="testi-open-quote">"</span>
+        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
+        <p class="testi-quote">El santoku es exactamente lo que quería. Corte limpio, mango perfecto en la mano y un acabado de exhibición. Para siempre.</p>
+        <div class="testi-author"><div class="testi-av">A</div><div><div class="testi-name">Ana G.</div><div class="testi-loc">Mendoza, Argentina</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="sec-header" style="padding:0 0 0 0;max-width:none">
+      <div>
+        <p class="sec-tag rv">FAQ</p>
+        <h2 class="sec-h2 rv d1">Lo que <em>todos</em><br>quieren saber.</h2>
+      </div>
+    </div>
+    <div class="faq-layout">
+      <div class="faq-sidebar rv d2">
+        <p class="faq-sidebar-text">¿Tenés dudas? Estas son las preguntas más comunes. Si tu consulta no está acá, escribinos directo por WhatsApp.</p>
+        <a href="https://wa.me/5493843458340?text=Hola!%20Tengo%20una%20consulta" target="_blank" class="btn-primary" style="display:inline-flex" id="faq-wa">Consultar →</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item rv">
+          <span class="faq-n">01</span>
+          <h4 class="faq-q">¿Cuánto tarda un encargo personalizado?</h4>
+          <p class="faq-a">Depende de la complejidad. Una pieza simple: 2–3 semanas. Sets o piezas elaboradas con grabado: 4–8 semanas. Siempre avisamos el tiempo exacto antes de confirmar.</p>
+        </div>
+        <div class="faq-item rv d1">
+          <span class="faq-n">02</span>
+          <h4 class="faq-q">¿Puedo elegir el tipo de madera y acero?</h4>
+          <p class="faq-a">Sí. Tenemos varios tipos de acero (1075, 440C, inox. alto carbono) y maderas (quebracho, lapacho, guayacán, asta natural). Te asesoramos según el uso.</p>
+        </div>
+        <div class="faq-item rv d2">
+          <span class="faq-n">03</span>
+          <h4 class="faq-q">¿Hacen grabados personalizados?</h4>
+          <p class="faq-a">Sí — iniciales, nombres, fechas o diseños en la hoja o el mango. Muy pedido para regalos. Consultanos los detalles por WhatsApp según la pieza.</p>
+        </div>
+        <div class="faq-item rv d3">
+          <span class="faq-n">04</span>
+          <h4 class="faq-q">¿Tienen precios fijos?</h4>
+          <p class="faq-a">No, porque cada pieza es única. El precio varía según materiales, tiempo de trabajo y extras. Respondemos con presupuesto claro ese mismo día por WhatsApp.</p>
+        </div>
+        <div class="faq-item rv d4">
+          <span class="faq-n">05</span>
+          <h4 class="faq-q">¿Envían al exterior?</h4>
+          <p class="faq-a">Sí. Ya enviamos a Alemania, Uruguay y Chile. El envío internacional se coordina directamente con el comprador. Escribinos y lo resolvemos juntos.</p>
+        </div>
+        <div class="faq-item rv d5">
+          <span class="faq-n">06</span>
+          <h4 class="faq-q">¿Cómo se cuida un cuchillo artesanal?</h4>
+          <p class="faq-a">Con piedra o chaira de calidad. No dejar sumergido en agua. Los mangos de madera se benefician de aceite de linaza ocasional. Te explicamos todo con la entrega.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ENVIOS ══════════════════════════════════════ -->
+<section class="envios-strip" id="envios">
+  <div class="envios-inner">
+    <div class="envios-text">
+      <p class="sec-tag rv">Envíos</p>
+      <h2 class="envios-h3 rv d1">Llegamos<br>a donde estés.</h2>
+      <p class="envios-desc rv d2">Enviamos a todo el territorio argentino y al exterior, con packaging especializado para que tu pieza llegue perfecta.</p>
+      <div class="envios-list rv d3">
+        <div class="envios-feat"><div class="envios-dot"></div><p class="envios-feat-t"><strong>Argentina completa</strong> — OCA, Andreani y puerta a puerta a todas las provincias.</p></div>
+        <div class="envios-feat"><div class="envios-dot"></div><p class="envios-feat-t"><strong>Exportación confirmada</strong> — Alemania, Uruguay, Chile. Coordinamos con el comprador.</p></div>
+        <div class="envios-feat"><div class="envios-dot"></div><p class="envios-feat-t"><strong>Packaging seguro</strong> — Cada pieza sale protegida y lista para viajar sin riesgo.</p></div>
+        <div class="envios-feat"><div class="envios-dot"></div><p class="envios-feat-t"><strong>Seguimiento real</strong> — Compartimos número de rastreo y cualquier novedad.</p></div>
+      </div>
+      <div class="envios-countries rv d4">
+        <span class="country-tag">Bs. Aires</span>
+        <span class="country-tag">Salta</span>
+        <span class="country-tag">Córdoba</span>
+        <span class="country-tag">Mendoza</span>
+        <span class="country-tag">Patagonia</span>
+        <span class="country-tag">Tucumán</span>
+        <span class="country-tag">Alemania 🇩🇪</span>
+        <span class="country-tag">Uruguay</span>
+        <span class="country-tag">Chile</span>
+        <span class="country-tag">+ más</span>
+      </div>
+    </div>
+    <div class="envios-map rv d3">
+      <svg viewBox="0 0 200 340" fill="none" class="envios-map-art">
+        <path d="M85 10 L130 12 L145 28 L148 55 L162 68 L165 90 L155 110 L162 130 L155 155 L148 165 L152 180 L145 200 L138 215 L130 228 L118 242 L105 255 L95 268 L88 280 L82 295 L78 315 L75 330 L72 315 L68 295 L65 278 L60 262 L55 248 L52 235 L55 222 L48 208 L45 192 L48 178 L42 162 L38 145 L42 128 L38 112 L45 92 L50 72 L60 58 L68 42 L78 26 Z" stroke="#111" stroke-width="1.2" fill="none"/>
+        <circle cx="75" cy="95" r="4" fill="#111"/>
+        <circle cx="75" cy="95" r="9" fill="none" stroke="#111" stroke-width="1" opacity=".3"/>
+        <text x="83" y="99" font-family="DM Sans, sans-serif" font-size="7" fill="#111" opacity=".7">Salta</text>
+        <circle cx="90" cy="195" r="3" fill="#111" opacity=".5"/>
+        <text x="97" y="199" font-family="DM Sans, sans-serif" font-size="6.5" fill="#111" opacity=".5">Bs. As.</text>
+        <circle cx="74" cy="168" r="2.5" fill="#111" opacity=".4"/>
+        <text x="42" y="162" font-family="DM Sans, sans-serif" font-size="6.5" fill="#111" opacity=".4">Córdoba</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════ -->
+<section class="cta-section dark-zone" id="contacto">
+  <div class="cta-inner">
+    <p class="cta-tag rv">Hablemos</p>
+    <h2 class="cta-h2 rv d1">Tu pieza<br>empieza hoy.</h2>
+    <p class="cta-sub rv d2">No hay catálogo. Hay conversación. Contanos qué necesitás.</p>
+    <div class="cta-acts rv d3">
+      <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" target="_blank" class="btn-wa" id="cta-wa">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Escribir a Gonzalo
+      </a>
+      <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="btn-ig" id="cta-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @gonzalo.londero.3
+      </a>
+    </div>
+    <div class="cta-contacts rv d4">
+      <div class="cta-contact">
+        <p class="cta-contact-l">WhatsApp</p>
+        <a href="tel:+5493843458340" class="cta-contact-v" id="cta-wa-number">3843-458340</a>
+      </div>
+      <div style="width:1px;background:#221208"></div>
+      <div class="cta-contact">
+        <p class="cta-contact-l">Instagram</p>
+        <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="cta-contact-v" id="cta-ig-handle">@gonzalo.londero.3</a>
+      </div>
+      <div style="width:1px;background:#221208"></div>
+      <div class="cta-contact">
+        <p class="cta-contact-l">Facebook</p>
+        <a href="https://www.facebook.com/Gonzafcf" target="_blank" class="cta-contact-v" id="cta-fb">Gonzalo Londero</a>
+      </div>
+      <div style="width:1px;background:#221208"></div>
+      <div class="cta-contact">
+        <p class="cta-contact-l">Envíos</p>
+        <span class="cta-contact-v">Argentina · Exterior</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════ -->
+<footer class="dark-zone">
+  <div class="footer-inner">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand-logo">
+          <div class="foot-logo-mark"><span>GL</span></div>
+          <div class="foot-logo-name">GL Cuchillos<small>Artesanales · Salta, Argentina</small></div>
+        </div>
+        <p class="foot-desc">Cuchillos forjados a mano, pieza por pieza. Para quienes entienden que la calidad real no se fabrica en serie.</p>
+        <p class="foot-tagline">"Cada filo cuenta una historia."</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="soc" id="footer-ig">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/Gonzafcf" target="_blank" class="soc" id="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/5493843458340" class="soc" id="footer-wa">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Productos</h5>
+        <ul id="footer-products">
+          <!-- se llenará dinámicamente con los primeros 6 productos -->
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Información</h5>
+        <ul>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#proceso">El Proceso</a></li>
+          <li><a href="#encargo">Cómo Encargar</a></li>
+          <li><a href="#materiales">Materiales</a></li>
+          <li><a href="#envios">Envíos</a></li>
+          <li><a href="#faq">Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <address>
+          <div><strong>WhatsApp</strong><p id="footer-wa-number">3843-458340</p></div>
+          <div><strong>Instagram</strong><p id="footer-ig-handle">@gonzalo.londero.3</p></div>
+          <div><strong>Facebook</strong><p id="footer-fb-name">Gonzalo Londero</p></div>
+          <div><strong>Envíos</strong><p>Argentina · Internacional</p></div>
+        </address>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · Salta, Argentina</p>
+      <span class="foot-made">Hecho con ♥ en Argentina 🇦🇷</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WA Float -->
+<a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" class="wa-float" target="_blank" id="wa-float">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  Consultar
+</a>
+
+<script>
+// ── CURSOR ──────────────────────────────────────
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.prod,.testi,.mat-item,.ord-step,.faq-item,.num-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+// ── DARK ZONE CURSOR ────────────────────────────
+function checkDarkZone(){
+  const mid=window.innerHeight/2;
+  let isDark=false;
+  document.querySelectorAll('.dark-zone').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<=mid && r.bottom>=mid) isDark=true;
+  });
+  document.body.classList.toggle('dark-zone',isDark);
+}
+window.addEventListener('scroll',checkDarkZone,{passive:true});
+checkDarkZone();
+
+// ── NAV ─────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>40);
+},{passive:true});
+
+// ── MOBILE NAV ──────────────────────────────────
+document.getElementById('navBurger').onclick=()=>document.getElementById('mob').classList.add('open');
+document.getElementById('mobClose').onclick=()=>document.getElementById('mob').classList.remove('open');
+function closeMob(){document.getElementById('mob').classList.remove('open')}
+
+// ── REVEAL ──────────────────────────────────────
+const rvEls=document.querySelectorAll('.rv');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+rvEls.forEach(el=>obs.observe(el));
+function checkVis(){document.querySelectorAll('.rv:not(.vis)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight+80)el.classList.add('vis')})}
+setTimeout(checkVis,200);setTimeout(checkVis,700);
+window.addEventListener('scroll',checkVis,{passive:true});
+
+// ── FUNCIÓN PARA RENDERIZAR PRODUCTOS ───────────
+function renderProducts(products) {
+  const grid = document.getElementById('prod-grid');
+  if (!grid) return;
+  
+  // Filtrar solo productos activos (si se desea mostrar solo activos)
+  const activeProducts = products.filter(p => p.active !== false);
+  
+  if (activeProducts.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem 0;color:var(--mid)">No hay productos disponibles en este momento.</div>';
+    return;
+  }
+
+  // Mapear badge a clase CSS
+  const badgeClass = {
+    avail: 'badge-avail',
+    custom: 'badge-custom',
+    intl: 'badge-intl',
+    unavail: 'badge-unavail'
+  };
+
+  const html = activeProducts.map(p => {
+    // Determinar texto del badge
+    let badgeText = p.badgeText || '';
+    if (!badgeText) {
+      // Si no hay badgeText, usar una traducción del badge
+      const badgeMap = { avail: 'Disponible', custom: 'A pedido', intl: 'Internacional', unavail: 'No disponible' };
+      badgeText = badgeMap[p.badge] || '';
+    }
+
+    // Especificaciones
+    const specs = p.specs || [];
+    const specsHtml = specs.map(s => `<span class="prod-spec">${s}</span>`).join('');
+
+    // Imagen: si tiene image, mostrar <img>, sino SVG placeholder
+    const imgHtml = p.image 
+      ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+      : `<svg class="prod-img-art" viewBox="0 0 220 400" fill="none">
+          <path d="M110 25 L205 145 Q214 162 204 174 L110 170Z" fill="currentColor" opacity=".8"/>
+          <rect x="102" y="165" width="16" height="8" rx="1" fill="currentColor"/>
+          <path d="M104 173 Q103 230 106 310 L116 310 Q119 230 118 173Z" fill="currentColor" opacity=".6"/>
+          <circle cx="110" cy="205" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="245" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="285" r="3" fill="currentColor" opacity=".9"/>
+        </svg>`;
+
+    // Precio y nota
+    const priceMain = p.price || 'Consultar';
+    const priceNote = p.priceNote ? `<small>${p.priceNote}</small>` : '';
+
+    // Link de WhatsApp para consulta
+    const waNumber = document.getElementById('hero-wa')?.href?.match(/wa\.me\/(\d+)/)?.[1] || '5493843458340';
+    const consultLink = `https://wa.me/${waNumber}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
+
+    return `
+      <div class="prod rv">
+        <div class="prod-img">
+          ${imgHtml}
+          <div class="prod-slash"></div>
+          <div class="prod-badge ${badgeClass[p.badge] || 'badge-avail'}">${badgeText}</div>
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">${p.category || '—'}</p>
+          <h3 class="prod-name">${p.name}</h3>
+          <p class="prod-desc">${p.description || ''}</p>
+          <div class="prod-specs">
+            ${specsHtml}
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">${priceMain}${priceNote}</div>
+            <a href="${consultLink}" class="prod-btn" target="_blank">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  grid.innerHTML = html;
+  
+  // Agregar clase reveal a los nuevos productos (ya tienen clase rv)
+  // El observer ya los vigila, pero hay que re-observarlos? Como se agregaron después, debemos volver a observar.
+  // Simplemente volvemos a ejecutar la observación para los nuevos elementos.
+  const newRv = grid.querySelectorAll('.rv');
+  newRv.forEach(el => obs.observe(el));
+  // También forzamos checkVis para los que ya están en pantalla
+  setTimeout(checkVis, 100);
+}
+
+// ── CARGA DE DATOS DESDE JSON ───────────────────
+(async function(){
+  try{
+    const res=await fetch('products.json?t='+Date.now());
+    if(!res.ok) {
+      console.warn('No se pudo cargar products.json, usando datos de respaldo');
+      // Datos de respaldo (los mismos que estaban estáticos)
+      const fallbackProducts = [
+        { id:'1', name:'Juego Parrillero XL', category:'Parrilla & Asado', description:'Set completo para asadores. Cuchillo, tenedor y chaira con mango en quebracho colorado. El que viajó a Alemania.', specs:['Acero 1075','Quebracho','30 cm'], badge:'avail', badgeText:'Disponible', price:'Consultar', priceNote:'Personalizable · Envío incluido', active:true },
+        { id:'2', name:'Cuchillo de Caza', category:'Caza & Campo', description:'Hoja robusta para el campo. Mango en madera natural con remaches de bronce. Filo que aguanta trabajo real.', specs:['Acero 1075','Madera natural','22 cm'], badge:'avail', badgeText:'Disponible', price:'Consultar', priceNote:'Con vaina de cuero', active:true },
+        { id:'3', name:'Nakiri Chef', category:'Cocina Profesional', description:'Hoja rectangular doble filo estilo japonés. Corte limpio para vegetales. Madera maciza artesanal.', specs:['Inox. alto carbono','Madera maciza','17 cm'], badge:'custom', badgeText:'A pedido', price:'Consultar', priceNote:'Encargo · 4–6 semanas', active:true },
+        { id:'4', name:'Facón Gaucho', category:'Gaucho & Tradición', description:'Pieza tradicional argentina. Mango en madera o asta natural. Vaina de cuero artesanal. Para colección, regalo o uso rural.', specs:['Acero 1075','Madera / Asta','26 cm'], badge:'intl', badgeText:'Internacional', price:'Consultar', priceNote:'Con vaina cuero', active:true },
+        { id:'5', name:'Santoku Artesanal', category:'Cocina Premium', description:'Cuchillo multiuso de corte preciso. Mango en lapacho, equilibrio perfecto. Para el cocinero que no acepta menos.', specs:['Acero 440C','Lapacho','18 cm'], badge:'avail', badgeText:'Disponible', price:'Consultar', priceNote:'Entrega inmediata', active:true },
+        { id:'6', name:'Set de Mesa', category:'Mesa & Regalo', description:'6 cuchillos de mesa forjados a mano. Mango unificado, presentación en caja de madera. El regalo que no se olvida.', specs:['Acero inox.','Caja madera','Set completo'], badge:'custom', badgeText:'A pedido', price:'Consultar', priceNote:'Encargo · 3–5 semanas', active:true }
+      ];
+      renderProducts(fallbackProducts);
+      return;
+    }
+    const data = await res.json();
+    // data tiene { settings, products }
+    const products = data.products || [];
+    renderProducts(products);
+
+    // Actualizar settings
+    const s = data.settings || {};
+    
+    // Hero
+    if (s.heroTitle) {
+      document.querySelector('.hero-h1 .line-sm').textContent = s.heroTitle;
+    }
+    if (s.heroSubtitle) {
+      document.querySelector('.hero-tag').innerHTML = s.heroSubtitle;
+    }
+    if (s.heroStat1) {
+      document.getElementById('hero-stat1').textContent = s.heroStat1;
+    }
+    if (s.heroStat1Label) {
+      document.getElementById('hero-stat1-label').textContent = s.heroStat1Label;
+    }
+    
+    // Números de contacto
+    if (s.whatsapp) {
+      const waNumber = s.whatsapp.replace(/\D/g,'');
+      // Actualizar todos los enlaces de WhatsApp
+      document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+        let base = a.href.split('?')[0];
+        let query = a.href.split('?')[1] || '';
+        base = base.replace(/wa\.me\/\d+/, 'wa.me/' + waNumber);
+        a.href = base + (query ? '?' + query : '');
+      });
+      // También actualizar textos de teléfono
+      document.querySelectorAll('[id$="wa-number"]').forEach(el => {
+        el.textContent = waNumber.replace(/(\d{4})(\d{3})(\d{3})/, '$1-$2$3'); // formatear
+      });
+    }
+    if (s.instagram) {
+      const ig = s.instagram.replace('@','');
+      document.querySelectorAll('a[href*="instagram.com"]').forEach(a => {
+        a.href = 'https://www.instagram.com/' + ig;
+      });
+      document.querySelectorAll('[id$="ig-handle"]').forEach(el => {
+        el.textContent = '@' + ig;
+      });
+    }
+    if (s.facebook) {
+      const fb = s.facebook;
+      document.querySelectorAll('a[href*="facebook.com"]').forEach(a => {
+        a.href = 'https://www.facebook.com/' + fb;
+      });
+      document.getElementById('cta-fb').textContent = fb;
+      document.getElementById('footer-fb-name').textContent = fb;
+    }
+
+    // Footer - lista de productos (primeros 6)
+    const footerProdList = document.getElementById('footer-products');
+    if (footerProdList && products.length) {
+      const firstSix = products.slice(0,6).map(p => `<li><a href="#coleccion">${p.name}</a></li>`).join('');
+      footerProdList.innerHTML = firstSix;
+    }
+
+  } catch(e){
+    console.warn('Error cargando products.json', e);
+    // Datos de respaldo
+    const fallbackProducts = [ /* mismos que arriba */ ];
+    renderProducts(fallbackProducts);
+  }
+})();
+</script>
+</body>
+</html>  --steel-pale:#C8DAE2;
+  --dk-wood:#1E1006;
+  --dk-wood2:#2A1A0C;
+  --dk-border:rgba(240,200,150,.1);
+  --dk-border2:rgba(240,200,150,.06);
+}
+
+/* ── GRAIN ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1001;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:240px;
+  opacity:.045;mix-blend-mode:multiply;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes slash-in{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv.fade-only{transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  transition:background .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(20,10,2,.96);
+  backdrop-filter:blur(16px);
+  border-color:rgba(110,136,152,.08);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:12px;
+}
+.nav-mark{
+  width:36px;height:36px;border:1px solid rgba(110,136,152,.2);border-radius:50%;
+  display:grid;place-items:center;
+  transition:background .25s,border-color .25s;
+}
+nav.scrolled .nav-mark{border-color:rgba(110,136,152,.18)}
+.nav-mark:hover{background:rgba(240,215,170,.08)}
+.nav-mark span{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:.8rem;color:#F0E6D6;
+  opacity:0;transition:opacity .3s;
+}
+nav.scrolled .nav-mark span{opacity:1}
+.nav-wordmark{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.05rem;color:#F0E6D6;opacity:0;
+  transition:opacity .3s;letter-spacing:-.01em;
+}
+nav.scrolled .nav-wordmark{opacity:1}
+.nav-links{
+  display:flex;align-items:center;gap:2.5rem;
+}
+.nav-links a{
+  font-size:.72rem;font-weight:400;
+  color:rgba(247,244,239,0);
+  letter-spacing:.06em;text-transform:uppercase;
+  transition:color .3s;position:relative;
+}
+nav.scrolled .nav-links a{color:rgba(240,215,170,.35)}
+nav.scrolled .nav-links a:hover{color:#F0E6D6}
+.nav-cta{
+  font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:#F0E6D6;background:var(--steel);padding:.45rem 1.25rem;
+  opacity:0;transition:opacity .3s,background .2s,color .2s;
+}
+nav.scrolled .nav-cta{opacity:1}
+.nav-cta:hover{background:var(--steel2)}
+.nav-burger{
+  display:none;background:none;border:none;
+  flex-direction:column;gap:5px;padding:4px;
+  opacity:0;transition:opacity .3s;
+}
+nav.scrolled .nav-burger{opacity:1}
+.nav-burger span{display:block;width:22px;height:1.5px;background:#F0E6D6;transition:.25s}
+
+/* ── MOBILE NAV ── */
+.mob{
+  display:none;position:fixed;inset:0;z-index:499;
+  background:#180E04;
+  flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:0 clamp(2rem,8vw,6rem);gap:1.5rem;
+}
+.mob.open{display:flex}
+.mob-close{position:absolute;top:1.2rem;right:clamp(1.5rem,4vw,4rem);background:none;border:none;font-size:1.8rem;color:#5A3C24;line-height:1;transition:color .2s}
+.mob-close:hover{color:#F0E6D6}
+.mob a{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:clamp(2.5rem,7vw,4rem);color:#F0E6D6;
+  line-height:1.1;transition:color .2s;
+}
+.mob a:hover{color:#888}
+.mob-line{width:40px;height:1px;background:#222;margin:.5rem 0}
+.mob-sub{font-size:.75rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:#5A3C24;margin-top:.5rem}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  background:var(--black);
+  display:grid;
+  grid-template-rows:1fr auto;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 70% 35%,rgba(110,136,152,.06) 0%,transparent 50%),
+    radial-gradient(ellipse at 20% 75%,rgba(180,120,60,.05) 0%,transparent 45%),
+    radial-gradient(ellipse at 50% 95%,rgba(78,99,110,.04) 0%,transparent 35%);
+}
+/* subtle cross-hatch texture */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(180,130,80,.018) 39px,rgba(180,130,80,.018) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(110,136,152,.015) 39px,rgba(110,136,152,.015) 40px);
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:end;
+  padding:clamp(7rem,14vh,10rem) clamp(1.5rem,6vw,5rem) 0;
+  position:relative;z-index:2;
+  gap:3rem;
+}
+.hero-text{padding-bottom:clamp(3rem,6vh,5rem)}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.75rem;
+  font-size:.62rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--steel2);margin-bottom:2.5rem;
+  opacity:0;animation:rise .8s .1s var(--ease) forwards;
+}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--steel)}
+.hero-h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(4rem,9vw,9.5rem);
+  font-weight:900;font-style:italic;
+  line-height:.88;letter-spacing:-.03em;
+  color:#F0E6D6;
+  opacity:0;animation:rise 1s .2s var(--ease) forwards;
+}
+.hero-h1 .line-plain{font-style:normal;font-weight:400;color:#333}
+.hero-h1 .line-sm{
+  display:block;
+  font-size:clamp(1.4rem,2.8vw,2.8rem);
+  font-style:normal;font-weight:300;
+  color:#5A3C24;letter-spacing:.01em;
+  margin-top:.4rem;
+}
+.hero-meta{
+  margin-top:3rem;
+  display:flex;align-items:flex-start;gap:3rem;flex-wrap:wrap;
+  opacity:0;animation:rise .8s .45s var(--ease) forwards;
+}
+.hero-stat{border-top:1px solid rgba(110,136,152,.25);padding-top:1rem;min-width:100px}
+.hero-stat-n{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:2.2rem;color:#F0E6D6;line-height:1;
+}
+.hero-stat-l{
+  font-size:.6rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--steel2);margin-top:.3rem;
+}
+.hero-actions{
+  margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:rise .8s .55s var(--ease) forwards;
+}
+.btn-primary{
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.75rem 2rem;
+  background:#F0E6D6;color:#2C1808;
+  transition:background .2s,color .2s,transform .2s;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.btn-primary:hover{background:#E4D5C0;transform:translateY(-1px)}
+.btn-ghost{
+  font-size:.68rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+  padding:.75rem 2rem;
+  background:transparent;color:var(--steel2);
+  border:1px solid rgba(110,136,152,.35);
+  transition:border-color .2s,color .2s;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.btn-ghost:hover{border-color:var(--steel-light);color:#F0E6D6}
+
+/* Hero right visual */
+.hero-visual{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  align-items:center;padding-bottom:clamp(2rem,5vh,4rem);
+  position:relative;
+}
+.hero-knife-wrap{
+  position:relative;width:100%;max-width:320px;
+  opacity:0;animation:rise 1.2s .3s var(--ease) forwards;
+  filter:drop-shadow(0 60px 100px rgba(0,0,0,.8));
+}
+.hero-badge-wrap{
+  position:absolute;bottom:0;right:0;
+  background:rgba(78,99,110,.12);
+  border:1px solid rgba(110,136,152,.2);
+  padding:1rem 1.4rem;
+  backdrop-filter:blur(8px);
+  opacity:0;animation:rise .7s 1s var(--ease) forwards;
+}
+.hero-badge-tag{
+  font-size:.52rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--steel2);margin-bottom:.3rem;
+}
+.hero-badge-val{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.2rem;color:#F0E6D6;line-height:1.1;
+}
+.hero-badge-sub{font-size:.58rem;color:var(--steel2);margin-top:.2rem}
+
+/* Hero bottom scroll ticker */
+.hero-ticker{
+  border-top:1px solid rgba(78,99,110,.3);
+  padding:.75rem 0;
+  overflow:hidden;position:relative;z-index:2;
+}
+.ticker-track{
+  display:flex;animation:scroll-x 28s linear infinite;white-space:nowrap;
+}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:1.8rem;padding:0 1.8rem;
+  font-size:.6rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--steel);flex-shrink:0;
+}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--steel);flex-shrink:0}
+
+/* ── NUMBERS BAR ── */
+.numbers{
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+.numbers-inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--line);
+}
+.num-item{
+  padding:3.5rem 2rem;
+  border-right:1px solid var(--line);
+  position:relative;
+  transition:background .25s;
+}
+.num-item:hover{background:var(--paper2)}
+.num-n{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:clamp(2.8rem,4.5vw,4.5rem);color:var(--ink);
+  line-height:1;display:block;
+}
+.num-l{
+  font-size:.62rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mid);margin-top:.7rem;display:block;
+}
+.num-divider{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--steel);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.num-item:hover .num-divider{transform:scaleX(1)}
+
+/* ── ABOUT STRIP ── */
+.about-strip{
+  background:linear-gradient(120deg,#180E04 0%,#1C1208 60%,#1A1410 100%);
+  padding:clamp(5rem,10vh,8rem) clamp(1.5rem,4vw,4rem);
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:clamp(3rem,6vw,8rem);
+  align-items:center;
+  max-width:none;
+  border-top:1px solid rgba(180,130,80,.08);
+}
+.about-label{
+  font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--steel);writing-mode:vertical-rl;transform:rotate(180deg);
+  align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
+}
+.about-content{}
+.about-h2{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:clamp(2.5rem,5vw,5rem);
+  color:#F0E6D6;line-height:1.02;letter-spacing:-.02em;
+  margin-bottom:2rem;
+}
+.about-h2 em{font-style:normal;color:#444}
+.about-body{
+  font-size:1.05rem;font-weight:300;line-height:1.85;
+  color:#6B5040;max-width:680px;
+}
+.about-body p+p{margin-top:1.2rem}
+.about-body strong{color:#888;font-weight:500}
+.about-sig{
+  margin-top:3rem;
+  display:flex;align-items:center;gap:1.2rem;
+  border-top:1px solid #2C1C0A;padding-top:2rem;
+}
+.about-sig-av{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--steel);border:1px solid var(--steel2);
+  display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  font-size:1.1rem;color:#F0E6D6;flex-shrink:0;
+}
+.about-sig-name{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+  font-size:1rem;color:#F0E6D6;
+}
+.about-sig-sub{font-size:.65rem;color:#5A3C24;letter-spacing:.06em;text-transform:uppercase;margin-top:.25rem}
+
+/* ── SECTION HEADER ── */
+.sec-header{
+  padding:clamp(4rem,8vh,6rem) clamp(1.5rem,4vw,4rem) 0;
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:2rem;flex-wrap:wrap;
+}
+.sec-tag{
+  font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mid);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;
+}
+.sec-tag::before{content:'';width:16px;height:1px;background:var(--mid)}
+.sec-h2{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:800;
+  font-size:clamp(2.5rem,5vw,5rem);
+  color:var(--ink);line-height:1.0;letter-spacing:-.02em;
+}
+.sec-h2 em{font-style:normal;font-weight:400;color:var(--mid)}
+.sec-link{
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mid);border-bottom:1px solid var(--line2);padding-bottom:.2rem;
+  white-space:nowrap;transition:color .2s,border-color .2s;
+}
+.sec-link:hover{color:var(--ink);border-color:var(--ink)}
+
+/* Dark versions */
+.dk .sec-tag{color:var(--steel2)}
+.dk .sec-tag::before{background:var(--steel)}
+.dk .sec-h2{color:#F0E6D6}
+.dk .sec-h2 em{color:#444}
+.dk .sec-link{color:#5A3C24;border-color:#3D2410}
+.dk .sec-link:hover{color:#F0E6D6;border-color:#555}
+
+/* ── PRODUCTS ── */
+.products-section{
+  background:var(--paper);
+  padding-bottom:clamp(5rem,10vh,8rem);
+}
+.prod-grid{
+  max-width:1280px;margin:0 auto;
+  padding:clamp(3rem,5vh,4rem) clamp(1.5rem,4vw,4rem) 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-top:none;
+}
+.prod{
+  background:var(--paper);
+  display:flex;flex-direction:column;
+  transition:background .3s;
+  position:relative;overflow:hidden;
+}
+.prod:hover{background:var(--paper2)}
+.prod-img{
+  aspect-ratio:3/4;
+  background:var(--paper3);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
 .prod-img-art{
   width:60%;opacity:.12;
   transition:opacity .5s,transform .6s var(--ease);
