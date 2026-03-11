@@ -56,7 +56,6 @@ body.dark-zone.hov #cur-ring{border-color:rgba(240,230,214,.6)}
   --line2:rgba(44,24,8,.22);
   --black:#180E04;
   --ease:cubic-bezier(.22,1,.36,1);
-  /* ── STEEL ── */
   --steel:#4E636E;
   --steel2:#6E8898;
   --steel-light:#9AB4C0;
@@ -183,7 +182,6 @@ nav.scrolled .nav-burger{opacity:1}
     radial-gradient(ellipse at 20% 75%,rgba(180,120,60,.05) 0%,transparent 45%),
     radial-gradient(ellipse at 50% 95%,rgba(78,99,110,.04) 0%,transparent 35%);
 }
-/* subtle cross-hatch texture */
 .hero-bg::after{
   content:'';position:absolute;inset:0;
   background-image:
@@ -260,38 +258,30 @@ nav.scrolled .nav-burger{opacity:1}
 
 /* Hero right visual */
 .hero-visual{
-  position:relative; /* para posicionar el badge */
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:center;
-  padding-bottom:clamp(2rem,5vh,4rem);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  align-items:center;padding-bottom:clamp(2rem,5vh,4rem);
+  position:relative;
 }
 .hero-knife-wrap{
   position:relative;
   width:100%;
-  max-width: min(500px, 40vw); /* aumentado para que la imagen sea más grande */
-  opacity:0;
-  animation:rise 1.2s .3s var(--ease) forwards;
+  /* Eliminamos el max-width fijo para que la imagen pueda ocupar más espacio */
+  /* max-width:320px; */ /* Comentado o eliminado */
   filter:drop-shadow(0 60px 100px rgba(0,0,0,.8));
 }
-.hero-knife-wrap img {
+.hero-knife-wrap img{
   width:100%;
   height:auto;
   display:block;
+  object-fit:contain; /* Para que no se deforme */
 }
 .hero-badge-wrap{
-  position:absolute;
-  bottom:0;
-  right:0;
-  background:rgba(20,10,5,.85);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(110,136,152,.3);
+  position:absolute;bottom:0;right:0;
+  background:rgba(78,99,110,.12);
+  border:1px solid rgba(110,136,152,.2);
   padding:1rem 1.4rem;
-  opacity:0;
-  animation:rise .7s 1s var(--ease) forwards;
-  z-index:10;
-  border-radius:4px;
+  backdrop-filter:blur(8px);
+  opacity:0;animation:rise .7s 1s var(--ease) forwards;
 }
 .hero-badge-tag{
   font-size:.52rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
@@ -950,7 +940,6 @@ footer{
   .cta-contacts{gap:2rem}
   .hero-h1{font-size:clamp(3.2rem,13vw,5rem)}
   .mat-item{grid-template-columns:1fr}
-  .hero-knife-wrap{max-width:80%;} /* en móvil, más pequeño */
 }
 </style>
 </head>
@@ -1028,7 +1017,7 @@ footer{
     </div>
     <div class="hero-visual">
       <div class="hero-knife-wrap" id="hero-knife-wrap">
-        <!-- SVG por defecto (se inyectará dinámicamente si no hay imagen) -->
+        <!-- Aquí se inyectará la imagen o el SVG por defecto -->
         <svg viewBox="0 0 340 620" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Blade -->
           <path d="M170 42 L318 228 Q332 255 318 272 L170 262 Z" fill="url(#hblade)"/>
@@ -1537,9 +1526,7 @@ footer{
       </div>
       <div class="foot-col">
         <h5>Productos</h5>
-        <ul id="footer-products">
-          <!-- se llenará dinámicamente con los primeros 6 productos -->
-        </ul>
+        <ul id="footer-products"></ul>
       </div>
       <div class="foot-col">
         <h5>Información</h5>
@@ -1644,16 +1631,13 @@ function renderProducts(products) {
     // Determinar texto del badge
     let badgeText = p.badgeText || '';
     if (!badgeText) {
-      // Si no hay badgeText, usar una traducción del badge
       const badgeMap = { avail: 'Disponible', custom: 'A pedido', intl: 'Internacional', unavail: 'No disponible' };
       badgeText = badgeMap[p.badge] || '';
     }
 
-    // Especificaciones
     const specs = p.specs || [];
     const specsHtml = specs.map(s => `<span class="prod-spec">${s}</span>`).join('');
 
-    // Imagen: si tiene image, mostrar <img>, sino SVG placeholder
     const imgHtml = p.image 
       ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
       : `<svg class="prod-img-art" viewBox="0 0 220 400" fill="none">
@@ -1663,11 +1647,9 @@ function renderProducts(products) {
           <circle cx="110" cy="205" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="245" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="285" r="3" fill="currentColor" opacity=".9"/>
         </svg>`;
 
-    // Precio y nota
     const priceMain = p.price || 'Consultar';
     const priceNote = p.priceNote ? `<small>${p.priceNote}</small>` : '';
 
-    // Link de WhatsApp para consulta
     const waNumber = document.getElementById('hero-wa')?.href?.match(/wa\.me\/(\d+)/)?.[1] || '5493843458340';
     const consultLink = `https://wa.me/${waNumber}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
 
@@ -1699,12 +1681,8 @@ function renderProducts(products) {
 
   grid.innerHTML = html;
   
-  // Agregar clase reveal a los nuevos productos (ya tienen clase rv)
-  // El observer ya los vigila, pero hay que re-observarlos? Como se agregaron después, debemos volver a observar.
-  // Simplemente volvemos a ejecutar la observación para los nuevos elementos.
   const newRv = grid.querySelectorAll('.rv');
   newRv.forEach(el => obs.observe(el));
-  // También forzamos checkVis para los que ya están en pantalla
   setTimeout(checkVis, 100);
 }
 
@@ -1713,11 +1691,51 @@ function renderHeroImage(heroImage) {
   const container = document.getElementById('hero-knife-wrap');
   if (!container) return;
   if (heroImage && heroImage.trim() !== '') {
-    // Si hay imagen, reemplazamos el contenido del contenedor con un <img>
-    container.innerHTML = `<img src="${heroImage}" alt="Hero" loading="lazy">`;
+    container.innerHTML = `<img src="${heroImage}" alt="Hero" loading="lazy" style="width:100%; height:auto; object-fit:contain;">`;
   } else {
-    // Si no hay imagen, aseguramos que esté el SVG por defecto (ya está en el HTML)
-    // pero por si acaso lo dejamos como está (no hacemos nada)
+    // SVG por defecto (el mismo que estaba antes)
+    container.innerHTML = `<svg viewBox="0 0 340 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Blade -->
+      <path d="M170 42 L318 228 Q332 255 318 272 L170 262 Z" fill="url(#hblade)"/>
+      <path d="M170 42 L318 228 Q332 255 318 272" stroke="rgba(247,244,239,.2)" stroke-width="1" fill="none"/>
+      <!-- Blade fuller line -->
+      <path d="M174 58 L304 234" stroke="rgba(247,244,239,.07)" stroke-width="1.5" fill="none"/>
+      <!-- Bolster -->
+      <rect x="157" y="255" width="26" height="13" rx="1" fill="url(#hbolster)"/>
+      <!-- Handle -->
+      <path d="M160 268 Q158 348 163 448 L179 448 Q184 348 182 268 Z" fill="url(#hhandle)"/>
+      <!-- Wood grain -->
+      <path d="M164 278 Q165 358 165 438" stroke="rgba(240,215,170,.05)" stroke-width="1.8" fill="none"/>
+      <path d="M172 278 Q172 358 172 438" stroke="rgba(247,244,239,.03)" stroke-width="1.2" fill="none"/>
+      <!-- Rivets -->
+      <circle cx="171" cy="308" r="4.5" fill="url(#hrivet)"/>
+      <circle cx="171" cy="365" r="4.5" fill="url(#hrivet)"/>
+      <circle cx="171" cy="422" r="4.5" fill="url(#hrivet)"/>
+      <!-- GL -->
+      <text x="52" y="155" font-family="Fraunces, serif" font-size="82" fill="rgba(247,244,239,.03)" font-style="italic" font-weight="900">GL</text>
+      <defs>
+        <linearGradient id="hblade" x1="170" y1="42" x2="332" y2="272" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(180,180,180,.08)"/>
+          <stop offset="45%" stop-color="rgba(220,220,220,.5)"/>
+          <stop offset="100%" stop-color="rgba(160,160,160,.65)"/>
+        </linearGradient>
+        <linearGradient id="hbolster" x1="157" y1="261" x2="183" y2="268" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#2A2A2A"/>
+          <stop offset="50%" stop-color="#AAAAAA"/>
+          <stop offset="100%" stop-color="#2A2A2A"/>
+        </linearGradient>
+        <linearGradient id="hhandle" x1="160" y1="268" x2="184" y2="268" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#121212"/>
+          <stop offset="30%" stop-color="#2A2A2A"/>
+          <stop offset="65%" stop-color="#1A1A1A"/>
+          <stop offset="100%" stop-color="#180E04"/>
+        </linearGradient>
+        <radialGradient id="hrivet" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#CCCCCC"/>
+          <stop offset="100%" stop-color="#555555"/>
+        </radialGradient>
+      </defs>
+    </svg>`;
   }
 }
 
@@ -1737,11 +1755,9 @@ function renderHeroImage(heroImage) {
         { id:'6', name:'Set de Mesa', category:'Mesa & Regalo', description:'6 cuchillos de mesa forjados a mano. Mango unificado, presentación en caja de madera. El regalo que no se olvida.', specs:['Acero inox.','Caja madera','Set completo'], badge:'custom', badgeText:'A pedido', price:'Consultar', priceNote:'Encargo · 3–5 semanas', active:true }
       ];
       renderProducts(fallbackProducts);
-      // No hay imagen de hero en respaldo, así que no hacemos nada (se queda el SVG)
       return;
     }
     const data = await res.json();
-    // data tiene { settings, products }
     const products = data.products || [];
     renderProducts(products);
 
@@ -1761,25 +1777,31 @@ function renderHeroImage(heroImage) {
     if (s.heroStat1Label) {
       document.getElementById('hero-stat1-label').textContent = s.heroStat1Label;
     }
-    
+    if (s.heroStat3) {
+      document.getElementById('hero-stat3').textContent = s.heroStat3;
+    }
+    if (s.heroStat3Label) {
+      document.getElementById('hero-stat3-label').textContent = s.heroStat3Label;
+    }
+
     // Imagen del hero
     if (s.heroImage) {
       renderHeroImage(s.heroImage);
+    } else {
+      renderHeroImage(null); // muestra el SVG
     }
     
     // Números de contacto
     if (s.whatsapp) {
       const waNumber = s.whatsapp.replace(/\D/g,'');
-      // Actualizar todos los enlaces de WhatsApp
       document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
         let base = a.href.split('?')[0];
         let query = a.href.split('?')[1] || '';
         base = base.replace(/wa\.me\/\d+/, 'wa.me/' + waNumber);
         a.href = base + (query ? '?' + query : '');
       });
-      // También actualizar textos de teléfono
       document.querySelectorAll('[id$="wa-number"]').forEach(el => {
-        el.textContent = waNumber.replace(/(\d{4})(\d{3})(\d{3})/, '$1-$2$3'); // formatear
+        el.textContent = waNumber.replace(/(\d{4})(\d{3})(\d{3})/, '$1-$2$3');
       });
     }
     if (s.instagram) {
@@ -1809,8 +1831,7 @@ function renderHeroImage(heroImage) {
 
   } catch(e){
     console.warn('Error cargando products.json', e);
-    // Datos de respaldo
-    const fallbackProducts = [ /* mismos que arriba */ ];
+    const fallbackProducts = [ /* ... */ ];
     renderProducts(fallbackProducts);
   }
 })();
