@@ -1,443 +1,519 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GL Admin · Panel de Control</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panel Admin · GL Cuchillos Artesanales</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0D0B08;
-  --bg2:#131009;
-  --bg3:#1A1510;
-  --bg4:#221A12;
-  --amber:#C8832A;
-  --gold:#D4A843;
-  --green:#2ECC71;
-  --red:#E74C3C;
-  --blue:#3498DB;
-  --yellow:#F1C40F;
-  --cream:#F0E6D0;
-  --muted:#7A6A54;
-  --border:rgba(212,168,67,.1);
-  --border2:rgba(212,168,67,.2);
-  --input-bg:rgba(255,255,255,.04);
-  --ease:cubic-bezier(.22,1,.36,1);
+  --bg:#f7f5f1;
+  --surface:#ffffff;
+  --border:#e8e3da;
+  --text:#1a1814;
+  --muted:#8a8278;
+  --accent:#c8832a;
+  --acdk:#a06820;
+  --green:#2d8a5e;
+  --red:#c0392b;
+  --blue:#3d6bce;
+  --gold:#d4a843;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'DM Sans',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+  --radius:8px;
 }
-html,body{height:100%;font-family:'Poppins',sans-serif;font-weight:300;background:var(--bg);color:var(--cream);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-button{font-family:'Poppins',sans-serif;cursor:pointer}
-input,textarea,select{font-family:'Poppins',sans-serif}
-img{display:block;max-width:100%}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block}
+button{font-family:var(--sans);cursor:pointer}
+input,textarea,select{font-family:var(--sans)}
 
-/* ── SCROLLBAR ────────────────────────────── */
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-
-/* ── LOGIN ────────────────────────────────── */
+/* ── LOGIN ─────────────────────────────────── */
 #login-screen{
-  position:fixed;inset:0;z-index:1000;
+  position:fixed;inset:0;z-index:9000;
   background:var(--bg);
   display:flex;align-items:center;justify-content:center;
 }
 #login-screen.hidden{display:none}
 .login-card{
-  width:100%;max-width:400px;padding:2.5rem;
-  background:var(--bg2);border:1px solid var(--border);
+  background:var(--surface);border-radius:12px;border:1px solid var(--border);
+  padding:44px 38px;width:100%;max-width:380px;
+  box-shadow:0 8px 40px rgba(0,0,0,.09);
   text-align:center;
 }
-.login-logo{
-  width:56px;height:56px;border-radius:50%;
-  border:1px solid var(--border2);
-  display:grid;place-items:center;margin:0 auto 1.5rem;
-  font-size:.85rem;font-weight:700;color:var(--gold);letter-spacing:.05em;
+.login-monogram{
+  font-family:var(--serif);font-size:48px;font-weight:500;
+  color:var(--accent);line-height:1;margin-bottom:2px;
 }
-.login-card h2{font-size:1.3rem;font-weight:600;margin-bottom:.3rem}
-.login-card p{font-size:.78rem;color:var(--muted);margin-bottom:2rem}
-.login-card input{
-  width:100%;padding:.75rem 1rem;
-  background:var(--input-bg);border:1px solid var(--border);
-  color:var(--cream);font-size:.88rem;font-weight:300;
-  outline:none;margin-bottom:1rem;
+.login-sub{
+  font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:28px;
+}
+.login-card h2{font-family:var(--serif);font-size:26px;font-weight:500;margin-bottom:6px}
+.login-card p{font-size:13px;color:var(--muted);margin-bottom:22px}
+.login-input{
+  width:100%;padding:12px 14px;
+  background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);
+  font-size:14px;color:var(--text);outline:none;margin-bottom:12px;
   transition:border-color .2s;
 }
-.login-card input:focus{border-color:var(--amber)}
+.login-input:focus{border-color:var(--accent);background:var(--surface)}
 .btn-login{
-  width:100%;padding:.8rem;
-  background:var(--amber);color:var(--bg);
-  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  border:none;
-  transition:background .2s;
+  width:100%;padding:12px;
+  background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-size:13px;font-weight:600;letter-spacing:.05em;
+  transition:background .2s,transform .15s;
 }
-.btn-login:hover{background:var(--gold)}
-.login-error{color:var(--red);font-size:.75rem;margin-top:.75rem}
+.btn-login:hover{background:var(--acdk);transform:translateY(-1px)}
+.login-err{color:var(--red);font-size:12px;margin-top:8px;min-height:18px}
 
-/* ── LAYOUT ───────────────────────────────── */
-#app{display:flex;min-height:100vh}
-#app.hidden{display:none}
-
-/* ── SIDEBAR ──────────────────────────────── */
-.sidebar{
-  width:240px;flex-shrink:0;
-  background:var(--bg2);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  position:fixed;left:0;top:0;bottom:0;z-index:100;
-  transition:transform .3s var(--ease);
-}
-.sidebar-logo{
-  padding:1.5rem 1.4rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:.9rem;
-}
-.sidebar-logo-mark{
-  width:36px;height:36px;border-radius:50%;
-  border:1px solid var(--border2);
-  display:grid;place-items:center;
-  font-size:.68rem;font-weight:700;color:var(--gold);flex-shrink:0;
-}
-.sidebar-logo-text{font-size:.85rem;font-weight:600;line-height:1.2}
-.sidebar-logo-text small{display:block;font-size:.6rem;font-weight:300;color:var(--muted);margin-top:1px}
-.sidebar-nav{flex:1;padding:1rem 0;overflow-y:auto}
-.nav-section{
-  font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);padding:.6rem 1.4rem .4rem;
-  margin-top:.5rem;
-}
-.nav-item{
-  display:flex;align-items:center;gap:.75rem;
-  padding:.7rem 1.4rem;
-  font-size:.78rem;font-weight:400;color:var(--muted);
-  cursor:pointer;
-  transition:color .2s,background .2s;
-  border-left:2px solid transparent;
-  position:relative;
-}
-.nav-item:hover{color:var(--cream);background:rgba(255,255,255,.03)}
-.nav-item.active{color:var(--cream);background:rgba(212,168,67,.07);border-left-color:var(--amber)}
-.nav-item svg{flex-shrink:0;opacity:.7}
-.nav-badge{
-  margin-left:auto;
-  background:var(--amber);color:var(--bg);
-  font-size:.55rem;font-weight:700;
-  padding:.15rem .45rem;border-radius:9px;
-}
-.sidebar-footer{
-  padding:1rem 1.4rem;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.sidebar-footer-info{font-size:.7rem;color:var(--muted)}
-.sidebar-footer-info strong{display:block;color:var(--cream);font-weight:500;font-size:.75rem}
-.btn-logout{
-  background:none;border:1px solid var(--border);
-  padding:.4rem .7rem;
-  font-size:.65rem;color:var(--muted);
-  transition:color .2s,border-color .2s;
-}
-.btn-logout:hover{color:var(--red);border-color:var(--red)}
-
-/* ── MAIN ─────────────────────────────────── */
-.main{
-  margin-left:240px;flex:1;
-  display:flex;flex-direction:column;min-height:100vh;
-}
+/* ── TOPBAR ──────────────────────────────── */
 .topbar{
-  position:sticky;top:0;z-index:50;
-  background:rgba(13,11,8,.9);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0 2rem;height:58px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;
+  padding:0 32px;height:68px;
 }
-.topbar-title{font-size:1rem;font-weight:600}
-.topbar-actions{display:flex;align-items:center;gap:.75rem}
-.page-content{padding:2rem;flex:1}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-logo{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--text)}
+.topbar-logo span{color:var(--accent)}
+.topbar-tag{
+  font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);background:rgba(200,131,42,.1);padding:3px 10px;border-radius:20px;
+}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-stats{display:flex;gap:18px;margin-right:14px}
+.ts-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.ts-item i{color:var(--accent);font-size:13px}
+.ts-item strong{color:var(--text);font-weight:600}
 
-/* ── VIEWS ────────────────────────────────── */
-.view{display:none}
-.view.active{display:block}
+/* ── BUTTONS ─────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:500;
+  border-radius:var(--radius);transition:all .2s;white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--acdk);transform:translateY(-1px);box-shadow:0 4px 12px rgba(200,131,42,.3)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--bg)}
+.btn-danger{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2)}
+.btn-danger:hover{background:rgba(192,57,43,.15)}
+.btn-sm{padding:7px 14px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 
-/* ── CARDS / STATS ────────────────────────── */
-.stats-grid{
+/* ── PAGE ────────────────────────────────── */
+.page{max-width:1240px;margin:0 auto;padding:30px 24px}
+
+/* ── SAVE BANNER ─────────────────────────── */
+.save-banner{
+  background:linear-gradient(135deg,#1a1814,#2d2418);
+  color:#fff;border-radius:var(--radius);padding:16px 22px;
+  margin-bottom:26px;display:none;
+  align-items:center;justify-content:space-between;gap:16px;
+  box-shadow:var(--shadow);
+}
+.save-banner.show{display:flex}
+.save-banner strong{color:var(--gold)}
+.save-banner small{color:rgba(255,255,255,.45);font-size:11px;display:block;margin-top:2px}
+
+/* ── STATS PANEL ─────────────────────────── */
+.stats-panel{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1rem;margin-bottom:2rem;
+  gap:12px;margin-bottom:24px;
 }
 .stat-card{
-  background:var(--bg2);border:1px solid var(--border);
-  padding:1.4rem 1.6rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+  display:flex;align-items:center;gap:12px;
+  transition:box-shadow .2s;
+}
+.stat-card:hover{box-shadow:var(--shadow)}
+.stat-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(200,131,42,.1);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.stat-icon i{color:var(--accent);font-size:18px}
+.stat-content h3{font-size:26px;font-weight:600;font-family:var(--serif);line-height:1.1}
+.stat-content p{font-size:12px;color:var(--muted)}
+
+/* ── PAGE NAV ────────────────────────────── */
+.page-nav{
+  display:flex;gap:2px;margin-bottom:24px;
+  border-bottom:2px solid var(--border);padding-bottom:0;
+}
+.page-nav-btn{
+  padding:10px 20px;font-size:13px;font-weight:600;
+  border:none;background:none;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  font-family:var(--sans);transition:all .2s;
+  display:flex;align-items:center;gap:7px;border-radius:6px 6px 0 0;
+}
+.page-nav-btn:hover{color:var(--text);background:rgba(0,0,0,.03)}
+.page-nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.page-section{display:none}
+.page-section.active{display:block}
+
+/* ── TOOLBAR ─────────────────────────────── */
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.search-box{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:9px 14px;flex:1;min-width:180px;max-width:280px;transition:border-color .2s;
+}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box i{color:var(--muted);font-size:13px}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-family:var(--sans);font-size:14px;width:100%}
+.search-box input::placeholder{color:var(--muted)}
+.cat-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.cat-tab{
+  padding:7px 15px;border-radius:20px;font-size:12px;font-weight:500;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  cursor:pointer;transition:all .2s;
+}
+.cat-tab:hover{border-color:var(--accent);color:var(--accent)}
+.cat-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sort-wrap{display:flex;gap:6px;margin-left:auto;align-items:center}
+.sort-label{font-size:12px;color:var(--muted)}
+.sort-btn{
+  padding:6px 11px;border:1px solid var(--border);border-radius:6px;
+  background:var(--surface);font-size:11px;font-weight:500;cursor:pointer;
+  font-family:var(--sans);color:var(--muted);transition:all .2s;
+}
+.sort-btn.active,.sort-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── PRODUCT GRID ────────────────────────── */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+
+/* ── PRODUCT CARD ────────────────────────── */
+.prod-card{
+  background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);
+  overflow:hidden;transition:all .25s var(--ease);position:relative;
+}
+.prod-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.prod-card.inactive{opacity:.55}
+.prod-card.inactive .prod-img{filter:grayscale(.65)}
+
+.prod-img{
+  aspect-ratio:3/4;overflow:hidden;background:#f2ede6;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.prod-card:hover .prod-img img{transform:scale(1.04)}
+.no-img-ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;color:rgba(138,130,120,.3);width:100%;height:100%;
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+}
+.no-img-ph svg{opacity:.2;width:48px}
+
+.cat-badge{
+  position:absolute;top:10px;left:10px;z-index:2;
+  font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;
+}
+.b-avail{background:var(--accent);color:#fff}
+.b-custom{background:rgba(200,131,42,.15);color:var(--accent);border:1px solid rgba(200,131,42,.4)}
+.b-intl{background:var(--blue);color:#fff}
+.b-unavail{background:var(--red);color:#fff}
+
+.promo-badge{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:var(--red);color:#fff;font-size:9px;font-weight:700;
+  padding:3px 8px;border-radius:4px;
+}
+.featured-star{
+  position:absolute;bottom:10px;right:10px;z-index:2;
+  background:rgba(212,168,67,.9);color:#fff;
+  width:24px;height:24px;border-radius:50%;
+  display:grid;place-items:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+
+.prod-overlay{
+  position:absolute;inset:0;background:rgba(26,24,20,.45);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  opacity:0;transition:opacity .25s;
+}
+.prod-card:hover .prod-overlay{opacity:1}
+.ov-btn{
+  background:#fff;color:var(--text);border:none;cursor:pointer;
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  font-size:14px;transition:all .2s;
+}
+.ov-btn:hover{background:var(--accent);color:#fff;transform:scale(1.1)}
+.ov-btn.del:hover{background:var(--red)}
+.ov-btn.dup:hover{background:var(--blue)}
+.ov-btn.promo-btn:hover{background:var(--green)}
+
+.prod-info{padding:14px}
+.prod-name{font-weight:500;font-size:14px;line-height:1.3;margin-bottom:4px}
+.prod-cat-label{font-size:11px;color:var(--muted);margin-bottom:6px}
+.prod-price-row{display:flex;align-items:baseline;gap:6px}
+.price-main{font-family:var(--serif);font-size:19px;color:var(--accent);font-weight:500}
+
+.prod-footer{
+  padding:10px 14px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.prod-footer-label{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+
+/* TOGGLE */
+.toggle{position:relative;width:40px;height:22px;cursor:pointer;display:block;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.t-track{position:absolute;inset:0;background:#ddd;border-radius:11px;transition:background .25s}
+.toggle input:checked~.t-track{background:var(--accent)}
+.t-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .25s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle input:checked~.t-thumb{transform:translateX(18px)}
+
+/* ADD CARD */
+.add-card{
+  background:var(--surface);border-radius:var(--radius);border:2px dashed var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;aspect-ratio:3/4;cursor:pointer;color:var(--muted);
+  transition:all .25s;min-height:240px;
+}
+.add-card:hover{border-color:var(--accent);color:var(--accent);background:rgba(200,131,42,.03)}
+.add-card i{font-size:28px}
+.add-card span{font-size:13px;font-weight:500}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px 0;color:var(--muted);grid-column:1/-1}
+.empty i{font-size:40px;opacity:.2;margin-bottom:14px;display:block}
+
+/* ── MODAL ───────────────────────────────── */
+.backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.backdrop.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--surface);border-radius:12px;width:100%;max-width:720px;
+  max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);
+  transform:scale(.96) translateY(10px);transition:transform .3s var(--ease);
+}
+.backdrop.open .modal{transform:scale(1) translateY(0)}
+.modal-head{
+  padding:24px 26px 0;display:flex;align-items:flex-start;justify-content:space-between;
+  position:sticky;top:0;background:var(--surface);z-index:10;
+  border-bottom:1px solid var(--border);padding-bottom:16px;
+}
+.modal-title{font-family:var(--serif);font-size:24px;font-weight:500}
+.modal-close{
+  background:var(--bg);border:1px solid var(--border);color:var(--muted);
+  width:32px;height:32px;border-radius:50%;cursor:pointer;display:grid;
+  place-items:center;font-size:16px;transition:all .2s;flex-shrink:0;
+}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{padding:22px 26px}
+.modal-foot{
+  padding:16px 26px 24px;display:flex;justify-content:flex-end;gap:10px;
+  border-top:1px solid var(--border);
+  position:sticky;bottom:0;background:var(--surface);z-index:10;
+}
+
+/* MODAL TABS */
+.modal-tabs{
+  display:flex;gap:0;padding:0 26px;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  position:sticky;top:73px;z-index:9;
+}
+.modal-tab{
+  padding:10px 16px;font-size:12px;font-weight:600;
+  border:none;background:none;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  font-family:var(--sans);transition:all .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.modal-tab:hover{color:var(--text)}
+.modal-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── FORM ────────────────────────────────── */
+.form-row{margin-bottom:18px}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.09em}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);
+  color:var(--text);font-family:var(--sans);font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;
+}
+.form-textarea{min-height:90px;resize:vertical}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);background:var(--surface)}
+.form-input::placeholder{color:var(--muted)}
+select.form-select option{background:var(--surface)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-hint{font-size:11px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:5px}
+
+/* SPEC CHIPS */
+.specs-wrap{
+  display:flex;flex-wrap:wrap;gap:6px;padding:8px;
+  border:1.5px solid var(--border);border-radius:var(--radius);
+  background:var(--bg);min-height:46px;cursor:text;
   transition:border-color .2s;
 }
-.stat-card:hover{border-color:var(--border2)}
-.stat-label{font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.stat-value{font-size:2rem;font-weight:700;color:var(--cream);line-height:1}
-.stat-sub{font-size:.7rem;color:var(--muted);margin-top:.3rem}
-.stat-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.4rem}
+.specs-wrap:focus-within{border-color:var(--accent);background:var(--surface)}
+.spec-chip{
+  display:flex;align-items:center;gap:5px;padding:4px 10px;
+  background:rgba(200,131,42,.12);color:var(--accent);border-radius:20px;
+  font-size:12px;font-weight:500;
+}
+.spec-chip button{background:none;border:none;cursor:pointer;color:inherit;font-size:11px;padding:0;line-height:1}
+.spec-input-inner{
+  border:none;outline:none;background:none;
+  font-family:var(--sans);font-size:13px;color:var(--text);
+  min-width:120px;flex:1;
+}
+.spec-input-inner::placeholder{color:var(--muted)}
 
-/* ── SECTION HEADER ───────────────────────── */
-.section-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;
-}
-.section-header h2{font-size:1.1rem;font-weight:600}
-.section-header p{font-size:.78rem;color:var(--muted)}
-
-/* ── BUTTONS ──────────────────────────────── */
-.btn{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.6rem 1.2rem;
-  font-size:.72rem;font-weight:500;letter-spacing:.06em;
-  border:none;transition:all .2s;cursor:pointer;
-  font-family:'Poppins',sans-serif;
-}
-.btn-primary{background:var(--amber);color:var(--bg)}
-.btn-primary:hover{background:var(--gold)}
-.btn-outline-btn{background:transparent;color:var(--cream);border:1px solid var(--border2)}
-.btn-outline-btn:hover{border-color:var(--amber);color:var(--amber)}
-.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(231,76,60,.3)}
-.btn-danger:hover{background:rgba(231,76,60,.1)}
-.btn-success{background:var(--green);color:#fff}
-.btn-success:hover{background:#27AE60}
-.btn-sm{padding:.4rem .8rem;font-size:.66rem}
-.btn-icon{
-  width:32px;height:32px;padding:0;
-  display:grid;place-items:center;
-  background:transparent;border:1px solid var(--border);
-  color:var(--muted);transition:all .2s;
-}
-.btn-icon:hover{border-color:var(--amber);color:var(--amber)}
-
-/* ── PRODUCTS TABLE ───────────────────────── */
-.prod-table{width:100%;border-collapse:collapse}
-.prod-table th{
-  padding:.7rem 1rem;
-  font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--muted);text-align:left;
-  border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
-.prod-table td{
-  padding:.9rem 1rem;
-  font-size:.78rem;color:var(--cream);
-  border-bottom:1px solid rgba(212,168,67,.05);
-  vertical-align:middle;
-}
-.prod-table tr:hover td{background:rgba(255,255,255,.02)}
-.prod-thumb{
-  width:42px;height:42px;
-  background:var(--bg3);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;flex-shrink:0;
-}
-.prod-thumb img{width:100%;height:100%;object-fit:cover}
-.prod-thumb-placeholder{
-  width:42px;height:42px;
-  background:var(--bg3);border:1px solid var(--border);
-  display:grid;place-items:center;
-  color:var(--muted);font-size:.6rem;font-weight:500;
-  flex-shrink:0;
-}
-.prod-name-cell{display:flex;align-items:center;gap:.9rem}
-.prod-name-text strong{display:block;font-weight:500;font-size:.82rem}
-.prod-name-text span{font-size:.68rem;color:var(--muted)}
-.badge{
-  display:inline-block;
-  font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  padding:.22rem .65rem;
-}
-.badge-avail{background:rgba(46,204,113,.15);color:var(--green);border:1px solid rgba(46,204,113,.3)}
-.badge-custom{background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3)}
-.badge-intl{background:rgba(52,152,219,.12);color:var(--blue);border:1px solid rgba(52,152,219,.3)}
-.badge-unavail{background:rgba(231,76,60,.1);color:var(--red);border:1px solid rgba(231,76,60,.25)}
-.badge-promo{background:rgba(241,196,15,.1);color:var(--yellow);border:1px solid rgba(241,196,15,.25)}
-.toggle-wrap{display:flex;align-items:center;gap:.5rem}
-.toggle{
-  position:relative;display:inline-block;
-  width:36px;height:20px;cursor:pointer;
-}
-.toggle input{display:none}
-.toggle-slider{
-  position:absolute;inset:0;
-  background:rgba(255,255,255,.1);border:1px solid var(--border2);
-  border-radius:20px;
-  transition:.25s;
-}
-.toggle-slider::before{
-  content:'';position:absolute;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--muted);
-  left:2px;top:2px;
-  transition:.25s;
-}
-.toggle input:checked + .toggle-slider{background:rgba(200,131,42,.2);border-color:var(--amber)}
-.toggle input:checked + .toggle-slider::before{transform:translateX(16px);background:var(--amber)}
-.actions-cell{display:flex;gap:.4rem;align-items:center}
-
-/* ── MODAL ────────────────────────────────── */
-.modal-overlay{
-  position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
-  display:flex;align-items:center;justify-content:center;
-  padding:1rem;
-  opacity:0;pointer-events:none;transition:opacity .25s;
-}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{
-  background:var(--bg2);border:1px solid var(--border);
-  width:100%;max-width:680px;
-  max-height:90vh;overflow-y:auto;
-  transform:translateY(16px);transition:transform .3s var(--ease);
-}
-.modal-overlay.open .modal{transform:none}
-.modal-head{
-  padding:1.4rem 1.8rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:var(--bg2);z-index:2;
-}
-.modal-head h3{font-size:1rem;font-weight:600}
-.modal-close{
-  background:none;border:none;
-  color:var(--muted);font-size:1.4rem;line-height:1;
-  transition:color .2s;
-}
-.modal-close:hover{color:var(--cream)}
-.modal-body{padding:1.8rem}
-.modal-footer{
-  padding:1.2rem 1.8rem;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:flex-end;gap:.75rem;
-  position:sticky;bottom:0;background:var(--bg2);
-}
-
-/* ── FORM ─────────────────────────────────── */
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.form-row.full{grid-template-columns:1fr}
-.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
-.form-group label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.form-control{
-  width:100%;padding:.7rem .9rem;
-  background:var(--input-bg);border:1px solid var(--border);
-  color:var(--cream);font-size:.82rem;font-weight:300;
-  outline:none;transition:border-color .2s;
-}
-.form-control:focus{border-color:var(--amber)}
-.form-control::placeholder{color:var(--muted);opacity:.6}
-textarea.form-control{resize:vertical;min-height:90px}
-select.form-control option{background:var(--bg3);color:var(--cream)}
-.form-hint{font-size:.66rem;color:var(--muted);margin-top:.2rem}
-.specs-list{display:flex;flex-direction:column;gap:.5rem}
-.spec-row{display:flex;gap:.5rem;align-items:center}
-.spec-row input{flex:1}
-.btn-spec-add{
-  background:none;border:1px dashed var(--border2);
-  color:var(--muted);font-size:.72rem;font-weight:400;
-  padding:.5rem 1rem;width:100%;margin-top:.5rem;
-  transition:all .2s;
-}
-.btn-spec-add:hover{border-color:var(--amber);color:var(--amber)}
-
-/* ── IMAGE UPLOAD AREA ────────────────────── */
-.img-upload{
-  border:2px dashed var(--border2);
-  padding:2rem;text-align:center;
+/* IMAGE UPLOADER */
+.img-upload-zone{
+  display:block;position:relative;
+  border:2px dashed var(--border);border-radius:var(--radius);
   cursor:pointer;transition:border-color .2s,background .2s;
-  position:relative;
+  overflow:hidden;min-height:160px;background:var(--bg);text-align:center;
 }
-.img-upload:hover,.img-upload.dragover{border-color:var(--amber);background:rgba(212,168,67,.04)}
-.img-upload input[type=file]{
-  position:absolute;inset:0;opacity:0;cursor:pointer;
+.img-upload-zone:hover,.img-upload-zone.drag-over{border-color:var(--accent);background:rgba(200,131,42,.04)}
+.img-upload-zone.has-image{border-style:solid;border-color:var(--accent)}
+.upload-idle{padding:36px 20px;text-align:center;pointer-events:none}
+.upload-icon{font-size:36px;color:var(--accent);opacity:.55;display:block;margin-bottom:12px}
+.upload-title{font-weight:600;font-size:15px;color:var(--text);margin-bottom:4px}
+.upload-sub{font-size:13px;color:var(--muted);margin-bottom:8px}
+.upload-formats{font-size:11px;color:var(--muted);background:var(--border);padding:3px 10px;border-radius:20px;display:inline-block}
+.upload-preview{width:100%;position:relative}
+.upload-preview img{width:100%;max-height:280px;object-fit:contain;display:block;background:#f2ede6}
+.upload-clear{
+  position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;
+  background:rgba(0,0,0,.55);color:#fff;border:none;cursor:pointer;
+  font-size:12px;display:grid;place-items:center;transition:background .2s;z-index:5;
 }
-.img-upload-icon{color:var(--muted);margin:0 auto .8rem}
-.img-upload p{font-size:.78rem;color:var(--muted)}
-.img-upload strong{color:var(--amber)}
-.img-preview{
-  width:100%;max-height:200px;object-fit:cover;
-  border:1px solid var(--border);margin-top:1rem;
-  display:none;
+.upload-clear:hover{background:var(--red)}
+.upload-badge{
+  position:absolute;bottom:8px;left:8px;
+  background:var(--green);color:#fff;font-size:11px;font-weight:600;
+  padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:5px;
 }
-.img-preview.show{display:block}
-.img-preview-wrap{position:relative}
-.img-remove{
-  position:absolute;top:.5rem;right:.5rem;
-  background:rgba(0,0,0,.7);border:none;
-  width:28px;height:28px;border-radius:50%;
-  color:#fff;font-size:1rem;line-height:1;
-  display:none;align-items:center;justify-content:center;
-  transition:background .2s;
+.url-fallback{margin-top:10px}
+.url-fallback summary{
+  cursor:pointer;font-size:12px;color:var(--muted);
+  display:flex;align-items:center;gap:6px;padding:5px 0;
+  list-style:none;user-select:none;
 }
-.img-preview-wrap:hover .img-remove{display:flex}
-.img-remove:hover{background:var(--red)}
+.url-fallback summary::-webkit-details-marker{display:none}
+.url-fallback summary:hover{color:var(--accent)}
 
-/* ── TOAST ────────────────────────────────── */
-#toast{
-  position:fixed;bottom:2rem;right:2rem;z-index:9999;
-  display:flex;flex-direction:column;gap:.5rem;
+/* PROMO TIPO GRID */
+.promo-tipo-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;
 }
+.ptc{
+  border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;
+}
+.ptc:hover{border-color:var(--accent)}
+.ptc.sel{border-color:var(--accent);background:rgba(200,131,42,.07)}
+.ptc-icon{font-size:22px;margin-bottom:5px}
+.ptc-label{font-size:12px;font-weight:700}
+.ptc-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* CONFIG SECTION */
+.cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cfg-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;
+}
+.cfg-card h3{font-family:var(--serif);font-size:19px;font-weight:500;margin-bottom:4px}
+.cfg-card>p{font-size:12px;color:var(--muted);margin-bottom:18px}
+.steps{background:var(--bg);border-radius:var(--radius);padding:16px;border:1px solid var(--border);margin-top:10px}
+.steps ol{padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.steps li{font-size:13px;color:var(--muted);line-height:1.6}
+.steps strong{color:var(--text)}
+.steps code{background:var(--surface);padding:1px 6px;border-radius:4px;border:1px solid var(--border);font-size:11px;font-family:monospace}
+.gh-ok{background:rgba(45,138,94,.1);color:var(--green);border:1px solid rgba(45,138,94,.2);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:none;margin-top:10px;gap:8px}
+.gh-ok.on{display:flex;align-items:center}
+.gh-err{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:none;margin-top:10px}
+.gh-err.on{display:block}
+
+/* TOAST */
 .toast{
-  background:var(--bg3);border-left:3px solid var(--amber);
-  padding:.8rem 1.2rem;
-  font-size:.78rem;font-weight:400;
-  min-width:260px;max-width:360px;
-  animation:toastIn .3s var(--ease) forwards;
-  display:flex;align-items:center;gap:.7rem;
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);
+  z-index:999;padding:13px 22px;border-radius:var(--radius);
+  font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;
+  opacity:0;pointer-events:none;transition:all .4s var(--ease);
+  box-shadow:0 4px 20px rgba(0,0,0,.15);white-space:nowrap;
 }
-.toast.success{border-color:var(--green)}
-.toast.error{border-color:var(--red)}
-.toast.info{border-color:var(--blue)}
-@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.t-ok{background:#1a1814;color:#fff}
+.t-ok i{color:var(--gold)}
+.t-err{background:var(--red);color:#fff}
 
-/* ── CONFIG SECTION ───────────────────────── */
-.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.config-card{
-  background:var(--bg2);border:1px solid var(--border);
-  padding:1.6rem;
+/* ── PROMO CARDS ─────────────────────────── */
+.oferta-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;margin-bottom:28px;
 }
-.config-card h3{
-  font-size:.82rem;font-weight:600;margin-bottom:.3rem;
-  color:var(--cream);
+.oferta-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;transition:all .2s;
 }
-.config-card p{font-size:.72rem;color:var(--muted);margin-bottom:1.2rem}
+.oferta-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.oferta-card.inactive-offer{opacity:.55}
+.oferta-card-img{
+  height:100px;overflow:hidden;
+  background:linear-gradient(135deg,#2d2418,#3d3020);
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.oferta-card-img img{width:100%;height:100%;object-fit:cover}
+.oferta-card-img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:11px}
+.oferta-card-img-ph i{font-size:24px;opacity:.3}
+.oferta-tipo-badge{
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;flex-shrink:0;
+}
+.ot-pct{background:rgba(192,57,43,.12);color:var(--red)}
+.ot-texto{background:rgba(200,131,42,.12);color:var(--accent)}
+.ot-2x1{background:rgba(45,138,94,.12);color:var(--green)}
+.ot-envio{background:rgba(61,107,206,.12);color:var(--blue)}
+.ot-combo{background:rgba(0,0,0,.07);color:var(--text)}
+.ot-custom{background:rgba(200,131,42,.08);color:var(--acdk)}
+.oferta-card-head{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.oferta-name{font-weight:600;font-size:15px;line-height:1.3;margin-bottom:3px}
+.oferta-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.oferta-card-foot{
+  padding:10px 16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.osb{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.osb-activa{background:rgba(45,138,94,.1);color:var(--green)}
+.osb-inactiva{background:rgba(0,0,0,.06);color:var(--muted)}
 
-/* ── GITHUB SETUP ─────────────────────────── */
-.github-setup{
-  background:var(--bg3);border:1px solid var(--border2);
-  padding:1.4rem 1.6rem;margin-bottom:1.5rem;
+/* GLOBAL PROMO BANNER */
+.global-banner-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;margin-bottom:24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
 }
-.github-setup h4{font-size:.82rem;font-weight:600;margin-bottom:.3rem}
-.github-setup p{font-size:.72rem;color:var(--muted);margin-bottom:1rem}
-.github-status{
-  display:flex;align-items:center;gap:.5rem;
-  font-size:.72rem;
-}
-.github-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.github-status-dot.ok{background:var(--green)}
-.github-status-dot.warn{background:var(--yellow)}
-.github-status-dot.err{background:var(--red)}
+.global-banner-info h4{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:4px}
+.global-banner-info p{font-size:12px;color:var(--muted)}
+.global-banner-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.global-banner-text-wrap{flex:1;min-width:240px}
 
-/* ── PROMOTIONS ───────────────────────────── */
-.promo-global{
-  background:var(--bg2);border:1px solid var(--border);
-  padding:1.4rem 1.6rem;margin-bottom:1.5rem;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-}
-.promo-global-info h4{font-size:.88rem;font-weight:600;margin-bottom:.3rem}
-.promo-global-info p{font-size:.72rem;color:var(--muted)}
-
-/* ── RESPONSIVE ───────────────────────────── */
-@media(max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.mob-open{transform:none}
-  .main{margin-left:0}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
-  .config-grid{grid-template-columns:1fr}
+@media(max-width:860px){
+  .stats-panel{grid-template-columns:1fr 1fr}
+  .cfg-grid{grid-template-columns:1fr}
+  .topbar-stats{display:none}
+  .topbar{padding:0 18px}
 }
 @media(max-width:600px){
-  .stats-grid{grid-template-columns:1fr}
-  .page-content{padding:1rem}
+  .form-grid{grid-template-columns:1fr}
+  .promo-tipo-grid{grid-template-columns:1fr 1fr}
+  .page{padding:16px}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
 }
 </style>
 </head>
@@ -446,1242 +522,1087 @@ select.form-control option{background:var(--bg3);color:var(--cream)}
 <!-- ═══ LOGIN ════════════════════════════════ -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-logo">GL</div>
+    <div class="login-monogram">GL</div>
+    <div class="login-sub">Cuchillos Artesanales · Salta, Argentina</div>
     <h2>Panel de Control</h2>
-    <p>Ingresá tu contraseña para acceder</p>
-    <input type="password" id="pwd-input" placeholder="Contraseña" autocomplete="current-password">
-    <button class="btn-login" onclick="doLogin()">Ingresar</button>
-    <div class="login-error" id="login-error"></div>
+    <p>Ingresá tu contraseña para administrar el catálogo</p>
+    <input type="password" class="login-input" id="pwd-input" placeholder="Contraseña">
+    <button class="btn-login" onclick="doLogin()"><i class="fas fa-sign-in-alt" style="margin-right:6px"></i>Ingresar</button>
+    <div class="login-err" id="login-err"></div>
   </div>
 </div>
 
 <!-- ═══ APP ══════════════════════════════════ -->
-<div id="app" class="hidden">
+<div id="app" style="display:none">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-logo">
-      <div class="sidebar-logo-mark">GL</div>
-      <div class="sidebar-logo-text">GL Cuchillos<small>Panel de Admin</small></div>
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo"><span>GL</span> Cuchillos</div>
+    <div class="topbar-tag">Admin</div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-stats">
+      <div class="ts-item"><i class="fas fa-box-open"></i> <strong id="ts-total">0</strong>&nbsp;productos</div>
+      <div class="ts-item"><i class="fas fa-eye"></i> <strong id="ts-active">0</strong>&nbsp;visibles</div>
+      <div class="ts-item"><i class="fas fa-tag"></i> <strong id="ts-promo">0</strong>&nbsp;con promo</div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">Principal</div>
-      <div class="nav-item active" onclick="showView('dashboard')" data-view="dashboard">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        Dashboard
-      </div>
-      <div class="nav-section">Tienda</div>
-      <div class="nav-item" onclick="showView('products')" data-view="products">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Productos
-        <span class="nav-badge" id="prod-count">6</span>
-      </div>
-      <div class="nav-item" onclick="showView('promotions')" data-view="promotions">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        Promociones
-      </div>
-      <div class="nav-section">Sistema</div>
-      <div class="nav-item" onclick="showView('settings')" data-view="settings">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        Configuración
-      </div>
-      <div class="nav-item" onclick="showView('github')" data-view="github">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-        GitHub & Deploy
-      </div>
-    </nav>
-    <div class="sidebar-footer">
-      <div class="sidebar-footer-info">
-        <strong>Gonzalo Londero</strong>
-        GL Cuchillos
-      </div>
-      <button class="btn-logout" onclick="doLogout()">Salir</button>
-    </div>
-  </aside>
+    <button class="btn btn-sm btn-ghost" onclick="exportJSON()"><i class="fas fa-download"></i> Exportar</button>
+    <button class="btn btn-sm btn-primary" onclick="publishToGitHub()" id="btn-publish">
+      <i class="fas fa-cloud-upload-alt"></i> Publicar
+    </button>
+    <button class="btn btn-sm btn-ghost" onclick="doLogout()" title="Cerrar sesión" style="padding:7px 11px">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>
 
-  <!-- MAIN -->
-  <main class="main">
-    <div class="topbar">
-      <div style="display:flex;align-items:center;gap:1rem">
-        <button class="btn-icon" id="mob-menu-btn" onclick="toggleMobMenu()" style="display:none">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+<div class="page">
+
+  <!-- SAVE BANNER -->
+  <div class="save-banner" id="save-banner">
+    <div>
+      <strong>Cambios sin publicar</strong>
+      <small>Los cambios están guardados localmente. Hacé clic en "Publicar" para subirlos al sitio.</small>
+    </div>
+    <button class="btn btn-sm btn-primary" onclick="publishToGitHub()">
+      <i class="fas fa-cloud-upload-alt"></i> Publicar ahora
+    </button>
+  </div>
+
+  <!-- PAGE NAV -->
+  <nav class="page-nav">
+    <button class="page-nav-btn active" data-sec="productos" onclick="showSection('productos')">
+      <i class="fas fa-box"></i> Productos
+    </button>
+    <button class="page-nav-btn" data-sec="promociones" onclick="showSection('promociones')">
+      <i class="fas fa-tag"></i> Promociones
+    </button>
+    <button class="page-nav-btn" data-sec="configuracion" onclick="showSection('configuracion')">
+      <i class="fas fa-cog"></i> Configuración
+    </button>
+    <button class="page-nav-btn" data-sec="github" onclick="showSection('github')">
+      <i class="fab fa-github"></i> GitHub & Deploy
+    </button>
+  </nav>
+
+  <!-- ═══ SECTION: PRODUCTOS ═══ -->
+  <section class="page-section active" id="sec-productos">
+
+    <div class="stats-panel">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-boxes"></i></div>
+        <div class="stat-content"><h3 id="stat-total">0</h3><p>Total productos</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+        <div class="stat-content"><h3 id="stat-active">0</h3><p>Visibles en el sitio</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-tag"></i></div>
+        <div class="stat-content"><h3 id="stat-promo">0</h3><p>Con promoción activa</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-camera"></i></div>
+        <div class="stat-content"><h3 id="stat-imgs">0</h3><p>Con foto cargada</p></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Buscar producto..." oninput="renderGrid()">
+      </div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="sort-wrap">
+        <span class="sort-label">Ordenar:</span>
+        <button class="sort-btn active" data-sort="default" onclick="setSort('default',this)">Default</button>
+        <button class="sort-btn" data-sort="name" onclick="setSort('name',this)">A–Z</button>
+        <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Activos</button>
+      </div>
+    </div>
+
+    <div class="prod-grid" id="prod-grid"></div>
+  </section>
+
+  <!-- ═══ SECTION: PROMOCIONES ═══ -->
+  <section class="page-section" id="sec-promociones">
+
+    <!-- Banner global -->
+    <div class="global-banner-card">
+      <div class="global-banner-info">
+        <h4>🔖 Banner global del sitio</h4>
+        <p>Mostrá una barra de promo en toda la página. Ej: "¡Envío gratis esta semana!"</p>
+      </div>
+      <div class="global-banner-controls">
+        <div class="global-banner-text-wrap">
+          <input type="text" class="form-input" id="global-promo-text" placeholder="Ej: ¡20% OFF esta semana!">
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="global-promo-active">
+          <div class="t-track"></div><div class="t-thumb"></div>
+        </label>
+        <button class="btn btn-sm btn-primary" onclick="saveGlobalPromo()">
+          <i class="fas fa-check"></i> Guardar
         </button>
-        <span class="topbar-title" id="topbar-title">Dashboard</span>
-      </div>
-      <div class="topbar-actions">
-        <div id="save-status" style="font-size:.7rem;color:var(--muted);display:none"></div>
-        <button class="btn btn-primary btn-sm" onclick="publishToGitHub()" id="btn-publish">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
-          Publicar cambios
-        </button>
-        <a href="index.html" target="_blank" class="btn btn-outline-btn btn-sm">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Ver sitio
-        </a>
       </div>
     </div>
 
-    <div class="page-content">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <h2 style="font-family:var(--serif);font-size:22px;font-weight:500">Promociones por producto</h2>
+      <button class="btn btn-sm btn-primary" onclick="openNewPromo()">
+        <i class="fas fa-plus"></i> Nueva promo
+      </button>
+    </div>
 
-      <!-- ── DASHBOARD ─── -->
-      <div class="view active" id="view-dashboard">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">Productos activos</div>
-            <div class="stat-value" id="stat-active">0</div>
-            <div class="stat-sub">visibles en el sitio</div>
+    <div class="oferta-grid" id="promo-grid"></div>
+  </section>
+
+  <!-- ═══ SECTION: CONFIGURACIÓN ═══ -->
+  <section class="page-section" id="sec-configuracion">
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h3>📱 Datos de contacto</h3>
+        <p>Información que se muestra en el sitio</p>
+        <div class="form-row">
+          <label class="form-label">WhatsApp (con código de país)</label>
+          <input type="text" class="form-input" id="cfg-wa" placeholder="5493843458340">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Instagram (sin @)</label>
+          <input type="text" class="form-input" id="cfg-ig" placeholder="gonzalo.londero.3">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Facebook</label>
+          <input type="text" class="form-input" id="cfg-fb" placeholder="Gonzafcf">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Teléfono visible</label>
+          <input type="text" class="form-input" id="cfg-phone" placeholder="+54 9 3843 458340">
+        </div>
+      </div>
+      <div class="cfg-card">
+        <h3>🏠 Pantalla de inicio (Hero)</h3>
+        <p>Textos principales de la primera sección del sitio</p>
+        <div class="form-row">
+          <label class="form-label">Título principal</label>
+          <input type="text" class="form-input" id="cfg-title">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Subtítulo</label>
+          <textarea class="form-textarea" id="cfg-sub" style="min-height:70px"></textarea>
+        </div>
+        <div class="form-grid">
+          <div>
+            <label class="form-label">Estadística 1</label>
+            <input type="text" class="form-input" id="cfg-s1" placeholder="500+">
           </div>
-          <div class="stat-card">
-            <div class="stat-label">Total productos</div>
-            <div class="stat-value" id="stat-total">0</div>
-            <div class="stat-sub">en el catálogo</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Con promoción</div>
-            <div class="stat-value" id="stat-promo">0</div>
-            <div class="stat-sub">productos con promo activa</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Con imagen</div>
-            <div class="stat-value" id="stat-imgs">0</div>
-            <div class="stat-sub">productos con foto cargada</div>
+          <div>
+            <label class="form-label">Etiqueta 1</label>
+            <input type="text" class="form-input" id="cfg-s1l" placeholder="Piezas entregadas">
           </div>
         </div>
-
-        <div class="section-header">
-          <div>
-            <h2>Resumen rápido</h2>
-            <p>Estado actual del catálogo de productos</p>
-          </div>
-          <button class="btn btn-primary btn-sm" onclick="showView('products');openNewProduct()">
-            + Nuevo producto
+      </div>
+      <div class="cfg-card">
+        <h3>🔐 Cambiar contraseña</h3>
+        <p>Actualizá la contraseña del panel admin</p>
+        <div class="form-row">
+          <label class="form-label">Contraseña actual</label>
+          <input type="password" class="form-input" id="pwd-cur" placeholder="••••••••">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Nueva contraseña</label>
+          <input type="password" class="form-input" id="pwd-new" placeholder="••••••••">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Confirmar nueva contraseña</label>
+          <input type="password" class="form-input" id="pwd-cfm" placeholder="••••••••">
+        </div>
+        <button class="btn btn-sm btn-ghost" onclick="changePassword()">
+          <i class="fas fa-key"></i> Cambiar contraseña
+        </button>
+      </div>
+      <div class="cfg-card">
+        <h3>📦 Importar / Exportar</h3>
+        <p>Descargá o importá todos los datos del catálogo en formato JSON</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="btn btn-ghost btn-sm" onclick="exportJSON()">
+            <i class="fas fa-download"></i> Descargar products.json
+          </button>
+          <label class="btn btn-ghost btn-sm" style="cursor:pointer">
+            <i class="fas fa-upload"></i> Importar products.json
+            <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
+          </label>
+          <button class="btn btn-ghost btn-sm" onclick="if(confirm('¿Borrar datos locales y recargar?')){localStorage.clear();location.reload()}">
+            <i class="fas fa-trash-alt"></i> Limpiar datos locales
           </button>
         </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px">
+      <button class="btn btn-primary" onclick="saveSettings()">
+        <i class="fas fa-check"></i> Guardar configuración
+      </button>
+    </div>
+  </section>
 
-        <div style="background:var(--bg2);border:1px solid var(--border);overflow:hidden">
-          <table class="prod-table" id="dash-table">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Estado</th>
-                <th>Visible</th>
-                <th>Promo</th>
-              </tr>
-            </thead>
-            <tbody id="dash-tbody"></tbody>
-          </table>
+  <!-- ═══ SECTION: GITHUB ═══ -->
+  <section class="page-section" id="sec-github">
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h3>⚙️ Repositorio de GitHub</h3>
+        <p>Conectá tu repositorio para publicar cambios en un clic</p>
+        <div class="form-row">
+          <label class="form-label">Usuario de GitHub</label>
+          <input type="text" class="form-input" id="gh-user" placeholder="tu-usuario">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Nombre del repositorio</label>
+          <input type="text" class="form-input" id="gh-repo" placeholder="gl-cuchillos">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Token de acceso personal (PAT)</label>
+          <input type="password" class="form-input" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxx">
+          <div class="form-hint"><i class="fas fa-lock"></i> Se guarda solo en este navegador. Necesita permiso "Contents: Read & Write"</div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row" style="margin-bottom:0">
+            <label class="form-label">Branch</label>
+            <input type="text" class="form-input" id="gh-branch" value="main">
+          </div>
+          <div class="form-row" style="margin-bottom:0">
+            <label class="form-label">Ruta del archivo</label>
+            <input type="text" class="form-input" id="gh-path" value="products.json">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap">
+          <button class="btn btn-sm btn-primary" onclick="saveGhCfg()"><i class="fas fa-save"></i> Guardar</button>
+          <button class="btn btn-sm btn-ghost" onclick="testGh()"><i class="fas fa-plug"></i> Probar conexión</button>
+          <div id="gh-status" style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block"></span> No configurado
+          </div>
+        </div>
+        <div class="gh-ok" id="gh-ok"><i class="fas fa-check-circle"></i> Conexión exitosa ✓</div>
+        <div class="gh-err" id="gh-err"></div>
+      </div>
+      <div class="cfg-card">
+        <h3>📚 Cómo configurar GitHub Pages</h3>
+        <p>Seguí estos pasos para que "Publicar" actualice el sitio automáticamente</p>
+        <div class="steps">
+          <ol>
+            <li>Creá un repositorio en GitHub (público)</li>
+            <li>Subí los 3 archivos: <code>index.html</code>, <code>admin.html</code> y <code>products.json</code></li>
+            <li>En el repo → <strong>Settings → Pages → Source: Deploy from branch → main</strong></li>
+            <li>Creá un token en: <strong>GitHub → Settings → Developer Settings → Fine-grained tokens</strong> → seleccionar el repo → Contents: Read & Write</li>
+            <li>Pegá el token acá y guardá. Desde ahora el botón <strong>"Publicar"</strong> actualiza el sitio automáticamente en ~30 seg.</li>
+          </ol>
+        </div>
+        <div style="margin-top:14px;padding:12px 14px;background:rgba(200,131,42,.07);border-radius:var(--radius);border:1px solid rgba(200,131,42,.2)">
+          <p style="font-size:12px;color:var(--muted)">
+            <i class="fas fa-globe" style="color:var(--accent);margin-right:5px"></i>
+            Tu sitio estará en: <strong style="color:var(--accent)">https://[usuario].github.io/[repo]/</strong>
+          </p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ── PRODUCTS ─── -->
-      <div class="view" id="view-products">
-        <div class="section-header">
-          <div>
-            <h2>Gestión de Productos</h2>
-            <p>Agregá, editá, activá o eliminá productos del catálogo</p>
-          </div>
-          <div style="display:flex;gap:.75rem">
-            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('all')" id="filter-all">Todos</button>
-            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('active')" id="filter-active">Activos</button>
-            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('inactive')" id="filter-inactive">Inactivos</button>
-            <button class="btn btn-primary btn-sm" onclick="openNewProduct()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Nuevo producto
-            </button>
-          </div>
-        </div>
-        <div style="background:var(--bg2);border:1px solid var(--border);overflow:auto">
-          <table class="prod-table">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Badge</th>
-                <th>Promo</th>
-                <th>Precio</th>
-                <th>Visible</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="prod-tbody"></tbody>
-          </table>
-        </div>
-        <div style="text-align:center;padding:2rem;font-size:.75rem;color:var(--muted)" id="prod-empty" style="display:none">
-          No hay productos en este filtro
-        </div>
-      </div>
-
-      <!-- ── PROMOTIONS ─── -->
-      <div class="view" id="view-promotions">
-        <div class="section-header">
-          <div>
-            <h2>Promociones</h2>
-            <p>Configurá promos globales y por producto</p>
-          </div>
-        </div>
-
-        <div class="promo-global">
-          <div class="promo-global-info">
-            <h4>🔖 Banner global del sitio</h4>
-            <p>Mostrá un banner de promoción visible en toda la página (ej: "20% de descuento esta semana")</p>
-          </div>
-          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-            <label class="toggle" title="Activar banner global">
-              <input type="checkbox" id="global-promo-toggle" onchange="toggleGlobalPromo(this)">
-              <span class="toggle-slider"></span>
-            </label>
-            <button class="btn btn-outline-btn btn-sm" onclick="editGlobalPromo()">Editar banner</button>
-          </div>
-        </div>
-
-        <div class="section-header" style="margin-top:1rem">
-          <h2 style="font-size:.9rem">Promos por producto</h2>
-        </div>
-        <div style="background:var(--bg2);border:1px solid var(--border);overflow:auto">
-          <table class="prod-table">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Promo actual</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="promo-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── SETTINGS ─── -->
-      <div class="view" id="view-settings">
-        <div class="section-header">
-          <div>
-            <h2>Configuración del sitio</h2>
-            <p>Editá los textos, contacto y opciones generales</p>
-          </div>
-          <button class="btn btn-primary btn-sm" onclick="saveSettings()">Guardar cambios</button>
-        </div>
-        <div class="config-grid">
-          <div class="config-card">
-            <h3>📱 Datos de contacto</h3>
-            <p>Información de contacto que se muestra en el sitio</p>
-            <div class="form-group">
-              <label>WhatsApp (con código de país)</label>
-              <input type="text" class="form-control" id="cfg-whatsapp" placeholder="5493843458340">
-            </div>
-            <div class="form-group">
-              <label>Instagram (sin @)</label>
-              <input type="text" class="form-control" id="cfg-instagram" placeholder="gonzalo.londero.3">
-            </div>
-            <div class="form-group">
-              <label>Facebook</label>
-              <input type="text" class="form-control" id="cfg-facebook" placeholder="Gonzafcf">
-            </div>
-            <div class="form-group">
-              <label>Teléfono visible</label>
-              <input type="text" class="form-control" id="cfg-phone" placeholder="+54 9 3843 458340">
-            </div>
-          </div>
-          <div class="config-card">
-            <h3>🏠 Hero del sitio</h3>
-            <p>Textos principales de la pantalla de inicio</p>
-            <div class="form-group">
-              <label>Título principal</label>
-              <input type="text" class="form-control" id="cfg-hero-title" placeholder="Cada filo cuenta una historia.">
-            </div>
-            <div class="form-group">
-              <label>Subtítulo</label>
-              <textarea class="form-control" id="cfg-hero-subtitle" rows="3"></textarea>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Estadística 1</label>
-                <input type="text" class="form-control" id="cfg-stat1" placeholder="500+">
-              </div>
-              <div class="form-group">
-                <label>Etiqueta 1</label>
-                <input type="text" class="form-control" id="cfg-stat1-label" placeholder="Piezas entregadas">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Estadística 2</label>
-                <input type="text" class="form-control" id="cfg-stat2" placeholder="100%">
-              </div>
-              <div class="form-group">
-                <label>Etiqueta 2</label>
-                <input type="text" class="form-control" id="cfg-stat2-label" placeholder="Artesanal">
-              </div>
-            </div>
-          </div>
-          <div class="config-card">
-            <h3>🔐 Seguridad</h3>
-            <p>Cambiar contraseña del panel de admin</p>
-            <div class="form-group">
-              <label>Contraseña actual</label>
-              <input type="password" class="form-control" id="pwd-current" placeholder="••••••••">
-            </div>
-            <div class="form-group">
-              <label>Nueva contraseña</label>
-              <input type="password" class="form-control" id="pwd-new" placeholder="••••••••">
-            </div>
-            <div class="form-group">
-              <label>Confirmar nueva contraseña</label>
-              <input type="password" class="form-control" id="pwd-confirm" placeholder="••••••••">
-            </div>
-            <button class="btn btn-outline-btn btn-sm" onclick="changePassword()">Cambiar contraseña</button>
-          </div>
-          <div class="config-card">
-            <h3>📦 Exportar / Importar datos</h3>
-            <p>Descargá el JSON con todos los datos del catálogo o importá desde un archivo</p>
-            <div style="display:flex;flex-direction:column;gap:.75rem">
-              <button class="btn btn-outline-btn btn-sm" onclick="exportJSON()">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Descargar products.json
-              </button>
-              <label class="btn btn-outline-btn btn-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:.5rem">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                Importar products.json
-                <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── GITHUB ─── -->
-      <div class="view" id="view-github">
-        <div class="section-header">
-          <div>
-            <h2>GitHub & Deploy</h2>
-            <p>Conectá tu repositorio para publicar cambios automáticamente</p>
-          </div>
-        </div>
-
-        <div class="github-setup">
-          <h4>⚙️ Configuración del repositorio</h4>
-          <p>Ingresá los datos de tu repositorio de GitHub donde está alojado el sitio</p>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Usuario de GitHub</label>
-              <input type="text" class="form-control" id="gh-user" placeholder="tu-usuario">
-            </div>
-            <div class="form-group">
-              <label>Nombre del repositorio</label>
-              <input type="text" class="form-control" id="gh-repo" placeholder="gl-cuchillos">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Token de acceso personal (PAT)</label>
-            <input type="password" class="form-control" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxx">
-            <div class="form-hint">El token necesita permisos de "Contents" (lectura y escritura). Se guarda solo en este navegador.</div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Branch (rama)</label>
-              <input type="text" class="form-control" id="gh-branch" placeholder="main" value="main">
-            </div>
-            <div class="form-group">
-              <label>Ruta del archivo</label>
-              <input type="text" class="form-control" id="gh-path" placeholder="products.json" value="products.json">
-            </div>
-          </div>
-          <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
-            <button class="btn btn-primary btn-sm" onclick="saveGithubConfig()">Guardar configuración</button>
-            <button class="btn btn-outline-btn btn-sm" onclick="testGithubConnection()">Probar conexión</button>
-            <div class="github-status" id="gh-status">
-              <div class="github-status-dot warn"></div>
-              <span>No configurado</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="background:var(--bg2);border:1px solid var(--border);padding:1.6rem">
-          <h3 style="font-size:.88rem;font-weight:600;margin-bottom:.5rem">📚 Cómo configurar GitHub Pages</h3>
-          <div style="font-size:.78rem;color:var(--muted);line-height:1.9">
-            <p><strong style="color:var(--cream)">1.</strong> Creá un repositorio en GitHub (público o privado con Pages habilitado)</p>
-            <p><strong style="color:var(--cream)">2.</strong> Subí los archivos: <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">index.html</code>, <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">admin.html</code> y <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">products.json</code></p>
-            <p><strong style="color:var(--cream)">3.</strong> En el repositorio → Settings → Pages → Source: Deploy from branch → main</p>
-            <p><strong style="color:var(--cream)">4.</strong> Creá un token: GitHub → Settings → Developer Settings → Personal Access Tokens → Fine-grained → seleccionar repo → Contents: Read & Write</p>
-            <p><strong style="color:var(--cream)">5.</strong> Pegá el token en este panel y guardá. Desde ahora, "Publicar cambios" actualiza el sitio automáticamente.</p>
-            <p style="margin-top:.8rem;color:rgba(212,168,67,.6)">⚡ Los cambios tardan ~30 segundos en verse reflejados en el sitio live.</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /page-content -->
-  </main>
+</div><!-- /page -->
 </div><!-- /app -->
 
-<!-- ═══ MODAL - PRODUCTO ══════════════════════ -->
-<div class="modal-overlay" id="prod-modal">
+<!-- ═══ MODAL PRODUCTO ════════════════════════ -->
+<div class="backdrop" id="mProd">
   <div class="modal">
     <div class="modal-head">
-      <h3 id="modal-title">Nuevo producto</h3>
-      <button class="modal-close" onclick="closeModal('prod-modal')">×</button>
+      <h2 class="modal-title" id="modal-prod-title">Nuevo producto</h2>
+      <button class="modal-close" onclick="closeModal('mProd')">✕</button>
     </div>
+
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchModalTab(this,'tab-basic')"><i class="fas fa-info-circle"></i> Básico</button>
+      <button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos</button>
+      <button class="modal-tab" onclick="switchModalTab(this,'tab-specs')"><i class="fas fa-list-ul"></i> Detalles</button>
+      <button class="modal-tab" onclick="switchModalTab(this,'tab-cfg')"><i class="fas fa-sliders-h"></i> Config</button>
+    </div>
+
     <div class="modal-body">
       <input type="hidden" id="edit-id">
 
-      <div class="form-row">
-        <div class="form-group">
-          <label>Nombre del producto *</label>
-          <input type="text" class="form-control" id="edit-name" placeholder="Ej: Juego Parrillero XL">
+      <!-- TAB BÁSICO -->
+      <div class="tab-panel active" id="tab-basic">
+        <div class="form-row">
+          <label class="form-label">Nombre del producto *</label>
+          <input type="text" class="form-input" id="edit-name" placeholder="Ej: Juego Parrillero XL">
         </div>
-        <div class="form-group">
-          <label>Categoría *</label>
-          <input type="text" class="form-control" id="edit-category" placeholder="Ej: Parrilla & Asado">
-        </div>
-      </div>
-
-      <div class="form-row full">
-        <div class="form-group">
-          <label>Descripción</label>
-          <textarea class="form-control" id="edit-desc" placeholder="Descripción del producto..."></textarea>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Especificaciones técnicas</label>
-        <div class="specs-list" id="specs-list"></div>
-        <button class="btn-spec-add" onclick="addSpec()">+ Agregar especificación</button>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Badge / Etiqueta</label>
-          <select class="form-control" id="edit-badge">
-            <option value="avail">Disponible (verde)</option>
-            <option value="custom">A pedido (dorado)</option>
-            <option value="intl">Exportación (azul)</option>
-            <option value="unavail">No disponible (rojo)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Texto del badge</label>
-          <input type="text" class="form-control" id="edit-badge-text" placeholder="Ej: Disponible">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Precio (texto)</label>
-          <input type="text" class="form-control" id="edit-price" placeholder="Ej: $85.000 · Consultar precio">
-        </div>
-        <div class="form-group">
-          <label>Nota de precio</label>
-          <input type="text" class="form-control" id="edit-price-note" placeholder="Ej: Personalizable · Envío incluido">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Promoción (dejar vacío si no hay)</label>
-        <input type="text" class="form-control" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!">
-      </div>
-
-      <div class="form-group">
-        <label>Imagen del producto</label>
-        <div style="display:flex;flex-direction:column;gap:.75rem">
-          <div class="form-group" style="margin-bottom:0">
-            <label style="font-size:.62rem;color:var(--muted)">URL de imagen (Instagram, Imgur, etc.)</label>
-            <input type="text" class="form-control" id="edit-img-url" placeholder="https://..." oninput="previewFromUrl(this.value)">
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="form-label">Categoría *</label>
+            <input type="text" class="form-input" id="edit-cat" placeholder="Ej: Parrilla & Asado" list="cat-dl">
+            <datalist id="cat-dl"></datalist>
           </div>
-          <div style="text-align:center;font-size:.7rem;color:var(--muted);padding:.2rem 0">— o subí un archivo —</div>
-          <div class="img-upload" id="img-upload-area" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-            <input type="file" accept="image/*" onchange="handleImageFile(this)">
-            <svg class="img-upload-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <p>Arrastrá una imagen o <strong>hacé click</strong> para seleccionar</p>
-            <p style="font-size:.68rem;margin-top:.3rem">PNG, JPG, WEBP · Máx. 2MB · Se convierte a Base64</p>
+          <div class="form-row">
+            <label class="form-label">Estado / Badge</label>
+            <select class="form-select" id="edit-badge">
+              <option value="avail">Disponible</option>
+              <option value="custom">A pedido</option>
+              <option value="intl">Exportación</option>
+              <option value="unavail">No disponible</option>
+            </select>
           </div>
-          <div class="img-preview-wrap">
-            <img class="img-preview" id="img-preview" src="" alt="Preview">
-            <button class="img-remove" onclick="clearImage()" title="Quitar imagen">×</button>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Texto del badge</label>
+          <input type="text" class="form-input" id="edit-badge-txt" placeholder="Ej: Disponible">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-textarea" id="edit-desc" placeholder="Descripción del producto..."></textarea>
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="form-label">Precio (texto)</label>
+            <input type="text" class="form-input" id="edit-price" placeholder="Ej: $85.000">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Nota de precio</label>
+            <input type="text" class="form-input" id="edit-price-note" placeholder="Ej: Envío incluido">
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--bg3);border:1px solid var(--border)">
-        <div>
-          <div style="font-size:.8rem;font-weight:500;margin-bottom:.25rem">Visible en el sitio</div>
-          <div style="font-size:.7rem;color:var(--muted)">Activá para que el producto aparezca en la tienda</div>
+      <!-- TAB FOTOS -->
+      <div class="tab-panel" id="tab-fotos">
+        <div class="form-row">
+          <label class="form-label">Foto principal del producto</label>
+          <label class="img-upload-zone" id="img-zone">
+            <div class="upload-idle" id="upload-idle">
+              <i class="fas fa-camera upload-icon"></i>
+              <p class="upload-title">Arrastrá una foto o hacé clic</p>
+              <p class="upload-sub">JPG, PNG, WEBP</p>
+              <span class="upload-formats">Máx. 2MB · Se convierte a Base64</span>
+            </div>
+            <div class="upload-preview" id="upload-preview" style="display:none">
+              <img id="upload-img" src="" alt="">
+              <button class="upload-clear" onclick="clearImg(event)">×</button>
+              <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+            </div>
+            <input type="file" id="img-file" accept="image/*" style="display:none" onchange="onFileChange(this)">
+          </label>
+          <details class="url-fallback">
+            <summary><i class="fas fa-link"></i> O pegá una URL de imagen (Instagram, Imgur, etc.)</summary>
+            <input type="text" class="form-input" id="edit-img-url" placeholder="https://..." oninput="onUrlInput(this.value)" style="margin-top:8px">
+          </details>
         </div>
-        <label class="toggle">
-          <input type="checkbox" id="edit-active" checked>
-          <span class="toggle-slider"></span>
-        </label>
       </div>
-      <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--bg3);border:1px solid var(--border)">
-        <div>
-          <div style="font-size:.8rem;font-weight:500;margin-bottom:.25rem">Producto destacado</div>
-          <div style="font-size:.7rem;color:var(--muted)">Aparece primero en la grilla de productos</div>
+
+      <!-- TAB DETALLES / SPECS -->
+      <div class="tab-panel" id="tab-specs">
+        <div class="form-row">
+          <label class="form-label">Especificaciones técnicas <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">(Enter para agregar)</small></label>
+          <div class="specs-wrap" id="specs-wrap" onclick="document.getElementById('spec-input-inner').focus()">
+            <input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="Ej: Acero 1075 · presioná Enter" onkeydown="handleSpecKey(event)">
+          </div>
+          <div class="form-hint"><i class="fas fa-info-circle"></i> Escribí la spec y presioná Enter. Aparecen como chips en el producto.</div>
         </div>
-        <label class="toggle">
-          <input type="checkbox" id="edit-featured">
-          <span class="toggle-slider"></span>
-        </label>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Promoción en este producto</label>
+          <input type="text" class="form-input" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana! (dejar vacío si no hay)">
+        </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline-btn" onclick="closeModal('prod-modal')">Cancelar</button>
-      <button class="btn btn-danger" id="btn-delete-prod" onclick="confirmDelete()" style="display:none">Eliminar producto</button>
-      <button class="btn btn-primary" onclick="saveProduct()">Guardar producto</button>
+
+      <!-- TAB CONFIG -->
+      <div class="tab-panel" id="tab-cfg">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-size:14px;font-weight:500;margin-bottom:3px">Visible en el sitio</div>
+              <div style="font-size:12px;color:var(--muted)">Activá para que el producto aparezca en la tienda</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="edit-active" checked>
+              <div class="t-track"></div><div class="t-thumb"></div>
+            </label>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-size:14px;font-weight:500;margin-bottom:3px">⭐ Producto destacado</div>
+              <div style="font-size:12px;color:var(--muted)">Aparece primero en la grilla y con estrella</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="edit-featured">
+              <div class="t-track"></div><div class="t-thumb"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /modal-body -->
+
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mProd')">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="btn-del" onclick="openConfirmDel()" style="display:none">
+        <i class="fas fa-trash"></i> Eliminar
+      </button>
+      <button class="btn btn-primary" onclick="saveProduct()">
+        <i class="fas fa-check"></i> Guardar producto
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ═══ MODAL - CONFIRM DELETE ════════════════ -->
-<div class="modal-overlay" id="confirm-modal">
+<!-- ═══ MODAL PROMO ════════════════════════════ -->
+<div class="backdrop" id="mPromo">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-head">
+      <h2 class="modal-title" id="modal-promo-title">Promoción</h2>
+      <button class="modal-close" onclick="closeModal('mPromo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="promo-target">
+      <div class="form-row">
+        <label class="form-label">Tipo de promoción</label>
+        <div class="promo-tipo-grid">
+          <div class="ptc sel" data-tipo="texto" onclick="selTipo('texto')">
+            <div class="ptc-icon">💬</div>
+            <div class="ptc-label">Texto libre</div>
+            <div class="ptc-sub">Lo escribís vos</div>
+          </div>
+          <div class="ptc" data-tipo="pct" onclick="selTipo('pct')">
+            <div class="ptc-icon">%</div>
+            <div class="ptc-label">% Descuento</div>
+            <div class="ptc-sub">Ej: 20% off</div>
+          </div>
+          <div class="ptc" data-tipo="2x1" onclick="selTipo('2x1')">
+            <div class="ptc-icon">2️⃣</div>
+            <div class="ptc-label">2 × 1</div>
+            <div class="ptc-sub">Llevás 2, pagás 1</div>
+          </div>
+          <div class="ptc" data-tipo="envio" onclick="selTipo('envio')">
+            <div class="ptc-icon">🚚</div>
+            <div class="ptc-label">Envío gratis</div>
+            <div class="ptc-sub">Sin costo de envío</div>
+          </div>
+          <div class="ptc" data-tipo="combo" onclick="selTipo('combo')">
+            <div class="ptc-icon">🎁</div>
+            <div class="ptc-label">Combo</div>
+            <div class="ptc-sub">Pack especial</div>
+          </div>
+          <div class="ptc" data-tipo="custom" onclick="selTipo('custom')">
+            <div class="ptc-icon">✏️</div>
+            <div class="ptc-label">Personalizado</div>
+            <div class="ptc-sub">Texto a medida</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" id="promo-val-row" style="display:none">
+        <label class="form-label" id="promo-val-label">Valor (%)</label>
+        <input type="number" class="form-input" id="promo-val" placeholder="20">
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label class="form-label">Texto del badge (se muestra en la tarjeta del producto)</label>
+        <input type="text" class="form-input" id="promo-text" placeholder="Ej: ¡20% OFF esta semana!">
+        <div class="form-hint"><i class="fas fa-eye"></i> Este texto aparece sobre la foto del producto</div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mPromo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="savePromo()">
+        <i class="fas fa-check"></i> Guardar promo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CONFIRMAR ELIMINAR ══════════════ -->
+<div class="backdrop" id="mConfirm">
   <div class="modal" style="max-width:400px">
     <div class="modal-head">
-      <h3>¿Eliminar producto?</h3>
-      <button class="modal-close" onclick="closeModal('confirm-modal')">×</button>
+      <h2 class="modal-title">¿Eliminar producto?</h2>
+      <button class="modal-close" onclick="closeModal('mConfirm')">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:.88rem;color:var(--muted);line-height:1.7">Esta acción no se puede deshacer. El producto será eliminado permanentemente del catálogo.</p>
-      <p style="margin-top:.75rem;font-size:.88rem">¿Estás seguro que querés eliminar <strong id="confirm-prod-name" style="color:var(--amber)"></strong>?</p>
+      <p style="color:var(--muted);font-size:14px;line-height:1.7">Esta acción no se puede deshacer. ¿Eliminás <strong id="del-prod-name" style="color:var(--accent)"></strong> del catálogo?</p>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline-btn" onclick="closeModal('confirm-modal')">Cancelar</button>
-      <button class="btn btn-danger" onclick="deleteProduct()">Sí, eliminar</button>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mConfirm')">Cancelar</button>
+      <button class="btn btn-danger" onclick="doDelete()">
+        <i class="fas fa-trash"></i> Sí, eliminar
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ═══ MODAL - PROMO BANNER ═════════════════ -->
-<div class="modal-overlay" id="promo-modal">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-head">
-      <h3 id="promo-modal-title">Editar promoción</h3>
-      <button class="modal-close" onclick="closeModal('promo-modal')">×</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="promo-target-id">
-      <div class="form-group">
-        <label>Texto de la promoción</label>
-        <input type="text" class="form-control" id="promo-text" placeholder="Ej: ¡20% de descuento esta semana!">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline-btn" onclick="closeModal('promo-modal')">Cancelar</button>
-      <button class="btn btn-primary" onclick="savePromo()">Guardar promo</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ TOAST ═════════════════════════════════ -->
-<div id="toast"></div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-/* ════════════════════════════════════════════
-   CONSTANTS & STATE
-════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
 const DEFAULT_PWD = 'glcuchillos2024';
 let data = { settings:{}, products:[] };
-let currentFilter = 'all';
 let editingId = null;
-let pendingDeleteId = null;
+let currentSort = 'default';
+let currentCat = 'all';
+let currentSpecs = [];
+let promoTipo = 'texto';
+let toastTimer;
 
-/* ════════════════════════════════════════════
+/* ══════════════════════════════════════════
    INIT
-════════════════════════════════════════════ */
-(async function init(){
-  // Check login
-  if(localStorage.getItem('gl_admin_auth') === 'true'){
-    showApp();
-  }
-  // Load data
+══════════════════════════════════════════ */
+(async () => {
+  if (localStorage.getItem('gl_auth') === '1') showApp();
   await loadData();
-  // Load GitHub config
-  loadGithubConfig();
-  // Load settings into form
-  loadSettingsForm();
-  // Render
+  loadGhCfg();
+  fillSettings();
   renderAll();
 })();
 
-/* ════════════════════════════════════════════
+document.getElementById('pwd-input').onkeydown = e => { if (e.key === 'Enter') doLogin(); };
+
+/* ══════════════════════════════════════════
    AUTH
-════════════════════════════════════════════ */
-function doLogin(){
-  const pwd = document.getElementById('pwd-input').value;
-  const stored = localStorage.getItem('gl_admin_pwd') || DEFAULT_PWD;
-  if(pwd === stored){
-    localStorage.setItem('gl_admin_auth','true');
-    showApp();
-  } else {
-    document.getElementById('login-error').textContent = 'Contraseña incorrecta. Intentá de nuevo.';
-    document.getElementById('pwd-input').value='';
-  }
+══════════════════════════════════════════ */
+function doLogin() {
+  const p = document.getElementById('pwd-input').value;
+  const stored = localStorage.getItem('gl_pwd') || DEFAULT_PWD;
+  if (p === stored) { localStorage.setItem('gl_auth','1'); showApp(); }
+  else { document.getElementById('login-err').textContent = 'Contraseña incorrecta'; document.getElementById('pwd-input').value = ''; }
 }
-document.getElementById('pwd-input').addEventListener('keydown', e => {
-  if(e.key==='Enter') doLogin();
-});
-function doLogout(){
-  localStorage.removeItem('gl_admin_auth');
-  location.reload();
-}
-function showApp(){
+function doLogout() { localStorage.removeItem('gl_auth'); location.reload(); }
+function showApp() {
   document.getElementById('login-screen').classList.add('hidden');
-  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('app').style.display = 'block';
 }
-function changePassword(){
-  const cur = document.getElementById('pwd-current').value;
-  const nw = document.getElementById('pwd-new').value;
-  const cfm = document.getElementById('pwd-confirm').value;
-  const stored = localStorage.getItem('gl_admin_pwd') || DEFAULT_PWD;
-  if(cur !== stored){ toast('Contraseña actual incorrecta','error'); return; }
-  if(nw.length < 6){ toast('La nueva contraseña debe tener al menos 6 caracteres','error'); return; }
-  if(nw !== cfm){ toast('Las contraseñas no coinciden','error'); return; }
-  localStorage.setItem('gl_admin_pwd', nw);
-  toast('Contraseña cambiada correctamente','success');
-  ['pwd-current','pwd-new','pwd-confirm'].forEach(id=>document.getElementById(id).value='');
+function changePassword() {
+  const cur = document.getElementById('pwd-cur').value;
+  const nw  = document.getElementById('pwd-new').value;
+  const cf  = document.getElementById('pwd-cfm').value;
+  if (cur !== (localStorage.getItem('gl_pwd') || DEFAULT_PWD)) { toast('Contraseña actual incorrecta','err'); return; }
+  if (nw.length < 6) { toast('Mínimo 6 caracteres','err'); return; }
+  if (nw !== cf) { toast('Las contraseñas no coinciden','err'); return; }
+  localStorage.setItem('gl_pwd', nw);
+  toast('Contraseña actualizada ✓');
+  ['pwd-cur','pwd-new','pwd-cfm'].forEach(id => document.getElementById(id).value = '');
 }
 
-/* ════════════════════════════════════════════
-   DATA LOAD / SAVE
-════════════════════════════════════════════ */
-async function loadData(){
-  // Try to load from localStorage first (admin edits)
-  const cached = localStorage.getItem('gl_products_data');
-  if(cached){
-    try{ data = JSON.parse(cached); return; }catch(e){}
-  }
-  // Fallback: fetch products.json
-  try{
-    const res = await fetch('products.json?t='+Date.now());
-    if(res.ok){ data = await res.json(); saveToLocal(); }
-  }catch(e){
-    // Use defaults if fetch fails
-    data = {
-      settings:{
-        siteName:'GL Cuchillos Artesanales',
-        whatsapp:'5493843458340',instagram:'gonzalo.londero.3',facebook:'Gonzafcf',
-        phone:'+54 9 3843 458340',
-        heroTitle:'Cada filo cuenta una historia.',
-        heroSubtitle:'Cuchillos únicos, forjados pieza a pieza por Gonzalo Londero.',
-        heroStat1:'500+',heroStat1Label:'Piezas entregadas',
-        heroStat2:'100%',heroStat2Label:'Artesanal',
-        globalPromo:false,globalPromoBanner:''
-      },
-      products:[]
-    };
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+async function loadData() {
+  const cached = localStorage.getItem('gl_data');
+  if (cached) { try { data = JSON.parse(cached); return; } catch(e) {} }
+  try {
+    const r = await fetch('products.json?t='+Date.now());
+    if (r.ok) { data = await r.json(); persist(false); }
+  } catch(e) {
+    data = { settings:{ whatsapp:'5493843458340', instagram:'gonzalo.londero.3', facebook:'Gonzafcf', phone:'+54 9 3843 458340', heroTitle:'Cada filo cuenta una historia.', heroSubtitle:'', heroStat1:'500+', heroStat1Label:'Piezas entregadas', globalPromo:false, globalPromoBanner:'' }, products:[] };
   }
 }
-function saveToLocal(){
-  localStorage.setItem('gl_products_data', JSON.stringify(data));
-  updateSaveStatus('Guardado localmente');
-}
-function updateSaveStatus(msg){
-  const el = document.getElementById('save-status');
-  el.style.display='block';
-  el.textContent = msg;
-  setTimeout(()=>{el.style.display='none';},3000);
+function persist(mark=true) {
+  localStorage.setItem('gl_data', JSON.stringify(data));
+  if (mark) document.getElementById('save-banner').classList.add('show');
 }
 
-/* ════════════════════════════════════════════
-   NAVIGATION
-════════════════════════════════════════════ */
-function showView(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('view-'+name).classList.add('active');
-  document.querySelector(`[data-view="${name}"]`).classList.add('active');
-  document.getElementById('topbar-title').textContent = {
-    dashboard:'Dashboard',products:'Productos',
-    promotions:'Promociones',settings:'Configuración',github:'GitHub & Deploy'
-  }[name];
-  if(name==='dashboard') renderDashboard();
-  if(name==='products') renderProducts();
-  if(name==='promotions') renderPromos();
-  if(name==='settings') loadSettingsForm();
-  // Close mob menu
-  document.getElementById('sidebar').classList.remove('mob-open');
-}
-function toggleMobMenu(){
-  document.getElementById('sidebar').classList.toggle('mob-open');
+/* ══════════════════════════════════════════
+   SECTIONS
+══════════════════════════════════════════ */
+function showSection(sec) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.sec === sec));
+  document.getElementById('sec-'+sec).classList.add('active');
+  if (sec === 'promociones') renderPromoGrid();
+  if (sec === 'configuracion') fillSettings();
 }
 
-/* ════════════════════════════════════════════
+/* ══════════════════════════════════════════
    RENDER
-════════════════════════════════════════════ */
-function renderAll(){
-  renderDashboard();
-  renderProducts();
-  renderPromos();
-  updateBadgeCount();
+══════════════════════════════════════════ */
+function renderAll() { updateStats(); renderCatTabs(); renderGrid(); updateTopbar(); }
+
+function updateStats() {
+  const p = data.products;
+  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+  set('stat-total', p.length);
+  set('stat-active', p.filter(x=>x.active).length);
+  set('stat-promo', p.filter(x=>x.promo).length);
+  set('stat-imgs', p.filter(x=>x.image&&x.image.trim()).length);
+}
+function updateTopbar() {
+  const p = data.products;
+  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+  set('ts-total', p.length);
+  set('ts-active', p.filter(x=>x.active).length);
+  set('ts-promo', p.filter(x=>x.promo).length);
 }
 
-function updateBadgeCount(){
-  const active = data.products.filter(p=>p.active).length;
-  document.getElementById('prod-count').textContent = active;
+function renderCatTabs() {
+  const cats = ['all', ...new Set(data.products.map(p=>p.category).filter(Boolean))];
+  document.getElementById('cat-tabs').innerHTML = cats.map(c =>
+    `<div class="cat-tab${c===currentCat?' active':''}" onclick="setCat('${c}')">${c==='all'?'Todos':c}</div>`
+  ).join('');
+  const dl = document.getElementById('cat-dl');
+  if (dl) dl.innerHTML = cats.filter(c=>c!=='all').map(c=>`<option value="${c}">`).join('');
 }
 
-function renderDashboard(){
-  const prods = data.products;
-  const active = prods.filter(p=>p.active).length;
-  const withPromo = prods.filter(p=>p.promo).length + (data.settings.globalPromo?1:0);
-  const withImg = prods.filter(p=>p.image && p.image.trim()).length;
-  document.getElementById('stat-total').textContent = prods.length;
-  document.getElementById('stat-active').textContent = active;
-  document.getElementById('stat-promo').textContent = withPromo;
-  document.getElementById('stat-imgs').textContent = withImg;
-
-  const tbody = document.getElementById('dash-tbody');
-  tbody.innerHTML = prods.map(p => `
-    <tr>
-      <td>
-        <div class="prod-name-cell">
-          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
-          <div class="prod-name-text">
-            <strong>${p.name}</strong>
-            <span>${p.specs ? p.specs.slice(0,2).join(' · ') : ''}</span>
-          </div>
-        </div>
-      </td>
-      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
-      <td><span class="badge badge-${p.badge}">${p.badgeText}</span></td>
-      <td>
-        <div class="toggle-wrap">
-          <label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)"><span class="toggle-slider"></span></label>
-          <span style="font-size:.7rem;color:var(--muted)">${p.active?'Visible':'Oculto'}</span>
-        </div>
-      </td>
-      <td>${p.promo ? `<span class="badge badge-promo">${p.promo}</span>` : '<span style="color:var(--muted);font-size:.72rem">—</span>'}</td>
-    </tr>
-  `).join('');
+function setCat(c) { currentCat=c; renderCatTabs(); renderGrid(); }
+function setSort(s,btn) {
+  currentSort=s;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.toggle('active',b.dataset.sort===s));
+  renderGrid();
 }
 
-function renderProducts(){
-  let prods = data.products;
-  if(currentFilter==='active') prods = prods.filter(p=>p.active);
-  if(currentFilter==='inactive') prods = prods.filter(p=>!p.active);
+function getFiltered() {
+  let p = [...data.products];
+  const q = document.getElementById('search-input')?.value?.toLowerCase()||'';
+  if (q) p = p.filter(x => (x.name+x.category+x.description).toLowerCase().includes(q));
+  if (currentCat !== 'all') p = p.filter(x => x.category === currentCat);
+  if (currentSort === 'name') p.sort((a,b) => a.name.localeCompare(b.name));
+  if (currentSort === 'active') p.sort((a,b) => b.active-a.active);
+  if (currentSort === 'default') p.sort((a,b) => (b.featured?1:0)-(a.featured?1:0));
+  return p;
+}
 
-  ['all','active','inactive'].forEach(f=>{
-    document.getElementById('filter-'+f).style.borderColor = currentFilter===f ? 'var(--amber)' : '';
-    document.getElementById('filter-'+f).style.color = currentFilter===f ? 'var(--amber)' : '';
-  });
+function renderGrid() {
+  const prods = getFiltered();
+  const grid = document.getElementById('prod-grid');
+  if (!grid) return;
 
-  const tbody = document.getElementById('prod-tbody');
-  tbody.innerHTML = prods.map(p => `
-    <tr>
-      <td>
-        <div class="prod-name-cell">
-          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
-          <div class="prod-name-text">
-            <strong>${p.name}</strong>
-            <span>${(p.specs||[]).slice(0,2).join(' · ')}</span>
-          </div>
+  const badgeClass = { avail:'b-avail', custom:'b-custom', intl:'b-intl', unavail:'b-unavail' };
+
+  grid.innerHTML = prods.map(p => `
+    <div class="prod-card${p.active?'':' inactive'}">
+      <div class="prod-img">
+        ${p.image
+          ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+          : `<div class="no-img-ph">
+              <svg viewBox="0 0 80 80" fill="none"><path d="M10 60 L30 35 L45 50 L58 30 L70 60Z" fill="currentColor" opacity=".3"/><circle cx="25" cy="22" r="8" fill="currentColor" opacity=".3"/></svg>
+              <span>${p.name}</span>
+             </div>`
+        }
+        <div class="cat-badge ${badgeClass[p.badge]||'b-avail'}">${p.badgeText||p.badge}</div>
+        ${p.promo ? `<div class="promo-badge">${p.promo}</div>` : ''}
+        ${p.featured ? `<div class="featured-star">★</div>` : ''}
+        <div class="prod-overlay">
+          <button class="ov-btn" onclick="openEdit('${p.id}')" title="Editar"><i class="fas fa-pen"></i></button>
+          <button class="ov-btn dup" onclick="dupProduct('${p.id}')" title="Duplicar"><i class="fas fa-copy"></i></button>
+          <button class="ov-btn promo-btn" onclick="openPromoModal('${p.id}')" title="Promo"><i class="fas fa-tag"></i></button>
+          <button class="ov-btn del" onclick="triggerDelete('${p.id}')" title="Eliminar"><i class="fas fa-trash"></i></button>
         </div>
-      </td>
-      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
-      <td><span class="badge badge-${p.badge}">${p.badgeText}</span></td>
-      <td>${p.promo ? `<span class="badge badge-promo" style="font-size:.6rem">${p.promo.substring(0,25)}${p.promo.length>25?'…':''}</span>` : '<span style="color:var(--muted);font-size:.72rem">—</span>'}</td>
-      <td style="font-size:.75rem">${p.price||'—'}</td>
-      <td>
-        <label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)"><span class="toggle-slider"></span></label>
-      </td>
-      <td>
-        <div class="actions-cell">
-          <button class="btn-icon" title="Editar" onclick="openEditProduct('${p.id}')">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat-label">${p.category||'—'}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-price-row"><span class="price-main">${p.price||'Consultar'}</span></div>
+      </div>
+      <div class="prod-footer">
+        <span class="prod-footer-label">
+          ${p.active
+            ? '<i class="fas fa-eye" style="color:var(--green);font-size:11px"></i> Visible'
+            : '<i class="fas fa-eye-slash" style="color:var(--muted);font-size:11px"></i> Oculto'}
+        </span>
+        <label class="toggle">
+          <input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)">
+          <div class="t-track"></div><div class="t-thumb"></div>
+        </label>
+      </div>
+    </div>
+  `).join('') + `
+    <div class="add-card" onclick="openNew()">
+      <i class="fas fa-plus"></i>
+      <span>Nuevo producto</span>
+    </div>`;
+
+  if (!prods.length) {
+    grid.innerHTML = `<div class="empty"><i class="fas fa-box-open"></i><p>No hay productos en esta categoría</p></div>
+    <div class="add-card" onclick="openNew()"><i class="fas fa-plus"></i><span>Nuevo producto</span></div>`;
+  }
+  updateStats();
+}
+
+/* ══════════════════════════════════════════
+   PROMO GRID
+══════════════════════════════════════════ */
+function renderPromoGrid() {
+  document.getElementById('global-promo-active').checked = !!data.settings.globalPromo;
+  document.getElementById('global-promo-text').value = data.settings.globalPromoBanner||'';
+
+  const tipoLabel = { texto:'texto',pct:'% desc',['2x1']:'2×1',envio:'envío',combo:'combo',custom:'custom' };
+  const grid = document.getElementById('promo-grid');
+  grid.innerHTML = data.products.map(p => `
+    <div class="oferta-card${p.promo?'':' inactive-offer'}">
+      <div class="oferta-card-img">
+        ${p.image ? `<img src="${p.image}" alt="">` : `<div class="oferta-card-img-ph"><i class="fas fa-knife-kitchen"></i><span>${p.name}</span></div>`}
+      </div>
+      <div class="oferta-card-head">
+        <div>
+          <div class="oferta-name">${p.name}</div>
+          <div class="oferta-desc">${p.category||''}</div>
+        </div>
+        ${p.promo ? `<span class="oferta-tipo-badge ot-texto">${p.promo.substring(0,18)}${p.promo.length>18?'…':''}</span>` : '<span class="oferta-tipo-badge" style="background:rgba(0,0,0,.05);color:var(--muted)">Sin promo</span>'}
+      </div>
+      <div class="oferta-card-foot">
+        <span class="osb ${p.promo?'osb-activa':'osb-inactiva'}">
+          <i class="fas fa-${p.promo?'check':'minus'}-circle"></i>
+          ${p.promo?'Activa':'Inactiva'}
+        </span>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm btn-ghost" onclick="openPromoModal('${p.id}')">
+            ${p.promo?'Editar':'+ Agregar'}
           </button>
-          <button class="btn-icon" title="Duplicar" onclick="duplicateProduct('${p.id}')">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          </button>
+          ${p.promo ? `<button class="btn btn-sm btn-danger" onclick="clearPromo('${p.id}')">Quitar</button>` : ''}
         </div>
-      </td>
-    </tr>
-  `).join('');
+      </div>
+    </div>
+  `).join('') || `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)"><i class="fas fa-box-open" style="font-size:36px;opacity:.2;display:block;margin-bottom:14px"></i><p>No hay productos aún</p></div>`;
 }
 
-function renderPromos(){
-  document.getElementById('global-promo-toggle').checked = !!data.settings.globalPromo;
-  const tbody = document.getElementById('promo-tbody');
-  tbody.innerHTML = data.products.map(p => `
-    <tr>
-      <td>
-        <div class="prod-name-cell">
-          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
-          <div class="prod-name-text"><strong>${p.name}</strong></div>
-        </div>
-      </td>
-      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
-      <td>${p.promo ? `<span class="badge badge-promo">${p.promo}</span>` : '<span style="color:var(--muted);font-size:.72rem">Sin promoción</span>'}</td>
-      <td>
-        <div class="actions-cell">
-          <button class="btn btn-outline-btn btn-sm" onclick="editProductPromo('${p.id}')">
-            ${p.promo ? 'Editar' : '+ Agregar promo'}
-          </button>
-          ${p.promo ? `<button class="btn btn-danger btn-sm" onclick="clearProductPromo('${p.id}')">Quitar</button>` : ''}
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function filterProducts(f){
-  currentFilter = f;
-  renderProducts();
-}
-
-/* ════════════════════════════════════════════
+/* ══════════════════════════════════════════
    PRODUCT CRUD
-════════════════════════════════════════════ */
-function openNewProduct(){
+══════════════════════════════════════════ */
+function openNew() {
   editingId = null;
-  document.getElementById('modal-title').textContent = 'Nuevo producto';
-  document.getElementById('btn-delete-prod').style.display = 'none';
-  clearProductForm();
-  openModal('prod-modal');
+  document.getElementById('modal-prod-title').textContent = 'Nuevo producto';
+  document.getElementById('btn-del').style.display = 'none';
+  clearProdForm();
+  switchModalTab(document.querySelector('.modal-tab'), 'tab-basic');
+  openModal('mProd');
 }
 
-function openEditProduct(id){
+function openEdit(id) {
   editingId = id;
   const p = data.products.find(x=>x.id===id);
-  if(!p) return;
-  document.getElementById('modal-title').textContent = 'Editar producto';
-  document.getElementById('btn-delete-prod').style.display = 'inline-flex';
-  populateProductForm(p);
-  openModal('prod-modal');
+  if (!p) return;
+  document.getElementById('modal-prod-title').textContent = 'Editar · '+p.name;
+  document.getElementById('btn-del').style.display = 'inline-flex';
+  fillProdForm(p);
+  switchModalTab(document.querySelector('.modal-tab'), 'tab-basic');
+  openModal('mProd');
 }
 
-function clearProductForm(){
-  ['edit-id','edit-name','edit-category','edit-desc','edit-badge-text','edit-price','edit-price-note','edit-promo','edit-img-url'].forEach(id=>{
-    document.getElementById(id).value='';
+function clearProdForm() {
+  ['edit-id','edit-name','edit-cat','edit-desc','edit-badge-txt','edit-price','edit-price-note','edit-promo','edit-img-url'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value='';
   });
-  document.getElementById('edit-badge').value='avail';
+  document.getElementById('edit-badge').value = 'avail';
   document.getElementById('edit-active').checked = true;
   document.getElementById('edit-featured').checked = false;
-  document.getElementById('specs-list').innerHTML = '';
-  addSpec(); addSpec(); addSpec();
-  clearImage();
+  currentSpecs = [];
+  renderSpecs();
+  clearImgState();
 }
 
-function populateProductForm(p){
+function fillProdForm(p) {
   document.getElementById('edit-id').value = p.id;
   document.getElementById('edit-name').value = p.name||'';
-  document.getElementById('edit-category').value = p.category||'';
+  document.getElementById('edit-cat').value = p.category||'';
   document.getElementById('edit-desc').value = p.description||'';
   document.getElementById('edit-badge').value = p.badge||'avail';
-  document.getElementById('edit-badge-text').value = p.badgeText||'';
+  document.getElementById('edit-badge-txt').value = p.badgeText||'';
   document.getElementById('edit-price').value = p.price||'';
   document.getElementById('edit-price-note').value = p.priceNote||'';
   document.getElementById('edit-promo').value = p.promo||'';
   document.getElementById('edit-active').checked = !!p.active;
   document.getElementById('edit-featured').checked = !!p.featured;
-  document.getElementById('edit-img-url').value = p.image && !p.image.startsWith('data:') ? p.image : '';
-  document.getElementById('specs-list').innerHTML = '';
-  (p.specs||[]).forEach(s=>addSpec(s));
-  if(document.querySelectorAll('.spec-row').length === 0) addSpec();
-  if(p.image){
-    const preview = document.getElementById('img-preview');
-    preview.src = p.image;
-    preview.classList.add('show');
-  } else {
-    clearImage();
-  }
+  currentSpecs = [...(p.specs||[])];
+  renderSpecs();
+  if (p.image) showImgPreview(p.image);
+  else clearImgState();
+  if (p.image && !p.image.startsWith('data:')) document.getElementById('edit-img-url').value = p.image;
 }
 
-function addSpec(val=''){
-  const list = document.getElementById('specs-list');
-  const row = document.createElement('div');
-  row.className = 'spec-row';
-  row.innerHTML = `
-    <input type="text" class="form-control" value="${val}" placeholder="Ej: Acero 1075">
-    <button class="btn-icon" onclick="this.parentElement.remove()" title="Quitar">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  `;
-  list.appendChild(row);
-}
-
-function saveProduct(){
+function saveProduct() {
   const name = document.getElementById('edit-name').value.trim();
-  if(!name){ toast('El nombre del producto es obligatorio','error'); return; }
-
-  const specs = Array.from(document.querySelectorAll('.spec-row input'))
-    .map(i=>i.value.trim()).filter(Boolean);
-
-  const imgUrl = document.getElementById('edit-img-url').value.trim();
-  const previewSrc = document.getElementById('img-preview').src;
-  const image = previewSrc && document.getElementById('img-preview').classList.contains('show')
-    ? (previewSrc.startsWith('data:') ? previewSrc : imgUrl)
-    : imgUrl;
-
+  if (!name) { toast('El nombre es obligatorio','err'); return; }
+  const previewShowing = document.getElementById('upload-preview').style.display !== 'none';
+  const imgSrc = document.getElementById('upload-img').src;
+  const urlVal = document.getElementById('edit-img-url').value.trim();
+  const image = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
+  const existingPromo = editingId ? (data.products.find(x=>x.id===editingId)?.promo||'') : '';
   const prod = {
-    id: editingId || 'prod-'+Date.now(),
+    id: editingId||'p'+Date.now(),
     name,
-    category: document.getElementById('edit-category').value.trim(),
+    category: document.getElementById('edit-cat').value.trim(),
     description: document.getElementById('edit-desc').value.trim(),
-    specs,
+    specs: [...currentSpecs],
     badge: document.getElementById('edit-badge').value,
-    badgeText: document.getElementById('edit-badge-text').value.trim(),
+    badgeText: document.getElementById('edit-badge-txt').value.trim(),
     price: document.getElementById('edit-price').value.trim(),
     priceNote: document.getElementById('edit-price-note').value.trim(),
-    promo: document.getElementById('edit-promo').value.trim(),
+    promo: document.getElementById('edit-promo').value.trim() || existingPromo,
     active: document.getElementById('edit-active').checked,
     featured: document.getElementById('edit-featured').checked,
     image
   };
-
-  if(editingId){
-    const idx = data.products.findIndex(p=>p.id===editingId);
-    if(idx >= 0) data.products[idx] = prod;
-  } else {
-    data.products.push(prod);
-  }
-
-  saveToLocal();
-  renderAll();
-  closeModal('prod-modal');
-  toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓','success');
+  if (editingId) { const i=data.products.findIndex(x=>x.id===editingId); if(i>=0) data.products[i]=prod; }
+  else data.products.push(prod);
+  persist(); renderAll(); renderCatTabs();
+  closeModal('mProd');
+  toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓');
   editingId = null;
 }
 
-function quickToggle(id, checkbox){
+function quickToggle(id,cb) {
   const p = data.products.find(x=>x.id===id);
-  if(p){ p.active = checkbox.checked; saveToLocal(); renderAll(); }
+  if (p) { p.active=cb.checked; persist(); renderAll(); }
 }
 
-function confirmDelete(){
-  pendingDeleteId = editingId;
+function triggerDelete(id) { editingId=id; openConfirmDel(); }
+function openConfirmDel() {
   const p = data.products.find(x=>x.id===editingId);
-  if(p) document.getElementById('confirm-prod-name').textContent = p.name;
-  openModal('confirm-modal');
+  if (p) document.getElementById('del-prod-name').textContent = p.name;
+  openModal('mConfirm');
 }
-
-function deleteProduct(){
-  data.products = data.products.filter(p=>p.id!==pendingDeleteId);
-  saveToLocal();
-  renderAll();
-  closeModal('confirm-modal');
-  closeModal('prod-modal');
-  toast('Producto eliminado','success');
-  pendingDeleteId = null;
+function doDelete() {
+  data.products = data.products.filter(x=>x.id!==editingId);
+  persist(); renderAll(); renderCatTabs();
+  closeModal('mConfirm'); closeModal('mProd');
+  toast('Producto eliminado');
   editingId = null;
 }
-
-function duplicateProduct(id){
+function dupProduct(id) {
   const p = data.products.find(x=>x.id===id);
-  if(!p) return;
-  const copy = { ...p, id:'prod-'+Date.now(), name:p.name+' (copia)', active:false };
-  data.products.push(copy);
-  saveToLocal();
-  renderAll();
-  toast('Producto duplicado','success');
+  if (!p) return;
+  data.products.push({...p, id:'p'+Date.now(), name:p.name+' (copia)', active:false, featured:false});
+  persist(); renderAll();
+  toast('Producto duplicado');
 }
 
-/* ════════════════════════════════════════════
-   IMAGE HANDLING
-════════════════════════════════════════════ */
-function previewFromUrl(url){
-  const preview = document.getElementById('img-preview');
-  if(url){
-    preview.src = url;
-    preview.classList.add('show');
-    preview.onerror = ()=>{ preview.classList.remove('show'); };
-  } else {
-    preview.classList.remove('show');
+/* ══════════════════════════════════════════
+   SPECS
+══════════════════════════════════════════ */
+function handleSpecKey(e) {
+  if (e.key==='Enter'||e.key===',') {
+    e.preventDefault();
+    const val = e.target.value.trim();
+    if (val) { currentSpecs.push(val); e.target.value=''; renderSpecs(); }
+  } else if (e.key==='Backspace' && !e.target.value && currentSpecs.length) {
+    currentSpecs.pop(); renderSpecs();
   }
 }
-
-function handleImageFile(input){
-  const file = input.files[0];
-  if(!file) return;
-  if(file.size > 2*1024*1024){ toast('La imagen debe ser menor a 2MB','error'); return; }
-  const reader = new FileReader();
-  reader.onload = e => {
-    const preview = document.getElementById('img-preview');
-    preview.src = e.target.result;
-    preview.classList.add('show');
-    document.getElementById('edit-img-url').value = '';
-  };
-  reader.readAsDataURL(file);
+function removeSpec(i) { currentSpecs.splice(i,1); renderSpecs(); }
+function renderSpecs() {
+  const wrap = document.getElementById('specs-wrap');
+  wrap.innerHTML = currentSpecs.map((s,i)=>
+    `<div class="spec-chip">${s}<button onclick="removeSpec(${i})" type="button">×</button></div>`
+  ).join('') +
+  `<input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="${currentSpecs.length?'Más especificaciones...':'Ej: Acero 1075 · Enter para agregar'}" onkeydown="handleSpecKey(event)">`;
 }
 
-function handleDragOver(e){
-  e.preventDefault();
-  document.getElementById('img-upload-area').classList.add('dragover');
+/* ══════════════════════════════════════════
+   IMAGE
+══════════════════════════════════════════ */
+document.getElementById('img-zone').addEventListener('click', e => {
+  if (e.target.classList.contains('upload-clear')) return;
+  document.getElementById('img-file').click();
+});
+document.getElementById('img-zone').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
+document.getElementById('img-zone').addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
+document.getElementById('img-zone').addEventListener('drop', e => {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) processFile(f);
+});
+function onFileChange(input) { if(input.files[0]) processFile(input.files[0]); }
+function processFile(f) {
+  if (f.size > 2*1024*1024) { toast('Imagen muy grande (máx 2MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => showImgPreview(e.target.result);
+  r.readAsDataURL(f);
 }
-function handleDragLeave(){
-  document.getElementById('img-upload-area').classList.remove('dragover');
+function onUrlInput(url) { if(url) showImgPreview(url); else clearImgState(); }
+function showImgPreview(src) {
+  document.getElementById('upload-img').src = src;
+  document.getElementById('upload-preview').style.display = 'block';
+  document.getElementById('upload-idle').style.display = 'none';
+  document.getElementById('img-zone').classList.add('has-image');
 }
-function handleDrop(e){
-  e.preventDefault();
-  document.getElementById('img-upload-area').classList.remove('dragover');
-  const file = e.dataTransfer.files[0];
-  if(file && file.type.startsWith('image/')){
-    const fakeInput = { files:[file] };
-    handleImageFile(fakeInput);
-  }
+function clearImg(e) { e&&e.stopPropagation(); clearImgState(); }
+function clearImgState() {
+  document.getElementById('upload-img').src = '';
+  document.getElementById('upload-preview').style.display = 'none';
+  document.getElementById('upload-idle').style.display = 'block';
+  document.getElementById('img-zone').classList.remove('has-image');
+  document.getElementById('edit-img-url').value = '';
+  document.getElementById('img-file').value = '';
 }
 
-function clearImage(){
-  const preview = document.getElementById('img-preview');
-  preview.src=''; preview.classList.remove('show');
-  document.getElementById('edit-img-url').value='';
-}
-
-/* ════════════════════════════════════════════
+/* ══════════════════════════════════════════
    PROMOTIONS
-════════════════════════════════════════════ */
-function toggleGlobalPromo(checkbox){
-  data.settings.globalPromo = checkbox.checked;
-  saveToLocal();
-  toast(checkbox.checked ? 'Banner global activado' : 'Banner global desactivado','success');
+══════════════════════════════════════════ */
+function selTipo(t) {
+  promoTipo = t;
+  document.querySelectorAll('.ptc').forEach(el => el.classList.toggle('sel', el.dataset.tipo===t));
+  document.getElementById('promo-val-row').style.display = (t==='pct') ? 'block' : 'none';
+  const autofill = { '2x1':'🎁 2×1 — Llevás 2, pagás 1', envio:'🚚 Envío gratis', combo:'🎀 Combo especial' };
+  if (autofill[t]) document.getElementById('promo-text').value = autofill[t];
 }
 
-function editGlobalPromo(){
-  document.getElementById('promo-target-id').value = '__global__';
-  document.getElementById('promo-modal-title').textContent = 'Banner global del sitio';
-  document.getElementById('promo-text').value = data.settings.globalPromoBanner||'';
-  openModal('promo-modal');
+function openNewPromo() {
+  // Show generic promo (will target first product by default - or show all)
+  if (!data.products.length) { toast('Primero creá un producto','err'); return; }
+  openPromoModal(data.products[0].id);
 }
 
-function editProductPromo(id){
+function openPromoModal(id) {
   const p = data.products.find(x=>x.id===id);
-  document.getElementById('promo-target-id').value = id;
-  document.getElementById('promo-modal-title').textContent = `Promo: ${p?.name||''}`;
+  document.getElementById('promo-target').value = id;
+  document.getElementById('modal-promo-title').textContent = 'Promo · '+(p?.name||'');
   document.getElementById('promo-text').value = p?.promo||'';
-  openModal('promo-modal');
+  document.getElementById('promo-val').value = '';
+  selTipo('texto');
+  openModal('mPromo');
 }
 
-function clearProductPromo(id){
+function savePromo() {
+  let text = document.getElementById('promo-text').value.trim();
+  if (promoTipo==='pct') { const v=document.getElementById('promo-val').value; if(v&&!text) text=v+'% OFF'; }
+  const id = document.getElementById('promo-target').value;
   const p = data.products.find(x=>x.id===id);
-  if(p){ p.promo=''; saveToLocal(); renderPromos(); renderDashboard(); toast('Promoción eliminada','success'); }
+  if (p) { p.promo=text; persist(); renderAll(); renderPromoGrid(); closeModal('mPromo'); toast('Promo guardada ✓'); }
 }
 
-function savePromo(){
-  const target = document.getElementById('promo-target-id').value;
-  const text = document.getElementById('promo-text').value.trim();
-  if(target==='__global__'){
-    data.settings.globalPromoBanner = text;
-  } else {
-    const p = data.products.find(x=>x.id===target);
-    if(p) p.promo = text;
-  }
-  saveToLocal();
-  renderAll();
-  closeModal('promo-modal');
-  toast('Promoción guardada ✓','success');
+function clearPromo(id) {
+  const p = data.products.find(x=>x.id===id);
+  if (p) { p.promo=''; persist(); renderPromoGrid(); renderAll(); toast('Promo eliminada'); }
 }
 
-/* ════════════════════════════════════════════
+function saveGlobalPromo() {
+  data.settings.globalPromo = document.getElementById('global-promo-active').checked;
+  data.settings.globalPromoBanner = document.getElementById('global-promo-text').value.trim();
+  persist(); updateStats(); toast('Banner global guardado ✓');
+}
+
+/* ══════════════════════════════════════════
    SETTINGS
-════════════════════════════════════════════ */
-function loadSettingsForm(){
-  const s = data.settings || {};
-  const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val||''; };
-  setVal('cfg-whatsapp', s.whatsapp);
-  setVal('cfg-instagram', s.instagram);
-  setVal('cfg-facebook', s.facebook);
-  setVal('cfg-phone', s.phone);
-  setVal('cfg-hero-title', s.heroTitle);
-  setVal('cfg-hero-subtitle', s.heroSubtitle);
-  setVal('cfg-stat1', s.heroStat1);
-  setVal('cfg-stat1-label', s.heroStat1Label);
-  setVal('cfg-stat2', s.heroStat2);
-  setVal('cfg-stat2-label', s.heroStat2Label);
+══════════════════════════════════════════ */
+function fillSettings() {
+  const s = data.settings||{};
+  const sv = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v; };
+  sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
+  sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
+  sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
+}
+function saveSettings() {
+  const gv = id => document.getElementById(id)?.value?.trim()||'';
+  Object.assign(data.settings, {
+    whatsapp:gv('cfg-wa'), instagram:gv('cfg-ig'), facebook:gv('cfg-fb'), phone:gv('cfg-phone'),
+    heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
+    heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
+  });
+  persist(); toast('Configuración guardada ✓');
 }
 
-function saveSettings(){
-  const getVal = id => document.getElementById(id)?.value?.trim()||'';
-  data.settings.whatsapp = getVal('cfg-whatsapp');
-  data.settings.instagram = getVal('cfg-instagram');
-  data.settings.facebook = getVal('cfg-facebook');
-  data.settings.phone = getVal('cfg-phone');
-  data.settings.heroTitle = getVal('cfg-hero-title');
-  data.settings.heroSubtitle = getVal('cfg-hero-subtitle');
-  data.settings.heroStat1 = getVal('cfg-stat1');
-  data.settings.heroStat1Label = getVal('cfg-stat1-label');
-  data.settings.heroStat2 = getVal('cfg-stat2');
-  data.settings.heroStat2Label = getVal('cfg-stat2-label');
-  saveToLocal();
-  toast('Configuración guardada ✓','success');
-}
-
-/* ════════════════════════════════════════════
+/* ══════════════════════════════════════════
    IMPORT / EXPORT
-════════════════════════════════════════════ */
-function exportJSON(){
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'products.json';
-  a.click();
-  toast('Archivo descargado','success');
+══════════════════════════════════════════ */
+function exportJSON() {
+  const b = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='products.json'; a.click();
+  toast('Archivo descargado');
 }
-
-function importJSON(input){
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try{
-      const imported = JSON.parse(e.target.result);
-      if(!imported.products) throw new Error('Formato inválido');
-      data = imported;
-      saveToLocal();
-      renderAll();
-      loadSettingsForm();
-      toast(`Importado: ${data.products.length} productos ✓`,'success');
-    } catch(err){
-      toast('Error al importar: formato inválido','error');
-    }
+function importJSON(input) {
+  const f = input.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      const d = JSON.parse(e.target.result);
+      if (!d.products) throw 0;
+      data = d; persist(); renderAll(); fillSettings();
+      toast(`Importado: ${d.products.length} productos ✓`);
+    } catch { toast('Formato inválido','err'); }
     input.value='';
   };
-  reader.readAsText(file);
+  r.readAsText(f);
 }
 
-/* ════════════════════════════════════════════
-   GITHUB INTEGRATION
-════════════════════════════════════════════ */
-function loadGithubConfig(){
-  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
-  if(cfg.user) document.getElementById('gh-user').value = cfg.user;
-  if(cfg.repo) document.getElementById('gh-repo').value = cfg.repo;
-  if(cfg.token) document.getElementById('gh-token').value = cfg.token;
-  if(cfg.branch) document.getElementById('gh-branch').value = cfg.branch||'main';
-  if(cfg.path) document.getElementById('gh-path').value = cfg.path||'products.json';
-  updateGithubStatus(cfg.user && cfg.repo && cfg.token ? 'configured' : 'unconfigured');
+/* ══════════════════════════════════════════
+   GITHUB
+══════════════════════════════════════════ */
+function loadGhCfg() {
+  const c = JSON.parse(localStorage.getItem('gl_gh')||'{}');
+  ['user','repo','token','branch','path'].forEach(k => {
+    const el = document.getElementById('gh-'+k);
+    if (el && c[k]) el.value=c[k];
+  });
+  setGhStatus(c.user&&c.repo&&c.token?'cfg':'off');
 }
-
-function saveGithubConfig(){
-  const cfg = {
-    user: document.getElementById('gh-user').value.trim(),
-    repo: document.getElementById('gh-repo').value.trim(),
-    token: document.getElementById('gh-token').value.trim(),
-    branch: document.getElementById('gh-branch').value.trim()||'main',
-    path: document.getElementById('gh-path').value.trim()||'products.json',
-  };
-  if(!cfg.user||!cfg.repo||!cfg.token){
-    toast('Completá usuario, repositorio y token','error'); return;
-  }
-  localStorage.setItem('gl_github_cfg', JSON.stringify(cfg));
-  updateGithubStatus('configured');
-  toast('Configuración GitHub guardada ✓','success');
+function saveGhCfg() {
+  const c = { user:document.getElementById('gh-user').value.trim(), repo:document.getElementById('gh-repo').value.trim(), token:document.getElementById('gh-token').value.trim(), branch:document.getElementById('gh-branch').value.trim()||'main', path:document.getElementById('gh-path').value.trim()||'products.json' };
+  if (!c.user||!c.repo||!c.token) { toast('Completá todos los campos','err'); return; }
+  localStorage.setItem('gl_gh', JSON.stringify(c));
+  setGhStatus('cfg'); toast('Configuración guardada ✓');
 }
-
-function updateGithubStatus(status){
+function setGhStatus(s) {
   const el = document.getElementById('gh-status');
-  const configs = {
-    configured: {dot:'ok', text:'Configurado — listo para publicar'},
-    unconfigured: {dot:'warn', text:'No configurado'},
-    testing: {dot:'warn', text:'Probando conexión...'},
-    ok: {dot:'ok', text:'Conexión exitosa ✓'},
-    error: {dot:'err', text:'Error de conexión — revisá el token y el repositorio'},
-  };
-  const c = configs[status]||configs.unconfigured;
-  el.innerHTML = `<div class="github-status-dot ${c.dot}"></div><span>${c.text}</span>`;
+  const c = { off:['var(--gold)','No configurado'], cfg:['var(--gold)','Configurado — sin probar'], ok:['var(--green)','Conexión OK ✓'], err:['var(--red)','Error de conexión'] }[s]||['var(--gold)','—'];
+  el.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:${c[0]};display:inline-block"></span> ${c[1]}`;
 }
-
-async function testGithubConnection(){
-  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
-  if(!cfg.user||!cfg.repo||!cfg.token){
-    toast('Guardá la configuración primero','error'); return;
-  }
-  updateGithubStatus('testing');
-  try{
-    const res = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
-      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github.v3+json' }
-    });
-    if(res.ok){ updateGithubStatus('ok'); toast('Conexión exitosa ✓','success'); }
-    else { updateGithubStatus('error'); toast('Error '+res.status+': '+await res.text(),'error'); }
-  }catch(e){ updateGithubStatus('error'); toast('Error de red: '+e.message,'error'); }
+async function testGh() {
+  const c = JSON.parse(localStorage.getItem('gl_gh')||'{}');
+  if (!c.token) { toast('Guardá la configuración primero','err'); return; }
+  const okEl = document.getElementById('gh-ok'); const errEl = document.getElementById('gh-err');
+  okEl.classList.remove('on'); errEl.classList.remove('on');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{ headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json' } });
+    if (r.ok) { setGhStatus('ok'); okEl.classList.add('on'); toast('Conexión exitosa ✓'); }
+    else { setGhStatus('err'); errEl.textContent='Error '+r.status+' — revisá el token y el repositorio'; errEl.classList.add('on'); toast('Error de conexión','err'); }
+  } catch(e) { setGhStatus('err'); errEl.textContent='Error: '+e.message; errEl.classList.add('on'); toast('Error: '+e.message,'err'); }
 }
-
-async function publishToGitHub(){
-  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
-  if(!cfg.user||!cfg.repo||!cfg.token){
-    toast('Configurá GitHub primero — ve a "GitHub & Deploy"','error'); return;
-  }
-
+async function publishToGitHub() {
+  const c = JSON.parse(localStorage.getItem('gl_gh')||'{}');
+  if (!c.user||!c.repo||!c.token) { toast('Configurá GitHub primero (sección "GitHub & Deploy")','err'); return; }
   const btn = document.getElementById('btn-publish');
-  btn.disabled = true;
-  btn.textContent = 'Publicando...';
-
-  try{
-    // 1. Get current file SHA
-    const getRes = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
-      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github.v3+json' }
-    });
-
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Publicando...';
+  try {
+    const getR = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{ headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json' } });
     let sha = null;
-    if(getRes.ok){ const d = await getRes.json(); sha = d.sha; }
-
-    // 2. Encode content
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-
-    // 3. PUT file
-    const body = {
-      message:`Admin: actualización de productos ${new Date().toLocaleString('es-AR')}`,
-      content,
-      branch: cfg.branch||'main',
-    };
-    if(sha) body.sha = sha;
-
-    const putRes = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
-      method:'PUT',
-      headers:{
-        Authorization:`Bearer ${cfg.token}`,
-        Accept:'application/vnd.github.v3+json',
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if(putRes.ok){
-      toast('¡Publicado en GitHub! Los cambios se verán en ~30 seg ✓','success');
+    if (getR.ok) { const d=await getR.json(); sha=d.sha; }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const body = { message:`Admin: update ${new Date().toLocaleString('es-AR')}`, content, branch:c.branch||'main' };
+    if (sha) body.sha = sha;
+    const putR = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{ method:'PUT', headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' }, body:JSON.stringify(body) });
+    if (putR.ok) {
+      document.getElementById('save-banner').classList.remove('show');
+      toast('¡Publicado en GitHub! Cambios en ~30 seg ✓');
     } else {
-      const err = await putRes.json();
-      toast('Error al publicar: '+(err.message||putRes.status),'error');
+      const err = await putR.json();
+      toast('Error: '+(err.message||putR.status),'err');
     }
-  }catch(e){ toast('Error: '+e.message,'error'); }
-  finally{ btn.disabled=false; btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>Publicar cambios`; }
+  } catch(e) { toast('Error: '+e.message,'err'); }
+  finally { btn.disabled=false; btn.innerHTML='<i class="fas fa-cloud-upload-alt"></i> Publicar'; }
 }
 
-/* ════════════════════════════════════════════
-   MODALS
-════════════════════════════════════════════ */
-function openModal(id){
-  document.getElementById(id).classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeModal(id){
-  document.getElementById(id).classList.remove('open');
-  document.body.style.overflow='';
-}
-// Close on overlay click
-document.querySelectorAll('.modal-overlay').forEach(overlay=>{
-  overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(overlay.id); });
-});
+/* ══════════════════════════════════════════
+   MODAL HELPERS
+══════════════════════════════════════════ */
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.backdrop').forEach(b => b.addEventListener('click', e => { if(e.target===b) closeModal(b.id); }));
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.querySelectorAll('.backdrop.open').forEach(b=>closeModal(b.id)); });
 
-/* ════════════════════════════════════════════
+function switchModalTab(btn, panelId) {
+  const modal = btn ? btn.closest('.modal') : document.querySelector('.modal');
+  if (modal) {
+    modal.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    modal.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  }
+  if (btn) btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+
+/* ══════════════════════════════════════════
    TOAST
-════════════════════════════════════════════ */
-function toast(msg, type='info'){
-  const icons = {
-    success:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>',
-    error:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
-    info:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3498DB" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-  };
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.innerHTML = icons[type]+`<span>${msg}</span>`;
-  document.getElementById('toast').appendChild(el);
-  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(20px)'; el.style.transition='.3s'; setTimeout(()=>el.remove(),300); }, 3500);
+══════════════════════════════════════════ */
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.className = 'toast show ' + (type==='err' ? 't-err' : 't-ok');
+  el.innerHTML = (type==='err' ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-check-circle" style="color:var(--gold)"></i>') + ' ' + msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3400);
 }
-
-/* ════════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════ */
-function checkMobile(){
-  const isMob = window.innerWidth <= 900;
-  document.getElementById('mob-menu-btn').style.display = isMob ? 'grid' : 'none';
-}
-window.addEventListener('resize', checkMobile);
-checkMobile();
 </script>
 </body>
 </html>
