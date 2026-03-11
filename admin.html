@@ -686,11 +686,11 @@ select.form-select option{background:var(--surface)}
         <p>Textos principales de la primera sección del sitio</p>
         <div class="form-row">
           <label class="form-label">Título principal</label>
-          <input type="text" class="form-input" id="cfg-title">
+          <input type="text" class="form-input" id="cfg-title" placeholder="Cada filo cuenta una historia.">
         </div>
         <div class="form-row">
           <label class="form-label">Subtítulo</label>
-          <textarea class="form-textarea" id="cfg-sub" style="min-height:70px"></textarea>
+          <textarea class="form-textarea" id="cfg-sub" style="min-height:70px" placeholder="Cuchillos únicos, forjados pieza a pieza por Gonzalo Londero..."></textarea>
         </div>
         <div class="form-grid">
           <div>
@@ -702,8 +702,7 @@ select.form-select option{background:var(--surface)}
             <input type="text" class="form-input" id="cfg-s1l" placeholder="Piezas entregadas">
           </div>
         </div>
-
-        <!-- NUEVO: Imagen del hero -->
+        <!-- Campo de imagen del hero -->
         <div class="form-row">
           <label class="form-label">Imagen principal del hero (opcional)</label>
           <label class="img-upload-zone" id="hero-img-zone">
@@ -726,7 +725,6 @@ select.form-select option{background:var(--surface)}
           </details>
         </div>
       </div>
-
       <div class="cfg-card">
         <h3>🔐 Cambiar contraseña</h3>
         <p>Actualizá la contraseña del panel admin</p>
@@ -1415,7 +1413,7 @@ function renderSpecs() {
 }
 
 /* ══════════════════════════════════════════
-   IMAGE (para productos)
+   IMAGE (productos)
 ══════════════════════════════════════════ */
 document.getElementById('img-zone').addEventListener('click', e => {
   if (e.target.classList.contains('upload-clear')) return;
@@ -1453,8 +1451,19 @@ function clearImgState() {
 }
 
 /* ══════════════════════════════════════════
-   HERO IMAGE (nuevo)
+   HERO IMAGE (nuevas funciones)
 ══════════════════════════════════════════ */
+document.getElementById('hero-img-zone').addEventListener('click', e => {
+  if (e.target.classList.contains('upload-clear')) return;
+  document.getElementById('hero-img-file').click();
+});
+document.getElementById('hero-img-zone').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
+document.getElementById('hero-img-zone').addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
+document.getElementById('hero-img-zone').addEventListener('drop', e => {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) processHeroFile(f);
+});
 function onHeroFileChange(input) { if(input.files[0]) processHeroFile(input.files[0]); }
 function processHeroFile(f) {
   if (f.size > 2*1024*1024) { toast('Imagen muy grande (máx 2MB)','err'); return; }
@@ -1491,6 +1500,7 @@ function selTipo(t) {
 }
 
 function openNewPromo() {
+  // Show generic promo (will target first product by default - or show all)
   if (!data.products.length) { toast('Primero creá un producto','err'); return; }
   openPromoModal(data.products[0].id);
 }
@@ -1533,7 +1543,7 @@ function fillSettings() {
   sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
   sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
   sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
-  // Hero image
+  // Cargar imagen del hero si existe
   if (s.heroImage) showHeroImgPreview(s.heroImage);
   else clearHeroImgState();
 }
@@ -1544,13 +1554,13 @@ function saveSettings() {
     heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
     heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
   });
-  // Hero image
+  // Guardar imagen del hero
   const previewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
   const imgSrc = document.getElementById('hero-upload-img').src;
   const urlVal = document.getElementById('hero-img-url').value.trim();
   const heroImage = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
   data.settings.heroImage = heroImage;
-
+  
   persist(); toast('Configuración guardada ✓');
 }
 
