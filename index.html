@@ -1,627 +1,1273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GL CUCHILLOS ARTESANALES - Cuchillos Hechos a Mano | Argentina</title>
-    <meta name="description" content="Cuchillos artesanales de alta calidad forjados a mano en Argentina. Envíos a todo el país.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GL · Cuchillos Artesanales · Argentina</title>
+<meta name="description" content="Cuchillos artesanales forjados a mano en Argentina. Acero de alta calidad, mango en madera noble. Piezas únicas para quienes valoran lo auténtico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Barlow:wght@200;300;400;500&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Barlow',sans-serif;
+  font-weight:300;
+  background:#0E0C09;
+  color:#E8E2D8;
+  overflow-x:hidden;
+  cursor:none;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:none}
+
+/* ─── CURSOR ─────────────────────────────────── */
+#cur{
+  position:fixed;z-index:9999;pointer-events:none;
+  width:8px;height:8px;background:#C9A84C;border-radius:50%;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;
+}
+#cur-ring{
+  position:fixed;z-index:9998;pointer-events:none;
+  width:32px;height:32px;
+  border:1px solid rgba(201,168,76,.4);border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .3s,height .3s,border-color .3s,opacity .3s;
+}
+body.cur-hover #cur{width:4px;height:4px;background:#C9A84C}
+body.cur-hover #cur-ring{width:48px;height:48px;border-color:rgba(201,168,76,.7)}
+
+/* ─── VARIABLES ──────────────────────────────── */
+:root{
+  --bg:#0E0C09;
+  --bg2:#141210;
+  --bg3:#1A1713;
+  --border:rgba(232,226,216,.07);
+  --gold:#C9A84C;
+  --gold2:#E2C87A;
+  --cream:#E8E2D8;
+  --muted:#7A7268;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ─── GRAIN OVERLAY ──────────────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
+  opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px;
+}
+
+/* ─── NAV ────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .5s,border-color .5s;
+  border-bottom:1px solid transparent;
+}
+nav.solid{
+  background:rgba(14,12,9,.88);
+  backdrop-filter:blur(16px);
+  border-color:var(--border);
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+}
+.logo-mark{
+  width:36px;height:36px;
+  border:1px solid rgba(201,168,76,.5);
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;
+  color:var(--gold);
+  transition:border-color .3s,background .3s;
+}
+.logo:hover .logo-mark{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.logo-text{
+  font-family:'Cormorant',serif;
+  font-size:1.1rem;font-weight:500;letter-spacing:.06em;
+  color:var(--cream);
+}
+.logo-text span{
+  display:block;font-size:.55rem;font-weight:300;
+  font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin-top:1px;
+}
+.nav-links{
+  display:flex;gap:2.5rem;align-items:center;
+}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);
+  transition:color .25s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;
+  width:0;height:1px;background:var(--gold);
+  transition:width .3s var(--ease);
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.nav-wa{
+  display:flex;align-items:center;gap:.5rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bg);background:var(--gold);
+  padding:.5rem 1.3rem;
+  transition:background .25s;
+}
+.nav-wa:hover{background:var(--gold2)}
+.nav-toggle{
+  display:none;background:none;border:none;
+  flex-direction:column;gap:5px;padding:4px;
+}
+.nav-toggle span{
+  display:block;width:22px;height:1.5px;
+  background:var(--cream);transition:.3s;
+}
+
+/* ─── MOBILE OVERLAY ─────────────────────────── */
+.mob-nav{
+  display:none;position:fixed;inset:0;z-index:199;
+  background:var(--bg);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mob-nav.open{display:flex}
+.mob-nav a{
+  font-family:'Cormorant',serif;font-size:3rem;font-weight:300;
+  color:var(--cream);letter-spacing:.04em;
+  transition:color .2s;
+}
+.mob-nav a:hover{color:var(--gold)}
+.mob-close{
+  position:absolute;top:1.5rem;right:5vw;
+  background:none;border:none;color:var(--cream);
+  font-size:1.8rem;line-height:1;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+
+/* Left panel */
+.hero-l{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:140px 5vw 7vh 8vw;
+  position:relative;z-index:2;
+}
+.hero-overline{
+  display:flex;align-items:center;gap:.8rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.65rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2.2rem;
+  opacity:0;animation:riseIn .8s .1s var(--ease) forwards;
+}
+.hero-overline-dash{width:24px;height:1px;background:var(--gold)}
+.hero-h1{
+  font-family:'Cormorant',serif;
+  font-size:clamp(3.8rem,6.5vw,7rem);
+  font-weight:300;line-height:.95;
+  letter-spacing:-.01em;color:var(--cream);
+  opacity:0;animation:riseIn .9s .25s var(--ease) forwards;
+}
+.hero-h1 em{
+  font-style:italic;color:var(--gold);
+  display:block;
+}
+.hero-body{
+  margin-top:2rem;max-width:380px;
+  font-size:.95rem;font-weight:300;
+  line-height:1.75;color:rgba(232,226,216,.55);
+  opacity:0;animation:riseIn .9s .4s var(--ease) forwards;
+}
+.hero-actions{
+  margin-top:2.8rem;display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:riseIn .9s .55s var(--ease) forwards;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  padding:.85rem 2rem;
+  background:var(--gold);color:var(--bg);
+  border:1px solid var(--gold);
+  transition:background .25s,color .25s;
+}
+.btn-gold:hover{background:transparent;color:var(--gold)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  padding:.85rem 2rem;
+  background:transparent;color:var(--cream);
+  border:1px solid var(--border);
+  transition:border-color .25s,color .25s;
+}
+.btn-ghost:hover{border-color:rgba(232,226,216,.35);color:var(--gold)}
+.hero-stats{
+  margin-top:4rem;padding-top:2rem;
+  border-top:1px solid var(--border);
+  display:flex;gap:2.5rem;
+  opacity:0;animation:riseIn .9s .7s var(--ease) forwards;
+}
+.h-stat-n{
+  font-family:'Cormorant',serif;
+  font-size:2.4rem;font-weight:500;color:var(--cream);line-height:1;
+}
+.h-stat-l{
+  margin-top:.3rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Right panel — dark with knife illustration */
+.hero-r{
+  position:relative;overflow:hidden;
+  background:var(--bg2);
+  border-left:1px solid var(--border);
+}
+.hero-r::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 60% 40%,rgba(201,168,76,.07) 0%,transparent 65%);
+  z-index:1;
+}
+.hero-r-inner{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  padding:6rem 3rem;
+}
+/* Decorative large knife SVG */
+.knife-hero{
+  width:min(75%,340px);
+  opacity:0;
+  animation:riseIn 1.2s .4s var(--ease) forwards;
+  filter:drop-shadow(0 40px 80px rgba(201,168,76,.18));
+}
+.hero-badge{
+  position:absolute;bottom:2.5rem;right:2.5rem;z-index:3;
+  padding:1.1rem 1.5rem;
+  border:1px solid rgba(201,168,76,.2);
+  background:rgba(14,12,9,.7);backdrop-filter:blur(10px);
+  opacity:0;animation:riseIn .8s .9s var(--ease) forwards;
+}
+.hero-badge-top{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.4rem;
+}
+.hero-badge-val{
+  font-family:'Cormorant',serif;
+  font-size:1.6rem;font-weight:500;color:var(--cream);line-height:1;
+}
+
+/* ─── MARQUEE ────────────────────────────────── */
+.marquee{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:.75rem 0;background:var(--bg2);
+}
+.mq-track{display:flex;animation:mq 25s linear infinite;white-space:nowrap}
+.mq-item{
+  display:inline-flex;align-items:center;gap:1.8rem;padding:0 1.8rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);flex-shrink:0;
+}
+.mq-dot{color:var(--gold);font-size:.55rem}
+
+/* ─── SECTIONS COMMONS ───────────────────────── */
+.container{max-width:1220px;margin:0 auto;padding:0 5vw}
+section{padding:7.5rem 0}
+.s-label{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;
+}
+.s-label::before{content:'';width:18px;height:1px;background:var(--gold)}
+.s-title{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2.6rem,4.5vw,4.4rem);
+  font-weight:300;line-height:1.05;color:var(--cream);
+}
+.s-title em{font-style:italic;color:var(--gold)}
+
+/* ─── FEATURES ───────────────────────────────── */
+.features{background:var(--bg2);padding:0}
+.feat-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--border);
+  border-top:1px solid var(--border);
+}
+.feat{
+  padding:2.8rem 2.2rem;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  transition:background .35s;
+}
+.feat:hover{background:rgba(201,168,76,.04)}
+.feat-icon{
+  width:40px;height:40px;margin-bottom:1.4rem;
+  color:var(--gold);opacity:.8;
+}
+.feat h4{
+  font-family:'Cormorant',serif;
+  font-size:1.2rem;font-weight:500;color:var(--cream);
+  margin-bottom:.55rem;
+}
+.feat p{font-size:.82rem;color:var(--muted);line-height:1.7}
+
+/* ─── COLLECTION ─────────────────────────────── */
+.collection{background:var(--bg)}
+.coll-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:4rem;gap:2rem;flex-wrap:wrap;
+}
+.prod-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+}
+.prod{
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  transition:background .3s;position:relative;
+}
+.prod:hover{background:var(--bg3)}
+.prod-img{
+  aspect-ratio:4/5;
+  background:var(--bg2);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-img svg{
+  opacity:.15;transition:opacity .4s,transform .5s var(--ease);
+  color:var(--cream);
+}
+.prod:hover .prod-img svg{opacity:.22;transform:scale(1.04)}
+/* Gold shimmer line on hover */
+.prod-img::after{
+  content:'';position:absolute;
+  left:0;bottom:0;width:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transition:width .5s var(--ease);
+}
+.prod:hover .prod-img::after{width:100%}
+.prod-badge{
+  position:absolute;top:1.1rem;left:1.1rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.58rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.3rem .7rem;background:var(--gold);color:var(--bg);
+}
+.prod-info{padding:1.6rem 1.8rem 2rem}
+.prod-cat{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.55rem;
+}
+.prod-name{
+  font-family:'Cormorant',serif;
+  font-size:1.55rem;font-weight:500;color:var(--cream);
+  margin-bottom:.6rem;line-height:1.15;
+}
+.prod-desc{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem}
+.prod-foot{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding-top:1.2rem;border-top:1px solid var(--border);
+}
+.prod-price{
+  font-family:'Cormorant',serif;
+  font-size:1.35rem;font-weight:500;color:var(--cream);
+}
+.prod-price small{font-size:.7rem;color:var(--muted);font-family:'Barlow',sans-serif;font-weight:300}
+.btn-ask{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.55rem 1.2rem;
+  background:transparent;color:var(--gold);
+  border:1px solid rgba(201,168,76,.35);
+  transition:background .25s,border-color .25s,color .25s;
+}
+.btn-ask:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.coll-more{text-align:center;margin-top:3.5rem}
+
+/* ─── PROCESS ────────────────────────────────── */
+.process{background:var(--bg2)}
+.proc-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:start;margin-top:4.5rem;
+}
+.proc-steps{display:flex;flex-direction:column}
+.proc-step{
+  display:grid;grid-template-columns:52px 1fr;
+  gap:1.5rem;padding:2.2rem 0;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.proc-step:first-child{padding-top:0}
+.proc-step:last-child{border-bottom:none}
+.proc-n{
+  font-family:'Cormorant',serif;
+  font-size:3rem;font-weight:300;
+  color:rgba(201,168,76,.18);line-height:1;
+  transition:color .3s;
+}
+.proc-step:hover .proc-n{color:rgba(201,168,76,.45)}
+.proc-step h4{
+  font-family:'Cormorant',serif;
+  font-size:1.2rem;font-weight:500;color:var(--cream);
+  margin-bottom:.45rem;
+}
+.proc-step p{font-size:.8rem;color:var(--muted);line-height:1.7}
+.proc-visual{
+  position:sticky;top:120px;
+  aspect-ratio:3/4;
+  border:1px solid var(--border);
+  background:var(--bg3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2rem;padding:3rem;
+  overflow:hidden;
+  position:relative;
+}
+.proc-visual::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:220px;height:220px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);
+}
+.proc-visual-cross{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.04;
+}
+.proc-tag{
+  position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);
+  text-align:center;white-space:nowrap;
+}
+.proc-tag-top{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.3rem;
+}
+.proc-tag-val{
+  font-family:'Cormorant',serif;
+  font-size:2rem;font-weight:500;color:var(--cream);
+}
+
+/* ─── TESTIMONIALS ───────────────────────────── */
+.testimonials{background:var(--bg)}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3.5rem;
+}
+.testi{
+  background:var(--bg);padding:2.5rem 2.2rem;
+  transition:background .3s;
+}
+.testi:hover{background:var(--bg3)}
+.testi-stars{display:flex;gap:3px;margin-bottom:1.3rem;color:var(--gold)}
+.testi-quote{
+  font-family:'Cormorant',serif;
+  font-size:1.1rem;font-style:italic;font-weight:400;
+  color:var(--cream);line-height:1.7;margin-bottom:1.6rem;
+}
+.testi-author{display:flex;align-items:center;gap:.9rem}
+.testi-av{
+  width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;
+  color:var(--cream);flex-shrink:0;
+}
+.testi-name{font-size:.82rem;font-weight:400;color:var(--cream)}
+.testi-loc{font-size:.7rem;color:var(--muted);margin-top:.15rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em}
+
+/* ─── CTA ────────────────────────────────────── */
+.cta-section{
+  background:var(--bg2);
+  padding:7rem 0;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-title{
+  font-family:'Cormorant',serif;
+  font-size:clamp(3rem,5.5vw,5.5rem);
+  font-weight:300;line-height:1;color:var(--cream);
+  margin:1.2rem 0 1.4rem;
+}
+.cta-title em{font-style:italic;color:var(--gold)}
+.cta-sub{
+  font-size:.9rem;color:var(--muted);max-width:430px;
+  margin:0 auto 2.8rem;line-height:1.8;
+}
+.cta-acts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  padding:.9rem 2.2rem;
+  background:#25D366;color:#fff;
+  transition:background .25s,transform .2s;
+}
+.btn-wa:hover{background:#20c25e;transform:translateY(-1px)}
+.btn-insta{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  padding:.9rem 2.2rem;
+  background:transparent;color:var(--cream);
+  border:1px solid var(--border);
+  transition:border-color .25s,color .25s;
+}
+.btn-insta:hover{border-color:rgba(232,226,216,.3);color:var(--gold)}
+.cta-info{
+  display:flex;gap:3.5rem;justify-content:center;
+  margin-top:4rem;padding-top:3rem;
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.cta-info-item{text-align:center}
+.cta-info-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.5rem;
+}
+.cta-info-val{
+  font-family:'Cormorant',serif;
+  font-size:1.4rem;font-weight:400;color:var(--cream);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer{
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:4.5rem 0 2rem;
+  color:var(--muted);
+}
+.foot-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;
+  gap:3.5rem;padding-bottom:3.5rem;
+  border-bottom:1px solid var(--border);
+}
+.foot-brand-logo{
+  display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;
+}
+.foot-brand p{font-size:.82rem;line-height:1.75;max-width:250px}
+.socials{display:flex;gap:.6rem;margin-top:1.6rem}
+.soc{
+  width:34px;height:34px;
+  border:1px solid var(--border);
+  display:grid;place-items:center;
+  color:var(--muted);
+  transition:border-color .25s,color .25s;
+}
+.soc:hover{border-color:var(--gold);color:var(--gold)}
+.foot-col h5{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:1.3rem;
+}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.foot-col li a{font-size:.8rem;color:var(--muted);transition:color .2s}
+.foot-col li a:hover{color:var(--cream)}
+.foot-col address{font-style:normal;display:flex;flex-direction:column;gap:.9rem}
+.foot-col address strong{color:rgba(232,226,216,.6);font-weight:400;display:block;font-size:.65rem;letter-spacing:.1em;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;margin-bottom:.15rem}
+.foot-col address p{font-size:.82rem}
+.foot-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.8rem;flex-wrap:wrap;gap:1rem;
+}
+.foot-bottom p{font-size:.72rem}
+.foot-bottom span{font-size:.7rem;color:rgba(232,226,216,.2)}
+
+/* ─── WA FLOAT ───────────────────────────────── */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:150;
+  width:54px;height:54px;
+  background:#25D366;
+  display:grid;place-items:center;
+  box-shadow:0 8px 32px rgba(37,211,102,.3);
+  transition:transform .25s,box-shadow .25s;
+}
+.wa-float:hover{transform:scale(1.07) translateY(-2px);box-shadow:0 14px 40px rgba(37,211,102,.4)}
+
+/* ─── REVEAL ANIM ────────────────────────────── */
+.rv{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.rv.vis{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}
+.rv.d2{transition-delay:.2s}
+.rv.d3{transition-delay:.3s}
+.rv.d4{transition-delay:.4s}
+
+/* ─── KEYFRAMES ──────────────────────────────── */
+@keyframes riseIn{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:none}
+}
+@keyframes mq{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}
+  .hero-r{display:none}
+  .hero-l{padding:120px 6vw 7rem}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .proc-grid{grid-template-columns:1fr;gap:3rem}
+  .proc-visual{display:none}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .nav-links,.nav-wa{display:none}
+  .nav-toggle{display:flex}
+  .feat-grid{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .cta-info{gap:2rem}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <span class="logo-icon">GL</span>
-                <div class="logo-text">
-                    <span class="logo-main">GL CUCHILLOS</span>
-                    <span class="logo-sub">ARTESANALES</span>
-                </div>
-            </a>
+<div id="cur"></div>
+<div id="cur-ring"></div>
 
-            <div class="nav-menu" id="navMenu">
-                <a href="#inicio" class="nav-link active">Inicio</a>
-                <a href="#coleccion" class="nav-link">Colección</a>
-                <a href="#proceso" class="nav-link">Proceso</a>
-                <a href="#testimonios" class="nav-link">Testimonios</a>
-                <a href="#contacto" class="nav-link">Contacto</a>
-            </div>
+<!-- Mobile nav -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" id="mobClose">×</button>
+  <a href="#inicio" onclick="closeMob()">Inicio</a>
+  <a href="#coleccion" onclick="closeMob()">Colección</a>
+  <a href="#proceso" onclick="closeMob()">Proceso</a>
+  <a href="#testimonios" onclick="closeMob()">Testimonios</a>
+  <a href="#contacto" onclick="closeMob()">Contacto</a>
+</div>
 
-            <div class="nav-actions">
-                <button class="icon-btn" id="searchBtn" aria-label="Buscar">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                    </svg>
-                </button>
-                <button class="icon-btn" id="cartBtn" aria-label="Carrito">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                        <line x1="3" y1="6" x2="21" y2="6"/>
-                        <path d="M16 10a4 4 0 0 1-8 0"/>
-                    </svg>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <button class="menu-toggle" id="menuToggle" aria-label="Menú">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#inicio" class="logo">
+    <div class="logo-mark">GL</div>
+    <div class="logo-text">GL Cuchillos<span>Artesanales · Argentina</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#coleccion">Colección</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="https://wa.me/5493843458340" class="nav-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Consultar
+    </a>
+    <button class="nav-toggle" id="navTog" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <span class="hero-badge"> 100% Calidad</span>
-            <h1 class="hero-title">
-                Maestría Artesanal<br>
-                en Cada Hoja
-            </h1>
-            <p class="hero-text">
-                Cuchillos forjados a mano con tradición familiar argentina.<br>
-                Cada pieza es única, hecha con pasión y dedicación absoluta.
-            </p>
-            <div class="hero-cta">
-                <a href="#coleccion" class="btn btn-primary">
-                    Explorar Colección
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M5 12h14m-7-7 7 7-7 7"/>
-                    </svg>
-                </a>
-                <a href="#proceso" class="btn btn-secondary">Ver Proceso</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">40+</div>
-                    <div class="stat-label">Años de experiencia</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">5000+</div>
-                    <div class="stat-label">Cuchillos creados</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Satisfacción garantizada</div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="hero-img-wrapper">
-                <img src="images/gl-proceso-final.jpg" alt="Cuchillo artesanal" class="hero-img">
-            </div>
-        </div>
-    </section>
+<!-- ═══ HERO ═══════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-l">
+    <div class="hero-overline">
+      <div class="hero-overline-dash"></div>
+      100% Artesanal · Forjado a Mano
+    </div>
+    <h1 class="hero-h1">
+      Cada filo<br>
+      <em>cuenta una<br>historia.</em>
+    </h1>
+    <p class="hero-body">
+      Cuchillos únicos, forjados pieza a pieza en Argentina. Acero de alta calidad, maderas nobles, terminaciones impecables. Para quienes aprecian lo genuino.
+    </p>
+    <div class="hero-actions">
+      <a href="#coleccion" class="btn-gold">
+        Ver colección
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Quiero%20consultar%20sobre%20un%20cuchillo" class="btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Pedir por WhatsApp
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="h-stat-n">500+</div>
+        <div class="h-stat-l">Piezas entregadas</div>
+      </div>
+      <div>
+        <div class="h-stat-n">100%</div>
+        <div class="h-stat-l">Artesanal</div>
+      </div>
+      <div>
+        <div class="h-stat-n">🇦🇷</div>
+        <div class="h-stat-l">Hecho en Argentina</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
-                    </div>
-                    <h3>Hecho a Mano</h3>
-                    <p>Cada cuchillo forjado individualmente con técnicas tradicionales</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <h3>Garantía de por Vida</h3>
-                    <p>Respaldamos la calidad de cada pieza que sale de nuestro taller</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3>Envío a Todo el País</h3>
-                    <p>Delivery seguro con seguimiento en toda Argentina</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                            <line x1="1" y1="10" x2="23" y2="10"/>
-                        </svg>
-                    </div>
-                    <h3>12 Cuotas sin Interés</h3>
-                    <p>Financiación flexible para hacer realidad tu inversión</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Right panel with big knife illustration -->
+  <div class="hero-r">
+    <div class="hero-r-inner">
+      <!-- Large decorative knife SVG -->
+      <svg class="knife-hero" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Blade -->
+        <path d="M200 60 L360 230 Q370 250 360 270 L200 260 Z"
+          fill="url(#bladeGrad)" stroke="rgba(232,226,216,.08)" stroke-width=".5"/>
+        <!-- Blade edge highlight -->
+        <path d="M200 60 L360 230 Q370 250 360 270"
+          stroke="url(#edgeGrad)" stroke-width="1" fill="none"/>
+        <!-- Blade flat -->
+        <path d="M200 60 L200 260 L360 270 Q370 250 360 230 Z"
+          fill="url(#flatGrad)" opacity=".3"/>
+        <!-- Fuller groove -->
+        <path d="M210 80 L330 225" stroke="rgba(255,255,255,.06)" stroke-width="2.5"/>
+        <!-- Guard -->
+        <rect x="183" y="255" width="34" height="12" rx="2" fill="url(#guardGrad)"/>
+        <!-- Handle -->
+        <path d="M186 267 Q185 340 190 420 L210 420 Q215 340 214 267 Z"
+          fill="url(#handleGrad)"/>
+        <!-- Handle pins -->
+        <circle cx="200" cy="295" r="4" fill="rgba(201,168,76,.6)"/>
+        <circle cx="200" cy="340" r="4" fill="rgba(201,168,76,.6)"/>
+        <circle cx="200" cy="385" r="4" fill="rgba(201,168,76,.6)"/>
+        <!-- Wood grain lines on handle -->
+        <path d="M190 275 Q200 278 210 275" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 285 Q200 288 211 285" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 310 Q200 313 211 310" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 330 Q200 333 211 330" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 360 Q200 363 211 360" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 380 Q200 383 211 380" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <path d="M189 405 Q200 408 211 405" stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"/>
+        <!-- Butt cap -->
+        <ellipse cx="200" cy="420" rx="12" ry="6" fill="url(#guardGrad)"/>
 
-    <!-- Collection -->
-    <section class="collection" id="coleccion">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">NUESTRA COLECCIÓN</span>
-                <h2 class="section-title">Obras Maestras Artesanales</h2>
-                <p class="section-text">Cada cuchillo cuenta una historia única de pasión y dedicación</p>
-            </div>
+        <defs>
+          <linearGradient id="bladeGrad" x1="200" y1="60" x2="360" y2="270" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7A7870"/>
+            <stop offset="40%" stop-color="#B0ADA6"/>
+            <stop offset="70%" stop-color="#D4D0C8"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity=".7"/>
+          </linearGradient>
+          <linearGradient id="edgeGrad" x1="200" y1="60" x2="360" y2="270" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="rgba(255,255,255,.0)"/>
+            <stop offset="50%" stop-color="rgba(255,255,255,.35)"/>
+            <stop offset="100%" stop-color="rgba(201,168,76,.8)"/>
+          </linearGradient>
+          <linearGradient id="flatGrad" x1="200" y1="60" x2="360" y2="270" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="rgba(255,255,255,.15)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,.0)"/>
+          </linearGradient>
+          <linearGradient id="guardGrad" x1="183" y1="260" x2="217" y2="268" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#8A7A50"/>
+            <stop offset="50%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="#8A7A50"/>
+          </linearGradient>
+          <linearGradient id="handleGrad" x1="186" y1="267" x2="214" y2="267" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#3A2818"/>
+            <stop offset="30%" stop-color="#6A4A28"/>
+            <stop offset="60%" stop-color="#4A3020"/>
+            <stop offset="100%" stop-color="#2A1808"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <!-- Badge -->
+    <div class="hero-badge">
+      <div class="hero-badge-top">Envíos a todo el país</div>
+      <div class="hero-badge-val">Argentina 🇦🇷</div>
+    </div>
+  </div>
+</section>
 
-            <div class="collection-grid">
-                <!-- Product Card 1 -->
-                <article class="product-card" data-product="chef-">
-                    <div class="product-badge">Más Vendido</div>
-                    <div class="product-image">
-                        <img src="images/gl-detalle-final.jpg" alt="Chef" loading="lazy">
-                        <div class="product-overlay">
-                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                            </button>
-                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Chef Profesional</div>
-                        <h3 class="product-name">Chef </h3>
-                        <p class="product-description">Acero Inox con mango de olivo estabilizado</p>
-                        <div class="product-rating">
-                            <div class="stars">★★★★★</div>
-                            <span class="reviews">(42)</span>
-                        </div>
-                        <div class="product-footer">
-                            <div class="product-price">
-                                <span class="price">$24.500</span>
-                                <span class="installments">12 cuotas de $2.041</span>
-                            </div>
-                            <button class="btn-add-cart">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                                </svg>
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
-                </article>
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mq-track">
+    <div class="mq-item">Forjado a mano <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Acero de alta calidad <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Mango en madera noble <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Envíos a todo Argentina <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Piezas únicas <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Personalización total <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Calidad garantizada <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Exportamos al mundo <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Forjado a mano <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Acero de alta calidad <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Mango en madera noble <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Envíos a todo Argentina <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Piezas únicas <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Personalización total <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Calidad garantizada <span class="mq-dot">✦</span></div>
+    <div class="mq-item">Exportamos al mundo <span class="mq-dot">✦</span></div>
+  </div>
+</div>
 
-                <!-- Product Card 2 -->
-                <article class="product-card" data-product="caza-tactico">
-                    <div class="product-badge new">Nuevo</div>
-                    <div class="product-image">
-                        <img src="images/gl-detalle-final.jpg" alt="Caza Táctico" loading="lazy">
-                        <div class="product-overlay">
-                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                            </button>
-                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Caza & Aventura</div>
-                        <h3 class="product-name">Caza Táctico</h3>
-                        <p class="product-description">Acero al carbono 1095 con mango micarta</p>
-                        <div class="product-rating">
-                            <div class="stars">★★★★☆</div>
-                            <span class="reviews">(28)</span>
-                        </div>
-                        <div class="product-footer">
-                            <div class="product-price">
-                                <span class="price">$18.900</span>
-                                <span class="installments">12 cuotas de $1.575</span>
-                            </div>
-                            <button class="btn-add-cart">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                                </svg>
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
-                </article>
+<!-- ═══ FEATURES ════════════════════════════════ -->
+<section class="features">
+  <div class="container">
+    <div class="feat-grid">
+      <div class="feat rv">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+          <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+          <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+          <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+          <path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+        </svg>
+        <h4>100% Artesanal</h4>
+        <p>Cada pieza forjada individualmente. Sin producción en serie, sin moldes, sin compromesos de calidad.</p>
+      </div>
+      <div class="feat rv d1">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <h4>Calidad Garantizada</h4>
+        <p>Respaldamos cada pieza que sale del taller. Si no quedás conforme con el resultado, lo solucionamos.</p>
+      </div>
+      <div class="feat rv d2">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+          <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+        <h4>Envío a Todo el País</h4>
+        <p>Entrega segura a cualquier punto de Argentina. También exportamos al exterior — ya llegamos a Alemania.</p>
+      </div>
+      <div class="feat rv d3">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+        <h4>Piezas a Medida</h4>
+        <p>Diseñamos el cuchillo que tenés en mente. Largo, forma de hoja, madera del mango, grabado personalizado.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- Product Card 3 -->
-                <article class="product-card" data-product="juego-parrillero">
-                    <div class="product-badge sale">Oferta</div>
-                    <div class="product-image">
-                        <img src="images/gl-detalle-final.jpg" alt="Juego Parrillero" loading="lazy">
-                        <div class="product-overlay">
-                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                            </button>
-                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Parrilla & Asado</div>
-                        <h3 class="product-name">Juego Parrillero</h3>
-                        <p class="product-description">Set de 3 cuchillos + tenedor, mangos de nogal</p>
-                        <div class="product-rating">
-                            <div class="stars">★★★★★</div>
-                            <span class="reviews">(56)</span>
-                        </div>
-                        <div class="product-footer">
-                            <div class="product-price">
-                                <span class="price">$32.500</span>
-                                <span class="installments">12 cuotas de $2.708</span>
-                            </div>
-                            <button class="btn-add-cart">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                                </svg>
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product Card 4 -->
-                <article class="product-card" data-product="decorativo-">
-                    <div class="product-badge exclusive">Exclusivo</div>
-                    <div class="product-image">
-                        <img src="images/chefdamasco.jpg" alt=" Decorativo" loading="lazy">
-                        <div class="product-overlay">
-                            <button class="btn-icon btn-wishlist" aria-label="Agregar a favoritos">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                            </button>
-                            <button class="btn-icon btn-quick-view" aria-label="Vista rápida">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Pieza de Colección</div>
-                        <h3 class="product-name">Decorativo</h3>
-                        <p class="product-description">Patrón  único con mango de asta de ciervo</p>
-                        <div class="product-rating">
-                            <div class="stars">★★★★★</div>
-                            <span class="reviews">(19)</span>
-                        </div>
-                        <div class="product-footer">
-                            <div class="product-price">
-                                <span class="price">$42.000</span>
-                                <span class="installments">12 cuotas de $3.500</span>
-                            </div>
-                            <button class="btn-add-cart">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                                </svg>
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="section-cta">
-                <a href="#coleccion" class="btn btn-outline">
-                    Ver Colección Completa
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M5 12h14m-7-7 7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process -->
-    <section class="process" id="proceso">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">NUESTRO PROCESO</span>
-                <h2 class="section-title">Del Acero a la Obra Maestra</h2>
-                <p class="section-text">Un proceso artesanal perfeccionado durante décadas</p>
-            </div>
-
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Selección del Acero</h3>
-                    <p class="step-text">Elegimos los mejores aceros al carbono e inox, garantizando calidad excepcional.</p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Forjado Artesanal</h3>
-                    <p class="step-text">Cada hoja es forjada a mano en nuestra fragua, usando técnicas tradicionales.</p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="6"/>
-                            <circle cx="12" cy="12" r="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Tratamiento Térmico</h3>
-                    <p class="step-text">Proceso preciso de temple y revenido para dureza y flexibilidad óptimas.</p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Acabado Final</h3>
-                    <p class="step-text">Pulido, afilado profesional y montaje del mango artesanal único.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Banner -->
-    <section class="cta-banner">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">¿Listo para tu Cuchillo Artesanal?</h2>
-                <p class="cta-text">Consultá por pedidos personalizados o visitá nuestro taller</p>
-                <div class="cta-buttons">
-                    <a href="https://wa.me/5493843458340" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                        Contactar por WhatsApp
-                    </a>
-                    <a href="#coleccion" class="btn btn-secondary">Ver Catálogo</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonios">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">TESTIMONIOS</span>
-                <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"Increíble calidad. Compré el cuchillo de chef y superó todas mis expectativas. El balance y filo son perfectos."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez" loading="lazy">
-                        <div>
-                            <div class="author-name">Carlos Rodríguez</div>
-                            <div class="author-role">Chef Profesional</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"El juego parrillero es espectacular. Todos en mi familia quedaron maravillados con la artesanía y calidad."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María González" loading="lazy">
-                        <div>
-                            <div class="author-name">María González</div>
-                            <div class="author-role">Cliente desde 2019</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"Colecciono cuchillos hace 20 años. La maestría artesanal de GL es de lo mejor que he visto en Argentina."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Juan Pérez" loading="lazy">
-                        <div>
-                            <div class="author-name">Juan Pérez</div>
-                            <div class="author-role">Coleccionista</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="contacto">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <span class="logo-icon">GL</span>
-                        <div class="logo-text">
-                            <span class="logo-main">GL CUCHILLOS</span>
-                            <span class="logo-sub">ARTESANALES</span>
-                        </div>
-                    </div>
-                    <p class="footer-text">Forjando tradición y calidad desde 1980. Cada cuchillo cuenta una historia de pasión y dedicación.</p>
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/gonzalo.londero.3/" aria-label="Instagram">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/Gonzafcf" aria-label="Facebook">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
-                        <a href="https://wa.me/5493843458340" aria-label="WhatsApp">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Productos</h4>
-                    <ul>
-                        <li><a href="#coleccion">Cuchillos de Chef</a></li>
-                        <li><a href="#coleccion">Cuchillos de Caza</a></li>
-                        <li><a href="#coleccion">Juegos Parrilleros</a></li>
-                        <li><a href="#coleccion">Piezas Decorativas</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Empresa</h4>
-                    <ul>
-                        <li><a href="#proceso">Nuestro Proceso</a></li>
-                        <li><a href="#inicio">Sobre Nosotros</a></li>
-                        <li><a href="#testimonios">Testimonios</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Contacto</h4>
-                    <ul class="footer-contact">
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            Online, Argentina
-                        </li>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                            +54 9 3843 458340
-                        </li>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                            Lun-Vie: 9-18hs | Sáb: 9-13hs
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 GL CUCHILLOS ARTESANALES. Todos los derechos reservados.</p>
-                <div class="footer-payment">
-                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
-                        <rect width="48" height="32" rx="4" fill="#1A1F71"/>
-                        <text x="24" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">VISA</text>
-                    </svg>
-                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
-                        <rect width="48" height="32" rx="4" fill="#EB001B"/>
-                        <circle cx="24" cy="16" r="10" fill="#FF5F00"/>
-                    </svg>
-                    <svg width="32" height="20" viewBox="0 0 48 32" fill="none">
-                        <rect width="48" height="32" rx="4" fill="#00A3E0"/>
-                        <text x="24" y="20" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">AMEX</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-                Tu Carrito
-            </h3>
-            <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">×</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-                <p>Tu carrito está vacío</p>
-                <a href="#coleccion" class="btn btn-primary">Explorar Productos</a>
-            </div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span class="total-amount" id="cartTotal">$0</span>
-            </div>
-            <button class="btn btn-primary btn-full" id="checkoutBtn">
-                Finalizar Compra
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14m-7-7 7 7-7 7"/>
-                </svg>
-            </button>
-        </div>
+<!-- ═══ COLLECTION ══════════════════════════════ -->
+<section class="collection" id="coleccion">
+  <div class="container">
+    <div class="coll-head">
+      <div>
+        <div class="s-label rv">Colección</div>
+        <h2 class="s-title rv d1">Piezas <em>únicas,</em><br>hechas para durar.</h2>
+      </div>
+      <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20ver%20todo%20el%20catálogo" class="btn-ghost rv">Ver catálogo completo</a>
     </div>
 
-    <!-- Cart Overlay -->
-    <div class="overlay" id="cartOverlay"></div>
+    <div class="prod-grid">
+      <!-- Prod 1 -->
+      <div class="prod rv">
+        <div class="prod-img">
+          <svg width="160" height="160" viewBox="0 0 400 500" fill="none">
+            <path d="M200 60 L360 230 Q370 250 360 270 L200 260 Z" fill="url(#pg1)"/>
+            <path d="M200 60 L360 230 Q370 250 360 270" stroke="rgba(201,168,76,.4)" stroke-width="1" fill="none"/>
+            <rect x="183" y="255" width="34" height="12" rx="2" fill="rgba(201,168,76,.4)"/>
+            <path d="M186 267 Q185 340 190 420 L210 420 Q215 340 214 267 Z" fill="rgba(100,70,40,.6)"/>
+            <circle cx="200" cy="310" r="3.5" fill="rgba(201,168,76,.5)"/>
+            <circle cx="200" cy="370" r="3.5" fill="rgba(201,168,76,.5)"/>
+            <defs>
+              <linearGradient id="pg1" x1="200" y1="60" x2="360" y2="270" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#7A7870"/><stop offset="60%" stop-color="#C4C0B8"/><stop offset="100%" stop-color="#C9A84C" stop-opacity=".5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="prod-badge">Más vendido</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat">Chef · Parrilla</div>
+          <h3 class="prod-name">Juego Parrillero XL</h3>
+          <p class="prod-desc">Acero inoxidable de alta resistencia. Mango en madera dura con tachas de bronce. El favorito para el asado argentino — y ya llegó a Alemania.</p>
+          <div class="prod-foot">
+            <div class="prod-price">Consultar <small>precio</small></div>
+            <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Me%20interesa%20el%20Juego%20Parrillero%20XL" class="btn-ask">
+              Pedir
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/5493843458340" class="whatsapp-float" aria-label="Contactar por WhatsApp">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      <!-- Prod 2 -->
+      <div class="prod rv d1">
+        <div class="prod-img">
+          <svg width="160" height="160" viewBox="0 0 400 220" fill="none">
+            <!-- Nakiri blade (rectangular) -->
+            <path d="M60 50 L340 50 L340 150 L60 150 Z" fill="url(#pg2)" stroke="rgba(232,226,216,.06)" stroke-width=".5"/>
+            <path d="M60 50 L340 50 L340 55 L60 55 Z" fill="rgba(255,255,255,.12)"/>
+            <path d="M70 80 L330 80" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+            <rect x="40" y="145" width="24" height="50" rx="2" fill="rgba(201,168,76,.35)"/>
+            <path d="M42 195 Q52 240 62 195 L62 195 Q52 200 42 195 Z" fill="rgba(80,50,25,.7)"/>
+            <defs>
+              <linearGradient id="pg2" x1="60" y1="100" x2="340" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#6A6860"/><stop offset="50%" stop-color="#C0BCB4"/><stop offset="100%" stop-color="#8A8680"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="prod-badge" style="background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold)">Japonés</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat">Estilo Japonés</div>
+          <h3 class="prod-name">Nakiri Artesanal</h3>
+          <p class="prod-desc">Hoja rectangular de doble filo ideal para verduras. Equilibrio perfecto entre peso y precisión. Mango a elección del cliente.</p>
+          <div class="prod-foot">
+            <div class="prod-price">Consultar <small>precio</small></div>
+            <a href="https://wa.me/5493843458340?text=Hola!%20Me%20interesa%20el%20Nakiri%20Artesanal" class="btn-ask">
+              Pedir
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prod 3 -->
+      <div class="prod rv d2">
+        <div class="prod-img">
+          <svg width="160" height="160" viewBox="0 0 420 300" fill="none">
+            <!-- Hunting knife -->
+            <path d="M80 140 L320 80 Q370 130 340 160 L80 160 Z" fill="url(#pg3)"/>
+            <path d="M80 140 L320 80 Q370 130 340 160" stroke="rgba(201,168,76,.3)" stroke-width="1" fill="none"/>
+            <path d="M80 130 L80 170 Q70 160 70 150 Z" fill="rgba(201,168,76,.25)"/>
+            <rect x="56" y="128" width="28" height="44" rx="2" fill="rgba(201,168,76,.3)"/>
+            <path d="M58 172 L84 172 L84 240 L58 240 Z" fill="rgba(90,55,25,.65)"/>
+            <path d="M62 180 L80 180 M62 195 L80 195 M62 210 L80 210 M62 225 L80 225" stroke="rgba(0,0,0,.25)" stroke-width=".8"/>
+            <circle cx="71" cy="200" r="4" fill="rgba(201,168,76,.5)"/>
+            <defs>
+              <linearGradient id="pg3" x1="80" y1="120" x2="370" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8A8880"/><stop offset="55%" stop-color="#D0CCC4"/><stop offset="100%" stop-color="#C9A84C" stop-opacity=".4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="prod-badge" style="background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold)">Exportación</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat">Caza · Outdoor</div>
+          <h3 class="prod-name">Cuchillo de Caza</h3>
+          <p class="prod-desc">Forjado en acero al carbono de alta dureza. Filo que se mantiene en condiciones extremas. Mango ergonómico para uso intensivo.</p>
+          <div class="prod-foot">
+            <div class="prod-price">Consultar <small>precio</small></div>
+            <a href="https://wa.me/5493843458340?text=Hola!%20Me%20interesa%20el%20Cuchillo%20de%20Caza" class="btn-ask">
+              Pedir
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coll-more rv">
+      <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Quiero%20ver%20tu%20catálogo%20completo" class="btn-gold" style="display:inline-flex">
+        Ver catálogo completo por WhatsApp
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ════════════════════════════════ -->
+<section class="process" id="proceso">
+  <div class="container">
+    <div class="s-label rv">El proceso</div>
+    <h2 class="s-title rv d1">Así nace<br><em>cada pieza.</em></h2>
+
+    <div class="proc-grid">
+      <div class="proc-steps">
+        <div class="proc-step rv">
+          <div class="proc-n">01</div>
+          <div>
+            <h4>Selección del Acero</h4>
+            <p>Elegimos el material según el uso final: acero inoxidable para cocina, acero al carbono para mayor dureza en caza y outdoor. Cada elección define el carácter del cuchillo.</p>
+          </div>
+        </div>
+        <div class="proc-step rv d1">
+          <div class="proc-n">02</div>
+          <div>
+            <h4>Forja y Forma</h4>
+            <p>La hoja toma su forma a temperatura precisa, trabajada a martillo sobre yunque. Cada golpe es intencional. Este paso no se puede delegar a una máquina.</p>
+          </div>
+        </div>
+        <div class="proc-step rv d2">
+          <div class="proc-n">03</div>
+          <div>
+            <h4>Temple</h4>
+            <p>El proceso de calentamiento y enfriamiento controlado le da al acero su dureza definitiva. Un buen temple es la diferencia entre un filo que dura y uno que no.</p>
+          </div>
+        </div>
+        <div class="proc-step rv d3">
+          <div class="proc-n">04</div>
+          <div>
+            <h4>Acabado y Mango</h4>
+            <p>Pulido a mano hasta el acabado elegido. El mango — en maderas nobles, cuero o materiales premium — se ajusta ergonómicamente. Cada detalle se revisa antes de entregar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="proc-visual rv d2">
+        <div class="proc-visual-cross">
+          <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
+            <circle cx="160" cy="160" r="140" stroke="currentColor" stroke-width=".5"/>
+            <circle cx="160" cy="160" r="100" stroke="currentColor" stroke-width=".5" stroke-dasharray="3 8"/>
+            <line x1="20" y1="160" x2="300" y2="160" stroke="currentColor" stroke-width=".5"/>
+            <line x1="160" y1="20" x2="160" y2="300" stroke="currentColor" stroke-width=".5"/>
+          </svg>
+        </div>
+        <!-- Centered knife illustration -->
+        <svg width="55%" viewBox="0 0 400 500" fill="none">
+          <path d="M200 60 L360 230 Q370 250 360 270 L200 260 Z" fill="url(#pvg)"/>
+          <path d="M200 60 L360 230 Q370 250 360 270" stroke="rgba(201,168,76,.5)" stroke-width="1" fill="none"/>
+          <rect x="183" y="255" width="34" height="12" rx="2" fill="rgba(201,168,76,.6)"/>
+          <path d="M186 267 Q185 340 190 420 L210 420 Q215 340 214 267 Z" fill="rgba(80,50,25,.7)"/>
+          <circle cx="200" cy="300" r="4" fill="rgba(201,168,76,.7)"/>
+          <circle cx="200" cy="355" r="4" fill="rgba(201,168,76,.7)"/>
+          <circle cx="200" cy="405" r="4" fill="rgba(201,168,76,.7)"/>
+          <defs>
+            <linearGradient id="pvg" x1="200" y1="60" x2="360" y2="270" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6A6860"/><stop offset="60%" stop-color="#C4C0B8"/><stop offset="100%" stop-color="#C9A84C" stop-opacity=".7"/>
+            </linearGradient>
+          </defs>
         </svg>
-    </a>
+        <div class="proc-tag">
+          <div class="proc-tag-top">Hecho en</div>
+          <div class="proc-tag-val">Argentina 🇦🇷</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+<!-- ═══ TESTIMONIALS ════════════════════════════ -->
+<section class="testimonials" id="testimonios">
+  <div class="container">
+    <div class="s-label rv">Testimonios</div>
+    <h2 class="s-title rv d1">Lo que dicen<br><em>quienes confían.</em></h2>
+
+    <div class="testi-grid">
+      <div class="testi rv">
+        <div class="testi-stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"El juego parrillero XL que se fue a Alemania fue un éxito. Leonhard quedó fascinado con la calidad del acero y el acabado del mango. Lo recomendó a todos sus amigos."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#5C3A1E,#3A2010)">L</div>
+          <div>
+            <div class="testi-name">Leonhard K.</div>
+            <div class="testi-loc">Alemania · Cliente exportación</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi rv d1">
+        <div class="testi-stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"Le regalé el Nakiri a Luciana y quedó enamorada. La terminación es impecable, el balance perfecto. Vale cada peso — y lo volvería a pedir sin dudarlo."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#4A2A3A,#2A1020)">N</div>
+          <div>
+            <div class="testi-name">Néstor G.</div>
+            <div class="testi-loc">Buenos Aires · Cliente frecuente</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi rv d2">
+        <div class="testi-stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"Llevo el cuchillo de caza dos temporadas en el campo. Sigue afilado, el mango no cedió, el acero no se manchó. Eso es calidad real — no hay más que agregar."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#2A4A2A,#182A18)">C</div>
+          <div>
+            <div class="testi-name">Carlos M.</div>
+            <div class="testi-loc">Salta · Cliente desde 2022</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ══════════════════════════════════════ -->
+<section class="cta-section" id="contacto">
+  <div class="container">
+    <div class="s-label rv" style="justify-content:center">¿Tenés algo en mente?</div>
+    <h2 class="cta-title rv d1">Tu cuchillo <em>ideal</em><br>está a un mensaje.</h2>
+    <p class="cta-sub rv d2">Contanos qué buscás — medidas, tipo de acero, madera, grabado — y lo hacemos realidad. Sin complicaciones.</p>
+    <div class="cta-acts rv d3">
+      <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Quiero%20consultar%20sobre%20un%20cuchillo%20personalizado" class="btn-wa">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Escribir a Gonzalo
+      </a>
+      <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="btn-insta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Ver Instagram
+      </a>
+    </div>
+
+    <div class="cta-info rv d4">
+      <div class="cta-info-item">
+        <div class="cta-info-label">WhatsApp</div>
+        <a href="tel:+5493843458340" class="cta-info-val">+54 9 3843 458340</a>
+      </div>
+      <div style="width:1px;background:var(--border)"></div>
+      <div class="cta-info-item">
+        <div class="cta-info-label">Instagram</div>
+        <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="cta-info-val">@gonzalo.londero.3</a>
+      </div>
+      <div style="width:1px;background:var(--border)"></div>
+      <div class="cta-info-item">
+        <div class="cta-info-label">Envíos</div>
+        <span class="cta-info-val">Todo Argentina</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-logo">
+          <div class="logo-mark">GL</div>
+          <div class="logo-text" style="color:var(--cream)">GL Cuchillos<span>Artesanales · Argentina</span></div>
+        </div>
+        <p>Cuchillos forjados a mano, pieza por pieza. Para quienes entienden que la calidad real no se fabrica en serie.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="soc" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/Gonzafcf" target="_blank" class="soc" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/5493843458340" class="soc" aria-label="WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="#coleccion">Juegos Parrilleros</a></li>
+          <li><a href="#coleccion">Cuchillos de Caza</a></li>
+          <li><a href="#coleccion">Nakiri & Chef</a></li>
+          <li><a href="#coleccion">Piezas Personalizadas</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Información</h5>
+        <ul>
+          <li><a href="#proceso">El Proceso</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <address>
+          <div><strong>WhatsApp</strong><p>+54 9 3843 458340</p></div>
+          <div><strong>Instagram</strong><p>@gonzalo.londero.3</p></div>
+          <div><strong>Envíos</strong><p>Todo Argentina · Internacional</p></div>
+        </address>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2025 GL Cuchillos Artesanales · Gonzalo Londero</p>
+      <span>Hecho con ♥ en Argentina</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WA Float -->
+<a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" class="wa-float" aria-label="WhatsApp">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+// ── CURSOR ────────────────────────────────────
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.prod,.feat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));
+});
+
+// ── NAV ────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',scrollY>30);
+},{passive:true});
+
+// ── MOBILE ─────────────────────────────────
+document.getElementById('navTog').onclick=()=>document.getElementById('mobNav').classList.add('open');
+document.getElementById('mobClose').onclick=()=>document.getElementById('mobNav').classList.remove('open');
+function closeMob(){document.getElementById('mobNav').classList.remove('open')}
+
+// ── REVEAL ─────────────────────────────────
+const rvEls = document.querySelectorAll('.rv');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+rvEls.forEach(el=>obs.observe(el));
+// Fallback for local file viewing
+function checkVis(){
+  document.querySelectorAll('.rv:not(.vis)').forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight+80) el.classList.add('vis');
+  });
+}
+setTimeout(checkVis,200);
+setTimeout(checkVis,600);
+window.addEventListener('scroll',checkVis,{passive:true});
+</script>
 </body>
 </html>
