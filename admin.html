@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GL Admin · Panel de Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D0B08;
+  --bg2:#131009;
+  --bg3:#1A1510;
+  --bg4:#221A12;
+  --amber:#C8832A;
+  --gold:#D4A843;
+  --green:#2ECC71;
+  --red:#E74C3C;
+  --blue:#3498DB;
+  --yellow:#F1C40F;
+  --cream:#F0E6D0;
+  --muted:#7A6A54;
+  --border:rgba(212,168,67,.1);
+  --border2:rgba(212,168,67,.2);
+  --input-bg:rgba(255,255,255,.04);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html,body{height:100%;font-family:'Poppins',sans-serif;font-weight:300;background:var(--bg);color:var(--cream);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{font-family:'Poppins',sans-serif;cursor:pointer}
+input,textarea,select{font-family:'Poppins',sans-serif}
+img{display:block;max-width:100%}
+
+/* ── SCROLLBAR ────────────────────────────── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── LOGIN ────────────────────────────────── */
+#login-screen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+#login-screen.hidden{display:none}
+.login-card{
+  width:100%;max-width:400px;padding:2.5rem;
+  background:var(--bg2);border:1px solid var(--border);
+  text-align:center;
+}
+.login-logo{
+  width:56px;height:56px;border-radius:50%;
+  border:1px solid var(--border2);
+  display:grid;place-items:center;margin:0 auto 1.5rem;
+  font-size:.85rem;font-weight:700;color:var(--gold);letter-spacing:.05em;
+}
+.login-card h2{font-size:1.3rem;font-weight:600;margin-bottom:.3rem}
+.login-card p{font-size:.78rem;color:var(--muted);margin-bottom:2rem}
+.login-card input{
+  width:100%;padding:.75rem 1rem;
+  background:var(--input-bg);border:1px solid var(--border);
+  color:var(--cream);font-size:.88rem;font-weight:300;
+  outline:none;margin-bottom:1rem;
+  transition:border-color .2s;
+}
+.login-card input:focus{border-color:var(--amber)}
+.btn-login{
+  width:100%;padding:.8rem;
+  background:var(--amber);color:var(--bg);
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:none;
+  transition:background .2s;
+}
+.btn-login:hover{background:var(--gold)}
+.login-error{color:var(--red);font-size:.75rem;margin-top:.75rem}
+
+/* ── LAYOUT ───────────────────────────────── */
+#app{display:flex;min-height:100vh}
+#app.hidden{display:none}
+
+/* ── SIDEBAR ──────────────────────────────── */
+.sidebar{
+  width:240px;flex-shrink:0;
+  background:var(--bg2);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;left:0;top:0;bottom:0;z-index:100;
+  transition:transform .3s var(--ease);
+}
+.sidebar-logo{
+  padding:1.5rem 1.4rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.9rem;
+}
+.sidebar-logo-mark{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--border2);
+  display:grid;place-items:center;
+  font-size:.68rem;font-weight:700;color:var(--gold);flex-shrink:0;
+}
+.sidebar-logo-text{font-size:.85rem;font-weight:600;line-height:1.2}
+.sidebar-logo-text small{display:block;font-size:.6rem;font-weight:300;color:var(--muted);margin-top:1px}
+.sidebar-nav{flex:1;padding:1rem 0;overflow-y:auto}
+.nav-section{
+  font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);padding:.6rem 1.4rem .4rem;
+  margin-top:.5rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.7rem 1.4rem;
+  font-size:.78rem;font-weight:400;color:var(--muted);
+  cursor:pointer;
+  transition:color .2s,background .2s;
+  border-left:2px solid transparent;
+  position:relative;
+}
+.nav-item:hover{color:var(--cream);background:rgba(255,255,255,.03)}
+.nav-item.active{color:var(--cream);background:rgba(212,168,67,.07);border-left-color:var(--amber)}
+.nav-item svg{flex-shrink:0;opacity:.7}
+.nav-badge{
+  margin-left:auto;
+  background:var(--amber);color:var(--bg);
+  font-size:.55rem;font-weight:700;
+  padding:.15rem .45rem;border-radius:9px;
+}
+.sidebar-footer{
+  padding:1rem 1.4rem;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sidebar-footer-info{font-size:.7rem;color:var(--muted)}
+.sidebar-footer-info strong{display:block;color:var(--cream);font-weight:500;font-size:.75rem}
+.btn-logout{
+  background:none;border:1px solid var(--border);
+  padding:.4rem .7rem;
+  font-size:.65rem;color:var(--muted);
+  transition:color .2s,border-color .2s;
+}
+.btn-logout:hover{color:var(--red);border-color:var(--red)}
+
+/* ── MAIN ─────────────────────────────────── */
+.main{
+  margin-left:240px;flex:1;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(13,11,8,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+}
+.topbar-title{font-size:1rem;font-weight:600}
+.topbar-actions{display:flex;align-items:center;gap:.75rem}
+.page-content{padding:2rem;flex:1}
+
+/* ── VIEWS ────────────────────────────────── */
+.view{display:none}
+.view.active{display:block}
+
+/* ── CARDS / STATS ────────────────────────── */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;margin-bottom:2rem;
+}
+.stat-card{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:1.4rem 1.6rem;
+  transition:border-color .2s;
+}
+.stat-card:hover{border-color:var(--border2)}
+.stat-label{font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.stat-value{font-size:2rem;font-weight:700;color:var(--cream);line-height:1}
+.stat-sub{font-size:.7rem;color:var(--muted);margin-top:.3rem}
+.stat-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.4rem}
+
+/* ── SECTION HEADER ───────────────────────── */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;
+}
+.section-header h2{font-size:1.1rem;font-weight:600}
+.section-header p{font-size:.78rem;color:var(--muted)}
+
+/* ── BUTTONS ──────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.6rem 1.2rem;
+  font-size:.72rem;font-weight:500;letter-spacing:.06em;
+  border:none;transition:all .2s;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+.btn-primary{background:var(--amber);color:var(--bg)}
+.btn-primary:hover{background:var(--gold)}
+.btn-outline-btn{background:transparent;color:var(--cream);border:1px solid var(--border2)}
+.btn-outline-btn:hover{border-color:var(--amber);color:var(--amber)}
+.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(231,76,60,.3)}
+.btn-danger:hover{background:rgba(231,76,60,.1)}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#27AE60}
+.btn-sm{padding:.4rem .8rem;font-size:.66rem}
+.btn-icon{
+  width:32px;height:32px;padding:0;
+  display:grid;place-items:center;
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);transition:all .2s;
+}
+.btn-icon:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ── PRODUCTS TABLE ───────────────────────── */
+.prod-table{width:100%;border-collapse:collapse}
+.prod-table th{
+  padding:.7rem 1rem;
+  font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-align:left;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+.prod-table td{
+  padding:.9rem 1rem;
+  font-size:.78rem;color:var(--cream);
+  border-bottom:1px solid rgba(212,168,67,.05);
+  vertical-align:middle;
+}
+.prod-table tr:hover td{background:rgba(255,255,255,.02)}
+.prod-thumb{
+  width:42px;height:42px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+}
+.prod-thumb img{width:100%;height:100%;object-fit:cover}
+.prod-thumb-placeholder{
+  width:42px;height:42px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:grid;place-items:center;
+  color:var(--muted);font-size:.6rem;font-weight:500;
+  flex-shrink:0;
+}
+.prod-name-cell{display:flex;align-items:center;gap:.9rem}
+.prod-name-text strong{display:block;font-weight:500;font-size:.82rem}
+.prod-name-text span{font-size:.68rem;color:var(--muted)}
+.badge{
+  display:inline-block;
+  font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:.22rem .65rem;
+}
+.badge-avail{background:rgba(46,204,113,.15);color:var(--green);border:1px solid rgba(46,204,113,.3)}
+.badge-custom{background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3)}
+.badge-intl{background:rgba(52,152,219,.12);color:var(--blue);border:1px solid rgba(52,152,219,.3)}
+.badge-unavail{background:rgba(231,76,60,.1);color:var(--red);border:1px solid rgba(231,76,60,.25)}
+.badge-promo{background:rgba(241,196,15,.1);color:var(--yellow);border:1px solid rgba(241,196,15,.25)}
+.toggle-wrap{display:flex;align-items:center;gap:.5rem}
+.toggle{
+  position:relative;display:inline-block;
+  width:36px;height:20px;cursor:pointer;
+}
+.toggle input{display:none}
+.toggle-slider{
+  position:absolute;inset:0;
+  background:rgba(255,255,255,.1);border:1px solid var(--border2);
+  border-radius:20px;
+  transition:.25s;
+}
+.toggle-slider::before{
+  content:'';position:absolute;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--muted);
+  left:2px;top:2px;
+  transition:.25s;
+}
+.toggle input:checked + .toggle-slider{background:rgba(200,131,42,.2);border-color:var(--amber)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(16px);background:var(--amber)}
+.actions-cell{display:flex;gap:.4rem;align-items:center}
+
+/* ── MODAL ────────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1rem;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--bg2);border:1px solid var(--border);
+  width:100%;max-width:680px;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(16px);transition:transform .3s var(--ease);
+}
+.modal-overlay.open .modal{transform:none}
+.modal-head{
+  padding:1.4rem 1.8rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;background:var(--bg2);z-index:2;
+}
+.modal-head h3{font-size:1rem;font-weight:600}
+.modal-close{
+  background:none;border:none;
+  color:var(--muted);font-size:1.4rem;line-height:1;
+  transition:color .2s;
+}
+.modal-close:hover{color:var(--cream)}
+.modal-body{padding:1.8rem}
+.modal-footer{
+  padding:1.2rem 1.8rem;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:flex-end;gap:.75rem;
+  position:sticky;bottom:0;background:var(--bg2);
+}
+
+/* ── FORM ─────────────────────────────────── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-group label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.form-control{
+  width:100%;padding:.7rem .9rem;
+  background:var(--input-bg);border:1px solid var(--border);
+  color:var(--cream);font-size:.82rem;font-weight:300;
+  outline:none;transition:border-color .2s;
+}
+.form-control:focus{border-color:var(--amber)}
+.form-control::placeholder{color:var(--muted);opacity:.6}
+textarea.form-control{resize:vertical;min-height:90px}
+select.form-control option{background:var(--bg3);color:var(--cream)}
+.form-hint{font-size:.66rem;color:var(--muted);margin-top:.2rem}
+.specs-list{display:flex;flex-direction:column;gap:.5rem}
+.spec-row{display:flex;gap:.5rem;align-items:center}
+.spec-row input{flex:1}
+.btn-spec-add{
+  background:none;border:1px dashed var(--border2);
+  color:var(--muted);font-size:.72rem;font-weight:400;
+  padding:.5rem 1rem;width:100%;margin-top:.5rem;
+  transition:all .2s;
+}
+.btn-spec-add:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ── IMAGE UPLOAD AREA ────────────────────── */
+.img-upload{
+  border:2px dashed var(--border2);
+  padding:2rem;text-align:center;
+  cursor:pointer;transition:border-color .2s,background .2s;
+  position:relative;
+}
+.img-upload:hover,.img-upload.dragover{border-color:var(--amber);background:rgba(212,168,67,.04)}
+.img-upload input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;
+}
+.img-upload-icon{color:var(--muted);margin:0 auto .8rem}
+.img-upload p{font-size:.78rem;color:var(--muted)}
+.img-upload strong{color:var(--amber)}
+.img-preview{
+  width:100%;max-height:200px;object-fit:cover;
+  border:1px solid var(--border);margin-top:1rem;
+  display:none;
+}
+.img-preview.show{display:block}
+.img-preview-wrap{position:relative}
+.img-remove{
+  position:absolute;top:.5rem;right:.5rem;
+  background:rgba(0,0,0,.7);border:none;
+  width:28px;height:28px;border-radius:50%;
+  color:#fff;font-size:1rem;line-height:1;
+  display:none;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.img-preview-wrap:hover .img-remove{display:flex}
+.img-remove:hover{background:var(--red)}
+
+/* ── TOAST ────────────────────────────────── */
+#toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:9999;
+  display:flex;flex-direction:column;gap:.5rem;
+}
+.toast{
+  background:var(--bg3);border-left:3px solid var(--amber);
+  padding:.8rem 1.2rem;
+  font-size:.78rem;font-weight:400;
+  min-width:260px;max-width:360px;
+  animation:toastIn .3s var(--ease) forwards;
+  display:flex;align-items:center;gap:.7rem;
+}
+.toast.success{border-color:var(--green)}
+.toast.error{border-color:var(--red)}
+.toast.info{border-color:var(--blue)}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+/* ── CONFIG SECTION ───────────────────────── */
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.config-card{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:1.6rem;
+}
+.config-card h3{
+  font-size:.82rem;font-weight:600;margin-bottom:.3rem;
+  color:var(--cream);
+}
+.config-card p{font-size:.72rem;color:var(--muted);margin-bottom:1.2rem}
+
+/* ── GITHUB SETUP ─────────────────────────── */
+.github-setup{
+  background:var(--bg3);border:1px solid var(--border2);
+  padding:1.4rem 1.6rem;margin-bottom:1.5rem;
+}
+.github-setup h4{font-size:.82rem;font-weight:600;margin-bottom:.3rem}
+.github-setup p{font-size:.72rem;color:var(--muted);margin-bottom:1rem}
+.github-status{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.72rem;
+}
+.github-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.github-status-dot.ok{background:var(--green)}
+.github-status-dot.warn{background:var(--yellow)}
+.github-status-dot.err{background:var(--red)}
+
+/* ── PROMOTIONS ───────────────────────────── */
+.promo-global{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:1.4rem 1.6rem;margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.promo-global-info h4{font-size:.88rem;font-weight:600;margin-bottom:.3rem}
+.promo-global-info p{font-size:.72rem;color:var(--muted)}
+
+/* ── RESPONSIVE ───────────────────────────── */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.mob-open{transform:none}
+  .main{margin-left:0}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .config-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr}
+  .page-content{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">GL</div>
+    <h2>Panel de Control</h2>
+    <p>Ingresá tu contraseña para acceder</p>
+    <input type="password" id="pwd-input" placeholder="Contraseña" autocomplete="current-password">
+    <button class="btn-login" onclick="doLogin()">Ingresar</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ═══ APP ══════════════════════════════════ -->
+<div id="app" class="hidden">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">GL</div>
+      <div class="sidebar-logo-text">GL Cuchillos<small>Panel de Admin</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Principal</div>
+      <div class="nav-item active" onclick="showView('dashboard')" data-view="dashboard">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-section">Tienda</div>
+      <div class="nav-item" onclick="showView('products')" data-view="products">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Productos
+        <span class="nav-badge" id="prod-count">6</span>
+      </div>
+      <div class="nav-item" onclick="showView('promotions')" data-view="promotions">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        Promociones
+      </div>
+      <div class="nav-section">Sistema</div>
+      <div class="nav-item" onclick="showView('settings')" data-view="settings">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Configuración
+      </div>
+      <div class="nav-item" onclick="showView('github')" data-view="github">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub & Deploy
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-info">
+        <strong>Gonzalo Londero</strong>
+        GL Cuchillos
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Salir</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <button class="btn-icon" id="mob-menu-btn" onclick="toggleMobMenu()" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="topbar-title" id="topbar-title">Dashboard</span>
+      </div>
+      <div class="topbar-actions">
+        <div id="save-status" style="font-size:.7rem;color:var(--muted);display:none"></div>
+        <button class="btn btn-primary btn-sm" onclick="publishToGitHub()" id="btn-publish">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+          Publicar cambios
+        </button>
+        <a href="index.html" target="_blank" class="btn btn-outline-btn btn-sm">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver sitio
+        </a>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ── DASHBOARD ─── -->
+      <div class="view active" id="view-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Productos activos</div>
+            <div class="stat-value" id="stat-active">0</div>
+            <div class="stat-sub">visibles en el sitio</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total productos</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-sub">en el catálogo</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Con promoción</div>
+            <div class="stat-value" id="stat-promo">0</div>
+            <div class="stat-sub">productos con promo activa</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Con imagen</div>
+            <div class="stat-value" id="stat-imgs">0</div>
+            <div class="stat-sub">productos con foto cargada</div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <div>
+            <h2>Resumen rápido</h2>
+            <p>Estado actual del catálogo de productos</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="showView('products');openNewProduct()">
+            + Nuevo producto
+          </button>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid var(--border);overflow:hidden">
+          <table class="prod-table" id="dash-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Estado</th>
+                <th>Visible</th>
+                <th>Promo</th>
+              </tr>
+            </thead>
+            <tbody id="dash-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PRODUCTS ─── -->
+      <div class="view" id="view-products">
+        <div class="section-header">
+          <div>
+            <h2>Gestión de Productos</h2>
+            <p>Agregá, editá, activá o eliminá productos del catálogo</p>
+          </div>
+          <div style="display:flex;gap:.75rem">
+            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('all')" id="filter-all">Todos</button>
+            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('active')" id="filter-active">Activos</button>
+            <button class="btn btn-outline-btn btn-sm" onclick="filterProducts('inactive')" id="filter-inactive">Inactivos</button>
+            <button class="btn btn-primary btn-sm" onclick="openNewProduct()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nuevo producto
+            </button>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);overflow:auto">
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Badge</th>
+                <th>Promo</th>
+                <th>Precio</th>
+                <th>Visible</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="prod-tbody"></tbody>
+          </table>
+        </div>
+        <div style="text-align:center;padding:2rem;font-size:.75rem;color:var(--muted)" id="prod-empty" style="display:none">
+          No hay productos en este filtro
+        </div>
+      </div>
+
+      <!-- ── PROMOTIONS ─── -->
+      <div class="view" id="view-promotions">
+        <div class="section-header">
+          <div>
+            <h2>Promociones</h2>
+            <p>Configurá promos globales y por producto</p>
+          </div>
+        </div>
+
+        <div class="promo-global">
+          <div class="promo-global-info">
+            <h4>🔖 Banner global del sitio</h4>
+            <p>Mostrá un banner de promoción visible en toda la página (ej: "20% de descuento esta semana")</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+            <label class="toggle" title="Activar banner global">
+              <input type="checkbox" id="global-promo-toggle" onchange="toggleGlobalPromo(this)">
+              <span class="toggle-slider"></span>
+            </label>
+            <button class="btn btn-outline-btn btn-sm" onclick="editGlobalPromo()">Editar banner</button>
+          </div>
+        </div>
+
+        <div class="section-header" style="margin-top:1rem">
+          <h2 style="font-size:.9rem">Promos por producto</h2>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);overflow:auto">
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Promo actual</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="promo-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ─── -->
+      <div class="view" id="view-settings">
+        <div class="section-header">
+          <div>
+            <h2>Configuración del sitio</h2>
+            <p>Editá los textos, contacto y opciones generales</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="saveSettings()">Guardar cambios</button>
+        </div>
+        <div class="config-grid">
+          <div class="config-card">
+            <h3>📱 Datos de contacto</h3>
+            <p>Información de contacto que se muestra en el sitio</p>
+            <div class="form-group">
+              <label>WhatsApp (con código de país)</label>
+              <input type="text" class="form-control" id="cfg-whatsapp" placeholder="5493843458340">
+            </div>
+            <div class="form-group">
+              <label>Instagram (sin @)</label>
+              <input type="text" class="form-control" id="cfg-instagram" placeholder="gonzalo.londero.3">
+            </div>
+            <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" class="form-control" id="cfg-facebook" placeholder="Gonzafcf">
+            </div>
+            <div class="form-group">
+              <label>Teléfono visible</label>
+              <input type="text" class="form-control" id="cfg-phone" placeholder="+54 9 3843 458340">
+            </div>
+          </div>
+          <div class="config-card">
+            <h3>🏠 Hero del sitio</h3>
+            <p>Textos principales de la pantalla de inicio</p>
+            <div class="form-group">
+              <label>Título principal</label>
+              <input type="text" class="form-control" id="cfg-hero-title" placeholder="Cada filo cuenta una historia.">
+            </div>
+            <div class="form-group">
+              <label>Subtítulo</label>
+              <textarea class="form-control" id="cfg-hero-subtitle" rows="3"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Estadística 1</label>
+                <input type="text" class="form-control" id="cfg-stat1" placeholder="500+">
+              </div>
+              <div class="form-group">
+                <label>Etiqueta 1</label>
+                <input type="text" class="form-control" id="cfg-stat1-label" placeholder="Piezas entregadas">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Estadística 2</label>
+                <input type="text" class="form-control" id="cfg-stat2" placeholder="100%">
+              </div>
+              <div class="form-group">
+                <label>Etiqueta 2</label>
+                <input type="text" class="form-control" id="cfg-stat2-label" placeholder="Artesanal">
+              </div>
+            </div>
+          </div>
+          <div class="config-card">
+            <h3>🔐 Seguridad</h3>
+            <p>Cambiar contraseña del panel de admin</p>
+            <div class="form-group">
+              <label>Contraseña actual</label>
+              <input type="password" class="form-control" id="pwd-current" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label>Nueva contraseña</label>
+              <input type="password" class="form-control" id="pwd-new" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label>Confirmar nueva contraseña</label>
+              <input type="password" class="form-control" id="pwd-confirm" placeholder="••••••••">
+            </div>
+            <button class="btn btn-outline-btn btn-sm" onclick="changePassword()">Cambiar contraseña</button>
+          </div>
+          <div class="config-card">
+            <h3>📦 Exportar / Importar datos</h3>
+            <p>Descargá el JSON con todos los datos del catálogo o importá desde un archivo</p>
+            <div style="display:flex;flex-direction:column;gap:.75rem">
+              <button class="btn btn-outline-btn btn-sm" onclick="exportJSON()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Descargar products.json
+              </button>
+              <label class="btn btn-outline-btn btn-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:.5rem">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Importar products.json
+                <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GITHUB ─── -->
+      <div class="view" id="view-github">
+        <div class="section-header">
+          <div>
+            <h2>GitHub & Deploy</h2>
+            <p>Conectá tu repositorio para publicar cambios automáticamente</p>
+          </div>
+        </div>
+
+        <div class="github-setup">
+          <h4>⚙️ Configuración del repositorio</h4>
+          <p>Ingresá los datos de tu repositorio de GitHub donde está alojado el sitio</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Usuario de GitHub</label>
+              <input type="text" class="form-control" id="gh-user" placeholder="tu-usuario">
+            </div>
+            <div class="form-group">
+              <label>Nombre del repositorio</label>
+              <input type="text" class="form-control" id="gh-repo" placeholder="gl-cuchillos">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Token de acceso personal (PAT)</label>
+            <input type="password" class="form-control" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxx">
+            <div class="form-hint">El token necesita permisos de "Contents" (lectura y escritura). Se guarda solo en este navegador.</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Branch (rama)</label>
+              <input type="text" class="form-control" id="gh-branch" placeholder="main" value="main">
+            </div>
+            <div class="form-group">
+              <label>Ruta del archivo</label>
+              <input type="text" class="form-control" id="gh-path" placeholder="products.json" value="products.json">
+            </div>
+          </div>
+          <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm" onclick="saveGithubConfig()">Guardar configuración</button>
+            <button class="btn btn-outline-btn btn-sm" onclick="testGithubConnection()">Probar conexión</button>
+            <div class="github-status" id="gh-status">
+              <div class="github-status-dot warn"></div>
+              <span>No configurado</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid var(--border);padding:1.6rem">
+          <h3 style="font-size:.88rem;font-weight:600;margin-bottom:.5rem">📚 Cómo configurar GitHub Pages</h3>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.9">
+            <p><strong style="color:var(--cream)">1.</strong> Creá un repositorio en GitHub (público o privado con Pages habilitado)</p>
+            <p><strong style="color:var(--cream)">2.</strong> Subí los archivos: <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">index.html</code>, <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">admin.html</code> y <code style="background:var(--bg3);padding:.1rem .4rem;color:var(--amber)">products.json</code></p>
+            <p><strong style="color:var(--cream)">3.</strong> En el repositorio → Settings → Pages → Source: Deploy from branch → main</p>
+            <p><strong style="color:var(--cream)">4.</strong> Creá un token: GitHub → Settings → Developer Settings → Personal Access Tokens → Fine-grained → seleccionar repo → Contents: Read & Write</p>
+            <p><strong style="color:var(--cream)">5.</strong> Pegá el token en este panel y guardá. Desde ahora, "Publicar cambios" actualiza el sitio automáticamente.</p>
+            <p style="margin-top:.8rem;color:rgba(212,168,67,.6)">⚡ Los cambios tardan ~30 segundos en verse reflejados en el sitio live.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+</div><!-- /app -->
+
+<!-- ═══ MODAL - PRODUCTO ══════════════════════ -->
+<div class="modal-overlay" id="prod-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Nuevo producto</h3>
+      <button class="modal-close" onclick="closeModal('prod-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre del producto *</label>
+          <input type="text" class="form-control" id="edit-name" placeholder="Ej: Juego Parrillero XL">
+        </div>
+        <div class="form-group">
+          <label>Categoría *</label>
+          <input type="text" class="form-control" id="edit-category" placeholder="Ej: Parrilla & Asado">
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea class="form-control" id="edit-desc" placeholder="Descripción del producto..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Especificaciones técnicas</label>
+        <div class="specs-list" id="specs-list"></div>
+        <button class="btn-spec-add" onclick="addSpec()">+ Agregar especificación</button>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Badge / Etiqueta</label>
+          <select class="form-control" id="edit-badge">
+            <option value="avail">Disponible (verde)</option>
+            <option value="custom">A pedido (dorado)</option>
+            <option value="intl">Exportación (azul)</option>
+            <option value="unavail">No disponible (rojo)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Texto del badge</label>
+          <input type="text" class="form-control" id="edit-badge-text" placeholder="Ej: Disponible">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio (texto)</label>
+          <input type="text" class="form-control" id="edit-price" placeholder="Ej: $85.000 · Consultar precio">
+        </div>
+        <div class="form-group">
+          <label>Nota de precio</label>
+          <input type="text" class="form-control" id="edit-price-note" placeholder="Ej: Personalizable · Envío incluido">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Promoción (dejar vacío si no hay)</label>
+        <input type="text" class="form-control" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!">
+      </div>
+
+      <div class="form-group">
+        <label>Imagen del producto</label>
+        <div style="display:flex;flex-direction:column;gap:.75rem">
+          <div class="form-group" style="margin-bottom:0">
+            <label style="font-size:.62rem;color:var(--muted)">URL de imagen (Instagram, Imgur, etc.)</label>
+            <input type="text" class="form-control" id="edit-img-url" placeholder="https://..." oninput="previewFromUrl(this.value)">
+          </div>
+          <div style="text-align:center;font-size:.7rem;color:var(--muted);padding:.2rem 0">— o subí un archivo —</div>
+          <div class="img-upload" id="img-upload-area" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+            <input type="file" accept="image/*" onchange="handleImageFile(this)">
+            <svg class="img-upload-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Arrastrá una imagen o <strong>hacé click</strong> para seleccionar</p>
+            <p style="font-size:.68rem;margin-top:.3rem">PNG, JPG, WEBP · Máx. 2MB · Se convierte a Base64</p>
+          </div>
+          <div class="img-preview-wrap">
+            <img class="img-preview" id="img-preview" src="" alt="Preview">
+            <button class="img-remove" onclick="clearImage()" title="Quitar imagen">×</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--bg3);border:1px solid var(--border)">
+        <div>
+          <div style="font-size:.8rem;font-weight:500;margin-bottom:.25rem">Visible en el sitio</div>
+          <div style="font-size:.7rem;color:var(--muted)">Activá para que el producto aparezca en la tienda</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="edit-active" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--bg3);border:1px solid var(--border)">
+        <div>
+          <div style="font-size:.8rem;font-weight:500;margin-bottom:.25rem">Producto destacado</div>
+          <div style="font-size:.7rem;color:var(--muted)">Aparece primero en la grilla de productos</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="edit-featured">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-btn" onclick="closeModal('prod-modal')">Cancelar</button>
+      <button class="btn btn-danger" id="btn-delete-prod" onclick="confirmDelete()" style="display:none">Eliminar producto</button>
+      <button class="btn btn-primary" onclick="saveProduct()">Guardar producto</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL - CONFIRM DELETE ════════════════ -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <h3>¿Eliminar producto?</h3>
+      <button class="modal-close" onclick="closeModal('confirm-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.7">Esta acción no se puede deshacer. El producto será eliminado permanentemente del catálogo.</p>
+      <p style="margin-top:.75rem;font-size:.88rem">¿Estás seguro que querés eliminar <strong id="confirm-prod-name" style="color:var(--amber)"></strong>?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-btn" onclick="closeModal('confirm-modal')">Cancelar</button>
+      <button class="btn btn-danger" onclick="deleteProduct()">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL - PROMO BANNER ═════════════════ -->
+<div class="modal-overlay" id="promo-modal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-head">
+      <h3 id="promo-modal-title">Editar promoción</h3>
+      <button class="modal-close" onclick="closeModal('promo-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="promo-target-id">
+      <div class="form-group">
+        <label>Texto de la promoción</label>
+        <input type="text" class="form-control" id="promo-text" placeholder="Ej: ¡20% de descuento esta semana!">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-btn" onclick="closeModal('promo-modal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="savePromo()">Guardar promo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═════════════════════════════════ -->
+<div id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════
+   CONSTANTS & STATE
+════════════════════════════════════════════ */
+const DEFAULT_PWD = 'glcuchillos2024';
+let data = { settings:{}, products:[] };
+let currentFilter = 'all';
+let editingId = null;
+let pendingDeleteId = null;
+
+/* ════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════ */
+(async function init(){
+  // Check login
+  if(localStorage.getItem('gl_admin_auth') === 'true'){
+    showApp();
+  }
+  // Load data
+  await loadData();
+  // Load GitHub config
+  loadGithubConfig();
+  // Load settings into form
+  loadSettingsForm();
+  // Render
+  renderAll();
+})();
+
+/* ════════════════════════════════════════════
+   AUTH
+════════════════════════════════════════════ */
+function doLogin(){
+  const pwd = document.getElementById('pwd-input').value;
+  const stored = localStorage.getItem('gl_admin_pwd') || DEFAULT_PWD;
+  if(pwd === stored){
+    localStorage.setItem('gl_admin_auth','true');
+    showApp();
+  } else {
+    document.getElementById('login-error').textContent = 'Contraseña incorrecta. Intentá de nuevo.';
+    document.getElementById('pwd-input').value='';
+  }
+}
+document.getElementById('pwd-input').addEventListener('keydown', e => {
+  if(e.key==='Enter') doLogin();
+});
+function doLogout(){
+  localStorage.removeItem('gl_admin_auth');
+  location.reload();
+}
+function showApp(){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+}
+function changePassword(){
+  const cur = document.getElementById('pwd-current').value;
+  const nw = document.getElementById('pwd-new').value;
+  const cfm = document.getElementById('pwd-confirm').value;
+  const stored = localStorage.getItem('gl_admin_pwd') || DEFAULT_PWD;
+  if(cur !== stored){ toast('Contraseña actual incorrecta','error'); return; }
+  if(nw.length < 6){ toast('La nueva contraseña debe tener al menos 6 caracteres','error'); return; }
+  if(nw !== cfm){ toast('Las contraseñas no coinciden','error'); return; }
+  localStorage.setItem('gl_admin_pwd', nw);
+  toast('Contraseña cambiada correctamente','success');
+  ['pwd-current','pwd-new','pwd-confirm'].forEach(id=>document.getElementById(id).value='');
+}
+
+/* ════════════════════════════════════════════
+   DATA LOAD / SAVE
+════════════════════════════════════════════ */
+async function loadData(){
+  // Try to load from localStorage first (admin edits)
+  const cached = localStorage.getItem('gl_products_data');
+  if(cached){
+    try{ data = JSON.parse(cached); return; }catch(e){}
+  }
+  // Fallback: fetch products.json
+  try{
+    const res = await fetch('products.json?t='+Date.now());
+    if(res.ok){ data = await res.json(); saveToLocal(); }
+  }catch(e){
+    // Use defaults if fetch fails
+    data = {
+      settings:{
+        siteName:'GL Cuchillos Artesanales',
+        whatsapp:'5493843458340',instagram:'gonzalo.londero.3',facebook:'Gonzafcf',
+        phone:'+54 9 3843 458340',
+        heroTitle:'Cada filo cuenta una historia.',
+        heroSubtitle:'Cuchillos únicos, forjados pieza a pieza por Gonzalo Londero.',
+        heroStat1:'500+',heroStat1Label:'Piezas entregadas',
+        heroStat2:'100%',heroStat2Label:'Artesanal',
+        globalPromo:false,globalPromoBanner:''
+      },
+      products:[]
+    };
+  }
+}
+function saveToLocal(){
+  localStorage.setItem('gl_products_data', JSON.stringify(data));
+  updateSaveStatus('Guardado localmente');
+}
+function updateSaveStatus(msg){
+  const el = document.getElementById('save-status');
+  el.style.display='block';
+  el.textContent = msg;
+  setTimeout(()=>{el.style.display='none';},3000);
+}
+
+/* ════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════ */
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelector(`[data-view="${name}"]`).classList.add('active');
+  document.getElementById('topbar-title').textContent = {
+    dashboard:'Dashboard',products:'Productos',
+    promotions:'Promociones',settings:'Configuración',github:'GitHub & Deploy'
+  }[name];
+  if(name==='dashboard') renderDashboard();
+  if(name==='products') renderProducts();
+  if(name==='promotions') renderPromos();
+  if(name==='settings') loadSettingsForm();
+  // Close mob menu
+  document.getElementById('sidebar').classList.remove('mob-open');
+}
+function toggleMobMenu(){
+  document.getElementById('sidebar').classList.toggle('mob-open');
+}
+
+/* ════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════ */
+function renderAll(){
+  renderDashboard();
+  renderProducts();
+  renderPromos();
+  updateBadgeCount();
+}
+
+function updateBadgeCount(){
+  const active = data.products.filter(p=>p.active).length;
+  document.getElementById('prod-count').textContent = active;
+}
+
+function renderDashboard(){
+  const prods = data.products;
+  const active = prods.filter(p=>p.active).length;
+  const withPromo = prods.filter(p=>p.promo).length + (data.settings.globalPromo?1:0);
+  const withImg = prods.filter(p=>p.image && p.image.trim()).length;
+  document.getElementById('stat-total').textContent = prods.length;
+  document.getElementById('stat-active').textContent = active;
+  document.getElementById('stat-promo').textContent = withPromo;
+  document.getElementById('stat-imgs').textContent = withImg;
+
+  const tbody = document.getElementById('dash-tbody');
+  tbody.innerHTML = prods.map(p => `
+    <tr>
+      <td>
+        <div class="prod-name-cell">
+          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
+          <div class="prod-name-text">
+            <strong>${p.name}</strong>
+            <span>${p.specs ? p.specs.slice(0,2).join(' · ') : ''}</span>
+          </div>
+        </div>
+      </td>
+      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
+      <td><span class="badge badge-${p.badge}">${p.badgeText}</span></td>
+      <td>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)"><span class="toggle-slider"></span></label>
+          <span style="font-size:.7rem;color:var(--muted)">${p.active?'Visible':'Oculto'}</span>
+        </div>
+      </td>
+      <td>${p.promo ? `<span class="badge badge-promo">${p.promo}</span>` : '<span style="color:var(--muted);font-size:.72rem">—</span>'}</td>
+    </tr>
+  `).join('');
+}
+
+function renderProducts(){
+  let prods = data.products;
+  if(currentFilter==='active') prods = prods.filter(p=>p.active);
+  if(currentFilter==='inactive') prods = prods.filter(p=>!p.active);
+
+  ['all','active','inactive'].forEach(f=>{
+    document.getElementById('filter-'+f).style.borderColor = currentFilter===f ? 'var(--amber)' : '';
+    document.getElementById('filter-'+f).style.color = currentFilter===f ? 'var(--amber)' : '';
+  });
+
+  const tbody = document.getElementById('prod-tbody');
+  tbody.innerHTML = prods.map(p => `
+    <tr>
+      <td>
+        <div class="prod-name-cell">
+          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
+          <div class="prod-name-text">
+            <strong>${p.name}</strong>
+            <span>${(p.specs||[]).slice(0,2).join(' · ')}</span>
+          </div>
+        </div>
+      </td>
+      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
+      <td><span class="badge badge-${p.badge}">${p.badgeText}</span></td>
+      <td>${p.promo ? `<span class="badge badge-promo" style="font-size:.6rem">${p.promo.substring(0,25)}${p.promo.length>25?'…':''}</span>` : '<span style="color:var(--muted);font-size:.72rem">—</span>'}</td>
+      <td style="font-size:.75rem">${p.price||'—'}</td>
+      <td>
+        <label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)"><span class="toggle-slider"></span></label>
+      </td>
+      <td>
+        <div class="actions-cell">
+          <button class="btn-icon" title="Editar" onclick="openEditProduct('${p.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="btn-icon" title="Duplicar" onclick="duplicateProduct('${p.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderPromos(){
+  document.getElementById('global-promo-toggle').checked = !!data.settings.globalPromo;
+  const tbody = document.getElementById('promo-tbody');
+  tbody.innerHTML = data.products.map(p => `
+    <tr>
+      <td>
+        <div class="prod-name-cell">
+          ${p.image ? `<div class="prod-thumb"><img src="${p.image}" alt=""></div>` : `<div class="prod-thumb-placeholder">IMG</div>`}
+          <div class="prod-name-text"><strong>${p.name}</strong></div>
+        </div>
+      </td>
+      <td style="color:var(--muted);font-size:.75rem">${p.category}</td>
+      <td>${p.promo ? `<span class="badge badge-promo">${p.promo}</span>` : '<span style="color:var(--muted);font-size:.72rem">Sin promoción</span>'}</td>
+      <td>
+        <div class="actions-cell">
+          <button class="btn btn-outline-btn btn-sm" onclick="editProductPromo('${p.id}')">
+            ${p.promo ? 'Editar' : '+ Agregar promo'}
+          </button>
+          ${p.promo ? `<button class="btn btn-danger btn-sm" onclick="clearProductPromo('${p.id}')">Quitar</button>` : ''}
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function filterProducts(f){
+  currentFilter = f;
+  renderProducts();
+}
+
+/* ════════════════════════════════════════════
+   PRODUCT CRUD
+════════════════════════════════════════════ */
+function openNewProduct(){
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'Nuevo producto';
+  document.getElementById('btn-delete-prod').style.display = 'none';
+  clearProductForm();
+  openModal('prod-modal');
+}
+
+function openEditProduct(id){
+  editingId = id;
+  const p = data.products.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('modal-title').textContent = 'Editar producto';
+  document.getElementById('btn-delete-prod').style.display = 'inline-flex';
+  populateProductForm(p);
+  openModal('prod-modal');
+}
+
+function clearProductForm(){
+  ['edit-id','edit-name','edit-category','edit-desc','edit-badge-text','edit-price','edit-price-note','edit-promo','edit-img-url'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('edit-badge').value='avail';
+  document.getElementById('edit-active').checked = true;
+  document.getElementById('edit-featured').checked = false;
+  document.getElementById('specs-list').innerHTML = '';
+  addSpec(); addSpec(); addSpec();
+  clearImage();
+}
+
+function populateProductForm(p){
+  document.getElementById('edit-id').value = p.id;
+  document.getElementById('edit-name').value = p.name||'';
+  document.getElementById('edit-category').value = p.category||'';
+  document.getElementById('edit-desc').value = p.description||'';
+  document.getElementById('edit-badge').value = p.badge||'avail';
+  document.getElementById('edit-badge-text').value = p.badgeText||'';
+  document.getElementById('edit-price').value = p.price||'';
+  document.getElementById('edit-price-note').value = p.priceNote||'';
+  document.getElementById('edit-promo').value = p.promo||'';
+  document.getElementById('edit-active').checked = !!p.active;
+  document.getElementById('edit-featured').checked = !!p.featured;
+  document.getElementById('edit-img-url').value = p.image && !p.image.startsWith('data:') ? p.image : '';
+  document.getElementById('specs-list').innerHTML = '';
+  (p.specs||[]).forEach(s=>addSpec(s));
+  if(document.querySelectorAll('.spec-row').length === 0) addSpec();
+  if(p.image){
+    const preview = document.getElementById('img-preview');
+    preview.src = p.image;
+    preview.classList.add('show');
+  } else {
+    clearImage();
+  }
+}
+
+function addSpec(val=''){
+  const list = document.getElementById('specs-list');
+  const row = document.createElement('div');
+  row.className = 'spec-row';
+  row.innerHTML = `
+    <input type="text" class="form-control" value="${val}" placeholder="Ej: Acero 1075">
+    <button class="btn-icon" onclick="this.parentElement.remove()" title="Quitar">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  `;
+  list.appendChild(row);
+}
+
+function saveProduct(){
+  const name = document.getElementById('edit-name').value.trim();
+  if(!name){ toast('El nombre del producto es obligatorio','error'); return; }
+
+  const specs = Array.from(document.querySelectorAll('.spec-row input'))
+    .map(i=>i.value.trim()).filter(Boolean);
+
+  const imgUrl = document.getElementById('edit-img-url').value.trim();
+  const previewSrc = document.getElementById('img-preview').src;
+  const image = previewSrc && document.getElementById('img-preview').classList.contains('show')
+    ? (previewSrc.startsWith('data:') ? previewSrc : imgUrl)
+    : imgUrl;
+
+  const prod = {
+    id: editingId || 'prod-'+Date.now(),
+    name,
+    category: document.getElementById('edit-category').value.trim(),
+    description: document.getElementById('edit-desc').value.trim(),
+    specs,
+    badge: document.getElementById('edit-badge').value,
+    badgeText: document.getElementById('edit-badge-text').value.trim(),
+    price: document.getElementById('edit-price').value.trim(),
+    priceNote: document.getElementById('edit-price-note').value.trim(),
+    promo: document.getElementById('edit-promo').value.trim(),
+    active: document.getElementById('edit-active').checked,
+    featured: document.getElementById('edit-featured').checked,
+    image
+  };
+
+  if(editingId){
+    const idx = data.products.findIndex(p=>p.id===editingId);
+    if(idx >= 0) data.products[idx] = prod;
+  } else {
+    data.products.push(prod);
+  }
+
+  saveToLocal();
+  renderAll();
+  closeModal('prod-modal');
+  toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓','success');
+  editingId = null;
+}
+
+function quickToggle(id, checkbox){
+  const p = data.products.find(x=>x.id===id);
+  if(p){ p.active = checkbox.checked; saveToLocal(); renderAll(); }
+}
+
+function confirmDelete(){
+  pendingDeleteId = editingId;
+  const p = data.products.find(x=>x.id===editingId);
+  if(p) document.getElementById('confirm-prod-name').textContent = p.name;
+  openModal('confirm-modal');
+}
+
+function deleteProduct(){
+  data.products = data.products.filter(p=>p.id!==pendingDeleteId);
+  saveToLocal();
+  renderAll();
+  closeModal('confirm-modal');
+  closeModal('prod-modal');
+  toast('Producto eliminado','success');
+  pendingDeleteId = null;
+  editingId = null;
+}
+
+function duplicateProduct(id){
+  const p = data.products.find(x=>x.id===id);
+  if(!p) return;
+  const copy = { ...p, id:'prod-'+Date.now(), name:p.name+' (copia)', active:false };
+  data.products.push(copy);
+  saveToLocal();
+  renderAll();
+  toast('Producto duplicado','success');
+}
+
+/* ════════════════════════════════════════════
+   IMAGE HANDLING
+════════════════════════════════════════════ */
+function previewFromUrl(url){
+  const preview = document.getElementById('img-preview');
+  if(url){
+    preview.src = url;
+    preview.classList.add('show');
+    preview.onerror = ()=>{ preview.classList.remove('show'); };
+  } else {
+    preview.classList.remove('show');
+  }
+}
+
+function handleImageFile(input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){ toast('La imagen debe ser menor a 2MB','error'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const preview = document.getElementById('img-preview');
+    preview.src = e.target.result;
+    preview.classList.add('show');
+    document.getElementById('edit-img-url').value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleDragOver(e){
+  e.preventDefault();
+  document.getElementById('img-upload-area').classList.add('dragover');
+}
+function handleDragLeave(){
+  document.getElementById('img-upload-area').classList.remove('dragover');
+}
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('img-upload-area').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if(file && file.type.startsWith('image/')){
+    const fakeInput = { files:[file] };
+    handleImageFile(fakeInput);
+  }
+}
+
+function clearImage(){
+  const preview = document.getElementById('img-preview');
+  preview.src=''; preview.classList.remove('show');
+  document.getElementById('edit-img-url').value='';
+}
+
+/* ════════════════════════════════════════════
+   PROMOTIONS
+════════════════════════════════════════════ */
+function toggleGlobalPromo(checkbox){
+  data.settings.globalPromo = checkbox.checked;
+  saveToLocal();
+  toast(checkbox.checked ? 'Banner global activado' : 'Banner global desactivado','success');
+}
+
+function editGlobalPromo(){
+  document.getElementById('promo-target-id').value = '__global__';
+  document.getElementById('promo-modal-title').textContent = 'Banner global del sitio';
+  document.getElementById('promo-text').value = data.settings.globalPromoBanner||'';
+  openModal('promo-modal');
+}
+
+function editProductPromo(id){
+  const p = data.products.find(x=>x.id===id);
+  document.getElementById('promo-target-id').value = id;
+  document.getElementById('promo-modal-title').textContent = `Promo: ${p?.name||''}`;
+  document.getElementById('promo-text').value = p?.promo||'';
+  openModal('promo-modal');
+}
+
+function clearProductPromo(id){
+  const p = data.products.find(x=>x.id===id);
+  if(p){ p.promo=''; saveToLocal(); renderPromos(); renderDashboard(); toast('Promoción eliminada','success'); }
+}
+
+function savePromo(){
+  const target = document.getElementById('promo-target-id').value;
+  const text = document.getElementById('promo-text').value.trim();
+  if(target==='__global__'){
+    data.settings.globalPromoBanner = text;
+  } else {
+    const p = data.products.find(x=>x.id===target);
+    if(p) p.promo = text;
+  }
+  saveToLocal();
+  renderAll();
+  closeModal('promo-modal');
+  toast('Promoción guardada ✓','success');
+}
+
+/* ════════════════════════════════════════════
+   SETTINGS
+════════════════════════════════════════════ */
+function loadSettingsForm(){
+  const s = data.settings || {};
+  const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val||''; };
+  setVal('cfg-whatsapp', s.whatsapp);
+  setVal('cfg-instagram', s.instagram);
+  setVal('cfg-facebook', s.facebook);
+  setVal('cfg-phone', s.phone);
+  setVal('cfg-hero-title', s.heroTitle);
+  setVal('cfg-hero-subtitle', s.heroSubtitle);
+  setVal('cfg-stat1', s.heroStat1);
+  setVal('cfg-stat1-label', s.heroStat1Label);
+  setVal('cfg-stat2', s.heroStat2);
+  setVal('cfg-stat2-label', s.heroStat2Label);
+}
+
+function saveSettings(){
+  const getVal = id => document.getElementById(id)?.value?.trim()||'';
+  data.settings.whatsapp = getVal('cfg-whatsapp');
+  data.settings.instagram = getVal('cfg-instagram');
+  data.settings.facebook = getVal('cfg-facebook');
+  data.settings.phone = getVal('cfg-phone');
+  data.settings.heroTitle = getVal('cfg-hero-title');
+  data.settings.heroSubtitle = getVal('cfg-hero-subtitle');
+  data.settings.heroStat1 = getVal('cfg-stat1');
+  data.settings.heroStat1Label = getVal('cfg-stat1-label');
+  data.settings.heroStat2 = getVal('cfg-stat2');
+  data.settings.heroStat2Label = getVal('cfg-stat2-label');
+  saveToLocal();
+  toast('Configuración guardada ✓','success');
+}
+
+/* ════════════════════════════════════════════
+   IMPORT / EXPORT
+════════════════════════════════════════════ */
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'products.json';
+  a.click();
+  toast('Archivo descargado','success');
+}
+
+function importJSON(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!imported.products) throw new Error('Formato inválido');
+      data = imported;
+      saveToLocal();
+      renderAll();
+      loadSettingsForm();
+      toast(`Importado: ${data.products.length} productos ✓`,'success');
+    } catch(err){
+      toast('Error al importar: formato inválido','error');
+    }
+    input.value='';
+  };
+  reader.readAsText(file);
+}
+
+/* ════════════════════════════════════════════
+   GITHUB INTEGRATION
+════════════════════════════════════════════ */
+function loadGithubConfig(){
+  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
+  if(cfg.user) document.getElementById('gh-user').value = cfg.user;
+  if(cfg.repo) document.getElementById('gh-repo').value = cfg.repo;
+  if(cfg.token) document.getElementById('gh-token').value = cfg.token;
+  if(cfg.branch) document.getElementById('gh-branch').value = cfg.branch||'main';
+  if(cfg.path) document.getElementById('gh-path').value = cfg.path||'products.json';
+  updateGithubStatus(cfg.user && cfg.repo && cfg.token ? 'configured' : 'unconfigured');
+}
+
+function saveGithubConfig(){
+  const cfg = {
+    user: document.getElementById('gh-user').value.trim(),
+    repo: document.getElementById('gh-repo').value.trim(),
+    token: document.getElementById('gh-token').value.trim(),
+    branch: document.getElementById('gh-branch').value.trim()||'main',
+    path: document.getElementById('gh-path').value.trim()||'products.json',
+  };
+  if(!cfg.user||!cfg.repo||!cfg.token){
+    toast('Completá usuario, repositorio y token','error'); return;
+  }
+  localStorage.setItem('gl_github_cfg', JSON.stringify(cfg));
+  updateGithubStatus('configured');
+  toast('Configuración GitHub guardada ✓','success');
+}
+
+function updateGithubStatus(status){
+  const el = document.getElementById('gh-status');
+  const configs = {
+    configured: {dot:'ok', text:'Configurado — listo para publicar'},
+    unconfigured: {dot:'warn', text:'No configurado'},
+    testing: {dot:'warn', text:'Probando conexión...'},
+    ok: {dot:'ok', text:'Conexión exitosa ✓'},
+    error: {dot:'err', text:'Error de conexión — revisá el token y el repositorio'},
+  };
+  const c = configs[status]||configs.unconfigured;
+  el.innerHTML = `<div class="github-status-dot ${c.dot}"></div><span>${c.text}</span>`;
+}
+
+async function testGithubConnection(){
+  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
+  if(!cfg.user||!cfg.repo||!cfg.token){
+    toast('Guardá la configuración primero','error'); return;
+  }
+  updateGithubStatus('testing');
+  try{
+    const res = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
+      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github.v3+json' }
+    });
+    if(res.ok){ updateGithubStatus('ok'); toast('Conexión exitosa ✓','success'); }
+    else { updateGithubStatus('error'); toast('Error '+res.status+': '+await res.text(),'error'); }
+  }catch(e){ updateGithubStatus('error'); toast('Error de red: '+e.message,'error'); }
+}
+
+async function publishToGitHub(){
+  const cfg = JSON.parse(localStorage.getItem('gl_github_cfg')||'{}');
+  if(!cfg.user||!cfg.repo||!cfg.token){
+    toast('Configurá GitHub primero — ve a "GitHub & Deploy"','error'); return;
+  }
+
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = true;
+  btn.textContent = 'Publicando...';
+
+  try{
+    // 1. Get current file SHA
+    const getRes = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
+      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github.v3+json' }
+    });
+
+    let sha = null;
+    if(getRes.ok){ const d = await getRes.json(); sha = d.sha; }
+
+    // 2. Encode content
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+
+    // 3. PUT file
+    const body = {
+      message:`Admin: actualización de productos ${new Date().toLocaleString('es-AR')}`,
+      content,
+      branch: cfg.branch||'main',
+    };
+    if(sha) body.sha = sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`,{
+      method:'PUT',
+      headers:{
+        Authorization:`Bearer ${cfg.token}`,
+        Accept:'application/vnd.github.v3+json',
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if(putRes.ok){
+      toast('¡Publicado en GitHub! Los cambios se verán en ~30 seg ✓','success');
+    } else {
+      const err = await putRes.json();
+      toast('Error al publicar: '+(err.message||putRes.status),'error');
+    }
+  }catch(e){ toast('Error: '+e.message,'error'); }
+  finally{ btn.disabled=false; btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>Publicar cambios`; }
+}
+
+/* ════════════════════════════════════════════
+   MODALS
+════════════════════════════════════════════ */
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(overlay.id); });
+});
+
+/* ════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════ */
+function toast(msg, type='info'){
+  const icons = {
+    success:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    error:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    info:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3498DB" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+  };
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = icons[type]+`<span>${msg}</span>`;
+  document.getElementById('toast').appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(20px)'; el.style.transition='.3s'; setTimeout(()=>el.remove(),300); }, 3500);
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+function checkMobile(){
+  const isMob = window.innerWidth <= 900;
+  document.getElementById('mob-menu-btn').style.display = isMob ? 'grid' : 'none';
+}
+window.addEventListener('resize', checkMobile);
+checkMobile();
+</script>
+</body>
+</html>
