@@ -712,7 +712,7 @@ select.form-select option{background:var(--surface)}
             <div class="upload-idle" id="hero-upload-idle">
               <i class="fas fa-cloud-upload-alt upload-icon"></i>
               <p class="upload-title">Arrastrá una foto o video</p>
-              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 5MB</p>
+              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 10 MB</p>
               <span class="upload-formats">Se convierte a Base64</span>
             </div>
             <div class="upload-preview" id="hero-upload-preview" style="display:none">
@@ -904,7 +904,7 @@ select.form-select option{background:var(--surface)}
             <div class="upload-idle" id="upload-idle">
               <i class="fas fa-cloud-upload-alt upload-icon"></i>
               <p class="upload-title">Arrastrá una foto o video</p>
-              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 5MB</p>
+              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 10 MB</p>
               <span class="upload-formats">Se convierte a Base64</span>
             </div>
             <div class="upload-preview" id="upload-preview" style="display:none">
@@ -1450,7 +1450,7 @@ document.getElementById('img-zone').addEventListener('drop', e => {
 });
 function onFileChange(input) { if(input.files[0]) processFile(input.files[0]); }
 function processFile(f) {
-  if (f.size > 5*1024*1024) { toast('Archivo muy grande (máx 5MB)','err'); return; }
+  if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
   const r = new FileReader();
   r.onload = e => showMediaPreview(e.target.result, f.type);
   r.readAsDataURL(f);
@@ -1509,7 +1509,7 @@ document.getElementById('hero-img-zone').addEventListener('drop', e => {
 });
 function onHeroFileChange(input) { if(input.files[0]) processHeroFile(input.files[0]); }
 function processHeroFile(f) {
-  if (f.size > 5*1024*1024) { toast('Archivo muy grande (máx 5MB)','err'); return; }
+  if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
   const r = new FileReader();
   r.onload = e => showHeroMediaPreview(e.target.result, f.type);
   r.readAsDataURL(f);
