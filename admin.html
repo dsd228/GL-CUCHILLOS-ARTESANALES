@@ -371,7 +371,7 @@ select.form-select option{background:var(--surface)}
 }
 .spec-input-inner::placeholder{color:var(--muted)}
 
-/* IMAGE UPLOADER */
+/* IMAGE/VIDEO UPLOADER */
 .img-upload-zone{
   display:block;position:relative;
   border:2px dashed var(--border);border-radius:var(--radius);
@@ -386,7 +386,10 @@ select.form-select option{background:var(--surface)}
 .upload-sub{font-size:13px;color:var(--muted);margin-bottom:8px}
 .upload-formats{font-size:11px;color:var(--muted);background:var(--border);padding:3px 10px;border-radius:20px;display:inline-block}
 .upload-preview{width:100%;position:relative}
-.upload-preview img{width:100%;max-height:280px;object-fit:contain;display:block;background:#f2ede6}
+.upload-preview img,
+.upload-preview video{
+  width:100%;max-height:280px;object-fit:contain;display:block;background:#f2ede6;
+}
 .upload-clear{
   position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;
   background:rgba(0,0,0,.55);color:#fff;border:none;cursor:pointer;
@@ -702,25 +705,26 @@ select.form-select option{background:var(--surface)}
             <input type="text" class="form-input" id="cfg-s1l" placeholder="Piezas entregadas">
           </div>
         </div>
-        <!-- Campo de imagen del hero -->
+        <!-- Campo de imagen / video del hero -->
         <div class="form-row">
-          <label class="form-label">Imagen principal del hero (opcional)</label>
+          <label class="form-label">Imagen o video principal (hero)</label>
           <label class="img-upload-zone" id="hero-img-zone">
             <div class="upload-idle" id="hero-upload-idle">
-              <i class="fas fa-camera upload-icon"></i>
-              <p class="upload-title">Arrastrá una foto o hacé clic</p>
-              <p class="upload-sub">JPG, PNG, WEBP</p>
-              <span class="upload-formats">Máx. 2MB · Se convierte a Base64</span>
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <p class="upload-title">Arrastrá una foto o video</p>
+              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 5MB</p>
+              <span class="upload-formats">Se convierte a Base64</span>
             </div>
             <div class="upload-preview" id="hero-upload-preview" style="display:none">
-              <img id="hero-upload-img" src="" alt="">
+              <img id="hero-upload-img" src="" alt="" style="display:none;">
+              <video id="hero-upload-video" controls style="width:100%; max-height:280px; display:none;"></video>
               <button class="upload-clear" onclick="clearHeroImg(event)">×</button>
-              <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+              <div class="upload-badge"><i class="fas fa-check"></i> Archivo cargado</div>
             </div>
-            <input type="file" id="hero-img-file" accept="image/*" style="display:none" onchange="onHeroFileChange(this)">
+            <input type="file" id="hero-img-file" accept="image/*,video/*" style="display:none" onchange="onHeroFileChange(this)">
           </label>
           <details class="url-fallback">
-            <summary><i class="fas fa-link"></i> O pegá una URL de imagen</summary>
+            <summary><i class="fas fa-link"></i> O pegá una URL de imagen o video</summary>
             <input type="text" class="form-input" id="hero-img-url" placeholder="https://..." oninput="onHeroUrlInput(this.value)">
           </details>
         </div>
@@ -842,7 +846,7 @@ select.form-select option{background:var(--surface)}
 
     <div class="modal-tabs">
       <button class="modal-tab active" onclick="switchModalTab(this,'tab-basic')"><i class="fas fa-info-circle"></i> Básico</button>
-      <button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos</button>
+      <button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos / Video</button>
       <button class="modal-tab" onclick="switchModalTab(this,'tab-specs')"><i class="fas fa-list-ul"></i> Detalles</button>
       <button class="modal-tab" onclick="switchModalTab(this,'tab-cfg')"><i class="fas fa-sliders-h"></i> Config</button>
     </div>
@@ -892,26 +896,27 @@ select.form-select option{background:var(--surface)}
         </div>
       </div>
 
-      <!-- TAB FOTOS -->
+      <!-- TAB FOTOS / VIDEO -->
       <div class="tab-panel" id="tab-fotos">
         <div class="form-row">
-          <label class="form-label">Foto principal del producto</label>
+          <label class="form-label">Imagen o video del producto</label>
           <label class="img-upload-zone" id="img-zone">
             <div class="upload-idle" id="upload-idle">
-              <i class="fas fa-camera upload-icon"></i>
-              <p class="upload-title">Arrastrá una foto o hacé clic</p>
-              <p class="upload-sub">JPG, PNG, WEBP</p>
-              <span class="upload-formats">Máx. 2MB · Se convierte a Base64</span>
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <p class="upload-title">Arrastrá una foto o video</p>
+              <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 5MB</p>
+              <span class="upload-formats">Se convierte a Base64</span>
             </div>
             <div class="upload-preview" id="upload-preview" style="display:none">
-              <img id="upload-img" src="" alt="">
+              <img id="upload-img" src="" alt="" style="display:none;">
+              <video id="upload-video" controls style="width:100%; max-height:280px; display:none;"></video>
               <button class="upload-clear" onclick="clearImg(event)">×</button>
-              <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+              <div class="upload-badge"><i class="fas fa-check"></i> Archivo cargado</div>
             </div>
-            <input type="file" id="img-file" accept="image/*" style="display:none" onchange="onFileChange(this)">
+            <input type="file" id="img-file" accept="image/*,video/*" style="display:none" onchange="onFileChange(this)">
           </label>
           <details class="url-fallback">
-            <summary><i class="fas fa-link"></i> O pegá una URL de imagen (Instagram, Imgur, etc.)</summary>
+            <summary><i class="fas fa-link"></i> O pegá una URL de imagen o video</summary>
             <input type="text" class="form-input" id="edit-img-url" placeholder="https://..." oninput="onUrlInput(this.value)" style="margin-top:8px">
           </details>
         </div>
@@ -1193,11 +1198,16 @@ function renderGrid() {
 
   const badgeClass = { avail:'b-avail', custom:'b-custom', intl:'b-intl', unavail:'b-unavail' };
 
-  grid.innerHTML = prods.map(p => `
+  grid.innerHTML = prods.map(p => {
+    // Detectar si el recurso es video (por extensión o data:video)
+    const isVideo = p.image && (p.image.endsWith('.webm') || p.image.endsWith('.mp4') || p.image.includes('data:video'));
+    return `
     <div class="prod-card${p.active?'':' inactive'}">
       <div class="prod-img">
         ${p.image
-          ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+          ? (isVideo 
+              ? `<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f2ede6;"><i class="fas fa-video" style="font-size:32px; color:var(--accent); opacity:0.7;"></i><span style="margin-top:8px; font-size:12px;">Video</span></div>`
+              : `<img src="${p.image}" alt="${p.name}" loading="lazy">`)
           : `<div class="no-img-ph">
               <svg viewBox="0 0 80 80" fill="none"><path d="M10 60 L30 35 L45 50 L58 30 L70 60Z" fill="currentColor" opacity=".3"/><circle cx="25" cy="22" r="8" fill="currentColor" opacity=".3"/></svg>
               <span>${p.name}</span>
@@ -1229,8 +1239,8 @@ function renderGrid() {
           <div class="t-track"></div><div class="t-thumb"></div>
         </label>
       </div>
-    </div>
-  `).join('') + `
+    </div>`
+  }).join('') + `
     <div class="add-card" onclick="openNew()">
       <i class="fas fa-plus"></i>
       <span>Nuevo producto</span>
@@ -1250,12 +1260,17 @@ function renderPromoGrid() {
   document.getElementById('global-promo-active').checked = !!data.settings.globalPromo;
   document.getElementById('global-promo-text').value = data.settings.globalPromoBanner||'';
 
-  const tipoLabel = { texto:'texto',pct:'% desc',['2x1']:'2×1',envio:'envío',combo:'combo',custom:'custom' };
   const grid = document.getElementById('promo-grid');
-  grid.innerHTML = data.products.map(p => `
+  grid.innerHTML = data.products.map(p => {
+    const isVideo = p.image && (p.image.endsWith('.webm') || p.image.endsWith('.mp4') || p.image.includes('data:video'));
+    return `
     <div class="oferta-card${p.promo?'':' inactive-offer'}">
       <div class="oferta-card-img">
-        ${p.image ? `<img src="${p.image}" alt="">` : `<div class="oferta-card-img-ph"><i class="fas fa-knife-kitchen"></i><span>${p.name}</span></div>`}
+        ${p.image 
+          ? (isVideo 
+              ? `<div style="display:flex; align-items:center; justify-content:center; height:100%;"><i class="fas fa-video" style="font-size:24px; color:var(--accent); opacity:0.6;"></i><span style="margin-left:6px;">video</span></div>`
+              : `<img src="${p.image}" alt="">`)
+          : `<div class="oferta-card-img-ph"><i class="fas fa-knife-kitchen"></i><span>${p.name}</span></div>`}
       </div>
       <div class="oferta-card-head">
         <div>
@@ -1276,8 +1291,8 @@ function renderPromoGrid() {
           ${p.promo ? `<button class="btn btn-sm btn-danger" onclick="clearPromo('${p.id}')">Quitar</button>` : ''}
         </div>
       </div>
-    </div>
-  `).join('') || `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)"><i class="fas fa-box-open" style="font-size:36px;opacity:.2;display:block;margin-bottom:14px"></i><p>No hay productos aún</p></div>`;
+    </div>`
+  }).join('') || `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)"><i class="fas fa-box-open" style="font-size:36px;opacity:.2;display:block;margin-bottom:14px"></i><p>No hay productos aún</p></div>`;
 }
 
 /* ══════════════════════════════════════════
@@ -1329,7 +1344,7 @@ function fillProdForm(p) {
   document.getElementById('edit-featured').checked = !!p.featured;
   currentSpecs = [...(p.specs||[])];
   renderSpecs();
-  if (p.image) showImgPreview(p.image);
+  if (p.image) showMediaPreview(p.image);
   else clearImgState();
   if (p.image && !p.image.startsWith('data:')) document.getElementById('edit-img-url').value = p.image;
 }
@@ -1339,8 +1354,15 @@ function saveProduct() {
   if (!name) { toast('El nombre es obligatorio','err'); return; }
   const previewShowing = document.getElementById('upload-preview').style.display !== 'none';
   const imgSrc = document.getElementById('upload-img').src;
+  const videoSrc = document.getElementById('upload-video').src;
   const urlVal = document.getElementById('edit-img-url').value.trim();
-  const image = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
+  let image = '';
+  if (previewShowing) {
+    if (imgSrc && imgSrc !== '') image = imgSrc;
+    else if (videoSrc && videoSrc !== '') image = videoSrc;
+  } else {
+    image = urlVal;
+  }
   const existingPromo = editingId ? (data.products.find(x=>x.id===editingId)?.promo||'') : '';
   const prod = {
     id: editingId||'p'+Date.now(),
@@ -1413,7 +1435,7 @@ function renderSpecs() {
 }
 
 /* ══════════════════════════════════════════
-   IMAGE (productos)
+   IMAGE/VIDEO PREVIEW (productos)
 ══════════════════════════════════════════ */
 document.getElementById('img-zone').addEventListener('click', e => {
   if (e.target.classList.contains('upload-clear')) return;
@@ -1424,18 +1446,36 @@ document.getElementById('img-zone').addEventListener('dragleave', e => e.current
 document.getElementById('img-zone').addEventListener('drop', e => {
   e.preventDefault(); e.currentTarget.classList.remove('drag-over');
   const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) processFile(f);
+  if (f && (f.type.startsWith('image/') || f.type.startsWith('video/'))) processFile(f);
 });
 function onFileChange(input) { if(input.files[0]) processFile(input.files[0]); }
 function processFile(f) {
-  if (f.size > 2*1024*1024) { toast('Imagen muy grande (máx 2MB)','err'); return; }
+  if (f.size > 5*1024*1024) { toast('Archivo muy grande (máx 5MB)','err'); return; }
   const r = new FileReader();
-  r.onload = e => showImgPreview(e.target.result);
+  r.onload = e => showMediaPreview(e.target.result, f.type);
   r.readAsDataURL(f);
 }
-function onUrlInput(url) { if(url) showImgPreview(url); else clearImgState(); }
-function showImgPreview(src) {
-  document.getElementById('upload-img').src = src;
+function onUrlInput(url) {
+  if (url) {
+    const ext = url.split('.').pop().toLowerCase();
+    const isVideo = ['webm','mp4','ogg','mov'].includes(ext);
+    showMediaPreview(url, isVideo ? 'video/'+ext : 'image/'+(ext==='webp'?'webp':'jpeg'));
+  } else clearImgState();
+}
+function showMediaPreview(src, mimeType) {
+  const isVideo = mimeType.startsWith('video/');
+  const imgEl = document.getElementById('upload-img');
+  const videoEl = document.getElementById('upload-video');
+  if (isVideo) {
+    imgEl.style.display = 'none';
+    videoEl.style.display = 'block';
+    videoEl.src = src;
+    videoEl.load();
+  } else {
+    videoEl.style.display = 'none';
+    imgEl.style.display = 'block';
+    imgEl.src = src;
+  }
   document.getElementById('upload-preview').style.display = 'block';
   document.getElementById('upload-idle').style.display = 'none';
   document.getElementById('img-zone').classList.add('has-image');
@@ -1443,6 +1483,9 @@ function showImgPreview(src) {
 function clearImg(e) { e&&e.stopPropagation(); clearImgState(); }
 function clearImgState() {
   document.getElementById('upload-img').src = '';
+  document.getElementById('upload-video').src = '';
+  document.getElementById('upload-img').style.display = 'none';
+  document.getElementById('upload-video').style.display = 'none';
   document.getElementById('upload-preview').style.display = 'none';
   document.getElementById('upload-idle').style.display = 'block';
   document.getElementById('img-zone').classList.remove('has-image');
@@ -1451,7 +1494,7 @@ function clearImgState() {
 }
 
 /* ══════════════════════════════════════════
-   HERO IMAGE (nuevas funciones)
+   HERO IMAGE/VIDEO
 ══════════════════════════════════════════ */
 document.getElementById('hero-img-zone').addEventListener('click', e => {
   if (e.target.classList.contains('upload-clear')) return;
@@ -1462,18 +1505,36 @@ document.getElementById('hero-img-zone').addEventListener('dragleave', e => e.cu
 document.getElementById('hero-img-zone').addEventListener('drop', e => {
   e.preventDefault(); e.currentTarget.classList.remove('drag-over');
   const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) processHeroFile(f);
+  if (f && (f.type.startsWith('image/') || f.type.startsWith('video/'))) processHeroFile(f);
 });
 function onHeroFileChange(input) { if(input.files[0]) processHeroFile(input.files[0]); }
 function processHeroFile(f) {
-  if (f.size > 2*1024*1024) { toast('Imagen muy grande (máx 2MB)','err'); return; }
+  if (f.size > 5*1024*1024) { toast('Archivo muy grande (máx 5MB)','err'); return; }
   const r = new FileReader();
-  r.onload = e => showHeroImgPreview(e.target.result);
+  r.onload = e => showHeroMediaPreview(e.target.result, f.type);
   r.readAsDataURL(f);
 }
-function onHeroUrlInput(url) { if(url) showHeroImgPreview(url); else clearHeroImgState(); }
-function showHeroImgPreview(src) {
-  document.getElementById('hero-upload-img').src = src;
+function onHeroUrlInput(url) {
+  if (url) {
+    const ext = url.split('.').pop().toLowerCase();
+    const isVideo = ['webm','mp4','ogg','mov'].includes(ext);
+    showHeroMediaPreview(url, isVideo ? 'video/'+ext : 'image/'+(ext==='webp'?'webp':'jpeg'));
+  } else clearHeroImgState();
+}
+function showHeroMediaPreview(src, mimeType) {
+  const isVideo = mimeType.startsWith('video/');
+  const imgEl = document.getElementById('hero-upload-img');
+  const videoEl = document.getElementById('hero-upload-video');
+  if (isVideo) {
+    imgEl.style.display = 'none';
+    videoEl.style.display = 'block';
+    videoEl.src = src;
+    videoEl.load();
+  } else {
+    videoEl.style.display = 'none';
+    imgEl.style.display = 'block';
+    imgEl.src = src;
+  }
   document.getElementById('hero-upload-preview').style.display = 'block';
   document.getElementById('hero-upload-idle').style.display = 'none';
   document.getElementById('hero-img-zone').classList.add('has-image');
@@ -1481,6 +1542,9 @@ function showHeroImgPreview(src) {
 function clearHeroImg(e) { e&&e.stopPropagation(); clearHeroImgState(); }
 function clearHeroImgState() {
   document.getElementById('hero-upload-img').src = '';
+  document.getElementById('hero-upload-video').src = '';
+  document.getElementById('hero-upload-img').style.display = 'none';
+  document.getElementById('hero-upload-video').style.display = 'none';
   document.getElementById('hero-upload-preview').style.display = 'none';
   document.getElementById('hero-upload-idle').style.display = 'block';
   document.getElementById('hero-img-zone').classList.remove('has-image');
@@ -1500,7 +1564,6 @@ function selTipo(t) {
 }
 
 function openNewPromo() {
-  // Show generic promo (will target first product by default - or show all)
   if (!data.products.length) { toast('Primero creá un producto','err'); return; }
   openPromoModal(data.products[0].id);
 }
@@ -1543,8 +1606,8 @@ function fillSettings() {
   sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
   sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
   sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
-  // Cargar imagen del hero si existe
-  if (s.heroImage) showHeroImgPreview(s.heroImage);
+  // Cargar imagen/video del hero si existe
+  if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg');
   else clearHeroImgState();
 }
 function saveSettings() {
@@ -1554,11 +1617,18 @@ function saveSettings() {
     heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
     heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
   });
-  // Guardar imagen del hero
+  // Guardar imagen/video del hero
   const previewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
   const imgSrc = document.getElementById('hero-upload-img').src;
+  const videoSrc = document.getElementById('hero-upload-video').src;
   const urlVal = document.getElementById('hero-img-url').value.trim();
-  const heroImage = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
+  let heroImage = '';
+  if (previewShowing) {
+    if (imgSrc && imgSrc !== '') heroImage = imgSrc;
+    else if (videoSrc && videoSrc !== '') heroImage = videoSrc;
+  } else {
+    heroImage = urlVal;
+  }
   data.settings.heroImage = heroImage;
   
   persist(); toast('Configuración guardada ✓');
