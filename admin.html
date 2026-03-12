@@ -580,6 +580,7 @@ select.form-select option{background:var(--surface)}
     <button class="btn btn-sm btn-primary" onclick="publishToGitHub()" id="btn-publish">
       <i class="fas fa-cloud-upload-alt"></i> Publicar
     </button>
+    <span id="json-size-badge" style="font-size:11px;color:var(--muted);margin-left:2px" title="Tamaño del JSON"></span>
     <button class="btn btn-sm btn-ghost" onclick="doLogout()" title="Cerrar sesión" style="padding:7px 11px">
       <i class="fas fa-sign-out-alt"></i>
     </button>
@@ -1306,7 +1307,19 @@ async function loadData() {
 }
 function persist(mark=true) {
   try {
-    localStorage.setItem('gl_data', JSON.stringify(data));
+    const jsonStr = JSON.stringify(data);
+    localStorage.setItem('gl_data', jsonStr);
+    // Update size badge
+    const kb = Math.round(new Blob([jsonStr]).size / 1024);
+    const badge = document.getElementById('json-size-badge');
+    if (badge) {
+      const mb = (kb/1024).toFixed(2);
+      const over = kb > 900;
+      badge.innerHTML = `<span style="color:${over?'var(--red)':'var(--muted)'}">
+        <i class="fas fa-${over?'exclamation-triangle':'database'}" style="font-size:10px"></i>
+        ${kb < 1024 ? kb+'KB' : mb+'MB'}${over?' — muy grande!':''}
+      </span>`;
+    }
     if (mark) document.getElementById('save-banner').classList.add('show');
   } catch(e) {
     if (e.name === 'QuotaExceededError' || e.code === 22) {
@@ -1621,6 +1634,35 @@ function renderSpecs() {
    IMAGE/VIDEO PREVIEW (productos)
 ══════════════════════════════════════════ */
 /* ══════════════════════════════════════════
+   COMPRESS IMAGE (Canvas)
+   maxW: max width/height in px
+   quality: 0-1 JPEG quality
+══════════════════════════════════════════ */
+function compressImage(file, maxW, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxW || h > maxW) {
+          if (w >= h) { h = Math.round(h * maxW / w); w = maxW; }
+          else        { w = Math.round(w * maxW / h); h = maxW; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = ev.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ══════════════════════════════════════════
    IMAGE/VIDEO PREVIEW — multi-media (productos)
 ══════════════════════════════════════════ */
 let currentMedia = []; // array of {src, type} — first = main image
@@ -1685,9 +1727,16 @@ function onFileChange(input) {
 }
 function processFile(f) {
   if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
-  const r = new FileReader();
-  r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); };
-  r.readAsDataURL(f);
+  if (f.type.startsWith('video/')) {
+    const r = new FileReader();
+    r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); };
+    r.readAsDataURL(f);
+    return;
+  }
+  compressImage(f, 1200, 0.78).then(src => {
+    currentMedia.push({ src, type: 'image/jpeg' });
+    renderMediaGrid();
+  });
 }
 function clearImgState() {
   currentMedia = [];
@@ -1716,9 +1765,13 @@ document.getElementById('hero-img-zone').addEventListener('drop', e => {
 function onHeroFileChange(input) { if(input.files[0]) processHeroFile(input.files[0]); }
 function processHeroFile(f) {
   if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
-  const r = new FileReader();
-  r.onload = e => showHeroMediaPreview(e.target.result, f.type);
-  r.readAsDataURL(f);
+  if (f.type.startsWith('video/')) {
+    const r = new FileReader();
+    r.onload = e => showHeroMediaPreview(e.target.result, f.type);
+    r.readAsDataURL(f);
+    return;
+  }
+  compressImage(f, 1600, 0.80).then(src => showHeroMediaPreview(src, 'image/jpeg'));
 }
 function onHeroUrlInput(url) {
   if (url) {
@@ -1775,9 +1828,7 @@ document.getElementById('artisan-img-zone')?.addEventListener('drop', e => {
 function onArtisanFileChange(input) { if(input.files[0]) processArtisanFile(input.files[0]); }
 function processArtisanFile(f) {
   if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
-  const r = new FileReader();
-  r.onload = e => showArtisanImgPreview(e.target.result);
-  r.readAsDataURL(f);
+  compressImage(f, 800, 0.82).then(src => showArtisanImgPreview(src));
 }
 function onArtisanUrlInput(url) {
   if (url) showArtisanImgPreview(url);
@@ -2107,25 +2158,93 @@ async function testGh() {
 async function publishToGitHub() {
   const c = JSON.parse(localStorage.getItem('gl_gh')||'{}');
   if (!c.user||!c.repo||!c.token) { toast('Configurá GitHub primero (sección "GitHub & Deploy")','err'); return; }
+
+  // Check JSON size before sending
+  const jsonStr = JSON.stringify(data, null, 2);
+  const sizeKB = Math.round(new Blob([jsonStr]).size / 1024);
+  const sizeMB = (sizeKB / 1024).toFixed(2);
+
+  // GitHub API limit is ~100MB but fails in practice above ~1MB for base64
+  if (sizeKB > 900) {
+    const strip = confirm(
+      `⚠️ El archivo es muy grande (${sizeMB} MB) y GitHub puede rechazarlo.\n\n` +
+      `Esto ocurre porque las imágenes guardadas como Base64 pesan mucho.\n\n` +
+      `¿Publicar de todas formas? (puede fallar)\n\n` +
+      `Tip: usá URLs externas para imágenes en vez de subir archivos.`
+    );
+    if (!strip) return;
+  }
+
   const btn = document.getElementById('btn-publish');
   btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Publicando...';
+
   try {
-    const getR = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{ headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json' } });
+    // Get current SHA of the file (needed for updates)
+    const getR = await fetch(
+      `https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,
+      { headers: { Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json' } }
+    );
     let sha = null;
-    if (getR.ok) { const d=await getR.json(); sha=d.sha; }
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
-    const body = { message:`Admin: update ${new Date().toLocaleString('es-AR')}`, content, branch:c.branch||'main' };
+    if (getR.ok) { const d = await getR.json(); sha = d.sha; }
+    else if (getR.status !== 404) {
+      // 401 = bad token, 403 = no perms
+      const err = await getR.json().catch(()=>({}));
+      if (getR.status === 401) { toast('Token inválido — revisá el PAT en GitHub','err'); return; }
+      if (getR.status === 403) { toast('Sin permisos — el token necesita Contents: Read & Write','err'); return; }
+    }
+
+    // Encode JSON as base64 for GitHub API
+    let content;
+    try {
+      content = btoa(unescape(encodeURIComponent(jsonStr)));
+    } catch(e) {
+      toast('Error al codificar los datos — puede haber caracteres inválidos','err');
+      return;
+    }
+
+    const body = {
+      message: `Admin: update ${new Date().toLocaleString('es-AR')}`,
+      content,
+      branch: c.branch || 'main'
+    };
     if (sha) body.sha = sha;
-    const putR = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{ method:'PUT', headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' }, body:JSON.stringify(body) });
+
+    const putR = await fetch(
+      `https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${c.token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
     if (putR.ok) {
       document.getElementById('save-banner').classList.remove('show');
-      toast('¡Publicado en GitHub! Cambios en ~30 seg ✓');
+      toast(`¡Publicado en GitHub! (${sizeMB} MB) Cambios en ~30 seg ✓`);
     } else {
-      const err = await putR.json();
-      toast('Error: '+(err.message||putR.status),'err');
+      const err = await putR.json().catch(()=>({}));
+      let msg = err.message || `Error ${putR.status}`;
+      if (putR.status === 422) {
+        msg = `Archivo demasiado grande (${sizeMB} MB). Usá URLs de imágenes externas en vez de subir archivos.`;
+      } else if (putR.status === 401) {
+        msg = 'Token inválido — regenerá el PAT en GitHub → Settings → Developer settings';
+      } else if (putR.status === 403) {
+        msg = 'Sin permisos — el token necesita Contents: Read & Write sobre este repo';
+      } else if (putR.status === 409) {
+        msg = 'Conflicto de versión — recargá la página e intentá de nuevo';
+      }
+      toast('Error: ' + msg, 'err');
     }
-  } catch(e) { toast('Error: '+e.message,'err'); }
-  finally { btn.disabled=false; btn.innerHTML='<i class="fas fa-cloud-upload-alt"></i> Publicar'; }
+  } catch(e) {
+    toast('Error de red: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Publicar';
+  }
 }
 
 /* ══════════════════════════════════════════
