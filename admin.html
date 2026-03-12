@@ -468,6 +468,28 @@ select.form-select option{background:var(--surface)}
 .gh-err{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:none;margin-top:10px}
 .gh-err.on{display:block}
 
+/* IMGBB */
+.imgbb-status{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  border-radius:var(--radius);font-size:13px;margin-top:10px;
+  background:rgba(45,138,94,.08);border:1px solid rgba(45,138,94,.2);color:var(--green);
+  display:none;
+}
+.imgbb-status.on{display:flex}
+.imgbb-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;
+  background:rgba(45,138,94,.15);color:var(--green);border:1px solid rgba(45,138,94,.3);
+}
+.upload-progress{
+  position:absolute;inset:0;background:rgba(26,24,20,.7);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  color:#fff;font-size:13px;font-weight:600;z-index:10;border-radius:var(--radius);
+}
+.progress-bar-wrap{width:70%;height:4px;background:rgba(255,255,255,.2);border-radius:2px}
+.progress-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+
 /* TOAST */
 .toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);
@@ -903,7 +925,40 @@ select.form-select option{background:var(--surface)}
           </p>
         </div>
       </div>
-    </div>
+
+      <!-- IMGBB -->
+      <div class="cfg-card" style="grid-column:1/-1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div>
+            <h3>🖼️ imgbb — Hosting de imágenes <span class="imgbb-badge" id="imgbb-badge" style="display:none"><i class="fas fa-check"></i> Activo</span></h3>
+            <p>Subí imágenes a imgbb automáticamente. El JSON queda liviano (solo URLs) y podés tener decenas de fotos sin límite de tamaño.</p>
+          </div>
+          <a href="https://api.imgbb.com/" target="_blank" class="btn btn-sm btn-ghost" style="flex-shrink:0"><i class="fas fa-external-link-alt"></i> Obtener API key</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:flex-end;margin-top:4px">
+          <div class="form-row" style="margin-bottom:0">
+            <label class="form-label">API Key de imgbb</label>
+            <input type="text" class="form-input" id="imgbb-key" placeholder="Pegá tu API key acá (es gratis)">
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm btn-primary" onclick="saveImgbbKey()"><i class="fas fa-save"></i> Guardar</button>
+            <button class="btn btn-sm btn-ghost" onclick="testImgbb()"><i class="fas fa-plug"></i> Probar</button>
+          </div>
+        </div>
+        <div class="imgbb-status on" id="imgbb-ok" style="display:none">
+          <i class="fas fa-check-circle"></i> imgbb configurado — las imágenes se suben automáticamente al agregar fotos
+        </div>
+        <div style="margin-top:14px;padding:12px 14px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+          <p style="font-size:12px;color:var(--muted);line-height:1.7">
+            <strong style="color:var(--text)">Cómo obtener tu API key gratis:</strong><br>
+            1. Entrá a <strong>imgbb.com</strong> → creá una cuenta gratuita<br>
+            2. Andá a <strong>api.imgbb.com</strong> → copiá tu API key<br>
+            3. Pegala acá y guardá. Listo — todas las fotos se van a subir automáticamente a imgbb.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /cfg-grid -->
   </section>
 
 </div><!-- /page -->
@@ -1234,6 +1289,7 @@ let editingReviewId = null;
   if (localStorage.getItem('gl_auth') === '1') showApp();
   await loadData();
   loadGhCfg();
+  loadImgbbCfg();
   fillSettings();
   renderAll();
 })();
@@ -1634,6 +1690,105 @@ function renderSpecs() {
    IMAGE/VIDEO PREVIEW (productos)
 ══════════════════════════════════════════ */
 /* ══════════════════════════════════════════
+   IMGBB — Image hosting
+══════════════════════════════════════════ */
+function getImgbbKey() {
+  return localStorage.getItem('gl_imgbb') || '';
+}
+
+function saveImgbbKey() {
+  const key = document.getElementById('imgbb-key').value.trim();
+  if (!key) { toast('Ingresá una API key','err'); return; }
+  localStorage.setItem('gl_imgbb', key);
+  updateImgbbUI(true);
+  toast('API key de imgbb guardada ✓');
+}
+
+function updateImgbbUI(active) {
+  const badge = document.getElementById('imgbb-badge');
+  const ok    = document.getElementById('imgbb-ok');
+  if (badge) badge.style.display = active ? 'inline-flex' : 'none';
+  if (ok)    ok.style.display    = active ? 'flex' : 'none';
+}
+
+function loadImgbbCfg() {
+  const key = getImgbbKey();
+  const input = document.getElementById('imgbb-key');
+  if (key && input) input.value = key;
+  updateImgbbUI(!!key);
+}
+
+async function testImgbb() {
+  const key = getImgbbKey();
+  if (!key) { toast('Guardá primero la API key','err'); return; }
+  // Create a tiny 1x1 transparent PNG as test
+  const testB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+  try {
+    const fd = new FormData();
+    fd.append('key', key);
+    fd.append('image', testB64);
+    const r = await fetch('https://api.imgbb.com/1/upload', { method:'POST', body:fd });
+    const d = await r.json();
+    if (d.success) {
+      updateImgbbUI(true);
+      toast('imgbb conectado correctamente ✓');
+    } else {
+      toast('Error imgbb: ' + (d.error?.message || 'API key inválida'), 'err');
+    }
+  } catch(e) {
+    toast('Error de conexión con imgbb','err');
+  }
+}
+
+// Upload a file (or base64) to imgbb, returns the URL or null
+async function uploadToImgbb(fileOrB64, filename) {
+  const key = getImgbbKey();
+  if (!key) return null; // fallback to base64
+
+  try {
+    const fd = new FormData();
+    fd.append('key', key);
+    if (typeof fileOrB64 === 'string') {
+      // base64 string (strip data: prefix if present)
+      const b64 = fileOrB64.includes(',') ? fileOrB64.split(',')[1] : fileOrB64;
+      fd.append('image', b64);
+    } else {
+      fd.append('image', fileOrB64);
+    }
+    if (filename) fd.append('name', filename);
+
+    const r = await fetch('https://api.imgbb.com/1/upload', { method:'POST', body:fd });
+    const d = await r.json();
+    if (d.success) return d.data.url;
+    console.error('imgbb error:', d.error);
+    return null;
+  } catch(e) {
+    console.error('imgbb upload failed:', e);
+    return null;
+  }
+}
+
+// Show uploading overlay on a zone element
+function showUploadingOverlay(zoneId, show) {
+  const zone = document.getElementById(zoneId);
+  if (!zone) return;
+  let ov = zone.querySelector('.upload-progress');
+  if (show) {
+    if (!ov) {
+      ov = document.createElement('div');
+      ov.className = 'upload-progress';
+      ov.innerHTML = `<i class="fas fa-cloud-upload-alt" style="font-size:24px;color:var(--accent)"></i>
+        <span>Subiendo a imgbb...</span>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:60%"></div></div>`;
+      zone.style.position = 'relative';
+      zone.appendChild(ov);
+    }
+  } else {
+    if (ov) ov.remove();
+  }
+}
+
+/* ══════════════════════════════════════════
    COMPRESS IMAGE (Canvas)
    maxW: max width/height in px
    quality: 0-1 JPEG quality
@@ -1733,8 +1888,22 @@ function processFile(f) {
     r.readAsDataURL(f);
     return;
   }
-  compressImage(f, 1200, 0.78).then(src => {
-    currentMedia.push({ src, type: 'image/jpeg' });
+  showUploadingOverlay('img-zone', true);
+  compressImage(f, 1200, 0.82).then(async b64 => {
+    if (getImgbbKey()) {
+      const url = await uploadToImgbb(b64, f.name);
+      showUploadingOverlay('img-zone', false);
+      if (url) {
+        currentMedia.push({ src: url, type: 'image/jpeg' });
+        toast('Foto subida a imgbb ✓');
+      } else {
+        currentMedia.push({ src: b64, type: 'image/jpeg' });
+        toast('imgbb falló — guardada en Base64','');
+      }
+    } else {
+      showUploadingOverlay('img-zone', false);
+      currentMedia.push({ src: b64, type: 'image/jpeg' });
+    }
     renderMediaGrid();
   });
 }
@@ -1771,7 +1940,18 @@ function processHeroFile(f) {
     r.readAsDataURL(f);
     return;
   }
-  compressImage(f, 1600, 0.80).then(src => showHeroMediaPreview(src, 'image/jpeg'));
+  showUploadingOverlay('hero-img-zone', true);
+  compressImage(f, 1600, 0.82).then(async b64 => {
+    if (getImgbbKey()) {
+      const url = await uploadToImgbb(b64, 'hero-'+f.name);
+      showUploadingOverlay('hero-img-zone', false);
+      showHeroMediaPreview(url || b64, 'image/jpeg');
+      if (url) toast('Hero subido a imgbb ✓');
+    } else {
+      showUploadingOverlay('hero-img-zone', false);
+      showHeroMediaPreview(b64, 'image/jpeg');
+    }
+  });
 }
 function onHeroUrlInput(url) {
   if (url) {
@@ -1828,7 +2008,18 @@ document.getElementById('artisan-img-zone')?.addEventListener('drop', e => {
 function onArtisanFileChange(input) { if(input.files[0]) processArtisanFile(input.files[0]); }
 function processArtisanFile(f) {
   if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
-  compressImage(f, 800, 0.82).then(src => showArtisanImgPreview(src));
+  showUploadingOverlay('artisan-img-zone', true);
+  compressImage(f, 800, 0.82).then(async b64 => {
+    if (getImgbbKey()) {
+      const url = await uploadToImgbb(b64, 'artisan-'+f.name);
+      showUploadingOverlay('artisan-img-zone', false);
+      showArtisanImgPreview(url || b64);
+      if (url) toast('Foto artesano subida a imgbb ✓');
+    } else {
+      showUploadingOverlay('artisan-img-zone', false);
+      showArtisanImgPreview(b64);
+    }
+  });
 }
 function onArtisanUrlInput(url) {
   if (url) showArtisanImgPreview(url);
