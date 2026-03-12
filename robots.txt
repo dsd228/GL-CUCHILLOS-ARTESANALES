@@ -1,0 +1,25 @@
+# GL Cuchillos Artesanales - robots.txt
+# Configuración para motores de búsqueda
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /private
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Sitemap
+Sitemap: https://gl-cuchillos.artesanales.workers.dev/sitemap.xml
+
+# Rastreo crawl-delay (segundos)
+Crawl-delay: 1
+
+# Permitir Google, Bing, Yahoo
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
