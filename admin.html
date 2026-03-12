@@ -664,6 +664,7 @@ select.form-select option{background:var(--surface)}
   <!-- ═══ SECTION: CONFIGURACIÓN ═══ -->
   <section class="page-section" id="sec-configuracion">
     <div class="cfg-grid">
+      <!-- Datos de contacto -->
       <div class="cfg-card">
         <h3>📱 Datos de contacto</h3>
         <p>Información que se muestra en el sitio</p>
@@ -684,6 +685,8 @@ select.form-select option{background:var(--surface)}
           <input type="text" class="form-input" id="cfg-phone" placeholder="+54 9 3843 458340">
         </div>
       </div>
+
+      <!-- Hero -->
       <div class="cfg-card">
         <h3>🏠 Pantalla de inicio (Hero)</h3>
         <p>Textos principales de la primera sección del sitio</p>
@@ -729,6 +732,48 @@ select.form-select option{background:var(--surface)}
           </details>
         </div>
       </div>
+
+      <!-- Foto del artesano -->
+      <div class="cfg-card">
+        <h3>👨‍🏭 Foto del artesano</h3>
+        <p>Imagen de Gonzalo Londero que aparece en la sección "Sobre el artesano"</p>
+        <div class="form-row">
+          <label class="form-label">Foto del artesano</label>
+          <label class="img-upload-zone" id="artisan-img-zone">
+            <div class="upload-idle" id="artisan-upload-idle">
+              <i class="fas fa-camera upload-icon"></i>
+              <p class="upload-title">Arrastrá una foto o hacé clic</p>
+              <p class="upload-sub">JPG, PNG, WEBP · máx 10 MB</p>
+              <span class="upload-formats">Se convierte a Base64</span>
+            </div>
+            <div class="upload-preview" id="artisan-upload-preview" style="display:none">
+              <img id="artisan-upload-img" src="" alt="" style="display:block;">
+              <video id="artisan-upload-video" controls style="display:none;"></video>
+              <button class="upload-clear" onclick="clearArtisanImg(event)">×</button>
+              <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+            </div>
+            <input type="file" id="artisan-img-file" accept="image/*" style="display:none" onchange="onArtisanFileChange(this)">
+          </label>
+          <details class="url-fallback">
+            <summary><i class="fas fa-link"></i> O pegá una URL de imagen</summary>
+            <input type="text" class="form-input" id="artisan-img-url" placeholder="https://..." oninput="onArtisanUrlInput(this.value)">
+          </details>
+        </div>
+      </div>
+
+      <!-- Reseñas de clientes -->
+      <div class="cfg-card">
+        <h3>⭐ Reseñas de clientes</h3>
+        <p>Gestioná los testimonios que se muestran en el sitio</p>
+        <div style="margin-bottom:16px">
+          <button class="btn btn-sm btn-primary" onclick="openNewReview()">
+            <i class="fas fa-plus"></i> Agregar reseña
+          </button>
+        </div>
+        <div id="reviews-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+      </div>
+
+      <!-- Cambiar contraseña -->
       <div class="cfg-card">
         <h3>🔐 Cambiar contraseña</h3>
         <p>Actualizá la contraseña del panel admin</p>
@@ -748,6 +793,8 @@ select.form-select option{background:var(--surface)}
           <i class="fas fa-key"></i> Cambiar contraseña
         </button>
       </div>
+
+      <!-- Importar / Exportar -->
       <div class="cfg-card">
         <h3>📦 Importar / Exportar</h3>
         <p>Descargá o importá todos los datos del catálogo en formato JSON</p>
@@ -1040,7 +1087,66 @@ select.form-select option{background:var(--surface)}
   </div>
 </div>
 
-<!-- ═══ MODAL CONFIRMAR ELIMINAR ══════════════ -->
+<!-- ═══ MODAL RESEÑA ═══════════════════════════ -->
+<div class="backdrop" id="mReview">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-head">
+      <h2 class="modal-title" id="modal-review-title">Nueva reseña</h2>
+      <button class="modal-close" onclick="closeModal('mReview')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="review-id">
+      <div class="form-row">
+        <label class="form-label">Nombre del cliente *</label>
+        <input type="text" class="form-input" id="review-name" placeholder="Ej: Juan Pérez">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Calificación (1-5) *</label>
+        <select class="form-select" id="review-rating">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Texto de la reseña *</label>
+        <textarea class="form-textarea" id="review-text" rows="4" placeholder="Ej: Excelente calidad, el cuchillo superó mis expectativas..."></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Foto del cliente (opcional)</label>
+        <label class="img-upload-zone" id="review-img-zone">
+          <div class="upload-idle" id="review-upload-idle">
+            <i class="fas fa-camera upload-icon"></i>
+            <p class="upload-title">Arrastrá una foto o hacé clic</p>
+            <p class="upload-sub">JPG, PNG, WEBP · máx 10 MB</p>
+            <span class="upload-formats">Se convierte a Base64</span>
+          </div>
+          <div class="upload-preview" id="review-upload-preview" style="display:none">
+            <img id="review-upload-img" src="" alt="" style="display:block;">
+            <video id="review-upload-video" controls style="display:none;"></video>
+            <button class="upload-clear" onclick="clearReviewImg(event)">×</button>
+            <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
+          </div>
+          <input type="file" id="review-img-file" accept="image/*" style="display:none" onchange="onReviewFileChange(this)">
+        </label>
+        <details class="url-fallback">
+          <summary><i class="fas fa-link"></i> O pegá una URL de imagen</summary>
+          <input type="text" class="form-input" id="review-img-url" placeholder="https://..." oninput="onReviewUrlInput(this.value)">
+        </details>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mReview')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveReview()">
+        <i class="fas fa-check"></i> Guardar reseña
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CONFIRMAR ELIMINAR PRODUCTO ══════════════ -->
 <div class="backdrop" id="mConfirm">
   <div class="modal" style="max-width:400px">
     <div class="modal-head">
@@ -1059,6 +1165,25 @@ select.form-select option{background:var(--surface)}
   </div>
 </div>
 
+<!-- ═══ MODAL CONFIRMAR ELIMINAR RESEÑA ══════════════ -->
+<div class="backdrop" id="mConfirmReview">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <h2 class="modal-title">¿Eliminar reseña?</h2>
+      <button class="modal-close" onclick="closeModal('mConfirmReview')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--muted);font-size:14px;line-height:1.7">¿Eliminás la reseña de <strong id="del-review-name"></strong>?</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mConfirmReview')">Cancelar</button>
+      <button class="btn btn-danger" onclick="doDeleteReview()">
+        <i class="fas fa-trash"></i> Sí, eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -1067,13 +1192,14 @@ select.form-select option{background:var(--surface)}
    STATE
 ══════════════════════════════════════════ */
 const DEFAULT_PWD = 'glcuchillos2024';
-let data = { settings:{}, products:[] };
+let data = { settings: { reviews: [] }, products: [] };
 let editingId = null;
 let currentSort = 'default';
 let currentCat = 'all';
 let currentSpecs = [];
 let promoTipo = 'texto';
 let toastTimer;
+let editingReviewId = null;
 
 /* ══════════════════════════════════════════
    INIT
@@ -1119,12 +1245,38 @@ function changePassword() {
 ══════════════════════════════════════════ */
 async function loadData() {
   const cached = localStorage.getItem('gl_data');
-  if (cached) { try { data = JSON.parse(cached); return; } catch(e) {} }
+  if (cached) {
+    try {
+      data = JSON.parse(cached);
+      if (!data.settings.reviews) data.settings.reviews = [];
+      return;
+    } catch(e) {}
+  }
   try {
     const r = await fetch('products.json?t='+Date.now());
-    if (r.ok) { data = await r.json(); persist(false); }
+    if (r.ok) {
+      data = await r.json();
+      if (!data.settings.reviews) data.settings.reviews = [];
+      persist(false);
+    }
   } catch(e) {
-    data = { settings:{ whatsapp:'5493843458340', instagram:'gonzalo.londero.3', facebook:'Gonzafcf', phone:'+54 9 3843 458340', heroTitle:'Cada filo cuenta una historia.', heroSubtitle:'', heroStat1:'500+', heroStat1Label:'Piezas entregadas', globalPromo:false, globalPromoBanner:'' }, products:[] };
+    data = {
+      settings: {
+        whatsapp: '5493843458340',
+        instagram: 'gonzalo.londero.3',
+        facebook: 'Gonzafcf',
+        phone: '+54 9 3843 458340',
+        heroTitle: 'Cada filo cuenta una historia.',
+        heroSubtitle: '',
+        heroStat1: '500+',
+        heroStat1Label: 'Piezas entregadas',
+        globalPromo: false,
+        globalPromoBanner: '',
+        artisanPhoto: '',
+        reviews: []
+      },
+      products: []
+    };
   }
 }
 function persist(mark=true) {
@@ -1199,7 +1351,6 @@ function renderGrid() {
   const badgeClass = { avail:'b-avail', custom:'b-custom', intl:'b-intl', unavail:'b-unavail' };
 
   grid.innerHTML = prods.map(p => {
-    // Detectar si el recurso es video (por extensión o data:video)
     const isVideo = p.image && (p.image.endsWith('.webm') || p.image.endsWith('.mp4') || p.image.includes('data:video'));
     return `
     <div class="prod-card${p.active?'':' inactive'}">
@@ -1553,6 +1704,244 @@ function clearHeroImgState() {
 }
 
 /* ══════════════════════════════════════════
+   ARTISAN PHOTO
+══════════════════════════════════════════ */
+document.getElementById('artisan-img-zone')?.addEventListener('click', e => {
+  if (e.target.classList.contains('upload-clear')) return;
+  document.getElementById('artisan-img-file').click();
+});
+document.getElementById('artisan-img-zone')?.addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
+document.getElementById('artisan-img-zone')?.addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
+document.getElementById('artisan-img-zone')?.addEventListener('drop', e => {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) processArtisanFile(f);
+});
+function onArtisanFileChange(input) { if(input.files[0]) processArtisanFile(input.files[0]); }
+function processArtisanFile(f) {
+  if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => showArtisanImgPreview(e.target.result);
+  r.readAsDataURL(f);
+}
+function onArtisanUrlInput(url) {
+  if (url) showArtisanImgPreview(url);
+  else clearArtisanImgState();
+}
+function showArtisanImgPreview(src) {
+  const imgEl = document.getElementById('artisan-upload-img');
+  const videoEl = document.getElementById('artisan-upload-video');
+  imgEl.style.display = 'block';
+  videoEl.style.display = 'none';
+  imgEl.src = src;
+  document.getElementById('artisan-upload-preview').style.display = 'block';
+  document.getElementById('artisan-upload-idle').style.display = 'none';
+  document.getElementById('artisan-img-zone').classList.add('has-image');
+}
+function clearArtisanImg(e) { e?.stopPropagation(); clearArtisanImgState(); }
+function clearArtisanImgState() {
+  document.getElementById('artisan-upload-img').src = '';
+  document.getElementById('artisan-upload-preview').style.display = 'none';
+  document.getElementById('artisan-upload-idle').style.display = 'block';
+  document.getElementById('artisan-img-zone').classList.remove('has-image');
+  document.getElementById('artisan-img-url').value = '';
+  document.getElementById('artisan-img-file').value = '';
+}
+
+/* ══════════════════════════════════════════
+   REVIEWS
+══════════════════════════════════════════ */
+function renderReviewsList() {
+  const container = document.getElementById('reviews-list');
+  if (!container) return;
+  const reviews = data.settings.reviews || [];
+  if (reviews.length === 0) {
+    container.innerHTML = '<div style="padding:20px; text-align:center; color:var(--muted); border:1px dashed var(--border); border-radius:var(--radius);">No hay reseñas aún. Hacé clic en "Agregar reseña" para crear una.</div>';
+    return;
+  }
+  container.innerHTML = reviews.map(r => `
+    <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:12px; display:flex; align-items:center; gap:12px;">
+      ${r.image ? `<img src="${r.image}" alt="" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">` : '<div style="width:48px; height:48px; border-radius:50%; background:var(--border); display:flex; align-items:center; justify-content:center;"><i class="fas fa-user" style="color:var(--muted);"></i></div>'}
+      <div style="flex:1; min-width:0;">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <strong>${r.name}</strong>
+          <span style="color:var(--gold);">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span>
+        </div>
+        <div style="font-size:13px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px;">${r.text}</div>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button class="btn btn-sm btn-ghost" onclick="openEditReview('${r.id}')"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-sm btn-danger" onclick="openDeleteReview('${r.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openNewReview() {
+  editingReviewId = null;
+  document.getElementById('modal-review-title').textContent = 'Nueva reseña';
+  document.getElementById('review-id').value = '';
+  document.getElementById('review-name').value = '';
+  document.getElementById('review-rating').value = '5';
+  document.getElementById('review-text').value = '';
+  clearReviewImgState();
+  openModal('mReview');
+}
+
+function openEditReview(id) {
+  const r = data.settings.reviews.find(x => x.id === id);
+  if (!r) return;
+  editingReviewId = id;
+  document.getElementById('modal-review-title').textContent = 'Editar reseña';
+  document.getElementById('review-id').value = id;
+  document.getElementById('review-name').value = r.name || '';
+  document.getElementById('review-rating').value = r.rating || '5';
+  document.getElementById('review-text').value = r.text || '';
+  if (r.image) {
+    showReviewImgPreview(r.image);
+  } else {
+    clearReviewImgState();
+  }
+  if (r.image && !r.image.startsWith('data:')) document.getElementById('review-img-url').value = r.image;
+  openModal('mReview');
+}
+
+function saveReview() {
+  const name = document.getElementById('review-name').value.trim();
+  const rating = parseInt(document.getElementById('review-rating').value);
+  const text = document.getElementById('review-text').value.trim();
+  if (!name || !text || !rating) {
+    toast('Completá nombre, calificación y texto','err');
+    return;
+  }
+  const previewShowing = document.getElementById('review-upload-preview').style.display !== 'none';
+  const imgSrc = document.getElementById('review-upload-img').src;
+  const urlVal = document.getElementById('review-img-url').value.trim();
+  const image = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal;
+  const review = {
+    id: editingReviewId || 'rev' + Date.now(),
+    name,
+    rating,
+    text,
+    image: image || ''
+  };
+  if (!data.settings.reviews) data.settings.reviews = [];
+  if (editingReviewId) {
+    const idx = data.settings.reviews.findIndex(x => x.id === editingReviewId);
+    if (idx >= 0) data.settings.reviews[idx] = review;
+  } else {
+    data.settings.reviews.push(review);
+  }
+  persist();
+  renderReviewsList();
+  closeModal('mReview');
+  toast(editingReviewId ? 'Reseña actualizada ✓' : 'Reseña creada ✓');
+  editingReviewId = null;
+}
+
+function openDeleteReview(id) {
+  const r = data.settings.reviews.find(x => x.id === id);
+  if (r) {
+    document.getElementById('del-review-name').textContent = r.name;
+    editingReviewId = id;
+    openModal('mConfirmReview');
+  }
+}
+function doDeleteReview() {
+  data.settings.reviews = data.settings.reviews.filter(x => x.id !== editingReviewId);
+  persist();
+  renderReviewsList();
+  closeModal('mConfirmReview');
+  toast('Reseña eliminada');
+  editingReviewId = null;
+}
+
+/* ══════════════════════════════════════════
+   REVIEW IMAGE
+══════════════════════════════════════════ */
+document.getElementById('review-img-zone')?.addEventListener('click', e => {
+  if (e.target.classList.contains('upload-clear')) return;
+  document.getElementById('review-img-file').click();
+});
+document.getElementById('review-img-zone')?.addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
+document.getElementById('review-img-zone')?.addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
+document.getElementById('review-img-zone')?.addEventListener('drop', e => {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) processReviewFile(f);
+});
+function onReviewFileChange(input) { if(input.files[0]) processReviewFile(input.files[0]); }
+function processReviewFile(f) {
+  if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => showReviewImgPreview(e.target.result);
+  r.readAsDataURL(f);
+}
+function onReviewUrlInput(url) {
+  if (url) showReviewImgPreview(url);
+  else clearReviewImgState();
+}
+function showReviewImgPreview(src) {
+  document.getElementById('review-upload-img').src = src;
+  document.getElementById('review-upload-preview').style.display = 'block';
+  document.getElementById('review-upload-idle').style.display = 'none';
+  document.getElementById('review-img-zone').classList.add('has-image');
+}
+function clearReviewImg(e) { e?.stopPropagation(); clearReviewImgState(); }
+function clearReviewImgState() {
+  document.getElementById('review-upload-img').src = '';
+  document.getElementById('review-upload-preview').style.display = 'none';
+  document.getElementById('review-upload-idle').style.display = 'block';
+  document.getElementById('review-img-zone').classList.remove('has-image');
+  document.getElementById('review-img-url').value = '';
+  document.getElementById('review-img-file').value = '';
+}
+
+/* ══════════════════════════════════════════
+   SETTINGS
+══════════════════════════════════════════ */
+function fillSettings() {
+  const s = data.settings||{};
+  const sv = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v; };
+  sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
+  sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
+  sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
+  // Hero image
+  if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg');
+  else clearHeroImgState();
+  // Artisan photo
+  if (s.artisanPhoto) showArtisanImgPreview(s.artisanPhoto);
+  else clearArtisanImgState();
+  // Reviews list
+  renderReviewsList();
+}
+function saveSettings() {
+  const gv = id => document.getElementById(id)?.value?.trim()||'';
+  Object.assign(data.settings, {
+    whatsapp:gv('cfg-wa'), instagram:gv('cfg-ig'), facebook:gv('cfg-fb'), phone:gv('cfg-phone'),
+    heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
+    heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
+  });
+  // Hero image
+  const heroPreviewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
+  const heroImgSrc = document.getElementById('hero-upload-img').src;
+  const heroVideoSrc = document.getElementById('hero-upload-video').src;
+  const heroUrlVal = document.getElementById('hero-img-url').value.trim();
+  if (heroPreviewShowing) {
+    data.settings.heroImage = (heroImgSrc && heroImgSrc !== '') ? heroImgSrc : (heroVideoSrc || '');
+  } else {
+    data.settings.heroImage = heroUrlVal;
+  }
+  // Artisan photo
+  const artisanPreviewShowing = document.getElementById('artisan-upload-preview').style.display !== 'none';
+  const artisanImgSrc = document.getElementById('artisan-upload-img').src;
+  const artisanUrlVal = document.getElementById('artisan-img-url').value.trim();
+  data.settings.artisanPhoto = artisanPreviewShowing ? artisanImgSrc : artisanUrlVal;
+  
+  persist(); toast('Configuración guardada ✓');
+}
+
+/* ══════════════════════════════════════════
    PROMOTIONS
 ══════════════════════════════════════════ */
 function selTipo(t) {
@@ -1595,43 +1984,6 @@ function saveGlobalPromo() {
   data.settings.globalPromo = document.getElementById('global-promo-active').checked;
   data.settings.globalPromoBanner = document.getElementById('global-promo-text').value.trim();
   persist(); updateStats(); toast('Banner global guardado ✓');
-}
-
-/* ══════════════════════════════════════════
-   SETTINGS
-══════════════════════════════════════════ */
-function fillSettings() {
-  const s = data.settings||{};
-  const sv = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v; };
-  sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
-  sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
-  sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
-  // Cargar imagen/video del hero si existe
-  if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg');
-  else clearHeroImgState();
-}
-function saveSettings() {
-  const gv = id => document.getElementById(id)?.value?.trim()||'';
-  Object.assign(data.settings, {
-    whatsapp:gv('cfg-wa'), instagram:gv('cfg-ig'), facebook:gv('cfg-fb'), phone:gv('cfg-phone'),
-    heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
-    heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
-  });
-  // Guardar imagen/video del hero
-  const previewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
-  const imgSrc = document.getElementById('hero-upload-img').src;
-  const videoSrc = document.getElementById('hero-upload-video').src;
-  const urlVal = document.getElementById('hero-img-url').value.trim();
-  let heroImage = '';
-  if (previewShowing) {
-    if (imgSrc && imgSrc !== '') heroImage = imgSrc;
-    else if (videoSrc && videoSrc !== '') heroImage = videoSrc;
-  } else {
-    heroImage = urlVal;
-  }
-  data.settings.heroImage = heroImage;
-  
-  persist(); toast('Configuración guardada ✓');
 }
 
 /* ══════════════════════════════════════════
