@@ -733,7 +733,7 @@ select.form-select option{background:var(--surface)}
         </div>
       </div>
 
-      <!-- Foto del artesano -->
+      <!-- Foto del artesano (NUEVO) -->
       <div class="cfg-card">
         <h3>👨‍🏭 Foto del artesano</h3>
         <p>Imagen de Gonzalo Londero que aparece en la sección "Sobre el artesano"</p>
@@ -748,7 +748,6 @@ select.form-select option{background:var(--surface)}
             </div>
             <div class="upload-preview" id="artisan-upload-preview" style="display:none">
               <img id="artisan-upload-img" src="" alt="" style="display:block;">
-              <video id="artisan-upload-video" controls style="display:none;"></video>
               <button class="upload-clear" onclick="clearArtisanImg(event)">×</button>
               <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
             </div>
@@ -761,7 +760,7 @@ select.form-select option{background:var(--surface)}
         </div>
       </div>
 
-      <!-- Reseñas de clientes -->
+      <!-- Reseñas de clientes (NUEVO) -->
       <div class="cfg-card">
         <h3>⭐ Reseñas de clientes</h3>
         <p>Gestioná los testimonios que se muestran en el sitio</p>
@@ -1087,7 +1086,26 @@ select.form-select option{background:var(--surface)}
   </div>
 </div>
 
-<!-- ═══ MODAL RESEÑA ═══════════════════════════ -->
+<!-- ═══ MODAL CONFIRMAR ELIMINAR PRODUCTO ═════ -->
+<div class="backdrop" id="mConfirm">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <h2 class="modal-title">¿Eliminar producto?</h2>
+      <button class="modal-close" onclick="closeModal('mConfirm')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--muted);font-size:14px;line-height:1.7">Esta acción no se puede deshacer. ¿Eliminás <strong id="del-prod-name" style="color:var(--accent)"></strong> del catálogo?</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('mConfirm')">Cancelar</button>
+      <button class="btn btn-danger" onclick="doDelete()">
+        <i class="fas fa-trash"></i> Sí, eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL RESEÑA (NUEVO) ══════════════════ -->
 <div class="backdrop" id="mReview">
   <div class="modal" style="max-width:500px">
     <div class="modal-head">
@@ -1125,7 +1143,6 @@ select.form-select option{background:var(--surface)}
           </div>
           <div class="upload-preview" id="review-upload-preview" style="display:none">
             <img id="review-upload-img" src="" alt="" style="display:block;">
-            <video id="review-upload-video" controls style="display:none;"></video>
             <button class="upload-clear" onclick="clearReviewImg(event)">×</button>
             <div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div>
           </div>
@@ -1146,26 +1163,7 @@ select.form-select option{background:var(--surface)}
   </div>
 </div>
 
-<!-- ═══ MODAL CONFIRMAR ELIMINAR PRODUCTO ══════════════ -->
-<div class="backdrop" id="mConfirm">
-  <div class="modal" style="max-width:400px">
-    <div class="modal-head">
-      <h2 class="modal-title">¿Eliminar producto?</h2>
-      <button class="modal-close" onclick="closeModal('mConfirm')">✕</button>
-    </div>
-    <div class="modal-body">
-      <p style="color:var(--muted);font-size:14px;line-height:1.7">Esta acción no se puede deshacer. ¿Eliminás <strong id="del-prod-name" style="color:var(--accent)"></strong> del catálogo?</p>
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="closeModal('mConfirm')">Cancelar</button>
-      <button class="btn btn-danger" onclick="doDelete()">
-        <i class="fas fa-trash"></i> Sí, eliminar
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ MODAL CONFIRMAR ELIMINAR RESEÑA ══════════════ -->
+<!-- ═══ MODAL CONFIRMAR ELIMINAR RESEÑA (NUEVO) ═══ -->
 <div class="backdrop" id="mConfirmReview">
   <div class="modal" style="max-width:400px">
     <div class="modal-head">
@@ -1296,7 +1294,7 @@ function showSection(sec) {
 }
 
 /* ══════════════════════════════════════════
-   RENDER
+   RENDER (productos)
 ══════════════════════════════════════════ */
 function renderAll() { updateStats(); renderCatTabs(); renderGrid(); updateTopbar(); }
 
@@ -1730,9 +1728,7 @@ function onArtisanUrlInput(url) {
 }
 function showArtisanImgPreview(src) {
   const imgEl = document.getElementById('artisan-upload-img');
-  const videoEl = document.getElementById('artisan-upload-video');
   imgEl.style.display = 'block';
-  videoEl.style.display = 'none';
   imgEl.src = src;
   document.getElementById('artisan-upload-preview').style.display = 'block';
   document.getElementById('artisan-upload-idle').style.display = 'none';
@@ -1898,50 +1894,6 @@ function clearReviewImgState() {
 }
 
 /* ══════════════════════════════════════════
-   SETTINGS
-══════════════════════════════════════════ */
-function fillSettings() {
-  const s = data.settings||{};
-  const sv = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v; };
-  sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
-  sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
-  sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
-  // Hero image
-  if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg');
-  else clearHeroImgState();
-  // Artisan photo
-  if (s.artisanPhoto) showArtisanImgPreview(s.artisanPhoto);
-  else clearArtisanImgState();
-  // Reviews list
-  renderReviewsList();
-}
-function saveSettings() {
-  const gv = id => document.getElementById(id)?.value?.trim()||'';
-  Object.assign(data.settings, {
-    whatsapp:gv('cfg-wa'), instagram:gv('cfg-ig'), facebook:gv('cfg-fb'), phone:gv('cfg-phone'),
-    heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
-    heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
-  });
-  // Hero image
-  const heroPreviewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
-  const heroImgSrc = document.getElementById('hero-upload-img').src;
-  const heroVideoSrc = document.getElementById('hero-upload-video').src;
-  const heroUrlVal = document.getElementById('hero-img-url').value.trim();
-  if (heroPreviewShowing) {
-    data.settings.heroImage = (heroImgSrc && heroImgSrc !== '') ? heroImgSrc : (heroVideoSrc || '');
-  } else {
-    data.settings.heroImage = heroUrlVal;
-  }
-  // Artisan photo
-  const artisanPreviewShowing = document.getElementById('artisan-upload-preview').style.display !== 'none';
-  const artisanImgSrc = document.getElementById('artisan-upload-img').src;
-  const artisanUrlVal = document.getElementById('artisan-img-url').value.trim();
-  data.settings.artisanPhoto = artisanPreviewShowing ? artisanImgSrc : artisanUrlVal;
-  
-  persist(); toast('Configuración guardada ✓');
-}
-
-/* ══════════════════════════════════════════
    PROMOTIONS
 ══════════════════════════════════════════ */
 function selTipo(t) {
@@ -1987,6 +1939,50 @@ function saveGlobalPromo() {
 }
 
 /* ══════════════════════════════════════════
+   SETTINGS
+══════════════════════════════════════════ */
+function fillSettings() {
+  const s = data.settings||{};
+  const sv = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v; };
+  sv('cfg-wa',s.whatsapp); sv('cfg-ig',s.instagram); sv('cfg-fb',s.facebook); sv('cfg-phone',s.phone);
+  sv('cfg-title',s.heroTitle); sv('cfg-sub',s.heroSubtitle);
+  sv('cfg-s1',s.heroStat1); sv('cfg-s1l',s.heroStat1Label);
+  // Hero image
+  if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg');
+  else clearHeroImgState();
+  // Artisan photo
+  if (s.artisanPhoto) showArtisanImgPreview(s.artisanPhoto);
+  else clearArtisanImgState();
+  // Reviews list
+  renderReviewsList();
+}
+function saveSettings() {
+  const gv = id => document.getElementById(id)?.value?.trim()||'';
+  Object.assign(data.settings, {
+    whatsapp:gv('cfg-wa'), instagram:gv('cfg-ig'), facebook:gv('cfg-fb'), phone:gv('cfg-phone'),
+    heroTitle:gv('cfg-title'), heroSubtitle:gv('cfg-sub'),
+    heroStat1:gv('cfg-s1'), heroStat1Label:gv('cfg-s1l'),
+  });
+  // Hero image
+  const heroPreviewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
+  const heroImgSrc = document.getElementById('hero-upload-img').src;
+  const heroVideoSrc = document.getElementById('hero-upload-video').src;
+  const heroUrlVal = document.getElementById('hero-img-url').value.trim();
+  if (heroPreviewShowing) {
+    data.settings.heroImage = (heroImgSrc && heroImgSrc !== '') ? heroImgSrc : (heroVideoSrc || '');
+  } else {
+    data.settings.heroImage = heroUrlVal;
+  }
+  // Artisan photo
+  const artisanPreviewShowing = document.getElementById('artisan-upload-preview').style.display !== 'none';
+  const artisanImgSrc = document.getElementById('artisan-upload-img').src;
+  const artisanUrlVal = document.getElementById('artisan-img-url').value.trim();
+  data.settings.artisanPhoto = artisanPreviewShowing ? artisanImgSrc : artisanUrlVal;
+  
+  persist(); toast('Configuración guardada ✓');
+}
+
+/* ══════════════════════════════════════════
    IMPORT / EXPORT
 ══════════════════════════════════════════ */
 function exportJSON() {
@@ -2001,7 +1997,9 @@ function importJSON(input) {
     try {
       const d = JSON.parse(e.target.result);
       if (!d.products) throw 0;
-      data = d; persist(); renderAll(); fillSettings();
+      data = d;
+      if (!data.settings.reviews) data.settings.reviews = [];
+      persist(); renderAll(); fillSettings();
       toast(`Importado: ${d.products.length} productos ✓`);
     } catch { toast('Formato inválido','err'); }
     input.value='';
