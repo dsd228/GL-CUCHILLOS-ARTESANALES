@@ -410,6 +410,32 @@ select.form-select option{background:var(--surface)}
 .url-fallback summary::-webkit-details-marker{display:none}
 .url-fallback summary:hover{color:var(--accent)}
 
+/* MEDIA THUMB (multi-image grid) */
+.media-thumb{
+  position:relative;aspect-ratio:1;border-radius:var(--radius);
+  overflow:hidden;background:var(--bg);border:1.5px solid var(--border);
+  cursor:grab;transition:border-color .2s,box-shadow .2s;
+}
+.media-thumb:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(200,131,42,.2)}
+.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.media-thumb .mt-del{
+  position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;
+  background:rgba(192,57,43,.85);color:#fff;border:none;cursor:pointer;
+  font-size:10px;display:grid;place-items:center;z-index:5;
+  opacity:0;transition:opacity .2s;
+}
+.media-thumb:hover .mt-del{opacity:1}
+.media-thumb .mt-main{
+  position:absolute;bottom:4px;left:4px;
+  font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--accent);color:#fff;padding:2px 6px;border-radius:3px;
+}
+.media-thumb .mt-vid{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(26,24,20,.5);
+}
+.media-thumb .mt-vid i{color:#fff;font-size:22px;opacity:.8}
+
 /* PROMO TIPO GRID */
 .promo-tipo-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;
@@ -944,27 +970,28 @@ select.form-select option{background:var(--surface)}
 
       <!-- TAB FOTOS / VIDEO -->
       <div class="tab-panel" id="tab-fotos">
+        <!-- Galería multi-media -->
         <div class="form-row">
-          <label class="form-label">Imagen o video del producto</label>
-          <label class="img-upload-zone" id="img-zone">
+          <label class="form-label">Fotos y videos del producto <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">— La primera es la imagen principal</small></label>
+          <!-- Preview grid de medios ya cargados -->
+          <div id="media-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:12px;"></div>
+          <!-- Zona de carga -->
+          <label class="img-upload-zone" id="img-zone" style="min-height:110px">
             <div class="upload-idle" id="upload-idle">
-              <i class="fas fa-cloud-upload-alt upload-icon"></i>
-              <p class="upload-title">Arrastrá una foto o video</p>
+              <i class="fas fa-plus upload-icon" style="font-size:22px"></i>
+              <p class="upload-title" style="font-size:13px">Agregar foto o video</p>
               <p class="upload-sub">JPG, PNG, WEBP, MP4, WEBM · máx 10 MB</p>
-              <span class="upload-formats">Se convierte a Base64</span>
             </div>
-            <div class="upload-preview" id="upload-preview" style="display:none">
-              <img id="upload-img" src="" alt="" style="display:none;">
-              <video id="upload-video" controls style="width:100%; max-height:280px; display:none;"></video>
-              <button class="upload-clear" onclick="clearImg(event)">×</button>
-              <div class="upload-badge"><i class="fas fa-check"></i> Archivo cargado</div>
-            </div>
-            <input type="file" id="img-file" accept="image/*,video/*" style="display:none" onchange="onFileChange(this)">
+            <input type="file" id="img-file" accept="image/*,video/*" multiple style="display:none" onchange="onFileChange(this)">
           </label>
           <details class="url-fallback">
             <summary><i class="fas fa-link"></i> O pegá una URL de imagen o video</summary>
-            <input type="text" class="form-input" id="edit-img-url" placeholder="https://..." oninput="onUrlInput(this.value)" style="margin-top:8px">
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <input type="text" class="form-input" id="edit-img-url" placeholder="https://...">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="addMediaUrl()"><i class="fas fa-plus"></i></button>
+            </div>
           </details>
+          <div class="form-hint"><i class="fas fa-info-circle"></i> Podés agregar varias fotos y videos. Arrastrá para reordenar. La primera es la imagen principal.</div>
         </div>
       </div>
 
@@ -1485,6 +1512,7 @@ function clearProdForm() {
   currentSpecs = [];
   renderSpecs();
   clearImgState();
+  renderMediaGrid();
 }
 
 function fillProdForm(p) {
@@ -1501,28 +1529,22 @@ function fillProdForm(p) {
   document.getElementById('edit-featured').checked = !!p.featured;
   currentSpecs = [...(p.specs||[])];
   renderSpecs();
-  if (p.image) {
+  // Load media array
+  currentMedia = [];
+  if (p.media && p.media.length) {
+    currentMedia = p.media.map(m => typeof m === 'string' ? { src: m, type: m.includes('data:video') || m.endsWith('.mp4') || m.endsWith('.webm') ? 'video/mp4' : 'image/jpeg' } : m);
+  } else if (p.image) {
     const isVid = p.image.includes('data:video') || p.image.endsWith('.mp4') || p.image.endsWith('.webm');
-    showMediaPreview(p.image, isVid ? 'video/mp4' : 'image/jpeg');
-  } else clearImgState();
-  if (p.image && !p.image.startsWith('data:')) document.getElementById('edit-img-url').value = p.image;
+    currentMedia = [{ src: p.image, type: isVid ? 'video/mp4' : 'image/jpeg' }];
+  }
+  renderMediaGrid();
+  if (p.image && !p.image.startsWith('data:')) document.getElementById('edit-img-url').value = '';
 }
 
 function saveProduct() {
   const name = document.getElementById('edit-name').value.trim();
   if (!name) { toast('El nombre es obligatorio','err'); return; }
-  const previewShowing = document.getElementById('upload-preview').style.display !== 'none';
-  const imgEl = document.getElementById('upload-img');
-  const videoEl = document.getElementById('upload-video');
-  const imgSrc = imgEl.getAttribute('src') || '';
-  const videoSrc = videoEl.getAttribute('src') || '';
-  const urlVal = document.getElementById('edit-img-url').value.trim();
-  let image = '';
-  if (previewShowing) {
-    if (imgSrc && imgSrc !== '' && imgEl.style.display !== 'none') image = imgSrc;
-    else if (videoSrc && videoSrc !== '' && videoEl.style.display !== 'none') image = videoSrc;
-  }
-  if (!image) image = urlVal;
+  const image = currentMedia.length ? currentMedia[0].src : '';
   const existingPromo = editingId ? (data.products.find(x=>x.id===editingId)?.promo||'') : '';
   const prod = {
     id: editingId||'p'+Date.now(),
@@ -1537,7 +1559,8 @@ function saveProduct() {
     promo: document.getElementById('edit-promo').value.trim() || existingPromo,
     active: document.getElementById('edit-active').checked,
     featured: document.getElementById('edit-featured').checked,
-    image
+    image,
+    media: [...currentMedia]
   };
   if (editingId) { const i=data.products.findIndex(x=>x.id===editingId); if(i>=0) data.products[i]=prod; }
   else data.products.push(prod);
@@ -1597,61 +1620,84 @@ function renderSpecs() {
 /* ══════════════════════════════════════════
    IMAGE/VIDEO PREVIEW (productos)
 ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   IMAGE/VIDEO PREVIEW — multi-media (productos)
+══════════════════════════════════════════ */
+let currentMedia = []; // array of {src, type} — first = main image
+
+function renderMediaGrid() {
+  const grid = document.getElementById('media-grid');
+  if (!grid) return;
+  if (currentMedia.length === 0) { grid.innerHTML = ''; return; }
+  grid.innerHTML = currentMedia.map((m, i) => {
+    const isVid = m.type && m.type.startsWith('video');
+    return `<div class="media-thumb" draggable="true" data-idx="${i}"
+      ondragstart="mediaDragStart(event,${i})"
+      ondragover="mediaDragOver(event)"
+      ondrop="mediaDrop(event,${i})">
+      ${isVid
+        ? `<div style="background:#1a1814;width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-play-circle" style="color:var(--accent);font-size:28px"></i></div>`
+        : `<img src="${m.src}" alt="">`}
+      ${i===0 ? '<div class="mt-main">Principal</div>' : ''}
+      <button class="mt-del" onclick="removeMedia(${i})" type="button">×</button>
+    </div>`;
+  }).join('');
+}
+
+let dragSrcIdx = null;
+function mediaDragStart(e, idx) { dragSrcIdx = idx; e.dataTransfer.effectAllowed='move'; }
+function mediaDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect='move'; }
+function mediaDrop(e, targetIdx) {
+  e.preventDefault();
+  if (dragSrcIdx === null || dragSrcIdx === targetIdx) return;
+  const moved = currentMedia.splice(dragSrcIdx, 1)[0];
+  currentMedia.splice(targetIdx, 0, moved);
+  dragSrcIdx = null;
+  renderMediaGrid();
+}
+function removeMedia(idx) { currentMedia.splice(idx, 1); renderMediaGrid(); }
+function addMediaUrl() {
+  const urlEl = document.getElementById('edit-img-url');
+  const url = urlEl.value.trim();
+  if (!url) return;
+  const ext = url.split('.').pop().toLowerCase();
+  const isVideo = ['webm','mp4','ogg','mov'].includes(ext);
+  currentMedia.push({ src: url, type: isVideo ? 'video/'+ext : 'image/jpeg' });
+  urlEl.value = '';
+  renderMediaGrid();
+}
+
 document.getElementById('img-zone').addEventListener('click', e => {
-  if (e.target.classList.contains('upload-clear')) return;
+  if (e.target.classList.contains('mt-del')) return;
   document.getElementById('img-file').click();
 });
 document.getElementById('img-zone').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
 document.getElementById('img-zone').addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
 document.getElementById('img-zone').addEventListener('drop', e => {
   e.preventDefault(); e.currentTarget.classList.remove('drag-over');
-  const f = e.dataTransfer.files[0];
-  if (f && (f.type.startsWith('image/') || f.type.startsWith('video/'))) processFile(f);
+  Array.from(e.dataTransfer.files).forEach(f => {
+    if (f.type.startsWith('image/') || f.type.startsWith('video/')) processFile(f);
+  });
 });
-function onFileChange(input) { if(input.files[0]) processFile(input.files[0]); }
+function onFileChange(input) {
+  Array.from(input.files).forEach(f => processFile(f));
+  input.value = '';
+}
 function processFile(f) {
   if (f.size > 10*1024*1024) { toast('Archivo muy grande (máx 10 MB)','err'); return; }
   const r = new FileReader();
-  r.onload = e => showMediaPreview(e.target.result, f.type);
+  r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); };
   r.readAsDataURL(f);
 }
-function onUrlInput(url) {
-  if (url) {
-    const ext = url.split('.').pop().toLowerCase();
-    const isVideo = ['webm','mp4','ogg','mov'].includes(ext);
-    showMediaPreview(url, isVideo ? 'video/'+ext : 'image/'+(ext==='webp'?'webp':'jpeg'));
-  } else clearImgState();
-}
-function showMediaPreview(src, mimeType) {
-  const isVideo = mimeType.startsWith('video/');
-  const imgEl = document.getElementById('upload-img');
-  const videoEl = document.getElementById('upload-video');
-  if (isVideo) {
-    imgEl.style.display = 'none';
-    videoEl.style.display = 'block';
-    videoEl.src = src;
-    videoEl.load();
-  } else {
-    videoEl.style.display = 'none';
-    imgEl.style.display = 'block';
-    imgEl.src = src;
-  }
-  document.getElementById('upload-preview').style.display = 'block';
-  document.getElementById('upload-idle').style.display = 'none';
-  document.getElementById('img-zone').classList.add('has-image');
-}
-function clearImg(e) { e&&e.stopPropagation(); clearImgState(); }
 function clearImgState() {
-  document.getElementById('upload-img').src = '';
-  document.getElementById('upload-video').src = '';
-  document.getElementById('upload-img').style.display = 'none';
-  document.getElementById('upload-video').style.display = 'none';
-  document.getElementById('upload-preview').style.display = 'none';
-  document.getElementById('upload-idle').style.display = 'block';
-  document.getElementById('img-zone').classList.remove('has-image');
+  currentMedia = [];
+  renderMediaGrid();
   document.getElementById('edit-img-url').value = '';
   document.getElementById('img-file').value = '';
 }
+// Legacy compat — not used for multi but kept for safety
+function showMediaPreview(){}
+function clearImg(e){ if(e) e.stopPropagation(); clearImgState(); }
 
 /* ══════════════════════════════════════════
    HERO IMAGE/VIDEO
@@ -1976,19 +2022,26 @@ function saveSettings() {
   });
   // Hero image
   const heroPreviewShowing = document.getElementById('hero-upload-preview').style.display !== 'none';
-  const heroImgSrc = document.getElementById('hero-upload-img').src;
-  const heroVideoSrc = document.getElementById('hero-upload-video').src;
+  const heroImgEl = document.getElementById('hero-upload-img');
+  const heroVideoEl = document.getElementById('hero-upload-video');
   const heroUrlVal = document.getElementById('hero-img-url').value.trim();
   if (heroPreviewShowing) {
-    data.settings.heroImage = (heroImgSrc && heroImgSrc !== '') ? heroImgSrc : (heroVideoSrc || '');
+    const heroImgVisible = heroImgEl.style.display !== 'none' && heroImgEl.src && !heroImgEl.src.endsWith(location.href);
+    const heroVideoVisible = heroVideoEl.style.display !== 'none' && heroVideoEl.src && !heroVideoEl.src.endsWith(location.href);
+    data.settings.heroImage = heroImgVisible ? heroImgEl.src : (heroVideoVisible ? heroVideoEl.src : heroUrlVal);
   } else {
     data.settings.heroImage = heroUrlVal;
   }
   // Artisan photo
   const artisanPreviewShowing = document.getElementById('artisan-upload-preview').style.display !== 'none';
-  const artisanImgSrc = document.getElementById('artisan-upload-img').src;
+  const artisanImgEl = document.getElementById('artisan-upload-img');
   const artisanUrlVal = document.getElementById('artisan-img-url').value.trim();
-  data.settings.artisanPhoto = artisanPreviewShowing ? artisanImgSrc : artisanUrlVal;
+  if (artisanPreviewShowing) {
+    const artisanImgSrc = artisanImgEl.src;
+    data.settings.artisanPhoto = (artisanImgSrc && !artisanImgSrc.endsWith(location.href)) ? artisanImgSrc : artisanUrlVal;
+  } else {
+    data.settings.artisanPhoto = artisanUrlVal;
+  }
   
   persist(); toast('Configuración guardada ✓');
 }
