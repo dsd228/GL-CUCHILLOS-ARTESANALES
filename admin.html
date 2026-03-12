@@ -1493,8 +1493,10 @@ function fillProdForm(p) {
   document.getElementById('edit-featured').checked = !!p.featured;
   currentSpecs = [...(p.specs||[])];
   renderSpecs();
-  if (p.image) showMediaPreview(p.image);
-  else clearImgState();
+  if (p.image) {
+    const isVid = p.image.includes('data:video') || p.image.endsWith('.mp4') || p.image.endsWith('.webm');
+    showMediaPreview(p.image, isVid ? 'video/mp4' : 'image/jpeg');
+  } else clearImgState();
   if (p.image && !p.image.startsWith('data:')) document.getElementById('edit-img-url').value = p.image;
 }
 
