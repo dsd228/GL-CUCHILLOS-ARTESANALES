@@ -1278,8 +1278,16 @@ async function loadData() {
   }
 }
 function persist(mark=true) {
-  localStorage.setItem('gl_data', JSON.stringify(data));
-  if (mark) document.getElementById('save-banner').classList.add('show');
+  try {
+    localStorage.setItem('gl_data', JSON.stringify(data));
+    if (mark) document.getElementById('save-banner').classList.add('show');
+  } catch(e) {
+    if (e.name === 'QuotaExceededError' || e.code === 22) {
+      toast('Imagen muy pesada para guardar local. Usá una URL externa en vez de subir el archivo.','err');
+    } else {
+      toast('Error al guardar: '+e.message,'err');
+    }
+  }
 }
 
 /* ══════════════════════════════════════════
@@ -1504,16 +1512,17 @@ function saveProduct() {
   const name = document.getElementById('edit-name').value.trim();
   if (!name) { toast('El nombre es obligatorio','err'); return; }
   const previewShowing = document.getElementById('upload-preview').style.display !== 'none';
-  const imgSrc = document.getElementById('upload-img').src;
-  const videoSrc = document.getElementById('upload-video').src;
+  const imgEl = document.getElementById('upload-img');
+  const videoEl = document.getElementById('upload-video');
+  const imgSrc = imgEl.getAttribute('src') || '';
+  const videoSrc = videoEl.getAttribute('src') || '';
   const urlVal = document.getElementById('edit-img-url').value.trim();
   let image = '';
   if (previewShowing) {
-    if (imgSrc && imgSrc !== '') image = imgSrc;
-    else if (videoSrc && videoSrc !== '') image = videoSrc;
-  } else {
-    image = urlVal;
+    if (imgSrc && imgSrc !== '' && imgEl.style.display !== 'none') image = imgSrc;
+    else if (videoSrc && videoSrc !== '' && videoEl.style.display !== 'none') image = videoSrc;
   }
+  if (!image) image = urlVal;
   const existingPromo = editingId ? (data.products.find(x=>x.id===editingId)?.promo||'') : '';
   const prod = {
     id: editingId||'p'+Date.now(),
