@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guía del Panel Admin · GL Cuchillos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f7f5f1;
+  --surface:#fff;
+  --border:#e8e3da;
+  --text:#1a1814;
+  --muted:#8a8278;
+  --accent:#c8832a;
+  --green:#2d8a5e;
+  --red:#c0392b;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+
+.header{background:#1a1814;color:#fff;padding:48px 0 36px;text-align:center;border-bottom:3px solid var(–accent)}
+.header-mono{font-family:var(–serif);font-size:52px;color:var(–accent);line-height:1;margin-bottom:6px}
+.header h1{font-family:var(–serif);font-size:28px;font-weight:500;margin-bottom:8px}
+.header p{font-size:14px;opacity:.55;letter-spacing:.08em;text-transform:uppercase}
+
+/* LINK DESTACADO */
+.link-card{
+background:rgba(200,131,42,.08);border:2px solid var(–accent);
+border-radius:10px;padding:18px 22px;margin:24px 0;
+display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.link-card-icon{font-size:28px;flex-shrink:0}
+.link-card-body{flex:1;min-width:0}
+.link-card-body p{font-size:12px;color:var(–muted);margin-bottom:3px}
+.link-card-body a{
+font-size:14px;font-weight:600;color:var(–accent);
+word-break:break-all;display:block;
+}
+.link-card-body a:hover{text-decoration:underline}
+
+.toc{background:var(–surface);border-bottom:1px solid var(–border);padding:18px 0;position:sticky;top:0;z-index:10}
+.toc-inner{max-width:780px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:8px}
+.toc a{font-size:12px;font-weight:600;color:var(–muted);text-transform:uppercase;letter-spacing:.08em;padding:5px 14px;border-radius:20px;border:1px solid var(–border);transition:all .2s}
+.toc a:hover{border-color:var(–accent);color:var(–accent)}
+
+.wrap{max-width:780px;margin:0 auto;padding:40px 24px 80px}
+
+.section{margin-bottom:52px}
+.section-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(–border)}
+.section-num{width:36px;height:36px;border-radius:50%;background:var(–accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex-shrink:0}
+.section-head h2{font-family:var(–serif);font-size:26px;font-weight:500}
+.section-tag{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(–accent);background:rgba(200,131,42,.1);padding:3px 10px;border-radius:20px;margin-left:auto}
+
+.card{background:var(–surface);border:1px solid var(–border);border-radius:10px;padding:22px 24px;margin-bottom:16px}
+.card h3{font-family:var(–serif);font-size:19px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card p{color:var(–muted);font-size:14px;line-height:1.7;margin-bottom:12px}
+.card p:last-child{margin-bottom:0}
+
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(–border)}
+.step:last-child{border-bottom:none}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(–accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:2px}
+.step-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.step-body p{font-size:13px;color:var(–muted);line-height:1.6}
+
+.tip{background:rgba(45,138,94,.07);border:1px solid rgba(45,138,94,.2);border-left:4px solid var(–green);border-radius:6px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(–text)}
+.tip strong{color:var(–green)}
+.warn{background:rgba(200,131,42,.07);border:1px solid rgba(200,131,42,.2);border-left:4px solid var(–accent);border-radius:6px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(–text)}
+.warn strong{color:var(–accent)}
+
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+th{background:rgba(200,131,42,.08);font-weight:600;text-align:left;padding:10px 14px;border:1px solid var(–border);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+td{padding:10px 14px;border:1px solid var(–border);color:var(–muted)}
+td strong{color:var(–text)}
+tr:hover td{background:rgba(0,0,0,.015)}
+
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:20px}
+.b-green{background:rgba(45,138,94,.12);color:var(–green)}
+.b-amber{background:rgba(200,131,42,.12);color:var(–accent)}
+.b-red{background:rgba(192,57,43,.12);color:var(–red)}
+.b-blue{background:rgba(61,107,206,.12);color:#3d6bce}
+
+kbd{background:var(–text);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-family:monospace;font-weight:600}
+
+.divider{height:1px;background:var(–border);margin:32px 0}
+
+.footer{background:#1a1814;color:rgba(255,255,255,.4);text-align:center;padding:28px;font-size:12px}
+.footer span{color:var(–accent)}
+
+@media(max-width:600px){
+.header-mono{font-size:40px}
+.wrap{padding:28px 16px 60px}
+.toc-inner{gap:6px}
+.toc a{font-size:11px;padding:4px 11px}
+.link-card{padding:14px 16px;gap:10px}
+.link-card-body a{font-size:13px}
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="header-mono">GL</div>
+  <h1>Guía del Panel de Control</h1>
+  <p>GL Cuchillos Artesanales · Manual de uso</p>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#acceso">Acceso</a>
+    <a href="#productos">Productos</a>
+    <a href="#fotos">Fotos & Videos</a>
+    <a href="#promociones">Promociones</a>
+    <a href="#configuracion">Configuración</a>
+    <a href="#publicar">Publicar</a>
+    <a href="#imgbb">Imágenes (imgbb)</a>
+    <a href="#faq">Preguntas frecuentes</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- LINK DESTACADO -->
+
+  <div class="link-card">
+    <div class="link-card-icon">🔗</div>
+    <div class="link-card-body">
+      <p>Tu panel de administración está en:</p>
+      <a href="https://gl-cuchillos.artesanales.workers.dev/admin.html" target="_blank">
+        https://gl-cuchillos.artesanales.workers.dev/admin.html
+      </a>
+      <p style="margin-top:8px;font-size:12px;color:var(--muted)">Sitio principal: <a href="https://gl-cuchillos.artesanales.workers.dev" target="_blank">gl-cuchillos.artesanales.workers.dev</a></p>
+    </div>
+  </div>
+
+  <!-- ── ACCESO ── -->
+
+  <div class="section" id="acceso">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>Cómo entrar al panel</h2>
+      <span class="section-tag">Acceso</span>
+    </div>
+
+```
+<div class="card">
+  <h3>📱 Funciona desde el celular</h3>
+  <p>El panel está adaptado para usar desde el celular. Podés agregar productos, subir fotos y publicar cambios todo desde tu teléfono sin necesidad de una computadora.</p>
+  <div class="tip"><strong>Consejo:</strong> Guardá el link en tus favoritos del navegador para acceder rápido.</div>
+</div>
+
+<div class="card">
+  <h3>🔐 Iniciar sesión</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Abrís el link del panel en tu celular o computadora</h4><p>Te aparece la pantalla de contraseña.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Contraseña inicial</h4><p>La contraseña que viene por defecto es <kbd>glcuchillos2024</kbd>. Te recomiendo cambiarla la primera vez que entrés.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Escribís la contraseña y presionás Enter (o el botón "Ingresar")</h4><p>Ya estás adentro con todos tus productos y opciones.</p></div>
+    </div>
+  </div>
+  <div class="tip"><strong>Para cerrar sesión:</strong> Usá el ícono de salida (→) que está arriba a la derecha.</div>
+</div>
+
+<div class="card">
+  <h3>🔑 Cambiar la contraseña</h3>
+  <p>Desde <strong>Config → Cambiar contraseña</strong>. Ingresás la contraseña actual, la nueva dos veces, y guardás.</p>
+  <div class="warn"><strong>Importante:</strong> anotá la contraseña nueva en un lugar seguro. Si la olvidás, contactá al desarrollador para resetearla.</div>
+</div>
+```
+
+  </div>
+
+  <!-- ── PRODUCTOS ── -->
+
+  <div class="section" id="productos">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>Gestión de productos</h2>
+      <span class="section-tag">Catálogo</span>
+    </div>
+
+```
+<div class="card">
+  <h3>➕ Agregar un cuchillo nuevo</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Tocás el recuadro "Nuevo producto"</h4><p>Aparece al final de la grilla con un signo <kbd>+</kbd>.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Completás los datos básicos</h4><p>Nombre, categoría, estado y precio. El único campo obligatorio es el nombre.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Agregás las fotos (pestaña "Fotos")</h4><p>Ver sección siguiente para más detalles.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><h4>Tocás "Guardar"</h4><p>El producto queda guardado en el panel.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body"><h4>Tocás "Publicar" para que aparezca en el sitio</h4><p>Si no publicás, los cambios quedan solo guardados en el panel de ese navegador.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📋 Los campos del producto</h3>
+  <table>
+    <tr><th>Campo</th><th>Para qué sirve</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Nombre</strong></td><td>El título del cuchillo en la tienda</td><td>Juego Parrillero XL</td></tr>
+    <tr><td><strong>Categoría</strong></td><td>Agrupa los productos en filtros</td><td>Parrilla &amp; Asado</td></tr>
+    <tr><td><strong>Estado / Badge</strong></td><td>La etiqueta de disponibilidad</td><td>Disponible / A pedido</td></tr>
+    <tr><td><strong>Descripción</strong></td><td>Texto que describe el cuchillo</td><td>Hoja de 25 cm, mango...</td></tr>
+    <tr><td><strong>Precio</strong></td><td>Lo que se muestra en la tarjeta</td><td>$85.000</td></tr>
+    <tr><td><strong>Nota de precio</strong></td><td>Aclaración bajo el precio</td><td>Envío incluido</td></tr>
+  </table>
+  <div style="margin-top:18px">
+    <p style="font-size:13px;margin-bottom:8px;font-weight:600">Estados de disponibilidad:</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span class="badge b-green">Disponible</span>
+      <span class="badge b-amber">A pedido</span>
+      <span class="badge b-blue">Exportación</span>
+      <span class="badge b-red">No disponible</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>✏️ Editar un producto existente</h3>
+  <p>Desde el celular: tocás la tarjeta del producto una vez para que aparezcan los botones de acción, luego elegís lo que necesitás:</p>
+  <table>
+    <tr><th>Botón</th><th>Función</th></tr>
+    <tr><td>✏️ Lápiz</td><td>Abre el formulario para editar todos los datos</td></tr>
+    <tr><td>📋 Copiar</td><td>Duplica el producto (útil para variantes)</td></tr>
+    <tr><td>🏷️ Etiqueta</td><td>Agrega o edita una promoción</td></tr>
+    <tr><td>🗑️ Basura</td><td>Elimina el producto (pide confirmación)</td></tr>
+  </table>
+  <div class="tip"><strong>Desde la computadora:</strong> pasás el cursor por encima de la tarjeta y aparecen los botones directamente.</div>
+</div>
+
+<div class="card">
+  <h3>👁️ Mostrar / ocultar un producto</h3>
+  <p>En la parte inferior de cada tarjeta hay un interruptor. Si lo apagás, el producto queda oculto en el sitio pero <strong>no se borra</strong>. Lo podés volver a activar cuando quieras.</p>
+  <div class="tip"><strong>Útil para:</strong> cuchillos que temporalmente no están disponibles, sin necesidad de eliminarlos del catálogo.</div>
+</div>
+
+<div class="card">
+  <h3>⭐ Producto destacado</h3>
+  <p>En la pestaña <strong>Config</strong> del formulario podés marcar un producto como "Destacado". Estos aparecen primero en la grilla y tienen una estrella dorada.</p>
+</div>
+
+<div class="card">
+  <h3>🔎 Buscar y filtrar</h3>
+  <p>En la parte superior de la sección Productos tenés una barra de búsqueda por nombre o descripción, filtros por categoría (se crean solos) y opciones para ordenar. Todos funcionan bien desde el celular con scroll horizontal.</p>
+</div>
+
+<div class="card">
+  <h3>🔧 Especificaciones técnicas (pestaña "Detalles")</h3>
+  <p>Podés agregar características como tipo de acero, largo de la hoja, mango, etc. Se muestran como etiquetas en el producto. Escribís el texto y presionás <kbd>Enter</kbd> para agregar cada una.</p>
+</div>
+```
+
+  </div>
+
+  <!-- ── FOTOS ── -->
+
+  <div class="section" id="fotos">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Subir fotos y videos</h2>
+      <span class="section-tag">Multimedia</span>
+    </div>
+
+```
+<div class="card">
+  <h3>📸 Agregar fotos desde el celular</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Abrís el producto y tocás la pestaña "Fotos"</h4><p>Aparece la zona de carga con un <kbd>+</kbd>.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Tocás la zona de carga</h4><p>El celular te pregunta si querés usar la Cámara o elegir de la Galería.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Elegís la foto</h4><p>Formatos: JPG, PNG, WEBP. Máximo 10 MB por archivo. El panel la comprime automáticamente.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><h4>La primera foto es la imagen principal</h4><p>La que se ve en la tarjeta del producto. Podés agregar varias y reordenarlas.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body"><h4>También podés pegar una URL de imagen</h4><p>Tocás "O pegá una URL" y ponés el link directo de la foto.</p></div>
+    </div>
+  </div>
+  <div class="tip"><strong>Consejo:</strong> Para que el sitio cargue rápido, usá fotos de menos de 2 MB. Desde el celular, elegí "calidad media" al exportar desde la galería.</div>
+</div>
+
+<div class="card">
+  <h3>🎬 Agregar videos</h3>
+  <p>Funciona igual que las fotos. Formatos: MP4, WEBM. El video se muestra en la galería del producto con un ícono de play.</p>
+  <div class="warn"><strong>Atención con el tamaño:</strong> Los videos pesan mucho. Si el panel dice que el archivo es "demasiado grande", configurá imgbb (ver sección 7) o usá una URL en vez de subir el archivo directamente.</div>
+</div>
+
+<div class="card">
+  <h3>🗑️ Quitar una foto</h3>
+  <p>En la galería del producto aparece una <strong>X roja</strong> en cada foto para eliminarla. No olvidés guardar el producto y luego publicar.</p>
+</div>
+```
+
+  </div>
+
+  <!-- ── PROMOCIONES ── -->
+
+  <div class="section" id="promociones">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Promociones y ofertas</h2>
+      <span class="section-tag">Marketing</span>
+    </div>
+
+```
+<div class="card">
+  <h3>🔖 Banner global del sitio</h3>
+  <p>En la sección <strong>Promos</strong> hay un campo para un banner que se ve en toda la página (una barra de anuncio arriba del sitio). Escribís el texto, activás el interruptor y guardás.</p>
+  <p><strong>Ejemplo:</strong> <em>"¡Envío gratis esta semana a todo el país!"</em></p>
+  <div class="tip"><strong>Para desactivarlo:</strong> solo apagás el interruptor y guardás. El texto queda guardado para la próxima vez.</div>
+</div>
+
+<div class="card">
+  <h3>🏷️ Promo en un producto específico</h3>
+  <p>Cada producto puede tener su propia promoción — aparece como una etiqueta roja sobre la foto. Tipos disponibles:</p>
+  <table>
+    <tr><th>Tipo</th><th>Para qué usarlo</th></tr>
+    <tr><td>💬 Texto libre</td><td>Escribís lo que querés, total libertad</td></tr>
+    <tr><td>% Descuento</td><td>Ponés el porcentaje y lo calcula solo</td></tr>
+    <tr><td>2 × 1</td><td>Dos por el precio de uno</td></tr>
+    <tr><td>🚚 Envío gratis</td><td>Para productos con envío sin costo</td></tr>
+    <tr><td>🎁 Combo</td><td>Pack o kit especial</td></tr>
+    <tr><td>✏️ Personalizado</td><td>Texto a medida</td></tr>
+  </table>
+  <div class="steps" style="margin-top:16px">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Vas a la sección "Promos"</h4><p>Ves la lista de todos tus productos.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Tocás "+ Agregar" o "Editar" en el producto</h4></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Elegís el tipo, completás el texto y guardás</h4><p>El badge rojo aparece automáticamente sobre la foto del producto.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><h4>Para quitar la promo</h4><p>Tocás "Quitar" en el producto correspondiente.</p></div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- ── CONFIGURACIÓN ── -->
+
+  <div class="section" id="configuracion">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>Configuración del sitio</h2>
+      <span class="section-tag">Ajustes</span>
+    </div>
+
+```
+<div class="card">
+  <h3>📱 Datos de contacto</h3>
+  <p>Desde <strong>Config → Contacto</strong> podés actualizar:</p>
+  <table>
+    <tr><th>Campo</th><th>Formato</th></tr>
+    <tr><td>WhatsApp</td><td>Con código de país, sin espacios: <kbd>5493843458340</kbd></td></tr>
+    <tr><td>Instagram</td><td>Sin el @: <kbd>gonzalo.londero.3</kbd></td></tr>
+    <tr><td>Facebook</td><td>El nombre de usuario de tu página</td></tr>
+    <tr><td>Teléfono visible</td><td>Como querés que aparezca: <kbd>+54 9 3843 458340</kbd></td></tr>
+  </table>
+  <div class="tip">No olvidés tocar <strong>"Guardar configuración"</strong> al final y luego <strong>"Publicar"</strong>.</div>
+</div>
+
+<div class="card">
+  <h3>🏠 Texto de la pantalla de inicio (Hero)</h3>
+  <p>Podés cambiar el título principal, el subtítulo y las estadísticas que se ven en la primera pantalla. También podés subir una foto o video de fondo directamente desde el celular.</p>
+  <div class="warn"><strong>Con los textos:</strong> Menos es más. El título corto y directo funciona mejor que uno largo.</div>
+</div>
+
+<div class="card">
+  <h3>👨‍🏭 Foto del artesano</h3>
+  <p>En la sección "Sobre el artesano" del sitio aparece una foto tuya. Podés actualizarla cuando quieras tocando la zona de carga y eligiendo de la galería del celular.</p>
+</div>
+
+<div class="card">
+  <h3>⭐ Reseñas de clientes</h3>
+  <p>Podés agregar los testimonios de tus clientes que se muestran en el sitio. Para cada reseña podés poner:</p>
+  <ul style="font-size:13px;color:var(--muted);padding-left:20px;display:flex;flex-direction:column;gap:5px;margin-top:8px">
+    <li>Nombre del cliente</li>
+    <li>Texto del comentario</li>
+    <li>Cantidad de estrellas (1 a 5)</li>
+    <li>Foto del cliente (opcional)</li>
+  </ul>
+</div>
+```
+
+  </div>
+
+  <!-- ── PUBLICAR ── -->
+
+  <div class="section" id="publicar">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2>Publicar cambios al sitio</h2>
+      <span class="section-tag">Deploy</span>
+    </div>
+
+```
+<div class="card">
+  <h3>☁️ Cómo funciona la publicación</h3>
+  <p>El panel guarda los cambios en tu navegador primero. Para que aparezcan en el sitio real, tenés que tocar <strong>"Publicar"</strong> (botón arriba a la derecha).</p>
+  <div class="tip"><strong>¿Cuándo aparece el banner "Cambios sin publicar"?</strong> Cada vez que editás algo (un producto, una promo, configuración). Es el recordatorio de que tenés que publicar.</div>
+</div>
+
+<div class="card">
+  <h3>🔄 Pasos para publicar</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Hacés todos los cambios que necesitás</h4><p>Podés editar varios productos, promos y configuración antes de publicar.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Tocás el botón "Publicar" (arriba a la derecha)</h4><p>O el botón "Publicar" del banner dorado.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Esperás unos 30 segundos</h4><p>El sitio se actualiza solo. No hace falta hacer nada más.</p></div>
+    </div>
+  </div>
+  <div class="warn"><strong>¿Falló la publicación?</strong> Puede pasar si el archivo de fotos es muy grande. Contactá al desarrollador. Mientras tanto los cambios quedan guardados en el panel.</div>
+</div>
+
+<div class="card">
+  <h3>💾 Exportar e importar datos</h3>
+  <p>Desde <strong>Config → Importar / Exportar</strong> podés descargar todos los datos en un archivo <kbd>products.json</kbd> como respaldo. Si necesitás restaurarlo, importás ese archivo desde el mismo lugar.</p>
+  <div class="tip"><strong>Recomendado:</strong> Hacé un backup antes de hacer cambios grandes.</div>
+</div>
+```
+
+  </div>
+
+  <!-- ── IMGBB ── -->
+
+  <div class="section" id="imgbb">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2>Configurar imgbb (fotos externas)</h2>
+      <span class="section-tag">Recomendado</span>
+    </div>
+
+```
+<div class="card">
+  <h3>🖼️ ¿Para qué sirve imgbb?</h3>
+  <p>Cuando subís fotos directamente al panel, se guardan dentro del archivo de datos y lo hacen muy pesado. Con imgbb, las fotos se suben a un servidor gratuito y el panel solo guarda el link. Así el sitio carga más rápido y podés tener muchas más fotos sin problemas.</p>
+  <div class="tip"><strong>Recomendado si:</strong> tenés más de 5 productos con fotos, o si el panel te avisa que el archivo es "demasiado grande".</div>
+</div>
+
+<div class="card">
+  <h3>⚙️ Cómo configurarlo (una sola vez)</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Entrás a <a href="https://imgbb.com" target="_blank">imgbb.com</a></h4><p>Creás una cuenta gratuita con tu email.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Vas a <a href="https://api.imgbb.com" target="_blank">api.imgbb.com</a></h4><p>Copiás tu API key (es un código largo).</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>En el panel: sección "GitHub"</h4><p>Buscás la tarjeta "imgbb — Hosting de imágenes".</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><h4>Pegás la API key y tocás "Guardar"</h4><p>Luego "Probar" para confirmar que funciona.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body"><h4>Listo</h4><p>A partir de ahora, cuando subas fotos, se van a subir automáticamente a imgbb.</p></div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- ── FAQ ── -->
+
+  <div class="section" id="faq">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <h2>Preguntas frecuentes</h2>
+      <span class="section-tag">FAQ</span>
+    </div>
+
+```
+<div class="card">
+  <h3>❓ Publiqué pero no se actualiza el sitio</h3>
+  <p>Esperá 1 minuto y recargá la página del sitio. Si sigue igual, probá abrirlo en modo incógnito (privado). A veces el navegador guarda una versión vieja en caché.</p>
+</div>
+
+<div class="card">
+  <h3>❓ No me aparecen los productos que cargué antes</h3>
+  <p>Los productos se guardan en el navegador con el que los cargaste. Si abrís el panel desde otro navegador o celular, vas a verlo vacío hasta que publiques. Para sincronizar: entrá desde el dispositivo original, tocá "Publicar", y luego en cualquier otro dispositivo los productos van a aparecer al recargar.</p>
+</div>
+
+<div class="card">
+  <h3>❓ El panel dice "archivo muy grande"</h3>
+  <p>Pasó porque las fotos pesan mucho. Soluciones:</p>
+  <ul style="font-size:13px;color:var(--muted);padding-left:20px;display:flex;flex-direction:column;gap:5px;margin-top:8px">
+    <li>Configurar imgbb (ver sección anterior) — <strong>la mejor solución</strong></li>
+    <li>Reducir el tamaño de las fotos antes de subirlas</li>
+    <li>Usar URLs en vez de subir archivos directamente</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>❓ Borré un producto por error</h3>
+  <p>Si todavía no publicaste los cambios, recargá la página y va a volver al estado anterior. Si ya publicaste, podés recrearlo manualmente o contactar al desarrollador para restaurar desde un backup.</p>
+  <div class="tip"><strong>Por eso:</strong> antes de borrar cosas, bajate un backup desde Config → Exportar.</div>
+</div>
+
+<div class="card">
+  <h3>❓ Olvidé la contraseña del panel</h3>
+  <p>Contactá al desarrollador y te la resetea. Es un cambio rápido.</p>
+</div>
+
+<div class="card">
+  <h3>❓ Quiero agregar una categoría nueva</h3>
+  <p>Al editar un producto, en el campo "Categoría" escribís el nombre de la nueva categoría. Se crea sola — no hay que configurarla por separado. A partir de ese momento aparece como filtro en el sitio y en el panel.</p>
+</div>
+
+<div class="card">
+  <h3>❓ ¿Los cambios se guardan solos?</h3>
+  <p>Sí, cada vez que tocás "Guardar" en un producto o "Guardar configuración", los cambios quedan en el panel. Pero para que aparezcan en el sitio <strong>siempre tenés que tocar "Publicar"</strong>.</p>
+</div>
+```
+
+  </div>
+
+  <div class="divider"></div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px 24px;text-align:center">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:4px">¿Tenés dudas o algo no funciona?</p>
+    <p style="font-size:15px;font-weight:500">Contactame directamente y lo resolvemos juntos 🔪</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Guía preparada por <span>DiazUX Studio</span> para GL Cuchillos Artesanales
+</div>
+
+</body>
+</html>
