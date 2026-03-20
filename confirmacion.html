@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Confirmación · GL Cuchillos Artesanales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit}
+:root{
+  --jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;
+  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
+  --silver-line:rgba(200,205,214,.16);
+  --cream:#E8E0D0;--muted:#787060;
+  --serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ── NAV ── */
+nav{
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid var(--silver-line);
+  padding:0 clamp(1.5rem,4vw,3rem);height:68px;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-mono{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--silver);}
+.nav-text{display:flex;flex-direction:column;}
+.nav-name{font-family:var(--serif);font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);}
+.nav-sub{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver3);}
+
+/* ── MAIN ── */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;}
+
+/* ── CARD ── */
+.conf-card{
+  background:var(--jet2);
+  border:1px solid var(--silver-line);
+  max-width:520px;width:100%;
+  overflow:hidden;
+}
+.conf-top{padding:3rem 2.5rem 2rem;text-align:center;}
+.conf-icon{
+  width:80px;height:80px;
+  border-radius:50%;
+  background:var(--jet3);
+  border:1px solid var(--silver-line);
+  margin:0 auto 1.8rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.conf-icon svg{width:32px;height:32px;}
+.conf-icon.ok svg{color:var(--silver);}
+.conf-icon.pend svg{color:#E8C060;}
+.conf-icon.err svg{color:#e87070;}
+.conf-eyebrow{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--silver3);margin-bottom:.8rem;}
+.conf-title{font-family:var(--serif);font-size:clamp(1.8rem,6vw,2.6rem);font-weight:400;font-style:italic;color:var(--cream);margin-bottom:.7rem;line-height:1.1;}
+.conf-title em{color:var(--silver);font-style:normal;}
+.conf-desc{font-size:11px;color:var(--silver3);line-height:1.8;letter-spacing:.04em;max-width:380px;margin:0 auto;}
+
+/* ── DETALLE ── */
+.conf-detalle{
+  background:var(--jet3);
+  padding:1.4rem 2.5rem;
+  border-top:1px solid var(--silver-line);
+}
+.det-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver3);margin-bottom:.9rem;display:flex;align-items:center;gap:.4rem;}
+.det-label svg{width:10px;height:10px;}
+.det-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:.4rem;color:var(--silver3);letter-spacing:.04em;}
+.det-row strong{color:var(--cream);font-weight:500;}
+
+/* ── WA BLOCK ── */
+.conf-wa{padding:1.4rem 2.5rem;border-top:1px solid var(--silver-line);}
+.wa-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem;}
+.wa-ico{width:38px;height:38px;background:var(--jet3);border:1px solid var(--silver-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.wa-ico svg{width:16px;height:16px;}
+.wa-head strong{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--cream);}
+.wa-head span{font-size:9px;color:var(--silver3);display:block;letter-spacing:.06em;}
+.wa-info{background:var(--jet);border:1px solid var(--silver-line);padding:.85rem 1rem;font-size:10px;color:var(--silver3);line-height:1.7;letter-spacing:.04em;}
+
+/* ── ACTIONS ── */
+.conf-actions{padding:1.4rem 2.5rem 2.2rem;display:flex;flex-direction:column;gap:.6rem;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--sans);font-size:9px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  padding:.9rem 2rem;width:100%;
+  transition:all .2s;text-decoration:none;
+}
+.btn-primary{background:var(--cream);color:var(--jet);}
+.btn-primary:hover{background:var(--silver2);}
+.btn-outline{background:transparent;color:var(--silver);border:1px solid var(--silver-line);}
+.btn-outline:hover{border-color:var(--silver);color:var(--cream);}
+.btn-ig{background:transparent;color:var(--silver3);border:1px solid rgba(200,205,214,.1);}
+.btn-ig:hover{border-color:var(--silver-line);color:var(--silver);}
+.btn svg{width:12px;height:12px;}
+
+/* ── CONFETTI ── */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.confetti-piece{position:absolute;width:7px;height:7px;border-radius:1px;opacity:0;animation:fall linear forwards;}
+@keyframes fall{0%{opacity:1;transform:translateY(-20px) rotate(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+
+@media(max-width:480px){
+  .conf-top{padding:2.2rem 1.6rem 1.5rem;}
+  .conf-detalle,.conf-wa,.conf-actions{padding-left:1.6rem;padding-right:1.6rem;}
+}
+@media(max-width:360px){
+  .conf-top{padding:1.8rem 1.2rem 1.2rem;}
+  .conf-detalle,.conf-wa,.conf-actions{padding-left:1.2rem;padding-right:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="confetti-wrap" id="confetti"></div>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <span class="nav-mono">GL</span>
+    <div class="nav-text">
+      <span class="nav-name">Cuchillos Artesanales</span>
+      <span class="nav-sub">confirmación de pedido</span>
+    </div>
+  </a>
+</nav>
+
+<main>
+  <div class="conf-card" id="conf-card"></div>
+</main>
+
+<script>
+const WA_NUM    = '5493843458340';
+const IG_HANDLE = 'gonzalo.londero.3';
+
+function getParam(k){ return new URLSearchParams(window.location.search).get(k); }
+
+const status  = getParam('collection_status')||getParam('status')||'approved';
+const via     = getParam('via');
+const prodNom = decodeURIComponent(getParam('prod')||'tu pieza');
+const pct     = getParam('pct')||'50';
+const monto   = getParam('monto');
+const pedido  = JSON.parse(sessionStorage.getItem('gl_pedido')||'{}');
+
+/* ── Detalle del pedido ── */
+function detalle(){
+  if(!pedido.nombre&&!pedido.producto) return '';
+  return `<div class="conf-detalle">
+    <div class="det-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      Detalle del pedido
+    </div>
+    ${pedido.nombre?`<div class="det-row"><span>Cliente</span><strong>${pedido.nombre}</strong></div>`:''}
+    ${pedido.producto?`<div class="det-row"><span>Pieza</span><strong>${pedido.producto}</strong></div>`:''}
+    ${pedido.pct&&pedido.monto?`<div class="det-row"><span>Seña abonada (${pedido.pct}%)</span><strong>$${Number(pedido.monto).toLocaleString('es-AR')}</strong></div>`:''}
+    ${pedido.precioTotal&&pedido.monto?`<div class="det-row"><span>Saldo al entregar</span><strong>$${(Number(pedido.precioTotal)-Number(pedido.monto)).toLocaleString('es-AR')}</strong></div>`:''}
+  </div>`;
+}
+
+/* ── Render estados ── */
+function renderOK(){
+  spawnConfetti();
+  document.getElementById('conf-card').innerHTML = `
+    <div class="conf-top">
+      <div class="conf-icon ok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+          <polyline points="22 4 12 15.01 9 12.01"/>
+        </svg>
+      </div>
+      <div class="conf-eyebrow">Pago confirmado</div>
+      <h1 class="conf-title">¡Seña <em>recibida!</em></h1>
+      <p class="conf-desc">Tu encargo está en marcha. Gonzalo se va a contactar pronto para coordinar los detalles de tu pieza.</p>
+    </div>
+    ${detalle()}
+    <div class="conf-wa">
+      <div class="wa-head">
+        <div class="wa-ico">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        </div>
+        <div>
+          <strong>Próximos pasos</strong>
+          <span>Gonzalo se comunica en 24 a 48 hs</span>
+        </div>
+      </div>
+      <div class="wa-info">
+        📍 Taller en Quimilí, Santiago del Estero · Envíos a todo Argentina y exterior<br/>
+        📱 Podés escribirle directamente a Gonzalo por WhatsApp o Instagram
+      </div>
+    </div>
+    <div class="conf-actions">
+      <a class="btn btn-primary" href="https://wa.me/${WA_NUM}?text=Hola%20Gonzalo!%20Acabo%20de%20dejar%20la%20se%C3%B1a%20por%20${encodeURIComponent(prodNom)}.%20Cuando%20puedas%20me%20avis%C3%A1s%20los%20pr%C3%B3ximos%20pasos." target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Escribir a Gonzalo por WhatsApp
+      </a>
+      <a class="btn btn-ig" href="https://instagram.com/${IG_HANDLE}" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        @${IG_HANDLE}
+      </a>
+      <a class="btn btn-outline" href="index.html">Volver al inicio</a>
+    </div>`;
+}
+
+function renderPendiente(){
+  document.getElementById('conf-card').innerHTML = `
+    <div class="conf-top">
+      <div class="conf-icon pend">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="conf-eyebrow">Pago en proceso</div>
+      <h1 class="conf-title">Pago <em>pendiente</em></h1>
+      <p class="conf-desc">Tu pago está siendo procesado. Gonzalo te va a contactar en cuanto se confirme, normalmente en pocas horas.</p>
+    </div>
+    ${detalle()}
+    <div class="conf-actions">
+      <a class="btn btn-primary" href="https://wa.me/${WA_NUM}?text=Hola%20Gonzalo!%20Hice%20un%20pago%20pendiente%20por%20${encodeURIComponent(prodNom)}.%20%C2%BFPod%C3%A9s%20confirmarme%20cuando%20llegue?" target="_blank">Consultar por WhatsApp</a>
+      <a class="btn btn-outline" href="index.html">Volver al inicio</a>
+    </div>`;
+}
+
+function renderError(){
+  document.getElementById('conf-card').innerHTML = `
+    <div class="conf-top">
+      <div class="conf-icon err">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <div class="conf-eyebrow">Pago no completado</div>
+      <h1 class="conf-title">Hubo un <em>problema</em></h1>
+      <p class="conf-desc">No se pudo procesar el pago. Podés intentar de nuevo o coordinar directamente con Gonzalo por WhatsApp.</p>
+    </div>
+    <div class="conf-actions">
+      <a class="btn btn-primary" href="javascript:history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Intentar de nuevo
+      </a>
+      <a class="btn btn-outline" href="https://wa.me/${WA_NUM}?text=Hola%20Gonzalo!%20Tuve%20un%20problema%20pagando%20por%20${encodeURIComponent(prodNom)}.%20%C2%BFPuedo%20coordinar%20de%20otra%20forma?" target="_blank">Coordinar por WhatsApp</a>
+      <a class="btn btn-ig" href="https://instagram.com/${IG_HANDLE}" target="_blank">Instagram</a>
+      <a class="btn btn-outline" style="border-color:rgba(200,205,214,.08);color:var(--muted);" href="index.html">Volver al inicio</a>
+    </div>`;
+}
+
+/* ── Confetti ── */
+function spawnConfetti(){
+  const colors=['#C8CDD6','#8E96A2','#E8E0D0','#DDE1E8','rgba(200,205,214,.6)'];
+  const wrap=document.getElementById('confetti');
+  for(let i=0;i<48;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText=`left:${Math.random()*100}%;background:${colors[i%colors.length]};width:${5+Math.random()*6}px;height:${5+Math.random()*6}px;border-radius:${Math.random()>.5?'50%':'1px'};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*.7}s;`;
+    wrap.appendChild(el);
+  }
+  setTimeout(()=>wrap.remove(),5000);
+}
+
+/* ── Notificación automática a WA de Gonzalo (abre WA automático en confirmación) ── */
+function notificarGonzalo(){
+  // Construir mensaje automático para Gonzalo
+  const nom = pedido.nombre || 'Un cliente';
+  const prod2 = pedido.producto || prodNom;
+  const montoStr = pedido.monto ? '$'+Number(pedido.monto).toLocaleString('es-AR') : '';
+  const email = pedido.email ? ` · ${pedido.email}` : '';
+  const tel = pedido.tel ? ` · WA: ${pedido.tel}` : '';
+  const msg = `🔪 *Nuevo pedido GL Cuchillos*\n\n👤 Cliente: ${nom}${email}${tel}\n📦 Pieza: ${prod2}\n${montoStr?`💰 Seña pagada: ${montoStr}\n`:''}📍 Encargo iniciado vía web`;
+  // Solo abre si hay número de tel del cliente (para no spam)
+  // Gonzalo recibe vía webhook del backend — este es un backup por WA
+  return `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
+}
+
+/* ── Routing ── */
+if(status==='approved'||status==='approved'){
+  renderOK();
+  // Abrir WA a Gonzalo automáticamente después de 2s (suave, no intrusivo)
+  setTimeout(()=>{
+    const waGonzalo = notificarGonzalo();
+    // Crear link invisible y disparar notif discreta
+    const notifLink = document.createElement('a');
+    notifLink.href = waGonzalo;
+    notifLink.target = '_blank';
+    notifLink.style.display = 'none';
+    document.body.appendChild(notifLink);
+    // No auto-click — el botón "Escribir a Gonzalo" es el call to action principal
+    // El webhook del servidor ya notifica automáticamente
+  }, 2000);
+} else if(status==='pending'||status==='in_process'){
+  renderPendiente();
+} else {
+  renderError();
+}
+
+sessionStorage.removeItem('gl_pedido');
+</script>
+</body>
+</html>
