@@ -76,6 +76,14 @@ transition:background .2s;
 }
 .btn-login:active{background:var(–acdk)}
 .login-err{color:var(–red);font-size:12px;margin-top:8px;min-height:18px}
+/* Indicador de almacenamiento */
+.storage-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;color:var(--green);
+  background:rgba(45,138,94,.1);border-radius:4px;
+  padding:2px 6px;margin-left:6px;
+}
+.storage-badge i{font-size:9px;}
 
 /* ── TOPBAR ──────────────────────────────── */
 .topbar{
@@ -656,7 +664,7 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
     <button class="btn btn-sm btn-primary" onclick="publishToGitHub()" id="btn-publish">
       <i class="fas fa-cloud-upload-alt"></i> <span class="btn-pub-label">Publicar</span>
     </button>
-    <span id="json-size-badge" style="font-size:10px;color:var(--muted)" title="Tamaño del JSON"></span>
+    <span id="json-size-badge" style="font-size:10px;color:var(--muted)" title="Tamaño del JSON"></span><span class="storage-badge" title="Datos guardados en IndexedDB — no se borran con la caché"><i class="fas fa-shield-alt"></i> Permanente</span>
     <button class="btn btn-sm btn-ghost" onclick="doLogout()" title="Salir" style="padding:8px 10px">
       <i class="fas fa-sign-out-alt"></i>
     </button>
@@ -670,7 +678,7 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
   <div class="save-banner" id="save-banner">
     <div>
       <strong>Cambios sin publicar</strong>
-      <small>Guardados localmente. Tocá "Publicar" para subir al sitio.</small>
+      <small>Guardados permanentemente en este dispositivo. Tocá "Publicar" para subir al sitio.</small>
     </div>
     <button class="btn btn-sm btn-primary" onclick="publishToGitHub()">
       <i class="fas fa-cloud-upload-alt"></i> Publicar
@@ -910,7 +918,7 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
         <i class="fas fa-upload"></i> Importar products.json
         <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
       </label>
-      <button class="btn btn-ghost btn-sm" onclick="if(confirm('¿Borrar datos locales y recargar?')){localStorage.clear();location.reload()}">
+      <button class="btn btn-ghost btn-sm" onclick="resetData()">
         <i class="fas fa-trash-alt"></i> Limpiar datos locales
       </button>
     </div>
@@ -1326,11 +1334,16 @@ let editingReviewId = null;
 ══════════════════════════════════════════ */
 (async () => {
   if (localStorage.getItem('gl_auth') === '1') showApp();
-  await loadData();
+  await loadData(); // carga desde IndexedDB (permanente)
   loadGhCfg();
   loadImgbbCfg();
   fillSettings();
   renderAll();
+  // Mostrar hint de almacenamiento en la primera carga
+  const snap = localStorage.getItem('gl_snap');
+  if (!snap && data.products.length === 0) {
+    setTimeout(() => toast('Admin listo. Los cambios se guardan automáticamente en este dispositivo.'), 800);
+  }
 })();
 
 document.getElementById('pwd-input').onkeydown = e => { if (e.key === 'Enter') doLogin(); };
@@ -1382,58 +1395,149 @@ function changePassword() {
 }
 
 /* ══════════════════════════════════════════
-   DATA
+   DATA — IndexedDB (permanente, no se borra con caché)
+   Fallback: localStorage → products.json
 ══════════════════════════════════════════ */
+
+// ── IndexedDB wrapper ──────────────────────
+const DB_NAME = 'gl_cuchillos';
+const DB_VERSION = 1;
+const STORE = 'admin_data';
+let _db = null;
+
+async function openDB() {
+  if (_db) return _db;
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE)) {
+        db.createObjectStore(STORE, { keyPath: 'id' });
+      }
+    };
+    req.onsuccess  = e => { _db = e.target.result; resolve(_db); };
+    req.onerror    = e => reject(e.target.error);
+  });
+}
+
+async function idbGet(key) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).get(key);
+    req.onsuccess = e => resolve(e.target.result?.value ?? null);
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+
+async function idbSet(key, value) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE, 'readwrite');
+    const req = tx.objectStore(STORE).put({ id: key, value });
+    req.onsuccess = () => resolve();
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+
+async function idbClear() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE, 'readwrite');
+    tx.objectStore(STORE).clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror    = e => reject(e.target.error);
+  });
+}
+
+// ── loadData: IndexedDB → localStorage → products.json ──
 async function loadData() {
+  // 1. Intentar IndexedDB (permanente)
+  try {
+    const saved = await idbGet('data');
+    if (saved) {
+      data = saved;
+      if (!data.settings) data.settings = {};
+      if (!data.settings.reviews) data.settings.reviews = [];
+      updateStorageInfo();
+      return;
+    }
+  } catch(e) { console.warn('IndexedDB no disponible:', e); }
+
+  // 2. Fallback a localStorage (por si venía de versión anterior)
   const cached = localStorage.getItem('gl_data');
   if (cached) {
     try {
       data = JSON.parse(cached);
       if (!data.settings.reviews) data.settings.reviews = [];
+      // Migrar a IndexedDB y limpiar localStorage
+      await persist(false);
+      localStorage.removeItem('gl_data');
+      toast('Datos migrados a almacenamiento permanente ✓');
       return;
     } catch(e) {}
   }
+
+  // 3. Fallback a products.json (primera vez)
   try {
     const r = await fetch('products.json?t='+Date.now());
     if (r.ok) {
       data = await r.json();
+      if (!data.settings) data.settings = {};
       if (!data.settings.reviews) data.settings.reviews = [];
-      persist(false);
+      await persist(false);
+      return;
     }
-  } catch(e) {
-    data = {
-      settings: {
-        whatsapp:'5493843458340', instagram:'gonzalo.londero.3', facebook:'Gonzafcf',
-        phone:'+54 9 3843 458340', heroTitle:'Cada filo cuenta una historia.',
-        heroSubtitle:'', heroStat1:'500+', heroStat1Label:'Piezas entregadas',
-        globalPromo:false, globalPromoBanner:'', artisanPhoto:'', reviews:[]
-      },
-      products: []
-    };
-  }
+  } catch(e) {}
+
+  // 4. Datos vacíos por defecto
+  data = {
+    settings: {
+      whatsapp:'5493843458340', instagram:'gonzalo.londero.3', facebook:'Gonzafcf',
+      phone:'+54 9 3843 458340', heroTitle:'Cada filo cuenta una historia.',
+      heroSubtitle:'', heroStat1:'500+', heroStat1Label:'Piezas entregadas',
+      globalPromo:false, globalPromoBanner:'', artisanPhoto:'', reviews:[]
+    },
+    products: []
+  };
 }
-function persist(mark=true) {
+
+// ── persist: guarda en IndexedDB ──────────
+async function persist(mark=true) {
   try {
-    const jsonStr = JSON.stringify(data);
-    localStorage.setItem('gl_data', jsonStr);
-    const kb = Math.round(new Blob([jsonStr]).size / 1024);
-    const badge = document.getElementById('json-size-badge');
-    if (badge) {
-      const mb = (kb/1024).toFixed(2);
-      const over = kb > 900;
-      badge.innerHTML = `<span style="color:${over?'var(--red)':'var(--muted)'}">
-        <i class="fas fa-${over?'exclamation-triangle':'database'}" style="font-size:10px"></i>
-        ${kb < 1024 ? kb+'KB' : mb+'MB'}${over?' ⚠️':''}
-      </span>`;
-    }
+    await idbSet('data', data);
+    // También guardar snapshot en localStorage como backup secundario
+    try {
+      const snap = JSON.stringify({ _snap: true, ts: Date.now(), count: data.products.length });
+      localStorage.setItem('gl_snap', snap);
+    } catch(e) {}
+    updateStorageInfo();
     if (mark) document.getElementById('save-banner').classList.add('show');
   } catch(e) {
-    if (e.name === 'QuotaExceededError' || e.code === 22) {
-      toast('Imagen muy pesada. Usá una URL externa.','err');
-    } else {
-      toast('Error al guardar: '+e.message,'err');
-    }
+    toast('Error guardando: '+e.message,'err');
   }
+}
+
+function updateStorageInfo() {
+  const badge = document.getElementById('json-size-badge');
+  if (!badge) return;
+  const jsonStr = JSON.stringify(data);
+  const kb = Math.round(new Blob([jsonStr]).size / 1024);
+  const mb = (kb/1024).toFixed(2);
+  const over = kb > 4000;
+  badge.innerHTML = `<span style="color:${over?'var(--red)':'var(--muted)'}">
+    <i class="fas fa-${over?'exclamation-triangle':'database'}" style="font-size:10px"></i>
+    ${kb < 1024 ? kb+' KB' : mb+' MB'} · ${data.products.length} productos${over?' ⚠️':''}
+  </span>`;
+}
+
+// ── Borrar todo (reset) ───────────────────
+async function resetData() {
+  if (!confirm('¿Borrar TODOS los datos del admin? Esta acción no se puede deshacer.')) return;
+  await idbClear();
+  localStorage.removeItem('gl_data');
+  localStorage.removeItem('gl_snap');
+  location.reload();
 }
 
 /* ══════════════════════════════════════════
