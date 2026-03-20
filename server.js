@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // ── Mercado Pago ──────────────────────────────────────────────
 const client = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN || "APP_USR-809049792090054-032008-b8baa74fac91eff924b15ef2a950907e-8051139",
+  accessToken: process.env.MP_ACCESS_TOKEN || "",
 });
 
 // ── Middlewares ───────────────────────────────────────────────
@@ -122,11 +122,59 @@ app.post("/gl/sena", async (req, res) => {
   }
 });
 
-// ── POST /webhook — MP notifica pagos ────────────────────────
-app.post("/webhook", (req, res) => {
+// ── POST /webhook — MP notifica pagos → WA a Gonzalo ─────────
+app.post("/webhook", async (req, res) => {
   const { type, data } = req.body;
   console.log("Webhook MP:", type, data?.id);
-  // GL Cuchillos no descuenta stock — solo log
+
+  if (type === "payment" && data?.id) {
+    try {
+      const { MercadoPagoConfig: MPC, Payment } = require("mercadopago");
+      const mpClient = new MPC({ accessToken: process.env.MP_ACCESS_TOKEN });
+      const payClient = new Payment(mpClient);
+      const payment = await payClient.get({ id: data.id });
+
+      if (payment.status === "approved") {
+        const meta = payment.metadata || {};
+        const nombre  = meta.cliente_nombre || "—";
+        const email   = meta.cliente_email  || "";
+        const tel     = meta.cliente_tel    || "";
+        const prod    = meta.producto_id ? `Producto ID: ${meta.producto_id}` : "pieza artesanal";
+        const monto   = payment.transaction_amount
+          ? `$${Number(payment.transaction_amount).toLocaleString("es-AR")}`
+          : "—";
+        const pct     = meta.porcentaje ? `(${meta.porcentaje}% de seña)` : "";
+
+        // Log para Render dashboard
+        console.log(`
+💰 PAGO APROBADO`);
+        console.log(`   Cliente: ${nombre} ${email} ${tel}`);
+        console.log(`   Producto: ${prod}`);
+        console.log(`   Monto: ${monto} ${pct}`);
+        console.log(`   Payment ID: ${payment.id}
+`);
+
+        // Construir URL de WA para notificar a Gonzalo
+        const waMsg = encodeURIComponent(
+          `🔪 *Nuevo pedido GL Cuchillos*
+
+` +
+          `👤 Cliente: ${nombre}${email ? " · " + email : ""}${tel ? " · WA: " + tel : ""}
+` +
+          `📦 ${prod.replace("Producto ID: ", "")}
+` +
+          `💰 Seña: ${monto} ${pct}
+` +
+          `🆔 ID pago: ${payment.id}`
+        );
+        const waUrl = `https://wa.me/5493843458340?text=${waMsg}`;
+        console.log(`   WA Gonzalo: ${waUrl}`);
+      }
+    } catch(e) {
+      console.error("Error procesando webhook:", e?.message || e);
+    }
+  }
+
   res.sendStatus(200);
 });
 
