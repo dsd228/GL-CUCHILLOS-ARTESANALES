@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Checkout · GL Cuchillos Artesanales</title>
+<meta name="description" content="Reservá tu cuchillo artesanal de Gonzalo Londero con una seña. Pago seguro con Mercado Pago."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;font-size:16px!important;-webkit-appearance:none;}
+:root{
+  --jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;
+  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
+  --silver-line:rgba(200,205,214,.16);
+  --cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
+  --serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid var(--silver-line);
+  backdrop-filter:blur(20px);
+  padding:0 clamp(1.5rem,4vw,3rem);
+  height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-mono{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--silver);}
+.nav-text{display:flex;flex-direction:column;}
+.nav-name{font-family:var(--serif);font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);}
+.nav-sub{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver3);}
+.nav-back{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver3);border:1px solid var(--silver-line);padding:.5rem 1.2rem;transition:all .2s;display:flex;align-items:center;gap:.5rem;}
+.nav-back:hover{color:var(--silver);border-color:var(--silver);}
+.nav-back svg{width:12px;height:12px;}
+
+/* ── LAYOUT ── */
+.ck-wrap{max-width:1100px;margin:0 auto;padding:3rem clamp(1.5rem,5vw,3rem) 6rem;display:grid;grid-template-columns:1fr 380px;gap:2px;align-items:start;}
+@media(max-width:860px){.ck-wrap{grid-template-columns:1fr;}}
+
+/* ── CARD ── */
+.ck-card{background:var(--jet2);border:1px solid var(--silver-line);}
+.ck-card-head{padding:1.8rem 2rem 1.4rem;border-bottom:1px solid var(--silver-line);display:flex;align-items:center;gap:.8rem;}
+.ck-card-head svg{width:16px;height:16px;color:var(--silver3);flex-shrink:0;}
+.ck-card-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;font-style:italic;color:var(--cream);}
+.ck-card-body{padding:1.8rem 2rem;}
+
+/* ── FORM ── */
+.fg{margin-bottom:1.2rem;}
+.fg:last-child{margin-bottom:0;}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:500px){.fg-row{grid-template-columns:1fr;}}
+.fl{display:block;font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver3);margin-bottom:.55rem;}
+.fi{
+  width:100%;padding:.85rem 1rem;
+  background:var(--jet3);
+  border:1px solid var(--silver-line);
+  color:var(--cream);
+  font-family:var(--sans);font-size:13px;
+  outline:none;transition:border-color .2s;
+}
+.fi:focus{border-color:rgba(200,205,214,.5);}
+.fi::placeholder{color:var(--muted);}
+textarea.fi{min-height:80px;resize:vertical;font-size:14px!important;}
+
+/* ── MÉTODOS DE PAGO ── */
+.pay-methods{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1.5rem;}
+.pay-method{
+  padding:1rem 1.2rem;
+  border:1.5px solid var(--silver-line);
+  cursor:pointer;
+  display:flex;align-items:center;gap:.9rem;
+  transition:border-color .2s,background .2s;
+  background:var(--jet3);
+}
+.pay-method:hover,.pay-method.sel{border-color:rgba(200,205,214,.55);background:var(--jet4);}
+.pay-method.sel{border-color:var(--silver);}
+.pm-icon{width:36px;height:36px;border-radius:50%;background:var(--jet2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pm-icon svg{width:16px;height:16px;}
+.pm-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);}
+.pm-desc{font-size:9px;color:var(--silver3);margin-top:2px;letter-spacing:.08em;}
+.pm-check{margin-left:auto;width:18px;height:18px;border:1.5px solid var(--silver-line);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.pay-method.sel .pm-check{background:var(--silver);border-color:var(--silver);}
+.pm-check svg{width:10px;height:10px;color:var(--jet);opacity:0;transition:opacity .15s;}
+.pay-method.sel .pm-check svg{opacity:1;}
+
+/* ── SEÑA INFO ── */
+.sena-info{background:var(--jet);border:1px solid var(--silver-line);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.sena-info-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--silver3);letter-spacing:.05em;margin-bottom:.35rem;}
+.sena-info-row:last-child{margin-bottom:0;}
+.sena-info-row strong{color:var(--cream);font-weight:600;}
+.sena-total{font-size:1.4rem;font-family:var(--serif);font-style:italic;color:var(--silver);}
+
+/* ── BUTTONS ── */
+.btn-pay{
+  width:100%;padding:1rem;
+  background:var(--cream);color:var(--jet);
+  border:none;
+  font-family:var(--sans);font-size:9px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  min-height:52px;
+}
+.btn-pay:hover{background:var(--silver2);transform:translateY(-1px);}
+.btn-pay:active{transform:translateY(0);}
+.btn-pay.loading{opacity:.65;pointer-events:none;}
+.btn-pay svg{width:15px;height:15px;flex-shrink:0;}
+.btn-wa{
+  width:100%;padding:.9rem;margin-top:.7rem;
+  background:transparent;color:var(--silver);
+  border:1px solid var(--silver-line);
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  text-decoration:none;
+}
+.btn-wa:hover{border-color:var(--silver);color:var(--cream);}
+.btn-ig{
+  width:100%;padding:.8rem;margin-top:.5rem;
+  background:transparent;color:var(--silver3);
+  border:1px solid rgba(200,205,214,.1);
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  text-decoration:none;
+}
+.btn-ig:hover{border-color:var(--silver-line);color:var(--silver);}
+.err-msg{font-size:11px;color:#e87070;margin-top:.6rem;min-height:16px;letter-spacing:.02em;}
+
+/* ── RESUMEN ── */
+.sum-prod{display:flex;gap:1rem;align-items:center;padding-bottom:1.2rem;margin-bottom:1.2rem;border-bottom:1px solid var(--silver-line);}
+.sum-img{width:72px;height:72px;object-fit:cover;background:var(--jet3);flex-shrink:0;}
+.sum-pname{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--cream);margin-bottom:.3rem;}
+.sum-pcat{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--silver3);}
+.sum-row{display:flex;justify-content:space-between;font-size:11px;color:var(--silver3);margin-bottom:.5rem;letter-spacing:.04em;}
+.sum-row strong{color:var(--cream);}
+.sum-hr{height:1px;background:var(--silver-line);margin:.8rem 0;}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;}
+.sum-total span{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver3);}
+.sum-total strong{font-family:var(--serif);font-size:1.6rem;font-style:italic;color:var(--silver);}
+
+/* ── SELLOS ── */
+.sellos{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--silver-line);}
+.sello{font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--silver3);border:1px solid var(--silver-line);padding:.22rem .55rem;}
+
+/* ── SECURE ── */
+.secure{display:flex;align-items:center;gap:.5rem;font-size:8px;color:var(--muted);letter-spacing:.1em;margin-top:1rem;justify-content:center;}
+.secure svg{width:11px;height:11px;color:var(--silver3);}
+
+/* ── DISCLAIMER ── */
+.disclaimer{font-size:9px;color:var(--muted);line-height:1.7;letter-spacing:.03em;margin-top:1.2rem;border-top:1px solid var(--silver-line);padding-top:1rem;}
+.disclaimer strong{color:var(--silver3);}
+
+/* ── SKELETON ── */
+.sum-loading{animation:shimmer 1.5s linear infinite;background:linear-gradient(90deg,var(--jet3) 25%,var(--jet4) 50%,var(--jet3) 75%);background-size:200% 100%;height:180px;}
+@keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
+
+@media(max-width:500px){
+  .ck-card-body{padding:1.4rem 1.2rem;}
+  .ck-card-head{padding:1.4rem 1.2rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <span class="nav-mono">GL</span>
+    <div class="nav-text">
+      <span class="nav-name">Cuchillos Artesanales</span>
+      <span class="nav-sub">Quimilí · Santiago del Estero</span>
+    </div>
+  </a>
+  <a class="nav-back" href="javascript:history.back()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver
+  </a>
+</nav>
+
+<div class="ck-wrap">
+
+  <!-- FORMULARIO -->
+  <div>
+    <div class="ck-card">
+      <div class="ck-card-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <h2 class="ck-card-title">Tus datos</h2>
+      </div>
+      <div class="ck-card-body">
+        <div class="fg-row">
+          <div class="fg">
+            <label class="fl" for="ch-nom">Nombre *</label>
+            <input class="fi" id="ch-nom" type="text" placeholder="María" autocomplete="given-name" required/>
+          </div>
+          <div class="fg">
+            <label class="fl" for="ch-ape">Apellido *</label>
+            <input class="fi" id="ch-ape" type="text" placeholder="González" autocomplete="family-name" required/>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="ch-email">Email *</label>
+          <input class="fi" id="ch-email" type="email" placeholder="maria@email.com" autocomplete="email" required/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="ch-tel">WhatsApp / Teléfono</label>
+          <input class="fi" id="ch-tel" type="tel" placeholder="+54 9 385 000-0000" autocomplete="tel"/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="ch-nota">Nota para el encargo</label>
+          <textarea class="fi" id="ch-nota" placeholder="Madera preferida, largo, grabado, uso previsto…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="ck-card" style="margin-top:2px;">
+      <div class="ck-card-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <h2 class="ck-card-title">Forma de pago</h2>
+      </div>
+      <div class="ck-card-body">
+
+        <!-- Métodos -->
+        <div class="pay-methods">
+          <div class="pay-method sel" id="pm-mp" onclick="selMetodo('mp')">
+            <div class="pm-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+            </div>
+            <div>
+              <div class="pm-label">Mercado Pago</div>
+              <div class="pm-desc">Tarjeta, débito, QR · Pago seguro online</div>
+            </div>
+            <div class="pm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="pay-method" id="pm-wa" onclick="selMetodo('wa')">
+            <div class="pm-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </div>
+            <div>
+              <div class="pm-label">WhatsApp</div>
+              <div class="pm-desc">Coordinar transferencia o efectivo</div>
+            </div>
+            <div class="pm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seña info (solo visible con MP) -->
+        <div class="sena-info" id="sena-info">
+          <div class="sena-info-row">
+            <span>Precio del producto</span>
+            <strong id="sum-precio-total">—</strong>
+          </div>
+          <div class="sena-info-row">
+            <span>Porcentaje de seña</span>
+            <strong id="sum-pct">50%</strong>
+          </div>
+          <div class="sena-info-row" style="margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--silver-line);">
+            <span style="font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;">A pagar ahora</span>
+            <span class="sena-total" id="sum-monto">—</span>
+          </div>
+        </div>
+
+        <!-- Botón MP -->
+        <button class="btn-pay" id="btn-pay-mp" onclick="pagar()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          <span id="btn-pay-label">Pagar seña con Mercado Pago</span>
+        </button>
+
+        <!-- Botón WA (oculto inicialmente) -->
+        <a id="btn-wa-pay" class="btn-wa" href="#" target="_blank" style="display:none;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Coordinar por WhatsApp
+        </a>
+
+        <!-- Instagram -->
+        <a class="btn-ig" href="https://instagram.com/gonzalo.londero.3" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          Consultar por Instagram @gonzalo.londero.3
+        </a>
+
+        <div class="err-msg" id="ck-err"></div>
+
+        <div class="secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Pago 100% seguro · Tus datos están protegidos
+        </div>
+
+        <div class="disclaimer">
+          Al abonar la seña confirmás el inicio del encargo. <strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega. El plazo estimado es de 4 a 8 semanas según la complejidad de la pieza.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="ck-card" style="position:sticky;top:88px;">
+    <div class="ck-card-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      <h2 class="ck-card-title">Resumen</h2>
+    </div>
+    <div class="ck-card-body" id="sum-body">
+      <div class="sum-loading"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const BACKEND   = 'https://gl-cuchillos-artesanales.onrender.com';
+const WA_NUM    = '5493843458340';
+const IG_HANDLE = 'gonzalo.londero.3';
+const GL_PCT    = 50;
+
+let prod    = null;
+let prodId  = null;
+let metodo  = 'mp';
+
+function getParam(k){ return new URLSearchParams(window.location.search).get(k); }
+
+/* ── Selección de método ── */
+function selMetodo(m){
+  metodo = m;
+  document.getElementById('pm-mp').classList.toggle('sel', m==='mp');
+  document.getElementById('pm-wa').classList.toggle('sel', m==='wa');
+  document.getElementById('sena-info').style.display = m==='mp' ? 'block' : 'none';
+  document.getElementById('btn-pay-mp').style.display = m==='mp' ? 'flex' : 'none';
+  document.getElementById('btn-wa-pay').style.display = m==='wa' ? 'flex' : 'none';
+}
+
+/* ── Cargar producto ── */
+async function init(){
+  prodId = getParam('id');
+  if(!prodId){ window.location.href='index.html'; return; }
+
+  let catalog = {};
+  // Try IndexedDB first
+  try{
+    const idb = await new Promise((res,rej)=>{
+      const r=indexedDB.open('gl_cuchillos',1);
+      r.onsuccess=e=>res(e.target.result);r.onerror=e=>rej(e);
+    });
+    const saved = await new Promise((res,rej)=>{
+      const tx=idb.transaction('admin_data','readonly');
+      const r=tx.objectStore('admin_data').get('data');
+      r.onsuccess=e=>res(e.target.result?.value??null);r.onerror=e=>rej(e);
+    });
+    if(saved&&saved.products) catalog = Object.fromEntries(saved.products.map(p=>[p.id,p]));
+  }catch(e){}
+
+  if(!Object.keys(catalog).length){
+    try{
+      const r = await fetch('products.json?t='+Date.now());
+      if(r.ok){ const d=await r.json(); (d.products||[]).forEach(p=>catalog[p.id]=p); }
+    }catch(e){}
+  }
+
+  prod = catalog[prodId];
+  if(!prod){ window.location.href='index.html'; return; }
+
+  document.title = `Checkout: ${prod.name} · GL Cuchillos`;
+  const precioNum = parseInt((prod.price||'').replace(/[^0-9]/g,''))||0;
+  const monto     = Math.round(precioNum * GL_PCT / 100);
+  const imgSrc    = prod.image||(prod.media&&prod.media[0]?.src)||'';
+  const catLabel  = prod.category||'Cuchillería artesanal';
+
+  // Resumen
+  document.getElementById('sum-body').innerHTML = `
+    <div class="sum-prod">
+      ${imgSrc
+        ? `<img class="sum-img" src="${imgSrc}" alt="${prod.name}" onerror="this.style.display='none'">`
+        : `<div class="sum-img" style="display:flex;align-items:center;justify-content:center;color:var(--muted)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 3l9 6v12H3V9z"/></svg></div>`}
+      <div>
+        <div class="sum-pname">${prod.name}</div>
+        <div class="sum-pcat">${catLabel}</div>
+        ${prod.priceNote?`<div style="font-size:8px;color:var(--muted);margin-top:.3rem;letter-spacing:.08em;">${prod.priceNote}</div>`:''}
+      </div>
+    </div>
+    <div class="sum-row"><span>Precio</span><strong>${prod.price||'Consultar'}</strong></div>
+    <div class="sum-row"><span>Seña (${GL_PCT}%)</span><strong>${precioNum>0?'$'+monto.toLocaleString('es-AR'):'—'}</strong></div>
+    <div class="sum-row"><span>Saldo al entregar</span><strong>${precioNum>0?'$'+(precioNum-monto).toLocaleString('es-AR'):'—'}</strong></div>
+    <div class="sum-hr"></div>
+    <div class="sum-total">
+      <span>A pagar ahora</span>
+      <strong>${precioNum>0?'$'+monto.toLocaleString('es-AR'):'Consultar'}</strong>
+    </div>
+    <div class="sellos">
+      <span class="sello">🇦🇷 Hecho en Argentina</span>
+      <span class="sello">✈ Envíos al exterior</span>
+      <span class="sello">🔨 Trabajado a mano</span>
+      <span class="sello">📍 Quimilí, Sgo. del Estero</span>
+    </div>`;
+
+  // Actualizar totales en form
+  document.getElementById('sum-precio-total').textContent = prod.price||'Consultar';
+  document.getElementById('sum-pct').textContent = GL_PCT+'%';
+  document.getElementById('sum-monto').textContent = precioNum>0?'$'+monto.toLocaleString('es-AR'):'Consultar';
+
+  // Si no tiene precio, ocultar MP y mostrar solo WA
+  if(precioNum<=0){
+    selMetodo('wa');
+    document.getElementById('pm-mp').style.display='none';
+  }
+
+  // WA button link
+  const nombre = (prod.name||'').replace(/\s/g,'%20');
+  const waText = `Hola!%20Quiero%20hacer%20un%20pedido%20de:%20${nombre}%20%E2%80%94%20${(prod.price||'presupuesto')}`;
+  document.getElementById('btn-wa-pay').href = `https://wa.me/${WA_NUM}?text=${waText}`;
+
+  selMetodo('mp');
+}
+
+/* ── Pagar ── */
+async function pagar(){
+  if(metodo==='wa'){
+    document.getElementById('btn-wa-pay').click();
+    return;
+  }
+
+  const nom   = document.getElementById('ch-nom').value.trim();
+  const ape   = document.getElementById('ch-ape').value.trim();
+  const email = document.getElementById('ch-email').value.trim();
+  const tel   = document.getElementById('ch-tel').value.trim();
+  const nota  = document.getElementById('ch-nota').value.trim();
+  const errEl = document.getElementById('ck-err');
+  const btn   = document.getElementById('btn-pay-mp');
+
+  errEl.textContent='';
+  if(!nom||!ape){ errEl.textContent='Ingresá tu nombre y apellido.'; return; }
+  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){ errEl.textContent='Ingresá un email válido.'; return; }
+
+  const precioNum = parseInt((prod.price||'').replace(/[^0-9]/g,''))||0;
+  if(precioNum<=0){ errEl.textContent='Este producto no tiene precio fijo. Consultá por WhatsApp.'; return; }
+
+  btn.classList.add('loading');
+  document.getElementById('btn-pay-label').textContent='Conectando con Mercado Pago…';
+
+  try{
+    const res = await fetch(BACKEND+'/gl/sena',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        producto: prod.name,
+        precioTotal: precioNum,
+        porcentajeSena: GL_PCT,
+        nombre: nom+' '+ape,
+        email,
+        telefono: tel||undefined,
+        nota: nota||undefined,
+        productoId: prod.id,
+      }),
+    });
+    const data = await res.json();
+    if(!res.ok||!data.init_point){
+      errEl.textContent = data.error||'Error al conectar con Mercado Pago. Intentá de nuevo.';
+      btn.classList.remove('loading');
+      document.getElementById('btn-pay-label').textContent='Pagar seña con Mercado Pago';
+      return;
+    }
+    // Guardar datos para confirmacion
+    sessionStorage.setItem('gl_pedido', JSON.stringify({
+      nombre: nom+' '+ape, producto: prod.name,
+      monto: data.monto_sena, pct: data.porcentaje,
+      precioTotal: precioNum, email, tel,
+    }));
+    window.location.href = data.init_point;
+  }catch(err){
+    errEl.textContent='Sin conexión. Revisá internet e intentá de nuevo.';
+    btn.classList.remove('loading');
+    document.getElementById('btn-pay-label').textContent='Pagar seña con Mercado Pago';
+  }
+}
+
+init();
+</script>
+</body>
+</html>
