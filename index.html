@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="google-site-verification" content="">
 <title>GL Cuchillos | Artesanales Forjados a Mano | Santiago del Estero</title>
-<meta name="description" content="Cuchillos forjados a mano 100% artesanal. Nakiri, parrilleros, facones, caza. Artesano Gonzalo Londero. Envíos a Argentina y exterior.">
+<meta name="description" content="Cuchillos trabajados a mano 100% artesanal. Nakiri, parrilleros, facones, caza. Artesano Gonzalo Londero. Envíos a Argentina y exterior.">
 <link rel="canonical" href="https://gl-cuchillos.artesanales.workers.dev/">
 
 <!-- ── SCHEMA STRUCTURED DATA (JSON-LD) ── -->
@@ -18,7 +18,7 @@
   "@type": "LocalBusiness",
   "name": "GL Cuchillos Artesanales",
   "image": "https://gl-cuchillos.artesanales.workers.dev/og-image.jpg",
-  "description": "Cuchillos forjados a mano 100% artesanal. Nakiri, parrilleros, facones, caza.",
+  "description": "Cuchillos trabajados a mano 100% artesanal. Nakiri, parrilleros, facones, caza.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Santiago del Estero",
@@ -34,7 +34,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gl-cuchillos.artesanales.workers.dev/">
 <meta property="og:title" content="GL Cuchillos Artesanales · Gonzalo Londero">
-<meta property="og:description" content="Cuchillos forjados a mano desde Santiago del Estero, Argentina. Nakiri, parrilleros, facones, caza. Envíos a todo el país y al exterior.">
+<meta property="og:description" content="Cuchillos trabajados a mano desde Quimilí, Santiago del Estero, Argentina. Nakiri, parrilleros, facones, caza. Envíos a todo el país y al exterior.">
 <meta property="og:image" content="https://gl-cuchillos.artesanales.workers.dev/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -45,7 +45,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GL Cuchillos Artesanales · Gonzalo Londero">
-<meta name="twitter:description" content="Cuchillos forjados a mano desde Santiago del Estero, Argentina.">
+<meta name="twitter:description" content="Cuchillos trabajados a mano desde Quimilí, Santiago del Estero, Argentina.">
 <meta name="twitter:image" content="https://gl-cuchillos.artesanales.workers.dev/og-image.jpg">
 
 <!-- ── WHATSAPP especifico ── -->
@@ -922,6 +922,11 @@ rgba(8,8,8,.55) 100%
 opacity:0;pointer-events:none;
 transition:opacity .4s;
 }
+
+/* ── CATEGORÍAS ── */
+.cat-card:hover{background:var(--jet4)!important;border-color:rgba(200,205,214,.45)!important;}
+.cat-card:hover h3{color:var(--silver);}
+#cat-grid{transition:none;}
 </style>
 
 </head>
@@ -1743,6 +1748,7 @@ skipBtn.addEventListener('click',function(){
     </div>
   </div>
   <ul class="nav-links">
+    <li><a href="#categorias">Categorías</a></li>
     <li><a href="#coleccion">Colección</a></li>
     <li><a href="#historia">Artesano</a></li>
     <li><a href="#materiales">Materiales</a></li>
@@ -1774,7 +1780,7 @@ skipBtn.addEventListener('click',function(){
   <div id="hero-img-overlay"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-label">Forjado a mano · Santiago del Estero, Argentina</div>
+      <div class="hero-label">Trabajado a mano · Quimilí, Santiago del Estero, Argentina</div>
       <h1 class="hero-h1">Cada filo<br>cuenta <em>una historia.</em></h1>
       <p class="hero-desc">Cuchillos artesanales forjados uno a uno por Gonzalo Londero. Acero de primera, maderas nobles, piezas que duran generaciones.</p>
       <div class="hero-actions">
@@ -1871,14 +1877,14 @@ skipBtn.addEventListener('click',function(){
   <!-- Ticker -->
   <div class="hero-ticker">
     <div class="ticker-track">
-      <span class="ticker-item">Forjado a mano<span class="ticker-sep"></span></span>
+      <span class="ticker-item">Trabajado a mano<span class="ticker-sep"></span></span>
       <span class="ticker-item">Acero de primera<span class="ticker-sep"></span></span>
       <span class="ticker-item">Maderas nobles<span class="ticker-sep"></span></span>
       <span class="ticker-item">Santiago del Estero · Argentina<span class="ticker-sep"></span></span>
       <span class="ticker-item">Envíos al exterior<span class="ticker-sep"></span></span>
       <span class="ticker-item">100% artesanal<span class="ticker-sep"></span></span>
       <span class="ticker-item">Personalizable<span class="ticker-sep"></span></span>
-      <span class="ticker-item">Forjado a mano<span class="ticker-sep"></span></span>
+      <span class="ticker-item">Trabajado a mano<span class="ticker-sep"></span></span>
       <span class="ticker-item">Acero de primera<span class="ticker-sep"></span></span>
       <span class="ticker-item">Maderas nobles<span class="ticker-sep"></span></span>
       <span class="ticker-item">Santiago del Estero · Argentina<span class="ticker-sep"></span></span>
@@ -1894,9 +1900,9 @@ skipBtn.addEventListener('click',function(){
 <section style="background:var(--jet);padding:clamp(5rem,10vh,7rem) clamp(1.5rem,5vw,5rem);border-top:1px solid var(--silver-line)">
   <div style="max-width:900px;margin:0 auto;text-align:center">
     <h2 style="font-family:var(--sans);font-weight:200;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.2;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.5rem">Cuchillos 100% Artesanales Forjados a Mano</h2>
-    <p style="font-size:1rem;font-weight:300;color:var(--cream2);line-height:1.9;max-width:740px;margin:0 auto 2rem">En GL Cuchillos Artesanales, cada pieza es forjada manualmente por Gonzalo Londero. <strong style="color:var(--cream)">Cuchillos de calidad premium</strong> — Nakiri, parrilleros, facones, cuchillos de caza — hechos con aceros seleccionados (1075, inoxidable 440C) y maderas nobles de la región. Desde Santiago del Estero, Argentina, llevamos la tradición de la cuchillería artesanal a todo el país y el exterior.</p>
+    <p style="font-size:1rem;font-weight:300;color:var(--cream2);line-height:1.9;max-width:740px;margin:0 auto 2rem">En GL Cuchillos Artesanales, cada pieza es forjada manualmente por Gonzalo Londero. <strong style="color:var(--cream)">Cuchillos de calidad premium</strong> — Nakiri, parrilleros, facones, cuchillos de caza — hechos con aceros seleccionados (1075, inoxidable 440C) y maderas nobles de la región. Desde Quimilí, Santiago del Estero, Argentina, llevamos la tradición de la cuchillería artesanal a todo el país y el exterior.</p>
     <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin-top:3rem;padding-top:2rem;border-top:1px solid var(--silver-line)">
-      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Proceso</strong>Forja manual 48h por pieza</div>
+      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Proceso</strong>Trabajo manual 48h por pieza</div>
       <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Alcance</strong>Exportación a 5+ países</div>
       <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Personalización</strong>Grabados y materiales a medida</div>
       <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Garantía</strong>Piezas duraderas para generaciones</div>
@@ -1956,7 +1962,7 @@ skipBtn.addEventListener('click',function(){
     <div class="sec-label rv">Historia · Artesano</div>
     <h2 class="sec-h2 rv d1">El artesano<br>detrás <em>del filo.</em></h2>
     <div class="about-body rv d2">
-      <p>Gonzalo Londero es un <strong>maestro cuchillero</strong> de Santiago del Estero, Argentina. Más de una década forjando piezas únicas a mano — lo que empezó como pasión se convirtió en un oficio de precisión y respeto profundo por el material.</p>
+      <p>Gonzalo Londero es un <strong>maestro cuchillero</strong> de Quimilí, Santiago del Estero, Argentina. Más de una década forjando piezas únicas a mano — lo que empezó como pasión se convirtió en un oficio de precisión y respeto profundo por el material.</p>
       <p>Cada cuchillo que sale de su taller lleva horas de trabajo silencioso: el golpe preciso del martillo sobre el acero al rojo vivo, el lijado paciente del mango, el afilado final que convierte el metal bruto en un instrumento verdadero.</p>
       <p>Las piezas de GL Cuchillos llegan a toda Argentina y al exterior. Algunas viajan a Alemania, otras recorren el país para quienes entienden que <strong>lo bueno no se fabrica en serie.</strong></p>
     </div>
@@ -1964,7 +1970,7 @@ skipBtn.addEventListener('click',function(){
       <div class="about-sig-av">G</div>
       <div>
         <div class="about-sig-name">Gonzalo Londero</div>
-        <div class="about-sig-role">Maestro cuchillero · Santiago del Estero, Argentina</div>
+        <div class="about-sig-role">Maestro cuchillero · Quimilí, Santiago del Estero, Argentina</div>
       </div>
     </div>
   </div>
@@ -1978,6 +1984,20 @@ skipBtn.addEventListener('click',function(){
 </div>
 
 <!-- ── PRODUCTS ── -->
+
+
+<!-- ── CATEGORÍAS ── -->
+<section id="categorias" style="padding:5rem 0;background:var(--jet);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);">
+    <div class="rv" style="margin-bottom:3rem;">
+      <div class="sec-label">Colección</div>
+      <h2 class="sec-h2" style="max-width:520px;">Por tipo de <em>pieza</em></h2>
+    </div>
+    <div id="cat-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--silver-line);">
+      <!-- Cards generadas por JS -->
+    </div>
+  </div>
+</section>
 
 <section class="products" id="coleccion">
   <div class="products-header">
@@ -2019,7 +2039,7 @@ skipBtn.addEventListener('click',function(){
       </div>
       <div class="step rv d1">
         <div class="step-n">02</div>
-        <h4 class="step-h">Forja a temperatura</h4>
+        <h4 class="step-h">Artesanía a temperatura</h4>
         <p class="step-p">El acero se lleva al rojo vivo y se golpea en el yunque. Es el momento más físico y crítico. Una temperatura incorrecta puede arruinar la pieza antes de empezar.</p>
       </div>
       <div class="step rv d2">
@@ -2109,7 +2129,7 @@ skipBtn.addEventListener('click',function(){
         <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
         <div class="testi-open">"</div>
         <p class="testi-quote">Trabajo en campo y necesitaba algo que aguante. El cuchillo de caza lleva dos años de uso intenso y sigue perfecto. Filo, balance y material de primera.</p>
-        <div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">Juan P.</div><div class="testi-loc">Santiago del Estero, Argentina</div></div></div>
+        <div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">Juan P.</div><div class="testi-loc">Quimilí, Santiago del Estero, Argentina</div></div></div>
       </div>
       <div class="testi rv d3">
         <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
@@ -2244,7 +2264,7 @@ skipBtn.addEventListener('click',function(){
       <div>
         <div class="foot-brand-monogram">GL</div>
         <div class="foot-brand-name">Cuchillos Artesanales</div>
-        <p class="foot-brand-desc">Forjados a mano por Gonzalo Londero desde Santiago del Estero, Argentina. Piezas únicas para quienes entienden que lo bueno no se fabrica en serie.</p>
+        <p class="foot-brand-desc">Trabajados a mano por Gonzalo Londero desde Quimilí, Santiago del Estero, Argentina. Piezas únicas para quienes entienden que lo bueno no se fabrica en serie.</p>
         <div class="foot-soc">
           <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="soc" aria-label="Instagram">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
@@ -2296,14 +2316,14 @@ skipBtn.addEventListener('click',function(){
           </div>
           <div>
             <strong>Ubicación</strong>
-            <p>Santiago del Estero, Argentina</p>
+            <p>Quimilí, Santiago del Estero, Argentina</p>
           </div>
         </address>
       </div>
     </div>
     <div class="foot-bottom">
       <span class="foot-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · Todos los derechos reservados</span>
-      <span class="foot-made">Forjado con fuego · Santiago del Estero, Argentina</span>
+      <span class="foot-made">Forjado con fuego · Quimilí, Santiago del Estero, Argentina</span>
     </div>
   </div>
 </footer>
@@ -2360,17 +2380,18 @@ setTimeout(checkVis,200);setTimeout(checkVis,700);
 window.addEventListener('scroll',checkVis,{passive:true});
 
 /* ── RENDER PRODUCTS ── */
-function renderProducts(products){
+function renderProducts(products, catFilter){
   const grid=document.getElementById('prod-grid');
   if(!grid)return;
-  const active=products.filter(p=>p.active!==false);
+  let active=products.filter(p=>p.active!==false);
+  if(catFilter&&catFilter!=='all') active=active.filter(p=>p.category===catFilter);
   if(!active.length){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--muted)">No hay productos disponibles en este momento.</div>';
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--muted)">No hay productos en esta categoría.</div>';
     return;
   }
   const badgeCls={avail:'badge-avail',custom:'badge-custom',intl:'badge-intl',unavail:'badge-unavail'};
   const badgeTxt={avail:'Disponible',custom:'A pedido',intl:'Internacional',unavail:'No disponible'};
-  const waN=document.getElementById('hero-wa')?.href?.match(/wa\.me\/(\d+)/)?.[1]||'5493843458340';
+  const waN='5493843458340';
   const knifeArts=[
     `<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 25 L205 145 Q214 162 204 174 L110 170Z" fill="currentColor" opacity=".8"/><rect x="102" y="165" width="16" height="8" rx="1" fill="currentColor"/><path d="M104 173 Q103 230 106 310 L116 310 Q119 230 118 173Z" fill="currentColor" opacity=".6"/><circle cx="110" cy="205" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="245" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="285" r="3" fill="currentColor" opacity=".9"/></svg>`,
     `<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 30 L210 160 Q218 178 208 190 L110 184Z" fill="currentColor" opacity=".7"/><path d="M107 182 Q106 236 108 298 L114 298 Q116 236 114 182Z" fill="currentColor" opacity=".5"/><rect x="103" y="178" width="14" height="8" rx="1" fill="currentColor"/><ellipse cx="110" cy="218" rx="4" ry="3" fill="currentColor" opacity=".85"/><ellipse cx="110" cy="258" rx="4" ry="3" fill="currentColor" opacity=".85"/></svg>`,
@@ -2385,12 +2406,20 @@ function renderProducts(products){
     const specs=(p.specs||[]).map(s=>`<span class="prod-spec">${s}</span>`).join('');
     const img=p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:(knifeArts[i%6]||knifeArts[0]);
     const link=`https://wa.me/${waN}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
-    return`<div class="prod-card rv" style="transition-delay:${(i%3)*.08}s" onclick="openProduct('${p.id}')" title="Ver detalles de ${p.name}">
+    const precioNum=parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
+    const stockLabel=p.stock>0?`${p.stock} disponible${p.stock===1?'':'s'}`:'Sin stock';
+    const stockColor=p.stock>0?'rgba(80,200,120,.9)':'rgba(200,80,80,.9)';
+    const igLink=`https://instagram.com/gonzalo.londero.3`;
+    return`<div class="prod-card rv" style="transition-delay:${(i%3)*.08}s" onclick="openProduct('${p.id}')" title="Ver ${p.name}">
       <div class="prod-img">
         <div class="prod-img-bg"></div>
         ${img}
         <div class="prod-badge ${bc}">${bt}</div>
         ${p.promo?`<div style="position:absolute;top:1rem;right:1rem;background:var(--silver);color:var(--jet);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem">${p.promo}</div>`:''}
+        <!-- Stock indicator -->
+        <div style="position:absolute;bottom:.8rem;left:.8rem;background:rgba(8,8,8,.85);border:1px solid ${stockColor};color:${stockColor};font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;backdrop-filter:blur(8px);">
+          ${stockLabel}
+        </div>
         <div class="prod-silver-line"></div>
       </div>
       <div class="prod-body">
@@ -2398,12 +2427,25 @@ function renderProducts(products){
         <h3 class="prod-name">${p.name}</h3>
         <p class="prod-desc">${p.description||''}</p>
         <div class="prod-specs">${specs}</div>
+        <!-- Sellos -->
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0;">
+          <span style="font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--silver3);border:1px solid var(--silver-line);padding:.2rem .55rem;">🇦🇷 Hecho en Argentina</span>
+          <span style="font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--silver3);border:1px solid var(--silver-line);padding:.2rem .55rem;">✈ Envíos al exterior</span>
+          <span style="font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--silver3);border:1px solid var(--silver-line);padding:.2rem .55rem;">🔨 Trabajado a mano</span>
+        </div>
         <div class="prod-footer">
-          <div class="prod-price">${p.price||'Consultar'}${p.priceNote?`<small>${p.priceNote}</small>`:''}</div>
-          <a href="${link}" class="prod-btn" target="_blank" onclick="event.stopPropagation()">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            Consultar
-          </a>
+          <div class="prod-price">${p.price||'Consultar precio'}${p.priceNote?`<small>${p.priceNote}</small>`:''}</div>
+          <div style="display:flex;gap:.4rem;" onclick="event.stopPropagation()">
+            ${precioNum>0?`<a href="checkout.html?id=${p.id}" class="prod-btn" style="background:var(--silver);color:var(--jet);" title="Pagar con Mercado Pago">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              Pagar</a>`:''}
+            <a href="${link}" class="prod-btn" target="_blank" title="Consultar por WhatsApp">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              WA</a>
+            <a href="${igLink}" class="prod-btn" target="_blank" title="Ver en Instagram" style="padding:.5rem .7rem;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>`;
@@ -2459,14 +2501,16 @@ function renderHeroImage(heroImage){
     {id:'3',name:'Nakiri Chef',category:'Cocina Profesional',description:'Hoja rectangular doble filo estilo japonés. Corte limpio para vegetales. Madera maciza artesanal.',specs:['Inox. alto carbono','Madera maciza','17 cm'],badge:'custom',badgeText:'A pedido',price:'Consultar',priceNote:'Encargo · 4–6 semanas',active:true},
     {id:'4',name:'Facón Gaucho',category:'Gaucho & Tradición',description:'Pieza tradicional argentina. Mango en madera o asta natural. Vaina de cuero artesanal. Para colección o uso rural.',specs:['Acero 1075','Madera / Asta','26 cm'],badge:'intl',badgeText:'Internacional',price:'Consultar',priceNote:'Con vaina cuero',active:true},
     {id:'5',name:'Santoku Artesanal',category:'Cocina Premium',description:'Cuchillo multiuso de corte preciso. Mango en lapacho, equilibrio perfecto. Para el cocinero que no acepta menos.',specs:['Acero 440C','Lapacho','18 cm'],badge:'avail',badgeText:'Disponible',price:'Consultar',priceNote:'Entrega inmediata',active:true},
-    {id:'6',name:'Set de Mesa',category:'Mesa & Regalo',description:'6 cuchillos de mesa forjados a mano. Mango unificado, presentación en caja de madera. El regalo que no se olvida.',specs:['Acero inox.','Caja madera','Set completo'],badge:'custom',badgeText:'A pedido',price:'Consultar',priceNote:'Encargo · 3–5 semanas',active:true}
+    {id:'6',name:'Set de Mesa',category:'Mesa & Regalo',description:'6 cuchillos de mesa trabajados a mano. Mango unificado, presentación en caja de madera. El regalo que no se olvida.',specs:['Acero inox.','Caja madera','Set completo'],badge:'custom',badgeText:'A pedido',price:'Consultar',priceNote:'Encargo · 3–5 semanas',active:true}
   ];
   try{
     const res=await fetch('products.json?t='+Date.now());
     if(!res.ok){renderProducts(fallback);return}
     const data=await res.json();
     const prods=data.products||[];
-    renderProducts(prods.length?prods:fallback);
+    window._allProducts = prods.length?prods:fallback;
+    renderCategories(window._allProducts);
+    renderProducts(window._allProducts, catActual);
     const s=data.settings||{};
     if(s.heroImage)renderHeroImage(s.heroImage);
     if(s.artisanPhoto)renderArtisanPhoto(s.artisanPhoto);
@@ -2499,7 +2543,7 @@ function renderHeroImage(heroImage){
     }
   }catch(e){
     console.warn('products.json no disponible');
-    renderProducts(fallback);
+    window._allProducts=fallback; renderCategories(fallback); renderProducts(fallback,catActual);
   }
 })();
 
@@ -2526,3 +2570,50 @@ function renderHeroImage(heroImage){
 </script>
 </body>
 </html>
+/* ── CATEGORÍAS ── */
+const CAT_DEFS = [
+  { id:'all',       label:'Todos',            icon:'⚔', desc:'Ver toda la colección' },
+  { id:'Parrilla & Asado', label:'Parrilla & Asado', icon:'🔥', desc:'Sets para asadores exigentes' },
+  { id:'Caza & Campo',     label:'Caza & Campo',     icon:'🌿', desc:'Robustez para el trabajo real' },
+  { id:'Cocina Profesional',label:'Cocina',          icon:'👨‍🍳', desc:'Precisión para la cocina' },
+  { id:'Tradición Gaucha', label:'Tradición Gaucha', icon:'🐄', desc:'El facon y la identidad criolla' },
+  { id:'Diseño Exclusivo',  label:'Diseño Exclusivo', icon:'✨', desc:'Piezas únicas de colección' },
+  { id:'Cocina & Regalo',   label:'Regalo',           icon:'🎁', desc:'Ideales para regalar' },
+];
+
+let catActual = 'all';
+
+function renderCategories(products){
+  const grid = document.getElementById('cat-grid');
+  if(!grid) return;
+  // Count per category
+  const counts = {};
+  products.filter(p=>p.active!==false).forEach(p=>{
+    counts[p.category] = (counts[p.category]||0)+1;
+  });
+  const cats = CAT_DEFS.filter(cat => cat.id==='all' || counts[cat.id]>0);
+  grid.innerHTML = cats.map(cat => {
+    const n = cat.id==='all' ? products.filter(p=>p.active!==false).length : (counts[cat.id]||0);
+    const active = catActual===cat.id ? 'style="background:var(--jet3);border-color:var(--silver);"' : '';
+    return `<div class="cat-card rv" ${active} onclick="filterCat('${cat.id}')" style="background:var(--jet2);border:1px solid var(--silver-line);padding:2.5rem 2rem;cursor:pointer;transition:background .25s,border-color .25s;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="font-size:2.5rem;margin-bottom:1rem;">${cat.icon}</div>
+        <div style="font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--silver3);margin-bottom:.5rem;">${cat.desc}</div>
+        <h3 style="font-family:var(--serif);font-size:1.6rem;font-weight:400;font-style:italic;color:var(--cream);line-height:1.1;">${cat.label}</h3>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--silver-line);">
+        <span style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);">${n} pieza${n!==1?'s':''}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--silver3)" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+  // Scroll to coleccion if category clicked
+}
+
+function filterCat(cat){
+  catActual = cat;
+  renderCategories(window._allProducts||[]);
+  renderProducts(window._allProducts||[], cat);
+  document.getElementById('coleccion').scrollIntoView({behavior:'smooth'});
+}
