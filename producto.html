@@ -184,6 +184,19 @@ nav{
 }
 .prod-price-note{font-size:10px;font-weight:400;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .prod-actions{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
+
+.btn-sena{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:.9rem 1.5rem;
+  background:var(--cream);color:var(--jet);
+  border:none;border-radius:2px;
+  font-family:var(--sans);font-size:8px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,transform .15s;
+  margin-bottom:.6rem;
+}
+.btn-sena:hover{background:var(--silver2);transform:translateY(-1px);}
+.btn-sena svg{width:13px;height:13px;}
 .btn-wa{
   display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
   padding:1rem 2rem;background:var(--silver);color:var(--jet);
@@ -293,6 +306,101 @@ footer{
   .rel-card{border-right:none;border-bottom:1px solid var(--silver-line)}
   .rel-card:last-child{border-bottom:none}
 }
+
+/* ── MODAL SEÑA ─────────────────────────────────────────── */
+.sena-backdrop{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(8,8,8,.88);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.sena-backdrop.open{opacity:1;pointer-events:all;}
+.sena-modal{
+  background:var(--jet3);
+  border:1px solid var(--silver-line);
+  border-radius:2px;
+  padding:2.5rem 2rem;
+  width:100%;max-width:440px;
+  position:relative;
+  transform:translateY(24px);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.sena-backdrop.open .sena-modal{transform:translateY(0);}
+.sena-close{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;color:var(--silver3);
+  font-size:18px;line-height:1;cursor:pointer;
+  padding:.25rem;transition:color .2s;
+}
+.sena-close:hover{color:var(--cream);}
+.sena-eyebrow{
+  font-size:8px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--silver3);margin-bottom:.75rem;
+}
+.sena-title{
+  font-family:var(--serif);font-size:1.6rem;font-weight:400;
+  font-style:italic;color:var(--cream);margin-bottom:.35rem;line-height:1.1;
+}
+.sena-prod{font-size:11px;letter-spacing:.12em;color:var(--silver3);margin-bottom:1.5rem;}
+.sena-monto-box{
+  background:var(--jet4);border:1px solid var(--silver-line);
+  border-radius:2px;padding:1rem 1.2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;
+}
+.sena-monto-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--silver3);}
+.sena-monto-val{font-family:var(--serif);font-size:1.8rem;color:var(--cream);font-weight:500;}
+.sena-monto-pct{font-size:9px;color:var(--silver3);margin-top:2px;letter-spacing:.08em;}
+.sena-form-row{margin-bottom:1rem;}
+.sena-label{
+  display:block;font-size:8px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--silver3);margin-bottom:.4rem;
+}
+.sena-input{
+  width:100%;background:var(--jet4);
+  border:1px solid var(--silver-line);
+  border-radius:2px;padding:.75rem .9rem;
+  font-family:var(--sans);font-size:13px;letter-spacing:.04em;
+  color:var(--cream);outline:none;
+  transition:border-color .2s;
+  -webkit-appearance:none;
+}
+.sena-input:focus{border-color:rgba(200,205,214,.5);}
+.sena-input::placeholder{color:var(--muted);}
+.sena-divider{
+  height:1px;background:var(--silver-line);
+  margin:1.2rem 0;
+}
+.sena-disclaimer{
+  font-size:10px;color:var(--muted);line-height:1.6;
+  letter-spacing:.02em;margin-bottom:1.5rem;
+}
+.sena-disclaimer strong{color:var(--silver3);}
+.btn-sena-pay{
+  width:100%;padding:1rem;
+  background:var(--cream);color:var(--jet);
+  border:none;border-radius:2px;
+  font-family:var(--sans);font-size:9px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.btn-sena-pay:hover{background:var(--silver2);transform:translateY(-1px);}
+.btn-sena-pay:active{transform:translateY(0);}
+.btn-sena-pay svg{width:16px;height:16px;flex-shrink:0;}
+.btn-sena-pay.loading{opacity:.7;pointer-events:none;}
+.sena-error{
+  font-size:11px;color:#e87070;margin-top:.6rem;
+  min-height:16px;letter-spacing:.02em;
+}
+@media(max-width:480px){
+  .sena-modal{padding:2rem 1.4rem;}
+  .sena-title{font-size:1.35rem;}
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
@@ -335,6 +443,56 @@ footer{
   </a>
 </footer>
 
+
+<!-- MODAL SEÑA -->
+<div class="sena-backdrop" id="sena-backdrop" onclick="closeSenaModal(event)">
+  <div class="sena-modal" id="sena-modal">
+    <button class="sena-close" onclick="closeSenaModal()" aria-label="Cerrar">&#215;</button>
+    <div class="sena-eyebrow">Dejar seña · Mercado Pago</div>
+    <div class="sena-title">Reservá tu pieza</div>
+    <div class="sena-prod" id="sena-prod-nombre">—</div>
+
+    <div class="sena-monto-box">
+      <div>
+        <div class="sena-monto-label">Seña a abonar</div>
+        <div class="sena-monto-val" id="sena-monto-display">$—</div>
+        <div class="sena-monto-pct" id="sena-monto-desc">50% del total</div>
+      </div>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,205,214,.35)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+    </div>
+
+    <div class="sena-form-row">
+      <label class="sena-label" for="sena-nombre">Nombre completo *</label>
+      <input class="sena-input" type="text" id="sena-nombre" placeholder="Gonzalo Londero" autocomplete="name"/>
+    </div>
+    <div class="sena-form-row">
+      <label class="sena-label" for="sena-email">Email *</label>
+      <input class="sena-input" type="email" id="sena-email" placeholder="correo@ejemplo.com" autocomplete="email"/>
+    </div>
+    <div class="sena-form-row">
+      <label class="sena-label" for="sena-tel">Teléfono / WhatsApp</label>
+      <input class="sena-input" type="tel" id="sena-tel" placeholder="+54 9 381 000-0000" autocomplete="tel"/>
+    </div>
+    <div class="sena-form-row">
+      <label class="sena-label" for="sena-nota">Nota para el encargo</label>
+      <input class="sena-input" type="text" id="sena-nota" placeholder="Madera preferida, grabado, largo especial…"/>
+    </div>
+
+    <div class="sena-divider"></div>
+
+    <p class="sena-disclaimer">
+      Al abonar la seña confirmás el inicio del encargo artesanal.<br>
+      <strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega.
+    </p>
+
+    <button class="btn-sena-pay" id="btn-sena-pay" onclick="pagarSena()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Pagar seña con Mercado Pago
+    </button>
+    <div class="sena-error" id="sena-error"></div>
+  </div>
+</div>
+
 <script>
 /* ── CURSOR ── */
 (function(){
@@ -348,6 +506,13 @@ footer{
   function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)}
   loop();
 })();
+
+
+/* ── GL CUCHILLOS CONFIG ── */
+const GL_BACKEND     = 'https://estiloartesanal-emma.onrender.com';
+const GL_SENA_PCT    = 50;  // % de seña — Gonzalo puede cambiar este número
+let   currentProduct = null;
+let   senaMontoTotal = 0;
 
 /* ── MAIN ── */
 const knifeArt = `<svg viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`;
@@ -415,6 +580,12 @@ function selectMedia(idx) {
 }
 
 function renderProduct(p, settings) {
+  currentProduct = p;
+  // Extraer precio numérico (ej: "$45.000" → 45000)
+  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,'')) || 0;
+  const pct       = GL_SENA_PCT;
+  const montoSena = Math.round(precioNum * pct / 100);
+  senaMontoTotal  = precioNum;
   const waN = (settings?.whatsapp||waNumber).replace(/\D/g,'') || '5493843458340';
   const media = p.media && p.media.length
     ? p.media
@@ -461,7 +632,12 @@ function renderProduct(p, settings) {
         </div>
 
         <div class="prod-actions">
-          <a href="${link}" target="_blank" class="btn-wa">
+          ${precioNum > 0 ? `
+          <button class="btn-sena" onclick="openSenaModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Dejar seña — ${pct}% · $\${montoSena.toLocaleString('es-AR')}
+          </button>` : ''}
+          <a href="${link}" target="_blank" class="btn-wa${precioNum > 0 ? '-outline' : ''}">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
             Consultar por WhatsApp
           </a>
@@ -521,23 +697,145 @@ function showNotFound() {
     </div>`;
 }
 
+
+/* ── MODAL SEÑA ─────────────────────────────────────────── */
+function openSenaModal() {
+  const p   = currentProduct;
+  const pct = GL_SENA_PCT;
+  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
+  const monto     = Math.round(precioNum * pct / 100);
+
+  document.getElementById('sena-prod-nombre').textContent = p?.name || '';
+  document.getElementById('sena-monto-display').textContent =
+    '$' + monto.toLocaleString('es-AR');
+  document.getElementById('sena-monto-desc').textContent =
+    pct + '% del total — $' + precioNum.toLocaleString('es-AR');
+  document.getElementById('sena-error').textContent = '';
+  document.getElementById('sena-nombre').value = '';
+  document.getElementById('sena-email').value  = '';
+  document.getElementById('sena-tel').value    = '';
+  document.getElementById('sena-nota').value   = '';
+
+  document.getElementById('sena-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('sena-nombre').focus(), 350);
+}
+
+function closeSenaModal(e) {
+  if (e && e.target !== document.getElementById('sena-backdrop') && e.type === 'click') return;
+  document.getElementById('sena-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSenaModal();
+});
+
+async function pagarSena() {
+  const nombre = document.getElementById('sena-nombre').value.trim();
+  const email  = document.getElementById('sena-email').value.trim();
+  const tel    = document.getElementById('sena-tel').value.trim();
+  const nota   = document.getElementById('sena-nota').value.trim();
+  const errEl  = document.getElementById('sena-error');
+  const btn    = document.getElementById('btn-sena-pay');
+
+  errEl.textContent = '';
+
+  if (!nombre) { errEl.textContent = 'Ingresá tu nombre completo.'; return; }
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+    errEl.textContent = 'Ingresá un email válido.'; return;
+  }
+
+  const p         = currentProduct;
+  const pct       = GL_SENA_PCT;
+  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
+
+  if (precioNum <= 0) {
+    errEl.textContent = 'Este producto no tiene precio fijo. Consultá por WhatsApp.';
+    return;
+  }
+
+  btn.classList.add('loading');
+  btn.textContent = 'Conectando con Mercado Pago…';
+
+  try {
+    const res = await fetch(GL_BACKEND + '/gl/sena', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        producto:        p.name,
+        precioTotal:     precioNum,
+        porcentajeSena:  pct,
+        nombre,
+        email,
+        telefono:        tel || undefined,
+        nota:            nota || undefined,
+        productoId:      p.id,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || !data.init_point) {
+      errEl.textContent = data.error || 'Error al conectar con Mercado Pago. Intentá de nuevo.';
+      btn.classList.remove('loading');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
+      return;
+    }
+
+    // Guardar datos en sessionStorage para la pantalla de confirmación
+    sessionStorage.setItem('gl_sena', JSON.stringify({
+      nombre, producto: p.name,
+      monto: data.monto_sena, pct: data.porcentaje,
+      precioTotal: precioNum,
+    }));
+
+    // Redirigir a MP
+    window.location.href = data.init_point;
+
+  } catch(err) {
+    errEl.textContent = 'Sin conexión. Revisá tu internet e intentá de nuevo.';
+    btn.classList.remove('loading');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
+  }
+}
+
 (async function(){
   const params = getParams();
   const id = params.get('id');
   if (!id) { showNotFound(); return; }
 
   let data = null;
+  // 1. Intentar IndexedDB (admin en mismo dominio)
   try {
-    // Try localStorage first (same-origin admin data)
-    const cached = localStorage.getItem('gl_data');
-    if (cached) data = JSON.parse(cached);
-  } catch(e){}
+    const idb = await new Promise((res, rej) => {
+      const req = indexedDB.open('gl_cuchillos', 1);
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+    const val = await new Promise((res, rej) => {
+      const tx  = idb.transaction('admin_data', 'readonly');
+      const req = tx.objectStore('admin_data').get('data');
+      req.onsuccess = e => res(e.target.result?.value ?? null);
+      req.onerror   = e => rej(e);
+    });
+    if (val) data = val;
+  } catch(e) {}
 
+  // 2. Fallback localStorage
+  if (!data) {
+    try {
+      const cached = localStorage.getItem('gl_data');
+      if (cached) data = JSON.parse(cached);
+    } catch(e) {}
+  }
+
+  // 3. Fallback products.json publicado
   if (!data) {
     try {
       const r = await fetch('products.json?t='+Date.now());
       if (r.ok) data = await r.json();
-    } catch(e){}
+    } catch(e) {}
   }
 
   const products = data?.products || [];
