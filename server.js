@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // ── Mercado Pago ──────────────────────────────────────────────
 const client = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN || "",
+  accessToken: process.env.MP_ACCESS_TOKEN || "APP_USR-809049792090054-032008-b8baa74fac91eff924b15ef2a950907e-8051139",
 });
 
 // ── Middlewares ───────────────────────────────────────────────
