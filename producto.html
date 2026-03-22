@@ -1,457 +1,325 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GL Cuchillos Artesanales · Detalle</title>
-<meta name="description" content="Cuchillos trabajado a mano por Gonzalo Londero. 100% artesanal desde Quimili, Santiago del Estero, Argentina.">
+<title>GL Cuchillos · Colección</title>
+<meta name="description" content="Cuchillos artesanales forjados a mano por Gonzalo Londero. Nakiri, parrilleros, facones, caza. Desde Quimilí, Santiago del Estero, Argentina.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:'Josefin Sans',sans-serif;
-  background:#080808;color:#E8E0D0;
-  overflow-x:hidden;cursor:none;
-}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden;cursor:none;}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:none}
 
 /* ── CURSOR ── */
-#cur{position:fixed;z-index:9999;pointer-events:none;
-  width:5px;height:5px;background:#C8CDD6;border-radius:50%;
-  transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
-#cur-ring{position:fixed;z-index:9998;pointer-events:none;
-  width:28px;height:28px;border:1px solid rgba(200,205,214,.3);border-radius:50%;
-  transform:translate(-50%,-50%);
-  transition:width .35s cubic-bezier(.22,1,.36,1),height .35s cubic-bezier(.22,1,.36,1),border-color .3s}
+#cur{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;background:#C8CDD6;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur-ring{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(200,205,214,.3);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s,border-color .3s}
 body.hov #cur{width:3px;height:3px}
 body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
 
-/* ── CSS VARS ── */
+/* ── VARS ── */
 :root{
-  --jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;--jet5:#222222;
-  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
-  --silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.16);
-  --cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
-  --serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
-  --ease:cubic-bezier(.22,1,.36,1);--ease2:cubic-bezier(.16,1,.3,1);
+–jet:#080808;–jet2:#0E0E0E;–jet3:#141414;–jet4:#1A1A1A;
+–silver:#C8CDD6;–silver2:#DDE1E8;–silver3:#8E96A2;
+–silver-line:rgba(200,205,214,.16);
+–cream:#E8E0D0;–cream2:#C8BCA8;–muted:#787060;
+–serif:‘Playfair Display’,serif;–sans:‘Josefin Sans’,sans-serif;
+–ease:cubic-bezier(.22,1,.36,1);
 }
 
-@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes ld{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
 
 /* ── NAV ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:800;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(1.5rem,4vw,4rem);height:72px;
-  background:rgba(8,8,8,.97);border-bottom:1px solid var(--silver-line);
-  backdrop-filter:blur(20px);
+position:fixed;top:0;left:0;right:0;z-index:800;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 clamp(1.5rem,4vw,4rem);height:72px;
+background:rgba(8,8,8,.97);border-bottom:1px solid var(–silver-line);
+backdrop-filter:blur(20px);
 }
-.nav-brand{display:flex;align-items:center;gap:16px}
-.nav-monogram{font-family:var(--serif);font-style:italic;font-weight:500;font-size:30px;color:var(--silver);letter-spacing:-.01em}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo-svg{width:44px;height:44px;flex-shrink:0}
 .nav-brand-text{display:flex;flex-direction:column}
-.nav-brand-name{font-family:var(--serif);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);line-height:1.1}
-.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);margin-top:2px}
-.nav-back{
-  display:flex;align-items:center;gap:.6rem;
-  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(200,205,214,.6);transition:color .2s;
-}
-.nav-back:hover{color:var(--cream)}
+.nav-brand-name{font-family:var(–serif);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–cream);line-height:1.1}
+.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-top:2px}
+.nav-back{display:flex;align-items:center;gap:.6rem;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.6);transition:color .2s}
+.nav-back:hover{color:var(–cream)}
 .nav-back svg{transition:transform .2s}
 .nav-back:hover svg{transform:translateX(-3px)}
 
-/* ── PAGE LAYOUT ── */
-.page{
-  max-width:1280px;margin:0 auto;
-  padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem);
-}
+/* ── VIEWS ── */
+#view-list{display:block}
+#view-detail{display:none}
 
-/* ── BREADCRUMB ── */
-.breadcrumb{
-  display:flex;align-items:center;gap:.6rem;
-  font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:2.5rem;
-  animation:rise .6s var(--ease) forwards;
-}
-.breadcrumb a{color:var(--muted);transition:color .2s}
-.breadcrumb a:hover{color:var(--silver)}
-.breadcrumb span{color:var(--silver)}
+/* ── PAGE ── */
+.page{max-width:1400px;margin:0 auto;padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem)}
 
-/* ── PRODUCT LAYOUT ── */
-.prod-layout{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(3rem,6vw,7rem);align-items:start;
-  margin-bottom:clamp(4rem,8vh,7rem);
-}
+/* ── LIST VIEW ── */
+.list-header{margin-bottom:3rem;animation:rise .6s var(–ease) forwards}
+.list-cat-label{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.list-cat-label::before{content:’’;width:22px;height:1px;background:var(–silver)}
+.list-title{font-family:var(–sans);font-weight:200;font-size:clamp(2rem,4vw,3.5rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
+.list-title em{font-style:normal;font-weight:100;color:var(–silver)}
+.list-count{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted)}
 
-/* ── GALLERY ── */
-.gallery{position:sticky;top:90px}
-.gallery-main{
-  position:relative;
-  aspect-ratio:1/1.1;
-  background:var(--jet3);
-  border:1px solid var(--silver-line);
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:1rem;
-  animation:fade .8s var(--ease) forwards;
-}
-.gallery-main img{
-  width:85%;height:85%;object-fit:contain;
-  transition:transform .6s var(--ease);
-}
-.gallery-main img:hover{transform:scale(1.04)}
-.gallery-main video{width:100%;height:100%;object-fit:cover}
-.gallery-main .prod-badge-main{
-  position:absolute;top:1.2rem;left:1.2rem;
-  font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:.3rem .7rem;z-index:2;
-}
-.badge-avail{background:var(--silver);color:var(--jet)}
-.badge-custom{background:transparent;color:var(--silver);border:1px solid rgba(200,205,214,.4)}
-.badge-intl{background:var(--jet4);color:var(--cream2);border:1px solid var(--silver-line)}
-.badge-unavail{background:transparent;color:var(--muted);border:1px solid rgba(120,112,96,.3)}
-.gallery-promo{
-  position:absolute;top:1.2rem;right:1.2rem;
-  background:var(--silver);color:var(--jet);
-  font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:.3rem .7rem;z-index:2;
-}
-.gallery-art{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-}
-.gallery-art svg{width:50%;opacity:.15;color:var(--cream)}
+/* Category filter tabs */
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.cat-tab{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(–silver-line);color:var(–muted);background:transparent;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.cat-tab:hover{border-color:rgba(200,205,214,.4);color:var(–cream2)}
+.cat-tab.active{border-color:var(–silver);color:var(–jet);background:var(–silver)}
 
-/* Thumbnail strip */
-.gallery-thumbs{
-  display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.3rem;
-  scrollbar-width:none;
+/* Products grid */
+.prod-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-top:1px solid var(–silver-line);
+border-left:1px solid var(–silver-line);
 }
-.gallery-thumbs::-webkit-scrollbar{display:none}
-.gallery-thumb{
-  flex-shrink:0;width:64px;height:64px;
-  border:1.5px solid var(--silver-line);
-  overflow:hidden;background:var(--jet3);
-  cursor:pointer;transition:border-color .2s;
-  display:flex;align-items:center;justify-content:center;
+.prod-card{
+border-right:1px solid var(–silver-line);
+border-bottom:1px solid var(–silver-line);
+background:var(–jet);cursor:pointer;
+transition:background .3s;overflow:hidden;position:relative;
 }
-.gallery-thumb.active{border-color:var(--silver)}
-.gallery-thumb:hover{border-color:rgba(200,205,214,.5)}
-.gallery-thumb img{width:100%;height:100%;object-fit:cover}
-.gallery-thumb .thumb-vid{
-  width:100%;height:100%;background:var(--jet4);
-  display:flex;align-items:center;justify-content:center;
+.prod-card:hover{background:var(–jet3)}
+.prod-card-img{
+aspect-ratio:1/1.05;background:var(–jet2);
+display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
 }
-.gallery-thumb .thumb-vid i{color:var(--silver);font-size:18px;opacity:.7}
+.prod-card-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
+.prod-card:hover .prod-card-img img{transform:scale(1.04)}
+.prod-card-img svg{width:45%;opacity:.15;color:var(–cream)}
+.prod-card-badge{position:absolute;top:1rem;left:1rem;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;z-index:2}
+.badge-avail{background:var(–silver);color:var(–jet)}
+.badge-custom{background:transparent;color:var(–silver);border:1px solid rgba(200,205,214,.4)}
+.badge-intl{background:var(–jet4);color:var(–cream2);border:1px solid var(–silver-line)}
+.badge-unavail{background:transparent;color:var(–muted);border:1px solid rgba(120,112,96,.3)}
+.prod-card-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–silver);transform:scaleX(0);transform-origin:left;transition:.5s var(–ease)}
+.prod-card:hover .prod-card-silver-line{transform:scaleX(1)}
+.prod-card-body{padding:1.6rem 1.8rem 2rem}
+.prod-card-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.5rem}
+.prod-card-name{font-family:var(–sans);font-size:.92rem;font-weight:300;color:var(–cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.7rem;line-height:1.2}
+.prod-card-desc{font-size:.82rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.7;margin-bottom:1.2rem}
+.prod-card-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.4rem}
+.prod-card-spec{font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid var(–silver-line);color:var(–muted)}
+.prod-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(–silver-line)}
+.prod-card-price{font-family:var(–serif);font-size:1rem;font-style:italic;color:var(–silver)}
+.prod-card-price small{display:block;font-family:var(–sans);font-style:normal;font-size:.6rem;font-weight:400;letter-spacing:.1em;color:var(–muted);margin-top:.1rem}
+.prod-card-actions{display:flex;gap:.4rem}
+.prod-card-btn{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.45rem 1rem;background:transparent;color:var(–cream2);border:1px solid rgba(200,205,214,.3);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
+.prod-card-btn:hover{background:var(–silver);color:var(–jet);border-color:var(–silver)}
+.prod-card-btn.primary{background:var(–silver);color:var(–jet);border-color:var(–silver)}
+.prod-card-btn.primary:hover{background:var(–silver2)}
 
-/* ── PRODUCT INFO ── */
-.prod-info{animation:rise .7s .15s var(--ease) both}
-.prod-info-cat{
-  font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;
-}
-.prod-info-cat::before{content:'';width:22px;height:1px;background:var(--silver)}
-.prod-info-name{
-  font-family:var(--sans);font-weight:200;
-  font-size:clamp(1.8rem,4vw,3.2rem);
-  color:var(--cream);line-height:1.1;letter-spacing:.14em;
-  text-transform:uppercase;margin-bottom:1.4rem;
-}
-.prod-info-desc{
-  font-size:.95rem;font-weight:300;letter-spacing:.02em;
-  color:var(--cream2);line-height:1.9;margin-bottom:2rem;
-  border-left:1px solid var(--silver-line);padding-left:1.4rem;
-}
-.prod-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
-.prod-spec{
-  font-size:8px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  padding:.3rem .7rem;border:1px solid var(--silver-line);color:var(--muted);
-}
-.prod-price-block{
-  padding:1.8rem 0;border-top:1px solid var(--silver-line);border-bottom:1px solid var(--silver-line);
-  margin-bottom:2rem;
-}
-.prod-price-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
-.prod-price-val{
-  font-family:var(--serif);font-style:italic;font-size:2rem;
-  color:var(--silver);font-weight:400;margin-bottom:.3rem;
-}
-.prod-price-note{font-size:10px;font-weight:400;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-.prod-actions{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
-
-.btn-sena{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  width:100%;padding:.9rem 1.5rem;
-  background:var(--cream);color:var(--jet);
-  border:none;border-radius:2px;
-  font-family:var(--sans);font-size:8px;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;
-  cursor:pointer;transition:background .2s,transform .15s;
-  margin-bottom:.6rem;
-}
-.btn-sena:hover{background:var(--silver2);transform:translateY(-1px);}
-.btn-sena svg{width:13px;height:13px;}
-.btn-wa{
-  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:1rem 2rem;background:var(--silver);color:var(--jet);
-  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  transition:background .2s,transform .15s;width:100%;
-}
-.btn-wa:hover{background:var(--silver2);transform:translateY(-2px)}
-.btn-wa-outline{
-  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:1rem 2rem;background:transparent;color:rgba(232,224,208,.6);
-  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  border:1px solid rgba(200,205,214,.25);width:100%;
-  transition:border-color .2s,color .2s;
-}
-.btn-wa-outline:hover{border-color:var(--silver);color:var(--cream)}
-.prod-meta{display:flex;flex-direction:column;gap:.6rem}
-.prod-meta-item{
-  display:flex;align-items:center;gap:.8rem;
-  font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-}
-.prod-meta-item i{color:var(--silver);font-size:11px;width:14px}
-
-/* ── RELATED ── */
-.related-section{
-  border-top:1px solid var(--silver-line);
-  padding-top:clamp(3rem,6vh,5rem);
-}
-.sec-label{
-  font-size:9px;font-weight:600;letter-spacing:.20em;text-transform:uppercase;
-  color:var(--silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;
-}
-.sec-label::before{content:'';width:22px;height:1px;background:var(--silver)}
-.sec-h2{
-  font-family:var(--sans);font-weight:200;
-  font-size:clamp(1.5rem,3vw,2.6rem);
-  color:var(--cream);line-height:1.1;letter-spacing:.14em;
-  text-transform:uppercase;margin-bottom:2.5rem;
-}
-.sec-h2 em{font-style:normal;font-weight:100;color:var(--silver);letter-spacing:.2em}
-.related-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--silver-line);
-}
-.rel-card{
-  border-right:1px solid var(--silver-line);
-  background:var(--jet);padding:0;
-  overflow:hidden;cursor:pointer;
-  transition:background .3s;
-  display:flex;flex-direction:column;
-}
-.rel-card:last-child{border-right:none}
-.rel-card:hover{background:var(--jet3)}
-.rel-img{
-  aspect-ratio:1;background:var(--jet2);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;position:relative;
-}
-.rel-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(--ease)}
-.rel-card:hover .rel-img img{transform:scale(1.04)}
-.rel-img svg{width:45%;opacity:.15;color:var(--cream)}
-.rel-body{padding:1.4rem 1.6rem;flex:1;display:flex;flex-direction:column}
-.rel-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:.4rem}
-.rel-name{font-family:var(--sans);font-size:.82rem;font-weight:300;color:var(--cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:auto}
-.rel-price{font-family:var(--serif);font-style:italic;font-size:1rem;color:rgba(200,205,214,.7);margin-top:.8rem}
-
-/* ── NOT FOUND ── */
-.not-found{
-  min-height:70vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;gap:1.5rem;
-}
-.not-found-icon{font-size:3.5rem;opacity:.15}
-.not-found h2{font-family:var(--sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream)}
-.not-found p{font-size:.9rem;font-weight:300;color:var(--muted);letter-spacing:.08em}
+/* Empty state */
+.empty-state{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(–muted);font-size:.9rem;font-weight:300;letter-spacing:.08em}
 
 /* ── LOADING ── */
-.loading{min-height:70vh;display:flex;align-items:center;justify-content:center}
-.loading-dot{
-  width:6px;height:6px;border-radius:50%;background:var(--silver);
-  display:inline-block;margin:0 4px;animation:ld .8s ease-in-out infinite;
-}
+.loading{min-height:60vh;display:flex;align-items:center;justify-content:center;gap:6px}
+.loading-dot{width:6px;height:6px;border-radius:50%;background:var(–silver);animation:ld .8s ease-in-out infinite}
 .loading-dot:nth-child(2){animation-delay:.12s}
 .loading-dot:nth-child(3){animation-delay:.24s}
-@keyframes ld{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+/* ── DETAIL VIEW ── */
+.detail-page{max-width:1280px;margin:0 auto;padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem)}
+.breadcrumb{display:flex;align-items:center;gap:.6rem;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted);margin-bottom:2.5rem;animation:rise .6s var(–ease) forwards}
+.breadcrumb a{color:var(–muted);transition:color .2s;cursor:pointer}
+.breadcrumb a:hover{color:var(–silver)}
+.breadcrumb span{color:var(–silver)}
+.prod-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,7rem);align-items:start;margin-bottom:clamp(4rem,8vh,7rem)}
+.gallery{position:sticky;top:90px}
+.gallery-main{position:relative;aspect-ratio:1/1.1;background:var(–jet3);border:1px solid var(–silver-line);overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;animation:fade .8s var(–ease) forwards}
+.gallery-main img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
+.gallery-main img:hover{transform:scale(1.04)}
+.gallery-main video{width:100%;height:100%;object-fit:cover}
+.gallery-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.gallery-art svg{width:50%;opacity:.15;color:var(–cream)}
+.gallery-badge{position:absolute;top:1.2rem;left:1.2rem;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem;z-index:2}
+.gallery-promo{position:absolute;top:1.2rem;right:1.2rem;background:var(–silver);color:var(–jet);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem;z-index:2}
+.gallery-thumbs{display:flex;gap:.6rem;overflow-x:auto;scrollbar-width:none}
+.gallery-thumbs::-webkit-scrollbar{display:none}
+.gallery-thumb{flex-shrink:0;width:64px;height:64px;border:1.5px solid var(–silver-line);overflow:hidden;background:var(–jet3);cursor:pointer;transition:border-color .2s;display:flex;align-items:center;justify-content:center}
+.gallery-thumb.active{border-color:var(–silver)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover}
+.gallery-thumb-play{width:100%;height:100%;background:var(–jet4);display:flex;align-items:center;justify-content:center;color:var(–silver);opacity:.7}
+
+.prod-info{animation:rise .7s .15s var(–ease) both}
+.prod-info-cat{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
+.prod-info-cat::before{content:’’;width:22px;height:1px;background:var(–silver)}
+.prod-info-name{font-family:var(–sans);font-weight:200;font-size:clamp(1.8rem,4vw,3.2rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.4rem}
+.prod-info-desc{font-size:.95rem;font-weight:300;color:var(–cream2);line-height:1.9;margin-bottom:2rem;border-left:1px solid var(–silver-line);padding-left:1.4rem}
+.prod-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
+.prod-spec{font-size:8px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid var(–silver-line);color:var(–muted)}
+.prod-price-block{padding:1.8rem 0;border-top:1px solid var(–silver-line);border-bottom:1px solid var(–silver-line);margin-bottom:2rem}
+.prod-price-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–muted);margin-bottom:.4rem}
+.prod-price-val{font-family:var(–serif);font-style:italic;font-size:2rem;color:var(–silver);font-weight:400;margin-bottom:.3rem}
+.prod-price-note{font-size:10px;font-weight:400;letter-spacing:.12em;color:var(–muted);text-transform:uppercase}
+.prod-actions{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
+.btn-sena{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.95rem 1.5rem;background:var(–cream);color:var(–jet);border:none;font-family:var(–sans);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s}
+.btn-sena:hover{background:var(–silver2);transform:translateY(-1px)}
+.btn-wa-full{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 2rem;background:var(–silver);color:var(–jet);font-family:var(–sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;width:100%;transition:background .2s,transform .15s;text-decoration:none}
+.btn-wa-full:hover{background:var(–silver2);transform:translateY(-2px)}
+.btn-outline-full{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 2rem;background:transparent;color:rgba(232,224,208,.6);font-family:var(–sans);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(200,205,214,.25);width:100%;transition:border-color .2s,color .2s;text-decoration:none}
+.btn-outline-full:hover{border-color:var(–silver);color:var(–cream)}
+.prod-meta{display:flex;flex-direction:column;gap:.8rem}
+.prod-meta-item{display:flex;align-items:center;gap:.9rem;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–muted)}
+.prod-meta-icon{color:var(–silver);flex-shrink:0}
+
+/* Related */
+.related-section{border-top:1px solid var(–silver-line);padding-top:clamp(3rem,6vh,5rem)}
+.sec-label{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
+.sec-label::before{content:’’;width:22px;height:1px;background:var(–silver)}
+.sec-h2{font-family:var(–sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.6rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2.5rem}
+.sec-h2 em{font-style:normal;font-weight:100;color:var(–silver)}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(–silver-line)}
+.rel-card{border-right:1px solid var(–silver-line);background:var(–jet);overflow:hidden;cursor:pointer;transition:background .3s;display:flex;flex-direction:column}
+.rel-card:last-child{border-right:none}
+.rel-card:hover{background:var(–jet3)}
+.rel-img{aspect-ratio:1;background:var(–jet2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rel-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
+.rel-card:hover .rel-img img{transform:scale(1.04)}
+.rel-img svg{width:45%;opacity:.15;color:var(–cream)}
+.rel-body{padding:1.4rem 1.6rem;flex:1;display:flex;flex-direction:column}
+.rel-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.4rem}
+.rel-name{font-family:var(–sans);font-size:.82rem;font-weight:300;color:var(–cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:auto}
+.rel-price{font-family:var(–serif);font-style:italic;font-size:1rem;color:rgba(200,205,214,.7);margin-top:.8rem}
+
+/* Not found */
+.not-found{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5rem}
+.not-found h2{font-family:var(–sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:.2em;text-transform:uppercase;color:var(–cream)}
+.not-found p{font-size:.9rem;font-weight:300;color:var(–muted)}
+
+/* ── MODAL SEÑA ── */
+.sena-backdrop{position:fixed;inset:0;z-index:2000;background:rgba(8,8,8,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.sena-backdrop.open{opacity:1;pointer-events:all}
+.sena-modal{background:var(–jet3);border:1px solid var(–silver-line);padding:2.5rem 2rem;width:100%;max-width:440px;position:relative;transform:translateY(24px);transition:transform .35s var(–ease)}
+.sena-backdrop.open .sena-modal{transform:none}
+.sena-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(–silver3);font-size:18px;cursor:pointer;transition:color .2s;padding:.25rem}
+.sena-close:hover{color:var(–cream)}
+.sena-eyebrow{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver3);margin-bottom:.75rem}
+.sena-title{font-family:var(–serif);font-size:1.6rem;font-style:italic;color:var(–cream);margin-bottom:.35rem}
+.sena-prod{font-size:11px;letter-spacing:.12em;color:var(–silver3);margin-bottom:1.5rem}
+.sena-monto-box{background:var(–jet4);border:1px solid var(–silver-line);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.sena-monto-val{font-family:var(–serif);font-size:1.8rem;color:var(–cream)}
+.sena-monto-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–silver3)}
+.sena-monto-pct{font-size:9px;color:var(–silver3);margin-top:2px}
+.sena-form-row{margin-bottom:1rem}
+.sena-label{display:block;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–silver3);margin-bottom:.4rem}
+.sena-input{width:100%;background:var(–jet4);border:1px solid var(–silver-line);padding:.75rem .9rem;font-family:var(–sans);font-size:13px;color:var(–cream);outline:none;transition:border-color .2s;-webkit-appearance:none}
+.sena-input:focus{border-color:rgba(200,205,214,.5)}
+.sena-input::placeholder{color:var(–muted)}
+.sena-divider{height:1px;background:var(–silver-line);margin:1.2rem 0}
+.sena-disclaimer{font-size:10px;color:var(–muted);line-height:1.6;margin-bottom:1.5rem}
+.sena-disclaimer strong{color:var(–silver3)}
+.btn-sena-pay{width:100%;padding:1rem;background:var(–cream);color:var(–jet);border:none;font-family:var(–sans);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.btn-sena-pay:hover{background:var(–silver2);transform:translateY(-1px)}
+.btn-sena-pay.loading{opacity:.7;pointer-events:none}
+.sena-error{font-size:11px;color:#e87070;margin-top:.6rem;min-height:16px}
 
 /* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--silver-line);
-  padding:2rem clamp(1.5rem,4vw,4rem);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
-.footer-brand{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--silver)}
-.footer-back{
-  font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);transition:color .2s;display:flex;align-items:center;gap:.5rem;
-}
-.footer-back:hover{color:var(--silver)}
+footer{border-top:1px solid var(–silver-line);padding:2rem clamp(1.5rem,4vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:var(–serif);font-style:italic;font-size:1.2rem;color:var(–silver)}
+.footer-back{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–muted);transition:color .2s;display:flex;align-items:center;gap:.5rem;cursor:pointer}
+.footer-back:hover{color:var(–silver)}
 
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){
-  .prod-layout{grid-template-columns:1fr}
-  .gallery{position:static}
-  .related-grid{grid-template-columns:1fr 1fr}
-  .rel-card:nth-child(2n){border-right:none}
-  .rel-card:nth-child(3){display:none}
+.prod-layout{grid-template-columns:1fr}
+.gallery{position:static}
+.related-grid{grid-template-columns:1fr 1fr}
+.rel-card:nth-child(3){display:none}
+.rel-card:nth-child(2){border-right:none}
 }
-@media(max-width:600px){
-  .related-grid{grid-template-columns:1fr}
-  .rel-card{border-right:none;border-bottom:1px solid var(--silver-line)}
-  .rel-card:last-child{border-bottom:none}
+@media(max-width:640px){
+.prod-grid{grid-template-columns:1fr}
+.related-grid{grid-template-columns:1fr}
+.rel-card{border-right:none;border-bottom:1px solid var(–silver-line)}
 }
-
-/* ── MODAL SEÑA ─────────────────────────────────────────── */
-.sena-backdrop{
-  position:fixed;inset:0;z-index:2000;
-  background:rgba(8,8,8,.88);
-  backdrop-filter:blur(12px);
-  display:flex;align-items:center;justify-content:center;
-  padding:1.5rem;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s ease;
-}
-.sena-backdrop.open{opacity:1;pointer-events:all;}
-.sena-modal{
-  background:var(--jet3);
-  border:1px solid var(--silver-line);
-  border-radius:2px;
-  padding:2.5rem 2rem;
-  width:100%;max-width:440px;
-  position:relative;
-  transform:translateY(24px);
-  transition:transform .35s cubic-bezier(.22,1,.36,1);
-}
-.sena-backdrop.open .sena-modal{transform:translateY(0);}
-.sena-close{
-  position:absolute;top:1rem;right:1rem;
-  background:none;border:none;color:var(--silver3);
-  font-size:18px;line-height:1;cursor:pointer;
-  padding:.25rem;transition:color .2s;
-}
-.sena-close:hover{color:var(--cream);}
-.sena-eyebrow{
-  font-size:8px;font-weight:600;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--silver3);margin-bottom:.75rem;
-}
-.sena-title{
-  font-family:var(--serif);font-size:1.6rem;font-weight:400;
-  font-style:italic;color:var(--cream);margin-bottom:.35rem;line-height:1.1;
-}
-.sena-prod{font-size:11px;letter-spacing:.12em;color:var(--silver3);margin-bottom:1.5rem;}
-.sena-monto-box{
-  background:var(--jet4);border:1px solid var(--silver-line);
-  border-radius:2px;padding:1rem 1.2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1.5rem;
-}
-.sena-monto-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--silver3);}
-.sena-monto-val{font-family:var(--serif);font-size:1.8rem;color:var(--cream);font-weight:500;}
-.sena-monto-pct{font-size:9px;color:var(--silver3);margin-top:2px;letter-spacing:.08em;}
-.sena-form-row{margin-bottom:1rem;}
-.sena-label{
-  display:block;font-size:8px;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--silver3);margin-bottom:.4rem;
-}
-.sena-input{
-  width:100%;background:var(--jet4);
-  border:1px solid var(--silver-line);
-  border-radius:2px;padding:.75rem .9rem;
-  font-family:var(--sans);font-size:13px;letter-spacing:.04em;
-  color:var(--cream);outline:none;
-  transition:border-color .2s;
-  -webkit-appearance:none;
-}
-.sena-input:focus{border-color:rgba(200,205,214,.5);}
-.sena-input::placeholder{color:var(--muted);}
-.sena-divider{
-  height:1px;background:var(--silver-line);
-  margin:1.2rem 0;
-}
-.sena-disclaimer{
-  font-size:10px;color:var(--muted);line-height:1.6;
-  letter-spacing:.02em;margin-bottom:1.5rem;
-}
-.sena-disclaimer strong{color:var(--silver3);}
-.btn-sena-pay{
-  width:100%;padding:1rem;
-  background:var(--cream);color:var(--jet);
-  border:none;border-radius:2px;
-  font-family:var(--sans);font-size:9px;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;
-  cursor:pointer;
-  transition:background .2s,transform .15s;
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-}
-.btn-sena-pay:hover{background:var(--silver2);transform:translateY(-1px);}
-.btn-sena-pay:active{transform:translateY(0);}
-.btn-sena-pay svg{width:16px;height:16px;flex-shrink:0;}
-.btn-sena-pay.loading{opacity:.7;pointer-events:none;}
-.sena-error{
-  font-size:11px;color:#e87070;margin-top:.6rem;
-  min-height:16px;letter-spacing:.02em;
-}
-@media(max-width:480px){
-  .sena-modal{padding:2rem 1.4rem;}
-  .sena-title{font-size:1.35rem;}
-}
+@media(max-width:480px){.sena-modal{padding:2rem 1.4rem}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
 </head>
 <body>
 
-<!-- ── CURSOR ── -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
+
 <nav>
   <a href="index.html" class="nav-brand">
-    <span class="nav-monogram">GL</span>
+    <svg class="nav-logo-svg" viewBox="0 0 220 220" fill="none">
+      <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".7"/>
+      <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.3)" stroke-width="0.5"/>
+      <text x="110" y="126" text-anchor="middle" font-family="Playfair Display,serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
+      <path id="nArc1" d="M 28 110 A 82 82 0 0 1 192 110" fill="none"/>
+      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+        <textPath href="#nArc1" startOffset="50%" text-anchor="middle">CUCHILLOS ARTESANALES</textPath>
+      </text>
+      <path id="nArc2" d="M 28 110 A 82 82 0 0 0 192 110" fill="none"/>
+      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+        <textPath href="#nArc2" startOffset="50%" text-anchor="middle">IND. ARGENTINA</textPath>
+      </text>
+    </svg>
     <div class="nav-brand-text">
       <span class="nav-brand-name">Cuchillos Artesanales</span>
       <span class="nav-brand-sub">Santiago del Estero · Argentina</span>
     </div>
   </a>
-  <a href="index.html#coleccion" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5M12 5l-7 7 7 7"/>
-    </svg>
-    Ver colección
+  <a id="nav-back-btn" href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Inicio
   </a>
 </nav>
 
-<!-- ── MAIN ── -->
-<main class="page" id="main-content">
-  <div class="loading" id="loading">
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-  </div>
-</main>
+<!-- VIEW: LIST (todos los productos) -->
+
+<div id="view-list">
+  <main class="page">
+    <div class="list-header" id="list-header">
+      <div class="list-cat-label" id="list-cat-label">Colección</div>
+      <h1 class="list-title" id="list-title">Todas las <em>piezas</em></h1>
+      <div class="list-count" id="list-count">Cargando…</div>
+    </div>
+    <div class="cat-tabs" id="cat-tabs"></div>
+    <div id="loading-list" class="loading">
+      <div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div>
+    </div>
+    <div class="prod-grid" id="prod-grid" style="display:none"></div>
+  </main>
+</div>
+
+<!-- VIEW: DETAIL (producto individual) -->
+
+<div id="view-detail">
+  <main class="detail-page" id="detail-content"></main>
+</div>
 
 <footer>
   <span class="footer-brand">GL</span>
-  <a href="index.html#coleccion" class="footer-back">
-    <i class="fas fa-arrow-left" style="font-size:10px"></i> Volver al catálogo
-  </a>
+  <span class="footer-back" id="footer-back-btn" onclick="goToList()">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver al catálogo
+  </span>
 </footer>
 
-
 <!-- MODAL SEÑA -->
+
 <div class="sena-backdrop" id="sena-backdrop" onclick="closeSenaModal(event)">
-  <div class="sena-modal" id="sena-modal">
-    <button class="sena-close" onclick="closeSenaModal()" aria-label="Cerrar">&#215;</button>
+  <div class="sena-modal">
+    <button class="sena-close" onclick="closeSenaModal()">&#215;</button>
     <div class="sena-eyebrow">Dejar seña · Mercado Pago</div>
     <div class="sena-title">Reservá tu pieza</div>
     <div class="sena-prod" id="sena-prod-nombre">—</div>
-
     <div class="sena-monto-box">
       <div>
         <div class="sena-monto-label">Seña a abonar</div>
@@ -460,10 +328,9 @@ footer{
       </div>
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,205,214,.35)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
     </div>
-
     <div class="sena-form-row">
       <label class="sena-label" for="sena-nombre">Nombre completo *</label>
-      <input class="sena-input" type="text" id="sena-nombre" placeholder="Gonzalo Londero" autocomplete="name"/>
+      <input class="sena-input" type="text" id="sena-nombre" placeholder="Tu nombre" autocomplete="name"/>
     </div>
     <div class="sena-form-row">
       <label class="sena-label" for="sena-email">Email *</label>
@@ -477,16 +344,10 @@ footer{
       <label class="sena-label" for="sena-nota">Nota para el encargo</label>
       <input class="sena-input" type="text" id="sena-nota" placeholder="Madera preferida, grabado, largo especial…"/>
     </div>
-
     <div class="sena-divider"></div>
-
-    <p class="sena-disclaimer">
-      Al abonar la seña confirmás el inicio del encargo artesanal.<br>
-      <strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega.
-    </p>
-
+    <p class="sena-disclaimer">Al abonar la seña confirmás el inicio del encargo artesanal.<br><strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega.</p>
     <button class="btn-sena-pay" id="btn-sena-pay" onclick="pagarSena()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
       Pagar seña con Mercado Pago
     </button>
     <div class="sena-error" id="sena-error"></div>
@@ -498,8 +359,8 @@ footer{
 (function(){
   const c=document.getElementById('cur'),r=document.getElementById('cur-ring');
   let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{ passive:true });
-  document.querySelectorAll('a,button,label,[onclick],[style*="cursor:pointer"]').forEach(el=>{
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{passive:true});
+  document.querySelectorAll('a,button,[onclick]').forEach(el=>{
     el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
     el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
   });
@@ -507,168 +368,173 @@ footer{
   loop();
 })();
 
+/* ── CONFIG ── */
+const GL_BACKEND  = 'https://gl-cuchillos-artesanales.onrender.com';
+const GL_SENA_PCT = 50;
+const WA_DEFAULT  = '5493843458340';
 
-/* ── GL CUCHILLOS CONFIG ── */
-const GL_BACKEND     = 'https://gl-cuchillos-artesanales.onrender.com';
-const GL_SENA_PCT    = 50;  // % de seña — Gonzalo puede cambiar este número
-let   currentProduct = null;
-let   senaMontoTotal = 0;
-
-/* ── MAIN ── */
 const knifeArt = `<svg viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`;
 
-const badgeClass = { avail:'badge-avail', custom:'badge-custom', intl:'badge-intl', unavail:'badge-unavail' };
+const BADGE_CLS = {avail:'badge-avail',custom:'badge-custom',intl:'badge-intl',unavail:'badge-unavail'};
+const BADGE_TXT = {avail:'Disponible',custom:'A pedido',intl:'Internacional',unavail:'No disponible'};
 
-function getParams() {
-  return new URLSearchParams(window.location.search);
-}
+const META_ICONS = {
+  hand: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
+  truck:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+  star: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  clock:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+};
+const WA_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
 
-function waLink(waNum, name) {
-  const w = (waNum||'5493843458340').replace(/\D/g,'');
-  return `https://wa.me/${w}?text=Hola!%20Me%20interesa%20${encodeURIComponent(name)}`;
-}
-
+/* ── STATE ── */
 let allProducts = [];
-let waNumber = '5493843458340';
-let currentMediaIdx = 0;
-let productMedia = [];
+let waNumber    = WA_DEFAULT;
+let catActual   = 'all';
+let currentProduct = null;
+let productMedia   = [];
 
-function renderGallery(media, badgeTxt, badgeCls, promo) {
-  productMedia = media;
-  currentMediaIdx = 0;
-  const main = document.getElementById('gal-main');
-  const thumbsEl = document.getElementById('gal-thumbs');
-  if (!main) return;
-  renderMainMedia(0, badgeTxt, badgeCls, promo);
-  if (media.length > 1) {
-    thumbsEl.innerHTML = media.map((m,i) => {
-      const isVid = m.type && m.type.startsWith('video');
-      return `<div class="gallery-thumb${i===0?' active':''}" onclick="selectMedia(${i})" id="thumb-${i}">
-        ${isVid
-          ? `<div class="thumb-vid"><i class="fas fa-play"></i></div>`
-          : `<img src="${m.src}" alt="">`}
-      </div>`;
-    }).join('');
-  } else {
-    thumbsEl.innerHTML = '';
+/* ── DATA ── */
+async function loadData() {
+  let data = null;
+  try {
+    const idb = await new Promise((res,rej)=>{const r=indexedDB.open('gl_cuchillos',1);r.onsuccess=e=>res(e.target.result);r.onerror=rej});
+    const val = await new Promise((res,rej)=>{const tx=idb.transaction('admin_data','readonly');const r=tx.objectStore('admin_data').get('data');r.onsuccess=e=>res(e.target.result?.value??null);r.onerror=rej});
+    if(val) data=val;
+  } catch(e){}
+  if(!data){try{const c=localStorage.getItem('gl_data');if(c)data=JSON.parse(c)}catch(e){}}
+  if(!data){try{const r=await fetch('products.json?t='+Date.now());if(r.ok)data=await r.json()}catch(e){}}
+  return data;
+}
+
+/* ── RENDER LIST ── */
+function renderList(cat) {
+  catActual = cat || 'all';
+
+  const filtered = catActual === 'all'
+    ? allProducts.filter(p=>p.active!==false)
+    : allProducts.filter(p=>p.active!==false && p.category===catActual);
+
+  // Update header
+  document.getElementById('list-cat-label').textContent = catActual === 'all' ? 'Colección completa' : catActual;
+  document.getElementById('list-title').innerHTML = catActual === 'all'
+    ? 'Todas las <em>piezas</em>'
+    : `<em>${catActual}</em>`;
+  document.getElementById('list-count').textContent = filtered.length + ' pieza' + (filtered.length!==1?'s':'');
+
+  // Update tabs
+  const tabs = document.getElementById('cat-tabs');
+  const cats = ['all', ...new Set(allProducts.filter(p=>p.active!==false).map(p=>p.category).filter(Boolean))];
+  tabs.innerHTML = cats.map(c => {
+    const n = c==='all' ? allProducts.filter(p=>p.active!==false).length : allProducts.filter(p=>p.active!==false&&p.category===c).length;
+    return `<button class="cat-tab${catActual===c?' active':''}" onclick="renderList('${c}')">${c==='all'?'Todos':c} (${n})</button>`;
+  }).join('');
+
+  // Render cards
+  const grid = document.getElementById('prod-grid');
+  if(!filtered.length){
+    grid.innerHTML = '<div class="empty-state">No hay piezas en esta categoría.</div>';
+    grid.style.display='grid';
+    return;
   }
+
+  grid.innerHTML = filtered.map(p => {
+    const bc = BADGE_CLS[p.badge]||'badge-avail';
+    const bt = p.badgeText||(BADGE_TXT[p.badge]||'Disponible');
+    const media = p.media&&p.media.length ? p.media[0] : (p.image?{src:p.image,type:'image/jpeg'}:null);
+    const isVid = media&&media.type&&media.type.startsWith('video');
+    const specs = (p.specs||[]).slice(0,3).map(s=>`<span class="prod-card-spec">${s}</span>`).join('');
+    const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
+    const waN = waNumber.replace(/\D/g,'')||WA_DEFAULT;
+    const waHref = `https://wa.me/${waN}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
+
+    return `<div class="prod-card" onclick="openDetail('${p.id}')">
+      <div class="prod-card-img">
+        ${media
+          ? (isVid
+            ? `<div style="width:100%;height:100%;background:var(--jet4);display:flex;align-items:center;justify-content:center;">${WA_ICON}</div>`
+            : `<img src="${media.src}" alt="${p.name}" loading="lazy">`)
+          : knifeArt}
+        <div class="prod-card-badge ${bc}">${bt}</div>
+        ${p.promo?`<div style="position:absolute;top:1rem;right:1rem;background:var(--silver);color:var(--jet);font-size:7px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .55rem;">${p.promo}</div>`:''}
+        <div class="prod-card-silver-line"></div>
+      </div>
+      <div class="prod-card-body">
+        <div class="prod-card-cat">${p.category||'—'}</div>
+        <div class="prod-card-name">${p.name}</div>
+        ${p.description?`<div class="prod-card-desc">${p.description.slice(0,90)}${p.description.length>90?'…':''}</div>`:''}
+        ${specs?`<div class="prod-card-specs">${specs}</div>`:''}
+        <div class="prod-card-footer">
+          <div class="prod-card-price">${p.price||'Consultar'}<small>${p.priceNote||''}</small></div>
+          <div class="prod-card-actions" onclick="event.stopPropagation()">
+            ${precioNum>0?`<button class="prod-card-btn primary" onclick="openDetail('${p.id}');event.stopPropagation()">Reservar</button>`:''}
+            <a href="${waHref}" target="_blank" class="prod-card-btn">${WA_ICON}</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  grid.style.display='grid';
+  document.getElementById('loading-list').style.display='none';
+
+  // Update nav back button
+  document.getElementById('nav-back-btn').textContent = '';
+  document.getElementById('nav-back-btn').href = 'index.html';
+  document.getElementById('nav-back-btn').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Inicio`;
 }
 
-function renderMainMedia(idx, badgeTxt, badgeCls, promo) {
-  const main = document.getElementById('gal-main');
-  if (!main) return;
-  const m = productMedia[idx];
-  const isVid = m && m.type && m.type.startsWith('video');
-  main.innerHTML = `
-    ${badgeTxt ? `<div class="prod-badge-main ${badgeCls}">${badgeTxt}</div>` : ''}
-    ${promo ? `<div class="gallery-promo">${promo}</div>` : ''}
-    ${m
-      ? (isVid
-          ? `<video src="${m.src}" controls autoplay muted loop style="width:100%;height:100%;object-fit:cover"></video>`
-          : `<img src="${m.src}" alt="">`)
-      : `<div class="gallery-art">${knifeArt}</div>`}
-  `;
+/* ── DETAIL VIEW ── */
+function openDetail(id) {
+  const p = allProducts.find(p=>p.id===id);
+  if(!p||!p.active) return;
+  history.pushState({view:'detail',id},'',`?id=${id}`);
+  showDetailView(p);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function selectMedia(idx) {
-  currentMediaIdx = idx;
-  const bt = document.getElementById('gal-main')?.dataset?.badge || '';
-  const bc = document.getElementById('gal-main')?.dataset?.badgecls || '';
-  const pr = document.getElementById('gal-main')?.dataset?.promo || '';
-  renderMainMedia(idx, bt, bc, pr);
-  document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+function goToList() {
+  history.pushState({view:'list',cat:catActual},'','?cat='+encodeURIComponent(catActual==='all'?'':catActual));
+  document.getElementById('view-list').style.display='block';
+  document.getElementById('view-detail').style.display='none';
+  document.getElementById('footer-back-btn').style.display='none';
+  document.getElementById('nav-back-btn').innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Inicio`;
+  document.getElementById('nav-back-btn').href='index.html';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function renderProduct(p, settings) {
+function showDetailView(p) {
   currentProduct = p;
-  // Extraer precio numérico (ej: "$45.000" → 45000)
-  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,'')) || 0;
-  const pct       = GL_SENA_PCT;
-  const montoSena = Math.round(precioNum * pct / 100);
-  senaMontoTotal  = precioNum;
-  const waN = (settings?.whatsapp||waNumber).replace(/\D/g,'') || '5493843458340';
-  const media = p.media && p.media.length
-    ? p.media
-    : (p.image ? [{ src: p.image, type: p.image.includes('data:video')||p.image.endsWith('.mp4')||p.image.endsWith('.webm') ? 'video/mp4' : 'image/jpeg' }] : []);
-  const bc = badgeClass[p.badge] || 'badge-avail';
-  const bt = p.badgeText || (p.badge==='avail'?'Disponible': p.badge==='custom'?'A pedido': p.badge==='intl'?'Internacional':'No disponible');
-  const specs = (p.specs||[]).map(s=>`<div class="prod-spec">${s}</div>`).join('');
-  const link = waLink(waN, p.name);
-  const linkCat = `https://wa.me/${waN}?text=Hola!%20Quiero%20ver%20el%20cat%C3%A1logo%20completo`;
-
+  document.getElementById('view-list').style.display='none';
+  document.getElementById('view-detail').style.display='block';
+  document.getElementById('footer-back-btn').style.display='flex';
   document.title = `${p.name} · GL Cuchillos Artesanales`;
 
-  const html = `
-    <div class="breadcrumb">
-      <a href="index.html">Inicio</a>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      <a href="index.html#coleccion">Colección</a>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      <span>${p.name}</span>
-    </div>
+  // Nav back → volver al listado
+  document.getElementById('nav-back-btn').innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Catálogo`;
+  document.getElementById('nav-back-btn').onclick = (e)=>{e.preventDefault();goToList()};
 
-    <div class="prod-layout">
-      <!-- GALLERY -->
-      <div class="gallery">
-        <div class="gallery-main" id="gal-main"
-          data-badge="${bt}"
-          data-badgecls="${bc}"
-          data-promo="${p.promo||''}">
-        </div>
-        <div class="gallery-thumbs" id="gal-thumbs"></div>
-      </div>
+  const bc = BADGE_CLS[p.badge]||'badge-avail';
+  const bt = p.badgeText||(BADGE_TXT[p.badge]||'Disponible');
+  const media = p.media&&p.media.length ? p.media : (p.image?[{src:p.image,type:'image/jpeg'}]:[]);
+  const specs = (p.specs||[]).map(s=>`<div class="prod-spec">${s}</div>`).join('');
+  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
+  const montoSena = Math.round(precioNum*GL_SENA_PCT/100);
+  const waN = waNumber.replace(/\D/g,'')||WA_DEFAULT;
+  const waHref = `https://wa.me/${waN}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
+  const waCat  = `https://wa.me/${waN}?text=Hola!%20Quiero%20ver%20el%20cat%C3%A1logo%20completo`;
 
-      <!-- INFO -->
-      <div class="prod-info">
-        <div class="prod-info-cat">${p.category||'Cuchillería Artesanal'}</div>
-        <h1 class="prod-info-name">${p.name}</h1>
-        ${p.description ? `<p class="prod-info-desc">${p.description}</p>` : ''}
-        ${specs ? `<div class="prod-specs">${specs}</div>` : ''}
-
-        <div class="prod-price-block">
-          <div class="prod-price-label">Precio</div>
-          <div class="prod-price-val">${p.price||'Consultar'}</div>
-          ${p.priceNote ? `<div class="prod-price-note">${p.priceNote}</div>` : ''}
-        </div>
-
-        <div class="prod-actions">
-          ${precioNum > 0 ? `
-          <button class="btn-sena" onclick="openSenaModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-            Dejar seña — ${pct}% · $\${montoSena.toLocaleString('es-AR')}
-          </button>` : ''}
-          <a href="${link}" target="_blank" class="btn-wa${precioNum > 0 ? '-outline' : ''}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            Consultar por WhatsApp
-          </a>
-          <a href="${linkCat}" target="_blank" class="btn-wa-outline">Ver catálogo completo</a>
-        </div>
-
-        <div class="prod-meta">
-          <div class="prod-meta-item"><i class="fas fa-hammer"></i>Trabajado 100% a mano</div>
-          <div class="prod-meta-item"><i class="fas fa-truck"></i>Envíos a todo Argentina y exterior</div>
-          <div class="prod-meta-item"><i class="fas fa-star"></i>Pieza única, sin producción en serie</div>
-          ${p.badge==='custom'?'<div class="prod-meta-item"><i class="fas fa-clock"></i>Tiempo de encargo: 4–6 semanas</div>':''}
-        </div>
-      </div>
-    </div>
-
-    <!-- RELATED -->
-    ${allProducts.filter(r=>r.id!==p.id&&r.active).length > 0 ? `
+  // Related products
+  const related = allProducts.filter(r=>r.id!==p.id&&r.active!==false).slice(0,3);
+  const relatedHTML = related.length ? `
     <div class="related-section">
       <div class="sec-label">También te puede interesar</div>
       <h2 class="sec-h2">Otras <em>piezas</em></h2>
       <div class="related-grid">
-        ${allProducts.filter(r=>r.id!==p.id&&r.active).slice(0,3).map(r=>{
-          const rMedia = r.media&&r.media.length ? r.media[0] : (r.image ? {src:r.image,type:'image/jpeg'} : null);
-          const isVid = rMedia && rMedia.type && rMedia.type.startsWith('video');
-          return `<div class="rel-card" onclick="location.href='producto.html?id=${r.id}'">
-            <div class="rel-img">
-              ${rMedia
-                ? (isVid ? `<div style="width:100%;height:100%;background:var(--jet4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-play-circle" style="color:var(--silver);font-size:2rem;opacity:.6"></i></div>`
-                         : `<img src="${rMedia.src}" alt="${r.name}">`)
-                : knifeArt}
-            </div>
+        ${related.map(r=>{
+          const rm = r.media&&r.media.length?r.media[0]:(r.image?{src:r.image,type:'image/jpeg'}:null);
+          const rv = rm&&rm.type&&rm.type.startsWith('video');
+          return `<div class="rel-card" onclick="openDetail('${r.id}')">
+            <div class="rel-img">${rm?(rv?knifeArt:`<img src="${rm.src}" alt="${r.name}" loading="lazy">`):knifeArt}</div>
             <div class="rel-body">
               <div class="rel-cat">${r.category||'—'}</div>
               <div class="rel-name">${r.name}</div>
@@ -677,875 +543,107 @@ function renderProduct(p, settings) {
           </div>`;
         }).join('')}
       </div>
-    </div>` : ''}
+    </div>` : '';
+
+  document.getElementById('detail-content').innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="goToList()">Colección</a>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      <span>${p.name}</span>
+    </div>
+    <div class="prod-layout">
+      <div class="gallery">
+        <div class="gallery-main" id="gal-main"></div>
+        <div class="gallery-thumbs" id="gal-thumbs"></div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-info-cat">${p.category||'Cuchillería Artesanal'}</div>
+        <h1 class="prod-info-name">${p.name}</h1>
+        ${p.description?`<p class="prod-info-desc">${p.description}</p>`:''}
+        ${specs?`<div class="prod-specs">${specs}</div>`:''}
+        <div class="prod-price-block">
+          <div class="prod-price-label">Precio</div>
+          <div class="prod-price-val">${p.price||'Consultar'}</div>
+          ${p.priceNote?`<div class="prod-price-note">${p.priceNote}</div>`:''}
+        </div>
+        <div class="prod-actions">
+          ${precioNum>0?`
+          <button class="btn-sena" onclick="openSenaModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Dejar seña — ${GL_SENA_PCT}% · $${montoSena.toLocaleString('es-AR')}
+          </button>`:''}
+          <a href="${waHref}" target="_blank" class="${precioNum>0?'btn-outline-full':'btn-wa-full'}">
+            ${WA_ICON} Consultar por WhatsApp
+          </a>
+          <a href="${waCat}" target="_blank" class="btn-outline-full">Ver catálogo completo</a>
+        </div>
+        <div class="prod-meta">
+          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.hand}</span>Trabajado 100% a mano</div>
+          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.truck}</span>Envíos a todo Argentina y exterior</div>
+          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.star}</span>Pieza única, sin producción en serie</div>
+          ${p.badge==='custom'?`<div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.clock}</span>Tiempo de encargo: 4–6 semanas</div>`:''}
+        </div>
+      </div>
+    </div>
+    ${relatedHTML}
   `;
 
-  document.getElementById('main-content').innerHTML = html;
-  // Now render gallery
   renderGallery(media, bt, bc, p.promo||'');
-}
-
-function showNotFound() {
-  document.getElementById('main-content').innerHTML = `
-    <div class="not-found">
-      <div class="not-found-icon"><i class="fas fa-search"></i></div>
-      <h2>Producto no encontrado</h2>
-      <p>El producto que buscás no existe o fue eliminado.</p>
-      <a href="index.html#coleccion" style="margin-top:1rem;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);border:1px solid var(--silver-line);padding:.8rem 1.8rem;transition:border-color .2s;display:inline-block">
-        ← Volver al catálogo
-      </a>
-    </div>`;
-}
-
-
-/* ── MODAL SEÑA ─────────────────────────────────────────── */
-function openSenaModal() {
-  const p   = currentProduct;
-  const pct = GL_SENA_PCT;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
-  const monto     = Math.round(precioNum * pct / 100);
-
-  document.getElementById('sena-prod-nombre').textContent = p?.name || '';
-  document.getElementById('sena-monto-display').textContent =
-    '$' + monto.toLocaleString('es-AR');
-  document.getElementById('sena-monto-desc').textContent =
-    pct + '% del total — $' + precioNum.toLocaleString('es-AR');
-  document.getElementById('sena-error').textContent = '';
-  document.getElementById('sena-nombre').value = '';
-  document.getElementById('sena-email').value  = '';
-  document.getElementById('sena-tel').value    = '';
-  document.getElementById('sena-nota').value   = '';
-
-  document.getElementById('sena-backdrop').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('sena-nombre').focus(), 350);
-}
-
-function closeSenaModal(e) {
-  if (e && e.target !== document.getElementById('sena-backdrop') && e.type === 'click') return;
-  document.getElementById('sena-backdrop').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSenaModal();
-});
-
-async function pagarSena() {
-  const nombre = document.getElementById('sena-nombre').value.trim();
-  const email  = document.getElementById('sena-email').value.trim();
-  const tel    = document.getElementById('sena-tel').value.trim();
-  const nota   = document.getElementById('sena-nota').value.trim();
-  const errEl  = document.getElementById('sena-error');
-  const btn    = document.getElementById('btn-sena-pay');
-
-  errEl.textContent = '';
-
-  if (!nombre) { errEl.textContent = 'Ingresá tu nombre completo.'; return; }
-  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
-    errEl.textContent = 'Ingresá un email válido.'; return;
-  }
-
-  const p         = currentProduct;
-  const pct       = GL_SENA_PCT;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
-
-  if (precioNum <= 0) {
-    errEl.textContent = 'Este producto no tiene precio fijo. Consultá por WhatsApp.';
-    return;
-  }
-
-  btn.classList.add('loading');
-  btn.textContent = 'Conectando con Mercado Pago…';
-
-  try {
-    const res = await fetch(GL_BACKEND + '/gl/sena', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        producto:        p.name,
-        precioTotal:     precioNum,
-        porcentajeSena:  pct,
-        nombre,
-        email,
-        telefono:        tel || undefined,
-        nota:            nota || undefined,
-        productoId:      p.id,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok || !data.init_point) {
-      errEl.textContent = data.error || 'Error al conectar con Mercado Pago. Intentá de nuevo.';
-      btn.classList.remove('loading');
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
-      return;
-    }
-
-    // Guardar datos en sessionStorage para la pantalla de confirmación
-    sessionStorage.setItem('gl_sena', JSON.stringify({
-      nombre, producto: p.name,
-      monto: data.monto_sena, pct: data.porcentaje,
-      precioTotal: precioNum,
-    }));
-
-    // Redirigir a MP
-    window.location.href = data.init_point;
-
-  } catch(err) {
-    errEl.textContent = 'Sin conexión. Revisá tu internet e intentá de nuevo.';
-    btn.classList.remove('loading');
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
-  }
-}
-
-(async function(){
-  const params = getParams();
-  const id = params.get('id');
-  if (!id) { showNotFound(); return; }
-
-  let data = null;
-  // 1. Intentar IndexedDB (admin en mismo dominio)
-  try {
-    const idb = await new Promise((res, rej) => {
-      const req = indexedDB.open('gl_cuchillos', 1);
-      req.onsuccess = e => res(e.target.result);
-      req.onerror   = e => rej(e);
-    });
-    const val = await new Promise((res, rej) => {
-      const tx  = idb.transaction('admin_data', 'readonly');
-      const req = tx.objectStore('admin_data').get('data');
-      req.onsuccess = e => res(e.target.result?.value ?? null);
-      req.onerror   = e => rej(e);
-    });
-    if (val) data = val;
-  } catch(e) {}
-
-  // 2. Fallback localStorage
-  if (!data) {
-    try {
-      const cached = localStorage.getItem('gl_data');
-      if (cached) data = JSON.parse(cached);
-    } catch(e) {}
-  }
-
-  // 3. Fallback products.json publicado
-  if (!data) {
-    try {
-      const r = await fetch('products.json?t='+Date.now());
-      if (r.ok) data = await r.json();
-    } catch(e) {}
-  }
-
-  const products = data?.products || [];
-  const settings = data?.settings || {};
-  allProducts = products;
-  waNumber = (settings.whatsapp||'5493843458340');
-
-  const product = products.find(p => p.id === id);
-  if (!product || !product.active) { showNotFound(); return; }
-
-  renderProduct(product, settings);
-})();
-</script>
-</body>
-</html>  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
-  --silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.16);
-  --cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
-  --serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
-  --ease:cubic-bezier(.22,1,.36,1);--ease2:cubic-bezier(.16,1,.3,1);
-}
-
-@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:800;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(1.5rem,4vw,4rem);height:72px;
-  background:rgba(8,8,8,.97);border-bottom:1px solid var(--silver-line);
-  backdrop-filter:blur(20px);
-}
-.nav-brand{display:flex;align-items:center;gap:16px}
-.nav-monogram{font-family:var(--serif);font-style:italic;font-weight:500;font-size:30px;color:var(--silver);letter-spacing:-.01em}
-.nav-brand-text{display:flex;flex-direction:column}
-.nav-brand-name{font-family:var(--serif);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);line-height:1.1}
-.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);margin-top:2px}
-.nav-back{
-  display:flex;align-items:center;gap:.6rem;
-  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(200,205,214,.6);transition:color .2s;
-}
-.nav-back:hover{color:var(--cream)}
-.nav-back svg{transition:transform .2s}
-.nav-back:hover svg{transform:translateX(-3px)}
-
-/* ── PAGE LAYOUT ── */
-.page{
-  max-width:1280px;margin:0 auto;
-  padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem);
-}
-
-/* ── BREADCRUMB ── */
-.breadcrumb{
-  display:flex;align-items:center;gap:.6rem;
-  font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:2.5rem;
-  animation:rise .6s var(--ease) forwards;
-}
-.breadcrumb a{color:var(--muted);transition:color .2s}
-.breadcrumb a:hover{color:var(--silver)}
-.breadcrumb span{color:var(--silver)}
-
-/* ── PRODUCT LAYOUT ── */
-.prod-layout{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(3rem,6vw,7rem);align-items:start;
-  margin-bottom:clamp(4rem,8vh,7rem);
 }
 
 /* ── GALLERY ── */
-.gallery{position:sticky;top:90px}
-.gallery-main{
-  position:relative;
-  aspect-ratio:1/1.1;
-  background:var(--jet3);
-  border:1px solid var(--silver-line);
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:1rem;
-  animation:fade .8s var(--ease) forwards;
-}
-.gallery-main img{
-  width:85%;height:85%;object-fit:contain;
-  transition:transform .6s var(--ease);
-}
-.gallery-main img:hover{transform:scale(1.04)}
-.gallery-main video{width:100%;height:100%;object-fit:cover}
-.gallery-main .prod-badge-main{
-  position:absolute;top:1.2rem;left:1.2rem;
-  font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:.3rem .7rem;z-index:2;
-}
-.badge-avail{background:var(--silver);color:var(--jet)}
-.badge-custom{background:transparent;color:var(--silver);border:1px solid rgba(200,205,214,.4)}
-.badge-intl{background:var(--jet4);color:var(--cream2);border:1px solid var(--silver-line)}
-.badge-unavail{background:transparent;color:var(--muted);border:1px solid rgba(120,112,96,.3)}
-.gallery-promo{
-  position:absolute;top:1.2rem;right:1.2rem;
-  background:var(--silver);color:var(--jet);
-  font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:.3rem .7rem;z-index:2;
-}
-.gallery-art{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-}
-.gallery-art svg{width:50%;opacity:.15;color:var(--cream)}
-
-/* Thumbnail strip */
-.gallery-thumbs{
-  display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.3rem;
-  scrollbar-width:none;
-}
-.gallery-thumbs::-webkit-scrollbar{display:none}
-.gallery-thumb{
-  flex-shrink:0;width:64px;height:64px;
-  border:1.5px solid var(--silver-line);
-  overflow:hidden;background:var(--jet3);
-  cursor:pointer;transition:border-color .2s;
-  display:flex;align-items:center;justify-content:center;
-}
-.gallery-thumb.active{border-color:var(--silver)}
-.gallery-thumb:hover{border-color:rgba(200,205,214,.5)}
-.gallery-thumb img{width:100%;height:100%;object-fit:cover}
-.gallery-thumb .thumb-vid{
-  width:100%;height:100%;background:var(--jet4);
-  display:flex;align-items:center;justify-content:center;
-}
-.gallery-thumb .thumb-vid i{color:var(--silver);font-size:18px;opacity:.7}
-
-/* ── PRODUCT INFO ── */
-.prod-info{animation:rise .7s .15s var(--ease) both}
-.prod-info-cat{
-  font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;
-}
-.prod-info-cat::before{content:'';width:22px;height:1px;background:var(--silver)}
-.prod-info-name{
-  font-family:var(--sans);font-weight:200;
-  font-size:clamp(1.8rem,4vw,3.2rem);
-  color:var(--cream);line-height:1.1;letter-spacing:.14em;
-  text-transform:uppercase;margin-bottom:1.4rem;
-}
-.prod-info-desc{
-  font-size:.95rem;font-weight:300;letter-spacing:.02em;
-  color:var(--cream2);line-height:1.9;margin-bottom:2rem;
-  border-left:1px solid var(--silver-line);padding-left:1.4rem;
-}
-.prod-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
-.prod-spec{
-  font-size:8px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  padding:.3rem .7rem;border:1px solid var(--silver-line);color:var(--muted);
-}
-.prod-price-block{
-  padding:1.8rem 0;border-top:1px solid var(--silver-line);border-bottom:1px solid var(--silver-line);
-  margin-bottom:2rem;
-}
-.prod-price-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
-.prod-price-val{
-  font-family:var(--serif);font-style:italic;font-size:2rem;
-  color:var(--silver);font-weight:400;margin-bottom:.3rem;
-}
-.prod-price-note{font-size:10px;font-weight:400;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-.prod-actions{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
-
-.btn-sena{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  width:100%;padding:.9rem 1.5rem;
-  background:var(--cream);color:var(--jet);
-  border:none;border-radius:2px;
-  font-family:var(--sans);font-size:8px;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;
-  cursor:pointer;transition:background .2s,transform .15s;
-  margin-bottom:.6rem;
-}
-.btn-sena:hover{background:var(--silver2);transform:translateY(-1px);}
-.btn-sena svg{width:13px;height:13px;}
-.btn-wa{
-  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:1rem 2rem;background:var(--silver);color:var(--jet);
-  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  transition:background .2s,transform .15s;width:100%;
-}
-.btn-wa:hover{background:var(--silver2);transform:translateY(-2px)}
-.btn-wa-outline{
-  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:1rem 2rem;background:transparent;color:rgba(232,224,208,.6);
-  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  border:1px solid rgba(200,205,214,.25);width:100%;
-  transition:border-color .2s,color .2s;
-}
-.btn-wa-outline:hover{border-color:var(--silver);color:var(--cream)}
-.prod-meta{display:flex;flex-direction:column;gap:.6rem}
-.prod-meta-item{
-  display:flex;align-items:center;gap:.8rem;
-  font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-}
-.prod-meta-item i{color:var(--silver);font-size:11px;width:14px}
-
-/* ── RELATED ── */
-.related-section{
-  border-top:1px solid var(--silver-line);
-  padding-top:clamp(3rem,6vh,5rem);
-}
-.sec-label{
-  font-size:9px;font-weight:600;letter-spacing:.20em;text-transform:uppercase;
-  color:var(--silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;
-}
-.sec-label::before{content:'';width:22px;height:1px;background:var(--silver)}
-.sec-h2{
-  font-family:var(--sans);font-weight:200;
-  font-size:clamp(1.5rem,3vw,2.6rem);
-  color:var(--cream);line-height:1.1;letter-spacing:.14em;
-  text-transform:uppercase;margin-bottom:2.5rem;
-}
-.sec-h2 em{font-style:normal;font-weight:100;color:var(--silver);letter-spacing:.2em}
-.related-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--silver-line);
-}
-.rel-card{
-  border-right:1px solid var(--silver-line);
-  background:var(--jet);padding:0;
-  overflow:hidden;cursor:pointer;
-  transition:background .3s;
-  display:flex;flex-direction:column;
-}
-.rel-card:last-child{border-right:none}
-.rel-card:hover{background:var(--jet3)}
-.rel-img{
-  aspect-ratio:1;background:var(--jet2);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;position:relative;
-}
-.rel-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(--ease)}
-.rel-card:hover .rel-img img{transform:scale(1.04)}
-.rel-img svg{width:45%;opacity:.15;color:var(--cream)}
-.rel-body{padding:1.4rem 1.6rem;flex:1;display:flex;flex-direction:column}
-.rel-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:.4rem}
-.rel-name{font-family:var(--sans);font-size:.82rem;font-weight:300;color:var(--cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:auto}
-.rel-price{font-family:var(--serif);font-style:italic;font-size:1rem;color:rgba(200,205,214,.7);margin-top:.8rem}
-
-/* ── NOT FOUND ── */
-.not-found{
-  min-height:70vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;gap:1.5rem;
-}
-.not-found-icon{font-size:3.5rem;opacity:.15}
-.not-found h2{font-family:var(--sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream)}
-.not-found p{font-size:.9rem;font-weight:300;color:var(--muted);letter-spacing:.08em}
-
-/* ── LOADING ── */
-.loading{min-height:70vh;display:flex;align-items:center;justify-content:center}
-.loading-dot{
-  width:6px;height:6px;border-radius:50%;background:var(--silver);
-  display:inline-block;margin:0 4px;animation:ld .8s ease-in-out infinite;
-}
-.loading-dot:nth-child(2){animation-delay:.12s}
-.loading-dot:nth-child(3){animation-delay:.24s}
-@keyframes ld{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--silver-line);
-  padding:2rem clamp(1.5rem,4vw,4rem);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
-.footer-brand{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--silver)}
-.footer-back{
-  font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);transition:color .2s;display:flex;align-items:center;gap:.5rem;
-}
-.footer-back:hover{color:var(--silver)}
-
-@media(max-width:900px){
-  .prod-layout{grid-template-columns:1fr}
-  .gallery{position:static}
-  .related-grid{grid-template-columns:1fr 1fr}
-  .rel-card:nth-child(2n){border-right:none}
-  .rel-card:nth-child(3){display:none}
-}
-@media(max-width:600px){
-  .related-grid{grid-template-columns:1fr}
-  .rel-card{border-right:none;border-bottom:1px solid var(--silver-line)}
-  .rel-card:last-child{border-bottom:none}
-}
-
-/* ── MODAL SEÑA ─────────────────────────────────────────── */
-.sena-backdrop{
-  position:fixed;inset:0;z-index:2000;
-  background:rgba(8,8,8,.88);
-  backdrop-filter:blur(12px);
-  display:flex;align-items:center;justify-content:center;
-  padding:1.5rem;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s ease;
-}
-.sena-backdrop.open{opacity:1;pointer-events:all;}
-.sena-modal{
-  background:var(--jet3);
-  border:1px solid var(--silver-line);
-  border-radius:2px;
-  padding:2.5rem 2rem;
-  width:100%;max-width:440px;
-  position:relative;
-  transform:translateY(24px);
-  transition:transform .35s cubic-bezier(.22,1,.36,1);
-}
-.sena-backdrop.open .sena-modal{transform:translateY(0);}
-.sena-close{
-  position:absolute;top:1rem;right:1rem;
-  background:none;border:none;color:var(--silver3);
-  font-size:18px;line-height:1;cursor:pointer;
-  padding:.25rem;transition:color .2s;
-}
-.sena-close:hover{color:var(--cream);}
-.sena-eyebrow{
-  font-size:8px;font-weight:600;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--silver3);margin-bottom:.75rem;
-}
-.sena-title{
-  font-family:var(--serif);font-size:1.6rem;font-weight:400;
-  font-style:italic;color:var(--cream);margin-bottom:.35rem;line-height:1.1;
-}
-.sena-prod{font-size:11px;letter-spacing:.12em;color:var(--silver3);margin-bottom:1.5rem;}
-.sena-monto-box{
-  background:var(--jet4);border:1px solid var(--silver-line);
-  border-radius:2px;padding:1rem 1.2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1.5rem;
-}
-.sena-monto-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--silver3);}
-.sena-monto-val{font-family:var(--serif);font-size:1.8rem;color:var(--cream);font-weight:500;}
-.sena-monto-pct{font-size:9px;color:var(--silver3);margin-top:2px;letter-spacing:.08em;}
-.sena-form-row{margin-bottom:1rem;}
-.sena-label{
-  display:block;font-size:8px;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--silver3);margin-bottom:.4rem;
-}
-.sena-input{
-  width:100%;background:var(--jet4);
-  border:1px solid var(--silver-line);
-  border-radius:2px;padding:.75rem .9rem;
-  font-family:var(--sans);font-size:13px;letter-spacing:.04em;
-  color:var(--cream);outline:none;
-  transition:border-color .2s;
-  -webkit-appearance:none;
-}
-.sena-input:focus{border-color:rgba(200,205,214,.5);}
-.sena-input::placeholder{color:var(--muted);}
-.sena-divider{
-  height:1px;background:var(--silver-line);
-  margin:1.2rem 0;
-}
-.sena-disclaimer{
-  font-size:10px;color:var(--muted);line-height:1.6;
-  letter-spacing:.02em;margin-bottom:1.5rem;
-}
-.sena-disclaimer strong{color:var(--silver3);}
-.btn-sena-pay{
-  width:100%;padding:1rem;
-  background:var(--cream);color:var(--jet);
-  border:none;border-radius:2px;
-  font-family:var(--sans);font-size:9px;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;
-  cursor:pointer;
-  transition:background .2s,transform .15s;
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-}
-.btn-sena-pay:hover{background:var(--silver2);transform:translateY(-1px);}
-.btn-sena-pay:active{transform:translateY(0);}
-.btn-sena-pay svg{width:16px;height:16px;flex-shrink:0;}
-.btn-sena-pay.loading{opacity:.7;pointer-events:none;}
-.sena-error{
-  font-size:11px;color:#e87070;margin-top:.6rem;
-  min-height:16px;letter-spacing:.02em;
-}
-@media(max-width:480px){
-  .sena-modal{padding:2rem 1.4rem;}
-  .sena-title{font-size:1.35rem;}
-}
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-<body>
-
-<!-- ── CURSOR ── -->
-<div id="cur"></div>
-<div id="cur-ring"></div>
-
-<!-- ── NAV ── -->
-<nav>
-  <a href="index.html" class="nav-brand">
-    <span class="nav-monogram">GL</span>
-    <div class="nav-brand-text">
-      <span class="nav-brand-name">Cuchillos Artesanales</span>
-      <span class="nav-brand-sub">Santiago del Estero · Argentina</span>
-    </div>
-  </a>
-  <a href="index.html#coleccion" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5M12 5l-7 7 7 7"/>
-    </svg>
-    Ver colección
-  </a>
-</nav>
-
-<!-- ── MAIN ── -->
-<main class="page" id="main-content">
-  <div class="loading" id="loading">
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-  </div>
-</main>
-
-<footer>
-  <span class="footer-brand">GL</span>
-  <a href="index.html#coleccion" class="footer-back">
-    <i class="fas fa-arrow-left" style="font-size:10px"></i> Volver al catálogo
-  </a>
-</footer>
-
-
-<!-- MODAL SEÑA -->
-<div class="sena-backdrop" id="sena-backdrop" onclick="closeSenaModal(event)">
-  <div class="sena-modal" id="sena-modal">
-    <button class="sena-close" onclick="closeSenaModal()" aria-label="Cerrar">&#215;</button>
-    <div class="sena-eyebrow">Dejar seña · Mercado Pago</div>
-    <div class="sena-title">Reservá tu pieza</div>
-    <div class="sena-prod" id="sena-prod-nombre">—</div>
-
-    <div class="sena-monto-box">
-      <div>
-        <div class="sena-monto-label">Seña a abonar</div>
-        <div class="sena-monto-val" id="sena-monto-display">$—</div>
-        <div class="sena-monto-pct" id="sena-monto-desc">50% del total</div>
-      </div>
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,205,214,.35)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-    </div>
-
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-nombre">Nombre completo *</label>
-      <input class="sena-input" type="text" id="sena-nombre" placeholder="Gonzalo Londero" autocomplete="name"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-email">Email *</label>
-      <input class="sena-input" type="email" id="sena-email" placeholder="correo@ejemplo.com" autocomplete="email"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-tel">Teléfono / WhatsApp</label>
-      <input class="sena-input" type="tel" id="sena-tel" placeholder="+54 9 381 000-0000" autocomplete="tel"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-nota">Nota para el encargo</label>
-      <input class="sena-input" type="text" id="sena-nota" placeholder="Madera preferida, grabado, largo especial…"/>
-    </div>
-
-    <div class="sena-divider"></div>
-
-    <p class="sena-disclaimer">
-      Al abonar la seña confirmás el inicio del encargo artesanal.<br>
-      <strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega.
-    </p>
-
-    <button class="btn-sena-pay" id="btn-sena-pay" onclick="pagarSena()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-      Pagar seña con Mercado Pago
-    </button>
-    <div class="sena-error" id="sena-error"></div>
-  </div>
-</div>
-
-<script>
-/* ── CURSOR ── */
-(function(){
-  const c=document.getElementById('cur'),r=document.getElementById('cur-ring');
-  let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{ passive:true });
-  document.querySelectorAll('a,button,label,[onclick],[style*="cursor:pointer"]').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
-  });
-  function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)}
-  loop();
-})();
-
-
-/* ── GL CUCHILLOS CONFIG ── */
-const GL_BACKEND     = 'https://gl-cuchillos-artesanales.onrender.com';
-const GL_SENA_PCT    = 50;  // % de seña — Gonzalo puede cambiar este número
-let   currentProduct = null;
-let   senaMontoTotal = 0;
-
-/* ── MAIN ── */
-const knifeArt = `<svg viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`;
-
-const badgeClass = { avail:'badge-avail', custom:'badge-custom', intl:'badge-intl', unavail:'badge-unavail' };
-
-function getParams() {
-  return new URLSearchParams(window.location.search);
-}
-
-function waLink(waNum, name) {
-  const w = (waNum||'5493843458340').replace(/\D/g,'');
-  return `https://wa.me/${w}?text=Hola!%20Me%20interesa%20${encodeURIComponent(name)}`;
-}
-
-let allProducts = [];
-let waNumber = '5493843458340';
-let currentMediaIdx = 0;
-let productMedia = [];
-
-function renderGallery(media, badgeTxt, badgeCls, promo) {
+function renderGallery(media, bt, bc, promo) {
   productMedia = media;
-  currentMediaIdx = 0;
-  const main = document.getElementById('gal-main');
+  renderMainMedia(0, bt, bc, promo);
   const thumbsEl = document.getElementById('gal-thumbs');
-  if (!main) return;
-  renderMainMedia(0, badgeTxt, badgeCls, promo);
-  if (media.length > 1) {
-    thumbsEl.innerHTML = media.map((m,i) => {
-      const isVid = m.type && m.type.startsWith('video');
-      return `<div class="gallery-thumb${i===0?' active':''}" onclick="selectMedia(${i})" id="thumb-${i}">
-        ${isVid
-          ? `<div class="thumb-vid"><i class="fas fa-play"></i></div>`
-          : `<img src="${m.src}" alt="">`}
-      </div>`;
-    }).join('');
-  } else {
-    thumbsEl.innerHTML = '';
-  }
+  if(!thumbsEl) return;
+  thumbsEl.innerHTML = media.length>1 ? media.map((m,i)=>{
+    const isVid = m.type&&m.type.startsWith('video');
+    return `<div class="gallery-thumb${i===0?' active':''}" onclick="selectMedia(${i},\`${bt}\`,\`${bc}\`,\`${promo}\`)">
+      ${isVid?`<div class="gallery-thumb-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="5,3 19,12 5,21"/></svg></div>`:`<img src="${m.src}" alt="">`}
+    </div>`;
+  }).join('') : '';
 }
 
-function renderMainMedia(idx, badgeTxt, badgeCls, promo) {
+function renderMainMedia(idx, bt, bc, promo) {
   const main = document.getElementById('gal-main');
-  if (!main) return;
+  if(!main) return;
   const m = productMedia[idx];
-  const isVid = m && m.type && m.type.startsWith('video');
+  const isVid = m&&m.type&&m.type.startsWith('video');
   main.innerHTML = `
-    ${badgeTxt ? `<div class="prod-badge-main ${badgeCls}">${badgeTxt}</div>` : ''}
-    ${promo ? `<div class="gallery-promo">${promo}</div>` : ''}
-    ${m
-      ? (isVid
-          ? `<video src="${m.src}" controls autoplay muted loop style="width:100%;height:100%;object-fit:cover"></video>`
-          : `<img src="${m.src}" alt="">`)
-      : `<div class="gallery-art">${knifeArt}</div>`}
+    ${bt?`<div class="gallery-badge ${bc}">${bt}</div>`:''}
+    ${promo?`<div class="gallery-promo">${promo}</div>`:''}
+    ${m?(isVid?`<video src="${m.src}" controls autoplay muted loop style="width:100%;height:100%;object-fit:cover"></video>`:`<img src="${m.src}" alt="">`):`<div class="gallery-art">${knifeArt}</div>`}
   `;
 }
 
-function selectMedia(idx) {
-  currentMediaIdx = idx;
-  const bt = document.getElementById('gal-main')?.dataset?.badge || '';
-  const bc = document.getElementById('gal-main')?.dataset?.badgecls || '';
-  const pr = document.getElementById('gal-main')?.dataset?.promo || '';
-  renderMainMedia(idx, bt, bc, pr);
+function selectMedia(idx, bt, bc, promo) {
+  renderMainMedia(idx, bt, bc, promo);
   document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
 }
 
-function renderProduct(p, settings) {
-  currentProduct = p;
-  // Extraer precio numérico (ej: "$45.000" → 45000)
-  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,'')) || 0;
-  const pct       = GL_SENA_PCT;
-  const montoSena = Math.round(precioNum * pct / 100);
-  senaMontoTotal  = precioNum;
-  const waN = (settings?.whatsapp||waNumber).replace(/\D/g,'') || '5493843458340';
-  const media = p.media && p.media.length
-    ? p.media
-    : (p.image ? [{ src: p.image, type: p.image.includes('data:video')||p.image.endsWith('.mp4')||p.image.endsWith('.webm') ? 'video/mp4' : 'image/jpeg' }] : []);
-  const bc = badgeClass[p.badge] || 'badge-avail';
-  const bt = p.badgeText || (p.badge==='avail'?'Disponible': p.badge==='custom'?'A pedido': p.badge==='intl'?'Internacional':'No disponible');
-  const specs = (p.specs||[]).map(s=>`<div class="prod-spec">${s}</div>`).join('');
-  const link = waLink(waN, p.name);
-  const linkCat = `https://wa.me/${waN}?text=Hola!%20Quiero%20ver%20el%20cat%C3%A1logo%20completo`;
-
-  document.title = `${p.name} · GL Cuchillos Artesanales`;
-
-  const html = `
-    <div class="breadcrumb">
-      <a href="index.html">Inicio</a>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      <a href="index.html#coleccion">Colección</a>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      <span>${p.name}</span>
-    </div>
-
-    <div class="prod-layout">
-      <!-- GALLERY -->
-      <div class="gallery">
-        <div class="gallery-main" id="gal-main"
-          data-badge="${bt}"
-          data-badgecls="${bc}"
-          data-promo="${p.promo||''}">
-        </div>
-        <div class="gallery-thumbs" id="gal-thumbs"></div>
-      </div>
-
-      <!-- INFO -->
-      <div class="prod-info">
-        <div class="prod-info-cat">${p.category||'Cuchillería Artesanal'}</div>
-        <h1 class="prod-info-name">${p.name}</h1>
-        ${p.description ? `<p class="prod-info-desc">${p.description}</p>` : ''}
-        ${specs ? `<div class="prod-specs">${specs}</div>` : ''}
-
-        <div class="prod-price-block">
-          <div class="prod-price-label">Precio</div>
-          <div class="prod-price-val">${p.price||'Consultar'}</div>
-          ${p.priceNote ? `<div class="prod-price-note">${p.priceNote}</div>` : ''}
-        </div>
-
-        <div class="prod-actions">
-          ${precioNum > 0 ? `
-          <button class="btn-sena" onclick="openSenaModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-            Dejar seña — ${pct}% · $\${montoSena.toLocaleString('es-AR')}
-          </button>` : ''}
-          <a href="${link}" target="_blank" class="btn-wa${precioNum > 0 ? '-outline' : ''}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            Consultar por WhatsApp
-          </a>
-          <a href="${linkCat}" target="_blank" class="btn-wa-outline">Ver catálogo completo</a>
-        </div>
-
-        <div class="prod-meta">
-          <div class="prod-meta-item"><i class="fas fa-hammer"></i>Trabajado 100% a mano</div>
-          <div class="prod-meta-item"><i class="fas fa-truck"></i>Envíos a todo Argentina y exterior</div>
-          <div class="prod-meta-item"><i class="fas fa-star"></i>Pieza única, sin producción en serie</div>
-          ${p.badge==='custom'?'<div class="prod-meta-item"><i class="fas fa-clock"></i>Tiempo de encargo: 4–6 semanas</div>':''}
-        </div>
-      </div>
-    </div>
-
-    <!-- RELATED -->
-    ${allProducts.filter(r=>r.id!==p.id&&r.active).length > 0 ? `
-    <div class="related-section">
-      <div class="sec-label">También te puede interesar</div>
-      <h2 class="sec-h2">Otras <em>piezas</em></h2>
-      <div class="related-grid">
-        ${allProducts.filter(r=>r.id!==p.id&&r.active).slice(0,3).map(r=>{
-          const rMedia = r.media&&r.media.length ? r.media[0] : (r.image ? {src:r.image,type:'image/jpeg'} : null);
-          const isVid = rMedia && rMedia.type && rMedia.type.startsWith('video');
-          return `<div class="rel-card" onclick="location.href='producto.html?id=${r.id}'">
-            <div class="rel-img">
-              ${rMedia
-                ? (isVid ? `<div style="width:100%;height:100%;background:var(--jet4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-play-circle" style="color:var(--silver);font-size:2rem;opacity:.6"></i></div>`
-                         : `<img src="${rMedia.src}" alt="${r.name}">`)
-                : knifeArt}
-            </div>
-            <div class="rel-body">
-              <div class="rel-cat">${r.category||'—'}</div>
-              <div class="rel-name">${r.name}</div>
-              <div class="rel-price">${r.price||'Consultar'}</div>
-            </div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>` : ''}
-  `;
-
-  document.getElementById('main-content').innerHTML = html;
-  // Now render gallery
-  renderGallery(media, bt, bc, p.promo||'');
-}
-
-function showNotFound() {
-  document.getElementById('main-content').innerHTML = `
-    <div class="not-found">
-      <div class="not-found-icon"><i class="fas fa-search"></i></div>
-      <h2>Producto no encontrado</h2>
-      <p>El producto que buscás no existe o fue eliminado.</p>
-      <a href="index.html#coleccion" style="margin-top:1rem;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);border:1px solid var(--silver-line);padding:.8rem 1.8rem;transition:border-color .2s;display:inline-block">
-        ← Volver al catálogo
-      </a>
-    </div>`;
-}
-
-
-/* ── MODAL SEÑA ─────────────────────────────────────────── */
+/* ── MODAL SEÑA ── */
 function openSenaModal() {
-  const p   = currentProduct;
-  const pct = GL_SENA_PCT;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
-  const monto     = Math.round(precioNum * pct / 100);
-
-  document.getElementById('sena-prod-nombre').textContent = p?.name || '';
-  document.getElementById('sena-monto-display').textContent =
-    '$' + monto.toLocaleString('es-AR');
-  document.getElementById('sena-monto-desc').textContent =
-    pct + '% del total — $' + precioNum.toLocaleString('es-AR');
-  document.getElementById('sena-error').textContent = '';
-  document.getElementById('sena-nombre').value = '';
-  document.getElementById('sena-email').value  = '';
-  document.getElementById('sena-tel').value    = '';
-  document.getElementById('sena-nota').value   = '';
-
+  const p = currentProduct;
+  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,''))||0;
+  const monto = Math.round(precioNum*GL_SENA_PCT/100);
+  document.getElementById('sena-prod-nombre').textContent = p?.name||'';
+  document.getElementById('sena-monto-display').textContent = '$'+monto.toLocaleString('es-AR');
+  document.getElementById('sena-monto-desc').textContent = GL_SENA_PCT+'% del total — $'+precioNum.toLocaleString('es-AR');
+  document.getElementById('sena-error').textContent='';
+  ['sena-nombre','sena-email','sena-tel','sena-nota'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('sena-backdrop').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('sena-nombre').focus(), 350);
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('sena-nombre').focus(),350);
 }
 
 function closeSenaModal(e) {
-  if (e && e.target !== document.getElementById('sena-backdrop') && e.type === 'click') return;
+  if(e&&e.target!==document.getElementById('sena-backdrop')&&e.type==='click') return;
   document.getElementById('sena-backdrop').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSenaModal();
-});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSenaModal()});
 
 async function pagarSena() {
   const nombre = document.getElementById('sena-nombre').value.trim();
@@ -1554,116 +652,80 @@ async function pagarSena() {
   const nota   = document.getElementById('sena-nota').value.trim();
   const errEl  = document.getElementById('sena-error');
   const btn    = document.getElementById('btn-sena-pay');
-
-  errEl.textContent = '';
-
-  if (!nombre) { errEl.textContent = 'Ingresá tu nombre completo.'; return; }
-  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
-    errEl.textContent = 'Ingresá un email válido.'; return;
-  }
-
-  const p         = currentProduct;
-  const pct       = GL_SENA_PCT;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,'')) || 0;
-
-  if (precioNum <= 0) {
-    errEl.textContent = 'Este producto no tiene precio fijo. Consultá por WhatsApp.';
-    return;
-  }
-
+  errEl.textContent='';
+  if(!nombre){errEl.textContent='Ingresá tu nombre completo.';return}
+  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){errEl.textContent='Ingresá un email válido.';return}
+  const p = currentProduct;
+  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,''))||0;
+  if(precioNum<=0){errEl.textContent='Este producto no tiene precio fijo. Consultá por WhatsApp.';return}
   btn.classList.add('loading');
-  btn.textContent = 'Conectando con Mercado Pago…';
-
+  btn.textContent='Conectando con Mercado Pago…';
   try {
-    const res = await fetch(GL_BACKEND + '/gl/sena', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        producto:        p.name,
-        precioTotal:     precioNum,
-        porcentajeSena:  pct,
-        nombre,
-        email,
-        telefono:        tel || undefined,
-        nota:            nota || undefined,
-        productoId:      p.id,
-      }),
+    const res = await fetch(GL_BACKEND+'/gl/sena',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({producto:p.name,precioTotal:precioNum,porcentajeSena:GL_SENA_PCT,nombre,email,telefono:tel||undefined,nota:nota||undefined,productoId:p.id})
     });
-
     const data = await res.json();
-
-    if (!res.ok || !data.init_point) {
-      errEl.textContent = data.error || 'Error al conectar con Mercado Pago. Intentá de nuevo.';
+    if(!res.ok||!data.init_point){
+      errEl.textContent=data.error||'Error al conectar con Mercado Pago. Intentá de nuevo.';
       btn.classList.remove('loading');
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
+      btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
       return;
     }
-
-    // Guardar datos en sessionStorage para la pantalla de confirmación
-    sessionStorage.setItem('gl_sena', JSON.stringify({
-      nombre, producto: p.name,
-      monto: data.monto_sena, pct: data.porcentaje,
-      precioTotal: precioNum,
-    }));
-
-    // Redirigir a MP
+    sessionStorage.setItem('gl_sena',JSON.stringify({nombre,producto:p.name,monto:data.monto_sena,pct:data.porcentaje,precioTotal:precioNum}));
     window.location.href = data.init_point;
-
   } catch(err) {
-    errEl.textContent = 'Sin conexión. Revisá tu internet e intentá de nuevo.';
+    errEl.textContent='Sin conexión. Revisá tu internet e intentá de nuevo.';
     btn.classList.remove('loading');
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
   }
 }
 
+/* ── BROWSER BACK/FORWARD ── */
+window.addEventListener('popstate', e => {
+  const s = e.state;
+  if(s?.view==='detail'&&s.id) {
+    const p = allProducts.find(p=>p.id===s.id);
+    if(p) showDetailView(p);
+  } else {
+    document.getElementById('view-list').style.display='block';
+    document.getElementById('view-detail').style.display='none';
+    document.getElementById('footer-back-btn').style.display='none';
+    renderList(s?.cat||catActual);
+  }
+});
+
+/* ── INIT ── */
 (async function(){
-  const params = getParams();
-  const id = params.get('id');
-  if (!id) { showNotFound(); return; }
+  const params = new URLSearchParams(window.location.search);
+  const idParam  = params.get('id');
+  const catParam = params.get('cat');
 
-  let data = null;
-  // 1. Intentar IndexedDB (admin en mismo dominio)
-  try {
-    const idb = await new Promise((res, rej) => {
-      const req = indexedDB.open('gl_cuchillos', 1);
-      req.onsuccess = e => res(e.target.result);
-      req.onerror   = e => rej(e);
-    });
-    const val = await new Promise((res, rej) => {
-      const tx  = idb.transaction('admin_data', 'readonly');
-      const req = tx.objectStore('admin_data').get('data');
-      req.onsuccess = e => res(e.target.result?.value ?? null);
-      req.onerror   = e => rej(e);
-    });
-    if (val) data = val;
-  } catch(e) {}
+  const data = await loadData();
+  allProducts = (data?.products||[]);
+  waNumber = (data?.settings?.whatsapp||WA_DEFAULT);
 
-  // 2. Fallback localStorage
-  if (!data) {
-    try {
-      const cached = localStorage.getItem('gl_data');
-      if (cached) data = JSON.parse(cached);
-    } catch(e) {}
+  document.getElementById('footer-back-btn').style.display='none';
+
+  if(idParam) {
+    // Llegó desde un link directo a un producto
+    const p = allProducts.find(p=>p.id===idParam);
+    if(p&&p.active!==false) {
+      history.replaceState({view:'detail',id:idParam},'',window.location.href);
+      showDetailView(p);
+    } else {
+      document.getElementById('detail-content').innerHTML=`<div class="not-found"><h2>Producto no encontrado</h2><p>El producto no existe o fue eliminado.</p><button class="cat-tab active" style="margin-top:2rem" onclick="goToList()">← Volver al catálogo</button></div>`;
+      document.getElementById('view-list').style.display='none';
+      document.getElementById('view-detail').style.display='block';
+    }
+  } else {
+    // Llegó desde una categoría del index o directo
+    const cat = catParam && catParam !== '' ? decodeURIComponent(catParam) : 'all';
+    history.replaceState({view:'list',cat},'',window.location.href);
+    renderList(cat);
   }
-
-  // 3. Fallback products.json publicado
-  if (!data) {
-    try {
-      const r = await fetch('products.json?t='+Date.now());
-      if (r.ok) data = await r.json();
-    } catch(e) {}
-  }
-
-  const products = data?.products || [];
-  const settings = data?.settings || {};
-  allProducts = products;
-  waNumber = (settings.whatsapp||'5493843458340');
-
-  const product = products.find(p => p.id === id);
-  if (!product || !product.active) { showNotFound(); return; }
-
-  renderProduct(product, settings);
 })();
 </script>
+
 </body>
 </html>
