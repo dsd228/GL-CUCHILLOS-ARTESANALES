@@ -942,7 +942,7 @@ transition:opacity .4s;
     muted
     playsinline
     preload="auto"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;"
+    style="position:absolute;inset:0;width:85%;height:85%;object-fit:cover;margin:auto;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.9;"
   >
     <source src="video/Prepagina.webm" type="video/webm">
   </video>
@@ -1870,7 +1870,7 @@ function renderArtisanPhoto(src) {
   if (!img) {
     img = document.createElement('img');
     img.className = 'artisan-photo';
-    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;';
+    img.style.cssText = 'position:absolute;inset:0;width:85%;height:85%;object-fit:cover;margin:auto;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;';
     visual.insertBefore(img, visual.firstChild);
   }
   img.src = src;
