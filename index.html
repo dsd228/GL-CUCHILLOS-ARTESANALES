@@ -921,7 +921,7 @@ rgba(8,8,8,.45) 70%,
 rgba(8,8,8,.55) 100%
 );
 opacity:0;pointer-events:none;
-transition:opacity .4s;
+transition:opacity .8s;
 }
 
 /* ── CATEGORÍAS ── */
@@ -942,7 +942,7 @@ transition:opacity .4s;
     muted
     playsinline
     preload="auto"
-    style="position:absolute;inset:0;width:85%;height:85%;object-fit:cover;margin:auto;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.9;"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.9;"
   >
     <source src="video/Prepagina.webm" type="video/webm">
   </video>
@@ -953,8 +953,8 @@ transition:opacity .4s;
 
   <!-- Logo centrado -->
 
-  <div style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;">
-    <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(120px,18vw,180px);filter:drop-shadow(0 0 32px rgba(200,205,214,0.35));">
+  <div style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:1rem;">
+    <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(110px,22vw,180px);height:auto;filter:drop-shadow(0 0 28px rgba(200,205,214,0.45));">
       <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".7"/>
       <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.3)" stroke-width="0.5"/>
       <text x="110" y="126" text-anchor="middle" font-family="Playfair Display, serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
@@ -977,6 +977,15 @@ transition:opacity .4s;
 
 <style>
 #gl-intro.gl-done{opacity:0;pointer-events:none;transition:opacity .9s cubic-bezier(.22,1,.36,1);}
+/* Intro video responsive */
+@media(min-width:768px){
+  #intro-video{object-position:center center;}
+}
+#gl-intro svg{
+  width:clamp(110px,20vw,180px);
+  height:auto;
+  filter:drop-shadow(0 0 28px rgba(200,205,214,0.45));
+}
 </style>
 
 <script>
@@ -987,6 +996,19 @@ transition:opacity .4s;
 
   function dismissIntro(){
     intro.classList.add('gl-done');
+
+    // Activar video de fondo en el hero
+    var heroBg = document.getElementById('hero-video-bg');
+    var heroOverlay = document.getElementById('hero-img-overlay');
+    if(heroBg){
+      heroBg.play();
+      // Fade in del video hero sincronizado con el fade out de la intro
+      setTimeout(function(){
+        heroBg.style.opacity = '0.55';
+        if(heroOverlay) heroOverlay.style.opacity = '1';
+      }, 200);
+    }
+
     setTimeout(function(){ intro.style.display='none'; document.body.style.overflow=''; }, 950);
   }
 
@@ -1048,6 +1070,11 @@ transition:opacity .4s;
 <!-- ── HERO ──────────────────────────────────────────── -->
 
 <section class="hero" id="hero">
+  <!-- Video de fondo del hero (se activa al terminar la intro) -->
+  <video id="hero-video-bg" muted loop playsinline
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 1.2s ease;pointer-events:none;z-index:0;">
+    <source src="video/Prepagina.webm" type="video/webm">
+  </video>
   <div id="hero-img-overlay"></div>
   <div class="hero-inner">
     <div class="hero-text">
