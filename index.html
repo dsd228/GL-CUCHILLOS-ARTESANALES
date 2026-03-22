@@ -1137,568 +1137,19 @@ transition:opacity .8s;
   </div>
 </section>
 
-<!-- ── INTRO SECTION (SEO CONTENT) ── -->
-
-<section style="background:var(--jet);padding:clamp(5rem,10vh,7rem) clamp(1.5rem,5vw,5rem);border-top:1px solid var(--silver-line)">
-  <div style="max-width:900px;margin:0 auto;text-align:center">
-    <h2 style="font-family:var(--sans);font-weight:200;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.2;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.5rem">Cuchillos 100% Artesanales Forjados a Mano</h2>
-    <p style="font-size:1rem;font-weight:300;color:var(--cream2);line-height:1.9;max-width:740px;margin:0 auto 2rem">En GL Cuchillos Artesanales, cada pieza es forjada manualmente por Gonzalo Londero. <strong style="color:var(--cream)">Cuchillos de calidad premium</strong> — Nakiri, parrilleros, facones, cuchillos de caza — hechos con aceros seleccionados (1075, inoxidable 440C) y maderas nobles de la región. Desde Quimilí, Santiago del Estero, Argentina, llevamos la tradición de la cuchillería artesanal a todo el país y el exterior.</p>
-    <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin-top:3rem;padding-top:2rem;border-top:1px solid var(--silver-line)">
-      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Proceso</strong>Trabajo manual 48h por pieza</div>
-      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Alcance</strong>Exportación a 5+ países</div>
-      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Personalización</strong>Grabados y materiales a medida</div>
-      <div><strong style="display:block;color:var(--silver);margin-bottom:.3rem">Garantía</strong>Piezas duraderas para generaciones</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── VIDEO TALLER ── -->
-
-<section id="video-taller" style="background:var(--jet);border-top:1px solid var(--silver-line);position:relative;overflow:hidden;">
-
-  <!-- Etiqueta superior -->
-
-  <div style="position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:1.5rem clamp(1.5rem,5vw,5rem);">
-    <div style="font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,205,214,.6);display:flex;align-items:center;gap:.8rem;">
-      <span style="width:22px;height:1px;background:var(--silver);display:inline-block;"></span>
-      El taller · En acción
-    </div>
-    <div style="font-size:8px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,205,214,.3);">
-      Quimilí · Santiago del Estero · Argentina
-    </div>
-  </div>
-
-  <!-- Contenedor video -->
-
-  <div style="position:relative;width:100%;overflow:hidden;">
-
-```
-<!-- Overlay cinemático superior -->
-<div style="position:absolute;top:0;left:0;right:0;height:180px;z-index:2;background:linear-gradient(to bottom, var(--jet) 0%, rgba(8,8,8,.7) 40%, transparent 100%);pointer-events:none;"></div>
-
-<!-- Overlay cinemático inferior -->
-<div style="position:absolute;bottom:0;left:0;right:0;height:220px;z-index:2;background:linear-gradient(to top, var(--jet) 0%, rgba(8,8,8,.8) 50%, transparent 100%);pointer-events:none;"></div>
-
-<!-- Overlay lateral izquierdo -->
-<div style="position:absolute;top:0;left:0;bottom:0;width:120px;z-index:2;background:linear-gradient(to right, var(--jet) 0%, transparent 100%);pointer-events:none;"></div>
-
-<!-- Overlay lateral derecho -->
-<div style="position:absolute;top:0;right:0;bottom:0;width:120px;z-index:2;background:linear-gradient(to left, var(--jet) 0%, transparent 100%);pointer-events:none;"></div>
-
-<!-- VIDEO — archivo video-taller.webm (fuente principal) -->
-<video
-  id="taller-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="metadata"
-  style="width:100%;max-height:85vh;object-fit:cover;display:block;opacity:.75;"
->
-  <source src="video/Prepagina.webm" type="video/webm">
-</video>
-
-<!-- Texto superpuesto central -->
-<div style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:2rem;">
-  <div style="font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(200,205,214,.5);margin-bottom:1.2rem;">
-    Gonzalo Londero · Maestro Cuchillero
-  </div>
-  <h2 style="font-family:'Josefin Sans',sans-serif;font-weight:100;font-size:clamp(2.5rem,6vw,6rem);color:var(--cream);line-height:1;letter-spacing:.18em;text-transform:uppercase;text-align:center;text-shadow:0 2px 40px rgba(0,0,0,.8);">
-    El fuego<br><span style="font-weight:200;color:var(--silver);">da forma.</span>
-  </h2>
-  <div style="width:40px;height:1px;background:var(--silver);margin-top:2rem;opacity:.6;"></div>
-</div>
-
-<!-- Botón play/pause -->
-<button
-  id="video-toggle"
-  style="position:absolute;bottom:2rem;right:clamp(1.5rem,5vw,5rem);z-index:5;background:rgba(8,8,8,.7);border:1px solid rgba(200,205,214,.25);color:var(--silver);width:44px;height:44px;display:grid;place-items:center;cursor:none;backdrop-filter:blur(8px);transition:background .2s,border-color .2s;"
-  aria-label="Pausar/reproducir video"
->
-  <svg id="video-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-  <svg id="video-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="5,3 19,12 5,21"/></svg>
-</button>
-```
-
-  </div>
-
-  <!-- Banda de datos -->
-
-  <div style="display:flex;align-items:center;justify-content:center;gap:clamp(2rem,5vw,5rem);flex-wrap:wrap;padding:2.5rem clamp(1.5rem,4vw,4rem);border-top:1px solid var(--silver-line);border-bottom:1px solid var(--silver-line);background:rgba(200,205,214,.02);">
-    <div style="text-align:center;">
-      <div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">48h</div>
-      <div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Por pieza</div>
-    </div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <div style="text-align:center;">
-      <div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">100%</div>
-      <div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Manual</div>
-    </div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <div style="text-align:center;">
-      <div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">∞</div>
-      <div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Piezas únicas</div>
-    </div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20el%20video%20y%20quiero%20consultar" target="_blank"
-       style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 2rem;background:var(--silver);color:var(--jet);display:inline-flex;align-items:center;gap:.6rem;transition:background .2s;text-decoration:none;">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-      Consultar por WhatsApp
-    </a>
-  </div>
-
-</section>
-
-<script>
-// ── CONTROL PLAY/PAUSE VIDEO ──
-(function(){
-  var vid = document.getElementById('taller-video');
-  var btn = document.getElementById('video-toggle');
-  var iconPause = document.getElementById('video-icon-pause');
-  var iconPlay  = document.getElementById('video-icon-play');
-  if(!vid||!btn) return;
-
-  btn.addEventListener('click', function(){
-    if(vid.paused){
-      vid.play();
-      iconPause.style.display = '';
-      iconPlay.style.display  = 'none';
-    } else {
-      vid.pause();
-      iconPause.style.display = 'none';
-      iconPlay.style.display  = '';
-    }
-  });
-
-  // Pausa automática cuando sale de pantalla
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){ vid.pause(); iconPause.style.display='none'; iconPlay.style.display=''; }
-      else { vid.play().catch(function(){}); iconPause.style.display=''; iconPlay.style.display='none'; }
-    });
-  }, { threshold: 0.2 });
-  io.observe(vid);
-})();
-</script>
-
-<!-- ── NUMBERS BAND ── -->
-
-<div class="numbers">
-  <div class="numbers-inner">
-    <div class="num-item rv">
-      <span class="num-n">+10</span>
-      <span class="num-l">Años de forja</span>
-      <div class="num-bar"></div>
-    </div>
-    <div class="num-item rv d1">
-      <span class="num-n">∞</span>
-      <span class="num-l">Piezas únicas</span>
-      <div class="num-bar"></div>
-    </div>
-    <div class="num-item rv d2">
-      <span class="num-n">5+</span>
-      <span class="num-l">Países de exportación</span>
-      <div class="num-bar"></div>
-    </div>
-    <div class="num-item rv d3">
-      <span class="num-n">100%</span>
-      <span class="num-l">Satisfacción garantizada</span>
-      <div class="num-bar"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ── ABOUT ── -->
-
-<section class="about" id="historia">
-  <div class="about-visual rv fade">
-    <svg class="about-visual-art" viewBox="0 0 260 480" fill="none">
-      <defs>
-        <linearGradient id="abladeG" x1="130" y1="32" x2="248" y2="248" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="rgba(200,205,214,.08)"/>
-          <stop offset="50%" stop-color="rgba(200,205,214,.45)"/>
-          <stop offset="100%" stop-color="rgba(200,205,214,.25)"/>
-        </linearGradient>
-      </defs>
-      <path d="M130 32 L240 186 Q249 208 237 220 L130 213Z" fill="url(#abladeG)" stroke="rgba(200,205,214,.15)" stroke-width=".5"/>
-      <rect x="122" y="210" width="16" height="11" rx="1" fill="rgba(200,205,214,.2)" stroke="rgba(200,205,214,.1)" stroke-width=".5"/>
-      <path d="M124 221 Q123 286 126 364 L136 364 Q138 286 136 221Z" fill="rgba(200,205,214,.1)"/>
-      <circle cx="130" cy="255" r="4" fill="rgba(200,205,214,.4)" stroke="rgba(200,205,214,.2)" stroke-width="1"/>
-      <circle cx="130" cy="305" r="4" fill="rgba(200,205,214,.4)" stroke="rgba(200,205,214,.2)" stroke-width="1"/>
-      <circle cx="130" cy="355" r="4" fill="rgba(200,205,214,.4)" stroke="rgba(200,205,214,.2)" stroke-width="1"/>
-    </svg>
-    <div class="about-visual-badge">Maestro Cuchillero</div>
-  </div>
-  <div class="about-text">
-    <div class="sec-label rv">Historia · Artesano</div>
-    <h2 class="sec-h2 rv d1">El artesano<br>detrás <em>del filo.</em></h2>
-    <div class="about-body rv d2">
-      <p>Gonzalo Londero es un <strong>maestro cuchillero</strong> de Quimilí, Santiago del Estero, Argentina. Más de una década forjando piezas únicas a mano — lo que empezó como pasión se convirtió en un oficio de precisión y respeto profundo por el material.</p>
-      <p>Cada cuchillo que sale de su taller lleva horas de trabajo silencioso: el golpe preciso del martillo sobre el acero al rojo vivo, el lijado paciente del mango, el afilado final que convierte el metal bruto en un instrumento verdadero.</p>
-      <p>Las piezas de GL Cuchillos llegan a toda Argentina y al exterior. Algunas viajan a Alemania, otras recorren el país para quienes entienden que <strong>lo bueno no se fabrica en serie.</strong></p>
-    </div>
-    <div class="about-sig rv d3">
-      <div class="about-sig-av">G</div>
-      <div>
-        <div class="about-sig-name">Gonzalo Londero</div>
-        <div class="about-sig-role">Maestro cuchillero · Quimilí, Santiago del Estero, Argentina</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── COLLECTION BANNER ── -->
-
-<div class="collection-banner">
-  <span class="collection-banner-text">Nueva colección disponible — Catálogo 2025</span>
-  <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20ver%20el%20catálogo%20completo" class="collection-banner-link" target="_blank" id="catalogo-link">Ver todo el catálogo</a>
-</div>
-
-<!-- ── PRODUCTS ── -->
-
 <!-- ── CATEGORÍAS ── -->
 
-<section id="categorias" style="padding:5rem 0;background:var(--jet);">
+<section id="categorias" style="padding:clamp(3rem,6vh,5rem) 0 clamp(4rem,8vh,6rem);background:var(--jet);">
   <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);">
     <div class="rv" style="margin-bottom:3rem;">
       <div class="sec-label">Colección</div>
       <h2 class="sec-h2" style="max-width:520px;">Por tipo de <em>pieza</em></h2>
     </div>
-    <div id="cat-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--silver-line);">
+    <div id="cat-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--silver-line);">
       <!-- Cards generadas por JS -->
     </div>
   </div>
 </section>
-
-<section class="products" id="coleccion">
-  <div class="products-header">
-    <div>
-      <div class="sec-label rv">Colección</div>
-      <h2 class="sec-h2 rv d1">Piezas <em>únicas,</em><br>hechas para durar.</h2>
-    </div>
-    <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20ver%20el%20catálogo%20completo" class="btn-outline rv" target="_blank" id="catalogo-link2">Catálogo completo</a>
-  </div>
-  <div id="prod-grid"></div>
-</section>
-
-<!-- ── EDITORIAL STRIP ── -->
-
-<div class="editorial">
-  <div class="editorial-inner">
-    <span class="silver-dec"></span>
-    <p class="editorial-quote rv">"No hay catálogo.<br>Hay <em>conversación.</em><br>Cada pieza empieza<br>con lo que necesitás."</p>
-    <div class="editorial-attr rv d2">— Gonzalo Londero · Maestro cuchillero</div>
-  </div>
-</div>
-
-<!-- ── PROCESS ── -->
-
-<section class="process" id="proceso">
-  <div class="process-inner">
-    <div class="process-header">
-      <div>
-        <div class="sec-label rv">El proceso</div>
-        <h2 class="sec-h2 rv d1">Del acero bruto<br>a la <em>pieza final.</em></h2>
-      </div>
-      <p class="rv d2" style="font-size:.88rem;font-weight:300;color:var(--cream2);max-width:320px;line-height:1.8;text-align:right">Cada paso es manual. Cada decisión es de Gonzalo. No existe la pieza idéntica.</p>
-    </div>
-    <div class="process-grid has-5">
-      <div class="step rv">
-        <div class="step-n">01</div>
-        <h4 class="step-h">Selección del acero</h4>
-        <p class="step-p">El uso final determina el material. No es lo mismo un cuchillo de caza que uno de cocina. La elección correcta del acero define todo lo que viene después.</p>
-      </div>
-      <div class="step rv d1">
-        <div class="step-n">02</div>
-        <h4 class="step-h">Artesanía a temperatura</h4>
-        <p class="step-p">El acero se lleva al rojo vivo y se golpea en el yunque. Es el momento más físico y crítico. Una temperatura incorrecta puede arruinar la pieza antes de empezar.</p>
-      </div>
-      <div class="step rv d2">
-        <div class="step-n">03</div>
-        <h4 class="step-h">Temple y revenido</h4>
-        <p class="step-p">El temple endurece el acero. El revenido reduce la fragilidad. Este equilibrio es el secreto de un buen filo: duro sin quebrarse. Gonzalo lo hace a mano.</p>
-      </div>
-      <div class="step rv d3">
-        <div class="step-n">04</div>
-        <h4 class="step-h">Conformado del mango</h4>
-        <p class="step-p">La madera se corta y pule a medida. Los remaches de bronce se colocan uno a uno. El equilibrio se chequea a mano. Si no se siente bien, se vuelve a trabajar.</p>
-      </div>
-      <div class="step rv d4" style="grid-column:1/-1">
-        <div class="step-n">05</div>
-        <h4 class="step-h">Afilado y acabado final</h4>
-        <p class="step-p">Piedras de grano progresivo hasta un filo que corta papel. Acabado satinado, mate o espejado. Cada pieza se inspecciona a mano antes de salir del taller. Tiempo promedio: <strong style="color:var(--silver)">48 horas de trabajo</strong>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── MATERIALS ── -->
-
-<section class="materials" id="materiales">
-  <div class="materials-inner">
-    <div class="materials-header">
-      <div class="sec-label rv">Los materiales</div>
-      <h2 class="sec-h2 rv d1">Acero y madera.<br><em>Sin compromiso.</em></h2>
-    </div>
-    <div class="mat-grid">
-      <div class="mat-item rv">
-        <div class="mat-icon">
-          <svg width="22" height="22" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M22 4 L40 22 L22 40 L4 22 Z"/><path d="M22 10 L34 22 L22 34 L10 22 Z"/></svg>
-        </div>
-        <h3 class="mat-h">Acero <em>1075</em></h3>
-        <p class="mat-body">Acero al carbono de media aleación. Alta tenacidad, excelente retención de filo. El preferido para caza, parrilla y campo.</p>
-        <div class="mat-tags"><span class="mat-tag">Alta dureza</span><span class="mat-tag">Fácil afilado</span><span class="mat-tag">Uso intensivo</span></div>
-      </div>
-      <div class="mat-item rv d1">
-        <div class="mat-icon">
-          <svg width="22" height="22" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="22" cy="22" r="18"/><circle cx="22" cy="22" r="8"/></svg>
-        </div>
-        <h3 class="mat-h">Acero <em>inoxidable</em></h3>
-        <p class="mat-body">440C y alto carbono inox. Resistencia a la corrosión sin sacrificar filo. Ideal para cocina profesional y regalos.</p>
-        <div class="mat-tags"><span class="mat-tag">Anticorrosión</span><span class="mat-tag">Cocina</span><span class="mat-tag">Regalo</span></div>
-      </div>
-      <div class="mat-item rv d2">
-        <div class="mat-icon">
-          <svg width="22" height="22" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 38 L12 16 Q12 6 22 4 Q32 6 32 16 L32 38"/><path d="M8 38 L36 38"/></svg>
-        </div>
-        <h3 class="mat-h">Maderas <em>nobles</em></h3>
-        <p class="mat-body">Quebracho colorado, lapacho, guayacán y asta natural. Cada mango se selecciona a mano — tan durable como el acero.</p>
-        <div class="mat-tags"><span class="mat-tag">Quebracho</span><span class="mat-tag">Lapacho</span><span class="mat-tag">Guayacán</span><span class="mat-tag">Asta</span></div>
-      </div>
-      <div class="mat-item rv d3">
-        <div class="mat-icon">
-          <svg width="22" height="22" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M8 36 Q8 28 14 24 Q20 20 22 12 Q24 20 30 24 Q36 28 36 36"/><path d="M6 36 L38 36"/></svg>
-        </div>
-        <h3 class="mat-h">Acabados <em>artesanales</em></h3>
-        <p class="mat-body">Remaches de bronce o alpaca. Grabados en hoja con nombre o diseño personalizado. Vainas de cuero cosidas a mano.</p>
-        <div class="mat-tags"><span class="mat-tag">Remaches bronce</span><span class="mat-tag">Grabado</span><span class="mat-tag">Vaina cuero</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-
-<section class="testimonials" id="testimonios">
-  <div class="testimonials-inner">
-    <div class="sec-label rv">Testimonios</div>
-    <h2 class="sec-h2 rv d1">Lo que dicen<br><em>quienes ya tienen una.</em></h2>
-    <div class="testi-grid">
-      <div class="testi rv">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">El facón es una obra de arte. Mango de guayacán, hoja brillante y equilibrio perfecto. En el asado todos me preguntaron de dónde lo saqué.</p>
-        <div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Roberto M.</div><div class="testi-loc">Tucumán, Argentina</div></div></div>
-      </div>
-      <div class="testi rv d1">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">El nakiri llegó a Alemania en perfecto estado. La calidad supera a cuchillos europeos que costaron el doble. Gonzalo es un artista del acero.</p>
-        <div class="testi-author"><div class="testi-av">M</div><div><div class="testi-name">Michael H.</div><div class="testi-loc">Múnich, Alemania 🇩🇪</div></div></div>
-      </div>
-      <div class="testi rv d2">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">Trabajo en campo y necesitaba algo que aguante. El cuchillo de caza lleva dos años de uso intenso y sigue perfecto. Filo, balance y material de primera.</p>
-        <div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">Juan P.</div><div class="testi-loc">Quimilí, Santiago del Estero, Argentina</div></div></div>
-      </div>
-      <div class="testi rv d3">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">Encargué un set de mesa para regalarle a mi papá. Llegó impecable con una presentación increíble. Lloramos todos. Vale cada centavo.</p>
-        <div class="testi-author"><div class="testi-av">C</div><div><div class="testi-name">Carla V.</div><div class="testi-loc">Buenos Aires, Argentina</div></div></div>
-      </div>
-      <div class="testi rv d4">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">Gonzalo es muy atento, explica cada detalle y cumple los tiempos. El resultado superó mis expectativas. Ya encargué la segunda pieza.</p>
-        <div class="testi-author"><div class="testi-av">L</div><div><div class="testi-name">Lucas F.</div><div class="testi-loc">Córdoba, Argentina</div></div></div>
-      </div>
-      <div class="testi rv d5">
-        <div class="testi-stars"><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span><span class="testi-star"></span></div>
-        <div class="testi-open">"</div>
-        <p class="testi-quote">El santoku es exactamente lo que quería. Corte limpio, mango perfecto en la mano y un acabado de exhibición. Para siempre.</p>
-        <div class="testi-author"><div class="testi-av">A</div><div><div class="testi-name">Ana G.</div><div class="testi-loc">Mendoza, Argentina</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ── -->
-
-<section class="faq" id="faq">
-  <div class="faq-inner">
-    <div class="faq-side">
-      <div class="sec-label rv">Preguntas</div>
-      <h2 class="sec-h2 rv d1" style="font-size:clamp(1.8rem,3.5vw,3rem)">Lo que <em>todos</em><br>quieren saber.</h2>
-      <p class="rv d2">¿Tenés dudas? Si tu consulta no está acá, escribinos directo por WhatsApp.</p>
-      <a href="https://wa.me/5493843458340?text=Hola!%20Tengo%20una%20consulta" target="_blank" class="btn-silver rv d3" style="display:inline-flex;margin-top:.5rem" id="faq-wa">Consultar ahora</a>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item rv"><span class="faq-n">01</span><div><h4 class="faq-q">¿Cuánto tarda un encargo personalizado?</h4><p class="faq-a">Depende de la complejidad. Una pieza simple: 2–3 semanas. Sets o piezas elaboradas con grabado: 4–8 semanas. Siempre avisamos el tiempo exacto antes de confirmar.</p></div></div>
-      <div class="faq-item rv d1"><span class="faq-n">02</span><div><h4 class="faq-q">¿Puedo elegir el tipo de madera y acero?</h4><p class="faq-a">Sí. Tenemos varios tipos de acero (1075, 440C, inox. alto carbono) y maderas (quebracho, lapacho, guayacán, asta natural). Te asesoramos según el uso.</p></div></div>
-      <div class="faq-item rv d2"><span class="faq-n">03</span><div><h4 class="faq-q">¿Hacen grabados personalizados?</h4><p class="faq-a">Sí — iniciales, nombres, fechas o diseños en la hoja o el mango. Muy pedido para regalos. Consultanos los detalles por WhatsApp según la pieza.</p></div></div>
-      <div class="faq-item rv d3"><span class="faq-n">04</span><div><h4 class="faq-q">¿Tienen precios fijos?</h4><p class="faq-a">No, porque cada pieza es única. El precio varía según materiales, tiempo de trabajo y extras. Respondemos con presupuesto claro ese mismo día.</p></div></div>
-      <div class="faq-item rv d4"><span class="faq-n">05</span><div><h4 class="faq-q">¿Envían al exterior?</h4><p class="faq-a">Sí. Ya enviamos a Alemania, Uruguay y Chile. El envío internacional se coordina directamente con el comprador. Escribinos y lo resolvemos juntos.</p></div></div>
-      <div class="faq-item rv d5"><span class="faq-n">06</span><div><h4 class="faq-q">¿Cómo se cuida un cuchillo artesanal?</h4><p class="faq-a">Con piedra o chaira de calidad. No dejar sumergido en agua. Los mangos de madera se benefician de aceite de linaza ocasional. Te explicamos todo con la entrega.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SHIPPING ── -->
-
-<section class="shipping" id="envios">
-  <div class="shipping-inner">
-    <div>
-      <div class="sec-label rv">Envíos</div>
-      <h2 class="sec-h2 rv d1" style="font-size:clamp(2rem,4vw,3.5rem)">Llegamos<br>a donde <em>estés.</em></h2>
-      <div class="shipping-feats rv d2">
-        <div class="shipping-feat"><div class="shipping-feat-dot"></div><p class="shipping-feat-text"><strong>Argentina completa</strong> — OCA, Andreani y puerta a puerta.</p></div>
-        <div class="shipping-feat"><div class="shipping-feat-dot"></div><p class="shipping-feat-text"><strong>Exportación confirmada</strong> — Alemania, Uruguay, Chile.</p></div>
-        <div class="shipping-feat"><div class="shipping-feat-dot"></div><p class="shipping-feat-text"><strong>Packaging seguro</strong> — Cada pieza sale protegida y lista para viajar.</p></div>
-        <div class="shipping-feat"><div class="shipping-feat-dot"></div><p class="shipping-feat-text"><strong>Seguimiento real</strong> — Compartimos número de rastreo y novedades.</p></div>
-      </div>
-      <div class="shipping-countries rv d3">
-        <span class="country-tag">Bs. Aires</span>
-        <span class="country-tag">Santiago del Estero</span>
-        <span class="country-tag">Córdoba</span>
-        <span class="country-tag">Mendoza</span>
-        <span class="country-tag">Patagonia</span>
-        <span class="country-tag">Tucumán</span>
-        <span class="country-tag">Alemania 🇩🇪</span>
-        <span class="country-tag">Uruguay</span>
-        <span class="country-tag">Chile</span>
-      </div>
-    </div>
-    <div class="shipping-map rv d2">
-      <svg viewBox="0 0 200 340" fill="none">
-        <path d="M85 10 L130 12 L145 28 L148 55 L162 68 L165 90 L155 110 L162 130 L155 155 L148 165 L152 180 L145 200 L138 215 L130 228 L118 242 L105 255 L95 268 L88 280 L82 295 L78 315 L75 330 L72 315 L68 295 L65 278 L60 262 L55 248 L52 235 L55 222 L48 208 L45 192 L48 178 L42 162 L38 145 L42 128 L38 112 L45 92 L50 72 L60 58 L68 42 L78 26 Z" stroke="rgba(200,205,214,.5)" stroke-width="1.2" fill="rgba(200,205,214,.04)"/>
-        <circle cx="75" cy="95" r="5" fill="var(--silver)" opacity=".9"/>
-        <circle cx="75" cy="95" r="11" fill="none" stroke="var(--silver)" stroke-width="1" opacity=".25"/>
-        <circle cx="75" cy="95" r="18" fill="none" stroke="var(--silver)" stroke-width=".5" opacity=".12"/>
-        <text x="83" y="99" font-family="Josefin Sans, sans-serif" font-size="7" fill="rgba(200,205,214,.8)" font-weight="600" letter-spacing=".1em" text-transform="uppercase">Santiago del Estero</text>
-        <circle cx="90" cy="195" r="3" fill="rgba(200,205,214,.5)"/>
-        <text x="97" y="199" font-family="Josefin Sans, sans-serif" font-size="6.5" fill="rgba(200,205,214,.4)">Bs. As.</text>
-        <circle cx="74" cy="168" r="2.5" fill="rgba(200,205,214,.4)"/>
-        <text x="42" y="162" font-family="Josefin Sans, sans-serif" font-size="6.5" fill="rgba(200,205,214,.4)">Córdoba</text>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA ── -->
-
-<section class="cta-section" id="contacto">
-  <div class="cta-inner">
-    <div class="cta-label rv">Hablemos</div>
-    <h2 class="cta-h2 rv d1">Tu pieza<br><em>empieza hoy.</em></h2>
-    <p class="cta-sub rv d2">No hay catálogo. Hay conversación. Contanos qué necesitás.</p>
-    <div class="cta-acts rv d3">
-      <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" target="_blank" class="btn-wa" id="cta-wa">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-        Escribir a Gonzalo
-      </a>
-      <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="btn-outline" id="cta-ig">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-        @gonzalo.londero.3
-      </a>
-    </div>
-    <div class="cta-contacts rv d4">
-      <div>
-        <div class="cta-contact-l">WhatsApp</div>
-        <a href="tel:+5493843458340" class="cta-contact-v" id="cta-wa-number">3843-458340</a>
-      </div>
-      <div style="width:1px;background:var(--silver-line)"></div>
-      <div>
-        <div class="cta-contact-l">Instagram</div>
-        <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="cta-contact-v" id="cta-ig-handle">@gonzalo.londero.3</a>
-      </div>
-      <div style="width:1px;background:var(--silver-line)"></div>
-      <div>
-        <div class="cta-contact-l">Facebook</div>
-        <a href="https://www.facebook.com/Gonzafcf" target="_blank" class="cta-contact-v" id="cta-fb">Gonzalo Londero</a>
-      </div>
-      <div style="width:1px;background:var(--silver-line)"></div>
-      <div>
-        <div class="cta-contact-l">Envíos</div>
-        <span class="cta-contact-v">Argentina · Exterior</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
-
-<footer>
-  <div class="footer-inner">
-    <div class="foot-top">
-      <div>
-        <div class="foot-brand-monogram">GL</div>
-        <div class="foot-brand-name">Cuchillos Artesanales</div>
-        <p class="foot-brand-desc">Trabajados a mano por Gonzalo Londero desde Quimilí, Santiago del Estero, Argentina. Piezas únicas para quienes entienden que lo bueno no se fabrica en serie.</p>
-        <div class="foot-soc">
-          <a href="https://www.instagram.com/gonzalo.londero.3" target="_blank" class="soc" aria-label="Instagram">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </a>
-          <a href="https://www.facebook.com/Gonzafcf" target="_blank" class="soc" aria-label="Facebook">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-          <a href="https://wa.me/5493843458340" target="_blank" class="soc" aria-label="WhatsApp">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="foot-col">
-        <h5>Colección</h5>
-        <ul id="footer-products">
-          <li><a href="#coleccion">Juego Parrillero XL</a></li>
-          <li><a href="#coleccion">Cuchillo de Caza</a></li>
-          <li><a href="#coleccion">Nakiri Chef</a></li>
-          <li><a href="#coleccion">Facón Gaucho</a></li>
-          <li><a href="#coleccion">Santoku Artesanal</a></li>
-          <li><a href="#coleccion">Set de Mesa</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Navegación</h5>
-        <ul>
-          <li><a href="#historia">El Artesano</a></li>
-          <li><a href="#proceso">El Proceso</a></li>
-          <li><a href="#materiales">Materiales</a></li>
-          <li><a href="#testimonios">Testimonios</a></li>
-          <li><a href="#faq">Preguntas frecuentes</a></li>
-          <li><a href="#envios">Envíos</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Contacto</h5>
-        <address>
-          <div>
-            <strong>WhatsApp</strong>
-            <p><a href="tel:+5493843458340">3843-458340</a></p>
-          </div>
-          <div>
-            <strong>Instagram</strong>
-            <p><a href="https://www.instagram.com/gonzalo.londero.3" target="_blank">@gonzalo.londero.3</a></p>
-          </div>
-          <div>
-            <strong>Facebook</strong>
-            <p><a href="https://www.facebook.com/Gonzafcf" target="_blank" id="footer-fb-name">Gonzalo Londero</a></p>
-          </div>
-          <div>
-            <strong>Ubicación</strong>
-            <p>Quimilí, Santiago del Estero, Argentina</p>
-          </div>
-        </address>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span class="foot-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · Todos los derechos reservados</span>
-      <span class="foot-made">Forjado con fuego · Quimilí, Santiago del Estero, Argentina</span>
-    </div>
-  </div>
-</footer>
-
 <!-- ── WA FLOAT ── -->
 
 <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" class="wa-float" target="_blank" id="wa-float">
@@ -1853,13 +1304,20 @@ function renderHeroImage(heroImage){
 
 /* ── CATEGORÍAS ── */
 const CAT_DEFS = [
-  { id:'all',       label:'Todos',            icon:'⚔', desc:'Ver toda la colección' },
-  { id:'Parrilla & Asado', label:'Parrilla & Asado', icon:'🔥', desc:'Sets para asadores exigentes' },
-  { id:'Caza & Campo',     label:'Caza & Campo',     icon:'🌿', desc:'Robustez para el trabajo real' },
-  { id:'Cocina Profesional',label:'Cocina',          icon:'👨‍🍳', desc:'Precisión para la cocina' },
-  { id:'Tradición Gaucha', label:'Tradición Gaucha', icon:'🐄', desc:'El facon y la identidad criolla' },
-  { id:'Diseño Exclusivo',  label:'Diseño Exclusivo', icon:'✨', desc:'Piezas únicas de colección' },
-  { id:'Cocina & Regalo',   label:'Regalo',           icon:'🎁', desc:'Ideales para regalar' },
+  { id:'all', label:'Todos', desc:'Ver toda la colección',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>` },
+  { id:'Parrilla & Asado', label:'Parrilla & Asado', desc:'Sets para asadores exigentes',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v4"/><path d="M12 3v4"/><path d="M16 3v4"/><path d="M4 9h16"/><path d="M6 9v5a6 6 0 0 0 12 0V9"/><path d="M12 20v2"/><path d="M9 22h6"/></svg>` },
+  { id:'Caza & Campo', label:'Caza & Campo', desc:'Robustez para el trabajo real',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l7-7"/><path d="M10 14l4-4"/><path d="M14 10l2-5 5-2-2 5z"/><circle cx="7" cy="17" r="1" fill="currentColor"/></svg>` },
+  { id:'Cocina Profesional', label:'Cocina', desc:'Precisión para la cocina',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>` },
+  { id:'Tradición Gaucha', label:'Tradición Gaucha', desc:'El facón y la identidad criolla',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 7v5c0 5.25 3.5 10.14 8 11.36C16.5 22.14 20 17.25 20 12V7z"/></svg>` },
+  { id:'Diseño Exclusivo', label:'Diseño Exclusivo', desc:'Piezas únicas de colección',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>` },
+  { id:'Cocina & Regalo', label:'Regalo', desc:'Ideales para regalar',
+    icon:`<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>` },
 ];
 
 let catActual = 'all';
@@ -1876,11 +1334,11 @@ function renderCategories(products){
   grid.innerHTML = cats.map(cat => {
     const n = cat.id==='all' ? products.filter(p=>p.active!==false).length : (counts[cat.id]||0);
     const active = catActual===cat.id ? 'style="background:var(--jet3);border-color:var(--silver);"' : '';
-    return `<div class="cat-card rv" ${active} onclick="filterCat('${cat.id}')" style="background:var(--jet2);border:1px solid var(--silver-line);padding:2.5rem 2rem;cursor:pointer;transition:background .25s,border-color .25s;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;">
+    return `<div class="cat-card rv" ${active} onclick="filterCat('${cat.id}')" style="background:var(--jet2);border:1px solid var(--silver-line);padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,4vw,3rem);cursor:pointer;transition:background .25s,border-color .25s;min-height:clamp(220px,30vh,320px);display:flex;flex-direction:column;justify-content:space-between;">
       <div>
-        <div style="font-size:2.5rem;margin-bottom:1rem;">${cat.icon}</div>
+        <div style="color:var(--silver);margin-bottom:1.4rem;opacity:.85;">${cat.icon}</div>
         <div style="font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--silver3);margin-bottom:.5rem;">${cat.desc}</div>
-        <h3 style="font-family:var(--serif);font-size:1.6rem;font-weight:400;font-style:italic;color:var(--cream);line-height:1.1;">${cat.label}</h3>
+        <h3 style="font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;font-style:italic;color:var(--cream);line-height:1.1;">${cat.label}</h3>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--silver-line);">
         <span style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);">${n} pieza${n!==1?'s':''}</span>
@@ -1893,10 +1351,11 @@ function renderCategories(products){
 }
 
 function filterCat(cat){
-  catActual = cat;
-  renderCategories(window._allProducts||[]);
-  renderProducts(window._allProducts||[], cat);
-  document.getElementById('coleccion').scrollIntoView({behavior:'smooth'});
+  if(cat === 'all'){
+    window.location.href = 'producto.html';
+  } else {
+    window.location.href = 'producto.html?cat=' + encodeURIComponent(cat);
+  }
 }
 
 /* ── DATA LOADER ── */
@@ -1911,12 +1370,11 @@ function filterCat(cat){
   ];
   try{
     const res=await fetch('products.json?t='+Date.now());
-    if(!res.ok){renderProducts(fallback);return}
+    if(!res.ok){renderCategories(fallback);return}
     const data=await res.json();
     const prods=data.products||[];
     window._allProducts = prods.length?prods:fallback;
     renderCategories(window._allProducts);
-    renderProducts(window._allProducts, catActual);
     const s=data.settings||{};
     if(s.heroImage)renderHeroImage(s.heroImage);
     if(s.artisanPhoto)renderArtisanPhoto(s.artisanPhoto);
@@ -1949,7 +1407,7 @@ function filterCat(cat){
     }
   }catch(e){
     console.warn('products.json no disponible');
-    window._allProducts=fallback; renderCategories(fallback); renderProducts(fallback,catActual);
+    window._allProducts=fallback; renderCategories(fallback);
   }
 })();
 
