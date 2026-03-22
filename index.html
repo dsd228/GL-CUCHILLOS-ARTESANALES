@@ -202,10 +202,10 @@ repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(200,205,214,
 repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(200,205,214,.03) 59px, rgba(200,205,214,.03) 60px);
 }
 .hero-inner{
-flex:1;display:grid;grid-template-columns:1fr 1fr;
+flex:1;display:grid;grid-template-columns:1fr;
 align-items:center;
 padding:clamp(6rem,12vh,9rem) clamp(1.5rem,5vw,5rem) clamp(3rem,6vh,5rem);
-position:relative;z-index:3;gap:4rem;max-width:1400px;width:100%;margin:0 auto;
+position:relative;z-index:3;max-width:900px;width:100%;margin:0 auto;
 }
 .hero-label{
 font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
@@ -1034,7 +1034,19 @@ transition:opacity .8s;
 
 <nav id="nav">
   <div class="nav-brand">
-    <span class="nav-monogram">GL</span>
+    <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(200,205,214,0.2));">
+      <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".7"/>
+      <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.3)" stroke-width="0.5"/>
+      <text x="110" y="126" text-anchor="middle" font-family="Playfair Display, serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
+      <path id="navTopArc" d="M 28 110 A 82 82 0 0 1 192 110" fill="none"/>
+      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+        <textPath href="#navTopArc" startOffset="50%" text-anchor="middle">CUCHILLOS ARTESANALES</textPath>
+      </text>
+      <path id="navBottomArc" d="M 28 110 A 82 82 0 0 0 192 110" fill="none"/>
+      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+        <textPath href="#navBottomArc" startOffset="50%" text-anchor="middle">IND. ARGENTINA</textPath>
+      </text>
+    </svg>
     <div class="nav-brand-text">
       <span class="nav-brand-name">Cuchillos Artesanales</span>
       <span class="nav-brand-sub">Santiago del Estero · Argentina · Est. 2012</span>
@@ -1083,75 +1095,7 @@ transition:opacity .8s;
       <p class="hero-desc">Cuchillos artesanales forjados uno a uno por Gonzalo Londero. Acero de primera, maderas nobles, piezas que duran generaciones.</p>
       <div class="hero-actions">
         <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20ver%20el%20catálogo%20completo" target="_blank" class="btn-silver" id="hero-wa">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          Ver catálogo
-        </a>
-        <a href="#historia" class="btn-outline">Conocer al artesano</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-n" id="hero-stat1">+10</div>
-          <div class="hero-stat-l" id="hero-stat1-label">Años forjando</div>
-        </div>
-        <div>
-          <div class="hero-stat-n">∞</div>
-          <div class="hero-stat-l">Piezas únicas</div>
-        </div>
-        <div>
-          <div class="hero-stat-n">5+</div>
-          <div class="hero-stat-l">Países</div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div id="hero-knife-wrap">
-        <!-- Knife SVG -->
-        <svg viewBox="0 0 340 660" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="hblade" x1="170" y1="42" x2="332" y2="285" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(180,180,180,.05)"/>
-              <stop offset="40%" stop-color="rgba(220,210,190,.45)"/>
-              <stop offset="75%" stop-color="rgba(200,190,170,.6)"/>
-              <stop offset="100%" stop-color="rgba(150,140,120,.55)"/>
-            </linearGradient>
-            <linearGradient id="hblade-edge" x1="170" y1="42" x2="332" y2="285" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(200,205,214,.0)"/>
-              <stop offset="50%" stop-color="rgba(200,205,214,.35)"/>
-              <stop offset="100%" stop-color="rgba(200,205,214,.15)"/>
-            </linearGradient>
-            <linearGradient id="hbolster" x1="157" y1="272" x2="183" y2="285" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#1A1A1A"/>
-              <stop offset="45%" stop-color="#888880"/>
-              <stop offset="100%" stop-color="#1A1A1A"/>
-            </linearGradient>
-            <linearGradient id="hhandle" x1="160" y1="285" x2="182" y2="285" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#0A0804"/>
-              <stop offset="28%" stop-color="#1A1208"/>
-              <stop offset="60%" stop-color="#0E0C06"/>
-              <stop offset="100%" stop-color="#180E04"/>
-            </linearGradient>
-            <radialGradient id="hrivet" cx="38%" cy="32%" r="65%">
-              <stop offset="0%" stop-color="#C8CDD6"/>
-              <stop offset="50%" stop-color="#8E96A2"/>
-              <stop offset="100%" stop-color="#1E272C"/>
-            </radialGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <!-- Blade -->
-          <path d="M170 42 L322 248 Q334 272 322 285 L170 278Z" fill="url(#hblade)"/>
-          <!-- Blade edge line with silver glow -->
-          <path d="M170 42 L322 248 Q334 272 322 285" stroke="url(#hblade-edge)" stroke-width="1.2" fill="none" filter="url(#glow)" opacity=".8"/>
-          <!-- Fuller -->
-          <path d="M174 58 L308 254" stroke="rgba(200,205,214,.06)" stroke-width="1.8" fill="none"/>
-          <!-- Bolster -->
-          <rect x="158" y="272" width="24" height="14" rx="1.5" fill="url(#hbolster)"/>
-          <!-- Handle -->
-          <path d="M160 286 Q158 368 163 468 L179 468 Q184 368 182 286Z" fill="url(#hhandle)"/>
-          <!-- Wood grain lines -->
-          <path d="M164 294 Q164 376 164 456" stroke="rgba(200,205,214,.04)" stroke-width="2" fill="none"/>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.08="none"/>
           <path d="M172 294 Q172 376 172 456" stroke="rgba(255,255,255,.025)" stroke-width="1.5" fill="none"/>
           <!-- Rivets — silver -->
           <circle cx="171" cy="322" r="5" fill="url(#hrivet)"/>
