@@ -1848,20 +1848,7 @@ function renderArtisanPhoto(src) {
 }
 
 function renderHeroImage(heroImage){
-  if(!heroImage||!heroImage.trim())return;
-  const hero=document.getElementById('hero');
-  if(!hero)return;
-  // Set full-bleed background image behind everything
-  hero.style.backgroundImage=`url('${heroImage}')`;
-  hero.style.backgroundSize='cover';
-  hero.style.backgroundPosition='center center';
-  hero.style.backgroundRepeat='no-repeat';
-  // Strengthen overlay so text stays readable
-  const overlay=document.getElementById('hero-img-overlay');
-  if(overlay)overlay.style.opacity='1';
-  // Hide the SVG panel — image takes over
-  const visual=document.querySelector('.hero-visual');
-  if(visual)visual.style.display='none';
+  // Desactivado — el fondo del hero es el video Prepagina.webm
 }
 
 /* ── CATEGORÍAS ── */
