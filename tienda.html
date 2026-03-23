@@ -15,21 +15,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-/* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden;cursor:none}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:none}
+button{font-family:inherit;cursor:pointer}
 
-/* ── CURSOR ── */
-#cur{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;background:#C8CDD6;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-#cur-ring{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(200,205,214,.3);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s cubic-bezier(.22,1,.36,1),border-color .3s}
-body.hov #cur{width:3px;height:3px}
-body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
-
-/* ── CSS VARS ── */
 :root{
 –jet:#080808;–jet2:#0E0E0E;–jet3:#141414;–jet4:#1A1A1A;–jet5:#222222;
 –silver:#C8CDD6;–silver2:#DDE1E8;–silver3:#8E96A2;
@@ -40,13 +32,12 @@ body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
 }
 
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes pulse-silver{0%,100%{box-shadow:0 0 0 0 rgba(200,205,214,.15)}50%{box-shadow:0 0 0 8px rgba(200,205,214,0)}}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(–ease),transform .8s var(–ease)}
 .rv.vis{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
-/* ── NAV ── */
+/* NAV */
 nav{
 position:fixed;top:0;left:0;right:0;z-index:800;
 display:flex;align-items:center;justify-content:space-between;
@@ -65,15 +56,15 @@ backdrop-filter:blur(20px);
 .nav-divider{width:1px;height:16px;background:var(–silver-line)}
 .nav-cta{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–jet);background:var(–silver);padding:.5rem 1.4rem;transition:background .2s,transform .15s;white-space:nowrap}
 .nav-cta:hover{background:var(–silver2);transform:translateY(-1px)}
-.nav-burger{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px}
+.nav-burger{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer}
 .nav-burger span{display:block;width:22px;height:2px;background:#fff;transition:.3s}
 #nav-overlay{position:fixed;inset:0;z-index:700;background:rgba(5,5,5,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(100%);transition:transform .5s var(–ease)}
 #nav-overlay.open{transform:none}
 #nav-overlay a{font-family:var(–serif);font-size:2rem;font-style:italic;font-weight:300;color:var(–cream);transition:color .2s}
 #nav-overlay a:hover{color:var(–silver)}
-.overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(–cream2);font-size:1.5rem;cursor:none}
+.overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(–cream2);font-size:1.5rem;cursor:pointer}
 
-/* ── STORE HEADER ── */
+/* STORE HEADER */
 .store-header{
 padding:clamp(6rem,11vh,8rem) clamp(1.5rem,5vw,5rem) clamp(2.5rem,4vh,4rem);
 background:var(–jet);
@@ -97,7 +88,7 @@ color:rgba(200,205,214,.025);letter-spacing:.3em;white-space:nowrap;pointer-even
 .store-count{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–muted)}
 .store-count strong{color:var(–silver)}
 
-/* ── CATEGORY FILTERS ── */
+/* CATEGORY FILTERS */
 .cat-filters{
 background:var(–jet2);
 border-bottom:1px solid var(–silver-line);
@@ -115,7 +106,7 @@ font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
 color:rgba(200,205,214,.45);
 padding:1.1rem 1.6rem;
 background:none;border:none;border-bottom:2px solid transparent;
-transition:color .2s,border-color .2s;white-space:nowrap;cursor:none;
+transition:color .2s,border-color .2s;white-space:nowrap;cursor:pointer;
 display:flex;align-items:center;gap:.5rem;
 }
 .cat-btn:hover{color:var(–cream)}
@@ -128,7 +119,7 @@ font-size:7px;font-weight:700;letter-spacing:.1em;color:var(–silver3);
 }
 .cat-btn.active .cat-count{background:rgba(200,205,214,.18);color:var(–silver)}
 
-/* ── SORT & SEARCH BAR ── */
+/* SORT & SEARCH BAR */
 .store-toolbar{
 background:var(–jet);
 border-bottom:1px solid var(–silver-line);
@@ -160,10 +151,10 @@ padding:.35rem .8rem;outline:none;cursor:pointer;
 }
 #store-sort option{background:var(–jet2)}
 .view-btns{display:flex;gap:.3rem}
-.view-btn{width:32px;height:32px;border:1px solid var(–silver-line);background:none;color:var(–muted);display:grid;place-items:center;transition:background .2s,color .2s;cursor:none}
+.view-btn{width:32px;height:32px;border:1px solid var(–silver-line);background:none;color:var(–muted);display:grid;place-items:center;transition:background .2s,color .2s;cursor:pointer}
 .view-btn.active{background:var(–silver);color:var(–jet);border-color:var(–silver)}
 
-/* ── PRODUCT GRID ── */
+/* PRODUCT GRID */
 .store-body{
 max-width:1400px;margin:0 auto;
 padding:0 clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,7rem);
@@ -178,51 +169,129 @@ margin-top:2rem;
 #prod-grid.grid-2{grid-template-columns:repeat(2,1fr)}
 #prod-grid.grid-1{grid-template-columns:1fr}
 
-/* ── PRODUCT CARD ── */
+/* PRODUCT CARD */
 .prod-card{
 border-right:1px solid var(–silver-line);
 border-bottom:1px solid var(–silver-line);
 background:var(–jet);position:relative;overflow:hidden;
 transition:background .35s;cursor:pointer;
+display:flex;flex-direction:column;
 }
 .prod-card:hover{background:var(–jet3)}
+
+/* Wood color swatch strip at top of each card */
+.prod-wood-swatch{
+height:5px;width:100%;display:block;flex-shrink:0;
+transition:height .3s var(–ease);
+}
+.prod-card:hover .prod-wood-swatch{height:8px}
+
+/* Image area */
 .prod-img{
-aspect-ratio:1/1.05;background:var(–jet2);
-position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;
+aspect-ratio:1/1;background:var(–jet2);
+position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
 }
 .prod-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,205,214,.04) 0%,transparent 60%);transition:opacity .35s}
 .prod-card:hover .prod-img-bg{opacity:2}
-.prod-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
-.prod-card:hover .prod-img img{transform:scale(1.04)}
-.prod-img svg.prod-art{width:45%;opacity:.18;color:var(–cream);transition:opacity .5s,transform .6s var(–ease)}
-.prod-card:hover .prod-img svg.prod-art{opacity:.3;transform:scale(1.04) translateY(-4px)}
-.prod-badge{position:absolute;top:1rem;left:1rem;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .65rem;z-index:2}
+.prod-img svg.prod-art{width:42%;opacity:.16;color:var(–cream);transition:opacity .5s,transform .6s var(–ease)}
+.prod-card:hover .prod-img svg.prod-art{opacity:.28;transform:scale(1.04) translateY(-4px)}
+
+/* Badges */
+.prod-badge{position:absolute;top:.85rem;left:.85rem;font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.26rem .62rem;z-index:2}
 .badge-avail{background:var(–silver);color:var(–jet)}
 .badge-custom{background:transparent;color:var(–silver);border:1px solid rgba(200,205,214,.4)}
 .badge-intl{background:var(–jet4);color:var(–cream2);border:1px solid var(–silver-line)}
 .badge-unavail{background:transparent;color:var(–muted);border:1px solid rgba(120,112,96,.3)}
+
+/* Origin flags strip */
+.prod-origin{
+position:absolute;top:.85rem;right:.85rem;z-index:2;
+display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;
+}
+.prod-flag{
+font-size:7.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+padding:.22rem .55rem;background:rgba(8,8,8,.82);border:1px solid rgba(200,205,214,.18);
+backdrop-filter:blur(6px);color:rgba(232,224,208,.75);
+display:flex;align-items:center;gap:.3rem;white-space:nowrap;
+}
+
 .prod-stock{position:absolute;bottom:.7rem;left:.7rem;font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .55rem;backdrop-filter:blur(8px);z-index:2}
 .prod-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–silver);transform:scaleX(0);transform-origin:left;transition:.5s var(–ease)}
 .prod-card:hover .prod-silver-line{transform:scaleX(1)}
-.prod-body{padding:1.6rem 1.8rem 2rem}
-.prod-cat{font-size:8.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.5rem}
-.prod-name{font-family:var(–sans);font-size:.95rem;font-weight:300;color:var(–cream);margin-bottom:.7rem;line-height:1.2;letter-spacing:.18em;text-transform:uppercase}
-.prod-desc{font-size:.83rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.75;margin-bottom:1.2rem}
-.prod-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem}
-.prod-spec{font-size:7.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(–silver-line);color:var(–muted)}
-.prod-seals{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1.2rem}
-.prod-seal{font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(–silver3);border:1px solid var(–silver-line);padding:.18rem .5rem}
-.prod-footer{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding-top:1.1rem;border-top:1px solid var(–silver-line)}
-.prod-price{font-family:var(–serif);font-size:1.05rem;font-style:italic;color:var(–silver)}
-.prod-price small{display:block;font-family:var(–sans);font-style:normal;font-size:.62rem;font-weight:400;letter-spacing:.1em;color:var(–muted);margin-top:.1rem}
-.prod-actions{display:flex;gap:.35rem}
-.prod-btn{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.45rem 1rem;background:transparent;color:var(–cream2);border:1px solid rgba(200,205,214,.3);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
-.prod-btn:hover{background:var(–silver);color:var(–jet);border-color:var(–silver)}
-.prod-btn.btn-pay{background:var(–silver);color:var(–jet);border-color:var(–silver)}
-.prod-btn.btn-pay:hover{background:var(–silver2)}
-.prod-btn.btn-icon{padding:.45rem .6rem}
 
-/* ── EMPTY STATE ── */
+/* Card body */
+.prod-body{padding:1.4rem 1.6rem 1.6rem;display:flex;flex-direction:column;flex:1}
+.prod-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.4rem}
+.prod-name{font-family:var(–sans);font-size:.9rem;font-weight:300;color:var(–cream);margin-bottom:.6rem;line-height:1.2;letter-spacing:.18em;text-transform:uppercase}
+.prod-desc{font-size:.8rem;font-weight:300;color:rgba(200,188,168,.52);line-height:1.75;margin-bottom:1rem}
+.prod-specs{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.9rem}
+.prod-spec{font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid var(–silver-line);color:var(–muted)}
+
+/* Wood detail row */
+.prod-wood-detail{
+display:flex;align-items:center;gap:.6rem;
+padding:.55rem .75rem;
+background:rgba(200,205,214,.03);border:1px solid rgba(200,205,214,.08);
+margin-bottom:.9rem;
+}
+.prod-wood-circle{width:18px;height:18px;border-radius:50%;flex-shrink:0;border:1px solid rgba(200,205,214,.15)}
+.prod-wood-label{font-size:7.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.55)}
+.prod-wood-name{font-size:8px;font-weight:400;letter-spacing:.1em;color:var(–cream2);margin-left:auto}
+
+/* Footer with price + buttons */
+.prod-footer{
+margin-top:auto;
+border-top:1px solid var(–silver-line);
+padding-top:1rem;
+}
+.prod-price-row{
+display:flex;align-items:baseline;justify-content:space-between;
+margin-bottom:.8rem;
+}
+.prod-price{font-family:var(–serif);font-size:1.05rem;font-style:italic;color:var(–silver)}
+.prod-price small{display:block;font-family:var(–sans);font-style:normal;font-size:.6rem;font-weight:400;letter-spacing:.1em;color:var(–muted);margin-top:.15rem}
+.prod-price-note{font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(–muted)}
+
+/* Action buttons - 3 buttons */
+.prod-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:.35rem;align-items:stretch}
+.prod-btn{
+font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+padding:.5rem .8rem;
+background:transparent;color:var(–cream2);border:1px solid rgba(200,205,214,.25);
+transition:background .2s,color .2s,border-color .2s;
+display:inline-flex;align-items:center;justify-content:center;gap:.35rem;
+white-space:nowrap;text-align:center;cursor:pointer;
+}
+.prod-btn:hover{background:rgba(200,205,214,.12);border-color:var(–silver);color:var(–cream)}
+/* Pay button — Mercado Pago blue */
+.prod-btn-pay{
+background:rgba(0,158,227,.12);
+color:#5bc8f5;
+border-color:rgba(0,158,227,.35);
+}
+.prod-btn-pay:hover{
+background:rgba(0,158,227,.22);
+border-color:#00a8e0;
+color:#7dd8f8;
+}
+/* WA budget/personalización — green */
+.prod-btn-wa{
+background:rgba(37,211,102,.08);
+color:#4dcc7a;
+border-color:rgba(37,211,102,.3);
+}
+.prod-btn-wa:hover{
+background:rgba(37,211,102,.18);
+border-color:#25D366;
+color:#5fe88c;
+}
+/* IG icon button */
+.prod-btn-ig{
+padding:.5rem .65rem;
+border-color:rgba(200,205,214,.15);
+}
+
+/* EMPTY STATE */
 .store-empty{
 grid-column:1/-1;
 padding:6rem 2rem;text-align:center;
@@ -231,7 +300,7 @@ padding:6rem 2rem;text-align:center;
 .store-empty-h{font-family:var(–serif);font-size:1.4rem;font-style:italic;color:var(–silver);margin-bottom:.8rem}
 .store-empty-p{font-size:.88rem;font-weight:300;color:var(–muted);line-height:1.8;margin-bottom:2rem}
 
-/* ── PROMO BANNER ── */
+/* PROMO BAR */
 .promo-bar{
 background:var(–silver);padding:.7rem clamp(1.5rem,4vw,4rem);
 display:flex;align-items:center;justify-content:center;gap:2rem;
@@ -240,7 +309,7 @@ position:relative;
 }
 .promo-close{position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(8,8,8,.45);font-size:1rem;cursor:pointer;line-height:1}
 
-/* ── CTA STRIP ── */
+/* CTA STRIP */
 .cta-strip{
 background:var(–jet2);border-top:1px solid var(–silver-line);
 padding:clamp(3rem,6vh,5rem) clamp(1.5rem,5vw,5rem);
@@ -257,7 +326,7 @@ text-align:center;
 .btn-outline{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.8rem 2.2rem;background:transparent;color:rgba(232,224,208,.6);border:1px solid rgba(200,205,214,.25);transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.6rem}
 .btn-outline:hover{border-color:var(–silver);color:var(–cream)}
 
-/* ── FOOTER ── */
+/* FOOTER */
 .mini-footer{
 background:#050505;border-top:1px solid var(–silver-line);
 padding:1.5rem clamp(1.5rem,4vw,4rem);
@@ -267,19 +336,18 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 .mini-footer-back{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,205,214,.35);display:flex;align-items:center;gap:.4rem;transition:color .2s}
 .mini-footer-back:hover{color:var(–silver)}
 
-/* ── WA FLOAT ── */
+/* WA FLOAT */
 .wa-float{position:fixed;bottom:2rem;right:2rem;z-index:600;display:flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;padding:.7rem 1.4rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 28px rgba(37,211,102,.3);transition:transform .2s,box-shadow .2s;animation:pulse-silver 2.5s 2s ease-in-out infinite}
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(37,211,102,.4)}
 
-/* ── BACK TO TOP ── */
-#back-top{position:fixed;bottom:2rem;left:2rem;z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(–silver);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .35s var(–ease),transform .35s var(–ease),background .25s;cursor:none}
+/* BACK TO TOP */
+#back-top{position:fixed;bottom:2rem;left:2rem;z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(–silver);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .35s var(–ease),transform .35s var(–ease),background .25s;cursor:pointer}
 #back-top.visible{opacity:1;pointer-events:auto;transform:none}
 #back-top:hover{background:var(–silver);color:var(–jet)}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:1100px){
 #prod-grid{grid-template-columns:repeat(2,1fr)}
-#prod-grid.grid-2{grid-template-columns:repeat(2,1fr)}
 #prod-grid.grid-1{grid-template-columns:1fr}
 }
 @media(max-width:768px){
@@ -288,19 +356,19 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 .search-wrap{max-width:100%;width:100%}
 .nav-links,.nav-cta{display:none}
 .nav-burger{display:flex}
+.prod-actions{grid-template-columns:1fr 1fr auto}
 }
 @media(max-width:480px){
 .cat-btn{padding:.9rem 1rem;font-size:8px}
+.prod-actions{grid-template-columns:1fr auto;grid-template-rows:auto auto}
+.prod-btn-pay{grid-column:1}
+.prod-btn-wa{grid-column:1}
+.prod-btn-ig{grid-row:1/3;grid-column:2}
 }
 </style>
 
 </head>
 <body>
-
-<!-- CURSOR -->
-
-<div id="cur"></div>
-<div id="cur-ring"></div>
 
 <!-- NAV -->
 
@@ -335,9 +403,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
     <div class="nav-divider"></div>
   </ul>
   <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="nav-cta" target="_blank">Consultar</a>
-  <button class="nav-burger" id="nav-burger" aria-label="Menú">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE OVERLAY -->
@@ -352,7 +418,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
   <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="btn-silver" target="_blank">Consultar →</a>
 </div>
 
-<!-- PROMO BAR (se muestra si hay promo en products.json) -->
+<!-- PROMO BAR -->
 
 <div id="promo-bar" style="display:none" class="promo-bar">
   <span id="promo-text"></span>
@@ -374,7 +440,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
       <span style="width:1px;height:14px;background:var(--silver-line);display:inline-block"></span>
       <span class="store-count">🔨 Todas trabajadas a mano</span>
       <span style="width:1px;height:14px;background:var(--silver-line);display:inline-block"></span>
-      <span class="store-count">✈ Envíos a todo el país y exterior</span>
+      <span class="store-count">🇦🇷 Industria Argentina · ✈ Envíos al exterior</span>
     </div>
   </div>
 </section>
@@ -382,9 +448,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 <!-- CATEGORY FILTERS -->
 
 <div class="cat-filters" id="cat-filters">
-  <div class="cat-filters-inner" id="cat-tabs">
-    <!-- Tabs rendered by JS -->
-  </div>
+  <div class="cat-filters-inner" id="cat-tabs"></div>
 </div>
 
 <!-- TOOLBAR -->
@@ -393,7 +457,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
   <div class="store-toolbar-inner">
     <div class="search-wrap">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="store-search" placeholder="Buscar pieza…" autocomplete="off">
+      <input type="text" id="store-search" placeholder="Buscar pieza, madera, acero…" autocomplete="off">
     </div>
     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
       <div class="sort-wrap">
@@ -403,16 +467,18 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
           <option value="name-az">Nombre A–Z</option>
           <option value="name-za">Nombre Z–A</option>
           <option value="avail">Disponibles primero</option>
+          <option value="price-asc">Precio menor</option>
+          <option value="price-desc">Precio mayor</option>
         </select>
       </div>
       <div class="view-btns">
-        <button class="view-btn active" id="view-3" title="3 columnas" aria-label="Vista 3 columnas">
+        <button class="view-btn active" id="view-3" title="3 columnas">
           <svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="5" height="5"/><rect x="6.5" y="0" width="5" height="5"/><rect x="13" y="0" width="5" height="5"/><rect x="0" y="6.5" width="5" height="5"/><rect x="6.5" y="6.5" width="5" height="5"/><rect x="13" y="6.5" width="5" height="5"/></svg>
         </button>
-        <button class="view-btn" id="view-2" title="2 columnas" aria-label="Vista 2 columnas">
+        <button class="view-btn" id="view-2" title="2 columnas">
           <svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="7.5" height="7.5"/><rect x="10.5" y="0" width="7.5" height="7.5"/><rect x="0" y="10.5" width="7.5" height="7.5"/><rect x="10.5" y="10.5" width="7.5" height="7.5"/></svg>
         </button>
-        <button class="view-btn" id="view-1" title="1 columna" aria-label="Vista 1 columna">
+        <button class="view-btn" id="view-1" title="1 columna">
           <svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="18" height="7"/><rect x="0" y="9" width="18" height="7"/></svg>
         </button>
       </div>
@@ -443,7 +509,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 <!-- FOOTER -->
 
 <footer class="mini-footer">
-  <span class="mini-footer-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero</span>
+  <span class="mini-footer-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · 🇦🇷 Industria Argentina</span>
   <a href="index.html" class="mini-footer-back">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Volver al inicio
@@ -457,23 +523,11 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
   Consultar
 </a>
 
-<!-- BACK TO TOP -->
-
 <button id="back-top" aria-label="Volver arriba">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
 <script>
-/* ── CURSOR ── */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,button,select').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
-});
-
 /* ── NAV BURGER ── */
 const burger=document.getElementById('nav-burger'),overlay=document.getElementById('nav-overlay');
 burger?.addEventListener('click',()=>overlay.classList.add('open'));
@@ -483,7 +537,7 @@ overlay.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>overlay.
 /* ── SCROLL REVEAL ── */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
-},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 function checkVis(){document.querySelectorAll('.rv:not(.vis)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight+100)el.classList.add('vis')})}
 setTimeout(checkVis,200);window.addEventListener('scroll',checkVis,{passive:true});
@@ -505,8 +559,92 @@ document.getElementById('view-1').addEventListener('click',function(){
   grid.className='grid-1';document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');
 });
 
+/* ── WOOD COLOR MAP ── */
+// Maps wood name keywords → CSS gradient representing the wood color
+const WOOD_COLORS = {
+  'nogal':          'linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)',
+  'lapacho':        'linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10)',
+  'quebracho':      'linear-gradient(90deg,#1a0a04,#3d1c0a,#5c2e14,#3a1808)',
+  'caoba':          'linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810)',
+  'olivo':          'linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020)',
+  'burl olivo':     'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',
+  'burl de olivo':  'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',
+  'guayubira':      'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',
+  'wengue':         'linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c)',
+  'palo santo':     'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',
+  'purpleheart':    'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
+  'amaranto':       'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
+  'pau ferro':      'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',
+  'pau petro':      'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',
+  'micarta':        'linear-gradient(90deg,#1a1a1a,#2e2e2e,#404040,#1a1a1a)',
+  'micarta naranja':'linear-gradient(90deg,#6a2a04,#a04010,#c05818,#7a3208)',
+  'micarta marfil': 'linear-gradient(90deg,#c8b890,#ddd0a8,#e8e0c0,#c0a878)',
+  'petiribi':       'linear-gradient(90deg,#3a2010,#5c3818,#7a5025,#4a2c14)',
+  'incienso':       'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',
+  'haya':           'linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)',
+  'membrillo':      'linear-gradient(90deg,#8a6030,#b08848,#c8a060,#9a7040)',
+  'algarrobo':      'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',
+  'chacaranda':     'linear-gradient(90deg,#1e0e18,#3a1c30,#582844,#2a1228)',
+  'roble americano':'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',
+  'roble':          'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',
+  'guambira':       'linear-gradient(90deg,#2c1e0e,#4e3818,#6a5028,#3c2c14)',
+  'ebano':          'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',
+  'ébano':          'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',
+  'laurel':         'linear-gradient(90deg,#3a2c10,#5c4820,#7a6030,#4a3818)',
+  'louro':          'linear-gradient(90deg,#4a3210,#6a5020,#8a6830,#5a4018)',
+  'palma negra':    'linear-gradient(90deg,#080604,#14100c,#201a14,#0c0a08)',
+  'guayaba':        'linear-gradient(90deg,#5a3c18,#7a5828,#9a7038,#6a4c20)',
+  'burl algarrobo': 'linear-gradient(90deg,#3a2010,#6a4828,#8a6038,#4a2e18)',
+  'burl caza':      'linear-gradient(90deg,#2a1e0e,#5a3e22,#7a5830,#3a2a14)',
+  'burl de lenga':  'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
+  'burl lenga':     'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
+  'jazzanda':       'linear-gradient(90deg,#1e0a2c,#3a1850,#581e78,#2c1040)',
+  'violeta':        'linear-gradient(90deg,#200840,#3c1460,#581e80,#2c0e4c)',
+  'baquelita':      'linear-gradient(90deg,#1a0808,#2e1414,#401c1c,#221010)',
+  'fierroliso':     'linear-gradient(90deg,#181818,#282828,#383838,#202020)',
+  'fenólico':       'linear-gradient(90deg,#181818,#282828,#383838,#202020)',
+  'titanio':        'linear-gradient(90deg,#484848,#606060,#787878,#505050)',
+  'default':        'linear-gradient(90deg,#1a1a1a,#2a2a2a,#3a3a3a,#222222)'
+};
+
+function getWoodGradient(empunaduraStr) {
+  if (!empunaduraStr) return WOOD_COLORS['default'];
+  const s = empunaduraStr.toLowerCase();
+  // Try longest match first
+  const keys = Object.keys(WOOD_COLORS).filter(k => k !== 'default').sort((a,b) => b.length - a.length);
+  for (const key of keys) {
+    if (s.includes(key)) return WOOD_COLORS[key];
+  }
+  return WOOD_COLORS['default'];
+}
+
+function getWoodCircleColor(empunaduraStr) {
+  // Return the middle color of the gradient as a solid circle color
+  if (!empunaduraStr) return '#2a2a2a';
+  const s = empunaduraStr.toLowerCase();
+  const colorMap = {
+    'nogal':'#5a3820','lapacho':'#7a4220','quebracho':'#4a2410','caoba':'#8a3018',
+    'olivo':'#6a5828','burl olivo':'#7a6432','guayubira':'#5e4828','wengue':'#201810',
+    'palo santo':'#8a5c28','purpleheart':'#5a2878','amaranto':'#5a2878',
+    'pau ferro':'#483018','pau petro':'#483018','micarta':'#303030',
+    'micarta naranja':'#b04c18','micarta marfil':'#d8c898','petiribi':'#6a4020',
+    'incienso':'#8a5c28','haya':'#c8a060','membrillo':'#b07838','algarrobo':'#6a4020',
+    'chacaranda':'#481c38','roble americano':'#a07030','roble':'#a07030',
+    'guambira':'#5a3c20','ebano':'#181410','ébano':'#181410','laurel':'#685030',
+    'louro':'#7a5828','palma negra':'#141010','guayaba':'#8a6030',
+    'burl algarrobo':'#7a5030','burl caza':'#6a4828','burl de lenga':'#d09060',
+    'burl lenga':'#d09060','jazzanda':'#481860','violeta':'#401858',
+    'baquelita':'#301010','fierroliso':'#303030','fenólico':'#303030','titanio':'#606060'
+  };
+  const keys = Object.keys(colorMap).sort((a,b) => b.length - a.length);
+  for (const key of keys) {
+    if (s.includes(key)) return colorMap[key];
+  }
+  return '#2a2a2a';
+}
+
 /* ── KNIFE ARTS ── */
-const knifeArts=[
+const knifeArts = [
   `<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 25 L205 145 Q214 162 204 174 L110 170Z" fill="currentColor" opacity=".8"/><rect x="102" y="165" width="16" height="8" rx="1" fill="currentColor"/><path d="M104 173 Q103 230 106 310 L116 310 Q119 230 118 173Z" fill="currentColor" opacity=".6"/><circle cx="110" cy="205" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="245" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="285" r="3" fill="currentColor" opacity=".9"/></svg>`,
   `<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 30 L210 160 Q218 178 208 190 L110 184Z" fill="currentColor" opacity=".7"/><path d="M107 182 Q106 236 108 298 L114 298 Q116 236 114 182Z" fill="currentColor" opacity=".5"/><rect x="103" y="178" width="14" height="8" rx="1" fill="currentColor"/><ellipse cx="110" cy="218" rx="4" ry="3" fill="currentColor" opacity=".85"/><ellipse cx="110" cy="258" rx="4" ry="3" fill="currentColor" opacity=".85"/></svg>`,
   `<svg class="prod-art" viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`,
@@ -516,178 +654,216 @@ const knifeArts=[
 ];
 
 /* ── STORE STATE ── */
-let allProducts=[];
-let currentCat='all';
-let searchTerm='';
-let sortMode='default';
+let allProducts = [];
+let currentCat = 'all';
+let searchTerm = '';
+let sortMode = 'default';
 
 /* ── READ URL PARAM ── */
-const urlCat=new URLSearchParams(location.search).get('cat');
-if(urlCat) currentCat=decodeURIComponent(urlCat);
+const urlCat = new URLSearchParams(location.search).get('cat');
+if (urlCat) currentCat = decodeURIComponent(urlCat);
 
 /* ── RENDER TABS ── */
-function renderTabs(products){
-  const tabsEl=document.getElementById('cat-tabs');
-  if(!tabsEl)return;
-  const counts={};
-  products.filter(p=>p.active!==false).forEach(p=>{counts[p.category]=(counts[p.category]||0)+1});
-  const total=products.filter(p=>p.active!==false).length;
-  const cats=[{id:'all',label:'Todos',icon:'⚔'}];
-  Object.entries(counts).sort((a,b)=>b[1]-a[1]).forEach(([cat,n])=>{
-    cats.push({id:cat,label:cat,icon:'·',count:n});
+function renderTabs(products) {
+  const tabsEl = document.getElementById('cat-tabs');
+  if (!tabsEl) return;
+  const counts = {};
+  products.filter(p => p.active !== false).forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1 });
+  const total = products.filter(p => p.active !== false).length;
+  const cats = [{ id: 'all', label: 'Todos', count: total }];
+  Object.entries(counts).sort((a, b) => b[1] - a[1]).forEach(([cat, n]) => {
+    cats.push({ id: cat, label: cat, count: n });
   });
-  tabsEl.innerHTML=cats.map(c=>{
-    const n=c.id==='all'?total:(counts[c.id]||0);
-    const active=currentCat===c.id?'active':'';
-    return`<button class="cat-btn ${active}" onclick="filterCat('${c.id.replace(/'/g,"\\'")}')">
-      ${c.label}<span class="cat-count">${n}</span>
+  tabsEl.innerHTML = cats.map(c => {
+    const active = currentCat === c.id ? 'active' : '';
+    return `<button class="cat-btn ${active}" data-cat="${c.id.replace(/"/g,'&quot;')}">
+      ${c.label}<span class="cat-count">${c.count}</span>
     </button>`;
   }).join('');
+  tabsEl.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => filterCat(btn.dataset.cat));
+  });
 }
 
 /* ── FILTER & SORT ── */
-function getFiltered(){
-  let list=allProducts.filter(p=>p.active!==false);
-  if(currentCat!=='all') list=list.filter(p=>p.category===currentCat);
-  if(searchTerm){
-    const s=searchTerm.toLowerCase();
-    list=list.filter(p=>(p.name+' '+p.category+' '+(p.description||'')+' '+(p.specs||[]).join(' ')).toLowerCase().includes(s));
+function getFiltered() {
+  let list = allProducts.filter(p => p.active !== false);
+  if (currentCat !== 'all') list = list.filter(p => p.category === currentCat);
+  if (searchTerm) {
+    const s = searchTerm.toLowerCase();
+    const emp = p => (p.details && p.details.empunadura) ? p.details.empunadura.toLowerCase() : '';
+    list = list.filter(p => (p.name + ' ' + p.category + ' ' + (p.description || '') + ' ' + (p.specs || []).join(' ') + ' ' + emp(p)).toLowerCase().includes(s));
   }
-  if(sortMode==='name-az') list=list.sort((a,b)=>a.name.localeCompare(b.name));
-  else if(sortMode==='name-za') list=list.sort((a,b)=>b.name.localeCompare(a.name));
-  else if(sortMode==='avail') list=list.sort((a,b)=>(a.badge==='avail'?-1:1)-(b.badge==='avail'?-1:1));
+  if (sortMode === 'name-az') list = list.sort((a, b) => a.name.localeCompare(b.name));
+  else if (sortMode === 'name-za') list = list.sort((a, b) => b.name.localeCompare(a.name));
+  else if (sortMode === 'avail') list = list.sort((a, b) => (b.stock > 0 ? 1 : -1) - (a.stock > 0 ? 1 : -1));
+  else if (sortMode === 'price-asc') {
+    list = list.sort((a, b) => {
+      const pa = parseInt((a.price || '').replace(/[^0-9]/g, '')) || 0;
+      const pb = parseInt((b.price || '').replace(/[^0-9]/g, '')) || 0;
+      return pa - pb;
+    });
+  } else if (sortMode === 'price-desc') {
+    list = list.sort((a, b) => {
+      const pa = parseInt((a.price || '').replace(/[^0-9]/g, '')) || 0;
+      const pb = parseInt((b.price || '').replace(/[^0-9]/g, '')) || 0;
+      return pb - pa;
+    });
+  }
   return list;
 }
 
 /* ── RENDER PRODUCTS ── */
-function renderProducts(){
-  const list=getFiltered();
-  const gridEl=document.getElementById('prod-grid');
-  if(!gridEl)return;
-  document.getElementById('prod-count').textContent=list.length;
-  if(!list.length){
-    gridEl.innerHTML=`<div class="store-empty">
+function renderProducts() {
+  const list = getFiltered();
+  const gridEl = document.getElementById('prod-grid');
+  if (!gridEl) return;
+  document.getElementById('prod-count').textContent = list.length;
+
+  if (!list.length) {
+    gridEl.innerHTML = `<div class="store-empty">
       <div class="store-empty-ico">🔪</div>
       <h3 class="store-empty-h">No encontramos piezas</h3>
-      <p class="store-empty-p">${searchTerm?'Probá con otro término de búsqueda.':'No hay productos en esta categoría por ahora.'}</p>
+      <p class="store-empty-p">${searchTerm ? 'Probá con otro término de búsqueda.' : 'No hay productos en esta categoría por ahora.'}</p>
       <button onclick="filterCat('all')" class="btn-outline" style="margin:0 auto;">Ver todo</button>
     </div>`;
     return;
   }
-  const waNum='5493843458340';
-  const badgeCls={avail:'badge-avail',custom:'badge-custom',intl:'badge-intl',unavail:'badge-unavail'};
-  const badgeTxt={avail:'Disponible',custom:'A pedido',intl:'Internacional',unavail:'Sin stock'};
-  gridEl.innerHTML=list.map((p,i)=>{
-    const bc=badgeCls[p.badge]||'badge-avail';
-    const bt=p.badgeText||(badgeTxt[p.badge]||'Disponible');
-    const specs=(p.specs||[]).map(s=>`<span class="prod-spec">${s}</span>`).join('');
-    const imgEl=p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:(knifeArts[i%6]);
-    const waLink=`https://wa.me/${waNum}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
-    const igLink=`https://instagram.com/gonzalo.londero.3`;
-    const hasPrice=parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
-    const stockN=typeof p.stock==='number'?p.stock:-1;
-    const stockLabel=stockN<0?'Consultar stock':stockN>0?`${stockN} disponible${stockN===1?'':'s'}`:'Sin stock';
-    const stockColor=stockN===0?'rgba(200,80,80,.9)':stockN>0?'rgba(80,200,120,.9)':'rgba(200,205,214,.45)';
-    return`<div class="prod-card rv" style="transition-delay:${(i%3)*.07}s" onclick="openProduct('${p.id}')">
+
+  const waNum = '5493843458340';
+  const badgeCls = { avail: 'badge-avail', custom: 'badge-custom', intl: 'badge-intl', unavail: 'badge-unavail' };
+  const badgeTxt = { avail: 'Disponible', custom: 'A pedido', intl: 'Internacional', unavail: 'Sin stock' };
+
+  gridEl.innerHTML = list.map((p, i) => {
+    const bc = badgeCls[p.badge] || 'badge-avail';
+    const bt = p.badgeText || (badgeTxt[p.badge] || 'Disponible');
+    const specs = (p.specs || []).map(s => `<span class="prod-spec">${s}</span>`).join('');
+    const imgEl = p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : (knifeArts[i % 6]);
+    const hasPrice = parseInt((p.price || '').replace(/[^0-9]/g, '')) || 0;
+    const stockN = typeof p.stock === 'number' ? p.stock : -1;
+    const stockLabel = stockN < 0 ? 'Consultar stock' : stockN > 0 ? `${stockN} disponible${stockN === 1 ? '' : 's'}` : 'Sin stock';
+    const stockColor = stockN === 0 ? 'rgba(200,80,80,.9)' : stockN > 0 ? 'rgba(80,200,120,.9)' : 'rgba(200,205,214,.45)';
+
+    // Wood info
+    const empunadura = (p.details && p.details.empunadura) ? p.details.empunadura : (p.specs && p.specs[1] ? p.specs[1] : '');
+    const woodGradient = getWoodGradient(empunadura);
+    const woodCircle = getWoodCircleColor(empunadura);
+    const woodShortName = empunadura ? empunadura.split(',')[0].split('+')[0].trim() : '—';
+
+    // WA messages
+    const waPresupuesto = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola Gonzalo! Quiero consultar por "${p.name}" (N°${p.id}). ¿Podés darme un presupuesto o info sobre personalización?`)}`;
+    const waSeña = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola! Quiero dejar una seña por "${p.name}" (N°${p.id}). ¿Cómo lo coordinamos?`)}`;
+
+    // Checkout link
+    const checkoutLink = `checkout.html?id=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}`;
+
+    return `<div class="prod-card rv" style="transition-delay:${(i % 3) * .06}s" onclick="openProduct('${p.id}')">
+      <div class="prod-wood-swatch" style="background:${woodGradient}"></div>
       <div class="prod-img">
         <div class="prod-img-bg"></div>
         ${imgEl}
         <div class="prod-badge ${bc}">${bt}</div>
-        ${p.promo?`<div style="position:absolute;top:1rem;right:1rem;background:var(--silver);color:var(--jet);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .65rem;z-index:2;">${p.promo}</div>`:''}
+        <div class="prod-origin">
+          <span class="prod-flag">🇦🇷 Ind. Argentina</span>
+          <span class="prod-flag">✈ Envíos</span>
+        </div>
+        ${p.promo ? `<div style="position:absolute;bottom:.7rem;right:.7rem;background:var(--silver);color:var(--jet);font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.26rem .62rem;z-index:2;">${p.promo}</div>` : ''}
         <div class="prod-stock" style="background:rgba(8,8,8,.85);border:1px solid ${stockColor};color:${stockColor};">${stockLabel}</div>
         <div class="prod-silver-line"></div>
       </div>
       <div class="prod-body">
-        <p class="prod-cat">${p.category||'—'}</p>
+        <p class="prod-cat">${p.category || '—'}</p>
         <h3 class="prod-name">${p.name}</h3>
-        <p class="prod-desc">${p.description||''}</p>
+        <p class="prod-desc">${p.description || ''}</p>
         <div class="prod-specs">${specs}</div>
-        <div class="prod-seals">
-          <span class="prod-seal">🇦🇷 Hecho en Argentina</span>
-          <span class="prod-seal">✈ Envíos</span>
-          <span class="prod-seal">🔨 Artesanal</span>
+
+        <div class="prod-wood-detail">
+          <div class="prod-wood-circle" style="background:${woodGradient};border-color:rgba(200,205,214,.2)"></div>
+          <span class="prod-wood-label">Mango ·</span>
+          <span class="prod-wood-name">${woodShortName}</span>
         </div>
-        <div class="prod-footer">
-          <div class="prod-price">${p.price||'Consultar precio'}${p.priceNote?`<small>${p.priceNote}</small>`:''}</div>
-          <div class="prod-actions" onclick="event.stopPropagation()">
-            ${hasPrice?`<a href="checkout.html?id=${p.id}" class="prod-btn btn-pay" title="Pagar">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagar</a>`:''}
-            <a href="${waLink}" class="prod-btn" target="_blank" title="WhatsApp" onclick="event.stopPropagation()">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WA</a>
-            <a href="${igLink}" class="prod-btn btn-icon" target="_blank" title="Instagram" onclick="event.stopPropagation()">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+
+        <div class="prod-footer" onclick="event.stopPropagation()">
+          <div class="prod-price-row">
+            <div class="prod-price">${p.price || 'Consultar'}${p.priceNote ? `<small>${p.priceNote}</small>` : ''}</div>
+          </div>
+          <div class="prod-actions">
+            <a href="${checkoutLink}" class="prod-btn prod-btn-pay" title="Pagar con Mercado Pago" onclick="event.stopPropagation()">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              Pagar · MP
+            </a>
+            <a href="${waPresupuesto}" class="prod-btn prod-btn-wa" target="_blank" title="Presupuesto / Seña / Personalización" onclick="event.stopPropagation()">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Presupuesto
+            </a>
+            <a href="https://www.instagram.com/cuchillos.artesanales.24" class="prod-btn prod-btn-ig" target="_blank" title="Ver en Instagram" onclick="event.stopPropagation()">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
             </a>
           </div>
         </div>
       </div>
     </div>`;
   }).join('');
-  gridEl.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-  setTimeout(checkVis,80);
+
+  gridEl.querySelectorAll('.rv').forEach(el => obs.observe(el));
+  setTimeout(checkVis, 80);
 }
 
-function openProduct(id){
-  window.location.href='producto.html?id='+encodeURIComponent(id);
+function openProduct(id) {
+  window.location.href = 'producto.html?id=' + encodeURIComponent(id);
 }
 
-function filterCat(cat){
-  currentCat=cat;
-  // Update tabs active state
-  document.querySelectorAll('.cat-btn').forEach(btn=>{
-    btn.classList.toggle('active',btn.textContent.trim().startsWith(cat==='all'?'Todos':cat));
-  });
+function filterCat(cat) {
+  currentCat = cat;
   renderTabs(allProducts);
   renderProducts();
-  // Update URL without reload
-  const u=new URL(location.href);
-  if(cat==='all') u.searchParams.delete('cat'); else u.searchParams.set('cat',cat);
-  history.replaceState(null,'',u.toString());
-  window.scrollTo({top:document.getElementById('cat-filters').offsetTop-80,behavior:'smooth'});
+  const u = new URL(location.href);
+  if (cat === 'all') u.searchParams.delete('cat'); else u.searchParams.set('cat', cat);
+  history.replaceState(null, '', u.toString());
+  const filtersEl = document.getElementById('cat-filters');
+  if (filtersEl) window.scrollTo({ top: filtersEl.offsetTop - 80, behavior: 'smooth' });
 }
 
 /* ── SEARCH ── */
-document.getElementById('store-search').addEventListener('input',function(){
-  searchTerm=this.value.trim();renderProducts();
+document.getElementById('store-search').addEventListener('input', function () {
+  searchTerm = this.value.trim(); renderProducts();
 });
 
 /* ── SORT ── */
-document.getElementById('store-sort').addEventListener('change',function(){
-  sortMode=this.value;renderProducts();
+document.getElementById('store-sort').addEventListener('change', function () {
+  sortMode = this.value; renderProducts();
 });
 
 /* ── FALLBACK DATA ── */
-const fallback=[
-  {id:'1',name:'Juego Parrillero XL',category:'Parrilla & Asado',description:'Set completo para asadores. Cuchillo, tenedor y chaira con mango en quebracho colorado.',specs:['Acero 1075','Quebracho','30 cm'],badge:'avail',price:'Consultar',priceNote:'Personalizable · Envío incluido',active:true,stock:2},
-  {id:'2',name:'Cuchillo de Caza',category:'Caza & Campo',description:'Hoja robusta para el campo. Mango en madera natural con remaches de bronce.',specs:['Acero 1075','Madera natural','22 cm'],badge:'avail',price:'Consultar',priceNote:'Con vaina de cuero',active:true,stock:3},
-  {id:'3',name:'Nakiri Chef',category:'Cocina Profesional',description:'Hoja rectangular doble filo estilo japonés. Corte limpio para vegetales.',specs:['Inox. alto carbono','Madera maciza','17 cm'],badge:'custom',price:'Consultar',priceNote:'Encargo · 4–6 semanas',active:true,stock:0},
-  {id:'4',name:'Facón Gaucho',category:'Tradición Gaucha',description:'Pieza tradicional argentina. Mango en madera o asta natural. Vaina de cuero artesanal.',specs:['Acero 1075','Madera / Asta','26 cm'],badge:'intl',price:'Consultar',priceNote:'Con vaina cuero',active:true,stock:1},
-  {id:'5',name:'Santoku Artesanal',category:'Cocina Profesional',description:'Cuchillo multiuso de corte preciso. Mango en lapacho, equilibrio perfecto.',specs:['Acero 440C','Lapacho','18 cm'],badge:'avail',price:'Consultar',priceNote:'Entrega inmediata',active:true,stock:1},
-  {id:'6',name:'Set de Mesa',category:'Cocina & Regalo',description:'6 cuchillos de mesa trabajados a mano. Mango unificado, presentación en caja de madera.',specs:['Acero inox.','Caja madera','Set completo'],badge:'custom',price:'Consultar',priceNote:'Encargo · 3–5 semanas',active:true,stock:0}
+const fallback = [
+  { id: '1', name: 'Juego Parrillero XL', category: 'Parrilla & Asado', description: 'Set completo para asadores.', specs: ['Acero 1075', 'Quebracho', '30 cm'], badge: 'avail', price: 'Consultar', active: true, stock: 2, details: { empunadura: 'Quebracho' } },
+  { id: '2', name: 'Cuchillo de Caza', category: 'Caza & Campo', description: 'Hoja robusta para el campo.', specs: ['Acero 1075', 'Lapacho', '22 cm'], badge: 'avail', price: 'Consultar', active: true, stock: 3, details: { empunadura: 'Lapacho' } },
+  { id: '3', name: 'Nakiri Chef', category: 'Cocina Profesional', description: 'Hoja rectangular estilo japonés.', specs: ['Inox.', 'Nogal', '17 cm'], badge: 'custom', price: 'Consultar', active: true, stock: 0, details: { empunadura: 'Nogal' } }
 ];
 
 /* ── LOAD DATA ── */
-(async function(){
-  try{
-    const res=await fetch('products.json?t='+Date.now());
-    if(!res.ok)throw new Error();
-    const data=await res.json();
-    allProducts=(data.products||[]).length?data.products:fallback;
-    const s=data.settings||{};
-    if(s.globalPromo&&s.globalPromoBanner){
-      const bar=document.getElementById('promo-bar');
-      document.getElementById('promo-text').textContent=s.globalPromoBanner;
-      bar.style.display='flex';
+(async function () {
+  try {
+    const res = await fetch('products.json?t=' + Date.now());
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    allProducts = (data.products || []).length ? data.products : fallback;
+    const s = data.settings || {};
+    if (s.globalPromo && s.globalPromoBanner) {
+      const bar = document.getElementById('promo-bar');
+      document.getElementById('promo-text').textContent = s.globalPromoBanner;
+      bar.style.display = 'flex';
     }
-    if(s.whatsapp){
-      const w=s.whatsapp.replace(/\D/g,'');
-      document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{a.href=a.href.replace(/wa\.me\/\d+/,'wa.me/'+w)});
+    if (s.whatsapp) {
+      const w = s.whatsapp.replace(/\D/g, '');
+      document.querySelectorAll('a[href*="wa.me"]').forEach(a => { a.href = a.href.replace(/wa\.me\/\d+/, 'wa.me/' + w) });
     }
-    if(s.instagram){
-      const ig=s.instagram.replace('@','');
-      document.querySelectorAll('a[href*="instagram.com"]').forEach(a=>{a.href='https://www.instagram.com/'+ig});
+    if (s.instagram) {
+      const ig = s.instagram.replace('@', '');
+      document.querySelectorAll('a[href*="instagram.com"]').forEach(a => { a.href = 'https://www.instagram.com/' + ig });
     }
-  }catch{
-    allProducts=fallback;
+  } catch {
+    allProducts = fallback;
   }
   renderTabs(allProducts);
   renderProducts();
