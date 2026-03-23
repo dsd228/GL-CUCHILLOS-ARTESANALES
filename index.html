@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="es">
 
-<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,63 +27,58 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto;font-size:16px}
-body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden;cursor:none}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:none}
-
-/* CURSOR */
-#cur{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;background:#C8CDD6;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-#cur-ring{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(200,205,214,.3);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s cubic-bezier(.22,1,.36,1),border-color .3s}
-body.hov #cur{width:3px;height:3px}
-body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
-
+button{font-family:inherit;cursor:pointer}
 :root{
-–jet:#080808;–jet2:#0E0E0E;–jet3:#141414;–jet4:#1A1A1A;
-–silver:#C8CDD6;–silver2:#DDE1E8;–silver3:#8E96A2;
-–silver-pale:rgba(200,205,214,.10);–silver-line:rgba(200,205,214,.16);
-–cream:#E8E0D0;–cream2:#C8BCA8;–muted:#787060;
-–serif:‘Playfair Display’,serif;–sans:‘Josefin Sans’,sans-serif;
-–ease:cubic-bezier(.22,1,.36,1);
+--jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;
+--silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
+--silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.16);
+--cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
+--serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
+--ease:cubic-bezier(.22,1,.36,1);
 }
-
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes pulse-silver{0%,100%{box-shadow:0 0 0 0 rgba(200,205,214,.15)}50%{box-shadow:0 0 0 8px rgba(200,205,214,0)}}
 @keyframes line-in{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-.rv{opacity:0;transform:translateY(20px);transition:opacity .9s var(–ease),transform .9s var(–ease)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.vis{opacity:1;transform:none}
 .rv.fade{transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 .d4{transition-delay:.4s}.d5{transition-delay:.5s}
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,4vw,4rem);height:72px;transition:background .4s,border-color .4s,height .3s;border-bottom:1px solid transparent}
-nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-line);backdrop-filter:blur(20px)}
+nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(--silver-line);backdrop-filter:blur(20px)}
 .nav-brand{display:flex;align-items:center;gap:16px}
 .nav-brand-text{display:flex;flex-direction:column}
-.nav-brand-name{font-family:var(–serif);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–cream);line-height:1.1}
-.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);margin-top:2px}
+.nav-brand-name{font-family:var(--serif);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);line-height:1.1}
+.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);list-style:none}
 .nav-links a{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,224,208,.5);transition:color .25s}
-.nav-links a:hover{color:var(–cream)}
-.nav-divider{width:1px;height:16px;background:var(–silver-line)}
-.nav-cta{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–jet);background:var(–silver);padding:.5rem 1.4rem;transition:background .2s,transform .15s;white-space:nowrap}
-.nav-cta:hover{background:var(–silver2);transform:translateY(-1px)}
-.nav-burger{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px}
+.nav-links a:hover{color:var(--cream)}
+.nav-divider{width:1px;height:16px;background:var(--silver-line)}
+.nav-cta{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--jet);background:var(--silver);padding:.5rem 1.4rem;transition:background .2s,transform .15s;white-space:nowrap}
+.nav-cta:hover{background:var(--silver2);transform:translateY(-1px)}
+.nav-burger{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer}
 .nav-burger span{display:block;width:22px;height:2px;background:#fff;transition:.3s}
-#nav-overlay{position:fixed;inset:0;z-index:700;background:rgba(5,5,5,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(100%);transition:transform .5s var(–ease)}
+#nav-overlay{position:fixed;inset:0;z-index:700;background:rgba(5,5,5,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(100%);transition:transform .5s var(--ease)}
 #nav-overlay.open{transform:none}
-#nav-overlay a{font-family:var(–serif);font-size:2.2rem;font-style:italic;font-weight:300;color:var(–cream);transition:color .2s}
-#nav-overlay a:hover{color:var(–silver)}
-.overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(–cream2);font-size:1.5rem;cursor:none}
-
+#nav-overlay a{font-family:var(--serif);font-size:2.2rem;font-style:italic;font-weight:300;color:var(--cream);transition:color .2s}
+#nav-overlay a:hover{color:var(--silver)}
+.overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--cream2);font-size:1.5rem;cursor:pointer}
 /* HERO */
-.hero{min-height:100vh;background:var(–jet);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 45%,rgba(200,205,214,.04) 0%,transparent 60%),radial-gradient(ellipse 50% 80% at 20% 60%,rgba(200,205,214,.025) 0%,transparent 50%);pointer-events:none}
-.hero::after{content:’’;position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(200,205,214,.03) 59px,rgba(200,205,214,.03) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(200,205,214,.03) 59px,rgba(200,205,214,.03) 60px)}
+.hero{min-height:100vh;background:var(--jet);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 45%,rgba(200,205,214,.04) 0%,transparent 60%),radial-gradient(ellipse 50% 80% at 20% 60%,rgba(200,205,214,.025) 0%,transparent 50%);pointer-events:none;z-index:2}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(200,205,214,.03) 59px,rgba(200,205,214,.03) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(200,205,214,.03) 59px,rgba(200,205,214,.03) 60px)}
+
+/* YouTube embed as hero background */
+.hero-yt-wrap{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-yt-wrap::after{content:’’;position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,8,8,.85) 0%,rgba(8,8,8,.65) 40%,rgba(8,8,8,.5) 70%,rgba(8,8,8,.6) 100%);z-index:1}
+.hero-yt-wrap iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;pointer-events:none;border:none}
+
 .hero-inner{flex:1;display:grid;grid-template-columns:1fr;align-items:center;padding:clamp(6rem,12vh,9rem) clamp(1.5rem,5vw,5rem) clamp(3rem,6vh,5rem);position:relative;z-index:3;max-width:900px;width:100%;margin:0 auto}
 .hero-label{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:2.4rem;opacity:0;animation:rise .7s .1s var(–ease) forwards}
 .hero-label::before{content:’’;width:28px;height:1px;background:var(–silver)}
@@ -107,7 +101,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .ticker-track{display:flex;animation:scroll-x 32s linear infinite;white-space:nowrap}
 .ticker-item{display:inline-flex;align-items:center;gap:2rem;padding:0 2rem;font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,205,214,.45);flex-shrink:0}
 .ticker-sep{width:3px;height:3px;border-radius:50%;background:rgba(200,205,214,.3);flex-shrink:0}
-
 /* NUMBERS */
 .numbers{background:var(–jet2);border-bottom:1px solid var(–silver-line)}
 .numbers-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(–silver-line)}
@@ -117,13 +110,11 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .num-l{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted)}
 .num-bar{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(–silver);transform:scaleX(0);transform-origin:left;transition:.4s var(–ease)}
 .num-item:hover .num-bar{transform:scaleX(1)}
-
 /* SECTION LABELS */
 .sec-label{font-size:9px;font-weight:600;letter-spacing:.20em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
 .sec-label::before{content:’’;width:22px;height:1px;background:var(–silver)}
 .sec-h2{font-family:var(–sans);font-weight:200;font-size:clamp(2rem,3.8vw,3.6rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.5rem}
 .sec-h2 em{font-style:normal;font-weight:100;color:var(–silver);letter-spacing:.2em}
-
 /* ABOUT */
 .about{background:var(–jet);padding:clamp(5rem,10vh,9rem) clamp(1.5rem,5vw,5rem);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(4rem,8vw,9rem);max-width:1400px;margin:0 auto}
 .about-visual{position:relative;aspect-ratio:3/4;background:var(–jet3);border:1px solid var(–silver-line);display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -137,14 +128,12 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .about-sig-av{width:48px;height:48px;border-radius:50%;background:var(–silver);display:grid;place-items:center;flex-shrink:0;font-family:var(–serif);font-style:italic;font-weight:500;font-size:1.2rem;color:var(–jet)}
 .about-sig-name{font-family:var(–sans);font-size:.78rem;font-weight:400;color:var(–cream);letter-spacing:.2em;text-transform:uppercase}
 .about-sig-role{font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(–silver);margin-top:.25rem}
-
 /* COLLECTION BANNER */
 .collection-banner{background:var(–silver);padding:1.5rem clamp(1.5rem,4vw,4rem);display:flex;align-items:center;justify-content:space-between;gap:2rem}
 .collection-banner-text{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(–jet)}
 .collection-banner-link{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(–jet);opacity:.65;transition:opacity .2s;white-space:nowrap;display:flex;align-items:center;gap:.6rem}
 .collection-banner-link:hover{opacity:1}
 .collection-banner-link::after{content:‘→’}
-
 /* CATEGORY CARDS */
 .cat-card{display:flex;flex-direction:column;justify-content:space-between;min-height:220px;background:var(–jet2);border:1px solid var(–silver-line);padding:2.5rem 2rem;text-decoration:none;transition:background .25s,border-color .25s}
 .cat-card:hover{background:var(–jet4);border-color:rgba(200,205,214,.5)}
@@ -156,7 +145,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .cat-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.8rem;padding-top:1.1rem;border-top:1px solid var(–silver-line)}
 .cat-card-count{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(–silver)}
 .cat-arrow{color:var(–silver3);opacity:.5;transition:opacity .25s,transform .25s}
-
 /* EDITORIAL */
 .editorial{background:var(–jet2);border-top:1px solid var(–silver-line);border-bottom:1px solid var(–silver-line);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem);text-align:center;position:relative;overflow:hidden}
 .editorial::before{content:‘ARTESANO’;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(–sans);font-weight:100;font-size:clamp(6rem,16vw,18rem);color:rgba(200,205,214,.03);white-space:nowrap;pointer-events:none;letter-spacing:.25em}
@@ -165,7 +153,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .editorial-quote{font-family:var(–sans);font-weight:200;font-size:clamp(1.4rem,3vw,2.6rem);color:var(–cream);line-height:1.5;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2rem}
 .editorial-quote em{font-weight:100;color:var(–silver)}
 .editorial-attr{font-size:9px;font-weight:600;letter-spacing:.20em;text-transform:uppercase;color:var(–muted)}
-
 /* PROCESS */
 .process{background:var(–jet);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem)}
 .process-inner{max-width:1400px;margin:0 auto}
@@ -180,7 +167,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .step-h{font-family:var(–sans);font-size:.85rem;font-weight:400;color:var(–cream);margin-bottom:.8rem;letter-spacing:.2em;text-transform:uppercase}
 .step-p{font-size:.88rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.8}
 .process-grid.has-5 .step:nth-child(5){border-right:none}
-
 /* MATERIALS */
 .materials{background:var(–jet2);border-top:1px solid var(–silver-line);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem)}
 .materials-inner{max-width:1400px;margin:0 auto}
@@ -198,6 +184,87 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .mat-tags{display:flex;flex-wrap:wrap;gap:.35rem}
 .mat-tag{font-size:7px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid rgba(200,205,214,.15);color:rgba(200,205,214,.6)}
 
+/* ===== MADERAS SECTION ===== */
+.maderas-section{background:var(–jet);padding:clamp(5rem,10vh,8rem) 0;overflow:hidden}
+.maderas-header{max-width:1400px;margin:0 auto;padding:0 clamp(1.5rem,5vw,5rem);margin-bottom:4rem}
+.maderas-scroll{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 clamp(1.5rem,5vw,5rem)}
+.maderas-scroll::-webkit-scrollbar{display:none}
+.madera-card{flex:0 0 clamp(280px,30vw,380px);scroll-snap-align:start;position:relative;height:520px;overflow:hidden;border:1px solid rgba(200,205,214,.08);transition:border-color .4s}
+.madera-card:hover{border-color:rgba(200,205,214,.35)}
+.madera-card:hover .madera-overlay{opacity:1}
+.madera-card:hover .madera-info{transform:translateY(0)}
+.madera-card:hover .madera-badge{opacity:1;transform:translateY(0)}
+/* Wood grain texture via CSS pseudo-elements */
+.madera-bg{position:absolute;inset:0;transition:transform .6s var(–ease)}
+.madera-card:hover .madera-bg{transform:scale(1.04)}
+.madera-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 100%);z-index:2;opacity:.7;transition:opacity .4s}
+.madera-grain{position:absolute;inset:0;z-index:1;opacity:.18;background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘400’ height=‘400’%3E%3Cfilter id=‘grain’%3E%3CfeTurbulence type=‘turbulence’ baseFrequency=‘0.65’ numOctaves=‘3’ stitchTiles=‘stitch’/%3E%3CfeColorMatrix type=‘saturate’ values=‘0’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23grain)’ opacity=‘1’/%3E%3C/svg%3E”);background-size:200px 200px}
+.madera-veta{position:absolute;inset:0;z-index:1;opacity:.12}
+.madera-info{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:2rem;transform:translateY(8px);transition:transform .4s var(–ease)}
+.madera-name{font-family:var(–serif);font-size:1.7rem;font-weight:400;font-style:italic;color:#fff;line-height:1.1;margin-bottom:.5rem;text-shadow:0 2px 20px rgba(0,0,0,.8)}
+.madera-origin{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.madera-desc{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.2rem}
+.madera-trait{display:inline-flex;align-items:center;gap:.4rem;font-size:7px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.55);margin-right:.4rem;margin-bottom:.4rem}
+.madera-badge{position:absolute;top:1.5rem;right:1.5rem;z-index:4;padding:.4rem .9rem;font-size:7px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:0;transform:translateY(-6px);transition:opacity .35s .1s,transform .35s .1s var(–ease)}
+
+/* Individual wood colors */
+.wood-lapacho .madera-bg{background:linear-gradient(160deg,#3d1f0a 0%,#6b3a1a 25%,#8b4e22 45%,#5c2e10 65%,#3d1f0a 80%,#7a4218 100%)}
+.wood-lapacho .madera-badge{background:#6b3a1a;color:#f0d5b0}
+.wood-quebracho .madera-bg{background:linear-gradient(155deg,#1a0a04 0%,#3d1c0a 20%,#5c2e14 40%,#3a1808 60%,#2a1206 80%,#4a2410 100%)}
+.wood-quebracho .madera-badge{background:#3d1c0a;color:#d4a574}
+.wood-nogal .madera-bg{background:linear-gradient(165deg,#2d1a0e 0%,#4a2c1a 25%,#6b4228 45%,#3d2614 65%,#5a3820 80%,#2d1a0e 100%)}
+.wood-nogal .madera-badge{background:#4a2c1a;color:#e8c99a}
+.wood-caoba .madera-bg{background:linear-gradient(150deg,#4a1a0a 0%,#7a2e14 25%,#9b3c1e 45%,#6b2810 65%,#4a1a0a 80%,#8a3418 100%)}
+.wood-caoba .madera-badge{background:#7a2e14;color:#f5d0b0}
+.wood-olivo .madera-bg{background:linear-gradient(162deg,#3d3418 0%,#5c4e24 25%,#7a6830 45%,#4e4020 65%,#6a5c2a 80%,#3d3418 100%)}
+.wood-olivo .madera-badge{background:#5c4e24;color:#e8d898}
+.wood-guayubira .madera-bg{background:linear-gradient(158deg,#2a1e0e 0%,#4e3820 25%,#6e5030 45%,#3c2a16 65%,#5a4228 80%,#2a1e0e 100%)}
+.wood-guayubira .madera-badge{background:#4e3820;color:#ddc898}
+.wood-wengue .madera-bg{background:linear-gradient(165deg,#0e0906 0%,#1e1410 20%,#2c1e18 40%,#160e0c 60%,#241a14 80%,#0e0906 100%)}
+.wood-wengue .madera-badge{background:#1e1410;color:#c8a884}
+.wood-palo-santo .madera-bg{background:linear-gradient(155deg,#5a3c1a 0%,#7a5424 25%,#9a6c30 45%,#6a4a1e 65%,#8a6028 80%,#5a3c1a 100%)}
+.wood-palo-santo .madera-badge{background:#7a5424;color:#f0d8a8}
+
+/* veta lines per wood */
+.wood-lapacho .madera-veta{background:repeating-linear-gradient(12deg,transparent,transparent 8px,rgba(180,110,50,.15) 8px,rgba(180,110,50,.15) 9px,transparent 9px,transparent 22px)}
+.wood-quebracho .madera-veta{background:repeating-linear-gradient(8deg,transparent,transparent 6px,rgba(120,60,20,.2) 6px,rgba(120,60,20,.2) 7px,transparent 7px,transparent 18px)}
+.wood-nogal .madera-veta{background:repeating-linear-gradient(15deg,transparent,transparent 10px,rgba(160,90,40,.12) 10px,rgba(160,90,40,.12) 11px,transparent 11px,transparent 28px)}
+.wood-caoba .madera-veta{background:repeating-linear-gradient(10deg,transparent,transparent 7px,rgba(200,80,30,.15) 7px,rgba(200,80,30,.15) 8px,transparent 8px,transparent 20px)}
+.wood-olivo .madera-veta{background:repeating-linear-gradient(20deg,transparent,transparent 5px,rgba(160,140,40,.15) 5px,rgba(160,140,40,.15) 6px,transparent 6px,transparent 15px)}
+.wood-guayubira .madera-veta{background:repeating-linear-gradient(11deg,transparent,transparent 9px,rgba(140,80,30,.13) 9px,rgba(140,80,30,.13) 10px,transparent 10px,transparent 25px)}
+.wood-wengue .madera-veta{background:repeating-linear-gradient(5deg,transparent,transparent 12px,rgba(80,40,20,.25) 12px,rgba(80,40,20,.25) 13px,transparent 13px,transparent 30px)}
+.wood-palo-santo .madera-veta{background:repeating-linear-gradient(18deg,transparent,transparent 6px,rgba(200,140,50,.14) 6px,rgba(200,140,50,.14) 7px,transparent 7px,transparent 16px)}
+
+.maderas-scroll-hint{text-align:center;margin-top:2rem;font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,205,214,.25);padding:0 clamp(1.5rem,5vw,5rem)}
+
+/* PRODUCTOS section */
+.productos-section{background:var(–jet2);border-top:1px solid var(–silver-line);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem)}
+.productos-inner{max-width:1400px;margin:0 auto}
+.productos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:var(–silver-line);margin-top:3.5rem}
+.producto-card{background:var(–jet2);padding:2.5rem;position:relative;overflow:hidden;transition:background .3s;text-decoration:none;display:flex;flex-direction:column;gap:1.5rem}
+.producto-card:hover{background:var(–jet3)}
+.producto-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:.4s var(–ease)}
+.producto-card:hover::before{transform:scaleX(1)}
+.pcard-lapacho::before{background:linear-gradient(90deg,#6b3a1a,#8b4e22)}
+.pcard-quebracho::before{background:linear-gradient(90deg,#3d1c0a,#5c2e14)}
+.pcard-nogal::before{background:linear-gradient(90deg,#4a2c1a,#6b4228)}
+.pcard-caoba::before{background:linear-gradient(90deg,#7a2e14,#9b3c1e)}
+.pcard-olivo::before{background:linear-gradient(90deg,#5c4e24,#7a6830)}
+.pcard-guayubira::before{background:linear-gradient(90deg,#4e3820,#6e5030)}
+.pcard-wengue::before{background:linear-gradient(90deg,#1e1410,#2c1e18)}
+.pcard-palo::before{background:linear-gradient(90deg,#7a5424,#9a6c30)}
+.producto-wood-swatch{width:100%;height:6px;border-radius:0;margin-bottom:.5rem}
+.producto-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.producto-cat{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(–silver3)}
+.producto-n{font-family:var(–serif);font-size:1.4rem;font-weight:400;font-style:italic;color:var(–cream);line-height:1.2}
+.producto-acero{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.25rem .65rem;border:1px solid var(–silver-line);color:var(–silver3)}
+.producto-body{font-size:.83rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.8}
+.producto-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.producto-spec{font-size:7px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid rgba(200,205,214,.1);color:rgba(200,205,214,.45)}
+.producto-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1px solid var(–silver-line);margin-top:auto}
+.producto-footer-link{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.4);transition:color .2s;display:flex;align-items:center;gap:.5rem}
+.producto-card:hover .producto-footer-link{color:var(–silver)}
+
 /* TESTIMONIALS */
 .testimonials{background:var(–jet);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem)}
 .testimonials-inner{max-width:1400px;margin:0 auto}
@@ -214,7 +281,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .testi-av{width:36px;height:36px;border-radius:50%;background:var(–silver);display:grid;place-items:center;flex-shrink:0;font-family:var(–serif);font-style:italic;font-size:.95rem;color:var(–jet)}
 .testi-name{font-size:.85rem;font-weight:500;color:var(–cream)}
 .testi-loc{font-size:.75rem;font-weight:300;color:var(–muted);margin-top:.15rem}
-
 /* FAQ */
 .faq{background:var(–jet2);border-top:1px solid var(–silver-line);padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem)}
 .faq-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:clamp(3rem,6vw,7rem);align-items:start}
@@ -225,7 +291,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .faq-n{font-family:var(–serif);font-style:italic;font-size:1rem;font-weight:300;color:rgba(200,205,214,.4);padding-top:.1rem}
 .faq-q{font-family:var(–sans);font-size:.82rem;font-weight:400;color:var(–cream);margin-bottom:.7rem;letter-spacing:.18em;text-transform:uppercase}
 .faq-a{font-size:.87rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.8}
-
 /* SHIPPING */
 .shipping{background:var(–jet3);border-top:1px solid var(–silver-line);border-bottom:1px solid var(–silver-line);padding:clamp(4rem,8vh,6rem) clamp(1.5rem,5vw,5rem)}
 .shipping-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:center}
@@ -239,7 +304,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .country-tag:hover{background:var(–silver);color:var(–jet)}
 .shipping-map{display:flex;align-items:center;justify-content:center;border:1px solid var(–silver-line);padding:3rem;background:var(–jet)}
 .shipping-map svg{max-height:280px;width:auto;opacity:.55}
-
 /* CTA */
 .cta-section{background:var(–jet);padding:clamp(7rem,14vh,12rem) clamp(1.5rem,5vw,5rem);text-align:center;position:relative;overflow:hidden}
 .cta-section::before{content:‘GL’;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(–sans);font-weight:100;font-size:clamp(14rem,34vw,40rem);color:rgba(200,205,214,.025);pointer-events:none;letter-spacing:.3em;line-height:1}
@@ -256,7 +320,6 @@ nav.scrolled{height:60px;background:rgba(8,8,8,.97);border-color:var(–silver-l
 .cta-contact-l{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.5rem}
 .cta-contact-v{font-family:var(–serif);font-size:1rem;font-style:italic;color:var(–cream2);transition:color .2s}
 .cta-contact-v:hover{color:var(–silver)}
-
 /* FOOTER */
 footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp(4rem,8vh,6rem) clamp(1.5rem,4vw,4rem) 2rem}
 .footer-inner{max-width:1400px;margin:0 auto}
@@ -279,15 +342,12 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;flex-wrap:wrap;gap:1rem}
 .foot-copy{font-size:.7rem;font-weight:300;color:rgba(200,205,214,.2);letter-spacing:.08em}
 .foot-made{font-family:var(–serif);font-style:italic;font-size:.8rem;color:rgba(120,112,96,.3)}
-
 /* WA FLOAT & BACK TOP */
 .wa-float{position:fixed;bottom:2rem;right:2rem;z-index:600;display:flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;padding:.7rem 1.4rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 28px rgba(37,211,102,.3);transition:transform .2s,box-shadow .2s;animation:pulse-silver 2.5s 2s ease-in-out infinite}
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(37,211,102,.4)}
-#back-top{position:fixed;bottom:2rem;left:2rem;z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(–silver);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .35s var(–ease),transform .35s var(–ease),background .25s;cursor:none}
+#back-top{position:fixed;bottom:2rem;left:2rem;z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(–silver);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .35s var(–ease),transform .35s var(–ease),background .25s;cursor:pointer}
 #back-top.visible{opacity:1;pointer-events:auto;transform:none}
 #back-top:hover{background:var(–silver);color:var(–jet)}
-#hero-img-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(8,8,8,.82) 0%,rgba(8,8,8,.65) 40%,rgba(8,8,8,.45) 70%,rgba(8,8,8,.55) 100%);opacity:0;pointer-events:none;transition:opacity .8s}
-
 /* RESPONSIVE */
 @media(max-width:1100px){
 .testi-grid{grid-template-columns:repeat(2,1fr)}
@@ -316,6 +376,7 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
 .foot-top{grid-template-columns:1fr 1fr}
 .nav-links,.nav-cta{display:none}
 .nav-burger{display:flex}
+.madera-card{flex:0 0 clamp(260px,75vw,320px)}
 }
 @media(max-width:640px){
 .testi-grid{grid-template-columns:1fr}
@@ -323,58 +384,12 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
 .testi:last-child{border-bottom:none!important}
 .numbers-inner{grid-template-columns:repeat(2,1fr)}
 .foot-top{grid-template-columns:1fr}
+.productos-grid{grid-template-columns:1fr}
 }
 </style>
 
 </head>
 <body>
-
-<!-- INTRO VIDEO -->
-
-<div id="gl-intro" style="position:fixed;inset:0;z-index:9000;background:#010101;overflow:hidden;cursor:none;">
-  <video id="intro-video" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;">
-    <source src="video/Prepagina.webm" type="video/webm">
-  </video>
-  <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(1,1,1,.85) 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
-  <div style="position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;pointer-events:none;padding:1rem;">
-    <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(110px,22vw,180px);height:auto;filter:drop-shadow(0 0 28px rgba(200,205,214,0.45));">
-      <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".7"/>
-      <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.3)" stroke-width="0.5"/>
-      <text x="110" y="126" text-anchor="middle" font-family="Playfair Display, serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
-      <path id="topArc2" d="M 28 110 A 82 82 0 0 1 192 110" fill="none"/>
-      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600"><textPath href="#topArc2" startOffset="50%" text-anchor="middle">CUCHILLOS ARTESANALES</textPath></text>
-      <path id="bottomArc2" d="M 28 110 A 82 82 0 0 0 192 110" fill="none"/>
-      <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600"><textPath href="#bottomArc2" startOffset="50%" text-anchor="middle">IND. ARGENTINA</textPath></text>
-    </svg>
-  </div>
-  <button id="gl-skip" style="position:absolute;bottom:2rem;right:2rem;z-index:10;background:none;cursor:none;border:1px solid rgba(200,205,214,0.15);color:rgba(200,205,214,0.35);font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.55rem 1.3rem;">Saltar intro ↓</button>
-</div>
-<style>
-#gl-intro.gl-done{opacity:0;pointer-events:none;transition:opacity .9s cubic-bezier(.22,1,.36,1);}
-</style>
-<script>
-(function(){
-  var intro=document.getElementById('gl-intro');
-  var vid=document.getElementById('intro-video');
-  var skip=document.getElementById('gl-skip');
-  function dismissIntro(){
-    intro.classList.add('gl-done');
-    var heroBg=document.getElementById('hero-video-bg');
-    var heroOverlay=document.getElementById('hero-img-overlay');
-    if(heroBg){heroBg.play();setTimeout(function(){heroBg.style.opacity='0.55';if(heroOverlay)heroOverlay.style.opacity='1';},200);}
-    setTimeout(function(){intro.style.display='none';document.body.style.overflow='';},950);
-  }
-  document.body.style.overflow='hidden';
-  vid.addEventListener('ended',dismissIntro);
-  intro.addEventListener('click',dismissIntro);
-  skip.addEventListener('click',function(e){e.stopPropagation();dismissIntro();});
-})();
-</script>
-
-<!-- CURSOR -->
-
-<div id="cur"></div>
-<div id="cur-ring"></div>
 
 <!-- NAV -->
 
@@ -420,13 +435,19 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
   <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20tu%20web%20y%20quiero%20consultar" class="btn-silver" target="_blank" style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 2.4rem;margin-top:1rem">Consultar →</a>
 </div>
 
-<!-- HERO — videos intactos -->
+<!-- HERO with YouTube background -->
 
 <section class="hero" id="hero">
-  <video id="hero-video-bg" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;pointer-events:none;z-index:0;">
-    <source src="video/Prepagina.webm" type="video/webm">
-  </video>
-  <div id="hero-img-overlay"></div>
+  <!-- YouTube embed as background video -->
+  <div class="hero-yt-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/LN0vsl-4X0M?autoplay=1&mute=1&loop=1&playlist=LN0vsl-4X0M&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+      title="GL Cuchillos - El Taller"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
   <div class="hero-inner">
     <div>
       <div class="hero-label">Trabajado a mano · Quimilí, Santiago del Estero, Argentina</div>
@@ -471,51 +492,6 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
     </div>
   </div>
 </section>
-
-<!-- VIDEO TALLER -->
-
-<section id="video-taller" style="background:var(--jet);border-top:1px solid var(--silver-line);position:relative;overflow:hidden;">
-  <div style="position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:1.5rem clamp(1.5rem,5vw,5rem);">
-    <div style="font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,205,214,.6);display:flex;align-items:center;gap:.8rem;"><span style="width:22px;height:1px;background:var(--silver);display:inline-block;"></span>El taller · En acción</div>
-    <div style="font-size:8px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,205,214,.3);">Quimilí · Santiago del Estero · Argentina</div>
-  </div>
-  <div style="position:relative;width:100%;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:180px;z-index:2;background:linear-gradient(to bottom,var(--jet) 0%,rgba(8,8,8,.7) 40%,transparent 100%);pointer-events:none;"></div>
-    <div style="position:absolute;bottom:0;left:0;right:0;height:220px;z-index:2;background:linear-gradient(to top,var(--jet) 0%,rgba(8,8,8,.8) 50%,transparent 100%);pointer-events:none;"></div>
-    <div style="position:absolute;top:0;left:0;bottom:0;width:120px;z-index:2;background:linear-gradient(to right,var(--jet) 0%,transparent 100%);pointer-events:none;"></div>
-    <div style="position:absolute;top:0;right:0;bottom:0;width:120px;z-index:2;background:linear-gradient(to left,var(--jet) 0%,transparent 100%);pointer-events:none;"></div>
-    <video id="taller-video" autoplay muted loop playsinline preload="metadata" style="width:100%;max-height:85vh;object-fit:cover;display:block;opacity:.75;">
-      <source src="video/Prepagina.webm" type="video/webm">
-    </video>
-    <div style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:2rem;">
-      <div style="font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(200,205,214,.5);margin-bottom:1.2rem;">Gonzalo Londero · Maestro Cuchillero</div>
-      <h2 style="font-family:'Josefin Sans',sans-serif;font-weight:100;font-size:clamp(2.5rem,6vw,6rem);color:var(--cream);line-height:1;letter-spacing:.18em;text-transform:uppercase;text-align:center;text-shadow:0 2px 40px rgba(0,0,0,.8);">El fuego<br><span style="font-weight:200;color:var(--silver);">da forma.</span></h2>
-      <div style="width:40px;height:1px;background:var(--silver);margin-top:2rem;opacity:.6;"></div>
-    </div>
-    <button id="video-toggle" style="position:absolute;bottom:2rem;right:clamp(1.5rem,5vw,5rem);z-index:5;background:rgba(8,8,8,.7);border:1px solid rgba(200,205,214,.25);color:var(--silver);width:44px;height:44px;display:grid;place-items:center;cursor:none;backdrop-filter:blur(8px);" aria-label="Play/Pause">
-      <svg id="video-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-      <svg id="video-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="5,3 19,12 5,21"/></svg>
-    </button>
-  </div>
-  <div style="display:flex;align-items:center;justify-content:center;gap:clamp(2rem,5vw,5rem);flex-wrap:wrap;padding:2.5rem clamp(1.5rem,4vw,4rem);border-top:1px solid var(--silver-line);border-bottom:1px solid var(--silver-line);background:rgba(200,205,214,.02);">
-    <div style="text-align:center;"><div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">48h</div><div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Por pieza</div></div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <div style="text-align:center;"><div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">51</div><div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Modelos</div></div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <div style="text-align:center;"><div style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2rem;color:var(--silver);letter-spacing:.14em;">100%</div><div style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Manual</div></div>
-    <div style="width:1px;height:40px;background:var(--silver-line);"></div>
-    <a href="tienda.html" style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 2rem;background:var(--silver);color:var(--jet);display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;">Ver tienda completa →</a>
-  </div>
-</section>
-<script>
-(function(){
-  var vid=document.getElementById('taller-video'),btn=document.getElementById('video-toggle');
-  var pp=document.getElementById('video-icon-pause'),pl=document.getElementById('video-icon-play');
-  if(!vid||!btn)return;
-  btn.addEventListener('click',function(){if(vid.paused){vid.play();pp.style.display='';pl.style.display='none';}else{vid.pause();pp.style.display='none';pl.style.display='';}});
-  new IntersectionObserver(function(e){e.forEach(function(x){if(!x.isIntersecting){vid.pause();pp.style.display='none';pl.style.display='';}else{vid.play().catch(function(){});pp.style.display='';pl.style.display='none';}});},{threshold:.2}).observe(vid);
-})();
-</script>
 
 <!-- NUMBERS -->
 
@@ -565,7 +541,7 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
   <a href="tienda.html" class="collection-banner-link">Ver toda la tienda</a>
 </div>
 
-<!-- CATEGORÍAS (solo cards → tienda.html?cat=X, SIN productos) -->
+<!-- CATEGORÍAS -->
 
 <section id="categorias" style="padding:clamp(4rem,8vh,7rem) 0;background:var(--jet);">
   <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);">
@@ -578,6 +554,371 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
     <div class="rv" style="text-align:center;margin-top:3rem;">
       <a href="tienda.html" class="btn-silver" style="display:inline-flex;">Ver toda la tienda · 51 piezas →</a>
     </div>
+  </div>
+</section>
+
+<!-- ===== MADERAS SECTION ===== -->
+
+<section id="maderas" class="maderas-section">
+  <div class="maderas-header rv">
+    <div class="sec-label">Mangos · Materiales</div>
+    <h2 class="sec-h2" style="max-width:580px;">Las maderas que<br><em>dan vida al mango.</em></h2>
+    <p style="font-size:.9rem;font-weight:300;color:var(--cream2);max-width:500px;line-height:1.8;margin-top:.8rem;">Cada especie tiene su carácter. Deslizá para explorar las maderas que usa Gonzalo — todas seleccionadas a mano por dureza, veta y belleza.</p>
+  </div>
+  <div class="maderas-scroll" id="maderas-scroll">
+
+```
+<!-- LAPACHO -->
+<div class="madera-card wood-lapacho rv">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(107,58,26,.85);color:#f0d5b0;border:1px solid rgba(240,213,176,.2);">Nativa Argentina</div>
+  <div class="madera-info">
+    <div class="madera-name">Lapacho</div>
+    <div class="madera-origin">Quebracho colorado · Gran Chaco, Argentina</div>
+    <div class="madera-desc">Una de las maderas más duras del mundo. Veta definida en tonos miel y caoba. Altamente resistente a la humedad — ideal para cuchillos de asador.</div>
+    <div>
+      <span class="madera-trait">Dureza extrema</span>
+      <span class="madera-trait">Anti-humedad</span>
+      <span class="madera-trait">Veta pronunciada</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUEBRACHO -->
+<div class="madera-card wood-quebracho rv d1">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(61,28,10,.9);color:#d4a574;border:1px solid rgba(212,165,116,.2);">Nativa Argentina</div>
+  <div class="madera-info">
+    <div class="madera-name">Quebracho</div>
+    <div class="madera-origin">Santiago del Estero · Chaco · Formosa</div>
+    <div class="madera-desc">El árbol símbolo del norte argentino. Tonos oscuros casi negros con reflejos rojizos. Peso y solidez incomparables. Un mango que se siente en la palma.</div>
+    <div>
+      <span class="madera-trait">Muy pesada</span>
+      <span class="madera-trait">Longevidad</span>
+      <span class="madera-trait">Tono oscuro</span>
+    </div>
+  </div>
+</div>
+
+<!-- NOGAL -->
+<div class="madera-card wood-nogal rv d2">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(74,44,26,.88);color:#e8c99a;border:1px solid rgba(232,201,154,.2);">Clásica</div>
+  <div class="madera-info">
+    <div class="madera-name">Nogal</div>
+    <div class="madera-origin">Argentina · Europa</div>
+    <div class="madera-desc">El clásico de los cuchilleros. Marrón medio con veta suave y sedosa. Equilibrio perfecto entre peso, agarre y elegancia. El preferido para cuchillos de cocina.</div>
+    <div>
+      <span class="madera-trait">Equilibrada</span>
+      <span class="madera-trait">Textura suave</span>
+      <span class="madera-trait">Agarre premium</span>
+    </div>
+  </div>
+</div>
+
+<!-- CAOBA AFRICANA -->
+<div class="madera-card wood-caoba rv d3">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(122,46,20,.88);color:#f5d0b0;border:1px solid rgba(245,208,176,.2);">Exótica</div>
+  <div class="madera-info">
+    <div class="madera-name">Caoba Africana</div>
+    <div class="madera-origin">África Occidental</div>
+    <div class="madera-desc">Rojiza intensa con destellos dorados. Veta irregular que crea patrones únicos en cada pieza. Una de las maderas más buscadas para cuchillos de colección.</div>
+    <div>
+      <span class="madera-trait">Color rojizo</span>
+      <span class="madera-trait">Veta única</span>
+      <span class="madera-trait">Colección</span>
+    </div>
+  </div>
+</div>
+
+<!-- BURL OLIVO -->
+<div class="madera-card wood-olivo rv d4">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(92,78,36,.9);color:#e8d898;border:1px solid rgba(232,216,152,.2);">Exclusiva</div>
+  <div class="madera-info">
+    <div class="madera-name">Burl Olivo</div>
+    <div class="madera-origin">Mediterráneo · Italia · España</div>
+    <div class="madera-desc">La nobleza del olivo en su forma más expresiva. El burl (nudo) genera patrones swirl imposibles de repetir. Dorado verdoso con motas oscuras. Altamente exclusivo.</div>
+    <div>
+      <span class="madera-trait">Patrón único</span>
+      <span class="madera-trait">Dorado verdoso</span>
+      <span class="madera-trait">Irrepetible</span>
+    </div>
+  </div>
+</div>
+
+<!-- GUAYUBIRA -->
+<div class="madera-card wood-guayubira rv d5">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(78,56,32,.9);color:#ddc898;border:1px solid rgba(221,200,152,.2);">Nativa Argentina</div>
+  <div class="madera-info">
+    <div class="madera-name">Guayubira</div>
+    <div class="madera-origin">Litoral · Mesopotamia Argentina</div>
+    <div class="madera-desc">Madera clara con veta fina y textura homogénea. Tonos crema a miel pálido. Liviana y trabajable, muy usada en mangos de facón y cuchillos de tradición gaucha.</div>
+    <div>
+      <span class="madera-trait">Tono claro</span>
+      <span class="madera-trait">Liviana</span>
+      <span class="madera-trait">Tradición gaucha</span>
+    </div>
+  </div>
+</div>
+
+<!-- WENGUE -->
+<div class="madera-card wood-wengue rv">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(30,20,16,.95);color:#c8a884;border:1px solid rgba(200,168,132,.2);">Exótica Premium</div>
+  <div class="madera-info">
+    <div class="madera-name">Wengue</div>
+    <div class="madera-origin">África Central · Congo · Camerún</div>
+    <div class="madera-desc">Negro profundo con vetas lineales casi perfectas en color chocolate. Aspecto de ébano sin la fragilidad. Alta resistencia. El mango más oscuro y contundente de la colección.</div>
+    <div>
+      <span class="madera-trait">Negro intenso</span>
+      <span class="madera-trait">Veta lineal</span>
+      <span class="madera-trait">Alta densidad</span>
+    </div>
+  </div>
+</div>
+
+<!-- PALO SANTO -->
+<div class="madera-card wood-palo-santo rv d1">
+  <div class="madera-bg"></div>
+  <div class="madera-grain"></div>
+  <div class="madera-veta"></div>
+  <div class="madera-overlay"></div>
+  <div class="madera-badge" style="background:rgba(122,84,36,.88);color:#f0d8a8;border:1px solid rgba(240,216,168,.2);">Nativa Argentina</div>
+  <div class="madera-info">
+    <div class="madera-name">Palo Santo</div>
+    <div class="madera-origin">Gran Chaco · Norte Argentino</div>
+    <div class="madera-desc">Fragancia natural característica que perdura años. Tonos dorado-anaranjado con veta irregular. Muy buscado para piezas de regalo por su aroma único y presencia visual.</div>
+    <div>
+      <span class="madera-trait">Aroma natural</span>
+      <span class="madera-trait">Tono dorado</span>
+      <span class="madera-trait">Pieza de regalo</span>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+  <div class="maderas-scroll-hint rv">← Deslizá para explorar todas las maderas →</div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+
+<section class="productos-section" id="productos">
+  <div class="productos-inner">
+    <div class="rv" style="margin-bottom:.5rem">
+      <div class="sec-label">Productos · Selección</div>
+      <h2 class="sec-h2" style="max-width:580px;">Piezas que <em>hablan solas.</em></h2>
+      <p style="font-size:.9rem;font-weight:300;color:var(--cream2);max-width:500px;line-height:1.8;margin-top:.8rem;">Una selección de piezas con mango de distintas maderas. Cada card lleva el color real de la madera usada.</p>
+    </div>
+    <div class="productos-grid">
+
+```
+  <!-- Facón Lapacho -->
+  <a href="tienda.html?cat=Tradición+Gaucha" class="producto-card pcard-lapacho rv">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10,#7a4218)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Tradición Gaucha</div>
+        <div class="producto-n">Facón Lapacho</div>
+      </div>
+      <span class="producto-acero">Acero 5160</span>
+    </div>
+    <p class="producto-body">Mango de lapacho sólido con pasadores de bronce. Hoja de 18 cm con vaciado cóncavo. Equilibrio perfecto para el asador exigente.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 18cm</span>
+      <span class="producto-spec">Lapacho</span>
+      <span class="producto-spec">Bronce</span>
+      <span class="producto-spec">Vaciado cóncavo</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Cuchillo Caza Quebracho -->
+  <a href="tienda.html?cat=Caza+%26+Campo" class="producto-card pcard-quebracho rv d1">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#1a0a04,#3d1c0a,#5c2e14,#3a1808,#4a2410)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Caza & Campo</div>
+        <div class="producto-n">Caza Quebracho</div>
+      </div>
+      <span class="producto-acero">Acero P498V</span>
+    </div>
+    <p class="producto-body">El quebracho oscuro da un agarre brutal. Hoja corta y robusta para trabajo en campo. Funda de cuero cosida a mano incluida.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 14cm</span>
+      <span class="producto-spec">Quebracho</span>
+      <span class="producto-spec">Con funda</span>
+      <span class="producto-spec">Alta dureza</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Nakiri Nogal -->
+  <a href="tienda.html?cat=Cocina+Profesional" class="producto-card pcard-nogal rv d2">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614,#5a3820)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Cocina Profesional</div>
+        <div class="producto-n">Nakiri Nogal</div>
+      </div>
+      <span class="producto-acero">Acero 420N</span>
+    </div>
+    <p class="producto-body">El favorito de los cocineros. Mango de nogal con textura sedosa y balance impecable. Hoja rectangular para vegetales y cortes de precisión.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 16cm</span>
+      <span class="producto-spec">Nogal</span>
+      <span class="producto-spec">Inoxidable</span>
+      <span class="producto-spec">Acabado espejo</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Set Parrillero Caoba -->
+  <a href="tienda.html?cat=Parrilla+%26+Asado" class="producto-card pcard-caoba rv d3">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810,#8a3418)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Parrilla & Asado</div>
+        <div class="producto-n">Set Parrillero Caoba</div>
+      </div>
+      <span class="producto-acero">Acero 5160</span>
+    </div>
+    <p class="producto-body">Set de 3 piezas con mango de caoba africana. Cuchillo principal + trinchador + puntilla. Presentación en caja de madera. El regalo definitivo.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">3 piezas</span>
+      <span class="producto-spec">Caoba africana</span>
+      <span class="producto-spec">Caja madera</span>
+      <span class="producto-spec">Regalo</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Cuchillo Colección Burl Olivo -->
+  <a href="tienda.html?cat=Diseño+Exclusivo" class="producto-card pcard-olivo rv d4">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020,#6a5c2a)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Diseño Exclusivo</div>
+        <div class="producto-n">Colección Burl Olivo</div>
+      </div>
+      <span class="producto-acero">Acero S160</span>
+    </div>
+    <p class="producto-body">Pieza de colección irrepetible. El patrón swirl del burl de olivo garantiza que ninguna pieza es igual a otra. File work en el lomo. Una joya.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 17cm</span>
+      <span class="producto-spec">Burl Olivo</span>
+      <span class="producto-spec">File work</span>
+      <span class="producto-spec">Única</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Facón Wengue -->
+  <a href="tienda.html?cat=Tradición+Gaucha" class="producto-card pcard-wengue rv d5">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c,#241a14)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Tradición Gaucha</div>
+        <div class="producto-n">Facón Wengue</div>
+      </div>
+      <span class="producto-acero">Acero 5160</span>
+    </div>
+    <p class="producto-body">El más oscuro de la colección. Mango de wengue con vetas lineales casi perfectas. Guarda española de latón. Presencia y carácter únicos.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 20cm</span>
+      <span class="producto-spec">Wengue</span>
+      <span class="producto-spec">Guarda española</span>
+      <span class="producto-spec">Latón</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Puntilla Guayubira -->
+  <a href="tienda.html?cat=Cocina+Profesional" class="producto-card pcard-guayubira rv">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16,#5a4228)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Cocina Profesional</div>
+        <div class="producto-n">Puntilla Guayubira</div>
+      </div>
+      <span class="producto-acero">Acero 420</span>
+    </div>
+    <p class="producto-body">Liviana y precisa. El guayubira claro contrasta con el acero inoxidable. Perfecta para cocinas donde el peso importa. Ideal como primer cuchillo artesanal.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 10cm</span>
+      <span class="producto-spec">Guayubira</span>
+      <span class="producto-spec">Inoxidable</span>
+      <span class="producto-spec">Liviana</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+  <!-- Cuchillo Regalo Palo Santo -->
+  <a href="tienda.html?cat=Diseño+Exclusivo" class="producto-card pcard-palo rv d1">
+    <div class="producto-wood-swatch" style="background:linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e,#8a6028)"></div>
+    <div class="producto-top">
+      <div>
+        <div class="producto-cat">Diseño Exclusivo</div>
+        <div class="producto-n">Regalo Palo Santo</div>
+      </div>
+      <span class="producto-acero">Acero 420N</span>
+    </div>
+    <p class="producto-body">El regalo que sorprende. El aroma natural del palo santo perdura en el mango. Tono dorado cálido, veta irregular única. Presentación especial disponible.</p>
+    <div class="producto-specs">
+      <span class="producto-spec">Hoja 15cm</span>
+      <span class="producto-spec">Palo Santo</span>
+      <span class="producto-spec">Aroma natural</span>
+      <span class="producto-spec">Con presentación</span>
+    </div>
+    <div class="producto-footer">
+      <span class="producto-footer-link">Ver en tienda →</span>
+    </div>
+  </a>
+
+</div>
+<div class="rv" style="text-align:center;margin-top:3rem;">
+  <a href="tienda.html" class="btn-silver" style="display:inline-flex;">Ver los 51 modelos en tienda →</a>
+</div>
+```
+
   </div>
 </section>
 
@@ -754,6 +1095,7 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
           <li><a href="#historia">El Artesano</a></li>
           <li><a href="#proceso">El Proceso</a></li>
           <li><a href="#materiales">Materiales</a></li>
+          <li><a href="#maderas">Maderas</a></li>
           <li><a href="#testimonios">Testimonios</a></li>
           <li><a href="#faq">Preguntas frecuentes</a></li>
           <li><a href="#envios">Envíos</a></li>
@@ -790,13 +1132,6 @@ footer{background:#050505;border-top:1px solid var(–silver-line);padding:clamp
 </button>
 
 <script>
-/* CURSOR */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
-
 /* ANCHOR SCROLL */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const id=a.getAttribute('href').slice(1);if(!id)return;const t=document.getElementById(id);if(!t)return;e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',location.pathname+location.search);});});
 
@@ -824,12 +1159,12 @@ bt.addEventListener('click',()=>{document.getElementById('hero').scrollIntoView(
 
 /* CATEGORY DEFS */
 const CAT_DEFS=[
-  {id:'all',           label:'Todos',             icon:'⚔', desc:'Ver toda la colección'},
+  {id:'all',label:'Todos',icon:'⚔',desc:'Ver toda la colección'},
   {id:'Parrilla & Asado',label:'Parrilla & Asado',icon:'🔥',desc:'Sets para asadores exigentes'},
-  {id:'Caza & Campo',  label:'Caza & Campo',       icon:'🌿',desc:'Robustez para el trabajo real'},
-  {id:'Cocina Profesional',label:'Cocina',         icon:'👨‍🍳',desc:'Precisión para la cocina'},
-  {id:'Tradición Gaucha',label:'Tradición Gaucha', icon:'🐄',desc:'El facón y la identidad criolla'},
-  {id:'Diseño Exclusivo',label:'Diseño Exclusivo', icon:'✨',desc:'Piezas únicas de colección'},
+  {id:'Caza & Campo',label:'Caza & Campo',icon:'🌿',desc:'Robustez para el trabajo real'},
+  {id:'Cocina Profesional',label:'Cocina',icon:'👨‍🍳',desc:'Precisión para la cocina'},
+  {id:'Tradición Gaucha',label:'Tradición Gaucha',icon:'🐄',desc:'El facón y la identidad criolla'},
+  {id:'Diseño Exclusivo',label:'Diseño Exclusivo',icon:'✨',desc:'Piezas únicas de colección'},
 ];
 
 function renderCategories(products){
@@ -857,7 +1192,7 @@ function renderCategories(products){
   grid.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 }
 
-/* LOAD DATA — solo para categorías y promo banner, NUNCA renderiza productos en el index */
+/* LOAD DATA */
 (async function(){
   const fallback=[
     {id:'1',category:'Parrilla & Asado',active:true},{id:'2',category:'Caza & Campo',active:true},
@@ -871,14 +1206,12 @@ function renderCategories(products){
     const prods=(data.products||[]).length?data.products:fallback;
     renderCategories(prods);
     const s=data.settings||{};
-    /* Solo mostrar banner de promo si admin lo activó */
     if(s.globalPromo&&s.globalPromoBanner){
       const b=document.createElement('div');
       b.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:900;background:var(--silver);color:var(--jet);text-align:center;padding:.65rem 1rem;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:2rem';
       b.innerHTML=`<span>${s.globalPromoBanner}</span><button onclick="this.parentElement.remove()" style="background:none;border:none;color:rgba(8,8,8,.45);font-size:1rem;cursor:pointer;line-height:1">✕</button>`;
       document.body.appendChild(b);
     }
-    /* Actualizar contacto si admin cambió datos */
     if(s.whatsapp){const w=s.whatsapp.replace(/\D/g,'');document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{a.href=a.href.replace(/wa\.me\/\d+/,'wa.me/'+w)});}
     if(s.instagram){const ig=s.instagram.replace('@','');document.querySelectorAll('a[href*="instagram.com"]').forEach(a=>{a.href='https://www.instagram.com/'+ig});}
   }catch{
