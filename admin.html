@@ -123,12 +123,10 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .b-unavail{background:var(–red);color:#fff}
 .promo-badge{position:absolute;top:8px;right:8px;z-index:2;background:var(–red);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:4px}
 .featured-star{position:absolute;bottom:30px;right:8px;z-index:2;background:rgba(212,168,67,.9);color:#fff;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px}
-
-/* ── 🇦🇷 BANDERITA ── */
 .ar-flag{position:absolute;bottom:8px;right:8px;z-index:2;font-size:16px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
-
-/* Combo badge */
 .combo-badge{position:absolute;bottom:30px;left:8px;z-index:2;background:var(–green);color:#fff;font-size:8px;font-weight:700;padding:3px 7px;border-radius:4px;display:flex;align-items:center;gap:3px}
+/* photo count badge */
+.photo-count-badge{position:absolute;bottom:8px;left:8px;z-index:2;background:rgba(26,24,20,.65);color:#fff;font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;display:flex;align-items:center;gap:4px}
 
 .prod-overlay{position:absolute;inset:0;background:rgba(26,24,20,.45);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .25s;pointer-events:none}
 .prod-card:hover .prod-overlay{opacity:1;pointer-events:all}
@@ -196,7 +194,31 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .spec-input-inner{border:none;outline:none;background:none;font-family:var(–sans);font-size:16px!important;color:var(–text);min-width:120px;flex:1}
 .spec-input-inner::placeholder{color:var(–muted)}
 
-/* IMAGE UPLOADER */
+/* ── ENHANCED MEDIA SECTION ── */
+.media-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.media-count-info{font-size:12px;color:var(–muted);display:flex;align-items:center;gap:5px}
+.media-add-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.media-add-btn{display:flex;align-items:center;gap:7px;padding:10px 14px;border:1.5px dashed var(–border);background:var(–bg);border-radius:var(–radius);cursor:pointer;font-size:13px;font-weight:500;color:var(–muted);transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:var(–sans)}
+.media-add-btn:hover,.media-add-btn:active{border-color:var(–accent);color:var(–accent);background:rgba(200,131,42,.05)}
+.media-add-btn i{font-size:15px}
+.media-grid-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:12px;min-height:0}
+.media-thumb{position:relative;aspect-ratio:1;border-radius:var(–radius);overflow:hidden;background:var(–bg);border:1.5px solid var(–border);cursor:grab;transition:border-color .2s,box-shadow .2s}
+.media-thumb:hover{border-color:var(–accent);box-shadow:0 2px 10px rgba(200,131,42,.2)}
+.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.media-thumb .mt-del{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(192,57,43,.85);color:#fff;border:none;cursor:pointer;font-size:11px;display:grid;place-items:center;z-index:5;-webkit-tap-highlight-color:transparent;transition:background .2s}
+.media-thumb .mt-del:hover{background:var(–red)}
+.media-thumb .mt-main{position:absolute;bottom:4px;left:4px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(–accent);color:#fff;padding:2px 6px;border-radius:3px}
+.media-thumb .mt-set-main{position:absolute;bottom:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:9px;display:grid;place-items:center;z-index:5;-webkit-tap-highlight-color:transparent;transition:background .2s}
+.media-thumb .mt-set-main:hover{background:var(–accent)}
+.media-thumb .mt-video-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.media-empty-state{border:2px dashed var(–border);border-radius:var(–radius);padding:32px 20px;text-align:center;color:var(–muted);background:var(–bg)}
+.media-empty-state i{font-size:30px;opacity:.2;display:block;margin-bottom:10px}
+.media-empty-state p{font-size:13px;font-weight:500;margin-bottom:4px}
+.media-empty-state small{font-size:11px}
+.url-add-row{display:flex;gap:8px;margin-top:8px}
+.url-add-row .form-input{flex:1}
+
+/* IMAGE UPLOADER (hero/artisan) */
 .img-upload-zone{display:block;position:relative;border:2px dashed var(–border);border-radius:var(–radius);cursor:pointer;transition:border-color .2s,background .2s;overflow:hidden;min-height:140px;background:var(–bg);text-align:center;-webkit-tap-highlight-color:transparent}
 .img-upload-zone.has-image{border-style:solid;border-color:var(–accent)}
 .upload-idle{padding:28px 20px;text-align:center;pointer-events:none}
@@ -211,28 +233,14 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .url-fallback{margin-top:10px}
 .url-fallback summary{cursor:pointer;font-size:12px;color:var(–muted);display:flex;align-items:center;gap:6px;padding:6px 0;list-style:none;user-select:none;min-height:36px}
 .url-fallback summary::-webkit-details-marker{display:none}
-.media-thumb{position:relative;aspect-ratio:1;border-radius:var(–radius);overflow:hidden;background:var(–bg);border:1.5px solid var(–border);cursor:grab}
-.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.media-thumb .mt-del{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(192,57,43,.85);color:#fff;border:none;cursor:pointer;font-size:11px;display:grid;place-items:center;z-index:5;-webkit-tap-highlight-color:transparent}
-.media-thumb .mt-main{position:absolute;bottom:4px;left:4px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(–accent);color:#fff;padding:2px 6px;border-radius:3px}
-.upload-progress{position:absolute;inset:0;background:rgba(26,24,20,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;font-size:13px;font-weight:600;z-index:10;border-radius:var(–radius)}
-.progress-bar-wrap{width:70%;height:4px;background:rgba(255,255,255,.2);border-radius:2px}
-.progress-bar-fill{height:100%;background:var(–accent);border-radius:2px;transition:width .3s}
 
 /* ── OFERTAS & COMBOS ── */
 .offers-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.offers-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
-.offers-tab{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(–border);background:var(–surface);color:var(–muted);cursor:pointer;transition:all .2s;min-height:36px;-webkit-tap-highlight-color:transparent}
-.offers-tab.active{background:var(–accent);color:#fff;border-color:var(–accent)}
-
-/* Global banner */
 .global-banner-card{background:var(–surface);border:1px solid var(–border);border-radius:var(–radius);padding:16px;margin-bottom:20px}
 .global-banner-card h4{font-family:var(–serif);font-size:17px;font-weight:500;margin-bottom:4px}
 .global-banner-card p{font-size:12px;color:var(–muted);margin-bottom:12px}
 .global-banner-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .global-banner-text-wrap{flex:1;min-width:200px}
-
-/* Offer cards grid */
 .offers-grid{display:grid;grid-template-columns:1fr;gap:12px}
 .offer-card{background:var(–surface);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;transition:box-shadow .2s}
 .offer-card:hover{box-shadow:var(–shadow)}
@@ -252,27 +260,18 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .offer-card-name{font-weight:600;font-size:14px;line-height:1.3;margin-bottom:2px}
 .offer-card-desc{font-size:12px;color:var(–muted)}
 .offer-card-foot{padding:10px 14px;border-top:1px solid var(–border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-
-/* Combo section */
-.combo-section{margin-top:24px}
-.combo-section h3{font-family:var(–serif);font-size:19px;font-weight:500;margin-bottom:4px}
-.combo-section p{font-size:12px;color:var(–muted);margin-bottom:16px}
 .combo-card{background:var(–surface);border:1px solid var(–border);border-radius:var(–radius);padding:14px;margin-bottom:10px}
 .combo-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
 .combo-card-name{font-weight:600;font-size:14px}
 .combo-card-items{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
 .combo-item-tag{font-size:11px;background:rgba(200,131,42,.1);color:var(–accent);padding:4px 10px;border-radius:20px;font-weight:500}
 .combo-card-foot{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(–border)}
-
-/* Offer tipo selector */
 .offer-tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .otc{border:1.5px solid var(–border);border-radius:var(–radius);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
 .otc.sel{border-color:var(–accent);background:rgba(200,131,42,.07)}
 .otc-icon{font-size:20px;margin-bottom:4px}
 .otc-label{font-size:11px;font-weight:700}
 .otc-sub{font-size:10px;color:var(–muted);margin-top:2px}
-
-/* Status badge */
 .status-badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px}
 .sb-active{background:rgba(45,138,94,.1);color:var(–green)}
 .sb-inactive{background:rgba(0,0,0,.06);color:var(–muted)}
@@ -327,6 +326,7 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
 .prod-card:hover .prod-overlay{opacity:1;pointer-events:all}
 .prod-card.touch-active .prod-overlay{opacity:0;pointer-events:none}
 .offer-tipo-grid{grid-template-columns:repeat(6,1fr)}
+.media-grid-wrap{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
 }
 @media(min-width:1024px){.topbar{padding:0 40px}}
 </style>
@@ -452,7 +452,7 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
     </div>
     <div style="padding:12px;background:rgba(200,131,42,.06);border:1px solid rgba(200,131,42,.2);border-radius:var(--radius);margin-bottom:20px;font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:8px">
       <i class="fas fa-info-circle" style="color:var(--accent);margin-top:2px;flex-shrink:0"></i>
-      <span>Los combos aparecen en el catálogo con badge <strong style="color:var(--green)">COMBO</strong> 🇦🇷 y precio especial. Podés combinar cualquier producto del catálogo.</span>
+      <span>Los combos aparecen en el catálogo con badge <strong style="color:var(--green)">COMBO</strong> 🇦🇷 y precio especial.</span>
     </div>
     <div id="combos-grid" style="display:grid;gap:12px"></div>
     <div id="combos-empty" style="display:none;text-align:center;padding:60px 0;color:var(--muted)">
@@ -578,76 +578,124 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
     <div class="modal-head"><h2 class="modal-title" id="modal-prod-title">Nuevo producto</h2><button class="modal-close" onclick="closeModal('mProd')">✕</button></div>
     <div class="modal-tabs">
       <button class="modal-tab active" onclick="switchModalTab(this,'tab-basic')"><i class="fas fa-info-circle"></i> Básico</button>
-      <button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos</button>
+      <button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos/Videos</button>
       <button class="modal-tab" onclick="switchModalTab(this,'tab-specs')"><i class="fas fa-list-ul"></i> Detalles</button>
       <button class="modal-tab" onclick="switchModalTab(this,'tab-precio')"><i class="fas fa-dollar-sign"></i> Precio</button>
       <button class="modal-tab" onclick="switchModalTab(this,'tab-cfg')"><i class="fas fa-sliders-h"></i> Config</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="edit-id">
-      <!-- TAB BÁSICO -->
-      <div class="tab-panel active" id="tab-basic">
-        <div class="form-row"><label class="form-label">Nombre del producto *</label><input type="text" class="form-input" id="edit-name" placeholder="Ej: Juego Parrillero XL"></div>
-        <div class="form-grid">
-          <div class="form-row"><label class="form-label">Categoría *</label><input type="text" class="form-input" id="edit-cat" placeholder="Ej: Parrilla & Asado" list="cat-dl"><datalist id="cat-dl"></datalist></div>
-          <div class="form-row"><label class="form-label">Estado / Badge</label><select class="form-select" id="edit-badge"><option value="avail">Disponible</option><option value="custom">A pedido</option><option value="intl">Exportación</option><option value="unavail">No disponible</option></select></div>
-        </div>
-        <div class="form-row"><label class="form-label">Texto del badge</label><input type="text" class="form-input" id="edit-badge-txt" placeholder="Ej: Disponible"></div>
-        <div class="form-row"><label class="form-label">Descripción</label><textarea class="form-textarea" id="edit-desc" placeholder="Descripción del producto..."></textarea></div>
+
+```
+  <!-- TAB BÁSICO -->
+  <div class="tab-panel active" id="tab-basic">
+    <div class="form-row"><label class="form-label">Nombre del producto *</label><input type="text" class="form-input" id="edit-name" placeholder="Ej: Juego Parrillero XL"></div>
+    <div class="form-grid">
+      <div class="form-row"><label class="form-label">Categoría *</label><input type="text" class="form-input" id="edit-cat" placeholder="Ej: Parrilla & Asado" list="cat-dl"><datalist id="cat-dl"></datalist></div>
+      <div class="form-row"><label class="form-label">Estado / Badge</label><select class="form-select" id="edit-badge"><option value="avail">Disponible</option><option value="custom">A pedido</option><option value="intl">Exportación</option><option value="unavail">No disponible</option></select></div>
+    </div>
+    <div class="form-row"><label class="form-label">Texto del badge</label><input type="text" class="form-input" id="edit-badge-txt" placeholder="Ej: Disponible"></div>
+    <div class="form-row"><label class="form-label">Descripción</label><textarea class="form-textarea" id="edit-desc" placeholder="Descripción del producto..."></textarea></div>
+  </div>
+
+  <!-- TAB FOTOS / VIDEOS -->
+  <div class="tab-panel" id="tab-fotos">
+    <div class="media-section-header">
+      <div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:2px">Galería del producto</div>
+        <div class="media-count-info"><i class="fas fa-images"></i> <span id="media-count-label">0 archivos</span> · La primera foto es la imagen principal</div>
       </div>
-      <!-- TAB FOTOS -->
-      <div class="tab-panel" id="tab-fotos">
-        <div class="form-row">
-          <label class="form-label">Fotos y videos <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">— La primera es la principal · 🇦🇷 aparece automáticamente en las cards</small></label>
-          <div id="media-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:10px"></div>
-          <label class="img-upload-zone" id="img-zone" style="min-height:100px">
-            <div class="upload-idle" id="upload-idle"><i class="fas fa-plus upload-icon" style="font-size:22px"></i><p class="upload-title" style="font-size:13px">Tocá para agregar foto o video</p><p class="upload-sub">JPG, PNG, WEBP, MP4 · máx 10 MB</p></div>
-            <input type="file" id="img-file" accept="image/*,video/*" multiple style="display:none" onchange="onFileChange(this)">
-          </label>
-          <details class="url-fallback"><summary><i class="fas fa-link"></i> O pegá una URL</summary><div style="display:flex;gap:8px;margin-top:8px"><input type="url" class="form-input" id="edit-img-url" placeholder="https://..."><button type="button" class="btn btn-ghost btn-sm" onclick="addMediaUrl()"><i class="fas fa-plus"></i></button></div></details>
-          <div class="form-hint"><i class="fas fa-flag"></i> La banderita 🇦🇷 aparece automáticamente en todas las cards del catálogo.</div>
-        </div>
-      </div>
-      <!-- TAB SPECS -->
-      <div class="tab-panel" id="tab-specs">
-        <div class="form-row">
-          <label class="form-label">Especificaciones <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">(Enter para agregar)</small></label>
-          <div class="specs-wrap" id="specs-wrap" onclick="document.getElementById('spec-input-inner').focus()"><input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="Ej: Acero 1075 · Enter" onkeydown="handleSpecKey(event)"></div>
-        </div>
-        <div class="form-row" style="margin-bottom:0"><label class="form-label">Nota de promo en este producto</label><input type="text" class="form-input" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!"></div>
-      </div>
-      <!-- TAB PRECIO -->
-      <div class="tab-panel" id="tab-precio">
-        <div class="form-grid">
-          <div class="form-row"><label class="form-label">Precio (texto)</label><input type="text" class="form-input" id="edit-price" placeholder="Ej: $85.000"></div>
-          <div class="form-row"><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="edit-price-orig" placeholder="Ej: $100.000"></div>
-        </div>
-        <div class="form-row"><label class="form-label">Nota de precio</label><input type="text" class="form-input" id="edit-price-note" placeholder="Ej: Envío incluido · Personalizable"></div>
-        <div class="form-row" style="margin-bottom:0"><label class="form-label">Stock disponible</label><input type="number" class="form-input" id="edit-stock" placeholder="0 = sin stock" min="0"></div>
-      </div>
-      <!-- TAB CONFIG -->
-      <div class="tab-panel" id="tab-cfg">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-            <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Visible en el sitio</div><div style="font-size:12px;color:var(--muted)">Activá para que aparezca en la tienda</div></div>
-            <label class="toggle"><input type="checkbox" id="edit-active" checked><div class="t-track"></div><div class="t-thumb"></div></label>
-          </div>
-          <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-            <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">⭐ Producto destacado</div><div style="font-size:12px;color:var(--muted)">Aparece primero y con estrella</div></div>
-            <label class="toggle"><input type="checkbox" id="edit-featured"><div class="t-track"></div><div class="t-thumb"></div></label>
-          </div>
-          <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-            <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">🇦🇷 Mostrar banderita</div><div style="font-size:12px;color:var(--muted)">Activa por defecto en todos los productos</div></div>
-            <label class="toggle"><input type="checkbox" id="edit-show-flag" checked><div class="t-track"></div><div class="t-thumb"></div></label>
-          </div>
-        </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button type="button" class="btn btn-sm btn-ghost" onclick="sortMediaByType()" title="Ordenar: fotos primero"><i class="fas fa-sort"></i> Ordenar</button>
+        <button type="button" class="btn btn-sm btn-danger" onclick="clearAllMedia()" title="Eliminar todas las fotos"><i class="fas fa-trash"></i> Limpiar todo</button>
       </div>
     </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="closeModal('mProd')">Cancelar</button>
-      <button class="btn btn-danger btn-sm" id="btn-del" onclick="openConfirmDel()" style="display:none"><i class="fas fa-trash"></i> Eliminar</button>
-      <button class="btn btn-primary" onclick="saveProduct()"><i class="fas fa-check"></i> Guardar</button>
+
+    <!-- Thumbnail grid -->
+    <div id="media-grid" class="media-grid-wrap"></div>
+    <div id="media-empty-state" class="media-empty-state" style="display:none">
+      <i class="fas fa-images"></i>
+      <p>Sin fotos ni videos aún</p>
+      <small>Usá los botones de abajo para agregar</small>
     </div>
+
+    <!-- Add buttons bar -->
+    <div class="media-add-bar">
+      <button type="button" class="media-add-btn" onclick="document.getElementById('img-file-photos').click()">
+        <i class="fas fa-camera" style="color:var(--accent)"></i> Agregar fotos
+      </button>
+      <button type="button" class="media-add-btn" onclick="document.getElementById('img-file-video').click()">
+        <i class="fas fa-video" style="color:var(--blue)"></i> Agregar video
+      </button>
+      <button type="button" class="media-add-btn" onclick="toggleUrlPanel()">
+        <i class="fas fa-link" style="color:var(--muted)"></i> Pegar URL
+      </button>
+    </div>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="img-file-photos" accept="image/*" multiple style="display:none" onchange="onFileChange(this)">
+    <input type="file" id="img-file-video" accept="video/*" multiple style="display:none" onchange="onFileChange(this)">
+
+    <!-- URL panel (hidden by default) -->
+    <div id="url-panel" style="display:none;margin-top:4px;padding:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius)">
+      <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Pegar URL de imagen o video</div>
+      <div class="url-add-row">
+        <input type="url" class="form-input" id="edit-img-url" placeholder="https://imagen.com/foto.jpg o https://video.mp4">
+        <button type="button" class="btn btn-primary btn-sm" onclick="addMediaUrl()"><i class="fas fa-plus"></i> Agregar</button>
+      </div>
+      <div class="form-hint" style="margin-top:8px"><i class="fas fa-info-circle"></i> Soporta JPG, PNG, WEBP, MP4, WEBM. Si tenés imgbb configurado, las fotos se suben automáticamente.</div>
+    </div>
+
+    <!-- Drag hint -->
+    <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px">
+      <i class="fas fa-arrows-alt"></i> Arrastrá las miniaturas para reordenar · <i class="fas fa-flag"></i> 🇦🇷 aparece en todas las cards
+    </div>
+  </div>
+
+  <!-- TAB SPECS -->
+  <div class="tab-panel" id="tab-specs">
+    <div class="form-row">
+      <label class="form-label">Especificaciones <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">(Enter para agregar)</small></label>
+      <div class="specs-wrap" id="specs-wrap" onclick="document.getElementById('spec-input-inner').focus()"><input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="Ej: Acero 1075 · Enter" onkeydown="handleSpecKey(event)"></div>
+    </div>
+    <div class="form-row" style="margin-bottom:0"><label class="form-label">Nota de promo en este producto</label><input type="text" class="form-input" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!"></div>
+  </div>
+
+  <!-- TAB PRECIO -->
+  <div class="tab-panel" id="tab-precio">
+    <div class="form-grid">
+      <div class="form-row"><label class="form-label">Precio (texto)</label><input type="text" class="form-input" id="edit-price" placeholder="Ej: $85.000"></div>
+      <div class="form-row"><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="edit-price-orig" placeholder="Ej: $100.000"></div>
+    </div>
+    <div class="form-row"><label class="form-label">Nota de precio</label><input type="text" class="form-input" id="edit-price-note" placeholder="Ej: Envío incluido · Personalizable"></div>
+    <div class="form-row" style="margin-bottom:0"><label class="form-label">Stock disponible</label><input type="number" class="form-input" id="edit-stock" placeholder="0 = sin stock" min="0"></div>
+  </div>
+
+  <!-- TAB CONFIG -->
+  <div class="tab-panel" id="tab-cfg">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Visible en el sitio</div><div style="font-size:12px;color:var(--muted)">Activá para que aparezca en la tienda</div></div>
+        <label class="toggle"><input type="checkbox" id="edit-active" checked><div class="t-track"></div><div class="t-thumb"></div></label>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">⭐ Producto destacado</div><div style="font-size:12px;color:var(--muted)">Aparece primero y con estrella</div></div>
+        <label class="toggle"><input type="checkbox" id="edit-featured"><div class="t-track"></div><div class="t-thumb"></div></label>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:3px">🇦🇷 Mostrar banderita</div><div style="font-size:12px;color:var(--muted)">Activa por defecto en todos los productos</div></div>
+        <label class="toggle"><input type="checkbox" id="edit-show-flag" checked><div class="t-track"></div><div class="t-thumb"></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-foot">
+  <button class="btn btn-ghost" onclick="closeModal('mProd')">Cancelar</button>
+  <button class="btn btn-danger btn-sm" id="btn-del" onclick="openConfirmDel()" style="display:none"><i class="fas fa-trash"></i> Eliminar</button>
+  <button class="btn btn-primary" onclick="saveProduct()"><i class="fas fa-check"></i> Guardar</button>
+</div>
+```
+
   </div>
 </div>
 
@@ -677,18 +725,12 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
         <label class="form-label">Porcentaje de descuento (%)</label>
         <input type="number" class="form-input" id="offer-pct-val" placeholder="20" min="1" max="99">
       </div>
-      <div class="form-row">
-        <label class="form-label">Texto del badge *</label>
-        <input type="text" class="form-input" id="offer-text" placeholder="Ej: ¡20% OFF esta semana!">
-      </div>
+      <div class="form-row"><label class="form-label">Texto del badge *</label><input type="text" class="form-input" id="offer-text" placeholder="Ej: ¡20% OFF esta semana!"></div>
       <div class="form-grid">
         <div class="form-row"><label class="form-label">Precio oferta</label><input type="text" class="form-input" id="offer-price" placeholder="Ej: $68.000"></div>
         <div class="form-row"><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="offer-price-orig" placeholder="Ej: $85.000"></div>
       </div>
-      <div class="form-row">
-        <label class="form-label">Descripción (opcional)</label>
-        <input type="text" class="form-input" id="offer-desc" placeholder="Ej: Solo por tiempo limitado">
-      </div>
+      <div class="form-row"><label class="form-label">Descripción (opcional)</label><input type="text" class="form-input" id="offer-desc" placeholder="Ej: Solo por tiempo limitado"></div>
       <div style="border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px">
         <div><div style="font-size:13px;font-weight:500">Oferta activa</div><div style="font-size:11px;color:var(--muted)">Se muestra en el catálogo</div></div>
         <label class="toggle"><input type="checkbox" id="offer-active" checked><div class="t-track"></div><div class="t-thumb"></div></label>
@@ -778,6 +820,9 @@ input,textarea,select,.form-input,.form-select,.form-textarea,.search-box input,
 <div class="toast" id="toast"></div>
 
 <script>
+/* ══ INITIAL DATA WITH ALL PRODUCTS ══════════════════════════════════════ */
+const INITIAL_DATA = {"settings":{"whatsapp":"5493843458340","instagram":"cuchillos.artesanales.24","facebook":"Cuchillos Artesanales","artisanPhoto":"","globalPromo":false,"globalPromoBanner":"","reviews":[]},"products":[{"id":"760","name":"Parrillero Nº760","category":"Parrilla & Asado","description":"Parrillero clásico con hoja vaciado plano. Mango en Nogal florado con terminación satinada. Vaina de baqueta artesanal.","specs":["Acero P498V","Nogal florado","22 cm hoja","33 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"769","name":"Mini Cleaver Nº769","category":"Cocina Profesional","description":"Mini cuchillo tipo cleaver de precisión. Hoja vaciado plano con terminación satinada. Mango en Petiribi artesanal.","specs":["Acero P498V","Petiribi","12 cm hoja","24 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"762","name":"Fighter Nº762","category":"Caza & Campo","description":"Cuchillo tipo fighter de alto rendimiento. Hoja vaciado plano con empuñadura en Micarta de primera calidad. Vaina de baqueta.","specs":["Acero Inox 420U","Micarta","17.5 cm hoja","31 cm total","58 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"760b","name":"Küchenm M Nº760","category":"Cocina Profesional","description":"Cuchillo de cocina mediano con hoja vaciado plano. Empuñadura en Lapacho, madera noble de la región. Terminación satinada.","specs":["Acero P498V","Lapacho","18 cm hoja","29 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"341","name":"Fighter Nº341","category":"Caza & Campo","description":"Fighter en acero carbono 5160 con fosfatizado oscuro. Empuñadura en Quebracho y Purpleheart con pasadores de bronce. Pieza excepcional.","specs":["Acero 5160 Carbono","Quebracho+Purpleheart","18.5 cm hoja","31 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"797","name":"Verijero M Nº797 — Grabado WD","category":"Diseño Exclusivo","description":"Verijero mediano con grabado personalizado 'WD' en la hoja. Empuñadura en Nogal con presillas y pasadores de acero inoxidable. Vaina de baqueta negra.","specs":["Acero Inox P498V","Nogal","18.5 cm hoja","29.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Grabado incluido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"800","name":"Capador Nº800","category":"Caza & Campo","description":"Capador compacto y robusto. Empuñadura combinada en Purpleheart, fierroliso y Petiribi. Vaina artesanal de baqueta.","specs":["Acero Inox 420","Purpleheart+Petiribi","8 cm hoja","16.5 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"804","name":"Cleaver M Nº804","category":"Cocina Profesional","description":"Cleaver mediano con mango en Nogal. Hoja vaciado plano con terminación satinada. Perfecto para cocina profesional.","specs":["Acero Inox 420","Nogal","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"799","name":"Capador Nº799","category":"Caza & Campo","description":"Capador con empuñadura bicolor en Amaranto y Petiribi. Acero inoxidable de alta dureza. Vaina de baqueta.","specs":["Acero Inox P498V","Amaranto+Petiribi","8 cm hoja","16.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"803","name":"Cleaver M Nº803 — Incienso","category":"Cocina Profesional","description":"Cleaver mediano con empuñadura en madera de Incienso. Hoja vaciado plano satinada. Un clásico artesanal.","specs":["Acero Inox 420","Incienso","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"802","name":"Cleaver M Nº802 — Haya","category":"Cocina Profesional","description":"Cleaver mediano con empuñadura en Haya europea. Hoja vaciado plano satinada con acabado premium.","specs":["Acero Inox 420","Haya","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"801","name":"Fileteador Nº801","category":"Cocina Profesional","description":"Fileteador con hoja flexible y precisa. Empuñadura combinada en Fierroliso y Fenólico Petiribi. Ideal para cocina profesional.","specs":["Acero Inox 420","Fierroliso+Fenólico","15 cm hoja","27 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"840","name":"Verijero S Nº840","category":"Caza & Campo","description":"Verijero chico con sangría en la hoja. Empuñadura en Membrillo con pasadores de bronce. Vaina de baqueta color negro.","specs":["Acero INOX 420","Membrillo","16 cm hoja","26 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"813","name":"Parrillero S Nº813","category":"Parrilla & Asado","description":"Parrillero chico con vaciado plano y sangría. File work artesanal. Empuñadura en Purpleheart (Amaranto) con pasadores de bronce. El asador exigente lo va a elegir.","specs":["Acero P498V","Purpleheart","21 cm hoja","33 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina sobre marcos · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"806","name":"Capador Nº806 — Micarta Naranja","category":"Caza & Campo","description":"Capador con llamativa empuñadura en Micarta color naranja con pasadores de bronce. Vaciado plano. Vaina negra.","specs":["Acero INOX 420","Micarta naranja","9 cm hoja","17 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"811","name":"Verijero S Nº811 — Nogal Premium","category":"Caza & Campo","description":"Verijero chico con sangría y vaciado plano. Empuñadura en Nogal Premium con pasadores de bronce. Vaina de baqueta negra.","specs":["Acero INOX 420","Nogal Premium","16 cm hoja","26 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"808","name":"Capador Nº808 — Baquelita+Pau Ferro","category":"Caza & Campo","description":"Capador compacto con empuñadura en Baquelita y Pau Ferro. Pasadores de bronce. Vaina de baqueta negra.","specs":["Acero INOX 420","Baquelita+Pau Ferro","9 cm hoja","17 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"818","name":"Parrillero M Nº818","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado plano sangrinado y file work. Empuñadura en Guayaba bondble. Vaina de cuero crudo cosido 7-1.","specs":["Acero Inox P498V","Guayaba","21 cm hoja","34.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"816","name":"Fileteador Nº816 — Olivo","category":"Cocina Profesional","description":"Fileteador con hoja sangrinada y file work. Empuñadura en madera de Olivo con pasadores de bronce y cobre. Vaina baqueta marrón.","specs":["Acero Inox 420N","Olivo","17.5 cm hoja","27 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina marrón · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"817","name":"Verijero S Nº817 — Haya Europea","category":"Caza & Campo","description":"Verijero chico con sangría y file work. Empuñadura en Haya Europea con pasadores de bronce y cobre. Vaina cuero crudo.","specs":["Acero Inox 420N","Haya Europea","15.5 cm hoja","26 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"815","name":"Cleaver M Nº815 — Chacaranda","category":"Cocina Profesional","description":"Cleaver mediano con vaciado plano sangrinado y file work. Empuñadura en Chacaranda flameado con pasadores de bronce y cobre.","specs":["Acero Inox 420N","Chacaranda flameado","12.5 cm hoja","23.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"819","name":"Verijero M Nº819 — Guayubira Exótica","category":"Caza & Campo","description":"Verijero mediano con sangría y file work. Empuñadura en Guayubira Exótica con pasadores de bronce y cobre. Vaina cuero crudo.","specs":["Acero Inox P498V","Guayubira Exótica","18 cm hoja","28.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"826","name":"Nakiri / Achuela Nº826","category":"Cocina Profesional","description":"Nakiri forjado en acero carbono 5160 con vaciado cóncavo satinado. Empuñadura en Pau Petro y Burl Algarrobo, pasador inox. Vaina de baqueta roja.","specs":["Acero 5160 Carbono","Pau Petro+Burl Algarrobo","16 cm hoja","30 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina roja · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"821","name":"Verijero M Nº821 — Guayubira Seleccionada","category":"Caza & Campo","description":"Verijero mediano con sangría y file work. Empuñadura en Guayubira Seleccionada con pasadores de bronce y cobre.","specs":["Acero Inox 420N","Guayubira Seleccionada","18 cm hoja","28.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"823","name":"Verijero S Nº823 — Roble Americano","category":"Caza & Campo","description":"Verijero chico con sangría y file work. Empuñadura en Roble Americano con pasadores de bronce y cobre. Vaina cuero crudo.","specs":["Acero Inox 420N","Roble Americano","15.5 cm hoja","26 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"820","name":"Verijero M Nº820 — Pau Ferro","category":"Caza & Campo","description":"Verijero mediano fosfatizado y sangrinado con file work. Empuñadura en Pau Ferro con pasadores de bronce y cobre. Vaina cuero crudo.","specs":["Acero Inox 420N","Pau Ferro","19 cm hoja","28.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"822","name":"Parrillero XL Nº822","category":"Parrilla & Asado","description":"Parrillero XL con hoja larga y sangría. File work artesanal. Empuñadura en Palma Negra con pasador doble de inox. Vaina cuero crudo — el rey de la parrilla.","specs":["Acero Inox P498V","Palma Negra","25 cm hoja","37.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"828","name":"Verijero S Nº828 — Full Tang","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con vaciado plano sangrinado y file work. Empuñadura combinada Pau Ferro-Guayubira-Haya Europea-Fenólico. Pieza de colección.","specs":["Acero Inox P498V","Pau Ferro+Guayubira+Haya","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"829","name":"Verijero S Nº829 — Nogal+Purpleheart","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con empuñadura en Nogal y Purpleheart con separador rojo. Combinación de colores excepcional.","specs":["Acero Inox P498V","Nogal+Purpleheart","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"830","name":"Verijero S Nº830 — Micarta Marfil","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con empuñadura en Micarta Marfil/Blanco y pasadores de latón y cobre. Vaina de cuero crudo.","specs":["Acero Inox P498V","Micarta Marfil","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"834","name":"Mini Táctico Nº834","category":"Diseño Exclusivo","description":"Mini cuchillo táctico Full Tang con vaciado plano pulido. Empuñadura en Roble Americano con pasadores de latón, cobre e ítón. Vaina baqueta negra.","specs":["Acero Inox P498V","Roble Americano","11 cm hoja","20.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"833","name":"Verijero M Nº833 — Incienso Jaspeado","category":"Caza & Campo","description":"Verijero mediano Full Tang con sangría y file work. Empuñadura en Incienso Jaspeado con pasadores de latón y cobre. Vaina cuero crudo.","specs":["Acero Inox P498V","Incienso Jaspeado","18.5 cm hoja","29.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"831","name":"Verijero M Nº831 — Caoba Africana","category":"Diseño Exclusivo","description":"Verijero mediano Full Tang con sangría y file work. Empuñadura en Caoba Africana con pasadores de latón y cobre. Vaina cuero crudo.","specs":["Acero Inox P498V","Caoba Africana","13.5 cm hoja","29.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"827","name":"Tipo Tanto Nº827","category":"Diseño Exclusivo","description":"Cuchillo tipo Tanto con punta cuadrada característica. Empuñadura combinada en Pau Ferro, Guayubira Exótica, Nogal y Fenólico. Vaina baqueta negra. Pieza de colección.","specs":["Acero Inox P498V","Pau Ferro+Guayubira","16.5 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"844","name":"Set Fileteador + Tenedor Nº844","category":"Parrilla & Asado","description":"Set parrillero completo: fileteador y tenedor a juego. Acero carbono de alta dureza con vaciado cóncavo. Empuñadura en Purpleheart flameado. Muesca española artesanal.","specs":["Acero S160 Carbono","Purpleheart flameado","15 cm hoja","27 cm total","63 HRc"],"badge":"avail","badgeText":"Set completo","price":"Consultar","priceNote":"Set cuchillo + tenedor · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"845","name":"Parrillero M Nº845 — Burl Olivo","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado plano sangrinado, file work y muesca española. Empuñadura en Burl de Olivo con pasadores de latón y cobre. Vaina cuero crudo cosido 7-1.","specs":["Acero Inox P498V","Burl Olivo","23 cm hoja","35 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"856","name":"Parrillero XL Nº856 — Burl de Lenga","category":"Parrilla & Asado","description":"El parrillero más imponente. Hoja XL con vaciado cóncavo, sangría, muesca española y satinado. Empuñadura en Burl de Lenga con pasadores de latón e inoxidable.","specs":["Acero Inox 420N","Burl de Lenga","26 cm hoja","38 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"855","name":"Capador Nº855 — Jazzanda Violeta","category":"Caza & Campo","description":"Capador compacto con vaciado cóncavo y file work. Empuñadura en Jazzanda Violeta con separador y Fenólico. Vaina cuero crudo.","specs":["Acero Inox 420N","Jazzanda Violeta","8 cm hoja","16.5 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"852","name":"Fileteador Nº852 — Laurel Flameado","category":"Cocina Profesional","description":"Fileteador con vaciado cóncavo, sangría, muesca española y satinado. Empuñadura en Laurel Flameado con pasadores de latón y cobre. Vaina cuero crudo.","specs":["Acero Inox P498V","Laurel Flameado","16 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"853","name":"Fileteador Nº853 — Lapacho","category":"Cocina Profesional","description":"Fileteador con vaciado cóncavo, sangría y muesca española. Empuñadura en Lapacho con pasadores de cobre. Vaina cuero crudo cosido.","specs":["Acero Inox P498V","Lapacho","16 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"862","name":"Todo Terreno Nº862","category":"Caza & Campo","description":"Cuchillo todo terreno en acero carbono fosfatizado. Vaciado plano, file work, sangría y muesca española. Empuñadura en Guayubira Exótica con cobre.","specs":["Acero S160 Carbono","Guayubira Exótica","23 cm hoja","38 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Cuero crudo cosido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"860","name":"Achuela Nº860","category":"Cocina Profesional","description":"Achuela (Nakiri-machete) en acero carbono fosfatizado. Doble vaciado plano y cóncavo con file work. Empuñadura en Louro Fain con pasadores de latón y cobre.","specs":["Acero S160 Carbono","Louro Fain","22 cm hoja","34 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Cuero crudo cosido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"881","name":"Verijero M Nº881 — Olivo Premium","category":"Diseño Exclusivo","description":"Verijero mediano en acero carbono fosfatizado con espiga oculta. Empuñadura en Olivo Premium con bronce e inox. Pieza premium.","specs":["Acero S160 Carbono","Olivo Premium","18 cm hoja","31 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$90.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"855b","name":"Parrillero M Nº855 — Caoba Africana","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado cóncavo, sangría y muesca española. Empuñadura en Caoba Africana con pasadores de latón e inoxidable.","specs":["Acero Inox 420N","Caoba Africana","23 cm hoja","26 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Baqueta cosida · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"882","name":"Verijero M Nº882 — Guambira Exótica","category":"Diseño Exclusivo","description":"Verijero mediano en carbono con espiga oculta y fosfatizado oscuro. Empuñadura en Guambira Exótica con bronce e inox. Alta dureza 63 HRc.","specs":["Acero S160 Carbono","Guambira Exótica","18 cm hoja","31 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$90.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"859","name":"Criollo Nº859 — Wengue","category":"Tradición Gaucha","description":"Cuchillo Criollo con hoja larga en acero carbono fosfatizado. Vaciado plano sangrinado con muesca española. Empuñadura en Wengue, maderas nobles africanas.","specs":["Acero S160 Carbono","Wengue","21 cm hoja","39.5 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"878","name":"Verijero M Nº878 — Ébano+Violeta","category":"Diseño Exclusivo","description":"Verijero mediano en carbono fosfatizado con guard de acero. Empuñadura en Ébano y Violeta con guarda inox. Acabado premium. Vaina baqueta.","specs":["Acero S160 Carbono","Ébano+Violeta","19 cm hoja","31.5 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$110.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"833b","name":"Chopper Nº833 — Burl Olivo","category":"Diseño Exclusivo","description":"Chopper en acero carbono con doble vaciado cóncavo sangrinado y muesca española fosfatizado. Hoja grande. Empuñadura en Burl Olivo con pasadores de latón y cobre.","specs":["Acero S160 Carbono","Burl Olivo","26.5 cm hoja","41.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"894","name":"Nakiri Nº894","category":"Cocina Profesional","description":"Nakiri artesanal con vaciado cóncavo sangrinado y file work. Empuñadura combinada en Algarrobo y Guayubira Exótica con pasador de latón. Vaina baqueta negra.","specs":["Acero Inox P498V","Algarrobo+Guayubira","18 cm hoja","31 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},{"id":"891","name":"Capador Nº891 — Algarrobo","category":"Caza & Campo","description":"Capador con vaciado cóncavo, file work, sangría y muesca española. Empuñadura en Algarrobo con pasadores de latón e inox. Vaina baqueta marrón.","specs":["Acero INOX 420N","Algarrobo","9.5 cm hoja","16 cm total","59 HRc"],"badge":"custom","badgeText":"A pedido","price":"Consultar","priceNote":"Encargo · 4–6 semanas · 🇦🇷","active":true,"stock":0,"image":"","media":[]},{"id":"857","name":"Fileteador Nº857 — Burl Caza","category":"Cocina Profesional","description":"Fileteador con vaciado cóncavo, sangría y muesca española. Empuñadura en Burl Caza con cuero crudo. Vaina cuero crudo cosido 7-1.","specs":["Acero Inox 420N","Burl Caza","15 cm hoja","31 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]}],"offers":[],"combos":[]};
+
 /* ══ STATE ══════════════════════════════════ */
 const DEFAULT_PWD = 'glcuchillos2024';
 let data = { settings: { reviews: [] }, products: [], offers: [], combos: [] };
@@ -791,6 +836,7 @@ let editingOfferId = null;
 let editingComboId = null;
 let editingReviewId = null;
 let toastTimer;
+let urlPanelOpen = false;
 
 /* ══ INIT ═══════════════════════════════════ */
 (async () => {
@@ -847,8 +893,9 @@ async function loadData() {
   try { const saved = await idbGet('data'); if (saved) { data = saved; if (!data.settings) data.settings = {}; if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; updateStorageInfo(); return; } } catch(e) {}
   const cached = localStorage.getItem('gl_data');
   if (cached) { try { data = JSON.parse(cached); if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; await persist(false); localStorage.removeItem('gl_data'); return; } catch(e) {} }
-  try { const r = await fetch('products.json?t='+Date.now()); if (r.ok) { data = await r.json(); if (!data.settings) data.settings = {}; if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; await persist(false); return; } } catch(e) {}
-  data = { settings: { whatsapp:'5493843458340', instagram:'gonzalo.londero.3', facebook:'Gonzafcf', heroTitle:'Cada filo cuenta una historia.', globalPromo:false, globalPromoBanner:'', artisanPhoto:'', reviews:[] }, products: [], offers: [], combos: [] };
+  // Load initial data with all products
+  data = JSON.parse(JSON.stringify(INITIAL_DATA));
+  await persist(false);
 }
 
 async function persist(mark=true) {
@@ -918,30 +965,29 @@ function renderGrid() {
   const grid = document.getElementById('prod-grid');
   if (!grid) return;
   const badgeClass = { avail:'b-avail', custom:'b-custom', intl:'b-intl', unavail:'b-unavail' };
-
-  // Check if product is part of an active combo
   const comboProductIds = new Set((data.combos||[]).filter(c=>c.active).flatMap(c=>c.items||[]));
 
   grid.innerHTML = prods.map(p => {
     const isVideo = p.image && (p.image.endsWith('.webm')||p.image.endsWith('.mp4')||p.image.includes('data:video'));
-    const showFlag = p.showFlag !== false; // default true
+    const showFlag = p.showFlag !== false;
     const inCombo = comboProductIds.has(p.id);
-    // Find active offer for this product
     const offer = (data.offers||[]).find(o=>o.active&&(o.productId===p.id||!o.productId));
+    const mediaCount = p.media ? p.media.length : (p.image ? 1 : 0);
     return `
     <div class="prod-card${p.active?'':' inactive'}">
       <div class="prod-img">
-        ${p.image ? (isVideo ? `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f2ede6;"><i class="fas fa-video" style="font-size:28px;color:var(--accent);opacity:.7"></i></div>` : `<img src="${p.image}" alt="${p.name}" loading="lazy">`)
+        ${p.image ? (isVideo ? `<div style="display:flex;align-items:center;justify-content:height:100%;background:#f2ede6;width:100%;align-items:center;justify-content:center;"><i class="fas fa-video" style="font-size:28px;color:var(--accent);opacity:.7"></i></div>` : `<img src="${p.image}" alt="${p.name}" loading="lazy">`)
           : `<div class="no-img-ph"><i class="fas fa-drafting-compass"></i><span>${p.name.slice(0,12)}</span></div>`}
         <div class="cat-badge ${badgeClass[p.badge]||'b-avail'}">${p.badgeText||p.badge}</div>
         ${(p.promo||offer) ? `<div class="promo-badge">${p.promo||(offer?offer.text:'')}</div>` : ''}
         ${p.featured ? `<div class="featured-star">★</div>` : ''}
         ${inCombo ? `<div class="combo-badge"><i class="fas fa-gift"></i> COMBO</div>` : ''}
+        ${mediaCount > 1 ? `<div class="photo-count-badge"><i class="fas fa-images"></i> ${mediaCount}</div>` : ''}
         ${showFlag ? `<div class="ar-flag" title="Hecho en Argentina">🇦🇷</div>` : ''}
         <div class="prod-overlay">
           <button class="ov-btn" onclick="openEdit('${p.id}')" title="Editar"><i class="fas fa-pen"></i></button>
+          <button class="ov-btn" onclick="openEditPhotos('${p.id}')" title="Fotos/Videos" style="background:rgba(200,131,42,.15);color:var(--accent)"><i class="fas fa-images"></i></button>
           <button class="ov-btn dup" onclick="dupProduct('${p.id}')" title="Duplicar"><i class="fas fa-copy"></i></button>
-          <button class="ov-btn offer-btn" onclick="openNewOfferForProduct('${p.id}')" title="Agregar oferta"><i class="fas fa-tag"></i></button>
           <button class="ov-btn del" onclick="triggerDelete('${p.id}')" title="Eliminar"><i class="fas fa-trash"></i></button>
         </div>
       </div>
@@ -968,6 +1014,8 @@ function renderGrid() {
 /* ══ PRODUCT CRUD ════════════════════════════ */
 function openNew() { editingId=null; document.getElementById('modal-prod-title').textContent='Nuevo producto'; document.getElementById('btn-del').style.display='none'; clearProdForm(); switchModalTab(document.querySelector('#mProd .modal-tab'),'tab-basic'); openModal('mProd'); }
 function openEdit(id) { editingId=id; const p=data.products.find(x=>x.id===id); if(!p) return; document.getElementById('modal-prod-title').textContent='Editar · '+p.name; document.getElementById('btn-del').style.display='inline-flex'; fillProdForm(p); switchModalTab(document.querySelector('#mProd .modal-tab'),'tab-basic'); openModal('mProd'); }
+function openEditPhotos(id) { editingId=id; const p=data.products.find(x=>x.id===id); if(!p) return; document.getElementById('modal-prod-title').textContent='Fotos · '+p.name; document.getElementById('btn-del').style.display='inline-flex'; fillProdForm(p); switchModalTab(document.querySelectorAll('#mProd .modal-tab')[1],'tab-fotos'); openModal('mProd'); }
+
 function clearProdForm() {
   ['edit-id','edit-name','edit-cat','edit-desc','edit-badge-txt','edit-price','edit-price-orig','edit-price-note','edit-promo','edit-img-url','edit-stock'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
   document.getElementById('edit-badge').value='avail';
@@ -975,6 +1023,7 @@ function clearProdForm() {
   document.getElementById('edit-featured').checked=false;
   document.getElementById('edit-show-flag').checked=true;
   currentSpecs=[]; renderSpecs(); currentMedia=[]; renderMediaGrid();
+  urlPanelOpen=false; const up=document.getElementById('url-panel'); if(up) up.style.display='none';
 }
 function fillProdForm(p) {
   document.getElementById('edit-id').value=p.id;
@@ -996,6 +1045,7 @@ function fillProdForm(p) {
   if (p.media&&p.media.length) currentMedia=p.media.map(m=>typeof m==='string'?{src:m,type:m.includes('data:video')||m.endsWith('.mp4')||m.endsWith('.webm')?'video/mp4':'image/jpeg'}:m);
   else if (p.image) currentMedia=[{src:p.image,type:p.image.includes('data:video')||p.image.endsWith('.mp4')||p.image.endsWith('.webm')?'video/mp4':'image/jpeg'}];
   renderMediaGrid();
+  urlPanelOpen=false; const up=document.getElementById('url-panel'); if(up) up.style.display='none';
 }
 function saveProduct() {
   const name = document.getElementById('edit-name').value.trim();
@@ -1059,25 +1109,112 @@ function compressImage(file, maxW, quality) {
   });
 }
 
-/* ══ MEDIA ══════════════════════════════════ */
-function renderMediaGrid() {
-  const grid=document.getElementById('media-grid'); if(!grid) return;
-  grid.innerHTML=currentMedia.map((m,i)=>{const isVid=m.type&&m.type.startsWith('video');return`<div class="media-thumb"><${isVid?'div style="background:#1a1814;width:100%;height:100%;display:flex;align-items:center;justify-content:center;"':'img src="'+m.src+'" alt=""'}${isVid?'><i class="fas fa-play-circle" style="color:var(--accent);font-size:28px"></i></div>':'>'} ${i===0?'<div class="mt-main">Principal</div>':''}<button class="mt-del" onclick="removeMedia(${i})" type="button">×</button></div>`;}).join('');
+/* ══ MEDIA — ENHANCED ═══════════════════════ */
+function updateMediaCountLabel() {
+  const el = document.getElementById('media-count-label'); if(!el) return;
+  const photos = currentMedia.filter(m=>!m.type||!m.type.startsWith('video')).length;
+  const videos = currentMedia.filter(m=>m.type&&m.type.startsWith('video')).length;
+  let parts = [];
+  if (photos) parts.push(photos + (photos===1?' foto':' fotos'));
+  if (videos) parts.push(videos + (videos===1?' video':' videos'));
+  el.textContent = parts.length ? parts.join(' · ') : '0 archivos';
 }
-let dragSrcIdx=null;
-function removeMedia(idx){currentMedia.splice(idx,1);renderMediaGrid();}
-function addMediaUrl(){const urlEl=document.getElementById('edit-img-url'),url=urlEl.value.trim();if(!url)return;const ext=url.split('.').pop().toLowerCase();currentMedia.push({src:url,type:['webm','mp4','ogg','mov'].includes(ext)?'video/'+ext:'image/jpeg'});urlEl.value='';renderMediaGrid();}
-document.getElementById('img-zone').addEventListener('click',e=>{if(e.target.classList.contains('mt-del'))return;document.getElementById('img-file').click();});
-document.getElementById('img-zone').addEventListener('dragover',e=>{e.preventDefault();});
-document.getElementById('img-zone').addEventListener('drop',e=>{e.preventDefault();Array.from(e.dataTransfer.files).forEach(f=>{if(f.type.startsWith('image/')||f.type.startsWith('video/'))processFile(f);});});
-function onFileChange(input){Array.from(input.files).forEach(f=>processFile(f));input.value='';}
-function processFile(f) {
-  if(f.size>10*1024*1024){toast('Archivo muy grande (máx 10 MB)','err');return;}
-  if(f.type.startsWith('video/')){const r=new FileReader();r.onload=e=>{currentMedia.push({src:e.target.result,type:f.type});renderMediaGrid();};r.readAsDataURL(f);return;}
+
+function renderMediaGrid() {
+  const grid = document.getElementById('media-grid');
+  const emptyState = document.getElementById('media-empty-state');
+  if (!grid) return;
+
+  if (!currentMedia.length) {
+    grid.innerHTML = '';
+    grid.style.display = 'none';
+    if (emptyState) emptyState.style.display = 'block';
+    updateMediaCountLabel();
+    return;
+  }
+  grid.style.display = 'grid';
+  if (emptyState) emptyState.style.display = 'none';
+
+  grid.innerHTML = currentMedia.map((m, i) => {
+    const isVid = m.type && m.type.startsWith('video');
+    return `<div class="media-thumb" draggable="true" ondragstart="dragStart(${i})" ondragover="dragOver(event,${i})" ondrop="dropMedia(event,${i})" ondragend="dragEnd()">
+      ${isVid
+        ? `<div style="background:#1a1814;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+            <div class="mt-video-icon"><i class="fas fa-play-circle" style="color:rgba(255,255,255,.7);font-size:28px"></i></div>
+           </div>`
+        : `<img src="${m.src}" alt="Foto ${i+1}" loading="lazy">`
+      }
+      ${i===0 ? `<div class="mt-main">Principal</div>` : `<button class="mt-set-main" onclick="setMainMedia(${i})" title="Hacer principal"><i class="fas fa-star" style="font-size:9px"></i></button>`}
+      <button class="mt-del" onclick="removeMedia(${i})" type="button" title="Eliminar">×</button>
+    </div>`;
+  }).join('');
+  updateMediaCountLabel();
+}
+
+let dragSrcIdx = null;
+function dragStart(i) { dragSrcIdx = i; }
+function dragEnd() { dragSrcIdx = null; }
+function dragOver(e, i) { e.preventDefault(); }
+function dropMedia(e, targetIdx) {
+  e.preventDefault();
+  if (dragSrcIdx === null || dragSrcIdx === targetIdx) return;
+  const moved = currentMedia.splice(dragSrcIdx, 1)[0];
+  currentMedia.splice(targetIdx, 0, moved);
+  renderMediaGrid();
+}
+function setMainMedia(idx) {
+  if (idx === 0) return;
+  const item = currentMedia.splice(idx, 1)[0];
+  currentMedia.unshift(item);
+  renderMediaGrid();
+  toast('Foto principal actualizada ✓');
+}
+function removeMedia(idx) { currentMedia.splice(idx,1); renderMediaGrid(); }
+function clearAllMedia() {
+  if (currentMedia.length === 0) return;
+  if (!confirm(`¿Eliminar todas las ${currentMedia.length} fotos/videos de este producto?`)) return;
+  currentMedia = []; renderMediaGrid(); toast('Galería vaciada');
+}
+function sortMediaByType() {
+  const photos = currentMedia.filter(m=>!m.type||!m.type.startsWith('video'));
+  const videos = currentMedia.filter(m=>m.type&&m.type.startsWith('video'));
+  currentMedia = [...photos, ...videos];
+  renderMediaGrid();
+  toast('Fotos primero, videos al final');
+}
+function toggleUrlPanel() {
+  urlPanelOpen = !urlPanelOpen;
+  const panel = document.getElementById('url-panel');
+  if (panel) { panel.style.display = urlPanelOpen ? 'block' : 'none'; if (urlPanelOpen) document.getElementById('edit-img-url').focus(); }
+}
+function addMediaUrl() {
+  const urlEl=document.getElementById('edit-img-url'), url=urlEl.value.trim();
+  if(!url) return;
+  const ext=url.split('?')[0].split('.').pop().toLowerCase();
+  currentMedia.push({src:url,type:['webm','mp4','ogg','mov'].includes(ext)?'video/'+ext:'image/jpeg'});
+  urlEl.value='';
+  renderMediaGrid();
+  toast('URL agregada ✓');
+}
+function onFileChange(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+  let processed = 0;
+  const total = files.length;
+  files.forEach(f => processFile(f, () => {
+    processed++;
+    if (processed === total) toast(`${total} archivo${total>1?'s':''} agregado${total>1?'s':''} ✓`);
+  }));
+  input.value='';
+}
+function processFile(f, done) {
+  if(f.size>10*1024*1024){toast('Archivo muy grande (máx 10 MB)','err');done&&done();return;}
+  if(f.type.startsWith('video/')){const r=new FileReader();r.onload=e=>{currentMedia.push({src:e.target.result,type:f.type});renderMediaGrid();done&&done();};r.readAsDataURL(f);return;}
   compressImage(f,1200,.82).then(async b64=>{
-    if(getImgbbKey()){const url=await uploadToImgbb(b64,f.name);if(url){currentMedia.push({src:url,type:'image/jpeg'});toast('Foto subida a imgbb ✓');}else{currentMedia.push({src:b64,type:'image/jpeg'});};}
+    if(getImgbbKey()){const url=await uploadToImgbb(b64,f.name);if(url){currentMedia.push({src:url,type:'image/jpeg'});}else{currentMedia.push({src:b64,type:'image/jpeg'});}}
     else currentMedia.push({src:b64,type:'image/jpeg'});
     renderMediaGrid();
+    done&&done();
   });
 }
 
@@ -1113,7 +1250,7 @@ function renderOffersGrid() {
   const grid=document.getElementById('offers-grid');
   const offers=data.offers||[];
   if(!offers.length){grid.innerHTML=`<div style="text-align:center;padding:40px;color:var(--muted);grid-column:1/-1"><i class="fas fa-tag" style="font-size:32px;opacity:.2;display:block;margin-bottom:12px"></i><p>No hay ofertas aún</p></div>`;return;}
-  const offerTypeLabels={texto:'Texto',pct:'Descuento',2x1:'2×1',envio:'Envío gratis',temporada:'Temporada',custom:'Personalizado'};
+  const offerTypeLabels={texto:'Texto',pct:'Descuento','2x1':'2×1',envio:'Envío gratis',temporada:'Temporada',custom:'Personalizado'};
   const offerTypeCls={texto:'ot-texto',pct:'ot-pct','2x1':'ot-2x1',envio:'ot-envio',temporada:'ot-texto',custom:'ot-custom'};
   grid.innerHTML=offers.map(o=>{
     const prod=o.productId?data.products.find(p=>p.id===o.productId):null;
@@ -1137,7 +1274,6 @@ function renderOffersGrid() {
     </div>`;
   }).join('');
 }
-
 function openNewOffer() { editingOfferId=null; clearOfferForm(); document.getElementById('modal-offer-title').textContent='Nueva oferta'; document.getElementById('btn-del-offer').style.display='none'; fillOfferProductSelect(); openModal('mOffer'); }
 function openNewOfferForProduct(prodId) { editingOfferId=null; clearOfferForm(); document.getElementById('modal-offer-title').textContent='Oferta para producto'; document.getElementById('btn-del-offer').style.display='none'; fillOfferProductSelect(prodId); openModal('mOffer'); }
 function openEditOffer(id) {
@@ -1164,7 +1300,6 @@ function saveOffer(){
   const offer={id:editingOfferId||'off'+Date.now(),type:offerTipo,text,productId:document.getElementById('offer-producto').value||'',pctVal:document.getElementById('offer-pct-val').value||'',price:document.getElementById('offer-price').value.trim(),priceOrig:document.getElementById('offer-price-orig').value.trim(),desc:document.getElementById('offer-desc').value.trim(),active:document.getElementById('offer-active').checked};
   if(!data.offers) data.offers=[];
   if(editingOfferId){const i=data.offers.findIndex(x=>x.id===editingOfferId);if(i>=0)data.offers[i]=offer;}else data.offers.push(offer);
-  // Also apply promo text to the product if specific product selected
   if(offer.productId){const p=data.products.find(x=>x.id===offer.productId);if(p){p.promo=text;if(offer.price)p.price=offer.price;if(offer.priceOrig)p.priceOrig=offer.priceOrig;}}
   persist();renderAll();renderOffersGrid();closeModal('mOffer');toast(editingOfferId?'Oferta actualizada ✓':'Oferta creada ✓');editingOfferId=null;
 }
@@ -1183,18 +1318,12 @@ function renderCombosGrid(){
     const prodNames=items.map(id=>{const p=data.products.find(x=>x.id===id);return p?p.name:'Producto eliminado';});
     return`<div class="combo-card${c.active?'':' inactive-offer'}">
       <div class="combo-card-head">
-        <div>
-          <div class="combo-card-name">${c.badge||'🎀 COMBO'} ${c.name}</div>
-          ${c.desc?`<div style="font-size:12px;color:var(--muted);margin-top:2px">${c.desc}</div>`:''}
-        </div>
+        <div><div class="combo-card-name">${c.badge||'🎀 COMBO'} ${c.name}</div>${c.desc?`<div style="font-size:12px;color:var(--muted);margin-top:2px">${c.desc}</div>`:''}</div>
         <span class="status-badge ${c.active?'sb-active':'sb-inactive'}">${c.active?'Activo':'Inactivo'}</span>
       </div>
       <div class="combo-card-items">${prodNames.map(n=>`<span class="combo-item-tag">📦 ${n}</span>`).join('')}</div>
       <div class="combo-card-foot">
-        <div>
-          <span style="font-family:var(--serif);font-size:18px;color:var(--accent);font-weight:500">${c.price||'—'}</span>
-          ${c.savings?`<span style="font-size:11px;color:var(--green);margin-left:6px">${c.savings}</span>`:''}
-        </div>
+        <div><span style="font-family:var(--serif);font-size:18px;color:var(--accent);font-weight:500">${c.price||'—'}</span>${c.savings?`<span style="font-size:11px;color:var(--green);margin-left:6px">${c.savings}</span>`:''}</div>
         <div style="display:flex;gap:6px;align-items:center">
           <label class="toggle"><input type="checkbox" ${c.active?'checked':''} onchange="toggleCombo('${c.id}',this)"><div class="t-track"></div><div class="t-thumb"></div></label>
           <button class="btn btn-sm btn-ghost" onclick="openEditCombo('${c.id}')"><i class="fas fa-pen"></i></button>
@@ -1213,7 +1342,7 @@ function openEditCombo(id){
 function clearComboForm(){['combo-name','combo-desc','combo-price','combo-savings'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('combo-badge').value='🎀 COMBO';document.getElementById('combo-active').checked=true;}
 function fillComboProductChecks(selectedIds){
   const container=document.getElementById('combo-productos-checks');
-  container.innerHTML=data.products.filter(p=>p.active!==false).map(p=>`<label style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:4px;cursor:pointer;transition:background .15s;"><input type="checkbox" value="${p.id}" ${selectedIds.includes(p.id)?'checked':''}><span style="font-size:13px">${p.name}</span><span style="font-size:11px;color:var(--muted);margin-left:auto">${p.price||''}</span></label>`).join('');
+  container.innerHTML=data.products.filter(p=>p.active!==false).map(p=>`<label style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:4px;cursor:pointer;"><input type="checkbox" value="${p.id}" ${selectedIds.includes(p.id)?'checked':''}><span style="font-size:13px">${p.name}</span><span style="font-size:11px;color:var(--muted);margin-left:auto">${p.price||''}</span></label>`).join('');
 }
 function saveCombo(){
   const name=document.getElementById('combo-name').value.trim();if(!name){toast('El nombre del combo es obligatorio','err');return;}
