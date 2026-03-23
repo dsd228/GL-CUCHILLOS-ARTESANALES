@@ -4,28 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GL Cuchillos · Colección</title>
-<meta name="description" content="Cuchillos artesanales forjados a mano por Gonzalo Londero. Nakiri, parrilleros, facones, caza. Desde Quimilí, Santiago del Estero, Argentina.">
+<title>GL Cuchillos · Producto</title>
+<meta name="description" content="Cuchillos artesanales forjados a mano por Gonzalo Londero. Desde Quimilí, Santiago del Estero, Argentina.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden;cursor:none;}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:none}
+button{font-family:inherit;cursor:pointer}
 
-/* ── CURSOR ── */
-#cur{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;background:#C8CDD6;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-#cur-ring{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(200,205,214,.3);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s,border-color .3s}
-body.hov #cur{width:3px;height:3px}
-body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
-
-/* ── VARS ── */
 :root{
-–jet:#080808;–jet2:#0E0E0E;–jet3:#141414;–jet4:#1A1A1A;
+–jet:#080808;–jet2:#0E0E0E;–jet3:#141414;–jet4:#1A1A1A;–jet5:#222;
 –silver:#C8CDD6;–silver2:#DDE1E8;–silver3:#8E96A2;
 –silver-line:rgba(200,205,214,.16);
 –cream:#E8E0D0;–cream2:#C8BCA8;–muted:#787060;
@@ -33,9 +26,10 @@ body.hov #cur-ring{width:44px;height:44px;border-color:rgba(200,205,214,.7)}
 –ease:cubic-bezier(.22,1,.36,1);
 }
 
-@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes ld{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+@keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
 
 /* ── NAV ── */
 nav{
@@ -50,208 +44,406 @@ backdrop-filter:blur(20px);
 .nav-brand-text{display:flex;flex-direction:column}
 .nav-brand-name{font-family:var(–serif);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–cream);line-height:1.1}
 .nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-top:2px}
-.nav-back{display:flex;align-items:center;gap:.6rem;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.6);transition:color .2s}
+.nav-actions{display:flex;align-items:center;gap:1rem}
+.nav-back{display:flex;align-items:center;gap:.5rem;font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.6);transition:color .2s}
 .nav-back:hover{color:var(–cream)}
 .nav-back svg{transition:transform .2s}
 .nav-back:hover svg{transform:translateX(-3px)}
-
-/* ── VIEWS ── */
-#view-list{display:block}
-#view-detail{display:none}
+.nav-wa-btn{display:flex;align-items:center;gap:.5rem;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(–jet);background:var(–silver);padding:.45rem 1.2rem;transition:background .2s;white-space:nowrap}
+.nav-wa-btn:hover{background:var(–silver2)}
 
 /* ── PAGE ── */
-.page{max-width:1400px;margin:0 auto;padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem)}
-
-/* ── LIST VIEW ── */
-.list-header{margin-bottom:3rem;animation:rise .6s var(–ease) forwards}
-.list-cat-label{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
-.list-cat-label::before{content:’’;width:22px;height:1px;background:var(–silver)}
-.list-title{font-family:var(–sans);font-weight:200;font-size:clamp(2rem,4vw,3.5rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
-.list-title em{font-style:normal;font-weight:100;color:var(–silver)}
-.list-count{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted)}
-
-/* Category filter tabs */
-.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
-.cat-tab{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(–silver-line);color:var(–muted);background:transparent;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
-.cat-tab:hover{border-color:rgba(200,205,214,.4);color:var(–cream2)}
-.cat-tab.active{border-color:var(–silver);color:var(–jet);background:var(–silver)}
-
-/* Products grid */
-.prod-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-border-top:1px solid var(–silver-line);
-border-left:1px solid var(–silver-line);
-}
-.prod-card{
-border-right:1px solid var(–silver-line);
-border-bottom:1px solid var(–silver-line);
-background:var(–jet);cursor:pointer;
-transition:background .3s;overflow:hidden;position:relative;
-}
-.prod-card:hover{background:var(–jet3)}
-.prod-card-img{
-aspect-ratio:1/1.05;background:var(–jet2);
-display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
-}
-.prod-card-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
-.prod-card:hover .prod-card-img img{transform:scale(1.04)}
-.prod-card-img svg{width:45%;opacity:.15;color:var(–cream)}
-.prod-card-badge{position:absolute;top:1rem;left:1rem;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;z-index:2}
-.badge-avail{background:var(–silver);color:var(–jet)}
-.badge-custom{background:transparent;color:var(–silver);border:1px solid rgba(200,205,214,.4)}
-.badge-intl{background:var(–jet4);color:var(–cream2);border:1px solid var(–silver-line)}
-.badge-unavail{background:transparent;color:var(–muted);border:1px solid rgba(120,112,96,.3)}
-.prod-card-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–silver);transform:scaleX(0);transform-origin:left;transition:.5s var(–ease)}
-.prod-card:hover .prod-card-silver-line{transform:scaleX(1)}
-.prod-card-body{padding:1.6rem 1.8rem 2rem}
-.prod-card-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.5rem}
-.prod-card-name{font-family:var(–sans);font-size:.92rem;font-weight:300;color:var(–cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.7rem;line-height:1.2}
-.prod-card-desc{font-size:.82rem;font-weight:300;color:rgba(200,188,168,.55);line-height:1.7;margin-bottom:1.2rem}
-.prod-card-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.4rem}
-.prod-card-spec{font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid var(–silver-line);color:var(–muted)}
-.prod-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(–silver-line)}
-.prod-card-price{font-family:var(–serif);font-size:1rem;font-style:italic;color:var(–silver)}
-.prod-card-price small{display:block;font-family:var(–sans);font-style:normal;font-size:.6rem;font-weight:400;letter-spacing:.1em;color:var(–muted);margin-top:.1rem}
-.prod-card-actions{display:flex;gap:.4rem}
-.prod-card-btn{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.45rem 1rem;background:transparent;color:var(–cream2);border:1px solid rgba(200,205,214,.3);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
-.prod-card-btn:hover{background:var(–silver);color:var(–jet);border-color:var(–silver)}
-.prod-card-btn.primary{background:var(–silver);color:var(–jet);border-color:var(–silver)}
-.prod-card-btn.primary:hover{background:var(–silver2)}
-
-/* Empty state */
-.empty-state{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(–muted);font-size:.9rem;font-weight:300;letter-spacing:.08em}
+.page{max-width:1360px;margin:0 auto;padding:clamp(5.5rem,11vh,7.5rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem)}
 
 /* ── LOADING ── */
-.loading{min-height:60vh;display:flex;align-items:center;justify-content:center;gap:6px}
+.loading-screen{min-height:80vh;display:flex;align-items:center;justify-content:center;gap:6px}
 .loading-dot{width:6px;height:6px;border-radius:50%;background:var(–silver);animation:ld .8s ease-in-out infinite}
 .loading-dot:nth-child(2){animation-delay:.12s}
 .loading-dot:nth-child(3){animation-delay:.24s}
 
-/* ── DETAIL VIEW ── */
-.detail-page{max-width:1280px;margin:0 auto;padding:clamp(5.5rem,12vh,8rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,6rem)}
-.breadcrumb{display:flex;align-items:center;gap:.6rem;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted);margin-bottom:2.5rem;animation:rise .6s var(–ease) forwards}
-.breadcrumb a{color:var(–muted);transition:color .2s;cursor:pointer}
+/* ── NOT FOUND ── */
+.not-found{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5rem;animation:rise .7s var(–ease) forwards}
+.not-found-ico{font-size:3rem;opacity:.3}
+.not-found h2{font-family:var(–sans);font-weight:200;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.2em;text-transform:uppercase;color:var(–cream)}
+.not-found p{font-size:.9rem;font-weight:300;color:var(–muted);max-width:340px;line-height:1.8}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(–muted);margin-bottom:2.5rem;animation:rise .5s var(–ease) forwards;flex-wrap:wrap}
+.breadcrumb a{color:var(–silver3);transition:color .2s}
 .breadcrumb a:hover{color:var(–silver)}
-.breadcrumb span{color:var(–silver)}
-.prod-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,7rem);align-items:start;margin-bottom:clamp(4rem,8vh,7rem)}
-.gallery{position:sticky;top:90px}
-.gallery-main{position:relative;aspect-ratio:1/1.1;background:var(–jet3);border:1px solid var(–silver-line);overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;animation:fade .8s var(–ease) forwards}
-.gallery-main img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
-.gallery-main img:hover{transform:scale(1.04)}
+.breadcrumb .bc-sep{color:rgba(200,205,214,.2)}
+.breadcrumb .bc-current{color:var(–cream2);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ── MAIN PRODUCT LAYOUT ── */
+.prod-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:clamp(3rem,6vw,8rem);
+align-items:start;
+margin-bottom:clamp(4rem,8vh,7rem);
+}
+
+/* ── GALLERY ── */
+.gallery{position:sticky;top:88px}
+
+/* Main image */
+.gallery-main{
+position:relative;
+aspect-ratio:1/1.1;
+background:var(–jet3);
+border:1px solid var(–silver-line);
+overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+margin-bottom:.7rem;
+animation:fade .7s var(–ease) forwards;
+}
+.gallery-main img{
+width:88%;height:88%;
+object-fit:contain;
+transition:transform .7s var(–ease);
+}
+.gallery-main img:hover{transform:scale(1.05)}
 .gallery-main video{width:100%;height:100%;object-fit:cover}
-.gallery-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.gallery-art svg{width:50%;opacity:.15;color:var(–cream)}
-.gallery-badge{position:absolute;top:1.2rem;left:1.2rem;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem;z-index:2}
-.gallery-promo{position:absolute;top:1.2rem;right:1.2rem;background:var(–silver);color:var(–jet);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem;z-index:2}
-.gallery-thumbs{display:flex;gap:.6rem;overflow-x:auto;scrollbar-width:none}
-.gallery-thumbs::-webkit-scrollbar{display:none}
-.gallery-thumb{flex-shrink:0;width:64px;height:64px;border:1.5px solid var(–silver-line);overflow:hidden;background:var(–jet3);cursor:pointer;transition:border-color .2s;display:flex;align-items:center;justify-content:center}
+.gal-art-placeholder{
+position:absolute;inset:0;
+display:flex;align-items:center;justify-content:center;
+}
+.gal-art-placeholder svg{width:45%;opacity:.14;color:var(–cream)}
+
+/* Zoom overlay */
+.gallery-main.zoomable{cursor:zoom-in}
+.gallery-main.zoomed{cursor:zoom-out}
+.gallery-main.zoomed img{transform:scale(1.9);cursor:zoom-out}
+
+/* Badges */
+.gal-badge-avail,.gal-badge-custom,.gal-badge-intl,.gal-badge-unavail{
+position:absolute;top:1rem;left:1rem;
+font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+padding:.3rem .7rem;z-index:3;
+}
+.gal-badge-avail{background:var(–silver);color:var(–jet)}
+.gal-badge-custom{background:transparent;color:var(–silver);border:1px solid rgba(200,205,214,.4)}
+.gal-badge-intl{background:var(–jet4);color:var(–cream2);border:1px solid var(–silver-line)}
+.gal-badge-unavail{background:transparent;color:var(–muted);border:1px solid rgba(120,112,96,.3)}
+
+.gal-promo{
+position:absolute;top:1rem;right:1rem;
+background:var(–silver);color:var(–jet);
+font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+padding:.3rem .7rem;z-index:3;
+}
+
+/* Navigation arrows */
+.gal-arrow{
+position:absolute;top:50%;transform:translateY(-50%);
+width:38px;height:38px;border:1px solid rgba(200,205,214,.2);
+background:rgba(8,8,8,.72);backdrop-filter:blur(8px);
+display:grid;place-items:center;color:var(–silver);
+transition:background .2s,border-color .2s;z-index:4;
+opacity:0;pointer-events:none;
+}
+.gallery-main:hover .gal-arrow{opacity:1;pointer-events:all}
+.gal-arrow:hover{background:rgba(200,205,214,.12);border-color:var(–silver)}
+.gal-arrow-prev{left:.7rem}
+.gal-arrow-next{right:.7rem}
+.gal-arrow:disabled{opacity:.25;pointer-events:none}
+
+/* Media counter */
+.gal-counter{
+position:absolute;bottom:.7rem;right:.7rem;z-index:3;
+font-size:8px;font-weight:600;letter-spacing:.14em;
+background:rgba(8,8,8,.7);backdrop-filter:blur(6px);
+padding:.25rem .6rem;color:rgba(200,205,214,.6);
+border:1px solid rgba(200,205,214,.1);
+}
+
+/* Thumbnails */
+.gallery-thumbs{
+display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:thin;scrollbar-color:rgba(200,205,214,.2) transparent;
+}
+.gallery-thumbs::-webkit-scrollbar{height:3px}
+.gallery-thumbs::-webkit-scrollbar-thumb{background:rgba(200,205,214,.2)}
+.gallery-thumb{
+flex-shrink:0;width:68px;height:68px;
+border:1.5px solid var(–silver-line);
+overflow:hidden;background:var(–jet3);
+cursor:pointer;transition:border-color .2s;
+display:flex;align-items:center;justify-content:center;
+position:relative;
+}
 .gallery-thumb.active{border-color:var(–silver)}
+.gallery-thumb:hover{border-color:rgba(200,205,214,.45)}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover}
-.gallery-thumb-play{width:100%;height:100%;background:var(–jet4);display:flex;align-items:center;justify-content:center;color:var(–silver);opacity:.7}
+.gallery-thumb-art{width:60%;opacity:.2;color:var(–cream)}
+.gal-thumb-play{
+position:absolute;inset:0;background:rgba(8,8,8,.5);
+display:flex;align-items:center;justify-content:center;color:var(–silver);
+}
+/* Add photo placeholder (shown to admin) */
+.gallery-thumb.add-placeholder{
+border:1.5px dashed rgba(200,205,214,.2);
+color:rgba(200,205,214,.3);
+font-size:22px;
+cursor:default;
+}
 
-.prod-info{animation:rise .7s .15s var(–ease) both}
-.prod-info-cat{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
+/* Origin badges */
+.gallery-origin{
+position:absolute;bottom:.7rem;left:.7rem;z-index:3;
+display:flex;flex-direction:column;gap:.3rem;align-items:flex-start;
+}
+.origin-flag{
+font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+padding:.22rem .55rem;background:rgba(8,8,8,.78);border:1px solid rgba(200,205,214,.15);
+backdrop-filter:blur(6px);color:rgba(232,224,208,.75);
+display:flex;align-items:center;gap:.3rem;white-space:nowrap;
+}
+
+/* ── PRODUCT INFO ── */
+.prod-info{animation:rise .7s .12s var(–ease) both}
+.prod-info-cat{
+font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+color:var(–silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;
+}
 .prod-info-cat::before{content:’’;width:22px;height:1px;background:var(–silver)}
-.prod-info-name{font-family:var(–sans);font-weight:200;font-size:clamp(1.8rem,4vw,3.2rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.4rem}
-.prod-info-desc{font-size:.95rem;font-weight:300;color:var(–cream2);line-height:1.9;margin-bottom:2rem;border-left:1px solid var(–silver-line);padding-left:1.4rem}
-.prod-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
-.prod-spec{font-size:8px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid var(–silver-line);color:var(–muted)}
-.prod-price-block{padding:1.8rem 0;border-top:1px solid var(–silver-line);border-bottom:1px solid var(–silver-line);margin-bottom:2rem}
-.prod-price-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–muted);margin-bottom:.4rem}
-.prod-price-val{font-family:var(–serif);font-style:italic;font-size:2rem;color:var(–silver);font-weight:400;margin-bottom:.3rem}
-.prod-price-note{font-size:10px;font-weight:400;letter-spacing:.12em;color:var(–muted);text-transform:uppercase}
-.prod-actions{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
-.btn-sena{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.95rem 1.5rem;background:var(–cream);color:var(–jet);border:none;font-family:var(–sans);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s}
-.btn-sena:hover{background:var(–silver2);transform:translateY(-1px)}
-.btn-wa-full{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 2rem;background:var(–silver);color:var(–jet);font-family:var(–sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;width:100%;transition:background .2s,transform .15s;text-decoration:none}
-.btn-wa-full:hover{background:var(–silver2);transform:translateY(-2px)}
-.btn-outline-full{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 2rem;background:transparent;color:rgba(232,224,208,.6);font-family:var(–sans);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(200,205,214,.25);width:100%;transition:border-color .2s,color .2s;text-decoration:none}
-.btn-outline-full:hover{border-color:var(–silver);color:var(–cream)}
-.prod-meta{display:flex;flex-direction:column;gap:.8rem}
-.prod-meta-item{display:flex;align-items:center;gap:.9rem;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–muted)}
-.prod-meta-icon{color:var(–silver);flex-shrink:0}
+.prod-info-name{
+font-family:var(–sans);font-weight:200;
+font-size:clamp(1.8rem,3.8vw,3rem);
+color:var(–cream);line-height:1.08;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.4rem;
+}
+.prod-info-desc{
+font-size:.93rem;font-weight:300;color:var(–cream2);
+line-height:1.95;margin-bottom:2rem;
+border-left:2px solid var(–silver-line);padding-left:1.3rem;
+}
 
-/* Related */
-.related-section{border-top:1px solid var(–silver-line);padding-top:clamp(3rem,6vh,5rem)}
-.sec-label{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
+/* Tech specs chips */
+.prod-specs-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.8rem}
+.prod-spec-chip{
+font-size:7.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+padding:.25rem .65rem;border:1px solid var(–silver-line);color:var(–muted);
+transition:border-color .2s,color .2s;
+}
+.prod-spec-chip:hover{border-color:rgba(200,205,214,.4);color:var(–cream2)}
+
+/* Wood swatch */
+.prod-wood-swatch{
+display:flex;align-items:center;gap:.9rem;
+padding:.8rem 1.1rem;
+background:rgba(200,205,214,.03);border:1px solid rgba(200,205,214,.08);
+margin-bottom:1.8rem;
+}
+.wood-swatch-bar{height:36px;width:80px;flex-shrink:0;border:1px solid rgba(200,205,214,.12)}
+.wood-swatch-info{display:flex;flex-direction:column;gap:.25rem}
+.wood-swatch-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver3)}
+.wood-swatch-name{font-family:var(–serif);font-style:italic;font-size:1rem;color:var(–cream2)}
+
+/* Price block */
+.prod-price-block{
+padding:1.6rem 0;
+border-top:1px solid var(–silver-line);
+border-bottom:1px solid var(–silver-line);
+margin-bottom:2rem;
+display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.prod-price-left{}
+.prod-price-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–muted);margin-bottom:.35rem}
+.prod-price-val{font-family:var(–serif);font-style:italic;font-size:2.2rem;color:var(–silver);font-weight:400;line-height:1}
+.prod-price-note{font-size:9px;font-weight:400;letter-spacing:.12em;color:var(–muted);text-transform:uppercase;margin-top:.3rem}
+.prod-stock-badge{
+font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+padding:.35rem .8rem;border:1px solid;
+align-self:center;
+}
+
+/* Action buttons */
+.prod-actions{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.btn-pay{
+display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+width:100%;padding:1rem 1.5rem;
+background:rgba(0,158,227,.14);color:#5bc8f5;
+border:1px solid rgba(0,158,227,.4);
+font-family:var(–sans);font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+transition:background .2s,border-color .2s,transform .15s;text-decoration:none;
+}
+.btn-pay:hover{background:rgba(0,158,227,.24);border-color:#00a8e0;transform:translateY(-1px)}
+.btn-wa-full{
+display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+padding:.95rem 1.5rem;
+background:rgba(37,211,102,.1);color:#4dcc7a;
+border:1px solid rgba(37,211,102,.35);
+font-family:var(–sans);font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+width:100%;transition:background .2s,border-color .2s,transform .15s;text-decoration:none;
+}
+.btn-wa-full:hover{background:rgba(37,211,102,.2);border-color:#25D366;transform:translateY(-1px)}
+.btn-outline-full{
+display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+padding:.9rem 1.5rem;
+background:transparent;color:rgba(232,224,208,.55);
+border:1px solid rgba(200,205,214,.22);
+font-family:var(–sans);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+width:100%;transition:border-color .2s,color .2s;text-decoration:none;
+}
+.btn-outline-full:hover{border-color:var(–silver);color:var(–cream)}
+
+/* Meta badges */
+.prod-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.prod-meta-badge{
+display:flex;align-items:center;gap:.5rem;
+font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+color:var(–muted);padding:.35rem .75rem;
+border:1px solid rgba(200,205,214,.1);background:rgba(200,205,214,.03);
+}
+.prod-meta-badge svg{color:var(–silver3);flex-shrink:0}
+
+/* ── FULL SPECS TABLE ── */
+.specs-section{
+border-top:1px solid var(–silver-line);
+padding-top:2rem;margin-top:1rem;
+}
+.specs-title{
+font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+color:var(–silver);display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;
+}
+.specs-title::before{content:’’;width:18px;height:1px;background:var(–silver)}
+.specs-table{
+display:grid;grid-template-columns:1fr 1fr;
+gap:0;border:1px solid var(–silver-line);
+}
+.spec-row{
+display:flex;flex-direction:column;
+padding:.85rem 1.1rem;border-right:1px solid var(–silver-line);border-bottom:1px solid var(–silver-line);
+transition:background .25s;
+}
+.spec-row:nth-child(2n){border-right:none}
+.spec-row:nth-last-child(-n+2){border-bottom:none}
+.spec-row:hover{background:rgba(200,205,214,.03)}
+.spec-row-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(–silver3);margin-bottom:.3rem}
+.spec-row-val{font-size:.88rem;font-weight:300;color:var(–cream2);letter-spacing:.04em}
+.spec-row-val strong{color:var(–cream);font-weight:500}
+
+/* Full-width spec row */
+.spec-row.full{grid-column:1/-1;border-right:none}
+
+/* Características tags */
+.spec-row.chars{grid-column:1/-1;border-right:none}
+.spec-chars-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem}
+.spec-char-tag{
+font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+padding:.25rem .6rem;border:1px solid var(–silver-line);color:var(–silver3);
+background:rgba(200,205,214,.03);
+}
+
+/* ── RELATED ── */
+.related-section{
+border-top:1px solid var(–silver-line);
+padding-top:clamp(3rem,6vh,5rem);
+margin-top:clamp(3rem,6vh,5rem);
+}
+.sec-label{
+font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+color:var(–silver);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;
+}
 .sec-label::before{content:’’;width:22px;height:1px;background:var(–silver)}
-.sec-h2{font-family:var(–sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.6rem);color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2.5rem}
+.sec-h2{
+font-family:var(–sans);font-weight:200;
+font-size:clamp(1.4rem,2.8vw,2.4rem);
+color:var(–cream);line-height:1.1;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2rem;
+}
 .sec-h2 em{font-style:normal;font-weight:100;color:var(–silver)}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(–silver-line)}
-.rel-card{border-right:1px solid var(–silver-line);background:var(–jet);overflow:hidden;cursor:pointer;transition:background .3s;display:flex;flex-direction:column}
+.related-grid{
+display:grid;grid-template-columns:repeat(3,1fr);
+border:1px solid var(–silver-line);
+}
+.rel-card{
+border-right:1px solid var(–silver-line);background:var(–jet);
+overflow:hidden;cursor:pointer;transition:background .3s;display:flex;flex-direction:column;
+}
 .rel-card:last-child{border-right:none}
 .rel-card:hover{background:var(–jet3)}
-.rel-img{aspect-ratio:1;background:var(–jet2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rel-img{
+aspect-ratio:1;background:var(–jet2);
+display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
 .rel-img img{width:85%;height:85%;object-fit:contain;transition:transform .6s var(–ease)}
 .rel-card:hover .rel-img img{transform:scale(1.04)}
-.rel-img svg{width:45%;opacity:.15;color:var(–cream)}
-.rel-body{padding:1.4rem 1.6rem;flex:1;display:flex;flex-direction:column}
-.rel-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.4rem}
+.rel-img svg{width:45%;opacity:.14;color:var(–cream)}
+.rel-body{padding:1.3rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.rel-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(–silver);margin-bottom:.35rem}
 .rel-name{font-family:var(–sans);font-size:.82rem;font-weight:300;color:var(–cream);letter-spacing:.16em;text-transform:uppercase;margin-bottom:auto}
-.rel-price{font-family:var(–serif);font-style:italic;font-size:1rem;color:rgba(200,205,214,.7);margin-top:.8rem}
-
-/* Not found */
-.not-found{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5rem}
-.not-found h2{font-family:var(–sans);font-weight:200;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:.2em;text-transform:uppercase;color:var(–cream)}
-.not-found p{font-size:.9rem;font-weight:300;color:var(–muted)}
-
-/* ── MODAL SEÑA ── */
-.sena-backdrop{position:fixed;inset:0;z-index:2000;background:rgba(8,8,8,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
-.sena-backdrop.open{opacity:1;pointer-events:all}
-.sena-modal{background:var(–jet3);border:1px solid var(–silver-line);padding:2.5rem 2rem;width:100%;max-width:440px;position:relative;transform:translateY(24px);transition:transform .35s var(–ease)}
-.sena-backdrop.open .sena-modal{transform:none}
-.sena-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(–silver3);font-size:18px;cursor:pointer;transition:color .2s;padding:.25rem}
-.sena-close:hover{color:var(–cream)}
-.sena-eyebrow{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(–silver3);margin-bottom:.75rem}
-.sena-title{font-family:var(–serif);font-size:1.6rem;font-style:italic;color:var(–cream);margin-bottom:.35rem}
-.sena-prod{font-size:11px;letter-spacing:.12em;color:var(–silver3);margin-bottom:1.5rem}
-.sena-monto-box{background:var(–jet4);border:1px solid var(–silver-line);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
-.sena-monto-val{font-family:var(–serif);font-size:1.8rem;color:var(–cream)}
-.sena-monto-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–silver3)}
-.sena-monto-pct{font-size:9px;color:var(–silver3);margin-top:2px}
-.sena-form-row{margin-bottom:1rem}
-.sena-label{display:block;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–silver3);margin-bottom:.4rem}
-.sena-input{width:100%;background:var(–jet4);border:1px solid var(–silver-line);padding:.75rem .9rem;font-family:var(–sans);font-size:13px;color:var(–cream);outline:none;transition:border-color .2s;-webkit-appearance:none}
-.sena-input:focus{border-color:rgba(200,205,214,.5)}
-.sena-input::placeholder{color:var(–muted)}
-.sena-divider{height:1px;background:var(–silver-line);margin:1.2rem 0}
-.sena-disclaimer{font-size:10px;color:var(–muted);line-height:1.6;margin-bottom:1.5rem}
-.sena-disclaimer strong{color:var(–silver3)}
-.btn-sena-pay{width:100%;padding:1rem;background:var(–cream);color:var(–jet);border:none;font-family:var(–sans);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem}
-.btn-sena-pay:hover{background:var(–silver2);transform:translateY(-1px)}
-.btn-sena-pay.loading{opacity:.7;pointer-events:none}
-.sena-error{font-size:11px;color:#e87070;margin-top:.6rem;min-height:16px}
+.rel-empunadura{font-size:.75rem;font-weight:300;color:var(–muted);margin-top:.4rem;letter-spacing:.04em}
+.rel-price{font-family:var(–serif);font-style:italic;font-size:.95rem;color:rgba(200,205,214,.7);margin-top:.6rem}
+.rel-wood-bar{height:3px;width:100%}
 
 /* ── FOOTER ── */
-footer{border-top:1px solid var(–silver-line);padding:2rem clamp(1.5rem,4vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer{
+border-top:1px solid var(–silver-line);
+padding:2rem clamp(1.5rem,4vw,4rem);
+display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
 .footer-brand{font-family:var(–serif);font-style:italic;font-size:1.2rem;color:var(–silver)}
-.footer-back{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(–muted);transition:color .2s;display:flex;align-items:center;gap:.5rem;cursor:pointer}
+.footer-copy{font-size:.7rem;font-weight:300;color:rgba(200,205,214,.2);letter-spacing:.08em}
+.footer-back{
+font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+color:var(–muted);transition:color .2s;
+display:flex;align-items:center;gap:.5rem;
+}
 .footer-back:hover{color:var(–silver)}
 
+/* ── LIGHTBOX ── */
+.lightbox{
+position:fixed;inset:0;z-index:3000;
+background:rgba(4,4,4,.96);backdrop-filter:blur(14px);
+display:flex;align-items:center;justify-content:center;
+opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lb-img{max-width:90vw;max-height:88vh;object-fit:contain;user-select:none}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(200,205,214,.6);font-size:1.6rem;cursor:pointer;transition:color .2s;padding:.5rem}
+.lb-close:hover{color:var(–cream)}
+.lb-arrow{
+position:absolute;top:50%;transform:translateY(-50%);
+width:52px;height:52px;border:1px solid rgba(200,205,214,.2);
+background:rgba(8,8,8,.7);backdrop-filter:blur(8px);
+display:grid;place-items:center;color:var(–silver);
+transition:background .2s,border-color .2s;
+}
+.lb-arrow:hover{background:rgba(200,205,214,.12);border-color:var(–silver)}
+.lb-arrow-prev{left:1.5rem}
+.lb-arrow-next{right:1.5rem}
+.lb-counter{
+position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+color:rgba(200,205,214,.5);
+}
+.lb-caption{
+position:absolute;bottom:3.5rem;left:50%;transform:translateX(-50%);
+font-size:10px;font-weight:300;letter-spacing:.1em;color:rgba(200,205,214,.4);
+white-space:nowrap;
+}
+
 /* ── RESPONSIVE ── */
-@media(max-width:1100px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){
 .prod-layout{grid-template-columns:1fr}
 .gallery{position:static}
 .related-grid{grid-template-columns:1fr 1fr}
-.rel-card:nth-child(3){display:none}
-.rel-card:nth-child(2){border-right:none}
+.rel-card:last-child{display:none}
 }
 @media(max-width:640px){
-.prod-grid{grid-template-columns:1fr}
+.specs-table{grid-template-columns:1fr}
+.spec-row{border-right:none}
+.spec-row:nth-last-child(-n+2){border-bottom:1px solid var(–silver-line)}
+.spec-row:last-child{border-bottom:none}
 .related-grid{grid-template-columns:1fr}
-.rel-card{border-right:none;border-bottom:1px solid var(–silver-line)}
+.rel-card{border-right:none!important;border-bottom:1px solid var(–silver-line)}
+.rel-card:last-child{display:flex;border-bottom:none}
+.lb-arrow{width:40px;height:40px}
+.nav-wa-btn{display:none}
 }
-@media(max-width:480px){.sena-modal{padding:2rem 1.4rem}}
 </style>
 
 </head>
 <body>
-
-<div id="cur"></div>
-<div id="cur-ring"></div>
 
 <!-- NAV -->
 
@@ -275,456 +467,564 @@ footer{border-top:1px solid var(–silver-line);padding:2rem clamp(1.5rem,4vw,4r
       <span class="nav-brand-sub">Santiago del Estero · Argentina</span>
     </div>
   </a>
-  <a id="nav-back-btn" href="index.html" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Inicio
-  </a>
+  <div class="nav-actions">
+    <a id="nav-back" href="tienda.html" class="nav-back">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Tienda
+    </a>
+    <a id="nav-wa" href="https://wa.me/5493843458340" target="_blank" class="nav-wa-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Consultar
+    </a>
+  </div>
 </nav>
 
-<!-- VIEW: LIST (todos los productos) -->
+<!-- MAIN CONTENT -->
 
-<div id="view-list">
-  <main class="page">
-    <div class="list-header" id="list-header">
-      <div class="list-cat-label" id="list-cat-label">Colección</div>
-      <h1 class="list-title" id="list-title">Todas las <em>piezas</em></h1>
-      <div class="list-count" id="list-count">Cargando…</div>
-    </div>
-    <div class="cat-tabs" id="cat-tabs"></div>
-    <div id="loading-list" class="loading">
-      <div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div>
-    </div>
-    <div class="prod-grid" id="prod-grid" style="display:none"></div>
-  </main>
+<main class="page" id="main-content">
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox" onclick="lbClickOutside(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-arrow lb-arrow-prev" id="lb-prev" onclick="lbNav(-1)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <button class="lb-arrow lb-arrow-next" id="lb-next" onclick="lbNav(1)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb-caption" id="lb-caption"></div>
+  <div class="lb-counter" id="lb-counter"></div>
 </div>
 
-<!-- VIEW: DETAIL (producto individual) -->
-
-<div id="view-detail">
-  <main class="detail-page" id="detail-content"></main>
-</div>
+<!-- FOOTER -->
 
 <footer>
   <span class="footer-brand">GL</span>
-  <span class="footer-back" id="footer-back-btn" onclick="goToList()">
+  <span class="footer-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · 🇦🇷</span>
+  <a href="tienda.html" class="footer-back">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Volver al catálogo
-  </span>
+    Volver a la tienda
+  </a>
 </footer>
 
-<!-- MODAL SEÑA -->
-
-<div class="sena-backdrop" id="sena-backdrop" onclick="closeSenaModal(event)">
-  <div class="sena-modal">
-    <button class="sena-close" onclick="closeSenaModal()">&#215;</button>
-    <div class="sena-eyebrow">Dejar seña · Mercado Pago</div>
-    <div class="sena-title">Reservá tu pieza</div>
-    <div class="sena-prod" id="sena-prod-nombre">—</div>
-    <div class="sena-monto-box">
-      <div>
-        <div class="sena-monto-label">Seña a abonar</div>
-        <div class="sena-monto-val" id="sena-monto-display">$—</div>
-        <div class="sena-monto-pct" id="sena-monto-desc">50% del total</div>
-      </div>
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,205,214,.35)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-nombre">Nombre completo *</label>
-      <input class="sena-input" type="text" id="sena-nombre" placeholder="Tu nombre" autocomplete="name"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-email">Email *</label>
-      <input class="sena-input" type="email" id="sena-email" placeholder="correo@ejemplo.com" autocomplete="email"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-tel">Teléfono / WhatsApp</label>
-      <input class="sena-input" type="tel" id="sena-tel" placeholder="+54 9 381 000-0000" autocomplete="tel"/>
-    </div>
-    <div class="sena-form-row">
-      <label class="sena-label" for="sena-nota">Nota para el encargo</label>
-      <input class="sena-input" type="text" id="sena-nota" placeholder="Madera preferida, grabado, largo especial…"/>
-    </div>
-    <div class="sena-divider"></div>
-    <p class="sena-disclaimer">Al abonar la seña confirmás el inicio del encargo artesanal.<br><strong>Gonzalo te contactará</strong> para coordinar los detalles y el saldo restante al momento de la entrega.</p>
-    <button class="btn-sena-pay" id="btn-sena-pay" onclick="pagarSena()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-      Pagar seña con Mercado Pago
-    </button>
-    <div class="sena-error" id="sena-error"></div>
-  </div>
-</div>
-
 <script>
-/* ── CURSOR ── */
-(function(){
-  const c=document.getElementById('cur'),r=document.getElementById('cur-ring');
-  let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{passive:true});
-  document.querySelectorAll('a,button,[onclick]').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
-  });
-  function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)}
-  loop();
-})();
-
-/* ── CONFIG ── */
-const GL_BACKEND  = 'https://gl-cuchillos-artesanales.onrender.com';
-const GL_SENA_PCT = 50;
-const WA_DEFAULT  = '5493843458340';
-
-const knifeArt = `<svg viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`;
-
-const BADGE_CLS = {avail:'badge-avail',custom:'badge-custom',intl:'badge-intl',unavail:'badge-unavail'};
-const BADGE_TXT = {avail:'Disponible',custom:'A pedido',intl:'Internacional',unavail:'No disponible'};
-
-const META_ICONS = {
-  hand: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
-  truck:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
-  star: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-  clock:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+/* ═══════════════════════════════════════════════
+   WOOD COLOR MAP
+═══════════════════════════════════════════════ */
+const WOOD_MAP = {
+  'nogal':          {g:'linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)',c:'#5a3820'},
+  'lapacho':        {g:'linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10)',c:'#7a4220'},
+  'quebracho':      {g:'linear-gradient(90deg,#1a0a04,#3d1c0a,#5c2e14,#3a1808)',c:'#4a2410'},
+  'caoba':          {g:'linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810)',c:'#8a3018'},
+  'olivo':          {g:'linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020)',c:'#6a5828'},
+  'burl olivo':     {g:'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',c:'#7a6432'},
+  'burl de olivo':  {g:'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',c:'#7a6432'},
+  'guayubira':      {g:'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',c:'#5e4828'},
+  'wengue':         {g:'linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c)',c:'#201810'},
+  'palo santo':     {g:'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',c:'#8a5c28'},
+  'purpleheart':    {g:'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',c:'#5a2878'},
+  'amaranto':       {g:'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',c:'#5a2878'},
+  'pau ferro':      {g:'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',c:'#483018'},
+  'pau petro':      {g:'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',c:'#483018'},
+  'micarta':        {g:'linear-gradient(90deg,#1a1a1a,#2e2e2e,#404040,#1a1a1a)',c:'#303030'},
+  'micarta naranja':{g:'linear-gradient(90deg,#6a2a04,#a04010,#c05818,#7a3208)',c:'#b04c18'},
+  'micarta marfil': {g:'linear-gradient(90deg,#c8b890,#ddd0a8,#e8e0c0,#c0a878)',c:'#d8c898'},
+  'petiribi':       {g:'linear-gradient(90deg,#3a2010,#5c3818,#7a5025,#4a2c14)',c:'#6a4020'},
+  'incienso':       {g:'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',c:'#8a5c28'},
+  'haya':           {g:'linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)',c:'#c8a060'},
+  'membrillo':      {g:'linear-gradient(90deg,#8a6030,#b08848,#c8a060,#9a7040)',c:'#b07838'},
+  'algarrobo':      {g:'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',c:'#6a4020'},
+  'chacaranda':     {g:'linear-gradient(90deg,#1e0e18,#3a1c30,#582844,#2a1228)',c:'#481c38'},
+  'roble americano':{g:'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',c:'#a07030'},
+  'roble':          {g:'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',c:'#a07030'},
+  'guambira':       {g:'linear-gradient(90deg,#2c1e0e,#4e3818,#6a5028,#3c2c14)',c:'#5a3c20'},
+  'ebano':          {g:'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',c:'#181410'},
+  'ébano':          {g:'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',c:'#181410'},
+  'laurel':         {g:'linear-gradient(90deg,#3a2c10,#5c4820,#7a6030,#4a3818)',c:'#685030'},
+  'louro':          {g:'linear-gradient(90deg,#4a3210,#6a5020,#8a6830,#5a4018)',c:'#7a5828'},
+  'palma negra':    {g:'linear-gradient(90deg,#080604,#14100c,#201a14,#0c0a08)',c:'#141010'},
+  'guayaba':        {g:'linear-gradient(90deg,#5a3c18,#7a5828,#9a7038,#6a4c20)',c:'#8a6030'},
+  'burl algarrobo': {g:'linear-gradient(90deg,#3a2010,#6a4828,#8a6038,#4a2e18)',c:'#7a5030'},
+  'burl caza':      {g:'linear-gradient(90deg,#2a1e0e,#5a3e22,#7a5830,#3a2a14)',c:'#6a4828'},
+  'burl de lenga':  {g:'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',c:'#d09060'},
+  'burl lenga':     {g:'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',c:'#d09060'},
+  'jazzanda':       {g:'linear-gradient(90deg,#1e0a2c,#3a1850,#581e78,#2c1040)',c:'#481860'},
+  'violeta':        {g:'linear-gradient(90deg,#200840,#3c1460,#581e80,#2c0e4c)',c:'#401858'},
+  'baquelita':      {g:'linear-gradient(90deg,#1a0808,#2e1414,#401c1c,#221010)',c:'#301010'},
+  'fierroliso':     {g:'linear-gradient(90deg,#181818,#282828,#383838,#202020)',c:'#303030'},
+  'fenólico':       {g:'linear-gradient(90deg,#181818,#282828,#383838,#202020)',c:'#303030'},
+  'titanio':        {g:'linear-gradient(90deg,#484848,#606060,#787878,#505050)',c:'#606060'},
 };
-const WA_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
+const WOOD_DEFAULT = {g:'linear-gradient(90deg,#1a1a1a,#2a2a2a,#3a3a3a,#222222)',c:'#2a2a2a'};
 
-/* ── STATE ── */
-let allProducts = [];
-let waNumber    = WA_DEFAULT;
-let catActual   = 'all';
-let currentProduct = null;
-let productMedia   = [];
-
-/* ── DATA ── */
-async function loadData() {
-  let data = null;
-  try {
-    const idb = await new Promise((res,rej)=>{const r=indexedDB.open('gl_cuchillos',1);r.onsuccess=e=>res(e.target.result);r.onerror=rej});
-    const val = await new Promise((res,rej)=>{const tx=idb.transaction('admin_data','readonly');const r=tx.objectStore('admin_data').get('data');r.onsuccess=e=>res(e.target.result?.value??null);r.onerror=rej});
-    if(val) data=val;
-  } catch(e){}
-  if(!data){try{const c=localStorage.getItem('gl_data');if(c)data=JSON.parse(c)}catch(e){}}
-  if(!data){try{const r=await fetch('products.json?t='+Date.now());if(r.ok)data=await r.json()}catch(e){}}
-  return data;
+function woodInfo(str) {
+  if (!str) return WOOD_DEFAULT;
+  const s = str.toLowerCase();
+  const keys = Object.keys(WOOD_MAP).sort((a,b) => b.length - a.length);
+  for (const k of keys) { if (s.includes(k)) return WOOD_MAP[k]; }
+  return WOOD_DEFAULT;
 }
 
-/* ── RENDER LIST ── */
-function renderList(cat) {
-  catActual = cat || 'all';
+/* ═══════════════════════════════════════════════
+   BADGE HELPERS
+═══════════════════════════════════════════════ */
+const BADGE = {
+  avail:   {cls:'gal-badge-avail',  txt:'Disponible'},
+  custom:  {cls:'gal-badge-custom', txt:'A pedido'},
+  intl:    {cls:'gal-badge-intl',   txt:'Internacional'},
+  unavail: {cls:'gal-badge-unavail',txt:'No disponible'},
+};
+function badge(p) {
+  const b = BADGE[p.badge] || BADGE.avail;
+  return {cls: b.cls, txt: p.badgeText || b.txt};
+}
 
-  const filtered = catActual === 'all'
-    ? allProducts.filter(p=>p.active!==false)
-    : allProducts.filter(p=>p.active!==false && p.category===catActual);
+function stockBadgeStyle(stock) {
+  if (stock === 0) return {text:'Sin stock',color:'rgba(200,80,80,.9)'};
+  if (stock > 0)   return {text:`${stock} disponible${stock>1?'s':''}`,color:'rgba(80,200,120,.9)'};
+  return {text:'Consultar stock',color:'rgba(200,205,214,.4)'};
+}
 
-  // Update header
-  document.getElementById('list-cat-label').textContent = catActual === 'all' ? 'Colección completa' : catActual;
-  document.getElementById('list-title').innerHTML = catActual === 'all'
-    ? 'Todas las <em>piezas</em>'
-    : `<em>${catActual}</em>`;
-  document.getElementById('list-count').textContent = filtered.length + ' pieza' + (filtered.length!==1?'s':'');
+/* ═══════════════════════════════════════════════
+   KNIFE ARTS (placeholder SVGs)
+═══════════════════════════════════════════════ */
+const KNIFE_ARTS = [
+  `<svg viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`,
+  `<svg viewBox="0 0 220 400" fill="none"><path d="M110 25 L205 145 Q214 162 204 174 L110 170Z" fill="currentColor" opacity=".8"/><rect x="102" y="165" width="16" height="8" rx="1" fill="currentColor"/><path d="M104 173 Q103 230 106 310 L116 310 Q119 230 118 173Z" fill="currentColor" opacity=".6"/><circle cx="110" cy="205" r="3" fill="currentColor"/><circle cx="110" cy="245" r="3" fill="currentColor"/><circle cx="110" cy="285" r="3" fill="currentColor"/></svg>`,
+  `<svg viewBox="0 0 220 400" fill="none"><path d="M110 30 L210 160 Q218 178 208 190 L110 184Z" fill="currentColor" opacity=".7"/><path d="M107 182 Q106 236 108 298 L114 298 Q116 236 114 182Z" fill="currentColor" opacity=".5"/><rect x="103" y="178" width="14" height="8" rx="1" fill="currentColor"/><ellipse cx="110" cy="218" rx="4" ry="3" fill="currentColor" opacity=".85"/><ellipse cx="110" cy="258" rx="4" ry="3" fill="currentColor" opacity=".85"/></svg>`,
+];
+const knifeArt = (i=0) => `<div class="gal-art-placeholder"><svg style="width:45%;opacity:.14;color:var(--cream)" viewBox="${KNIFE_ARTS[i%KNIFE_ARTS.length].match(/viewBox="([^"]+)"/)?.[1]||'0 0 240 360'}">${KNIFE_ARTS[i%KNIFE_ARTS.length].replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</svg></div>`;
 
-  // Update tabs
-  const tabs = document.getElementById('cat-tabs');
-  const cats = ['all', ...new Set(allProducts.filter(p=>p.active!==false).map(p=>p.category).filter(Boolean))];
-  tabs.innerHTML = cats.map(c => {
-    const n = c==='all' ? allProducts.filter(p=>p.active!==false).length : allProducts.filter(p=>p.active!==false&&p.category===c).length;
-    return `<button class="cat-tab${catActual===c?' active':''}" onclick="renderList('${c}')">${c==='all'?'Todos':c} (${n})</button>`;
+/* ═══════════════════════════════════════════════
+   GALLERY STATE
+═══════════════════════════════════════════════ */
+let galMedia = [];
+let galIdx = 0;
+let lbMedia = [];
+let lbIdx = 0;
+
+function renderGallery(media, badgeCls, badgeTxt, promo, stock) {
+  galMedia = media;
+  galIdx = 0;
+  renderGalMain(0, badgeCls, badgeTxt, promo, stock);
+  renderGalThumbs(badgeCls, badgeTxt, promo, stock);
+}
+
+function renderGalMain(idx, badgeCls, badgeTxt, promo, stock) {
+  const main = document.getElementById('gal-main');
+  if (!main) return;
+  galIdx = idx;
+  const m = galMedia[idx];
+  const isVid = m && m.type && m.type.startsWith('video');
+  const isImg = m && !isVid;
+  const stockInfo = stockBadgeStyle(stock);
+  main.innerHTML = `
+    ${badgeTxt ? `<div class="${badgeCls}">${badgeTxt}</div>` : ''}
+    ${promo ? `<div class="gal-promo">${promo}</div>` : ''}
+    <div class="gallery-origin">
+      <span class="origin-flag">🇦🇷 Ind. Argentina</span>
+      <span class="origin-flag">✈ Envíos</span>
+    </div>
+    ${isImg ? `<img src="${m.src}" alt="${m.alt||''}" onclick="openLightbox(${idx})" style="cursor:zoom-in">` : ''}
+    ${isVid ? `<video src="${m.src}" controls autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>` : ''}
+    ${!m ? knifeArt(0) : ''}
+    ${galMedia.length > 1 ? `
+      <button class="gal-arrow gal-arrow-prev" onclick="galNav(-1)" ${idx===0?'disabled':''}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="gal-arrow gal-arrow-next" onclick="galNav(1)" ${idx===galMedia.length-1?'disabled':''}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="gal-counter">${idx+1} / ${galMedia.length}</div>
+    ` : ''}
+    <div style="position:absolute;bottom:${galMedia.length>1?'2.2rem':'.7rem'};left:.7rem;z-index:3;">
+      <span style="font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .55rem;border:1px solid ${stockInfo.color};color:${stockInfo.color};background:rgba(8,8,8,.8)">${stockInfo.text}</span>
+    </div>
+  `;
+  // Store for arrow callbacks
+  main._badgeCls = badgeCls; main._badgeTxt = badgeTxt; main._promo = promo; main._stock = stock;
+}
+
+function renderGalThumbs(badgeCls, badgeTxt, promo, stock) {
+  const el = document.getElementById('gal-thumbs');
+  if (!el) return;
+  if (galMedia.length <= 1) { el.innerHTML = ''; return; }
+  el.innerHTML = galMedia.map((m, i) => {
+    const isVid = m.type && m.type.startsWith('video');
+    const isImg = m && !isVid;
+    return `<div class="gallery-thumb${i===0?' active':''}" onclick="galSelect(${i})">
+      ${isImg ? `<img src="${m.src}" alt="">` : ''}
+      ${isVid ? `<div class="gal-art-placeholder" style="inset:0;position:absolute">${knifeArt(i)}</div><div class="gal-thumb-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5,3 19,12 5,21" fill="currentColor"/></svg></div>` : ''}
+      ${!m.src ? `<svg class="gallery-thumb-art" viewBox="0 0 240 360" fill="none">${KNIFE_ARTS[0].replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</svg>` : ''}
+    </div>`;
   }).join('');
+}
 
-  // Render cards
-  const grid = document.getElementById('prod-grid');
-  if(!filtered.length){
-    grid.innerHTML = '<div class="empty-state">No hay piezas en esta categoría.</div>';
-    grid.style.display='grid';
-    return;
+function galNav(dir) {
+  const main = document.getElementById('gal-main');
+  if (!main) return;
+  const newIdx = Math.max(0, Math.min(galMedia.length - 1, galIdx + dir));
+  if (newIdx === galIdx) return;
+  galSelect(newIdx);
+}
+
+function galSelect(idx) {
+  const main = document.getElementById('gal-main');
+  if (!main) return;
+  renderGalMain(idx, main._badgeCls, main._badgeTxt, main._promo, main._stock);
+  document.querySelectorAll('.gallery-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+  galIdx = idx;
+}
+
+/* ═══════════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════════ */
+function openLightbox(idx) {
+  const imgs = galMedia.filter(m => !m.type || !m.type.startsWith('video'));
+  lbMedia = imgs;
+  // Find position of this idx in images-only array
+  let imgCount = 0;
+  for (let i = 0; i <= idx; i++) { if (!galMedia[i]?.type?.startsWith('video')) imgCount++; }
+  lbIdx = Math.min(imgCount - 1, lbMedia.length - 1);
+  if (lbMedia.length === 0) return;
+  renderLb();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLb() {
+  document.getElementById('lb-img').src = lbMedia[lbIdx]?.src || '';
+  document.getElementById('lb-img').alt = lbMedia[lbIdx]?.alt || '';
+  document.getElementById('lb-caption').textContent = lbMedia[lbIdx]?.alt || '';
+  document.getElementById('lb-counter').textContent = lbMedia.length > 1 ? `${lbIdx+1} / ${lbMedia.length}` : '';
+  document.getElementById('lb-prev').style.display = lbIdx === 0 ? 'none' : 'grid';
+  document.getElementById('lb-next').style.display = lbIdx === lbMedia.length-1 ? 'none' : 'grid';
+}
+
+function lbNav(dir) {
+  lbIdx = Math.max(0, Math.min(lbMedia.length - 1, lbIdx + dir));
+  renderLb();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lbClickOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+/* ═══════════════════════════════════════════════
+   SPECS TABLE BUILDER
+═══════════════════════════════════════════════ */
+function buildSpecsTable(d, p) {
+  // d = p.details object, p = product
+  if (!d) return '';
+  const rows = [];
+
+  // Parse characteristics into tags
+  const chars = d.caracteristicas ? d.caracteristicas.split('·').map(c => c.trim()).filter(Boolean) : [];
+
+  const add = (label, val, full) => {
+    if (!val) return;
+    rows.push({label, val: String(val), full: full || false});
+  };
+
+  add('Acero', d.acero);
+  add('Largo de hoja', d.largoHoja);
+  add('Largo total', d.largoTotal);
+  add('Ancho hoja', d.ancho);
+  add('Espesor', d.espesor);
+  add('Ángulo de filo', d.filo);
+  add('Dureza', d.dureza, false);
+  add('Terminación', d.terminacion);
+  add('Empuñadura', d.empunadura, true);
+  add('Vaina', d.vaina, true);
+
+  let tableHTML = rows.map(r => `
+    <div class="spec-row${r.full?' full':''}">
+      <span class="spec-row-label">${r.label}</span>
+      <span class="spec-row-val">${r.val}</span>
+    </div>
+  `).join('');
+
+  if (chars.length) {
+    tableHTML += `
+      <div class="spec-row chars">
+        <span class="spec-row-label">Características</span>
+        <div class="spec-chars-tags">
+          ${chars.map(c => `<span class="spec-char-tag">${c}</span>`).join('')}
+        </div>
+      </div>
+    `;
   }
 
-  grid.innerHTML = filtered.map(p => {
-    const bc = BADGE_CLS[p.badge]||'badge-avail';
-    const bt = p.badgeText||(BADGE_TXT[p.badge]||'Disponible');
-    const media = p.media&&p.media.length ? p.media[0] : (p.image?{src:p.image,type:'image/jpeg'}:null);
-    const isVid = media&&media.type&&media.type.startsWith('video');
-    const specs = (p.specs||[]).slice(0,3).map(s=>`<span class="prod-card-spec">${s}</span>`).join('');
-    const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
-    const waN = waNumber.replace(/\D/g,'')||WA_DEFAULT;
-    const waHref = `https://wa.me/${waN}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
+  if (!tableHTML) return '';
+  return `
+    <div class="specs-section">
+      <div class="specs-title">Especificaciones técnicas</div>
+      <div class="specs-table">${tableHTML}</div>
+    </div>
+  `;
+}
 
-    return `<div class="prod-card" onclick="openDetail('${p.id}')">
-      <div class="prod-card-img">
-        ${media
-          ? (isVid
-            ? `<div style="width:100%;height:100%;background:var(--jet4);display:flex;align-items:center;justify-content:center;">${WA_ICON}</div>`
-            : `<img src="${media.src}" alt="${p.name}" loading="lazy">`)
-          : knifeArt}
-        <div class="prod-card-badge ${bc}">${bt}</div>
-        ${p.promo?`<div style="position:absolute;top:1rem;right:1rem;background:var(--silver);color:var(--jet);font-size:7px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .55rem;">${p.promo}</div>`:''}
-        <div style="position:absolute;bottom:1rem;right:1rem;font-size:1.1rem;line-height:1;opacity:.85;">🇦🇷</div>
-        <div class="prod-card-silver-line"></div>
+/* ═══════════════════════════════════════════════
+   RELATED PRODUCTS
+═══════════════════════════════════════════════ */
+function buildRelated(allProducts, current) {
+  // Same category first, then others
+  let same = allProducts.filter(r => r.id !== current.id && r.active !== false && r.category === current.category);
+  let other = allProducts.filter(r => r.id !== current.id && r.active !== false && r.category !== current.category);
+  const related = [...same, ...other].slice(0, 3);
+  if (!related.length) return '';
+
+  const cards = related.map(r => {
+    const rm = r.media && r.media.length ? r.media[0] : (r.image ? {src: r.image, type:'image/jpeg'} : null);
+    const isVid = rm && rm.type && rm.type.startsWith('video');
+    const empunadura = r.details?.empunadura || (r.specs && r.specs[1]) || '';
+    const wi = woodInfo(empunadura);
+    return `<div class="rel-card" onclick="location.href='producto.html?id=${r.id}'">
+      <div class="rel-wood-bar" style="background:${wi.g}"></div>
+      <div class="rel-img">
+        ${rm && !isVid ? `<img src="${rm.src}" alt="${r.name}" loading="lazy">` : `<svg style="width:45%;opacity:.14;color:var(--cream)" viewBox="0 0 240 360" fill="none">${KNIFE_ARTS[0].replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</svg>`}
       </div>
-      <div class="prod-card-body">
-        <div class="prod-card-cat">${p.category||'—'}</div>
-        <div class="prod-card-name">${p.name}</div>
-        ${p.description?`<div class="prod-card-desc">${p.description.slice(0,90)}${p.description.length>90?'…':''}</div>`:''}
-        ${specs?`<div class="prod-card-specs">${specs}</div>`:''}
-        <div class="prod-card-footer">
-          <div class="prod-card-price">${p.price||'Consultar'}<small>${p.priceNote||''}</small></div>
-          <div class="prod-card-actions" onclick="event.stopPropagation()">
-            ${precioNum>0?`<button class="prod-card-btn primary" onclick="openDetail('${p.id}');event.stopPropagation()">Reservar</button>`:''}
-            <a href="${waHref}" target="_blank" class="prod-card-btn">${WA_ICON}</a>
-          </div>
-        </div>
+      <div class="rel-body">
+        <div class="rel-cat">${r.category || '—'}</div>
+        <div class="rel-name">${r.name}</div>
+        ${empunadura ? `<div class="rel-empunadura">Mango: ${empunadura.split(',')[0].split('+')[0].trim()}</div>` : ''}
+        <div class="rel-price">${r.price || 'Consultar'}</div>
       </div>
     </div>`;
   }).join('');
 
-  grid.style.display='grid';
-  document.getElementById('loading-list').style.display='none';
-
-  // Update nav back button
-  document.getElementById('nav-back-btn').textContent = '';
-  document.getElementById('nav-back-btn').href = 'index.html';
-  document.getElementById('nav-back-btn').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Inicio`;
-}
-
-/* ── DETAIL VIEW ── */
-function openDetail(id) {
-  const p = allProducts.find(p=>p.id===id);
-  if(!p||!p.active) return;
-  history.pushState({view:'detail',id},'',`?id=${id}`);
-  showDetailView(p);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function goToList() {
-  history.pushState({view:'list',cat:catActual},'','?cat='+encodeURIComponent(catActual==='all'?'':catActual));
-  document.getElementById('view-list').style.display='block';
-  document.getElementById('view-detail').style.display='none';
-  document.getElementById('footer-back-btn').style.display='none';
-  document.getElementById('nav-back-btn').innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Inicio`;
-  document.getElementById('nav-back-btn').href='index.html';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function showDetailView(p) {
-  currentProduct = p;
-  document.getElementById('view-list').style.display='none';
-  document.getElementById('view-detail').style.display='block';
-  document.getElementById('footer-back-btn').style.display='flex';
-  document.title = `${p.name} · GL Cuchillos Artesanales`;
-
-  // Nav back → volver al listado
-  document.getElementById('nav-back-btn').innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Catálogo`;
-  document.getElementById('nav-back-btn').onclick = (e)=>{e.preventDefault();goToList()};
-
-  const bc = BADGE_CLS[p.badge]||'badge-avail';
-  const bt = p.badgeText||(BADGE_TXT[p.badge]||'Disponible');
-  const media = p.media&&p.media.length ? p.media : (p.image?[{src:p.image,type:'image/jpeg'}]:[]);
-  const specs = (p.specs||[]).map(s=>`<div class="prod-spec">${s}</div>`).join('');
-  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,''))||0;
-  const montoSena = Math.round(precioNum*GL_SENA_PCT/100);
-  const waN = waNumber.replace(/\D/g,'')||WA_DEFAULT;
-  const waHref = `https://wa.me/${waN}?text=Hola!%20Me%20interesa%20${encodeURIComponent(p.name)}`;
-  const waCat  = `https://wa.me/${waN}?text=Hola!%20Quiero%20ver%20el%20cat%C3%A1logo%20completo`;
-
-  // Related products
-  const related = allProducts.filter(r=>r.id!==p.id&&r.active!==false).slice(0,3);
-  const relatedHTML = related.length ? `
+  return `
     <div class="related-section">
-      <div class="sec-label">También te puede interesar</div>
+      <div class="sec-label">También puede interesarte</div>
       <h2 class="sec-h2">Otras <em>piezas</em></h2>
-      <div class="related-grid">
-        ${related.map(r=>{
-          const rm = r.media&&r.media.length?r.media[0]:(r.image?{src:r.image,type:'image/jpeg'}:null);
-          const rv = rm&&rm.type&&rm.type.startsWith('video');
-          return `<div class="rel-card" onclick="openDetail('${r.id}')">
-            <div class="rel-img">${rm?(rv?knifeArt:`<img src="${rm.src}" alt="${r.name}" loading="lazy">`):knifeArt}</div>
-            <div class="rel-body">
-              <div class="rel-cat">${r.category||'—'}</div>
-              <div class="rel-name">${r.name}</div>
-              <div class="rel-price">${r.price||'Consultar'}</div>
-            </div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>` : '';
-
-  document.getElementById('detail-content').innerHTML = `
-    <div class="breadcrumb">
-      <a onclick="goToList()">Colección</a>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      <span>${p.name}</span>
+      <div class="related-grid">${cards}</div>
     </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════
+   RENDER PRODUCT
+═══════════════════════════════════════════════ */
+function renderProduct(p, allProducts, waNum) {
+  const b = badge(p);
+  const empunadura = p.details?.empunadura || (p.specs && p.specs[1]) || '';
+  const wi = woodInfo(empunadura);
+  const woodShort = empunadura ? empunadura.split(',')[0].trim() : '';
+
+  // Media: prefer p.media[], fallback to p.image
+  const media = (p.media && p.media.length)
+    ? p.media
+    : (p.image ? [{src: p.image, type:'image/jpeg', alt: p.name}] : []);
+
+  const precioNum = parseInt((p.price||'').replace(/[^0-9]/g,'')) || 0;
+  const stockN = typeof p.stock === 'number' ? p.stock : -1;
+
+  const waN = waNum || '5493843458340';
+  const waPresupuesto = `https://wa.me/${waN}?text=${encodeURIComponent(`Hola Gonzalo! Quiero consultar por "${p.name}" (N°${p.id}). ¿Me das un presupuesto / info de personalización?`)}`;
+  const waSeña = `https://wa.me/${waN}?text=${encodeURIComponent(`Hola! Quiero dejar una seña por "${p.name}" (N°${p.id}). ¿Cómo lo coordinamos?`)}`;
+
+  const checkoutLink = `checkout.html?id=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}`;
+
+  // Specs chips (the p.specs array)
+  const specChips = (p.specs || []).map(s => `<span class="prod-spec-chip">${s}</span>`).join('');
+
+  // Full specs table from p.details
+  const specsTable = buildSpecsTable(p.details, p);
+
+  // Related
+  const relatedHTML = buildRelated(allProducts, p);
+
+  const stockInfo = stockBadgeStyle(stockN);
+
+  document.getElementById('main-content').innerHTML = `
+    <div class="breadcrumb">
+      <a href="tienda.html">Tienda</a>
+      <span class="bc-sep">›</span>
+      <a href="tienda.html?cat=${encodeURIComponent(p.category||'')}">${p.category||'Colección'}</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-current">${p.name}</span>
+    </div>
+
     <div class="prod-layout">
+
+      <!-- GALLERY -->
       <div class="gallery">
         <div class="gallery-main" id="gal-main"></div>
         <div class="gallery-thumbs" id="gal-thumbs"></div>
       </div>
+
+      <!-- INFO -->
       <div class="prod-info">
-        <div class="prod-info-cat">${p.category||'Cuchillería Artesanal'}</div>
+        <div class="prod-info-cat">${p.category || 'Cuchillería Artesanal'}</div>
         <h1 class="prod-info-name">${p.name}</h1>
-        ${p.description?`<p class="prod-info-desc">${p.description}</p>`:''}
-        ${specs?`<div class="prod-specs">${specs}</div>`:''}
+        ${p.description ? `<p class="prod-info-desc">${p.description}</p>` : ''}
+
+        ${specChips ? `<div class="prod-specs-chips">${specChips}</div>` : ''}
+
+        ${woodShort ? `
+        <div class="prod-wood-swatch">
+          <div class="wood-swatch-bar" style="background:${wi.g}"></div>
+          <div class="wood-swatch-info">
+            <span class="wood-swatch-label">Mango</span>
+            <span class="wood-swatch-name">${woodShort}</span>
+          </div>
+        </div>` : ''}
+
+        <!-- PRICE -->
         <div class="prod-price-block">
-          <div class="prod-price-label">Precio</div>
-          <div class="prod-price-val">${p.price||'Consultar'}</div>
-          ${p.priceNote?`<div class="prod-price-note">${p.priceNote}</div>`:''}
+          <div class="prod-price-left">
+            <div class="prod-price-label">Precio</div>
+            <div class="prod-price-val">${p.price || 'Consultar'}</div>
+            ${p.priceNote ? `<div class="prod-price-note">${p.priceNote}</div>` : ''}
+          </div>
+          <div class="prod-stock-badge" style="border-color:${stockInfo.color};color:${stockInfo.color}">
+            ${stockInfo.text}
+          </div>
         </div>
+
+        <!-- ACTIONS -->
         <div class="prod-actions">
-          ${precioNum>0?`
-          <button class="btn-sena" onclick="openSenaModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-            Dejar seña — ${GL_SENA_PCT}% · $${montoSena.toLocaleString('es-AR')}
-          </button>`:''}
-          <a href="${waHref}" target="_blank" class="${precioNum>0?'btn-outline-full':'btn-wa-full'}">
-            ${WA_ICON} Consultar por WhatsApp
+          ${precioNum > 0 ? `
+          <a href="${checkoutLink}" class="btn-pay">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Pagar con Mercado Pago
+          </a>` : ''}
+          <a href="${waPresupuesto}" target="_blank" class="btn-wa-full">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Presupuesto / Personalización
           </a>
-          <a href="${waCat}" target="_blank" class="btn-outline-full">Ver catálogo completo</a>
+          <a href="${waSeña}" target="_blank" class="btn-outline-full">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Dejar una seña por WhatsApp
+          </a>
+          <a href="tienda.html" class="btn-outline-full" style="font-size:8.5px;opacity:.7">
+            ← Ver toda la tienda
+          </a>
         </div>
+
+        <!-- META BADGES -->
         <div class="prod-meta">
-          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.hand}</span>Trabajado 100% a mano</div>
-          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.truck}</span>Envíos a todo Argentina y exterior</div>
-          <div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.star}</span>Pieza única, sin producción en serie</div>
-          ${p.badge==='custom'?`<div class="prod-meta-item"><span class="prod-meta-icon">${META_ICONS.clock}</span>Tiempo de encargo: 4–6 semanas</div>`:''}
+          <div class="prod-meta-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+            100% artesanal
+          </div>
+          <div class="prod-meta-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Envíos Argentina y exterior
+          </div>
+          <div class="prod-meta-badge">
+            🇦🇷 Industria Argentina
+          </div>
+          <div class="prod-meta-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Pieza única — sin serie
+          </div>
+          ${p.badge === 'custom' ? `<div class="prod-meta-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Encargo: 4–6 semanas
+          </div>` : ''}
         </div>
+
+        <!-- FULL SPECS TABLE (inside info column on desktop) -->
+        ${specsTable}
+
       </div>
     </div>
+
     ${relatedHTML}
   `;
 
-  renderGallery(media, bt, bc, p.promo||'');
+  // Now init gallery
+  renderGallery(media, b.cls, b.txt, p.promo || '', stockN);
+
+  // Update nav WA link
+  document.getElementById('nav-wa').href = waPresupuesto;
+  document.title = `${p.name} · GL Cuchillos Artesanales`;
 }
 
-/* ── GALLERY ── */
-function renderGallery(media, bt, bc, promo) {
-  productMedia = media;
-  renderMainMedia(0, bt, bc, promo);
-  const thumbsEl = document.getElementById('gal-thumbs');
-  if(!thumbsEl) return;
-  thumbsEl.innerHTML = media.length>1 ? media.map((m,i)=>{
-    const isVid = m.type&&m.type.startsWith('video');
-    return `<div class="gallery-thumb${i===0?' active':''}" onclick="selectMedia(${i},\`${bt}\`,\`${bc}\`,\`${promo}\`)">
-      ${isVid?`<div class="gallery-thumb-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="5,3 19,12 5,21"/></svg></div>`:`<img src="${m.src}" alt="">`}
-    </div>`;
-  }).join('') : '';
+/* ═══════════════════════════════════════════════
+   LOAD DATA
+═══════════════════════════════════════════════ */
+async function loadData() {
+  let data = null;
+  // 1) IndexedDB (admin tool stores here)
+  try {
+    const idb = await new Promise((res,rej) => {
+      const r = indexedDB.open('gl_cuchillos', 1);
+      r.onsuccess = e => res(e.target.result);
+      r.onerror = rej;
+    });
+    const val = await new Promise((res,rej) => {
+      const tx = idb.transaction('admin_data','readonly');
+      const r = tx.objectStore('admin_data').get('data');
+      r.onsuccess = e => res(e.target.result?.value ?? null);
+      r.onerror = rej;
+    });
+    if (val) data = val;
+  } catch(e) {}
+  // 2) localStorage fallback
+  if (!data) { try { const c = localStorage.getItem('gl_data'); if (c) data = JSON.parse(c); } catch(e) {} }
+  // 3) products.json
+  if (!data) { try { const r = await fetch('products.json?t=' + Date.now()); if (r.ok) data = await r.json(); } catch(e) {} }
+  return data;
 }
 
-function renderMainMedia(idx, bt, bc, promo) {
-  const main = document.getElementById('gal-main');
-  if(!main) return;
-  const m = productMedia[idx];
-  const isVid = m&&m.type&&m.type.startsWith('video');
-  main.innerHTML = `
-    ${bt?`<div class="gallery-badge ${bc}">${bt}</div>`:''}
-    ${promo?`<div class="gallery-promo">${promo}</div>`:''}
-    ${m?(isVid?`<video src="${m.src}" controls autoplay muted loop style="width:100%;height:100%;object-fit:cover"></video>`:`<img src="${m.src}" alt="">`):`<div class="gallery-art">${knifeArt}</div>`}
+/* ═══════════════════════════════════════════════
+   NOT FOUND
+═══════════════════════════════════════════════ */
+function renderNotFound(msg) {
+  document.getElementById('main-content').innerHTML = `
+    <div class="not-found">
+      <div class="not-found-ico">🔪</div>
+      <h2>${msg || 'Producto no encontrado'}</h2>
+      <p>El producto no existe o fue eliminado.<br>Volvé al catálogo para ver todas las piezas.</p>
+      <a href="tienda.html" style="display:inline-flex;align-items:center;gap:.6rem;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.8rem 2rem;background:var(--silver);color:var(--jet);margin-top:1rem">
+        ← Volver a la tienda
+      </a>
+    </div>
   `;
 }
 
-function selectMedia(idx, bt, bc, promo) {
-  renderMainMedia(idx, bt, bc, promo);
-  document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-}
-
-/* ── MODAL SEÑA ── */
-function openSenaModal() {
-  const p = currentProduct;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,''))||0;
-  const monto = Math.round(precioNum*GL_SENA_PCT/100);
-  document.getElementById('sena-prod-nombre').textContent = p?.name||'';
-  document.getElementById('sena-monto-display').textContent = '$'+monto.toLocaleString('es-AR');
-  document.getElementById('sena-monto-desc').textContent = GL_SENA_PCT+'% del total — $'+precioNum.toLocaleString('es-AR');
-  document.getElementById('sena-error').textContent='';
-  ['sena-nombre','sena-email','sena-tel','sena-nota'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('sena-backdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-  setTimeout(()=>document.getElementById('sena-nombre').focus(),350);
-}
-
-function closeSenaModal(e) {
-  if(e&&e.target!==document.getElementById('sena-backdrop')&&e.type==='click') return;
-  document.getElementById('sena-backdrop').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSenaModal()});
-
-async function pagarSena() {
-  const nombre = document.getElementById('sena-nombre').value.trim();
-  const email  = document.getElementById('sena-email').value.trim();
-  const tel    = document.getElementById('sena-tel').value.trim();
-  const nota   = document.getElementById('sena-nota').value.trim();
-  const errEl  = document.getElementById('sena-error');
-  const btn    = document.getElementById('btn-sena-pay');
-  errEl.textContent='';
-  if(!nombre){errEl.textContent='Ingresá tu nombre completo.';return}
-  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){errEl.textContent='Ingresá un email válido.';return}
-  const p = currentProduct;
-  const precioNum = parseInt((p?.price||'').replace(/[^0-9]/g,''))||0;
-  if(precioNum<=0){errEl.textContent='Este producto no tiene precio fijo. Consultá por WhatsApp.';return}
-  btn.classList.add('loading');
-  btn.textContent='Conectando con Mercado Pago…';
-  try {
-    const res = await fetch(GL_BACKEND+'/gl/sena',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({producto:p.name,precioTotal:precioNum,porcentajeSena:GL_SENA_PCT,nombre,email,telefono:tel||undefined,nota:nota||undefined,productoId:p.id})
-    });
-    const data = await res.json();
-    if(!res.ok||!data.init_point){
-      errEl.textContent=data.error||'Error al conectar con Mercado Pago. Intentá de nuevo.';
-      btn.classList.remove('loading');
-      btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
-      return;
-    }
-    sessionStorage.setItem('gl_sena',JSON.stringify({nombre,producto:p.name,monto:data.monto_sena,pct:data.porcentaje,precioTotal:precioNum}));
-    window.location.href = data.init_point;
-  } catch(err) {
-    errEl.textContent='Sin conexión. Revisá tu internet e intentá de nuevo.';
-    btn.classList.remove('loading');
-    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pagar seña con Mercado Pago';
-  }
-}
-
-/* ── BROWSER BACK/FORWARD ── */
-window.addEventListener('popstate', e => {
-  const s = e.state;
-  if(s?.view==='detail'&&s.id) {
-    const p = allProducts.find(p=>p.id===s.id);
-    if(p) showDetailView(p);
-  } else {
-    document.getElementById('view-list').style.display='block';
-    document.getElementById('view-detail').style.display='none';
-    document.getElementById('footer-back-btn').style.display='none';
-    renderList(s?.cat||catActual);
-  }
-});
-
-/* ── INIT ── */
-(async function(){
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+(async function() {
   const params = new URLSearchParams(window.location.search);
-  const idParam  = params.get('id');
-  const catParam = params.get('cat');
+  const idParam = params.get('id');
+
+  if (!idParam) { renderNotFound('No se especificó ningún producto'); return; }
 
   const data = await loadData();
-  allProducts = (data?.products||[]);
-  waNumber = (data?.settings?.whatsapp||WA_DEFAULT);
+  const allProducts = data?.products || [];
+  const waNum = (data?.settings?.whatsapp || '5493843458340').replace(/\D/g,'');
 
-  document.getElementById('footer-back-btn').style.display='none';
+  const product = allProducts.find(p => String(p.id) === String(idParam));
 
-  if(idParam) {
-    // Llegó desde un link directo a un producto
-    const p = allProducts.find(p=>p.id===idParam);
-    if(p&&p.active!==false) {
-      history.replaceState({view:'detail',id:idParam},'',window.location.href);
-      showDetailView(p);
-    } else {
-      document.getElementById('detail-content').innerHTML=`<div class="not-found"><h2>Producto no encontrado</h2><p>El producto no existe o fue eliminado.</p><button class="cat-tab active" style="margin-top:2rem" onclick="goToList()">← Volver al catálogo</button></div>`;
-      document.getElementById('view-list').style.display='none';
-      document.getElementById('view-detail').style.display='block';
-    }
-  } else {
-    // Llegó desde una categoría del index o directo
-    const cat = catParam && catParam !== '' ? decodeURIComponent(catParam) : 'all';
-    history.replaceState({view:'list',cat},'',window.location.href);
-    renderList(cat);
+  if (!product || product.active === false) {
+    renderNotFound();
+    return;
   }
+
+  renderProduct(product, allProducts, waNum);
 })();
 </script>
 
