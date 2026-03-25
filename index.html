@@ -26,6 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@latest/bundled/lenis.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto;font-size:16px}
@@ -1270,23 +1271,6 @@ gsap.utils.toArray('.producto-card').forEach((card) => {
   card.addEventListener('mouseleave', () => {
     gsap.to(card, {y: 0, duration: 0.3, overwrite: 'auto'});
   });
-});
-
-/* NAV SCROLL ANIMATION */
-const nav = document.getElementById('nav');
-gsap.to(nav, {
-  scrollTrigger: {
-    trigger: 'body',
-    start: 'top center',
-    onUpdate: (self) => {
-      if (self.getVelocity() < -300) {
-        gsap.to(nav, {y: -80, duration: 0.2});
-      } else if (self.getVelocity() > 300) {
-        gsap.to(nav, {y: 0, duration: 0.2});
-      }
-    }
-  },
-  duration: 0.3
 });
 
 /* ANCHOR SCROLL */
