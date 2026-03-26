@@ -790,6 +790,7 @@ footer{
 }
 
 /* ═══ HERO FORGE SCROLL ═══ */
+/* ═══ HERO FORGE SCROLL ═══ */
 .hero{
   height:550vh !important;
   min-height:unset;
@@ -800,8 +801,7 @@ footer{
   position:sticky;
   top:0;
   height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  display:block;          /* ← antes era grid 1fr 1fr */
   overflow:hidden;
 }
 .hero-sticky .hero-atmosphere{
@@ -812,6 +812,35 @@ footer{
     radial-gradient(ellipse 100% 50% at 50% 100%, rgba(10,8,5,.8) 0%, transparent 60%);
   animation:forgeBreath 5s ease-in-out infinite;
 }
+
+/* IMAGEN: fondo full-width detrás de todo */
+.hero-right{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  z-index:1;
+}
+/* Gradiente: oscuro a la izquierda para que el texto sea legible */
+.hero-right::before{
+  background:linear-gradient(
+    to right,
+    rgba(8,8,8,.88) 0%,
+    rgba(8,8,8,.55) 38%,
+    rgba(8,8,8,.10) 65%,
+    transparent 100%
+  ) !important;
+  z-index:2;
+}
+/* Ocultar el corte diagonal (ya no hace falta) */
+.hero-cut{ display:none }
+
+/* TEXTO: encima de la imagen */
+.hero-left{
+  position:relative;
+  z-index:3;
+  width:clamp(420px, 48%, 680px);   /* ocupa ~mitad izquierda */
+}
+
 .knife-photo-stack{
   position:absolute;
   inset:0;
@@ -821,7 +850,7 @@ footer{
   inset:0;
   opacity:0;
   mix-blend-mode:screen;
-  transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
+  transition:opacity 0.8s cubic-bezier(.22,1,.36,1);
   will-change:opacity;
 }
 .knife-photo img{
@@ -879,9 +908,9 @@ footer{
   100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
 }
 @media(max-width:900px){
-  .hero-sticky{grid-template-columns:1fr}
-  .hero-left{order:2;padding:80px 1.5rem 40px !important}
-  .hero-right{order:1;min-height:45vh}
+  .hero-sticky{display:block}
+  .hero-left{width:100% !important;padding:80px 1.5rem 40px !important}
+  .hero-right{opacity:.5}
   .knife-photo img{object-fit:contain !important}
 }
 </style>
