@@ -821,7 +821,7 @@ footer{
   inset:0;
   opacity:0;
   mix-blend-mode:screen;
-  transition:opacity 0.6s cubic-bezier(.22,1,.36,1);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1);
   will-change:opacity;
 }
 .knife-photo img{
@@ -1833,7 +1833,7 @@ function update() {
   // Revelar / ocultar fotos
   photos.forEach((ph, i) => {
     if(!ph) return;
-    const shouldShow = i < target;
+    const shouldShow = i === target - 1;
     if(shouldShow !== ph.classList.contains('kp-visible')) {
       if(shouldShow) {
         ph.classList.add('kp-visible');
