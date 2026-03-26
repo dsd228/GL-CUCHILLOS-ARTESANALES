@@ -1657,37 +1657,6 @@
         "empunadura": "Pau Ferro + Purpleheart Heart",
         "vaina": "Baqueta"
       }
-    },
-    {
-      "id": "857",
-      "name": "Fileteador Nº857 — Burl Caza",
-      "category": "Cocina Profesional",
-      "description": "Fileteador con vaciado cóncavo, sangría y muesca española. Empuñadura en Burl Caza con cuero crudo. Vaina cuero crudo cosido 7-1.",
-      "specs": [
-        "Acero Inox 420N",
-        "Burl Caza",
-        "15 cm hoja",
-        "31 cm total",
-        "60 HRc"
-      ],
-      "badge": "avail",
-      "badgeText": "Disponible",
-      "price": "Consultar",
-      "priceNote": "Cuero crudo · 🇦🇷",
-      "active": true,
-      "stock": 1,
-      "details": {
-        "acero": "Inox 420N",
-        "caracteristicas": "Sangrinado · Vaciado cóncavo · File Work · Muesca Española",
-        "largoHoja": "15 cm",
-        "largoTotal": "31 cm",
-        "ancho": "3.5 cm",
-        "espesor": "5 mm",
-        "filo": "15°",
-        "dureza": "60 HRc",
-        "empunadura": "Burl Caza con cuero crudo",
-        "vaina": "Cuero crudo cosido 7-1"
-      }
     }
   ]
 }
