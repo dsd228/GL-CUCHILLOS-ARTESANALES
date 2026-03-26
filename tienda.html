@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -74,7 +73,7 @@ border-bottom:1px solid var(--silver-line);
 position:relative;overflow:hidden;
 }
 .store-header::before{
-content:‘TIENDA’;
+content:'TIENDA';
 position:absolute;right:-2rem;top:50%;transform:translateY(-50%);
 font-family:var(--sans);font-weight:100;font-size:clamp(5rem,14vw,14rem);
 color:rgba(200,205,214,.025);letter-spacing:.3em;white-space:nowrap;pointer-events:none;
@@ -561,58 +560,52 @@ document.getElementById('view-1').addEventListener('click',function(){
   grid.className='grid-1';document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');
 });
 
-/* ── WOOD COLOR MAP ── */
-// Maps wood name keywords → CSS gradient representing the wood color
+/* ── WOOD COLOR MAP (coherente con index.html) ── */
 const WOOD_COLORS = {
-  'nogal':          'linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)',
+  // Nativas / sudamericanas
+  'algarrobo':      'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',
+  'guayubira':      'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',
   'lapacho':        'linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10)',
-  'quebracho':      'linear-gradient(90deg,#1a0a04,#3d1c0a,#5c2e14,#3a1808)',
-  'caoba':          'linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810)',
+  'lenga':          'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
+  'burl lenga':     'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
+  'cipres':         'linear-gradient(90deg,#6f5e3f,#8f7652,#af946a,#7f6848)',
+  'incienso':       'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',
+  'peticibi':       'linear-gradient(90deg,#3a2010,#5c3818,#7a5025,#4a2c14)',
+  // Exóticas / importadas
   'olivo':          'linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020)',
   'burl olivo':     'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',
-  'burl de olivo':  'linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)',
-  'guayubira':      'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',
+  'nogal':          'linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)',
+  'haya':           'linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)',
   'wengue':         'linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c)',
-  'palo santo':     'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',
-  'purpleheart':    'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
-  'amaranto':       'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
   'pau ferro':      'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',
-  'pau petro':      'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',
+  'iroco':          'linear-gradient(90deg,#b5773c,#d6954c,#f0b45c,#b87a3e)',
+  'iroko':          'linear-gradient(90deg,#b5773c,#d6954c,#f0b45c,#b87a3e)',
+  'caoba africana': 'linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810)',
+  'laurel':         'linear-gradient(90deg,#3a2c10,#5c4820,#7a6030,#4a3818)',
+  'louro faia':     'linear-gradient(90deg,#4a3210,#6a5020,#8a6830,#5a4018)',
+  'roble americano':'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',
+  'amaranto':       'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
+  'purpleheart':    'linear-gradient(90deg,#2a1040,#4a2068,#6a3090,#3a1850)',
+  // Sintéticos
   'micarta':        'linear-gradient(90deg,#1a1a1a,#2e2e2e,#404040,#1a1a1a)',
   'micarta naranja':'linear-gradient(90deg,#6a2a04,#a04010,#c05818,#7a3208)',
   'micarta marfil': 'linear-gradient(90deg,#c8b890,#ddd0a8,#e8e0c0,#c0a878)',
-  'petiribi':       'linear-gradient(90deg,#3a2010,#5c3818,#7a5025,#4a2c14)',
-  'incienso':       'linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)',
-  'haya':           'linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)',
-  'membrillo':      'linear-gradient(90deg,#8a6030,#b08848,#c8a060,#9a7040)',
-  'algarrobo':      'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',
-  'chacaranda':     'linear-gradient(90deg,#1e0e18,#3a1c30,#582844,#2a1228)',
-  'roble americano':'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',
-  'roble':          'linear-gradient(90deg,#6a4818,#9a7030,#b88840,#7a5820)',
-  'guambira':       'linear-gradient(90deg,#2c1e0e,#4e3818,#6a5028,#3c2c14)',
-  'ebano':          'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',
-  'ébano':          'linear-gradient(90deg,#0a0806,#14100c,#1e1810,#0c0a08)',
-  'laurel':         'linear-gradient(90deg,#3a2c10,#5c4820,#7a6030,#4a3818)',
-  'louro':          'linear-gradient(90deg,#4a3210,#6a5020,#8a6830,#5a4018)',
-  'palma negra':    'linear-gradient(90deg,#080604,#14100c,#201a14,#0c0a08)',
-  'guayaba':        'linear-gradient(90deg,#5a3c18,#7a5828,#9a7038,#6a4c20)',
-  'burl algarrobo': 'linear-gradient(90deg,#3a2010,#6a4828,#8a6038,#4a2e18)',
-  'burl caza':      'linear-gradient(90deg,#2a1e0e,#5a3e22,#7a5830,#3a2a14)',
-  'burl de lenga':  'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
-  'burl lenga':     'linear-gradient(90deg,#c08050,#d8a868,#e8c080,#b07040)',
-  'jazzanda':       'linear-gradient(90deg,#1e0a2c,#3a1850,#581e78,#2c1040)',
-  'violeta':        'linear-gradient(90deg,#200840,#3c1460,#581e80,#2c0e4c)',
-  'baquelita':      'linear-gradient(90deg,#1a0808,#2e1414,#401c1c,#221010)',
-  'fierroliso':     'linear-gradient(90deg,#181818,#282828,#383838,#202020)',
   'fenólico':       'linear-gradient(90deg,#181818,#282828,#383838,#202020)',
-  'titanio':        'linear-gradient(90deg,#484848,#606060,#787878,#505050)',
+  // Burls y tratamientos especiales
+  'burl algarrobo': 'linear-gradient(90deg,#3a2010,#6a4828,#8a6038,#4a2e18)',
+  'chacaranda flameado':'linear-gradient(90deg,#1e0e18,#3a1c30,#582844,#2a1228)',
+  'iroco jaspeado': 'linear-gradient(90deg,#b5773c,#d6954c,#f0b45c,#b87a3e)',
+  // Default
   'default':        'linear-gradient(90deg,#1a1a1a,#2a2a2a,#3a3a3a,#222222)'
 };
 
 function getWoodGradient(empunaduraStr) {
   if (!empunaduraStr) return WOOD_COLORS['default'];
   const s = empunaduraStr.toLowerCase();
-  // Try longest match first
+  // Buscar coincidencia exacta primero por key
+  const exact = Object.keys(WOOD_COLORS).find(k => s === k);
+  if (exact) return WOOD_COLORS[exact];
+  // Buscar por substring (priorizando más largas)
   const keys = Object.keys(WOOD_COLORS).filter(k => k !== 'default').sort((a,b) => b.length - a.length);
   for (const key of keys) {
     if (s.includes(key)) return WOOD_COLORS[key];
@@ -621,22 +614,15 @@ function getWoodGradient(empunaduraStr) {
 }
 
 function getWoodCircleColor(empunaduraStr) {
-  // Return the middle color of the gradient as a solid circle color
   if (!empunaduraStr) return '#2a2a2a';
   const s = empunaduraStr.toLowerCase();
   const colorMap = {
-    'nogal':'#5a3820','lapacho':'#7a4220','quebracho':'#4a2410','caoba':'#8a3018',
-    'olivo':'#6a5828','burl olivo':'#7a6432','guayubira':'#5e4828','wengue':'#201810',
-    'palo santo':'#8a5c28','purpleheart':'#5a2878','amaranto':'#5a2878',
-    'pau ferro':'#483018','pau petro':'#483018','micarta':'#303030',
-    'micarta naranja':'#b04c18','micarta marfil':'#d8c898','petiribi':'#6a4020',
-    'incienso':'#8a5c28','haya':'#c8a060','membrillo':'#b07838','algarrobo':'#6a4020',
-    'chacaranda':'#481c38','roble americano':'#a07030','roble':'#a07030',
-    'guambira':'#5a3c20','ebano':'#181410','ébano':'#181410','laurel':'#685030',
-    'louro':'#7a5828','palma negra':'#141010','guayaba':'#8a6030',
-    'burl algarrobo':'#7a5030','burl caza':'#6a4828','burl de lenga':'#d09060',
-    'burl lenga':'#d09060','jazzanda':'#481860','violeta':'#401858',
-    'baquelita':'#301010','fierroliso':'#303030','fenólico':'#303030','titanio':'#606060'
+    'algarrobo':'#6a4020','guayubira':'#5e4828','lapacho':'#7a4220','lenga':'#d09060','cipres':'#8f7652',
+    'incienso':'#8a5c28','peticibi':'#6a4020','olivo':'#6a5828','burl olivo':'#7a6432','nogal':'#5a3820',
+    'haya':'#c8a060','wengue':'#201810','pau ferro':'#483018','iroco':'#d6954c','caoba africana':'#8a3018',
+    'laurel':'#685030','louro faia':'#7a5828','roble americano':'#a07030','amaranto':'#5a2878','purpleheart':'#5a2878',
+    'micarta':'#303030','micarta naranja':'#b04c18','micarta marfil':'#d8c898','fenólico':'#303030',
+    'burl algarrobo':'#7a5030','chacaranda flameado':'#481c38','iroco jaspeado':'#d6954c'
   };
   const keys = Object.keys(colorMap).sort((a,b) => b.length - a.length);
   for (const key of keys) {
