@@ -788,6 +788,102 @@ footer{
   .footer-top{grid-template-columns:1fr}
   .hero-stats{flex-wrap:wrap}
 }
+
+/* ═══ HERO FORGE SCROLL ═══ */
+.hero{
+  height:550vh !important;
+  min-height:unset;
+  display:block !important;
+  overflow:visible !important;
+}
+.hero-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.hero-sticky .hero-atmosphere{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 70% 55%, rgba(200,70,10,.13) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 55% 30%, rgba(224,98,15,.06) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(10,8,5,.8) 0%, transparent 60%);
+  animation:forgeBreath 5s ease-in-out infinite;
+}
+.knife-photo-stack{
+  position:absolute;
+  inset:0;
+}
+.knife-photo{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  mix-blend-mode:screen;
+  transition:opacity 0.6s cubic-bezier(.22,1,.36,1);
+  will-change:opacity;
+}
+.knife-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+.knife-photo.kp-visible{ opacity:1 }
+.forge-progress-bar{
+  position:absolute;
+  right:1.2rem;top:50%;
+  transform:translateY(-50%);
+  z-index:20;
+}
+.forge-prog-track{
+  width:1px;height:130px;
+  background:rgba(200,205,214,.08);
+  position:relative;overflow:hidden;
+}
+.forge-prog-fill{
+  position:absolute;top:0;left:0;right:0;height:0%;
+  background:linear-gradient(to bottom,#C8460A,#D4A535);
+  transition:height .25s ease;
+}
+.forge-prog-dots{
+  position:absolute;left:50%;top:0;bottom:0;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;
+  justify-content:space-around;align-items:center;
+  width:16px;pointer-events:none;
+}
+.forge-prog-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(200,205,214,.12);
+  border:1px solid rgba(200,205,214,.18);
+  transition:background .3s,border-color .3s,transform .25s;
+  flex-shrink:0;
+}
+.forge-prog-dot.fp-lit{
+  background:#F2831A;border-color:#F2831A;
+  transform:scale(1.5);
+  box-shadow:0 0 7px rgba(242,131,26,.7);
+}
+#hero-sparks{
+  position:absolute;inset:0;pointer-events:none;z-index:25;overflow:hidden;
+}
+.hspark{
+  position:absolute;width:2px;height:2px;
+  border-radius:50%;opacity:0;
+}
+@keyframes hsparkRise{
+  0%{transform:translate(0,0) scale(1.2);opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
+}
+@media(max-width:900px){
+  .hero-sticky{grid-template-columns:1fr}
+  .hero-left{order:2;padding:80px 1.5rem 40px !important}
+  .hero-right{order:1;min-height:45vh}
+  .knife-photo img{object-fit:contain !important}
+}
 </style>
 </head>
 <body>
@@ -843,7 +939,10 @@ footer{
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero" id="inicio">
-  <div class="hero-atmosphere"></div>
+
+  <!-- STICKY WRAPPER -->
+  <div class="hero-sticky">
+    <div class="hero-atmosphere"></div>
 
   <!-- LEFT -->
   <div class="hero-left">
@@ -904,115 +1003,57 @@ footer{
       <polygon points="0,0 80,0 0,800" fill="#080808"/>
     </svg>
 
-    <div class="knife-wrap">
-      <svg class="knife-svg" viewBox="0 0 480 700" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="hglow" cx="50%" cy="55%" r="55%">
-            <stop offset="0%" stop-color="#c8460a" stop-opacity=".3"/>
-            <stop offset="70%" stop-color="#c8460a" stop-opacity=".05"/>
-            <stop offset="100%" stop-color="#c8460a" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="hblade" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#c0b8a8"/>
-            <stop offset="25%" stop-color="#f0e8d8"/>
-            <stop offset="50%" stop-color="#e0d8c8"/>
-            <stop offset="75%" stop-color="#b0a898"/>
-            <stop offset="100%" stop-color="#908880"/>
-          </linearGradient>
-          <linearGradient id="hbevel" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#fff" stop-opacity=".6"/>
-            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="hhandle" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#3d2814"/>
-            <stop offset="40%" stop-color="#5c3c1e"/>
-            <stop offset="100%" stop-color="#2a1a08"/>
-          </linearGradient>
-          <linearGradient id="hguard" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#d4b870"/>
-            <stop offset="50%" stop-color="#a89040"/>
-            <stop offset="100%" stop-color="#806828"/>
-          </linearGradient>
-          <linearGradient id="hpin" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#e0b840"/>
-            <stop offset="100%" stop-color="#8a6520"/>
-          </linearGradient>
-        </defs>
+    <!-- FOTO STACK — 5 imágenes reales apiladas con mix-blend-mode:screen -->
+    <div class="knife-photo-stack">
 
-        <!-- atmosphere glow -->
-        <ellipse cx="240" cy="360" rx="200" ry="260" fill="url(#hglow)"/>
+      <!-- Foto 1: Cuchillo completo (imagen base, aparece primera) -->
+      <div class="knife-photo" id="kp-1">
+        <img src="images/knife-full.png"
+             alt="Cuchillo artesanal completo — damasco y nogal">
+      </div>
 
-        <!-- knife group rotated diagonal -->
-        <g transform="translate(240,350) rotate(-22) translate(-240,-350)">
+      <!-- Foto 2: Punta macro — hoja damasco -->
+      <div class="knife-photo" id="kp-2">
+        <img src="images/knife-tip.png"
+             alt="Punta y filo — acero damasco">
+      </div>
 
-          <!-- blade body -->
-          <path d="M 148,268 L 400,248 Q 465,246 476,254 Q 465,262 400,266 L 152,298 Z"
-                fill="url(#hblade)"/>
-          <!-- bevel highlight -->
-          <path d="M 152,268 L 400,250 Q 465,248 476,254 L 400,256 L 155,272 Z"
-                fill="url(#hbevel)" opacity=".6"/>
-          <!-- edge line -->
-          <line x1="152" y1="296" x2="476" y2="254" stroke="#fff" stroke-width=".5" opacity=".4"/>
-          <!-- fuller -->
-          <path d="M 188,278 Q 340,272 415,260 Q 438,258 448,259 Q 438,262 415,264 Q 340,276 188,284 Z"
-                fill="#807060" opacity=".4"/>
+      <!-- Foto 3: Cuchillo acero forjado -->
+      <div class="knife-photo" id="kp-3">
+        <img src="images/knife-steel.png"
+             alt="Cuchillo con mango de acero forjado">
+      </div>
 
-          <!-- guard -->
-          <rect x="138" y="256" width="16" height="54" rx="2.5" fill="url(#hguard)"/>
-          <rect x="140" y="258" width="3.5" height="50" rx="1" fill="#fff" opacity=".18"/>
-          <circle cx="146" cy="270" r="2.5" fill="url(#hpin)"/>
-          <circle cx="146" cy="300" r="2.5" fill="url(#hpin)"/>
+      <!-- Foto 4: Mango metálico macro -->
+      <div class="knife-photo" id="kp-4">
+        <img src="images/knife-handle-metal.png"
+             alt="Mango de acero forjado a mano">
+      </div>
 
-          <!-- handle body -->
-          <path d="M 138,258 L 68,266 Q 46,274 46,283 Q 46,292 68,300 L 138,306 Z" fill="url(#hhandle)"/>
-          <!-- wood grain -->
-          <path d="M 78,268 Q 100,272 122,270" stroke="#1a0e06" stroke-width=".5" fill="none" opacity=".4"/>
-          <path d="M 74,276 Q 102,280 126,277" stroke="#1a0e06" stroke-width=".5" fill="none" opacity=".35"/>
-          <path d="M 75,284 Q 100,288 124,285" stroke="#1a0e06" stroke-width=".5" fill="none" opacity=".4"/>
-          <path d="M 76,292 Q 102,296 122,293" stroke="#1a0e06" stroke-width=".5" fill="none" opacity=".3"/>
-          <path d="M 138,258 L 68,266 Q 46,274 46,283 Q 46,292 68,300 L 138,306 Z"
-                fill="none" stroke="#14090a" stroke-width="1"/>
+      <!-- Foto 5: Mango de nogal + remaches bronce -->
+      <div class="knife-photo" id="kp-5">
+        <img src="images/knife-handle-wood.png"
+             alt="Mango de nogal con remaches de bronce">
+      </div>
 
-          <!-- handle pins -->
-          <circle cx="96" cy="282" r="5" fill="url(#hpin)"/>
-          <circle cx="96" cy="282" r="3" fill="#c89820" opacity=".5"/>
-          <circle cx="96" cy="282" r="1.5" fill="#f0c840" opacity=".35"/>
-          <circle cx="114" cy="282" r="5" fill="url(#hpin)"/>
-          <circle cx="114" cy="282" r="3" fill="#c89820" opacity=".5"/>
-          <circle cx="114" cy="282" r="1.5" fill="#f0c840" opacity=".35"/>
-
-          <!-- pommel -->
-          <ellipse cx="50" cy="282" rx="7" ry="15" fill="url(#hguard)"/>
-          <ellipse cx="48" cy="282" rx="3.5" ry="10" fill="#fff" opacity=".07"/>
-        </g>
-
-        <!-- shadow -->
-        <ellipse cx="260" cy="490" rx="160" ry="10" fill="#000" opacity=".3"/>
-
-        <!-- acero label -->
-        <text x="360" y="318" font-family="Josefin Sans,sans-serif" font-size="8" font-weight="600"
-              letter-spacing="2.5" fill="#5a5040" text-anchor="middle"
-              transform="rotate(-22 360 318)">ACERO 5160 · FORJADO A MANO · QUIMILÍ</text>
-
-        <!-- corner editorial marks -->
-        <path d="M 30,60 L 30,40 L 50,40" fill="none" stroke="#2a2620" stroke-width="1"/>
-        <path d="M 450,640 L 450,660 L 430,660" fill="none" stroke="#2a2620" stroke-width="1"/>
-
-        <!-- animated sparks at tip -->
-        <circle cx="470" cy="230" r="1.8" fill="#f2831a" opacity=".9">
-          <animate attributeName="opacity" values=".9;0;.9" dur="1.6s" repeatCount="indefinite"/>
-          <animate attributeName="cy" values="230;200;230" dur="1.6s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="484" cy="240" r="1.2" fill="#faa438" opacity=".7">
-          <animate attributeName="opacity" values=".7;0;.7" dur="2.2s" repeatCount="indefinite" begin=".4s"/>
-          <animate attributeName="cy" values="240;206;240" dur="2.2s" repeatCount="indefinite" begin=".4s"/>
-        </circle>
-        <circle cx="462" cy="244" r="1" fill="#e0620f" opacity=".6">
-          <animate attributeName="opacity" values=".6;0;.6" dur="1.9s" repeatCount="indefinite" begin=".9s"/>
-          <animate attributeName="cy" values="244;210;244" dur="1.9s" repeatCount="indefinite" begin=".9s"/>
-        </circle>
-      </svg>
     </div>
+
+    <!-- Barra de progreso lateral -->
+    <div class="forge-progress-bar">
+      <div class="forge-prog-track">
+        <div class="forge-prog-fill" id="fp-fill"></div>
+        <div class="forge-prog-dots">
+          <div class="forge-prog-dot" id="fpd-1"></div>
+          <div class="forge-prog-dot" id="fpd-2"></div>
+          <div class="forge-prog-dot" id="fpd-3"></div>
+          <div class="forge-prog-dot" id="fpd-4"></div>
+          <div class="forge-prog-dot" id="fpd-5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sparks canvas -->
+    <div id="hero-sparks"></div>
 
     <div class="hero-badge">
       <span class="badge-eyebrow">Pieza destacada</span>
@@ -1025,7 +1066,9 @@ footer{
     </div>
 
     <div class="hero-origin">Quimilí · Santiago del Estero · Argentina</div>
-  </div>
+  </div><!-- /hero-right -->
+
+  </div><!-- /hero-sticky -->
 </section>
 
 <!-- ═══════ TICKER ═══════ -->
@@ -1705,6 +1748,123 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:.3});
 sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)});
+
+/* ═══════════════════════════════════════
+   HERO FORGE SCROLL ANIMATION
+   Mapea el scrollY dentro del hero a 5
+   etapas de revelado de fotos.
+   Cada foto usa mix-blend-mode:screen
+   — el negro desaparece, las piezas se
+   fusionan visualmente sin cortes.
+═══════════════════════════════════════ */
+(function(){
+
+const TOTAL = 5;
+const photos = Array.from({length:TOTAL}, (_,i) => document.getElementById(`kp-${i+1}`));
+const dots   = Array.from({length:TOTAL}, (_,i) => document.getElementById(`fpd-${i+1}`));
+const fill   = document.getElementById('fp-fill');
+const sparksEl = document.getElementById('hero-sparks');
+const heroSection = document.getElementById('inicio');
+
+// Embed real images as data-src → src swap para asegurar carga
+// Las imágenes vienen de los uploads
+const IMG_SRCS = [
+  'image_9640d180__1_.png',   // cuchillo completo
+  'image_da36b34d__1_.png',   // punta macro
+  'image_30f21cf0__1_.png',   // cuchillo acero
+  'image_c6c4f98e__1_.png',   // mango metal
+  'image_26afb88__1_.png',    // mango madera
+];
+
+// Asignar srcs reales (ajustar paths según estructura del servidor)
+photos.forEach((ph, i) => {
+  if(ph) {
+    const img = ph.querySelector('img');
+    if(img) {
+      // Intentar ruta relativa (ajustar según donde estén las fotos)
+      img.src = IMG_SRCS[i];
+    }
+  }
+});
+
+let lastRevealed = -1;
+let ticking = false;
+
+function getHeroProgress() {
+  if(!heroSection) return 0;
+  const rect  = heroSection.getBoundingClientRect();
+  const total = heroSection.offsetHeight - window.innerHeight;
+  if(total <= 0) return 1;
+  return Math.max(0, Math.min(1, -rect.top / total));
+}
+
+function emitSparks() {
+  if(!sparksEl) return;
+  const r = sparksEl.getBoundingClientRect();
+  const cx = r.width * 0.5;
+  const cy = r.height * 0.45;
+  for(let i = 0; i < 10; i++){
+    const s  = document.createElement('div');
+    s.className = 'hspark';
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = 25 + Math.random() * 90;
+    s.style.cssText = [
+      `--tx:${(Math.cos(angle)*dist).toFixed(1)}px`,
+      `--ty:${(Math.sin(angle)*dist - 50).toFixed(1)}px`,
+      `left:${(cx + (Math.random()-0.5)*60).toFixed(1)}px`,
+      `top:${(cy + (Math.random()-0.5)*40).toFixed(1)}px`,
+      `background:${Math.random()>.5?'#F2831A':'#D4A535'}`,
+      `animation:hsparkRise ${(.35 + Math.random()*.45).toFixed(2)}s ease-out forwards`,
+    ].join(';');
+    sparksEl.appendChild(s);
+    setTimeout(() => s.remove(), 800);
+  }
+}
+
+function update() {
+  const p      = getHeroProgress();
+  // Cuántas fotos mostrar: progreso 0→0 fotos, progreso 1→5 fotos
+  // Cada foto ocupa 1/5 del recorrido con un pequeño solapamiento
+  const target = Math.min(TOTAL, Math.floor(p * TOTAL * 1.08));
+
+  // Barra de progreso
+  if(fill) fill.style.height = (p * 100).toFixed(1) + '%';
+
+  // Revelar / ocultar fotos
+  photos.forEach((ph, i) => {
+    if(!ph) return;
+    const shouldShow = i < target;
+    if(shouldShow !== ph.classList.contains('kp-visible')) {
+      if(shouldShow) {
+        ph.classList.add('kp-visible');
+        if(i > lastRevealed) emitSparks();
+      } else {
+        ph.classList.remove('kp-visible');
+      }
+    }
+  });
+
+  // Puntos del indicador
+  dots.forEach((d, i) => {
+    if(!d) return;
+    d.classList.toggle('fp-lit', i < target);
+  });
+
+  lastRevealed = target - 1;
+  ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if(!ticking) {
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+}, {passive:true});
+
+// Correr al cargar
+requestAnimationFrame(update);
+
+})();
 </script>
 </body>
 </html>
