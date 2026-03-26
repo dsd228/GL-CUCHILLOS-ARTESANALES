@@ -419,6 +419,32 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .artesano-badge-name{font-family:var(--serif);font-size:14px;font-weight:500;font-style:italic;color:var(--cream);display:block}
 .artesano-badge-role{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-top:3px}
 
+/* ── Imagen / Video crossfade ── */
+.art-media{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
+  pointer-events:none;
+}
+.art-media--active{opacity:1}
+
+/* Indicador de puntos */
+.art-media-indicator{
+  position:absolute;bottom:1.5rem;right:1.5rem;z-index:5;
+  display:flex;gap:.4rem;align-items:center;
+}
+.art-ind-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(200,205,214,.3);
+  transition:background .4s,transform .4s;
+  cursor:pointer;
+}
+.art-ind-dot.active{
+  background:var(--silver);
+  transform:scale(1.3);
+}
+
 .artesano-copy{}
 .artesano-copy p{
   font-family:var(--cormorant);font-size:18px;font-weight:300;font-style:italic;
@@ -1186,23 +1212,28 @@ footer{
 <!-- ═══════ ARTESANO ═══════ -->
 <section class="artesano-section" id="historia">
   <div class="artesano-inner">
-    <div class="artesano-visual rv">
+    <div class="artesano-visual rv" id="artesano-visual">
       <div class="artesano-visual-glow"></div>
-      <span class="artesano-visual-letter">G</span>
-      <div class="artesano-logo-center">
-        <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".4"/>
-          <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.2)" stroke-width="0.5"/>
-          <text x="110" y="126" text-anchor="middle" font-family="Playfair Display, serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
-          <path id="artTopArc" d="M 28 110 A 82 82 0 0 1 192 110" fill="none"/>
-          <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.5)" letter-spacing="4" font-weight="600">
-            <textPath href="#artTopArc" startOffset="50%" text-anchor="middle">CUCHILLOS ARTESANALES</textPath>
-          </text>
-          <path id="artBottomArc" d="M 28 110 A 82 82 0 0 0 192 110" fill="none"/>
-          <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.5)" letter-spacing="4" font-weight="600">
-            <textPath href="#artBottomArc" startOffset="50%" text-anchor="middle">IND. ARGENTINA</textPath>
-          </text>
-        </svg>
+      <!-- Imagen -->
+      <img
+        id="art-img"
+        src="pexels-vlada-karpovich-4452613.jpg"
+        alt="Gonzalo Londero trabajando el cuero artesanalmente"
+        class="art-media art-media--active"
+      />
+      <!-- Video -->
+      <video
+        id="art-vid"
+        src="artesano.webm"
+        class="art-media"
+        muted
+        playsinline
+        loop
+      ></video>
+      <!-- Indicador de tipo de media -->
+      <div class="art-media-indicator" id="art-indicator">
+        <span class="art-ind-dot" id="art-dot-0"></span>
+        <span class="art-ind-dot" id="art-dot-1"></span>
       </div>
       <div class="artesano-badge">
         <span class="artesano-badge-name">Gonzalo Londero</span>
@@ -1924,6 +1955,55 @@ window.addEventListener('scroll', () => {
 // Correr al cargar
 requestAnimationFrame(update);
 
+})();
+
+/* ═══════════════════════════════════════
+   ARTESANO MEDIA CROSSFADE
+   Alterna imagen ↔ video con transición suave
+═══════════════════════════════════════ */
+(function(){
+  const img   = document.getElementById('art-img');
+  const vid   = document.getElementById('art-vid');
+  const dots  = [document.getElementById('art-dot-0'), document.getElementById('art-dot-1')];
+  if(!img || !vid) return;
+
+  let current = 0; // 0 = imagen, 1 = video
+  const SHOW_IMG_MS = 6000;   // cuánto tiempo se muestra la foto
+
+  function setActive(idx){
+    current = idx;
+    if(idx === 0){
+      vid.classList.remove('art-media--active');
+      vid.pause();
+      img.classList.add('art-media--active');
+    } else {
+      img.classList.remove('art-media--active');
+      vid.currentTime = 0;
+      vid.play().catch(()=>{});
+      vid.classList.add('art-media--active');
+    }
+    dots.forEach((d,i)=>{
+      d.classList.toggle('active', i === idx);
+    });
+  }
+
+  // Iniciar con imagen activa
+  setActive(0);
+  dots[0].classList.add('active');
+
+  // Después de SHOW_IMG_MS, pasar al video
+  let imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS);
+
+  // Cuando el video termina, volver a la imagen
+  vid.addEventListener('ended', ()=>{
+    setActive(0);
+    clearTimeout(imgTimer);
+    imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS);
+  });
+
+  // Click en puntos para cambiar manualmente
+  dots[0].addEventListener('click', ()=>{ clearTimeout(imgTimer); setActive(0); imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS); });
+  dots[1].addEventListener('click', ()=>{ clearTimeout(imgTimer); setActive(1); });
 })();
 
 /* ═══════════════════════════════════════
