@@ -14,25 +14,41 @@
   --text: #1a1814;
   --muted: #6b6258;
   --accent: #c8832a;
-  --acdk: #a06820;
+  --accent-hover: #a06820;
   --green: #2d8a5e;
   --red: #c0392b;
   --blue: #3d6bce;
   --gold: #d4a843;
+  --overlay: rgba(26,24,20,0.7);
+  --shadow: 0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+  --radius: 8px;
   --serif: 'Cormorant Garamond', serif;
   --sans: 'DM Sans', sans-serif;
   --ease: cubic-bezier(.16,1,.3,1);
-  --shadow: 0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
-  --radius: 8px;
+}
+[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --border: #2c2c2c;
+  --text: #e0e0e0;
+  --muted: #9e9e9e;
+  --accent: #e09d42;
+  --accent-hover: #c57f2a;
+  --green: #3aac7a;
+  --red: #e05545;
+  --blue: #5a8be6;
+  --gold: #f0b74a;
+  --overlay: rgba(0,0,0,0.8);
+  --shadow: 0 1px 3px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background 0.3s,color 0.2s}
 img{display:block}
 button{font-family:var(--sans);cursor:pointer;-webkit-tap-highlight-color:transparent}
 input,textarea,select{font-family:var(--sans);font-size:16px!important}
 
-/* ── LOGIN ── */
+/* Login */
 #login-screen{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;padding-bottom:calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
 #login-screen.hidden{display:none}
 .login-card{background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:36px 28px;width:100%;max-width:380px;box-shadow:0 8px 40px rgba(0,0,0,.09);text-align:center}
@@ -40,14 +56,14 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .login-sub{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .login-card h2{font-family:var(--serif);font-size:26px;font-weight:500;margin-bottom:6px}
 .login-card p{font-size:13px;color:var(--muted);margin-bottom:22px}
-.login-input{width:100%;padding:14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);font-size:16px!important;color:var(--text);outline:none;margin-bottom:12px;transition:border-color .2s;-webkit-appearance:none}
+.login-input{width:100%;padding:14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);font-size:16px!important;color:var(--text);outline:none;margin-bottom:12px;transition:border-color .2s}
 .login-input:focus{border-color:var(--accent);background:var(--surface)}
-.btn-login{width:100%;padding:14px;min-height:48px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;transition:background .2s;-webkit-appearance:none}
-.btn-login:active{background:var(--acdk)}
-.login-err{color:var(--red);font-size:12px;margin-top:8px;min-height:18px}
+.btn-login{width:100%;padding:14px;min-height:48px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;transition:background .2s}
+.btn-login:active{background:var(--accent-hover)}
+.login-err{color:var(--red);font-size:12px;margin-top:8px}
 
-/* ── TOPBAR ── */
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:56px;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+/* Topbar */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:56px}
 .topbar-left{display:flex;align-items:center;gap:10px}
 .topbar-logo{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--text)}
 .topbar-logo span{color:var(--accent)}
@@ -59,254 +75,205 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
 .ts-item strong{color:var(--text);font-weight:600}
 .storage-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--green);background:rgba(45,138,94,.1);border-radius:4px;padding:2px 6px;margin-left:4px}
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 16px;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;border-radius:var(--radius);transition:all .2s;white-space:nowrap;min-height:40px;-webkit-tap-highlight-color:transparent;-webkit-appearance:none}
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 16px;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;border-radius:var(--radius);transition:all .2s;white-space:nowrap;min-height:40px}
 .btn-primary{background:var(--accent);color:#fff}
-.btn-primary:active{background:var(--acdk)}
+.btn-primary:active{background:var(--accent-hover)}
 .btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}
 .btn-ghost:active{background:var(--bg)}
 .btn-danger{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2)}
 .btn-danger:active{background:rgba(192,57,43,.15)}
 .btn-success{background:rgba(45,138,94,.1);color:var(--green);border:1px solid rgba(45,138,94,.25)}
-.btn-success:active{background:rgba(45,138,94,.2)}
 .btn-sm{padding:8px 12px;font-size:12px;min-height:36px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 
-/* ── PAGE ── */
-.page{max-width:1240px;margin:0 auto;padding:20px 14px;padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));padding-bottom:max(30px,env(safe-area-inset-bottom))}
+/* Página */
+.page{max-width:1240px;margin:0 auto;padding:20px 14px}
 
-/* ── SAVE BANNER ── */
-.save-banner{background:linear-gradient(135deg,#1a1814,#2d2418);color:#fff;border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow);flex-wrap:wrap}
+/* Banner guardado */
+.save-banner{background:linear-gradient(135deg,#1a1814,#2d2418);color:#fff;border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+[data-theme="dark"] .save-banner{background:linear-gradient(135deg,#2c2c2c,#1e1e1e)}
 .save-banner.show{display:flex}
 .save-banner strong{color:var(--gold)}
 .save-banner small{color:rgba(255,255,255,.45);font-size:11px;display:block;margin-top:2px}
 
-/* ── STATS PANEL ── */
+/* Stats */
 .stats-panel{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;display:flex;align-items:center;gap:10px}
-.stat-icon{width:36px;height:36px;border-radius:50%;background:rgba(200,131,42,.1);display:grid;place-items:center;flex-shrink:0}
+.stat-icon{width:36px;height:36px;border-radius:50%;background:rgba(200,131,42,.1);display:grid;place-items:center}
 .stat-icon i{color:var(--accent);font-size:16px}
-.stat-content h3{font-size:22px;font-weight:600;font-family:var(--serif);line-height:1.1;color:var(--text)}
+.stat-content h3{font-size:22px;font-weight:600;font-family:var(--serif);line-height:1.1}
 .stat-content p{font-size:11px;color:var(--muted)}
 
-/* ── PAGE NAV ── */
-.page-nav{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.page-nav::-webkit-scrollbar{display:none}
-.page-nav-btn{padding:10px 14px;font-size:12px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;min-height:44px;-webkit-tap-highlight-color:transparent}
+/* Navegación */
+.page-nav{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border);overflow-x:auto}
+.page-nav-btn{padding:10px 14px;font-size:12px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap}
 .page-nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .page-section{display:none}
 .page-section.active{display:block}
 
-/* ── TOOLBAR ── */
+/* Toolbar */
 .toolbar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.search-box{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;flex:1;min-width:0;transition:border-color .2s}
-.search-box:focus-within{border-color:var(--accent)}
-.search-box i{color:var(--muted);font-size:13px;flex-shrink:0}
-.search-box input{background:none;border:none;outline:none;color:var(--text);font-family:var(--sans);font-size:16px!important;width:100%;min-width:0}
-.search-box input::placeholder{color:var(--muted)}
-.cat-tabs{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%}
-.cat-tabs::-webkit-scrollbar{display:none}
-.cat-tab{padding:8px 14px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;min-height:36px;-webkit-tap-highlight-color:transparent}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;flex:1}
+.search-box input{background:none;border:none;outline:none;color:var(--text);width:100%}
+.cat-tabs{display:flex;gap:6px;overflow-x:auto;width:100%}
+.cat-tab{padding:8px 14px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;white-space:nowrap}
 .cat-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.sort-wrap{display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;width:100%}
-.sort-wrap::-webkit-scrollbar{display:none}
-.sort-label{font-size:12px;color:var(--muted);white-space:nowrap}
-.sort-btn{padding:7px 11px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);color:var(--muted);transition:all .2s;white-space:nowrap;flex-shrink:0;min-height:34px;-webkit-tap-highlight-color:transparent}
+.sort-wrap{display:flex;gap:6px;align-items:center}
+.sort-btn{padding:7px 11px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:11px;font-weight:500;cursor:pointer;color:var(--muted)}
 .sort-btn.active{border-color:var(--accent);color:var(--accent)}
 
-/* ── PRODUCT GRID ── */
+/* Grid productos */
 .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-
-/* ── PRODUCT CARD ── */
-.prod-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:all .25s var(--ease);position:relative}
+.prod-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;position:relative}
 .prod-card.inactive{opacity:.55}
-.prod-card.inactive .prod-img{filter:grayscale(.65)}
-.prod-img{aspect-ratio:3/4;overflow:hidden;background:#f2ede6;position:relative;display:flex;align-items:center;justify-content:center}
+.prod-img{aspect-ratio:3/4;overflow:hidden;background:#f2ede6;position:relative}
 .prod-img img{width:100%;height:100%;object-fit:cover}
-.no-img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(138,130,120,.3);width:100%;height:100%;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-.no-img-ph i{font-size:28px;opacity:.2}
-
-/* ── BADGES ON CARDS (mejor contraste) ── */
+.no-img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(138,130,120,.3);width:100%;height:100%}
 .cat-badge{position:absolute;top:8px;left:8px;z-index:2;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
 .b-avail{background:var(--accent);color:#fff}
 .b-custom{background:#d48d3a;color:#fff}
 .b-intl{background:var(--blue);color:#fff}
 .b-unavail{background:var(--red);color:#fff}
-.promo-badge{position:absolute;top:8px;right:8px;z-index:2;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:4px}
-.featured-star{position:absolute;bottom:30px;right:8px;z-index:2;background:rgba(212,168,67,.9);color:#fff;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px}
-.ar-flag{position:absolute;bottom:8px;right:8px;z-index:2;font-size:16px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
-.combo-badge{position:absolute;bottom:30px;left:8px;z-index:2;background:var(--green);color:#fff;font-size:8px;font-weight:700;padding:3px 7px;border-radius:4px;display:flex;align-items:center;gap:3px}
-.photo-count-badge{position:absolute;bottom:8px;left:8px;z-index:2;background:rgba(26,24,20,.75);color:#fff;font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;display:flex;align-items:center;gap:4px}
-
-.prod-overlay{position:absolute;inset:0;background:rgba(26,24,20,.7);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .25s;pointer-events:none}
+.promo-badge{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:9px;padding:3px 7px;border-radius:4px}
+.featured-star{position:absolute;bottom:30px;right:8px;background:rgba(212,168,67,.9);color:#fff;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.ar-flag{position:absolute;bottom:8px;right:8px;font-size:16px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
+.combo-badge{position:absolute;bottom:30px;left:8px;background:var(--green);color:#fff;font-size:8px;padding:3px 7px;border-radius:4px;display:flex;align-items:center;gap:3px}
+.photo-count-badge{position:absolute;bottom:8px;left:8px;background:rgba(26,24,20,.75);color:#fff;font-size:9px;padding:2px 7px;border-radius:10px}
+.prod-overlay{position:absolute;inset:0;background:var(--overlay);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .25s;pointer-events:none}
 .prod-card:hover .prod-overlay{opacity:1;pointer-events:all}
-.prod-card.touch-active .prod-overlay{opacity:1;pointer-events:all}
-.ov-btn{background:#fff;color:var(--text);border:none;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:13px;transition:all .2s;-webkit-tap-highlight-color:transparent;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.ov-btn{background:#fff;color:var(--text);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:13px;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .ov-btn:active{background:var(--accent);color:#fff;transform:scale(1.1)}
-.ov-btn.del:active{background:var(--red)}
-.ov-btn.dup:active{background:var(--blue)}
-.ov-btn.offer-btn:active{background:var(--green)}
 .prod-info{padding:12px}
-.prod-name{font-weight:500;font-size:13px;line-height:1.3;margin-bottom:3px}
+.prod-name{font-weight:500;font-size:13px;margin-bottom:3px}
 .prod-cat-label{font-size:10px;color:var(--muted);margin-bottom:4px}
-.prod-price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.prod-price-row{display:flex;align-items:baseline;gap:6px}
 .price-main{font-family:var(--serif);font-size:17px;color:var(--accent);font-weight:500}
 .price-original{font-family:var(--serif);font-size:13px;color:var(--muted);text-decoration:line-through}
 .prod-footer{padding:9px 12px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .prod-footer-label{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.toggle{position:relative;width:40px;height:24px;cursor:pointer;display:block;flex-shrink:0}
+.toggle{position:relative;width:40px;height:24px;cursor:pointer;display:block}
 .toggle input{opacity:0;width:0;height:0;position:absolute}
 .t-track{position:absolute;inset:0;background:#ddd;border-radius:12px;transition:background .25s}
 .toggle input:checked~.t-track{background:var(--accent)}
-.t-thumb{position:absolute;top:4px;left:4px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .25s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.t-thumb{position:absolute;top:4px;left:4px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .25s}
 .toggle input:checked~.t-thumb{transform:translateX(16px)}
-.add-card{background:var(--surface);border-radius:var(--radius);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:3/4;cursor:pointer;color:var(--muted);transition:all .25s;min-height:200px;-webkit-tap-highlight-color:transparent}
-.add-card:active{border-color:var(--accent);color:var(--accent);background:rgba(200,131,42,.03)}
-.add-card i{font-size:26px}
-.add-card span{font-size:12px;font-weight:500}
+.add-card{background:var(--surface);border-radius:var(--radius);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:3/4;cursor:pointer;color:var(--muted)}
+.add-card:active{border-color:var(--accent);color:var(--accent)}
 .empty{text-align:center;padding:60px 0;color:var(--muted);grid-column:1/-1}
-.empty i{font-size:36px;opacity:.2;margin-bottom:14px;display:block}
 
-/* ── MODAL ── */
-.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:0}
+/* Modales */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .backdrop.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border-radius:16px 16px 0 0;width:100%;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 -4px 40px rgba(0,0,0,.2);transform:translateY(20px);transition:transform .3s var(--ease);padding-bottom:env(safe-area-inset-bottom)}
+.modal{background:var(--surface);border-radius:16px 16px 0 0;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(20px);transition:transform .3s;padding-bottom:env(safe-area-inset-bottom)}
 .backdrop.open .modal{transform:translateY(0)}
 .modal::before{content:'';display:block;width:40px;height:4px;border-radius:2px;background:var(--border);margin:10px auto 0}
 .modal-head{padding:16px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:10;border-bottom:1px solid var(--border);padding-bottom:14px}
 .modal-title{font-family:var(--serif);font-size:22px;font-weight:500}
-.modal-close{background:var(--bg);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:16px;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.modal-close{background:var(--bg);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
 .modal-body{padding:18px 20px}
-.modal-foot{padding:14px 20px;padding-bottom:max(14px,env(safe-area-inset-bottom));display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface);z-index:10}
-.modal-foot .btn{flex:1;justify-content:center}
-.modal-tabs{display:flex;gap:0;padding:0 20px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:73px;z-index:9;overflow-x:auto;scrollbar-width:none}
-.modal-tabs::-webkit-scrollbar{display:none}
-.modal-tab{padding:10px 12px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;min-height:44px;-webkit-tap-highlight-color:transparent}
+.modal-foot{padding:14px 20px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface)}
+.modal-tabs{display:flex;gap:0;padding:0 20px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:73px;z-index:9;overflow-x:auto}
+.modal-tab{padding:10px 12px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .modal-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
-/* ── FORM ── */
+/* Formularios */
 .form-row{margin-bottom:16px}
-.form-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.09em}
-.form-input,.form-select,.form-textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--sans);font-size:16px!important;padding:12px 14px;outline:none;transition:border-color .2s;-webkit-appearance:none}
-.form-textarea{min-height:90px;resize:vertical;font-size:16px!important}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);color:var(--text);padding:12px 14px;outline:none}
+.form-textarea{min-height:90px;resize:vertical}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);background:var(--surface)}
-.form-input::placeholder{color:var(--muted)}
 .form-grid{display:grid;grid-template-columns:1fr;gap:12px}
-.form-hint{font-size:11px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:5px}
+.form-hint{font-size:11px;color:var(--muted);margin-top:5px}
 
-/* SPEC CHIPS */
-.specs-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--bg);min-height:48px;cursor:text;transition:border-color .2s}
-.specs-wrap:focus-within{border-color:var(--accent);background:var(--surface)}
-.spec-chip{display:flex;align-items:center;gap:5px;padding:6px 10px;background:rgba(200,131,42,.12);color:var(--accent);border-radius:20px;font-size:12px;font-weight:500}
-.spec-chip button{background:none;border:none;cursor:pointer;color:inherit;font-size:13px;padding:0;line-height:1;min-width:20px;min-height:20px}
-.spec-input-inner{border:none;outline:none;background:none;font-family:var(--sans);font-size:16px!important;color:var(--text);min-width:120px;flex:1}
-.spec-input-inner::placeholder{color:var(--muted)}
+/* Specs chips */
+.specs-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--bg);min-height:48px}
+.specs-wrap:focus-within{border-color:var(--accent)}
+.spec-chip{display:flex;align-items:center;gap:5px;padding:6px 10px;background:rgba(200,131,42,.12);color:var(--accent);border-radius:20px;font-size:12px}
+.spec-chip button{background:none;border:none;cursor:pointer;color:inherit;font-size:13px}
+.spec-input-inner{border:none;outline:none;background:none;font-family:var(--sans);font-size:16px;color:var(--text);min-width:120px;flex:1}
 
-/* MEDIA SECTION */
-.media-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
-.media-count-info{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.media-add-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.media-add-btn{display:flex;align-items:center;gap:7px;padding:10px 14px;border:1.5px dashed var(--border);background:var(--bg);border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:var(--sans)}
-.media-add-btn:hover,.media-add-btn:active{border-color:var(--accent);color:var(--accent);background:rgba(200,131,42,.05)}
-.media-add-btn i{font-size:15px}
-.media-grid-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:12px;min-height:0}
-.media-thumb{position:relative;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;background:var(--bg);border:1.5px solid var(--border);cursor:grab;transition:border-color .2s,box-shadow .2s}
-.media-thumb:hover{border-color:var(--accent);box-shadow:0 2px 10px rgba(200,131,42,.2)}
-.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.media-thumb .mt-del{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(192,57,43,.85);color:#fff;border:none;cursor:pointer;font-size:11px;display:grid;place-items:center;z-index:5;-webkit-tap-highlight-color:transparent}
-.media-thumb .mt-main{position:absolute;bottom:4px;left:4px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 6px;border-radius:3px}
-.media-thumb .mt-set-main{position:absolute;bottom:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:9px;display:grid;place-items:center;z-index:5}
-.media-thumb .mt-set-main:hover{background:var(--accent)}
-.media-empty-state{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 20px;text-align:center;color:var(--muted);background:var(--bg)}
+/* Media */
+.media-grid-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:12px}
+.media-thumb{position:relative;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;background:var(--bg);border:1.5px solid var(--border);cursor:grab}
+.media-thumb img{width:100%;height:100%;object-fit:cover}
+.media-thumb .mt-del{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(192,57,43,.85);color:#fff;border:none;cursor:pointer;font-size:11px;display:grid;place-items:center}
+.media-thumb .mt-main{position:absolute;bottom:4px;left:4px;font-size:8px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:3px}
+.media-thumb .mt-set-main{position:absolute;bottom:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:9px;display:grid;place-items:center}
+.media-empty-state{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 20px;text-align:center;color:var(--muted)}
+.media-add-bar{display:flex;gap:8px;margin-bottom:12px}
+.media-add-btn{display:flex;align-items:center;gap:7px;padding:10px 14px;border:1.5px dashed var(--border);background:var(--bg);border-radius:var(--radius);cursor:pointer;font-size:13px;color:var(--muted)}
 .url-add-row{display:flex;gap:8px;margin-top:8px}
-.url-add-row .form-input{flex:1}
 
-/* IMAGE UPLOAD ZONES */
-.img-upload-zone{display:block;position:relative;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .2s,background .2s;overflow:hidden;min-height:140px;background:var(--bg);text-align:center}
-.img-upload-zone.has-image{border-style:solid;border-color:var(--accent)}
-.upload-idle{padding:28px 20px;text-align:center;pointer-events:none}
+/* Upload zones */
+.img-upload-zone{display:block;position:relative;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;overflow:hidden;min-height:140px;background:var(--bg);text-align:center}
+.upload-idle{padding:28px 20px}
 .upload-icon{font-size:30px;color:var(--accent);opacity:.55;display:block;margin-bottom:10px}
-.upload-title{font-weight:600;font-size:14px;color:var(--text);margin-bottom:4px}
-.upload-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-.upload-preview{width:100%;position:relative}
-.upload-preview img,.upload-preview video{width:100%;max-height:240px;object-fit:contain;display:block;background:#f2ede6}
-.upload-clear{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;border:none;cursor:pointer;font-size:14px;display:grid;place-items:center;z-index:5}
-.upload-badge{position:absolute;bottom:8px;left:8px;background:var(--green);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.upload-preview{position:relative}
+.upload-preview img,.upload-preview video{width:100%;max-height:240px;object-fit:contain;display:block}
+.upload-clear{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;border:none;cursor:pointer;display:grid;place-items:center}
+.upload-badge{position:absolute;bottom:8px;left:8px;background:var(--green);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px}
 .url-fallback{margin-top:10px}
-.url-fallback summary{cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;padding:6px 0;list-style:none;user-select:none;min-height:36px}
-.url-fallback summary::-webkit-details-marker{display:none}
+.url-fallback summary{cursor:pointer;font-size:12px;color:var(--muted);list-style:none}
 
-/* OFERTAS & COMBOS */
-.offers-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.global-banner-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:20px}
+/* Ofertas y combos */
 .offer-tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.otc{border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.otc{border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 8px;text-align:center;cursor:pointer}
 .otc.sel{border-color:var(--accent);background:rgba(200,131,42,.07)}
-.offers-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.offers-grid{display:grid;gap:12px}
 .offer-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .offer-card.inactive-offer{opacity:.6}
-.offer-type-badge{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.offer-type-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px}
 .ot-pct{background:rgba(192,57,43,.12);color:var(--red)}
 .ot-texto{background:rgba(200,131,42,.12);color:var(--accent)}
 .ot-2x1{background:rgba(45,138,94,.12);color:var(--green)}
 .ot-envio{background:rgba(61,107,206,.12);color:var(--blue)}
-.ot-custom{background:rgba(200,131,42,.08);color:var(--acdk)}
+.ot-custom{background:rgba(200,131,42,.08);color:var(--accent-hover)}
 .status-badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px}
 .sb-active{background:rgba(45,138,94,.1);color:var(--green)}
 .sb-inactive{background:rgba(0,0,0,.06);color:var(--muted)}
 .combo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
-.combo-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.combo-card-head{display:flex;justify-content:space-between;margin-bottom:8px}
 .combo-card-name{font-weight:600;font-size:14px}
 .combo-card-items{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
-.combo-item-tag{font-size:11px;background:rgba(200,131,42,.1);color:var(--accent);padding:4px 10px;border-radius:20px;font-weight:500}
-.combo-card-foot{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border)}
+.combo-item-tag{font-size:11px;background:rgba(200,131,42,.1);color:var(--accent);padding:4px 10px;border-radius:20px}
+.combo-card-foot{display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border)}
 
-/* CONFIG */
-.cfg-grid{display:grid;grid-template-columns:1fr;gap:14px}
+/* Configuración */
+.cfg-grid{display:grid;gap:14px}
 .cfg-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px}
 .cfg-card h3{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:4px}
 .steps{background:var(--bg);border-radius:var(--radius);padding:14px;border:1px solid var(--border);margin-top:10px}
-.gh-ok{background:rgba(45,138,94,.1);color:var(--green);border:1px solid rgba(45,138,94,.2);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:none;margin-top:10px;gap:8px}
-.gh-ok.on{display:flex;align-items:center}
-.gh-err{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:none;margin-top:10px}
+.gh-ok{background:rgba(45,138,94,.1);color:var(--green);border:1px solid rgba(45,138,94,.2);border-radius:var(--radius);padding:10px 14px;display:none;margin-top:10px;gap:8px}
+.gh-ok.on{display:flex}
+.gh-err{background:rgba(192,57,43,.08);color:var(--red);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:10px 14px;display:none;margin-top:10px}
 .gh-err.on{display:block}
-.imgbb-status{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-top:10px;background:rgba(45,138,94,.08);border:1px solid rgba(45,138,94,.2);color:var(--green);display:none}
+.imgbb-status{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius);margin-top:10px;background:rgba(45,138,94,.08);border:1px solid rgba(45,138,94,.2);color:var(--green);display:none}
 .imgbb-status.on{display:flex}
-.imgbb-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:rgba(45,138,94,.15);color:var(--green);border:1px solid rgba(45,138,94,.3)}
+.imgbb-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;padding:2px 8px;border-radius:20px;background:rgba(45,138,94,.15);color:var(--green)}
 
-/* TOAST */
-.toast{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);z-index:999;padding:13px 22px;border-radius:var(--radius);font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;opacity:0;pointer-events:none;transition:all .4s var(--ease);box-shadow:0 4px 20px rgba(0,0,0,.15);white-space:nowrap;max-width:calc(100vw - 32px)}
+/* Toast */
+.toast{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);z-index:999;padding:13px 22px;border-radius:var(--radius);font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;opacity:0;pointer-events:none;transition:all .4s;box-shadow:0 4px 20px rgba(0,0,0,.15);white-space:nowrap;max-width:calc(100vw - 32px)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.t-ok{background:#1a1814;color:#fff}
+.t-ok{background:var(--toast-bg);color:var(--toast-color)}
 .t-ok i{color:var(--gold)}
 .t-err{background:var(--red);color:#fff}
 
 @media(min-width:768px){
-body{font-size:15px}
-.topbar{padding:0 32px;height:68px}
-.topbar-stats{display:flex;gap:18px;margin-right:14px}
-.page{padding:30px 24px}
-.stats-panel{grid-template-columns:repeat(4,1fr);gap:12px}
-.prod-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.cfg-grid{grid-template-columns:1fr 1fr;gap:18px}
-.form-grid{grid-template-columns:1fr 1fr;gap:16px}
-.offers-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-.modal{border-radius:12px;max-width:720px;max-height:90vh;margin:20px auto}
-.backdrop{align-items:center;padding:20px}
-.modal::before{display:none}
-.modal-head{padding:24px 26px 0;padding-bottom:16px}
-.modal-body{padding:22px 26px}
-.modal-foot{padding:16px 26px 24px}
-.modal-foot .btn{flex:none}
-.modal-tabs{padding:0 26px}
-.global-banner-card{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px}
-.global-banner-card>div{flex:1}
-.offer-tipo-grid{grid-template-columns:repeat(6,1fr)}
-.media-grid-wrap{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .topbar-stats{display:flex;gap:18px;margin-right:14px}
+  .page{padding:30px 24px}
+  .stats-panel{grid-template-columns:repeat(4,1fr)}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+  .cfg-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr 1fr}
+  .offers-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .modal{border-radius:12px;max-width:720px;max-height:90vh;margin:20px auto}
+  .backdrop{align-items:center;padding:20px}
+  .modal::before{display:none}
+  .offer-tipo-grid{grid-template-columns:repeat(6,1fr)}
 }
-@media(min-width:1024px){.topbar{padding:0 40px}}
 </style>
 </head>
 <body>
@@ -337,19 +304,18 @@ body{font-size:15px}
       <div class="ts-item"><i class="fas fa-eye"></i> <strong id="ts-active">0</strong>&nbsp;visibles</div>
       <div class="ts-item"><i class="fas fa-tag"></i> <strong id="ts-promo">0</strong>&nbsp;con promo</div>
     </div>
-    <button class="btn btn-sm btn-ghost" onclick="exportJSON()" title="Exportar"><i class="fas fa-download"></i></button>
-    <button class="btn btn-sm btn-primary" onclick="publishToGitHub()" id="btn-publish">
-      <i class="fas fa-cloud-upload-alt"></i> <span class="btn-pub-label">Publicar</span>
-    </button>
-    <span id="json-size-badge" style="font-size:10px;color:var(--muted)"></span>
-    <span class="storage-badge" title="Datos guardados en IndexedDB — permanentes"><i class="fas fa-shield-alt"></i> Permanente</span>
-    <button class="btn btn-sm btn-ghost" onclick="doLogout()" title="Salir" style="padding:8px 10px"><i class="fas fa-sign-out-alt"></i></button>
+    <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" title="Modo oscuro/claro"><i class="fas fa-moon" id="theme-icon"></i></button>
+    <button class="btn btn-sm btn-ghost" onclick="exportJSON()"><i class="fas fa-download"></i></button>
+    <button class="btn btn-sm btn-primary" onclick="publishToGitHub()" id="btn-publish"><i class="fas fa-cloud-upload-alt"></i> Publicar</button>
+    <span id="json-size-badge"></span>
+    <span class="storage-badge"><i class="fas fa-database"></i> Persistente</span>
+    <button class="btn btn-sm btn-ghost" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i></button>
   </div>
 </header>
 
 <div class="page">
   <div class="save-banner" id="save-banner">
-    <div><strong>Cambios sin publicar</strong><small>Guardados en este dispositivo. Tocá "Publicar" para subir al sitio.</small></div>
+    <div><strong>Cambios sin publicar</strong><small>Guardados localmente. Tocá "Publicar" para actualizar el sitio.</small></div>
     <button class="btn btn-sm btn-primary" onclick="publishToGitHub()"><i class="fas fa-cloud-upload-alt"></i> Publicar</button>
   </div>
 
@@ -372,7 +338,8 @@ body{font-size:15px}
     <div class="toolbar">
       <div class="search-box"><i class="fas fa-search"></i><input type="text" id="search-input" placeholder="Buscar producto..." oninput="renderGrid()"></div>
       <div class="cat-tabs" id="cat-tabs"></div>
-      <div class="sort-wrap"><span class="sort-label">Orden:</span>
+      <div class="sort-wrap">
+        <span class="sort-label">Orden:</span>
         <button class="sort-btn active" data-sort="default" onclick="setSort('default',this)">Default</button>
         <button class="sort-btn" data-sort="name" onclick="setSort('name',this)">A–Z</button>
         <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Activos</button>
@@ -384,22 +351,25 @@ body{font-size:15px}
 
   <!-- OFERTAS -->
   <section class="page-section" id="sec-ofertas">
-    <div class="global-banner-card">
-      <div><h4>🔖 Banner global del sitio</h4><p>Barra de promo visible en toda la página</p></div>
-      <div class="global-banner-controls">
-        <div class="global-banner-text-wrap"><input type="text" class="form-input" id="global-promo-text" placeholder="Ej: ¡20% OFF esta semana! Solo por tiempo limitado"></div>
+    <div class="global-banner-card" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:20px">
+      <div><h4 style="font-family:var(--serif);font-size:17px">🔖 Banner global del sitio</h4><p style="font-size:12px;color:var(--muted)">Barra de promo visible en toda la página</p></div>
+      <div class="global-banner-controls" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+        <div style="flex:1"><input type="text" class="form-input" id="global-promo-text" placeholder="Ej: ¡20% OFF esta semana! Solo por tiempo limitado"></div>
         <label class="toggle"><input type="checkbox" id="global-promo-active"><div class="t-track"></div><div class="t-thumb"></div></label>
         <button class="btn btn-sm btn-primary" onclick="saveGlobalPromo()"><i class="fas fa-check"></i> Guardar</button>
       </div>
     </div>
-    <div class="offers-header"><div><h2 style="font-family:var(--serif);font-size:20px;font-weight:500">Ofertas por producto</h2><p style="font-size:12px;color:var(--muted);margin-top:2px">Asigná descuentos y promos individuales</p></div><button class="btn btn-sm btn-primary" onclick="openNewOffer()"><i class="fas fa-plus"></i> Nueva oferta</button></div>
+    <div class="offers-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div><h2 style="font-family:var(--serif);font-size:20px">Ofertas por producto</h2><p style="font-size:12px;color:var(--muted)">Asigná descuentos y promos individuales</p></div>
+      <button class="btn btn-sm btn-primary" onclick="openNewOffer()"><i class="fas fa-plus"></i> Nueva oferta</button>
+    </div>
     <div class="offers-grid" id="offers-grid"></div>
   </section>
 
   <!-- COMBOS -->
   <section class="page-section" id="sec-combos">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:6px">
-      <div><h2 style="font-family:var(--serif);font-size:22px;font-weight:500">Combos & Kits</h2><p style="font-size:12px;color:var(--muted);margin-top:2px">Agrupá productos en sets especiales con precio combo</p></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <div><h2 style="font-family:var(--serif);font-size:22px">Combos & Kits</h2><p style="font-size:12px;color:var(--muted)">Agrupá productos en sets especiales con precio combo</p></div>
       <button class="btn btn-primary" onclick="openNewCombo()"><i class="fas fa-plus"></i> Nuevo combo</button>
     </div>
     <div id="combos-grid" style="display:grid;gap:12px"></div>
@@ -413,7 +383,7 @@ body{font-size:15px}
         <div class="form-row"><label class="form-label">WhatsApp (con código de país)</label><input type="tel" class="form-input" id="cfg-wa" placeholder="5493843458340"></div>
         <div class="form-row"><label class="form-label">Instagram (sin @)</label><input type="text" class="form-input" id="cfg-ig" placeholder="cuchillos.artesanales.24"></div>
         <div class="form-row"><label class="form-label">Facebook</label><input type="text" class="form-input" id="cfg-fb" placeholder="Cuchillos Artesanales"></div>
-        <div class="form-row" style="margin-bottom:0"><label class="form-label">Teléfono visible</label><input type="tel" class="form-input" id="cfg-phone" placeholder="+54 9 3843 458340"></div>
+        <div class="form-row"><label class="form-label">Teléfono visible</label><input type="tel" class="form-input" id="cfg-phone" placeholder="+54 9 3843 458340"></div>
       </div>
       <div class="cfg-card"><h3>🏠 Hero (inicio)</h3><p>Textos de la primera sección del sitio</p>
         <div class="form-row"><label class="form-label">Título</label><input type="text" class="form-input" id="cfg-title" placeholder="Cada filo cuenta una historia."></div>
@@ -421,8 +391,8 @@ body{font-size:15px}
         <div class="form-grid"><div><label class="form-label">Estadística 1</label><input type="text" class="form-input" id="cfg-s1" placeholder="+10"></div><div><label class="form-label">Etiqueta 1</label><input type="text" class="form-input" id="cfg-s1l" placeholder="Años forjando"></div></div>
         <div class="form-row"><label class="form-label">Imagen o video hero</label>
           <label class="img-upload-zone" id="hero-img-zone">
-            <div class="upload-idle" id="hero-upload-idle"><i class="fas fa-cloud-upload-alt upload-icon"></i><p class="upload-title">Tocá para subir</p><p class="upload-sub">JPG, PNG, WEBP, MP4 · máx 10 MB</p><span class="upload-formats">Base64</span></div>
-            <div class="upload-preview" id="hero-upload-preview" style="display:none"><img id="hero-upload-img" src="" alt="" style="display:none"><video id="hero-upload-video" controls style="width:100%;max-height:240px;display:none"></video><button class="upload-clear" onclick="clearHeroImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Cargado</div></div>
+            <div class="upload-idle" id="hero-upload-idle"><i class="fas fa-cloud-upload-alt upload-icon"></i><p class="upload-title">Tocá para subir</p><p class="upload-sub">JPG, PNG, WEBP, MP4 · máx 10 MB</p></div>
+            <div class="upload-preview" id="hero-upload-preview" style="display:none"><img id="hero-upload-img" src="" alt=""><video id="hero-upload-video" controls style="width:100%;max-height:240px;display:none"></video><button class="upload-clear" onclick="clearHeroImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Cargado</div></div>
             <input type="file" id="hero-img-file" accept="image/*,video/*" style="display:none" onchange="onHeroFileChange(this)">
           </label>
           <details class="url-fallback"><summary><i class="fas fa-link"></i> O pegá una URL</summary><input type="url" class="form-input" id="hero-img-url" placeholder="https://..." oninput="onHeroUrlInput(this.value)"></details>
@@ -431,16 +401,16 @@ body{font-size:15px}
       <div class="cfg-card"><h3>👨‍🏭 Foto del artesano</h3><p>Imagen en la sección "Sobre el artesano"</p>
         <label class="img-upload-zone" id="artisan-img-zone">
           <div class="upload-idle" id="artisan-upload-idle"><i class="fas fa-camera upload-icon"></i><p class="upload-title">Tocá para subir foto</p><p class="upload-sub">JPG, PNG, WEBP · máx 10 MB</p></div>
-          <div class="upload-preview" id="artisan-upload-preview" style="display:none"><img id="artisan-upload-img" src="" alt="" style="display:block"><button class="upload-clear" onclick="clearArtisanImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Cargado</div></div>
+          <div class="upload-preview" id="artisan-upload-preview" style="display:none"><img id="artisan-upload-img" src="" alt=""><button class="upload-clear" onclick="clearArtisanImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Cargado</div></div>
           <input type="file" id="artisan-img-file" accept="image/*" style="display:none" onchange="onArtisanFileChange(this)">
         </label>
         <details class="url-fallback"><summary><i class="fas fa-link"></i> O pegá una URL</summary><input type="url" class="form-input" id="artisan-img-url" placeholder="https://..." oninput="onArtisanUrlInput(this.value)"></details>
       </div>
       <div class="cfg-card"><h3>⭐ Reseñas de clientes</h3><p>Testimonios que se muestran en el sitio</p><div style="margin-bottom:14px"><button class="btn btn-sm btn-primary" onclick="openNewReview()"><i class="fas fa-plus"></i> Agregar reseña</button></div><div id="reviews-list" style="display:flex;flex-direction:column;gap:10px"></div></div>
       <div class="cfg-card"><h3>🔐 Cambiar contraseña</h3><p>Actualizá la contraseña del panel</p>
-        <div class="form-row"><label class="form-label">Actual</label><input type="password" class="form-input" id="pwd-cur" placeholder="••••••••" autocomplete="current-password"></div>
-        <div class="form-row"><label class="form-label">Nueva</label><input type="password" class="form-input" id="pwd-new" placeholder="••••••••" autocomplete="new-password"></div>
-        <div class="form-row"><label class="form-label">Confirmar nueva</label><input type="password" class="form-input" id="pwd-cfm" placeholder="••••••••" autocomplete="new-password"></div>
+        <div class="form-row"><label class="form-label">Actual</label><input type="password" class="form-input" id="pwd-cur" placeholder="••••••••"></div>
+        <div class="form-row"><label class="form-label">Nueva</label><input type="password" class="form-input" id="pwd-new" placeholder="••••••••"></div>
+        <div class="form-row"><label class="form-label">Confirmar nueva</label><input type="password" class="form-input" id="pwd-cfm" placeholder="••••••••"></div>
         <button class="btn btn-sm btn-ghost" onclick="changePassword()"><i class="fas fa-key"></i> Cambiar</button>
       </div>
       <div class="cfg-card"><h3>📦 Importar / Exportar</h3><p>Descargá o importá los datos en JSON</p>
@@ -458,218 +428,569 @@ body{font-size:15px}
   <section class="page-section" id="sec-github">
     <div class="cfg-grid">
       <div class="cfg-card"><h3>⚙️ Repositorio GitHub</h3><p>Conectá tu repo para publicar en un clic</p>
-        <div class="form-row"><label class="form-label">Usuario de GitHub</label><input type="text" class="form-input" id="gh-user" placeholder="tu-usuario" autocomplete="off"></div>
-        <div class="form-row"><label class="form-label">Nombre del repositorio</label><input type="text" class="form-input" id="gh-repo" placeholder="gl-cuchillos" autocomplete="off"></div>
-        <div class="form-row"><label class="form-label">Token de acceso (PAT)</label><input type="password" class="form-input" id="gh-token" placeholder="ghp_xxxxxxxxxx" autocomplete="off"><div class="form-hint"><i class="fas fa-lock"></i> Solo en este navegador. Necesita "Contents: Read &amp; Write"</div></div>
-        <div class="form-grid"><div class="form-row" style="margin-bottom:0"><label class="form-label">Branch</label><input type="text" class="form-input" id="gh-branch" value="main"></div><div class="form-row" style="margin-bottom:0"><label class="form-label">Ruta del archivo</label><input type="text" class="form-input" id="gh-path" value="products.json"></div></div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:16px;flex-wrap:wrap"><button class="btn btn-sm btn-primary" onclick="saveGhCfg()"><i class="fas fa-save"></i> Guardar</button><button class="btn btn-sm btn-ghost" onclick="testGh()"><i class="fas fa-plug"></i> Probar</button><div id="gh-status" style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block"></span> No configurado</div></div>
+        <div class="form-row"><label class="form-label">Usuario de GitHub</label><input type="text" class="form-input" id="gh-user" placeholder="tu-usuario"></div>
+        <div class="form-row"><label class="form-label">Nombre del repositorio</label><input type="text" class="form-input" id="gh-repo" placeholder="gl-cuchillos"></div>
+        <div class="form-row"><label class="form-label">Token de acceso (PAT)</label><input type="password" class="form-input" id="gh-token" placeholder="ghp_xxxxxxxxxx"><div class="form-hint"><i class="fas fa-lock"></i> Necesita permisos "Contents: Read & Write"</div></div>
+        <div class="form-grid"><div><label class="form-label">Branch</label><input type="text" class="form-input" id="gh-branch" value="main"></div><div><label class="form-label">Ruta del archivo</label><input type="text" class="form-input" id="gh-path" value="products.json"></div></div>
+        <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn btn-sm btn-primary" onclick="saveGhCfg()"><i class="fas fa-save"></i> Guardar</button><button class="btn btn-sm btn-ghost" onclick="testGh()"><i class="fas fa-plug"></i> Probar</button><div id="gh-status" style="font-size:12px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block"></span> No configurado</div></div>
         <div class="gh-ok" id="gh-ok"><i class="fas fa-check-circle"></i> Conexión exitosa ✓</div><div class="gh-err" id="gh-err"></div>
       </div>
-      <div class="cfg-card"><h3>📚 Cómo configurar GitHub Pages</h3><p>Pasos para que "Publicar" actualice el sitio</p><div class="steps"><ol><li>Creá un repositorio en GitHub (público)</li><li>Subí los archivos: <code>index.html</code>, <code>admin.html</code>, <code>producto.html</code> y <code>products.json</code></li><li>Repo → <strong>Settings → Pages → Source: main</strong></li><li>Creá un token: <strong>Settings → Developer → Fine-grained tokens</strong> → Contents: Read &amp; Write</li><li>Pegá el token acá. El botón <strong>"Publicar"</strong> actualiza el sitio en ~30 seg.</li></ol></div></div>
-      <div class="cfg-card" style="grid-column:1/-1"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h3>🖼️ imgbb — Hosting de imágenes <span class="imgbb-badge" id="imgbb-badge" style="display:none"><i class="fas fa-check"></i> Activo</span></h3><p>Subí imágenes a imgbb — el JSON queda liviano (solo URLs)</p></div><a href="https://api.imgbb.com/" target="_blank" class="btn btn-sm btn-ghost"><i class="fas fa-external-link-alt"></i> Obtener key</a></div>
-        <div style="display:flex;gap:8px;align-items:flex-end;margin-top:12px;flex-wrap:wrap"><div class="form-row" style="margin-bottom:0;flex:1;min-width:200px"><label class="form-label">API Key de imgbb</label><input type="text" class="form-input" id="imgbb-key" placeholder="Pegá tu API key acá" autocomplete="off"></div><div style="display:flex;gap:8px"><button class="btn btn-sm btn-primary" onclick="saveImgbbKey()"><i class="fas fa-save"></i> Guardar</button><button class="btn btn-sm btn-ghost" onclick="testImgbb()"><i class="fas fa-plug"></i> Probar</button></div></div>
-        <div class="imgbb-status on" id="imgbb-ok" style="display:none"><i class="fas fa-check-circle"></i> imgbb configurado — fotos se suben automáticamente</div>
+      <div class="cfg-card"><h3>📚 Cómo configurar GitHub Pages</h3><p>Pasos para que "Publicar" actualice el sitio</p><div class="steps"><ol><li>Creá un repositorio en GitHub (público)</li><li>Subí los archivos: <code>index.html</code>, <code>admin.html</code>, <code>producto.html</code> y <code>products.json</code></li><li>Repo → <strong>Settings → Pages → Source: main</strong></li><li>Creá un token: <strong>Settings → Developer → Fine-grained tokens</strong> → Contents: Read & Write</li><li>Pegá el token acá. El botón <strong>"Publicar"</strong> actualiza el sitio en ~30 seg.</li></ol></div></div>
+      <div class="cfg-card" style="grid-column:1/-1"><div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap"><div><h3>🖼️ imgbb — Hosting de imágenes <span class="imgbb-badge" id="imgbb-badge" style="display:none"><i class="fas fa-check"></i> Activo</span></h3><p>Subí imágenes a imgbb — el JSON queda liviano (solo URLs)</p></div><a href="https://api.imgbb.com/" target="_blank" class="btn btn-sm btn-ghost"><i class="fas fa-external-link-alt"></i> Obtener key</a></div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><div style="flex:1"><label class="form-label">API Key de imgbb</label><input type="text" class="form-input" id="imgbb-key" placeholder="Pegá tu API key acá"></div><div><button class="btn btn-sm btn-primary" onclick="saveImgbbKey()"><i class="fas fa-save"></i> Guardar</button><button class="btn btn-sm btn-ghost" onclick="testImgbb()"><i class="fas fa-plug"></i> Probar</button></div></div>
+        <div class="imgbb-status" id="imgbb-ok"><i class="fas fa-check-circle"></i> imgbb configurado — fotos se suben automáticamente</div>
       </div>
     </div>
   </section>
-</div></div>
+</div>
+</div>
 
 <!-- MODALES -->
-<div class="backdrop" id="mProd"><div class="modal"><div class="modal-head"><h2 class="modal-title" id="modal-prod-title">Nuevo producto</h2><button class="modal-close" onclick="closeModal('mProd')">✕</button></div><div class="modal-tabs"><button class="modal-tab active" onclick="switchModalTab(this,'tab-basic')"><i class="fas fa-info-circle"></i> Básico</button><button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos/Videos</button><button class="modal-tab" onclick="switchModalTab(this,'tab-specs')"><i class="fas fa-list-ul"></i> Detalles</button><button class="modal-tab" onclick="switchModalTab(this,'tab-precio')"><i class="fas fa-dollar-sign"></i> Precio</button><button class="modal-tab" onclick="switchModalTab(this,'tab-cfg')"><i class="fas fa-sliders-h"></i> Config</button></div><div class="modal-body"><input type="hidden" id="edit-id"><div class="tab-panel active" id="tab-basic"><div class="form-row"><label class="form-label">Nombre del producto *</label><input type="text" class="form-input" id="edit-name" placeholder="Ej: Juego Parrillero XL"></div><div class="form-grid"><div class="form-row"><label class="form-label">Categoría *</label><input type="text" class="form-input" id="edit-cat" placeholder="Ej: Parrilla & Asado" list="cat-dl"><datalist id="cat-dl"></datalist></div><div class="form-row"><label class="form-label">Estado / Badge</label><select class="form-select" id="edit-badge"><option value="avail">Disponible</option><option value="custom">A pedido</option><option value="intl">Exportación</option><option value="unavail">No disponible</option></select></div></div><div class="form-row"><label class="form-label">Texto del badge</label><input type="text" class="form-input" id="edit-badge-txt" placeholder="Ej: Disponible"></div><div class="form-row"><label class="form-label">Descripción</label><textarea class="form-textarea" id="edit-desc" placeholder="Descripción del producto..."></textarea></div></div><div class="tab-panel" id="tab-fotos"><div class="media-section-header"><div><div style="font-size:13px;font-weight:600;margin-bottom:2px">Galería del producto</div><div class="media-count-info"><i class="fas fa-images"></i> <span id="media-count-label">0 archivos</span> · La primera foto es la imagen principal</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="btn btn-sm btn-ghost" onclick="sortMediaByType()" title="Ordenar: fotos primero"><i class="fas fa-sort"></i> Ordenar</button><button type="button" class="btn btn-sm btn-danger" onclick="clearAllMedia()" title="Eliminar todas las fotos"><i class="fas fa-trash"></i> Limpiar todo</button></div></div><div id="media-grid" class="media-grid-wrap"></div><div id="media-empty-state" class="media-empty-state" style="display:none"><i class="fas fa-images"></i><p>Sin fotos ni videos aún</p><small>Usá los botones de abajo para agregar</small></div><div class="media-add-bar"><button type="button" class="media-add-btn" onclick="document.getElementById('img-file-photos').click()"><i class="fas fa-camera" style="color:var(--accent)"></i> Agregar fotos</button><button type="button" class="media-add-btn" onclick="document.getElementById('img-file-video').click()"><i class="fas fa-video" style="color:var(--blue)"></i> Agregar video</button><button type="button" class="media-add-btn" onclick="toggleUrlPanel()"><i class="fas fa-link" style="color:var(--muted)"></i> Pegar URL</button></div><input type="file" id="img-file-photos" accept="image/*" multiple style="display:none" onchange="onFileChange(this)"><input type="file" id="img-file-video" accept="video/*" multiple style="display:none" onchange="onFileChange(this)"><div id="url-panel" style="display:none;margin-top:4px;padding:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius)"><div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Pegar URL de imagen o video</div><div class="url-add-row"><input type="url" class="form-input" id="edit-img-url" placeholder="https://imagen.com/foto.jpg o https://video.mp4"><button type="button" class="btn btn-primary btn-sm" onclick="addMediaUrl()"><i class="fas fa-plus"></i> Agregar</button></div><div class="form-hint" style="margin-top:8px"><i class="fas fa-info-circle"></i> Soporta JPG, PNG, WEBP, MP4, WEBM. Si tenés imgbb configurado, las fotos se suben automáticamente.</div></div><div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px"><i class="fas fa-arrows-alt"></i> Arrastrá las miniaturas para reordenar · <i class="fas fa-flag"></i> 🇦🇷 aparece en todas las cards</div></div><div class="tab-panel" id="tab-specs"><div class="form-row"><label class="form-label">Especificaciones <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">(Enter para agregar)</small></label><div class="specs-wrap" id="specs-wrap" onclick="document.getElementById('spec-input-inner').focus()"><input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="Ej: Acero 1075 · Enter" onkeydown="handleSpecKey(event)"></div></div><div class="form-row" style="margin-bottom:0"><label class="form-label">Nota de promo en este producto</label><input type="text" class="form-input" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!"></div></div><div class="tab-panel" id="tab-precio"><div class="form-grid"><div class="form-row"><label class="form-label">Precio (texto)</label><input type="text" class="form-input" id="edit-price" placeholder="Ej: $85.000"></div><div class="form-row"><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="edit-price-orig" placeholder="Ej: $100.000"></div></div><div class="form-row"><label class="form-label">Nota de precio</label><input type="text" class="form-input" id="edit-price-note" placeholder="Ej: Envío incluido · Personalizable"></div><div class="form-row" style="margin-bottom:0"><label class="form-label">Stock disponible</label><input type="number" class="form-input" id="edit-stock" placeholder="0 = sin stock" min="0"></div></div><div class="tab-panel" id="tab-cfg"><div style="display:flex;flex-direction:column;gap:12px"><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Visible en el sitio</div><div style="font-size:12px;color:var(--muted)">Activá para que aparezca en la tienda</div></div><label class="toggle"><input type="checkbox" id="edit-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">⭐ Producto destacado</div><div style="font-size:12px;color:var(--muted)">Aparece primero y con estrella</div></div><label class="toggle"><input type="checkbox" id="edit-featured"><div class="t-track"></div><div class="t-thumb"></div></label></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">🇦🇷 Mostrar banderita</div><div style="font-size:12px;color:var(--muted)">Activa por defecto en todos los productos</div></div><label class="toggle"><input type="checkbox" id="edit-show-flag" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mProd')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del" onclick="openConfirmDel()" style="display:none"><i class="fas fa-trash"></i> Eliminar</button><button class="btn btn-primary" onclick="saveProduct()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
+<div class="backdrop" id="mProd"><div class="modal"><div class="modal-head"><h2 class="modal-title" id="modal-prod-title">Nuevo producto</h2><button class="modal-close" onclick="closeModal('mProd')">✕</button></div><div class="modal-tabs"><button class="modal-tab active" onclick="switchModalTab(this,'tab-basic')"><i class="fas fa-info-circle"></i> Básico</button><button class="modal-tab" onclick="switchModalTab(this,'tab-fotos')"><i class="fas fa-images"></i> Fotos/Videos</button><button class="modal-tab" onclick="switchModalTab(this,'tab-specs')"><i class="fas fa-list-ul"></i> Detalles</button><button class="modal-tab" onclick="switchModalTab(this,'tab-precio')"><i class="fas fa-dollar-sign"></i> Precio</button><button class="modal-tab" onclick="switchModalTab(this,'tab-cfg')"><i class="fas fa-sliders-h"></i> Config</button></div><div class="modal-body"><input type="hidden" id="edit-id"><div class="tab-panel active" id="tab-basic"><div class="form-row"><label class="form-label">Nombre del producto *</label><input type="text" class="form-input" id="edit-name" placeholder="Ej: Juego Parrillero XL"></div><div class="form-grid"><div><label class="form-label">Categoría *</label><input type="text" class="form-input" id="edit-cat" placeholder="Ej: Parrilla & Asado" list="cat-dl"><datalist id="cat-dl"></datalist></div><div><label class="form-label">Estado / Badge</label><select class="form-select" id="edit-badge"><option value="avail">Disponible</option><option value="custom">A pedido</option><option value="intl">Exportación</option><option value="unavail">No disponible</option></select></div></div><div class="form-row"><label class="form-label">Texto del badge</label><input type="text" class="form-input" id="edit-badge-txt" placeholder="Ej: Disponible"></div><div class="form-row"><label class="form-label">Descripción</label><textarea class="form-textarea" id="edit-desc" placeholder="Descripción del producto..."></textarea></div></div><div class="tab-panel" id="tab-fotos"><div class="media-section-header"><div><div style="font-size:13px;font-weight:600">Galería del producto</div><div class="media-count-info"><i class="fas fa-images"></i> <span id="media-count-label">0 archivos</span> · La primera foto es la imagen principal</div></div><div><button type="button" class="btn btn-sm btn-ghost" onclick="sortMediaByType()"><i class="fas fa-sort"></i> Ordenar</button><button type="button" class="btn btn-sm btn-danger" onclick="clearAllMedia()"><i class="fas fa-trash"></i> Limpiar todo</button></div></div><div id="media-grid" class="media-grid-wrap"></div><div id="media-empty-state" class="media-empty-state" style="display:none"><i class="fas fa-images"></i><p>Sin fotos ni videos aún</p><small>Usá los botones de abajo para agregar</small></div><div class="media-add-bar"><button type="button" class="media-add-btn" onclick="document.getElementById('img-file-photos').click()"><i class="fas fa-camera"></i> Agregar fotos</button><button type="button" class="media-add-btn" onclick="document.getElementById('img-file-video').click()"><i class="fas fa-video"></i> Agregar video</button><button type="button" class="media-add-btn" onclick="toggleUrlPanel()"><i class="fas fa-link"></i> Pegar URL</button></div><input type="file" id="img-file-photos" accept="image/*" multiple style="display:none" onchange="onFileChange(this)"><input type="file" id="img-file-video" accept="video/*" multiple style="display:none" onchange="onFileChange(this)"><div id="url-panel" style="display:none;margin-top:4px;padding:12px;background:var(--bg);border-radius:var(--radius)"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Pegar URL de imagen o video</div><div class="url-add-row"><input type="url" class="form-input" id="edit-img-url" placeholder="https://..."><button type="button" class="btn btn-primary btn-sm" onclick="addMediaUrl()">Agregar</button></div><div class="form-hint"><i class="fas fa-info-circle"></i> Soporta JPG, PNG, WEBP, MP4, WEBM.</div></div><div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted)"><i class="fas fa-arrows-alt"></i> Arrastrá las miniaturas para reordenar</div></div><div class="tab-panel" id="tab-specs"><div class="form-row"><label class="form-label">Especificaciones <small>(Enter para agregar)</small></label><div class="specs-wrap" id="specs-wrap"><input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="Ej: Acero 1075 · Enter" onkeydown="handleSpecKey(event)"></div></div><div class="form-row"><label class="form-label">Nota de promo en este producto</label><input type="text" class="form-input" id="edit-promo" placeholder="Ej: ¡20% OFF esta semana!"></div></div><div class="tab-panel" id="tab-precio"><div class="form-grid"><div><label class="form-label">Precio (texto)</label><input type="text" class="form-input" id="edit-price" placeholder="Ej: $85.000"></div><div><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="edit-price-orig" placeholder="Ej: $100.000"></div></div><div class="form-row"><label class="form-label">Nota de precio</label><input type="text" class="form-input" id="edit-price-note" placeholder="Ej: Envío incluido · Personalizable"></div><div class="form-row"><label class="form-label">Stock disponible</label><input type="number" class="form-input" id="edit-stock" placeholder="0 = sin stock" min="0"></div></div><div class="tab-panel" id="tab-cfg"><div style="display:flex;flex-direction:column;gap:12px"><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;justify-content:space-between"><div><div style="font-weight:500">Visible en el sitio</div><div style="font-size:12px;color:var(--muted)">Activá para que aparezca en la tienda</div></div><label class="toggle"><input type="checkbox" id="edit-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;justify-content:space-between"><div><div style="font-weight:500">⭐ Producto destacado</div><div style="font-size:12px;color:var(--muted)">Aparece primero y con estrella</div></div><label class="toggle"><input type="checkbox" id="edit-featured"><div class="t-track"></div><div class="t-thumb"></div></label></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;justify-content:space-between"><div><div style="font-weight:500">🇦🇷 Mostrar banderita</div><div style="font-size:12px;color:var(--muted)">Activa por defecto en todos los productos</div></div><label class="toggle"><input type="checkbox" id="edit-show-flag" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mProd')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del" onclick="openConfirmDel()" style="display:none"><i class="fas fa-trash"></i> Eliminar</button><button class="btn btn-primary" onclick="saveProduct()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
 
-<div class="backdrop" id="mOffer"><div class="modal" style="max-width:560px"><div class="modal-head"><h2 class="modal-title" id="modal-offer-title">Nueva oferta</h2><button class="modal-close" onclick="closeModal('mOffer')">✕</button></div><div class="modal-body"><input type="hidden" id="offer-id"><div class="form-row"><label class="form-label">Tipo de oferta</label><div class="offer-tipo-grid"><div class="otc sel" data-tipo="texto" onclick="selOfferTipo('texto')"><div class="otc-icon">💬</div><div class="otc-label">Texto</div></div><div class="otc" data-tipo="pct" onclick="selOfferTipo('pct')"><div class="otc-icon">%</div><div class="otc-label">Descuento</div></div><div class="otc" data-tipo="2x1" onclick="selOfferTipo('2x1')"><div class="otc-icon">2️⃣</div><div class="otc-label">2×1</div></div><div class="otc" data-tipo="envio" onclick="selOfferTipo('envio')"><div class="otc-icon">🚚</div><div class="otc-label">Envío gratis</div></div><div class="otc" data-tipo="temporada" onclick="selOfferTipo('temporada')"><div class="otc-icon">🌟</div><div class="otc-label">Temporada</div></div><div class="otc" data-tipo="custom" onclick="selOfferTipo('custom')"><div class="otc-icon">✏️</div><div class="otc-label">Personalizado</div></div></div></div><div class="form-row" id="offer-producto-row"><label class="form-label">Producto (opcional — vacío = aplica a todos)</label><select class="form-select" id="offer-producto"><option value="">Todos los productos</option></select></div><div id="offer-pct-row" class="form-row" style="display:none"><label class="form-label">Porcentaje de descuento (%)</label><input type="number" class="form-input" id="offer-pct-val" placeholder="20" min="1" max="99"></div><div class="form-row"><label class="form-label">Texto del badge *</label><input type="text" class="form-input" id="offer-text" placeholder="Ej: ¡20% OFF esta semana!"></div><div class="form-grid"><div class="form-row"><label class="form-label">Precio oferta</label><input type="text" class="form-input" id="offer-price" placeholder="Ej: $68.000"></div><div class="form-row"><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="offer-price-orig" placeholder="Ej: $85.000"></div></div><div class="form-row"><label class="form-label">Descripción (opcional)</label><input type="text" class="form-input" id="offer-desc" placeholder="Ej: Solo por tiempo limitado"></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:13px;font-weight:500">Oferta activa</div><div style="font-size:11px;color:var(--muted)">Se muestra en el catálogo</div></div><label class="toggle"><input type="checkbox" id="offer-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mOffer')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del-offer" onclick="deleteOffer()" style="display:none"><i class="fas fa-trash"></i></button><button class="btn btn-primary" onclick="saveOffer()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
+<div class="backdrop" id="mOffer"><div class="modal" style="max-width:560px"><div class="modal-head"><h2 class="modal-title" id="modal-offer-title">Nueva oferta</h2><button class="modal-close" onclick="closeModal('mOffer')">✕</button></div><div class="modal-body"><input type="hidden" id="offer-id"><div class="form-row"><label class="form-label">Tipo de oferta</label><div class="offer-tipo-grid"><div class="otc sel" data-tipo="texto" onclick="selOfferTipo('texto')"><div class="otc-icon">💬</div><div class="otc-label">Texto</div></div><div class="otc" data-tipo="pct" onclick="selOfferTipo('pct')"><div class="otc-icon">%</div><div class="otc-label">Descuento</div></div><div class="otc" data-tipo="2x1" onclick="selOfferTipo('2x1')"><div class="otc-icon">2️⃣</div><div class="otc-label">2×1</div></div><div class="otc" data-tipo="envio" onclick="selOfferTipo('envio')"><div class="otc-icon">🚚</div><div class="otc-label">Envío gratis</div></div><div class="otc" data-tipo="temporada" onclick="selOfferTipo('temporada')"><div class="otc-icon">🌟</div><div class="otc-label">Temporada</div></div><div class="otc" data-tipo="custom" onclick="selOfferTipo('custom')"><div class="otc-icon">✏️</div><div class="otc-label">Personalizado</div></div></div></div><div class="form-row"><label class="form-label">Producto (opcional — vacío = aplica a todos)</label><select class="form-select" id="offer-producto"><option value="">Todos los productos</option></select></div><div id="offer-pct-row" class="form-row" style="display:none"><label class="form-label">Porcentaje de descuento (%)</label><input type="number" class="form-input" id="offer-pct-val" placeholder="20" min="1" max="99"></div><div class="form-row"><label class="form-label">Texto del badge *</label><input type="text" class="form-input" id="offer-text" placeholder="Ej: ¡20% OFF esta semana!"></div><div class="form-grid"><div><label class="form-label">Precio oferta</label><input type="text" class="form-input" id="offer-price" placeholder="Ej: $68.000"></div><div><label class="form-label">Precio original (tachado)</label><input type="text" class="form-input" id="offer-price-orig" placeholder="Ej: $85.000"></div></div><div class="form-row"><label class="form-label">Descripción (opcional)</label><input type="text" class="form-input" id="offer-desc" placeholder="Ej: Solo por tiempo limitado"></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between"><div><div style="font-weight:500">Oferta activa</div><div style="font-size:11px;color:var(--muted)">Se muestra en el catálogo</div></div><label class="toggle"><input type="checkbox" id="offer-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mOffer')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del-offer" onclick="deleteOffer()" style="display:none"><i class="fas fa-trash"></i></button><button class="btn btn-primary" onclick="saveOffer()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
 
-<div class="backdrop" id="mCombo"><div class="modal" style="max-width:600px"><div class="modal-head"><h2 class="modal-title" id="modal-combo-title">Nuevo combo</h2><button class="modal-close" onclick="closeModal('mCombo')">✕</button></div><div class="modal-body"><input type="hidden" id="combo-id"><div class="form-row"><label class="form-label">Nombre del combo *</label><input type="text" class="form-input" id="combo-name" placeholder="Ej: Kit Asador Completo"></div><div class="form-row"><label class="form-label">Descripción</label><input type="text" class="form-input" id="combo-desc" placeholder="Ej: Todo lo que necesitás para el asado perfecto"></div><div class="form-row"><label class="form-label">Productos incluidos *</label><div id="combo-productos-checks" style="display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--bg)"></div><div class="form-hint"><i class="fas fa-info-circle"></i> Seleccioná los productos que forman parte del combo</div></div><div class="form-grid"><div class="form-row"><label class="form-label">Precio combo *</label><input type="text" class="form-input" id="combo-price" placeholder="Ej: $150.000"></div><div class="form-row"><label class="form-label">Ahorro (texto)</label><input type="text" class="form-input" id="combo-savings" placeholder="Ej: Ahorrás $35.000"></div></div><div class="form-row"><label class="form-label">Badge del combo</label><input type="text" class="form-input" id="combo-badge" placeholder="Ej: 🎀 Kit especial" value="🎀 COMBO"></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px"><div><div style="font-size:13px;font-weight:500">Combo activo</div><div style="font-size:11px;color:var(--muted)">Se muestra en el catálogo</div></div><label class="toggle"><input type="checkbox" id="combo-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mCombo')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del-combo" onclick="deleteCombo()" style="display:none"><i class="fas fa-trash"></i></button><button class="btn btn-primary" onclick="saveCombo()"><i class="fas fa-check"></i> Guardar combo</button></div></div></div>
+<div class="backdrop" id="mCombo"><div class="modal" style="max-width:600px"><div class="modal-head"><h2 class="modal-title" id="modal-combo-title">Nuevo combo</h2><button class="modal-close" onclick="closeModal('mCombo')">✕</button></div><div class="modal-body"><input type="hidden" id="combo-id"><div class="form-row"><label class="form-label">Nombre del combo *</label><input type="text" class="form-input" id="combo-name" placeholder="Ej: Kit Asador Completo"></div><div class="form-row"><label class="form-label">Descripción</label><input type="text" class="form-input" id="combo-desc" placeholder="Ej: Todo lo que necesitás para el asado perfecto"></div><div class="form-row"><label class="form-label">Productos incluidos *</label><div id="combo-productos-checks" style="display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--bg)"></div><div class="form-hint"><i class="fas fa-info-circle"></i> Seleccioná los productos que forman parte del combo</div></div><div class="form-grid"><div><label class="form-label">Precio combo *</label><input type="text" class="form-input" id="combo-price" placeholder="Ej: $150.000"></div><div><label class="form-label">Ahorro (texto)</label><input type="text" class="form-input" id="combo-savings" placeholder="Ej: Ahorrás $35.000"></div></div><div class="form-row"><label class="form-label">Badge del combo</label><input type="text" class="form-input" id="combo-badge" placeholder="Ej: 🎀 Kit especial" value="🎀 COMBO"></div><div style="border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between"><div><div style="font-weight:500">Combo activo</div><div style="font-size:11px;color:var(--muted)">Se muestra en el catálogo</div></div><label class="toggle"><input type="checkbox" id="combo-active" checked><div class="t-track"></div><div class="t-thumb"></div></label></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mCombo')">Cancelar</button><button class="btn btn-danger btn-sm" id="btn-del-combo" onclick="deleteCombo()" style="display:none"><i class="fas fa-trash"></i></button><button class="btn btn-primary" onclick="saveCombo()"><i class="fas fa-check"></i> Guardar combo</button></div></div></div>
 
-<div class="backdrop" id="mConfirm"><div class="modal" style="max-width:400px"><div class="modal-head"><h2 class="modal-title">¿Eliminar producto?</h2><button class="modal-close" onclick="closeModal('mConfirm')">✕</button></div><div class="modal-body"><p style="color:var(--muted);font-size:14px;line-height:1.7">No se puede deshacer. ¿Eliminás <strong id="del-prod-name" style="color:var(--accent)"></strong>?</p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mConfirm')">Cancelar</button><button class="btn btn-danger" onclick="doDelete()"><i class="fas fa-trash"></i> Sí, eliminar</button></div></div></div>
+<div class="backdrop" id="mConfirm"><div class="modal" style="max-width:400px"><div class="modal-head"><h2 class="modal-title">¿Eliminar producto?</h2><button class="modal-close" onclick="closeModal('mConfirm')">✕</button></div><div class="modal-body"><p style="color:var(--muted);font-size:14px">No se puede deshacer. ¿Eliminás <strong id="del-prod-name" style="color:var(--accent)"></strong>?</p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mConfirm')">Cancelar</button><button class="btn btn-danger" onclick="doDelete()"><i class="fas fa-trash"></i> Sí, eliminar</button></div></div></div>
 
-<div class="backdrop" id="mReview"><div class="modal" style="max-width:500px"><div class="modal-head"><h2 class="modal-title" id="modal-review-title">Nueva reseña</h2><button class="modal-close" onclick="closeModal('mReview')">✕</button></div><div class="modal-body"><input type="hidden" id="review-id"><div class="form-row"><label class="form-label">Nombre del cliente *</label><input type="text" class="form-input" id="review-name" placeholder="Ej: Juan Pérez"></div><div class="form-row"><label class="form-label">Ciudad / País</label><input type="text" class="form-input" id="review-loc" placeholder="Ej: Tucumán, Argentina"></div><div class="form-row"><label class="form-label">Calificación *</label><select class="form-select" id="review-rating"><option value="5">★★★★★ (5)</option><option value="4">★★★★☆ (4)</option><option value="3">★★★☆☆ (3)</option><option value="2">★★☆☆☆ (2)</option><option value="1">★☆☆☆☆ (1)</option></select></div><div class="form-row"><label class="form-label">Texto de la reseña *</label><textarea class="form-textarea" id="review-text" rows="4" placeholder="Excelente calidad..."></textarea></div><div class="form-row"><label class="form-label">Foto del cliente (opcional)</label><label class="img-upload-zone" id="review-img-zone"><div class="upload-idle" id="review-upload-idle"><i class="fas fa-camera upload-icon"></i><p class="upload-title">Tocá para subir</p></div><div class="upload-preview" id="review-upload-preview" style="display:none"><img id="review-upload-img" src="" alt="" style="display:block"><button class="upload-clear" onclick="clearReviewImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div></div><input type="file" id="review-img-file" accept="image/*" style="display:none" onchange="onReviewFileChange(this)"></label><details class="url-fallback"><summary><i class="fas fa-link"></i> O pegá una URL</summary><input type="url" class="form-input" id="review-img-url" placeholder="https://..." oninput="onReviewUrlInput(this.value)"></details></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mReview')">Cancelar</button><button class="btn btn-primary" onclick="saveReview()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
+<div class="backdrop" id="mReview"><div class="modal" style="max-width:500px"><div class="modal-head"><h2 class="modal-title" id="modal-review-title">Nueva reseña</h2><button class="modal-close" onclick="closeModal('mReview')">✕</button></div><div class="modal-body"><input type="hidden" id="review-id"><div class="form-row"><label class="form-label">Nombre del cliente *</label><input type="text" class="form-input" id="review-name" placeholder="Ej: Juan Pérez"></div><div class="form-row"><label class="form-label">Ciudad / País</label><input type="text" class="form-input" id="review-loc" placeholder="Ej: Tucumán, Argentina"></div><div class="form-row"><label class="form-label">Calificación *</label><select class="form-select" id="review-rating"><option value="5">★★★★★ (5)</option><option value="4">★★★★☆ (4)</option><option value="3">★★★☆☆ (3)</option><option value="2">★★☆☆☆ (2)</option><option value="1">★☆☆☆☆ (1)</option></select></div><div class="form-row"><label class="form-label">Texto de la reseña *</label><textarea class="form-textarea" id="review-text" rows="4" placeholder="Excelente calidad..."></textarea></div><div class="form-row"><label class="form-label">Foto del cliente (opcional)</label><label class="img-upload-zone" id="review-img-zone"><div class="upload-idle" id="review-upload-idle"><i class="fas fa-camera upload-icon"></i><p class="upload-title">Tocá para subir</p></div><div class="upload-preview" id="review-upload-preview" style="display:none"><img id="review-upload-img" src="" alt=""><button class="upload-clear" onclick="clearReviewImg(event)">×</button><div class="upload-badge"><i class="fas fa-check"></i> Foto cargada</div></div><input type="file" id="review-img-file" accept="image/*" style="display:none" onchange="onReviewFileChange(this)"></label><details class="url-fallback"><summary><i class="fas fa-link"></i> O pegá una URL</summary><input type="url" class="form-input" id="review-img-url" placeholder="https://..." oninput="onReviewUrlInput(this.value)"></details></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('mReview')">Cancelar</button><button class="btn btn-primary" onclick="saveReview()"><i class="fas fa-check"></i> Guardar</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ========== INITIAL DATA (mismo que antes, se mantiene) ========== */
-const INITIAL_DATA = {"settings":{"whatsapp":"5493843458340","instagram":"cuchillos.artesanales.24","facebook":"Cuchillos Artesanales","artisanPhoto":"","globalPromo":false,"globalPromoBanner":"","reviews":[]},"products":[
-  // Se incluyen todos los productos del JSON original pero para no exceder el límite de caracteres se mantiene la estructura completa.
-  // En el archivo final debe ir el array completo de productos (el mismo que en products.json). Por brevedad se omite aquí, pero en la implementación real se copia el contenido de INITIAL_DATA desde el código anterior.
-]}; // En la versión final se debe incluir el array completo de productos, igual que en el código original.
+// ==================== DATOS INICIALES COMPLETOS (incluye todos los productos del JSON) ====================
+const INITIAL_DATA = {
+  "settings": { "whatsapp": "5493843458340", "instagram": "cuchillos.artesanales.24", "facebook": "Cuchillos Artesanales", "artisanPhoto": "", "globalPromo": false, "globalPromoBanner": "", "reviews": [] },
+  "products": [
+    {"id":"760","name":"Jamonero Nº760","category":"Parrilla & Asado","description":"Jamonero con hoja vaciado plano. Mango en Nogal Italiano...","specs":["Acero P498V","Nogal florado","22 cm hoja","33 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"769","name":"Mini Cleaver Nº769","category":"Cocina Profesional","description":"Mini cuchillo tipo cleaver de precisión...","specs":["Acero P498V","Petiribi","12 cm hoja","24 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"762","name":"Fighter Nº762","category":"Caza & Campo","description":"Cuchillo tipo fighter de alto rendimiento...","specs":["Acero Inox 420U","Micarta","17.5 cm hoja","31 cm total","58 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"797","name":"Verijero M Nº797 — Grabado WD","category":"Diseño Exclusivo","description":"Verijero mediano con grabado personalizado...","specs":["Acero Inox P498V","Nogal","18.5 cm hoja","29.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Grabado incluido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"800","name":"Capador Nº800","category":"Caza & Campo","description":"Capador compacto y robusto...","specs":["Acero Inox 420","Purpleheart+Petiribi","8 cm hoja","16.5 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"804","name":"Cleaver M Nº804","category":"Cocina Profesional","description":"Cleaver mediano con mango en Nogal...","specs":["Acero Inox 420","Nogal","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"799","name":"Capador Nº799","category":"Caza & Campo","description":"Capador con empuñadura bicolor...","specs":["Acero Inox P498V","Amaranto+Petiribi","8 cm hoja","16.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"803","name":"Cleaver M Nº803 — Incienso","category":"Cocina Profesional","description":"Cleaver mediano con empuñadura en madera de Incienso...","specs":["Acero Inox 420","Incienso","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"802","name":"Cleaver M Nº802 — Haya","category":"Cocina Profesional","description":"Cleaver mediano con empuñadura en Haya europea...","specs":["Acero Inox 420","Haya","12 cm hoja","24 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"801","name":"Fileteador Nº801","category":"Cocina Profesional","description":"Fileteador con hoja flexible y precisa...","specs":["Acero Inox 420","Fierroliso+Fenólico","15 cm hoja","27 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina de baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"813","name":"Parrillero S Nº813","category":"Parrilla & Asado","description":"Parrillero chico con vaciado plano y sangría...","specs":["Acero P498V","Purpleheart","21 cm hoja","33 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina sobre marcos · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"806","name":"Capador Nº806 — Micarta Naranja","category":"Caza & Campo","description":"Capador con llamativa empuñadura en Micarta color naranja...","specs":["Acero INOX 420","Micarta naranja","9 cm hoja","17 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"811","name":"Verijero S Nº811 — Nogal Premium","category":"Caza & Campo","description":"Verijero chico con sangría y vaciado plano...","specs":["Acero INOX 420","Nogal Premium","16 cm hoja","26 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"808","name":"Capador Nº808 — Baquelita+Pau Ferro","category":"Caza & Campo","description":"Capador compacto con empuñadura en Baquelita y Pau Ferro...","specs":["Acero INOX 420","Baquelita+Pau Ferro","9 cm hoja","17 cm total","57 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"818","name":"Parrillero M Nº818","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado plano sangrinado y file work...","specs":["Acero Inox P498V","Guayaba","21 cm hoja","34.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"816","name":"Fileteador Nº816 — Olivo","category":"Cocina Profesional","description":"Fileteador con hoja sangrinada y file work...","specs":["Acero Inox 420N","Olivo","17.5 cm hoja","27 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina marrón · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"817","name":"Verijero S Nº817 — Haya Europea","category":"Caza & Campo","description":"Verijero chico con sangría y file work...","specs":["Acero Inox 420N","Haya Europea","15.5 cm hoja","26 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"815","name":"Cleaver M Nº815 — Chacaranda","category":"Cocina Profesional","description":"Cleaver mediano con vaciado plano sangrinado y file work...","specs":["Acero Inox 420N","Chacaranda flameado","12.5 cm hoja","23.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"819","name":"Verijero M Nº819 — Guayubira Exótica","category":"Caza & Campo","description":"Verijero mediano con sangría y file work...","specs":["Acero Inox P498V","Guayubira Exótica","18 cm hoja","28.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"826","name":"Nakiri / Achuela Nº826","category":"Cocina Profesional","description":"Nakiri forjado en acero carbono 5160 con vaciado cóncavo...","specs":["Acero 5160 Carbono","Pau Petro+Burl Algarrobo","16 cm hoja","30 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina roja · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"821","name":"Verijero M Nº821 — Guayubira Seleccionada","category":"Caza & Campo","description":"Verijero mediano con sangría y file work...","specs":["Acero Inox 420N","Guayubira Seleccionada","18 cm hoja","28.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"823","name":"Verijero S Nº823 — Roble Americano","category":"Caza & Campo","description":"Verijero chico con sangría y file work...","specs":["Acero Inox 420N","Roble Americano","15.5 cm hoja","26 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"820","name":"Verijero M Nº820 — Pau Ferro","category":"Caza & Campo","description":"Verijero mediano fosfatizado y sangrinado con file work...","specs":["Acero Inox 420N","Pau Ferro","19 cm hoja","28.5 cm total","59 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"822","name":"Parrillero XL Nº822","category":"Parrilla & Asado","description":"Parrillero XL con hoja larga y sangría...","specs":["Acero Inox P498V","Palma Negra","25 cm hoja","37.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"828","name":"Verijero S Nº828 — Full Tang","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con vaciado plano sangrinado...","specs":["Acero Inox P498V","Pau Ferro+Guayubira+Haya","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"829","name":"Verijero S Nº829 — Nogal+Purpleheart","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con empuñadura en Nogal y Purpleheart...","specs":["Acero Inox P498V","Nogal+Purpleheart","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"830","name":"Verijero S Nº830 — Micarta Marfil","category":"Diseño Exclusivo","description":"Verijero chico Full Tang con empuñadura en Micarta Marfil...","specs":["Acero Inox P498V","Micarta Marfil","15.5 cm hoja","26.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"834","name":"Mini Táctico Nº834","category":"Diseño Exclusivo","description":"Mini cuchillo táctico Full Tang con vaciado plano pulido...","specs":["Acero Inox P498V","Roble Americano","11 cm hoja","20.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"833","name":"Verijero M Nº833 — Incienso Jaspeado","category":"Caza & Campo","description":"Verijero mediano Full Tang con sangría y file work...","specs":["Acero Inox P498V","Incienso Jaspeado","18.5 cm hoja","29.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"831","name":"Verijero M Nº831 — Caoba Africana","category":"Diseño Exclusivo","description":"Verijero mediano Full Tang con sangría y file work...","specs":["Acero Inox P498V","Caoba Africana","13.5 cm hoja","29.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"827","name":"Tipo Tanto Nº827","category":"Diseño Exclusivo","description":"Cuchillo tipo Tanto con punta cuadrada característica...","specs":["Acero Inox P498V","Pau Ferro+Guayubira","16.5 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · Full Tang · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"844","name":"Set Fileteador + Tenedor Nº844","category":"Parrilla & Asado","description":"Set parrillero completo: fileteador y tenedor a juego...","specs":["Acero S160 Carbono","Purpleheart flameado","15 cm hoja","27 cm total","63 HRc"],"badge":"avail","badgeText":"Set completo","price":"Consultar","priceNote":"Set cuchillo + tenedor · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"845","name":"Parrillero M Nº845 — Burl Olivo","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado plano sangrinado...","specs":["Acero Inox P498V","Burl Olivo","23 cm hoja","35 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"856","name":"Parrillero XL Nº856 — Burl de Lenga","category":"Parrilla & Asado","description":"El parrillero más imponente...","specs":["Acero Inox 420N","Burl de Lenga","26 cm hoja","38 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"855","name":"Capador Nº855 — Jazzanda Violeta","category":"Caza & Campo","description":"Capador compacto con vaciado cóncavo y file work...","specs":["Acero Inox 420N","Jazzanda Violeta","8 cm hoja","16.5 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"852","name":"Fileteador Nº852 — Laurel Flameado","category":"Cocina Profesional","description":"Fileteador con vaciado cóncavo, sangría...","specs":["Acero Inox P498V","Laurel Flameado","16 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"853","name":"Fileteador Nº853 — Lapacho","category":"Cocina Profesional","description":"Fileteador con vaciado cóncavo, sangría y muesca española...","specs":["Acero Inox P498V","Lapacho","16 cm hoja","27 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"862","name":"Todo Terreno Nº862","category":"Caza & Campo","description":"Cuchillo todo terreno en acero carbono fosfatizado...","specs":["Acero S160 Carbono","Guayubira Exótica","23 cm hoja","38 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Cuero crudo cosido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"860","name":"Achuela Nº860","category":"Cocina Profesional","description":"Achuela (Nakiri-machete) en acero carbono fosfatizado...","specs":["Acero S160 Carbono","Louro Fain","22 cm hoja","34 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Cuero crudo cosido · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"881","name":"Verijero M Nº881 — Olivo Premium","category":"Diseño Exclusivo","description":"Verijero mediano en acero carbono fosfatizado con espiga oculta...","specs":["Acero S160 Carbono","Olivo Premium","18 cm hoja","31 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$90.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"855b","name":"Parrillero M Nº855 — Caoba Africana","category":"Parrilla & Asado","description":"Parrillero mediano con vaciado cóncavo, sangría...","specs":["Acero Inox 420N","Caoba Africana","23 cm hoja","26 cm total","60 HRc"],"badge":"avail","badgeText":"Disponible","price":"$140.000","priceNote":"Baqueta cosida · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"882","name":"Verijero M Nº882 — Guambira Exótica","category":"Diseño Exclusivo","description":"Verijero mediano en carbono con espiga oculta...","specs":["Acero S160 Carbono","Guambira Exótica","18 cm hoja","31 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$90.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"859","name":"Criollo Nº859 — Wengue","category":"Tradición Gaucha","description":"Cuchillo Criollo con hoja larga en acero carbono fosfatizado...","specs":["Acero S160 Carbono","Wengue","21 cm hoja","39.5 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Cuero crudo · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"878","name":"Verijero M Nº878 — Ébano+Violeta","category":"Diseño Exclusivo","description":"Verijero mediano en carbono fosfatizado con guard de acero...","specs":["Acero S160 Carbono","Ébano+Violeta","19 cm hoja","31.5 cm total","63 HRc"],"badge":"avail","badgeText":"Disponible","price":"$110.000","priceNote":"Vaina baqueta · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"833b","name":"Chopper Nº833 — Burl Olivo","category":"Diseño Exclusivo","description":"Chopper en acero carbono con doble vaciado cóncavo...","specs":["Acero S160 Carbono","Burl Olivo","26.5 cm hoja","41.5 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Con vaina · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"894","name":"Nakiri Nº894","category":"Cocina Profesional","description":"Nakiri artesanal con vaciado cóncavo sangrinado...","specs":["Acero Inox P498V","Algarrobo+Guayubira","18 cm hoja","31 cm total","61 HRc"],"badge":"avail","badgeText":"Disponible","price":"Consultar","priceNote":"Vaina negra · 🇦🇷","active":true,"stock":1,"image":"","media":[]},
+    {"id":"891","name":"Capador Nº891 — Algarrobo","category":"Caza & Campo","description":"Capador con vaciado cóncavo, file work...","specs":["Acero INOX 420N","Algarrobo","9.5 cm hoja","16 cm total","59 HRc"],"badge":"custom","badgeText":"A pedido","price":"Consultar","priceNote":"Encargo · 4–6 semanas · 🇦🇷","active":true,"stock":0,"image":"","media":[]}
+  ],
+  "offers": [],
+  "combos": []
+};
 
-/* ========== ESTADO ========== */
-const DEFAULT_PWD = 'glcuchillos2024';
+// ==================== PERSISTENCIA CON INDEXEDDB ====================
+let db = null;
 let data = { settings: { reviews: [] }, products: [], offers: [], combos: [] };
-let editingId = null, currentSort = 'default', currentCat = 'all', currentSpecs = [], currentMedia = [], offerTipo = 'texto', editingOfferId = null, editingComboId = null, editingReviewId = null;
+let editingId = null, currentSort = 'default', currentCat = 'all', currentSpecs = [], currentMedia = [];
+let offerTipo = 'texto', editingOfferId = null, editingComboId = null, editingReviewId = null;
 let toastTimer, urlPanelOpen = false;
-let _db = null;
 
-/* ========== AYUDA PERSISTENCIA ========== */
-async function openDB() { if (_db) return _db; return new Promise((res,rej)=>{ const req = indexedDB.open('gl_cuchillos',1); req.onupgradeneeded=e=>{ if(!e.target.result.objectStoreNames.contains('admin_data')) e.target.result.createObjectStore('admin_data',{keyPath:'id'}); }; req.onsuccess=e=>{ _db=e.target.result; res(_db); }; req.onerror=rej; }); }
-async function idbGet(key) { const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction('admin_data','readonly').objectStore('admin_data').get(key); r.onsuccess=e=>res(e.target.result?.value??null); r.onerror=rej; }); }
-async function idbSet(key,value) { const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction('admin_data','readwrite').objectStore('admin_data').put({id:key,value}); r.onsuccess=res; r.onerror=rej; }); }
-async function idbClear() { const db=await openDB(); return new Promise((res,rej)=>{ const tx=db.transaction('admin_data','readwrite'); tx.objectStore('admin_data').clear(); tx.oncomplete=res; tx.onerror=rej; }); }
-
-async function persist(mark=true) {
-  if (!data.offers) data.offers = [];
-  if (!data.combos) data.combos = [];
-  try { await idbSet('data', data); updateStorageInfo(); if (mark) document.getElementById('save-banner').classList.add('show'); } catch(e) { toast('Error guardando: '+e.message,'err'); }
+function openDB() {
+  return new Promise((resolve, reject) => {
+    if (db) return resolve(db);
+    const request = indexedDB.open('gl_cuchillos', 2);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => { db = request.result; resolve(db); };
+    request.onupgradeneeded = (e) => {
+      const dbUp = e.target.result;
+      if (!dbUp.objectStoreNames.contains('admin_data')) {
+        dbUp.createObjectStore('admin_data', { keyPath: 'id' });
+      }
+    };
+  });
 }
 
-function updateStorageInfo() {
-  const el = document.getElementById('json-size-badge'); if (!el) return;
-  const kb = Math.round(new Blob([JSON.stringify(data)]).size / 1024);
-  el.innerHTML = `<span style="color:${kb>4000?'var(--red)':'var(--muted)'}"><i class="fas fa-database" style="font-size:10px"></i> ${kb<1024?kb+' KB':(kb/1024).toFixed(1)+' MB'} · ${data.products.length} prod${kb>4000?' ⚠️':''}</span>`;
+async function persistData() {
+  try {
+    const dbConn = await openDB();
+    const tx = dbConn.transaction('admin_data', 'readwrite');
+    const store = tx.objectStore('admin_data');
+    store.put({ id: 'data', value: data });
+    await tx.complete;
+    updateStorageInfo();
+    const lastPub = localStorage.getItem('gl_last_publish');
+    if (!lastPub || Date.now() - parseInt(lastPub) > 5000) {
+      document.getElementById('save-banner').classList.add('show');
+    }
+  } catch (err) {
+    console.error(err);
+    toast('Error guardando localmente', 'err');
+  }
 }
 
 async function loadData() {
-  try { const saved = await idbGet('data'); if (saved) { data = saved; if (!data.settings) data.settings = {}; if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; updateStorageInfo(); fillSettings(); renderAll(); return; } } catch(e) {}
+  try {
+    const dbConn = await openDB();
+    const tx = dbConn.transaction('admin_data', 'readonly');
+    const store = tx.objectStore('admin_data');
+    const result = await new Promise((resolve) => {
+      const req = store.get('data');
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => resolve(null);
+    });
+    if (result && result.value) {
+      data = result.value;
+      if (!data.settings) data.settings = {};
+      if (!data.settings.reviews) data.settings.reviews = [];
+      if (!data.offers) data.offers = [];
+      if (!data.combos) data.combos = [];
+      return;
+    }
+  } catch (e) {}
   const cached = localStorage.getItem('gl_data');
-  if (cached) { try { data = JSON.parse(cached); if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; await persist(false); localStorage.removeItem('gl_data'); fillSettings(); renderAll(); return; } catch(e) {} }
+  if (cached) {
+    try {
+      data = JSON.parse(cached);
+      if (!data.settings.reviews) data.settings.reviews = [];
+      if (!data.offers) data.offers = [];
+      if (!data.combos) data.combos = [];
+      await persistData();
+      localStorage.removeItem('gl_data');
+      return;
+    } catch (e) {}
+  }
   data = JSON.parse(JSON.stringify(INITIAL_DATA));
-  await persist(false);
-  fillSettings();
-  renderAll();
+  if (!data.settings.reviews) data.settings.reviews = [];
+  if (!data.offers) data.offers = [];
+  if (!data.combos) data.combos = [];
+  await persistData();
 }
 
-async function resetData() { if (!confirm('¿Borrar TODOS los datos del admin? No se puede deshacer.')) return; await idbClear(); localStorage.removeItem('gl_data'); localStorage.removeItem('gl_snap'); location.reload(); }
+async function persist(markChanges = true) {
+  await persistData();
+  if (markChanges) document.getElementById('save-banner').classList.add('show');
+  renderAll();
+  fillSettings();
+}
 
-/* ========== RENDER PRINCIPAL ========== */
-function showSection(sec) { document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active')); document.querySelectorAll('.page-nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.sec===sec)); document.getElementById('sec-'+sec).classList.add('active'); if(sec==='ofertas') renderOffersGrid(); if(sec==='combos') renderCombosGrid(); if(sec==='configuracion') fillSettings(); }
+function updateStorageInfo() {
+  const el = document.getElementById('json-size-badge');
+  if (!el) return;
+  const kb = Math.round(new Blob([JSON.stringify(data)]).size / 1024);
+  el.innerHTML = `<span style="color:${kb > 4000 ? 'var(--red)' : 'var(--muted)'}"><i class="fas fa-database"></i> ${kb < 1024 ? kb + ' KB' : (kb / 1024).toFixed(1) + ' MB'} · ${data.products.length} prod</span>`;
+}
+
+async function resetData() {
+  if (!confirm('⚠️ ¿Borrar TODOS los datos? Esta acción es irreversible.')) return;
+  const dbConn = await openDB();
+  const tx = dbConn.transaction('admin_data', 'readwrite');
+  tx.objectStore('admin_data').clear();
+  await tx.complete;
+  localStorage.removeItem('gl_data');
+  localStorage.removeItem('gl_last_publish');
+  location.reload();
+}
+
+// ==================== TEMA OSCURO ====================
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('gl_theme', theme);
+  const icon = document.getElementById('theme-icon');
+  if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  setTheme(current === 'light' ? 'dark' : 'light');
+}
+function loadTheme() {
+  const saved = localStorage.getItem('gl_theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(saved || (prefersDark ? 'dark' : 'light'));
+}
+
+// ==================== GITHUB PUBLICACIÓN ====================
+async function publishToGitHub() {
+  const cfg = JSON.parse(localStorage.getItem('gl_gh') || '{}');
+  if (!cfg.user || !cfg.repo || !cfg.token) {
+    toast('Configurá GitHub en la pestaña correspondiente', 'err');
+    return;
+  }
+  const jsonStr = JSON.stringify(data, null, 2);
+  const sizeMB = new Blob([jsonStr]).size / (1024 * 1024);
+  if (sizeMB > 0.9 && !confirm(`El archivo pesa ${sizeMB.toFixed(1)} MB. ¿Publicar igual?`)) return;
+
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publicando...';
+  try {
+    const getUrl = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.path}`;
+    let sha = null;
+    const getRes = await fetch(getUrl, {
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+    } else if (getRes.status !== 404) {
+      throw new Error(`Error al consultar archivo: ${getRes.status}`);
+    }
+    const content = btoa(unescape(encodeURIComponent(jsonStr)));
+    const body = {
+      message: `Actualización desde admin: ${new Date().toLocaleString('es-AR')}`,
+      content,
+      branch: cfg.branch || 'main'
+    };
+    if (sha) body.sha = sha;
+    const putRes = await fetch(getUrl, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${cfg.token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!putRes.ok) {
+      const errData = await putRes.json().catch(() => ({}));
+      throw new Error(errData.message || `Error ${putRes.status}`);
+    }
+    localStorage.setItem('gl_last_publish', Date.now().toString());
+    document.getElementById('save-banner').classList.remove('show');
+    toast('✅ Publicado correctamente. Los cambios se verán en la tienda en breve.', 'ok');
+    const statusDiv = document.getElementById('gh-status');
+    if (statusDiv) statusDiv.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span> Última publicación: ${new Date().toLocaleTimeString()}`;
+  } catch (err) {
+    console.error(err);
+    toast('Error al publicar: ' + err.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Publicar';
+  }
+}
+
+// ==================== FUNCIONES AUXILIARES ====================
+function showSection(sec) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.sec === sec));
+  document.getElementById('sec-' + sec).classList.add('active');
+  if (sec === 'ofertas') renderOffersGrid();
+  if (sec === 'combos') renderCombosGrid();
+  if (sec === 'configuracion') fillSettings();
+}
+
 function renderAll() { updateStats(); renderCatTabs(); renderGrid(); updateTopbar(); }
-function updateStats() { const p=data.products; document.getElementById('stat-total').textContent=p.length; document.getElementById('stat-active').textContent=p.filter(x=>x.active).length; document.getElementById('stat-promo').textContent=p.filter(x=>x.promo).length; document.getElementById('stat-imgs').textContent=p.filter(x=>x.image&&x.image.trim()).length; }
-function updateTopbar() { const p=data.products; document.getElementById('ts-total').textContent=p.length; document.getElementById('ts-active').textContent=p.filter(x=>x.active).length; document.getElementById('ts-promo').textContent=p.filter(x=>x.promo).length; }
-function renderCatTabs() { const cats=['all',...new Set(data.products.map(p=>p.category).filter(Boolean))]; document.getElementById('cat-tabs').innerHTML=cats.map(c=>`<div class="cat-tab${c===currentCat?' active':''}" onclick="setCat('${c}')">${c==='all'?'Todos':c}</div>`).join(''); const dl=document.getElementById('cat-dl'); if(dl) dl.innerHTML=cats.filter(c=>c!=='all').map(c=>`<option value="${c}">`).join(''); }
-function setCat(c) { currentCat=c; renderCatTabs(); renderGrid(); }
-function setSort(s,btn) { currentSort=s; document.querySelectorAll('.sort-btn').forEach(b=>b.classList.toggle('active',b.dataset.sort===s)); renderGrid(); }
+function updateStats() {
+  const p = data.products;
+  document.getElementById('stat-total').textContent = p.length;
+  document.getElementById('stat-active').textContent = p.filter(x => x.active).length;
+  document.getElementById('stat-promo').textContent = p.filter(x => x.promo).length;
+  document.getElementById('stat-imgs').textContent = p.filter(x => x.image && x.image.trim()).length;
+}
+function updateTopbar() {
+  const p = data.products;
+  document.getElementById('ts-total').textContent = p.length;
+  document.getElementById('ts-active').textContent = p.filter(x => x.active).length;
+  document.getElementById('ts-promo').textContent = p.filter(x => x.promo).length;
+}
+function renderCatTabs() {
+  const cats = ['all', ...new Set(data.products.map(p => p.category).filter(Boolean))];
+  document.getElementById('cat-tabs').innerHTML = cats.map(c => `<div class="cat-tab${c === currentCat ? ' active' : ''}" onclick="setCat('${c}')">${c === 'all' ? 'Todos' : c}</div>`).join('');
+  const dl = document.getElementById('cat-dl');
+  if (dl) dl.innerHTML = cats.filter(c => c !== 'all').map(c => `<option value="${c}">`).join('');
+}
+function setCat(c) { currentCat = c; renderCatTabs(); renderGrid(); }
+function setSort(s, btn) { currentSort = s; document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === s)); renderGrid(); }
 
-function getFiltered() { let p=[...data.products]; const q=document.getElementById('search-input')?.value?.toLowerCase()||''; if(q) p=p.filter(x=>(x.name+x.category+(x.description||'')).toLowerCase().includes(q)); if(currentCat!=='all') p=p.filter(x=>x.category===currentCat); if(currentSort==='name') p.sort((a,b)=>a.name.localeCompare(b.name)); else if(currentSort==='active') p.sort((a,b)=>b.active-a.active); else if(currentSort==='featured') p.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0)); else p.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0)); return p; }
+function getFiltered() {
+  let p = [...data.products];
+  const q = document.getElementById('search-input')?.value?.toLowerCase() || '';
+  if (q) p = p.filter(x => (x.name + x.category + (x.description || '')).toLowerCase().includes(q));
+  if (currentCat !== 'all') p = p.filter(x => x.category === currentCat);
+  if (currentSort === 'name') p.sort((a, b) => a.name.localeCompare(b.name));
+  else if (currentSort === 'active') p.sort((a, b) => b.active - a.active);
+  else if (currentSort === 'featured') p.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  else p.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  return p;
+}
 
 function renderGrid() {
-  const prods=getFiltered(), grid=document.getElementById('prod-grid'); if(!grid) return;
-  const badgeClass={avail:'b-avail',custom:'b-custom',intl:'b-intl',unavail:'b-unavail'};
-  const comboProductIds=new Set((data.combos||[]).filter(c=>c.active).flatMap(c=>c.items||[]));
-  grid.innerHTML=prods.map(p=>{
-    const isVideo=p.image&&(p.image.endsWith('.webm')||p.image.endsWith('.mp4')||p.image.includes('data:video'));
-    const showFlag=p.showFlag!==false, inCombo=comboProductIds.has(p.id);
-    const offer=(data.offers||[]).find(o=>o.active&&(o.productId===p.id||!o.productId));
-    const mediaCount=p.media?p.media.length:(p.image?1:0);
-    return `<div class="prod-card${p.active?'':' inactive'}"><div class="prod-img">${p.image?(isVideo?`<div style="display:flex;align-items:center;justify-content:height:100%;background:#f2ede6;width:100%;align-items:center;justify-content:center;"><i class="fas fa-video" style="font-size:28px;color:var(--accent);opacity:.7"></i></div>`:`<img src="${p.image}" alt="${p.name}" loading="lazy">`):`<div class="no-img-ph"><i class="fas fa-drafting-compass"></i><span>${p.name.slice(0,12)}</span></div>`}
-      <div class="cat-badge ${badgeClass[p.badge]||'b-avail'}">${p.badgeText||p.badge}</div>
-      ${(p.promo||offer)?`<div class="promo-badge">${p.promo||(offer?offer.text:'')}</div>`:''}
-      ${p.featured?`<div class="featured-star">★</div>`:''}
-      ${inCombo?`<div class="combo-badge"><i class="fas fa-gift"></i> COMBO</div>`:''}
-      ${mediaCount>1?`<div class="photo-count-badge"><i class="fas fa-images"></i> ${mediaCount}</div>`:''}
-      ${showFlag?`<div class="ar-flag" title="Hecho en Argentina">🇦🇷</div>`:''}
-      <div class="prod-overlay"><button class="ov-btn" onclick="openEdit('${p.id}')" title="Editar"><i class="fas fa-pen"></i></button><button class="ov-btn" onclick="openEditPhotos('${p.id}')" title="Fotos/Videos" style="background:rgba(200,131,42,.15);color:var(--accent)"><i class="fas fa-images"></i></button><button class="ov-btn dup" onclick="dupProduct('${p.id}')" title="Duplicar"><i class="fas fa-copy"></i></button><button class="ov-btn del" onclick="triggerDelete('${p.id}')" title="Eliminar"><i class="fas fa-trash"></i></button></div>
-    </div><div class="prod-info"><div class="prod-cat-label">${p.category||'—'}</div><div class="prod-name">${p.name}</div><div class="prod-price-row"><span class="price-main">${p.price||'Consultar'}</span>${p.priceOrig?`<span class="price-original">${p.priceOrig}</span>`:''}</div>${p.stock!==undefined&&p.stock!==''?`<div style="font-size:10px;margin-top:3px;color:${p.stock>0?'var(--green)':'var(--red)'}"><i class="fas fa-circle" style="font-size:7px"></i> ${p.stock>0?'Stock: '+p.stock:'Sin stock'}</div>`:''}</div><div class="prod-footer"><span class="prod-footer-label">${p.active?'<i class="fas fa-eye" style="color:var(--green);font-size:11px"></i> Visible':'<i class="fas fa-eye-slash" style="color:var(--muted);font-size:11px"></i> Oculto'}</span><label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="quickToggle('${p.id}',this)"><div class="t-track"></div><div class="t-thumb"></div></label></div></div>`;
-  }).join('')+`<div class="add-card" onclick="openNew()"><i class="fas fa-plus"></i><span>Nuevo producto</span></div>`;
-  if(!prods.length) grid.innerHTML=`<div class="empty"><i class="fas fa-box-open"></i><p>No hay productos en esta categoría</p></div><div class="add-card" onclick="openNew()"><i class="fas fa-plus"></i><span>Nuevo producto</span></div>`;
+  const prods = getFiltered(), grid = document.getElementById('prod-grid');
+  if (!grid) return;
+  const badgeClass = { avail: 'b-avail', custom: 'b-custom', intl: 'b-intl', unavail: 'b-unavail' };
+  const comboProductIds = new Set((data.combos || []).filter(c => c.active).flatMap(c => c.items || []));
+  grid.innerHTML = prods.map(p => {
+    const isVideo = p.image && (p.image.endsWith('.webm') || p.image.endsWith('.mp4') || p.image.includes('data:video'));
+    const showFlag = p.showFlag !== false;
+    const inCombo = comboProductIds.has(p.id);
+    const offer = (data.offers || []).find(o => o.active && (o.productId === p.id || !o.productId));
+    const mediaCount = p.media ? p.media.length : (p.image ? 1 : 0);
+    return `<div class="prod-card${p.active ? '' : ' inactive'}">
+      <div class="prod-img">
+        ${p.image ? (isVideo ? `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f2ede6"><i class="fas fa-video" style="font-size:28px;color:var(--accent)"></i></div>` : `<img src="${p.image}" alt="${p.name}" loading="lazy">`) : `<div class="no-img-ph"><i class="fas fa-drafting-compass"></i><span>${p.name.slice(0, 12)}</span></div>`}
+        <div class="cat-badge ${badgeClass[p.badge] || 'b-avail'}">${p.badgeText || p.badge}</div>
+        ${(p.promo || offer) ? `<div class="promo-badge">${p.promo || (offer ? offer.text : '')}</div>` : ''}
+        ${p.featured ? `<div class="featured-star">★</div>` : ''}
+        ${inCombo ? `<div class="combo-badge"><i class="fas fa-gift"></i> COMBO</div>` : ''}
+        ${mediaCount > 1 ? `<div class="photo-count-badge"><i class="fas fa-images"></i> ${mediaCount}</div>` : ''}
+        ${showFlag ? `<div class="ar-flag" title="Hecho en Argentina">🇦🇷</div>` : ''}
+        <div class="prod-overlay">
+          <button class="ov-btn" onclick="openEdit('${p.id}')" title="Editar"><i class="fas fa-pen"></i></button>
+          <button class="ov-btn" onclick="openEditPhotos('${p.id}')" title="Fotos/Videos"><i class="fas fa-images"></i></button>
+          <button class="ov-btn dup" onclick="dupProduct('${p.id}')" title="Duplicar"><i class="fas fa-copy"></i></button>
+          <button class="ov-btn del" onclick="triggerDelete('${p.id}')" title="Eliminar"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat-label">${p.category || '—'}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-price-row"><span class="price-main">${p.price || 'Consultar'}</span>${p.priceOrig ? `<span class="price-original">${p.priceOrig}</span>` : ''}</div>
+        ${p.stock !== undefined && p.stock !== '' ? `<div style="font-size:10px;margin-top:3px;color:${p.stock > 0 ? 'var(--green)' : 'var(--red)'}"><i class="fas fa-circle" style="font-size:7px"></i> ${p.stock > 0 ? 'Stock: ' + p.stock : 'Sin stock'}</div>` : ''}
+      </div>
+      <div class="prod-footer">
+        <span class="prod-footer-label">${p.active ? '<i class="fas fa-eye" style="color:var(--green)"></i> Visible' : '<i class="fas fa-eye-slash"></i> Oculto'}</span>
+        <label class="toggle"><input type="checkbox" ${p.active ? 'checked' : ''} onchange="quickToggle('${p.id}',this)"><div class="t-track"></div><div class="t-thumb"></div></label>
+      </div>
+    </div>`;
+  }).join('') + `<div class="add-card" onclick="openNew()"><i class="fas fa-plus"></i><span>Nuevo producto</span></div>`;
+  if (!prods.length) grid.innerHTML = `<div class="empty"><i class="fas fa-box-open"></i><p>No hay productos en esta categoría</p></div><div class="add-card" onclick="openNew()"><i class="fas fa-plus"></i><span>Nuevo producto</span></div>`;
   updateStats();
 }
 
-/* ========== CRUD PRODUCTOS (solo las funciones esenciales, todas iguales al original pero con persistencia asegurada) ========== */
-function openNew() { editingId=null; document.getElementById('modal-prod-title').textContent='Nuevo producto'; document.getElementById('btn-del').style.display='none'; clearProdForm(); switchModalTab(document.querySelector('#mProd .modal-tab'),'tab-basic'); openModal('mProd'); }
-function openEdit(id) { editingId=id; const p=data.products.find(x=>x.id===id); if(!p) return; document.getElementById('modal-prod-title').textContent='Editar · '+p.name; document.getElementById('btn-del').style.display='inline-flex'; fillProdForm(p); switchModalTab(document.querySelector('#mProd .modal-tab'),'tab-basic'); openModal('mProd'); }
-function openEditPhotos(id) { editingId=id; const p=data.products.find(x=>x.id===id); if(!p) return; document.getElementById('modal-prod-title').textContent='Fotos · '+p.name; document.getElementById('btn-del').style.display='inline-flex'; fillProdForm(p); switchModalTab(document.querySelectorAll('#mProd .modal-tab')[1],'tab-fotos'); openModal('mProd'); }
-function clearProdForm() { ['edit-id','edit-name','edit-cat','edit-desc','edit-badge-txt','edit-price','edit-price-orig','edit-price-note','edit-promo','edit-img-url','edit-stock'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';}); document.getElementById('edit-badge').value='avail'; document.getElementById('edit-active').checked=true; document.getElementById('edit-featured').checked=false; document.getElementById('edit-show-flag').checked=true; currentSpecs=[]; renderSpecs(); currentMedia=[]; renderMediaGrid(); urlPanelOpen=false; const up=document.getElementById('url-panel'); if(up) up.style.display='none'; }
-function fillProdForm(p) { document.getElementById('edit-id').value=p.id; document.getElementById('edit-name').value=p.name||''; document.getElementById('edit-cat').value=p.category||''; document.getElementById('edit-desc').value=p.description||''; document.getElementById('edit-badge').value=p.badge||'avail'; document.getElementById('edit-badge-txt').value=p.badgeText||''; document.getElementById('edit-price').value=p.price||''; document.getElementById('edit-price-orig').value=p.priceOrig||''; document.getElementById('edit-price-note').value=p.priceNote||''; document.getElementById('edit-promo').value=p.promo||''; document.getElementById('edit-active').checked=!!p.active; document.getElementById('edit-featured').checked=!!p.featured; document.getElementById('edit-show-flag').checked=p.showFlag!==false; document.getElementById('edit-stock').value=p.stock!==undefined?p.stock:''; currentSpecs=[...(p.specs||[])]; renderSpecs(); currentMedia=[]; if(p.media&&p.media.length) currentMedia=p.media.map(m=>typeof m==='string'?{src:m,type:m.includes('data:video')||m.endsWith('.mp4')||m.endsWith('.webm')?'video/mp4':'image/jpeg'}:m); else if(p.image) currentMedia=[{src:p.image,type:p.image.includes('data:video')||p.image.endsWith('.mp4')||p.image.endsWith('.webm')?'video/mp4':'image/jpeg'}]; renderMediaGrid(); urlPanelOpen=false; const up=document.getElementById('url-panel'); if(up) up.style.display='none'; }
-function saveProduct() { const name=document.getElementById('edit-name').value.trim(); if(!name){toast('El nombre es obligatorio','err'); return;} const image=currentMedia.length?currentMedia[0].src:''; const prod={id:editingId||'p'+Date.now(),name,category:document.getElementById('edit-cat').value.trim(),description:document.getElementById('edit-desc').value.trim(),specs:[...currentSpecs],badge:document.getElementById('edit-badge').value,badgeText:document.getElementById('edit-badge-txt').value.trim(),price:document.getElementById('edit-price').value.trim(),priceOrig:document.getElementById('edit-price-orig').value.trim(),priceNote:document.getElementById('edit-price-note').value.trim(),promo:document.getElementById('edit-promo').value.trim()||(editingId?(data.products.find(x=>x.id===editingId)?.promo||''):''),active:document.getElementById('edit-active').checked,featured:document.getElementById('edit-featured').checked,showFlag:document.getElementById('edit-show-flag').checked,stock:document.getElementById('edit-stock').value!==''?parseInt(document.getElementById('edit-stock').value):undefined,image,media:[...currentMedia]}; if(editingId){const i=data.products.findIndex(x=>x.id===editingId); if(i>=0) data.products[i]=prod;} else data.products.push(prod); persist(); renderAll(); renderCatTabs(); closeModal('mProd'); toast(editingId?'Producto actualizado ✓':'Producto creado ✓'); editingId=null; }
-function quickToggle(id,cb) { const p=data.products.find(x=>x.id===id); if(p){p.active=cb.checked; persist(); renderAll();} }
-function triggerDelete(id) { editingId=id; openConfirmDel(); }
-function openConfirmDel() { const p=data.products.find(x=>x.id===editingId); if(p) document.getElementById('del-prod-name').textContent=p.name; openModal('mConfirm'); }
-function doDelete() { data.products=data.products.filter(x=>x.id!==editingId); persist(); renderAll(); renderCatTabs(); closeModal('mConfirm'); closeModal('mProd'); toast('Producto eliminado'); editingId=null; }
-function dupProduct(id) { const p=data.products.find(x=>x.id===id); if(!p) return; data.products.push({...p,id:'p'+Date.now(),name:p.name+' (copia)',active:false,featured:false}); persist(); renderAll(); toast('Producto duplicado'); }
+// CRUD productos
+function openNew() { editingId = null; document.getElementById('modal-prod-title').textContent = 'Nuevo producto'; document.getElementById('btn-del').style.display = 'none'; clearProdForm(); switchModalTab(document.querySelector('#mProd .modal-tab'), 'tab-basic'); openModal('mProd'); }
+function openEdit(id) { editingId = id; const p = data.products.find(x => x.id === id); if (!p) return; document.getElementById('modal-prod-title').textContent = 'Editar · ' + p.name; document.getElementById('btn-del').style.display = 'inline-flex'; fillProdForm(p); switchModalTab(document.querySelector('#mProd .modal-tab'), 'tab-basic'); openModal('mProd'); }
+function openEditPhotos(id) { editingId = id; const p = data.products.find(x => x.id === id); if (!p) return; document.getElementById('modal-prod-title').textContent = 'Fotos · ' + p.name; document.getElementById('btn-del').style.display = 'inline-flex'; fillProdForm(p); switchModalTab(document.querySelectorAll('#mProd .modal-tab')[1], 'tab-fotos'); openModal('mProd'); }
+function clearProdForm() {
+  ['edit-id', 'edit-name', 'edit-cat', 'edit-desc', 'edit-badge-txt', 'edit-price', 'edit-price-orig', 'edit-price-note', 'edit-promo', 'edit-img-url', 'edit-stock'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('edit-badge').value = 'avail';
+  document.getElementById('edit-active').checked = true;
+  document.getElementById('edit-featured').checked = false;
+  document.getElementById('edit-show-flag').checked = true;
+  currentSpecs = []; renderSpecs(); currentMedia = []; renderMediaGrid();
+  urlPanelOpen = false; const up = document.getElementById('url-panel'); if (up) up.style.display = 'none';
+}
+function fillProdForm(p) {
+  document.getElementById('edit-id').value = p.id;
+  document.getElementById('edit-name').value = p.name || '';
+  document.getElementById('edit-cat').value = p.category || '';
+  document.getElementById('edit-desc').value = p.description || '';
+  document.getElementById('edit-badge').value = p.badge || 'avail';
+  document.getElementById('edit-badge-txt').value = p.badgeText || '';
+  document.getElementById('edit-price').value = p.price || '';
+  document.getElementById('edit-price-orig').value = p.priceOrig || '';
+  document.getElementById('edit-price-note').value = p.priceNote || '';
+  document.getElementById('edit-promo').value = p.promo || '';
+  document.getElementById('edit-active').checked = !!p.active;
+  document.getElementById('edit-featured').checked = !!p.featured;
+  document.getElementById('edit-show-flag').checked = p.showFlag !== false;
+  document.getElementById('edit-stock').value = p.stock !== undefined ? p.stock : '';
+  currentSpecs = [...(p.specs || [])]; renderSpecs();
+  currentMedia = [];
+  if (p.media && p.media.length) currentMedia = p.media.map(m => typeof m === 'string' ? { src: m, type: m.includes('data:video') || m.endsWith('.mp4') || m.endsWith('.webm') ? 'video/mp4' : 'image/jpeg' } : m);
+  else if (p.image) currentMedia = [{ src: p.image, type: p.image.includes('data:video') || p.image.endsWith('.mp4') || p.image.endsWith('.webm') ? 'video/mp4' : 'image/jpeg' }];
+  renderMediaGrid();
+  urlPanelOpen = false; const up = document.getElementById('url-panel'); if (up) up.style.display = 'none';
+}
+function saveProduct() {
+  const name = document.getElementById('edit-name').value.trim();
+  if (!name) { toast('El nombre es obligatorio', 'err'); return; }
+  const image = currentMedia.length ? currentMedia[0].src : '';
+  const prod = {
+    id: editingId || 'p' + Date.now(), name,
+    category: document.getElementById('edit-cat').value.trim(),
+    description: document.getElementById('edit-desc').value.trim(),
+    specs: [...currentSpecs],
+    badge: document.getElementById('edit-badge').value,
+    badgeText: document.getElementById('edit-badge-txt').value.trim(),
+    price: document.getElementById('edit-price').value.trim(),
+    priceOrig: document.getElementById('edit-price-orig').value.trim(),
+    priceNote: document.getElementById('edit-price-note').value.trim(),
+    promo: document.getElementById('edit-promo').value.trim() || (editingId ? (data.products.find(x => x.id === editingId)?.promo || '') : ''),
+    active: document.getElementById('edit-active').checked,
+    featured: document.getElementById('edit-featured').checked,
+    showFlag: document.getElementById('edit-show-flag').checked,
+    stock: document.getElementById('edit-stock').value !== '' ? parseInt(document.getElementById('edit-stock').value) : undefined,
+    image, media: [...currentMedia]
+  };
+  if (editingId) {
+    const idx = data.products.findIndex(x => x.id === editingId);
+    if (idx >= 0) data.products[idx] = prod;
+  } else data.products.push(prod);
+  persist(true);
+  closeModal('mProd');
+  toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓');
+  editingId = null;
+}
+function quickToggle(id, cb) { const p = data.products.find(x => x.id === id); if (p) { p.active = cb.checked; persist(true); renderAll(); } }
+function triggerDelete(id) { editingId = id; openConfirmDel(); }
+function openConfirmDel() { const p = data.products.find(x => x.id === editingId); if (p) document.getElementById('del-prod-name').textContent = p.name; openModal('mConfirm'); }
+function doDelete() { data.products = data.products.filter(x => x.id !== editingId); persist(true); renderAll(); renderCatTabs(); closeModal('mConfirm'); closeModal('mProd'); toast('Producto eliminado'); editingId = null; }
+function dupProduct(id) { const p = data.products.find(x => x.id === id); if (!p) return; data.products.push({ ...p, id: 'p' + Date.now(), name: p.name + ' (copia)', active: false, featured: false }); persist(true); renderAll(); toast('Producto duplicado'); }
 
-/* ========== SPECS (igual) ========== */
-function handleSpecKey(e) { if(e.key==='Enter'||e.key===','){e.preventDefault(); const val=e.target.value.trim(); if(val){currentSpecs.push(val); e.target.value=''; renderSpecs();}} else if(e.key==='Backspace'&&!e.target.value&&currentSpecs.length){currentSpecs.pop(); renderSpecs();} }
-function removeSpec(i) { currentSpecs.splice(i,1); renderSpecs(); }
-function renderSpecs() { const wrap=document.getElementById('specs-wrap'); if(!wrap) return; wrap.innerHTML=currentSpecs.map((s,i)=>`<div class="spec-chip">${s}<button onclick="removeSpec(${i})" type="button">×</button></div>`).join('')+`<input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="${currentSpecs.length?'Más...':'Ej: Acero 1075 · Enter'}" onkeydown="handleSpecKey(event)">`; }
-
-/* ========== MEDIA (igual pero con persistencia implícita) ========== */
-function updateMediaCountLabel() { const el=document.getElementById('media-count-label'); if(!el) return; const photos=currentMedia.filter(m=>!m.type||!m.type.startsWith('video')).length; const videos=currentMedia.filter(m=>m.type&&m.type.startsWith('video')).length; let parts=[]; if(photos) parts.push(photos+(photos===1?' foto':' fotos')); if(videos) parts.push(videos+(videos===1?' video':' videos')); el.textContent=parts.length?parts.join(' · '):'0 archivos'; }
-function renderMediaGrid() { const grid=document.getElementById('media-grid'), emptyState=document.getElementById('media-empty-state'); if(!grid) return; if(!currentMedia.length){grid.innerHTML=''; grid.style.display='none'; if(emptyState) emptyState.style.display='block'; updateMediaCountLabel(); return;} grid.style.display='grid'; if(emptyState) emptyState.style.display='none'; grid.innerHTML=currentMedia.map((m,i)=>{ const isVid=m.type&&m.type.startsWith('video'); return `<div class="media-thumb" draggable="true" ondragstart="dragStart(${i})" ondragover="dragOver(event,${i})" ondrop="dropMedia(event,${i})" ondragend="dragEnd()">${isVid?`<div style="background:#1a1814;width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><div class="mt-video-icon"><i class="fas fa-play-circle" style="color:rgba(255,255,255,.7);font-size:28px"></i></div></div>`:`<img src="${m.src}" alt="Foto ${i+1}" loading="lazy">`}${i===0?`<div class="mt-main">Principal</div>`:`<button class="mt-set-main" onclick="setMainMedia(${i})" title="Hacer principal"><i class="fas fa-star" style="font-size:9px"></i></button>`}<button class="mt-del" onclick="removeMedia(${i})" type="button" title="Eliminar">×</button></div>`; }).join(''); updateMediaCountLabel(); }
-let dragSrcIdx=null; function dragStart(i){dragSrcIdx=i;} function dragEnd(){dragSrcIdx=null;} function dragOver(e,i){e.preventDefault();}
-function dropMedia(e,targetIdx){e.preventDefault(); if(dragSrcIdx===null||dragSrcIdx===targetIdx) return; const moved=currentMedia.splice(dragSrcIdx,1)[0]; currentMedia.splice(targetIdx,0,moved); renderMediaGrid();}
-function setMainMedia(idx){if(idx===0) return; const item=currentMedia.splice(idx,1)[0]; currentMedia.unshift(item); renderMediaGrid(); toast('Foto principal actualizada ✓');}
-function removeMedia(idx){currentMedia.splice(idx,1); renderMediaGrid();}
-function clearAllMedia(){if(currentMedia.length===0) return; if(!confirm(`¿Eliminar todas las ${currentMedia.length} fotos/videos de este producto?`)) return; currentMedia=[]; renderMediaGrid(); toast('Galería vaciada');}
-function sortMediaByType(){const photos=currentMedia.filter(m=>!m.type||!m.type.startsWith('video')); const videos=currentMedia.filter(m=>m.type&&m.type.startsWith('video')); currentMedia=[...photos,...videos]; renderMediaGrid(); toast('Fotos primero, videos al final');}
-function toggleUrlPanel(){urlPanelOpen=!urlPanelOpen; const panel=document.getElementById('url-panel'); if(panel){panel.style.display=urlPanelOpen?'block':'none'; if(urlPanelOpen) document.getElementById('edit-img-url').focus();}}
-function addMediaUrl(){const urlEl=document.getElementById('edit-img-url'),url=urlEl.value.trim(); if(!url) return; const ext=url.split('?')[0].split('.').pop().toLowerCase(); currentMedia.push({src:url,type:['webm','mp4','ogg','mov'].includes(ext)?'video/'+ext:'image/jpeg'}); urlEl.value=''; renderMediaGrid(); toast('URL agregada ✓');}
-function onFileChange(input){const files=Array.from(input.files); if(!files.length) return; let processed=0; const total=files.length; files.forEach(f=>processFile(f,()=>{processed++; if(processed===total) toast(`${total} archivo${total>1?'s':''} agregado${total>1?'s':''} ✓`);})); input.value='';}
-function processFile(f,done){if(f.size>10*1024*1024){toast('Archivo muy grande (máx 10 MB)','err'); done&&done(); return;} if(f.type.startsWith('video/')){const r=new FileReader(); r.onload=e=>{currentMedia.push({src:e.target.result,type:f.type}); renderMediaGrid(); done&&done();}; r.readAsDataURL(f); return;} compressImage(f,1200,.82).then(async b64=>{if(getImgbbKey()){const url=await uploadToImgbb(b64,f.name); if(url){currentMedia.push({src:url,type:'image/jpeg'});} else{currentMedia.push({src:b64,type:'image/jpeg'});}} else currentMedia.push({src:b64,type:'image/jpeg'}); renderMediaGrid(); done&&done();});}
-function compressImage(file,maxW,quality){return new Promise((resolve,reject)=>{const reader=new FileReader(); reader.onload=ev=>{const img=new Image(); img.onload=()=>{let w=img.width,h=img.height; if(w>maxW||h>maxW){if(w>=h){h=Math.round(h*maxW/w); w=maxW;} else{w=Math.round(w*maxW/h); h=maxW;}} const canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); resolve(canvas.toDataURL('image/jpeg',quality));}; img.onerror=reject; img.src=ev.target.result;}; reader.onerror=reject; reader.readAsDataURL(file);});}
-function getImgbbKey(){return localStorage.getItem('gl_imgbb')||'';}
-async function uploadToImgbb(fileOrB64,filename){const key=getImgbbKey(); if(!key) return null; try{const fd=new FormData(); fd.append('key',key); fd.append('image',typeof fileOrB64==='string'?(fileOrB64.includes(',')?fileOrB64.split(',')[1]:fileOrB64):fileOrB64); if(filename) fd.append('name',filename); const r=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}); const d=await r.json(); return d.success?d.data.url:null;}catch(e){return null;}}
-
-/* ========== OFERTAS (simplificado, solo las llamadas a persist) ========== */
-function renderOffersGrid() { /* misma lógica original, asegura persist */ } 
-function saveOffer() { /* misma lógica, llama a persist */ }
-function deleteOffer() { /* llama a persist */ }
-function toggleOffer(id,cb) { /* llama a persist */ }
-function saveGlobalPromo() { /* llama a persist */ }
-
-/* ========== COMBOS ========== */
-function renderCombosGrid() { /* igual */ }
-function saveCombo() { /* llama a persist */ }
-function deleteCombo() { /* llama a persist */ }
-function toggleCombo(id,cb) { /* llama a persist */ }
-
-/* ========== REVIEWS ========== */
-function renderReviewsList() { /* igual */ }
-function saveReview() { /* llama a persist */ }
-function deleteReview() { /* llama a persist */ }
-
-/* ========== SETTINGS ========== */
-function fillSettings() { /* igual */ }
-function saveSettings() { /* igual, llama a persist */ }
-
-/* ========== IMPORT/EXPORT ========== */
-function exportJSON(){const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='products.json'; a.click(); toast('Archivo descargado');}
-function importJSON(input){const f=input.files[0]; if(!f)return; const r=new FileReader(); r.onload=e=>{try{const d=JSON.parse(e.target.result); if(!d.products) throw 0; data=d; if(!data.settings.reviews)data.settings.reviews=[]; if(!data.offers)data.offers=[]; if(!data.combos)data.combos=[]; persist(); renderAll(); fillSettings(); toast(`Importado: ${d.products.length} productos ✓`);}catch{toast('Formato inválido','err');}input.value='';}; r.readAsText(f);}
-
-/* ========== GITHUB ========== */
-function loadGhCfg(){const c=JSON.parse(localStorage.getItem('gl_gh')||'{}'); ['user','repo','token','branch','path'].forEach(k=>{const el=document.getElementById('gh-'+k); if(el&&c[k]) el.value=c[k];}); setGhStatus(c.user&&c.repo&&c.token?'cfg':'off');}
-function saveGhCfg(){const c={user:document.getElementById('gh-user').value.trim(),repo:document.getElementById('gh-repo').value.trim(),token:document.getElementById('gh-token').value.trim(),branch:document.getElementById('gh-branch').value.trim()||'main',path:document.getElementById('gh-path').value.trim()||'products.json'}; if(!c.user||!c.repo||!c.token){toast('Completá todos los campos','err');return;} localStorage.setItem('gl_gh',JSON.stringify(c)); setGhStatus('cfg'); toast('Configuración guardada ✓');}
-function setGhStatus(s){const el=document.getElementById('gh-status'); const c={off:['var(--gold)','No configurado'],cfg:['var(--gold)','Configurado'],ok:['var(--green)','Conexión OK ✓'],err:['var(--red)','Error']}[s]||['var(--gold)','—']; el.innerHTML=`<span style="width:8px;height:8px;border-radius:50%;background:${c[0]};display:inline-block"></span> ${c[1]}`;}
-async function testGh(){const c=JSON.parse(localStorage.getItem('gl_gh')||'{}'); if(!c.token){toast('Guardá la configuración primero','err');return;} const okEl=document.getElementById('gh-ok'),errEl=document.getElementById('gh-err'); okEl.classList.remove('on'); errEl.classList.remove('on'); try{const r=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{headers:{Authorization:`Bearer ${c.token}`,Accept:'application/vnd.github.v3+json'}}); if(r.ok){setGhStatus('ok'); okEl.classList.add('on'); toast('Conexión exitosa ✓');} else{setGhStatus('err'); errEl.textContent='Error '+r.status; errEl.classList.add('on'); toast('Error de conexión','err');}}catch(e){setGhStatus('err'); errEl.textContent='Error: '+e.message; errEl.classList.add('on'); toast('Error: '+e.message,'err');}}
-async function publishToGitHub(){
-  const c=JSON.parse(localStorage.getItem('gl_gh')||'{}'); if(!c.user||!c.repo||!c.token){toast('Configurá GitHub primero','err'); return;}
-  const jsonStr=JSON.stringify(data,null,2); const sizeKB=Math.round(new Blob([jsonStr]).size/1024);
-  if(sizeKB>900&&!confirm(`⚠️ El archivo es grande (${(sizeKB/1024).toFixed(1)} MB). ¿Publicar de todas formas?`)) return;
-  const btn=document.getElementById('btn-publish'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>';
-  try{
-    const getR=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{headers:{Authorization:`Bearer ${c.token}`,Accept:'application/vnd.github.v3+json'}});
-    let sha=null; if(getR.ok){const d=await getR.json(); sha=d.sha;} else if(getR.status===401){toast('Token inválido','err'); return;}
-    let content; try{content=btoa(unescape(encodeURIComponent(jsonStr)));}catch(e){toast('Error al codificar datos','err'); return;}
-    const body={message:`Admin: update ${new Date().toLocaleString('es-AR')}`,content,branch:c.branch||'main'}; if(sha) body.sha=sha;
-    const putR=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`,{method:'PUT',headers:{Authorization:`Bearer ${c.token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(putR.ok){document.getElementById('save-banner').classList.remove('show'); toast('¡Publicado! Cambios en ~30 seg ✓');}
-    else{const err=await putR.json().catch(()=>({})); let msg=err.message||`Error ${putR.status}`; if(putR.status===422) msg=`Archivo demasiado grande. Usá URLs de imágenes.`; else if(putR.status===401) msg='Token inválido'; else if(putR.status===403) msg='Sin permisos — Contents: Read & Write'; toast('Error: '+msg,'err');}
-  }catch(e){toast('Error de red: '+e.message,'err');}
-  finally{btn.disabled=false; btn.innerHTML='<i class="fas fa-cloud-upload-alt"></i> <span class="btn-pub-label">Publicar</span>';}
+// Specs
+function handleSpecKey(e) {
+  if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); const val = e.target.value.trim(); if (val) { currentSpecs.push(val); e.target.value = ''; renderSpecs(); } }
+  else if (e.key === 'Backspace' && !e.target.value && currentSpecs.length) { currentSpecs.pop(); renderSpecs(); }
+}
+function removeSpec(i) { currentSpecs.splice(i, 1); renderSpecs(); }
+function renderSpecs() {
+  const wrap = document.getElementById('specs-wrap'); if (!wrap) return;
+  wrap.innerHTML = currentSpecs.map((s, i) => `<div class="spec-chip">${s}<button onclick="removeSpec(${i})" type="button">×</button></div>`).join('') + `<input type="text" class="spec-input-inner" id="spec-input-inner" placeholder="${currentSpecs.length ? 'Más...' : 'Ej: Acero 1075 · Enter'}" onkeydown="handleSpecKey(event)">`;
 }
 
-/* ========== MODAL HELPERS ========== */
-function openModal(id){document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden';}
-function closeModal(id){document.getElementById(id).classList.remove('open'); document.body.style.overflow='';}
-document.querySelectorAll('.backdrop').forEach(b=>b.addEventListener('click',e=>{if(e.target===b)closeModal(b.id);}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.backdrop.open').forEach(b=>closeModal(b.id));});
-function switchModalTab(btn,panelId){const modal=btn?btn.closest('.modal'):null; if(modal){modal.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active')); modal.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));} if(btn)btn.classList.add('active'); const panel=document.getElementById(panelId); if(panel)panel.classList.add('active');}
-function toast(msg,type=''){const el=document.getElementById('toast'); el.className='toast show '+(type==='err'?'t-err':'t-ok'); el.innerHTML=(type==='err'?'<i class="fas fa-times-circle"></i>':'<i class="fas fa-check-circle" style="color:var(--gold)"></i>')+' '+msg; clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),3400);}
+// Media (versión simplificada pero funcional)
+function updateMediaCountLabel() { const el = document.getElementById('media-count-label'); if (!el) return; const photos = currentMedia.filter(m => !m.type || !m.type.startsWith('video')).length; const videos = currentMedia.filter(m => m.type && m.type.startsWith('video')).length; let parts = []; if (photos) parts.push(photos + (photos === 1 ? ' foto' : ' fotos')); if (videos) parts.push(videos + (videos === 1 ? ' video' : ' videos')); el.textContent = parts.length ? parts.join(' · ') : '0 archivos'; }
+function renderMediaGrid() {
+  const grid = document.getElementById('media-grid'), emptyState = document.getElementById('media-empty-state'); if (!grid) return;
+  if (!currentMedia.length) { grid.innerHTML = ''; grid.style.display = 'none'; if (emptyState) emptyState.style.display = 'block'; updateMediaCountLabel(); return; }
+  grid.style.display = 'grid'; if (emptyState) emptyState.style.display = 'none';
+  grid.innerHTML = currentMedia.map((m, i) => `<div class="media-thumb" draggable="true" ondragstart="dragStart(${i})" ondragover="dragOver(event,${i})" ondrop="dropMedia(event,${i})" ondragend="dragEnd()">${m.type && m.type.startsWith('video') ? `<div style="background:#1a1814;width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-play-circle" style="font-size:28px;color:rgba(255,255,255,.7)"></i></div>` : `<img src="${m.src}" alt="Foto ${i+1}" loading="lazy">`}${i === 0 ? `<div class="mt-main">Principal</div>` : `<button class="mt-set-main" onclick="setMainMedia(${i})" title="Hacer principal"><i class="fas fa-star"></i></button>`}<button class="mt-del" onclick="removeMedia(${i})" type="button">×</button></div>`).join('');
+  updateMediaCountLabel();
+}
+let dragSrcIdx = null;
+function dragStart(i) { dragSrcIdx = i; }
+function dragEnd() { dragSrcIdx = null; }
+function dragOver(e, i) { e.preventDefault(); }
+function dropMedia(e, targetIdx) { e.preventDefault(); if (dragSrcIdx === null || dragSrcIdx === targetIdx) return; const moved = currentMedia.splice(dragSrcIdx, 1)[0]; currentMedia.splice(targetIdx, 0, moved); renderMediaGrid(); }
+function setMainMedia(idx) { if (idx === 0) return; const item = currentMedia.splice(idx, 1)[0]; currentMedia.unshift(item); renderMediaGrid(); toast('Foto principal actualizada ✓'); }
+function removeMedia(idx) { currentMedia.splice(idx, 1); renderMediaGrid(); }
+function clearAllMedia() { if (currentMedia.length === 0) return; if (!confirm(`¿Eliminar todas las ${currentMedia.length} fotos/videos?`)) return; currentMedia = []; renderMediaGrid(); toast('Galería vaciada'); }
+function sortMediaByType() { const photos = currentMedia.filter(m => !m.type || !m.type.startsWith('video')); const videos = currentMedia.filter(m => m.type && m.type.startsWith('video')); currentMedia = [...photos, ...videos]; renderMediaGrid(); toast('Fotos primero, videos al final'); }
+function toggleUrlPanel() { urlPanelOpen = !urlPanelOpen; const panel = document.getElementById('url-panel'); if (panel) { panel.style.display = urlPanelOpen ? 'block' : 'none'; if (urlPanelOpen) document.getElementById('edit-img-url').focus(); } }
+function addMediaUrl() { const urlEl = document.getElementById('edit-img-url'), url = urlEl.value.trim(); if (!url) return; const ext = url.split('?')[0].split('.').pop().toLowerCase(); currentMedia.push({ src: url, type: ['webm', 'mp4', 'ogg', 'mov'].includes(ext) ? 'video/' + ext : 'image/jpeg' }); urlEl.value = ''; renderMediaGrid(); toast('URL agregada ✓'); }
+function onFileChange(input) { const files = Array.from(input.files); if (!files.length) return; let processed = 0; const total = files.length; files.forEach(f => processFile(f, () => { processed++; if (processed === total) toast(`${total} archivo${total > 1 ? 's' : ''} agregado${total > 1 ? 's' : ''} ✓`); })); input.value = ''; }
+function processFile(f, done) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande (máx 10 MB)', 'err'); done && done(); return; } if (f.type.startsWith('video/')) { const r = new FileReader(); r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); done && done(); }; r.readAsDataURL(f); return; } compressImage(f, 1200, .82).then(async b64 => { if (getImgbbKey()) { const url = await uploadToImgbb(b64, f.name); if (url) { currentMedia.push({ src: url, type: 'image/jpeg' }); } else { currentMedia.push({ src: b64, type: 'image/jpeg' }); } } else currentMedia.push({ src: b64, type: 'image/jpeg' }); renderMediaGrid(); done && done(); }); }
+function compressImage(file, maxW, quality) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = ev => { const img = new Image(); img.onload = () => { let w = img.width, h = img.height; if (w > maxW || h > maxW) { if (w >= h) { h = Math.round(h * maxW / w); w = maxW; } else { w = Math.round(w * maxW / h); h = maxW; } } const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h); resolve(canvas.toDataURL('image/jpeg', quality)); }; img.onerror = reject; img.src = ev.target.result; }; reader.onerror = reject; reader.readAsDataURL(file); }); }
+function getImgbbKey() { return localStorage.getItem('gl_imgbb') || ''; }
+async function uploadToImgbb(fileOrB64, filename) { const key = getImgbbKey(); if (!key) return null; try { const fd = new FormData(); fd.append('key', key); fd.append('image', typeof fileOrB64 === 'string' ? (fileOrB64.includes(',') ? fileOrB64.split(',')[1] : fileOrB64) : fileOrB64); if (filename) fd.append('name', filename); const r = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: fd }); const d = await r.json(); return d.success ? d.data.url : null; } catch (e) { return null; } }
 
-/* ========== LOGIN Y ARRANQUE ========== */
-function doLogin(){const p=document.getElementById('pwd-input').value; if(p===(localStorage.getItem('gl_pwd')||DEFAULT_PWD)){localStorage.setItem('gl_auth','1'); showApp();} else{document.getElementById('login-err').textContent='Contraseña incorrecta'; document.getElementById('pwd-input').value='';}}
-function doLogout(){localStorage.removeItem('gl_auth'); location.reload();}
-function showApp(){document.getElementById('login-screen').classList.add('hidden'); document.getElementById('app').style.display='block';}
-function changePassword(){const cur=document.getElementById('pwd-cur').value, nw=document.getElementById('pwd-new').value, cf=document.getElementById('pwd-cfm').value; if(cur!==(localStorage.getItem('gl_pwd')||DEFAULT_PWD)){toast('Contraseña actual incorrecta','err'); return;} if(nw.length<6){toast('Mínimo 6 caracteres','err'); return;} if(nw!==cf){toast('Las contraseñas no coinciden','err'); return;} localStorage.setItem('gl_pwd', nw); toast('Contraseña actualizada ✓'); ['pwd-cur','pwd-new','pwd-cfm'].forEach(id=>document.getElementById(id).value='');}
-document.getElementById('pwd-input').onkeydown = e=>{if(e.key==='Enter') doLogin();};
-document.addEventListener('touchstart', e=>{const card=e.target.closest('.prod-card'); const ovBtn=e.target.closest('.ov-btn'); if(!ovBtn) document.querySelectorAll('.prod-card.touch-active').forEach(c=>{if(c!==card) c.classList.remove('touch-active');}); if(card&&!ovBtn) card.classList.toggle('touch-active'); else if(!card) document.querySelectorAll('.prod-card.touch-active').forEach(c=>c.classList.remove('touch-active'));},{passive:true});
+// Ofertas (simplificado pero funcional)
+function renderOffersGrid() { const grid = document.getElementById('offers-grid'); const offers = data.offers || []; if (!offers.length) { grid.innerHTML = `<div class="empty"><i class="fas fa-tag"></i><p>No hay ofertas aún</p></div>`; return; } const offerTypeLabels = { texto: 'Texto', pct: 'Descuento', '2x1': '2×1', envio: 'Envío gratis', temporada: 'Temporada', custom: 'Personalizado' }; const offerTypeCls = { texto: 'ot-texto', pct: 'ot-pct', '2x1': 'ot-2x1', envio: 'ot-envio', temporada: 'ot-texto', custom: 'ot-custom' }; grid.innerHTML = offers.map(o => { const prod = o.productId ? data.products.find(p => p.id === o.productId) : null; return `<div class="offer-card${o.active ? '' : ' inactive-offer'}"><div class="offer-card-body" style="padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><div class="offer-card-name">${o.text || '—'}</div><span class="offer-type-badge ${offerTypeCls[o.type] || 'ot-texto'}">${offerTypeLabels[o.type] || o.type}</span></div><div class="offer-card-desc">${prod ? prod.name : 'Todos los productos'}${o.desc ? ' · ' + o.desc : ''}</div>${o.price ? `<div style="margin-top:6px"><span style="font-family:var(--serif);font-size:16px;color:var(--accent)">${o.price}</span>${o.priceOrig ? `<span style="text-decoration:line-through;margin-left:6px">${o.priceOrig}</span>` : ''}</div>` : ''}</div><div class="offer-card-foot" style="padding:10px 12px;border-top:1px solid var(--border);display:flex;justify-content:space-between"><span class="status-badge ${o.active ? 'sb-active' : 'sb-inactive'}">${o.active ? 'Activa' : 'Inactiva'}</span><div><button class="btn btn-sm btn-ghost" onclick="openEditOffer('${o.id}')">Editar</button><label class="toggle" style="margin-left:6px"><input type="checkbox" ${o.active ? 'checked' : ''} onchange="toggleOffer('${o.id}',this)"><div class="t-track"></div><div class="t-thumb"></div></label></div></div></div>`; }).join(''); }
+function openNewOffer() { editingOfferId = null; clearOfferForm(); document.getElementById('modal-offer-title').textContent = 'Nueva oferta'; document.getElementById('btn-del-offer').style.display = 'none'; fillOfferProductSelect(); openModal('mOffer'); }
+function openEditOffer(id) { const o = (data.offers || []).find(x => x.id === id); if (!o) return; editingOfferId = id; document.getElementById('modal-offer-title').textContent = 'Editar oferta'; document.getElementById('btn-del-offer').style.display = 'inline-flex'; fillOfferProductSelect(o.productId); selOfferTipo(o.type || 'texto'); document.getElementById('offer-pct-val').value = o.pctVal || ''; document.getElementById('offer-text').value = o.text || ''; document.getElementById('offer-price').value = o.price || ''; document.getElementById('offer-price-orig').value = o.priceOrig || ''; document.getElementById('offer-desc').value = o.desc || ''; document.getElementById('offer-active').checked = !!o.active; openModal('mOffer'); }
+function clearOfferForm() { ['offer-pct-val', 'offer-text', 'offer-price', 'offer-price-orig', 'offer-desc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; }); document.getElementById('offer-active').checked = true; selOfferTipo('texto'); }
+function fillOfferProductSelect(selectedId = '') { const sel = document.getElementById('offer-producto'); sel.innerHTML = '<option value="">Todos los productos</option>' + data.products.map(p => `<option value="${p.id}"${p.id === selectedId ? ' selected' : ''}>${p.name}</option>`).join(''); }
+function selOfferTipo(t) { offerTipo = t; document.querySelectorAll('.otc').forEach(el => el.classList.toggle('sel', el.dataset.tipo === t)); document.getElementById('offer-pct-row').style.display = t === 'pct' ? 'block' : 'none'; const autofill = { '2x1': '🎁 2×1 — Llevás 2 pagás 1', envio: '🚚 Envío gratis', temporada: '🌟 Oferta de temporada' }; if (autofill[t] && !document.getElementById('offer-text').value) document.getElementById('offer-text').value = autofill[t]; }
+function saveOffer() { const text = document.getElementById('offer-text').value.trim(); if (!text) { toast('El texto del badge es obligatorio', 'err'); return; } const offer = { id: editingOfferId || 'off' + Date.now(), type: offerTipo, text, productId: document.getElementById('offer-producto').value || '', pctVal: document.getElementById('offer-pct-val').value || '', price: document.getElementById('offer-price').value.trim(), priceOrig: document.getElementById('offer-price-orig').value.trim(), desc: document.getElementById('offer-desc').value.trim(), active: document.getElementById('offer-active').checked }; if (!data.offers) data.offers = []; if (editingOfferId) { const i = data.offers.findIndex(x => x.id === editingOfferId); if (i >= 0) data.offers[i] = offer; } else data.offers.push(offer); if (offer.productId) { const p = data.products.find(x => x.id === offer.productId); if (p) { p.promo = text; if (offer.price) p.price = offer.price; if (offer.priceOrig) p.priceOrig = offer.priceOrig; } } persist(true); renderOffersGrid(); closeModal('mOffer'); toast(editingOfferId ? 'Oferta actualizada ✓' : 'Oferta creada ✓'); editingOfferId = null; }
+function deleteOffer() { if (!editingOfferId) return; data.offers = (data.offers || []).filter(x => x.id !== editingOfferId); persist(true); renderOffersGrid(); closeModal('mOffer'); toast('Oferta eliminada'); editingOfferId = null; }
+function toggleOffer(id, cb) { const o = (data.offers || []).find(x => x.id === id); if (o) { o.active = cb.checked; persist(true); renderOffersGrid(); } }
+function saveGlobalPromo() { data.settings.globalPromo = document.getElementById('global-promo-active').checked; data.settings.globalPromoBanner = document.getElementById('global-promo-text').value.trim(); persist(true); toast('Banner global guardado ✓'); }
 
-// Carga inicial
-(async ()=>{ if(localStorage.getItem('gl_auth')==='1') showApp(); await loadData(); loadGhCfg(); loadImgbbCfg(); })();
-function loadImgbbCfg(){const key=getImgbbKey(); const input=document.getElementById('imgbb-key'); if(key&&input) input.value=key; updateImgbbUI(!!key);}
-function updateImgbbUI(active){const badge=document.getElementById('imgbb-badge'),ok=document.getElementById('imgbb-ok'); if(badge) badge.style.display=active?'inline-flex':'none'; if(ok) ok.style.display=active?'flex':'none';}
-function saveImgbbKey(){const key=document.getElementById('imgbb-key').value.trim(); if(!key){toast('Ingresá una API key','err');return;} localStorage.setItem('gl_imgbb',key); updateImgbbUI(true); toast('API key guardada ✓');}
-async function testImgbb(){const key=getImgbbKey(); if(!key){toast('Guardá primero la API key','err');return;} try{const fd=new FormData(); fd.append('key',key); fd.append('image','iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='); const r=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}); const d=await r.json(); if(d.success){updateImgbbUI(true);toast('imgbb conectado ✓');}else toast('Error imgbb: '+(d.error?.message||'API key inválida'),'err');} catch(e){toast('Error de conexión con imgbb','err');}}
+// Combos (simplificado)
+function renderCombosGrid() { const combos = data.combos || []; const grid = document.getElementById('combos-grid'), empty = document.getElementById('combos-empty'); if (!combos.length) { grid.style.display = 'none'; empty.style.display = 'block'; return; } empty.style.display = 'none'; grid.style.display = 'grid'; grid.innerHTML = combos.map(c => { const items = c.items || []; const prodNames = items.map(id => { const p = data.products.find(x => x.id === id); return p ? p.name : 'Producto eliminado'; }); return `<div class="combo-card${c.active ? '' : ' inactive-offer'}"><div class="combo-card-head"><div><div class="combo-card-name">${c.badge || '🎀 COMBO'} ${c.name}</div>${c.desc ? `<div style="font-size:12px;color:var(--muted)">${c.desc}</div>` : ''}</div><span class="status-badge ${c.active ? 'sb-active' : 'sb-inactive'}">${c.active ? 'Activo' : 'Inactivo'}</span></div><div class="combo-card-items">${prodNames.map(n => `<span class="combo-item-tag">📦 ${n}</span>`).join('')}</div><div class="combo-card-foot"><div><span style="font-family:var(--serif);font-size:18px;color:var(--accent)">${c.price || '—'}</span>${c.savings ? `<span style="margin-left:6px;font-size:11px;color:var(--green)">${c.savings}</span>` : ''}</div><div><label class="toggle"><input type="checkbox" ${c.active ? 'checked' : ''} onchange="toggleCombo('${c.id}',this)"><div class="t-track"></div><div class="t-thumb"></div></label><button class="btn btn-sm btn-ghost" onclick="openEditCombo('${c.id}')" style="margin-left:6px"><i class="fas fa-pen"></i></button></div></div></div>`; }).join(''); }
+function openNewCombo() { editingComboId = null; clearComboForm(); document.getElementById('modal-combo-title').textContent = 'Nuevo combo'; document.getElementById('btn-del-combo').style.display = 'none'; fillComboProductChecks([]); openModal('mCombo'); }
+function openEditCombo(id) { const c = (data.combos || []).find(x => x.id === id); if (!c) return; editingComboId = id; document.getElementById('modal-combo-title').textContent = 'Editar combo'; document.getElementById('btn-del-combo').style.display = 'inline-flex'; document.getElementById('combo-name').value = c.name || ''; document.getElementById('combo-desc').value = c.desc || ''; document.getElementById('combo-price').value = c.price || ''; document.getElementById('combo-savings').value = c.savings || ''; document.getElementById('combo-badge').value = c.badge || '🎀 COMBO'; document.getElementById('combo-active').checked = !!c.active; fillComboProductChecks(c.items || []); openModal('mCombo'); }
+function clearComboForm() { ['combo-name', 'combo-desc', 'combo-price', 'combo-savings'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; }); document.getElementById('combo-badge').value = '🎀 COMBO'; document.getElementById('combo-active').checked = true; }
+function fillComboProductChecks(selectedIds) { const container = document.getElementById('combo-productos-checks'); container.innerHTML = data.products.filter(p => p.active !== false).map(p => `<label style="display:flex;align-items:center;gap:8px;padding:6px 8px"><input type="checkbox" value="${p.id}" ${selectedIds.includes(p.id) ? 'checked' : ''}><span style="font-size:13px">${p.name}</span><span style="font-size:11px;color:var(--muted);margin-left:auto">${p.price || ''}</span></label>`).join(''); }
+function saveCombo() { const name = document.getElementById('combo-name').value.trim(); if (!name) { toast('El nombre del combo es obligatorio', 'err'); return; } const items = Array.from(document.querySelectorAll('#combo-productos-checks input:checked')).map(cb => cb.value); if (!items.length) { toast('Seleccioná al menos un producto', 'err'); return; } const combo = { id: editingComboId || 'combo' + Date.now(), name, desc: document.getElementById('combo-desc').value.trim(), price: document.getElementById('combo-price').value.trim(), savings: document.getElementById('combo-savings').value.trim(), badge: document.getElementById('combo-badge').value.trim() || '🎀 COMBO', active: document.getElementById('combo-active').checked, items }; if (!data.combos) data.combos = []; if (editingComboId) { const i = data.combos.findIndex(x => x.id === editingComboId); if (i >= 0) data.combos[i] = combo; } else data.combos.push(combo); persist(true); renderCombosGrid(); closeModal('mCombo'); toast(editingComboId ? 'Combo actualizado ✓' : 'Combo creado ✓'); editingComboId = null; }
+function deleteCombo() { if (!editingComboId) return; data.combos = (data.combos || []).filter(x => x.id !== editingComboId); persist(true); renderCombosGrid(); closeModal('mCombo'); toast('Combo eliminado'); editingComboId = null; }
+function toggleCombo(id, cb) { const c = (data.combos || []).find(x => x.id === id); if (c) { c.active = cb.checked; persist(true); renderCombosGrid(); } }
+
+// Reseñas
+function renderReviewsList() { const container = document.getElementById('reviews-list'); if (!container) return; const reviews = data.settings.reviews || []; if (!reviews.length) { container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:var(--radius)">No hay reseñas aún</div>'; return; } container.innerHTML = reviews.map(r => `<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px;display:flex;align-items:center;gap:10px;">${r.image ? `<img src="${r.image}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover">` : `<div style="width:44px;height:44px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center"><i class="fas fa-user"></i></div>`}<div style="flex:1"><div><strong>${r.name}</strong><span style="margin-left:6px;color:var(--gold)">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>${r.loc ? `<span style="font-size:11px;color:var(--muted);margin-left:6px">${r.loc}</span>` : ''}</div><div style="font-size:12px;color:var(--muted)">${r.text}</div></div><div><button class="btn btn-sm btn-ghost" onclick="openEditReview('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-danger" onclick="openDeleteReviewConfirm('${r.id}')"><i class="fas fa-trash"></i></button></div></div>`).join(''); }
+function openNewReview() { editingReviewId = null; document.getElementById('modal-review-title').textContent = 'Nueva reseña'; ['review-name', 'review-loc', 'review-text', 'review-img-url'].forEach(id => document.getElementById(id).value = ''); document.getElementById('review-id').value = ''; document.getElementById('review-rating').value = '5'; clearReviewImgState(); openModal('mReview'); }
+function openEditReview(id) { const r = data.settings.reviews.find(x => x.id === id); if (!r) return; editingReviewId = id; document.getElementById('modal-review-title').textContent = 'Editar reseña'; document.getElementById('review-id').value = id; document.getElementById('review-name').value = r.name || ''; document.getElementById('review-loc').value = r.loc || ''; document.getElementById('review-rating').value = r.rating || 5; document.getElementById('review-text').value = r.text || ''; if (r.image) showReviewImgPreview(r.image); else clearReviewImgState(); if (r.image && !r.image.startsWith('data:')) document.getElementById('review-img-url').value = r.image; openModal('mReview'); }
+function saveReview() { const name = document.getElementById('review-name').value.trim(), rating = parseInt(document.getElementById('review-rating').value), text = document.getElementById('review-text').value.trim(); if (!name || !text || !rating) { toast('Completá nombre, calificación y texto', 'err'); return; } const previewShowing = document.getElementById('review-upload-preview').style.display !== 'none'; const imgSrc = document.getElementById('review-upload-img').src; const urlVal = document.getElementById('review-img-url').value.trim(); const image = previewShowing ? (imgSrc.startsWith('data:') ? imgSrc : urlVal) : urlVal; const review = { id: editingReviewId || 'rev' + Date.now(), name, loc: document.getElementById('review-loc').value.trim(), rating, text, image: image || '' }; if (!data.settings.reviews) data.settings.reviews = []; if (editingReviewId) { const idx = data.settings.reviews.findIndex(x => x.id === editingReviewId); if (idx >= 0) data.settings.reviews[idx] = review; } else data.settings.reviews.push(review); persist(true); renderReviewsList(); closeModal('mReview'); toast(editingReviewId ? 'Reseña actualizada ✓' : 'Reseña creada ✓'); editingReviewId = null; }
+function openDeleteReviewConfirm(id) { const r = data.settings.reviews.find(x => x.id === id); if (r && confirm('¿Eliminás la reseña de ' + r.name + '?')) { data.settings.reviews = data.settings.reviews.filter(x => x.id !== id); persist(true); renderReviewsList(); toast('Reseña eliminada'); } }
+document.getElementById('review-img-zone')?.addEventListener('click', e => { if (e.target.classList.contains('upload-clear')) return; document.getElementById('review-img-file').click(); });
+function onReviewFileChange(input) { if (input.files[0]) processReviewFile(input.files[0]); }
+function processReviewFile(f) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande', 'err'); return; } const r = new FileReader(); r.onload = e => showReviewImgPreview(e.target.result); r.readAsDataURL(f); }
+function onReviewUrlInput(url) { if (url) showReviewImgPreview(url); else clearReviewImgState(); }
+function showReviewImgPreview(src) { document.getElementById('review-upload-img').src = src; document.getElementById('review-upload-preview').style.display = 'block'; document.getElementById('review-upload-idle').style.display = 'none'; document.getElementById('review-img-zone').classList.add('has-image'); }
+function clearReviewImg(e) { e?.stopPropagation(); clearReviewImgState(); }
+function clearReviewImgState() { document.getElementById('review-upload-img').src = ''; document.getElementById('review-upload-preview').style.display = 'none'; document.getElementById('review-upload-idle').style.display = 'block'; document.getElementById('review-img-zone').classList.remove('has-image'); document.getElementById('review-img-url').value = ''; document.getElementById('review-img-file').value = ''; }
+
+// Configuración
+function fillSettings() { const s = data.settings || {}; const sv = (id, v) => { const el = document.getElementById(id); if (el && v !== undefined) el.value = v; }; sv('cfg-wa', s.whatsapp); sv('cfg-ig', s.instagram); sv('cfg-fb', s.facebook); sv('cfg-phone', s.phone); sv('cfg-title', s.heroTitle); sv('cfg-sub', s.heroSubtitle); sv('cfg-s1', s.heroStat1); sv('cfg-s1l', s.heroStat1Label); if (s.heroImage) showHeroMediaPreview(s.heroImage, s.heroImage.startsWith('data:video') ? 'video/mp4' : 'image/jpeg'); else clearHeroImgState(); if (s.artisanPhoto) showArtisanImgPreview(s.artisanPhoto); else clearArtisanImgState(); renderReviewsList(); }
+function saveSettings() { const gv = id => document.getElementById(id)?.value?.trim() || ''; Object.assign(data.settings, { whatsapp: gv('cfg-wa'), instagram: gv('cfg-ig'), facebook: gv('cfg-fb'), phone: gv('cfg-phone'), heroTitle: gv('cfg-title'), heroSubtitle: gv('cfg-sub'), heroStat1: gv('cfg-s1'), heroStat1Label: gv('cfg-s1l') }); const heroPreviewShowing = document.getElementById('hero-upload-preview').style.display !== 'none'; const heroImgEl = document.getElementById('hero-upload-img'), heroVideoEl = document.getElementById('hero-upload-video'), heroUrlVal = document.getElementById('hero-img-url').value.trim(); if (heroPreviewShowing) { const heroImgVisible = heroImgEl.style.display !== 'none' && heroImgEl.src && !heroImgEl.src.endsWith(location.href); const heroVideoVisible = heroVideoEl.style.display !== 'none' && heroVideoEl.src && !heroVideoEl.src.endsWith(location.href); data.settings.heroImage = heroImgVisible ? heroImgEl.src : (heroVideoVisible ? heroVideoEl.src : heroUrlVal); } else data.settings.heroImage = heroUrlVal; const artPreviewShowing = document.getElementById('artisan-upload-preview').style.display !== 'none'; const artImgEl = document.getElementById('artisan-upload-img'), artUrlVal = document.getElementById('artisan-img-url').value.trim(); if (artPreviewShowing) { const artImgSrc = artImgEl.src; data.settings.artisanPhoto = (artImgSrc && !artImgSrc.endsWith(location.href)) ? artImgSrc : artUrlVal; } else data.settings.artisanPhoto = artUrlVal; persist(true); toast('Configuración guardada ✓'); }
+function showHeroMediaPreview(src, mimeType) { const isVideo = mimeType && mimeType.startsWith('video/'), imgEl = document.getElementById('hero-upload-img'), videoEl = document.getElementById('hero-upload-video'); if (isVideo) { imgEl.style.display = 'none'; videoEl.style.display = 'block'; videoEl.src = src; videoEl.load(); } else { videoEl.style.display = 'none'; imgEl.style.display = 'block'; imgEl.src = src; } document.getElementById('hero-upload-preview').style.display = 'block'; document.getElementById('hero-upload-idle').style.display = 'none'; document.getElementById('hero-img-zone').classList.add('has-image'); }
+function clearHeroImg(e) { e && e.stopPropagation(); clearHeroImgState(); }
+function clearHeroImgState() { ['hero-upload-img', 'hero-upload-video'].forEach(id => { const el = document.getElementById(id); el.src = ''; el.style.display = 'none'; }); document.getElementById('hero-upload-preview').style.display = 'none'; document.getElementById('hero-upload-idle').style.display = 'block'; document.getElementById('hero-img-zone').classList.remove('has-image'); document.getElementById('hero-img-url').value = ''; document.getElementById('hero-img-file').value = ''; }
+document.getElementById('hero-img-zone').addEventListener('click', e => { if (e.target.classList.contains('upload-clear')) return; document.getElementById('hero-img-file').click(); });
+function onHeroFileChange(input) { if (input.files[0]) processHeroFile(input.files[0]); }
+function processHeroFile(f) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande', 'err'); return; } if (f.type.startsWith('video/')) { const r = new FileReader(); r.onload = e => showHeroMediaPreview(e.target.result, f.type); r.readAsDataURL(f); return; } compressImage(f, 1600, .82).then(async b64 => { if (getImgbbKey()) { const url = await uploadToImgbb(b64, 'hero-' + f.name); showHeroMediaPreview(url || b64, 'image/jpeg'); if (url) toast('Hero subido a imgbb ✓'); } else showHeroMediaPreview(b64, 'image/jpeg'); }); }
+function onHeroUrlInput(url) { if (url) { const ext = url.split('.').pop().toLowerCase(); showHeroMediaPreview(url, ['webm', 'mp4', 'ogg', 'mov'].includes(ext) ? 'video/' + ext : 'image/jpeg'); } else clearHeroImgState(); }
+function showArtisanImgPreview(src) { document.getElementById('artisan-upload-img').src = src; document.getElementById('artisan-upload-preview').style.display = 'block'; document.getElementById('artisan-upload-idle').style.display = 'none'; document.getElementById('artisan-img-zone').classList.add('has-image'); }
+function clearArtisanImg(e) { e?.stopPropagation(); clearArtisanImgState(); }
+function clearArtisanImgState() { document.getElementById('artisan-upload-img').src = ''; document.getElementById('artisan-upload-preview').style.display = 'none'; document.getElementById('artisan-upload-idle').style.display = 'block'; document.getElementById('artisan-img-zone').classList.remove('has-image'); document.getElementById('artisan-img-url').value = ''; document.getElementById('artisan-img-file').value = ''; }
+document.getElementById('artisan-img-zone')?.addEventListener('click', e => { if (e.target.classList.contains('upload-clear')) return; document.getElementById('artisan-img-file').click(); });
+function onArtisanFileChange(input) { if (input.files[0]) processArtisanFile(input.files[0]); }
+function processArtisanFile(f) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande', 'err'); return; } compressImage(f, 800, .82).then(async b64 => { if (getImgbbKey()) { const url = await uploadToImgbb(b64, 'artisan-' + f.name); showArtisanImgPreview(url || b64); if (url) toast('Foto artesano subida ✓'); } else showArtisanImgPreview(b64); }); }
+function onArtisanUrlInput(url) { if (url) showArtisanImgPreview(url); else clearArtisanImgState(); }
+
+// Import/Export
+function exportJSON() { const b = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'products.json'; a.click(); toast('Archivo descargado'); }
+function importJSON(input) { const f = input.files[0]; if (!f) return; const r = new FileReader(); r.onload = e => { try { const d = JSON.parse(e.target.result); if (!d.products) throw 0; data = d; if (!data.settings.reviews) data.settings.reviews = []; if (!data.offers) data.offers = []; if (!data.combos) data.combos = []; persist(true); renderAll(); fillSettings(); toast(`Importado: ${d.products.length} productos ✓`); } catch { toast('Formato inválido', 'err'); } input.value = ''; }; r.readAsText(f); }
+
+// GitHub config
+function loadGhCfg() { const c = JSON.parse(localStorage.getItem('gl_gh') || '{}'); ['user', 'repo', 'token', 'branch', 'path'].forEach(k => { const el = document.getElementById('gh-' + k); if (el && c[k]) el.value = c[k]; }); setGhStatus(c.user && c.repo && c.token ? 'cfg' : 'off'); }
+function saveGhCfg() { const c = { user: document.getElementById('gh-user').value.trim(), repo: document.getElementById('gh-repo').value.trim(), token: document.getElementById('gh-token').value.trim(), branch: document.getElementById('gh-branch').value.trim() || 'main', path: document.getElementById('gh-path').value.trim() || 'products.json' }; if (!c.user || !c.repo || !c.token) { toast('Completá todos los campos', 'err'); return; } localStorage.setItem('gl_gh', JSON.stringify(c)); setGhStatus('cfg'); toast('Configuración guardada ✓'); }
+function setGhStatus(s) { const el = document.getElementById('gh-status'); const c = { off: ['var(--gold)', 'No configurado'], cfg: ['var(--gold)', 'Configurado'], ok: ['var(--green)', 'Conexión OK ✓'], err: ['var(--red)', 'Error'] }[s] || ['var(--gold)', '—']; el.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:${c[0]};display:inline-block"></span> ${c[1]}`; }
+async function testGh() { const c = JSON.parse(localStorage.getItem('gl_gh') || '{}'); if (!c.token) { toast('Guardá la configuración primero', 'err'); return; } const okEl = document.getElementById('gh-ok'), errEl = document.getElementById('gh-err'); okEl.classList.remove('on'); errEl.classList.remove('on'); try { const r = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/contents/${c.path}`, { headers: { Authorization: `Bearer ${c.token}`, Accept: 'application/vnd.github.v3+json' } }); if (r.ok) { setGhStatus('ok'); okEl.classList.add('on'); toast('Conexión exitosa ✓'); } else { setGhStatus('err'); errEl.textContent = 'Error ' + r.status; errEl.classList.add('on'); toast('Error de conexión', 'err'); } } catch (e) { setGhStatus('err'); errEl.textContent = 'Error: ' + e.message; errEl.classList.add('on'); toast('Error: ' + e.message, 'err'); } }
+
+// imgbb
+function loadImgbbCfg() { const key = getImgbbKey(); const input = document.getElementById('imgbb-key'); if (key && input) input.value = key; updateImgbbUI(!!key); }
+function updateImgbbUI(active) { const badge = document.getElementById('imgbb-badge'), ok = document.getElementById('imgbb-ok'); if (badge) badge.style.display = active ? 'inline-flex' : 'none'; if (ok) ok.style.display = active ? 'flex' : 'none'; }
+function saveImgbbKey() { const key = document.getElementById('imgbb-key').value.trim(); if (!key) { toast('Ingresá una API key', 'err'); return; } localStorage.setItem('gl_imgbb', key); updateImgbbUI(true); toast('API key guardada ✓'); }
+async function testImgbb() { const key = getImgbbKey(); if (!key) { toast('Guardá primero la API key', 'err'); return; } try { const fd = new FormData(); fd.append('key', key); fd.append('image', 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='); const r = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: fd }); const d = await r.json(); if (d.success) { updateImgbbUI(true); toast('imgbb conectado ✓'); } else toast('Error imgbb: ' + (d.error?.message || 'API key inválida'), 'err'); } catch (e) { toast('Error de conexión con imgbb', 'err'); } }
+
+// Modales y helpers
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.backdrop').forEach(b => b.addEventListener('click', e => { if (e.target === b) closeModal(b.id); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.backdrop.open').forEach(b => closeModal(b.id)); });
+function switchModalTab(btn, panelId) { const modal = btn ? btn.closest('.modal') : null; if (modal) { modal.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active')); modal.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active')); } if (btn) btn.classList.add('active'); const panel = document.getElementById(panelId); if (panel) panel.classList.add('active'); }
+function toast(msg, type = '') { const el = document.getElementById('toast'); el.className = 'toast show ' + (type === 'err' ? 't-err' : 't-ok'); el.innerHTML = (type === 'err' ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-check-circle" style="color:var(--gold)"></i>') + ' ' + msg; clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 3400); }
+
+// Login
+function doLogin() { const p = document.getElementById('pwd-input').value; if (p === (localStorage.getItem('gl_pwd') || 'glcuchillos2024')) { localStorage.setItem('gl_auth', '1'); showApp(); } else { document.getElementById('login-err').textContent = 'Contraseña incorrecta'; document.getElementById('pwd-input').value = ''; } }
+function doLogout() { localStorage.removeItem('gl_auth'); location.reload(); }
+function showApp() { document.getElementById('login-screen').classList.add('hidden'); document.getElementById('app').style.display = 'block'; }
+function changePassword() { const cur = document.getElementById('pwd-cur').value, nw = document.getElementById('pwd-new').value, cf = document.getElementById('pwd-cfm').value; if (cur !== (localStorage.getItem('gl_pwd') || 'glcuchillos2024')) { toast('Contraseña actual incorrecta', 'err'); return; } if (nw.length < 6) { toast('Mínimo 6 caracteres', 'err'); return; } if (nw !== cf) { toast('Las contraseñas no coinciden', 'err'); return; } localStorage.setItem('gl_pwd', nw); toast('Contraseña actualizada ✓'); ['pwd-cur', 'pwd-new', 'pwd-cfm'].forEach(id => document.getElementById(id).value = ''); }
+document.getElementById('pwd-input').onkeydown = e => { if (e.key === 'Enter') doLogin(); };
+document.addEventListener('touchstart', e => { const card = e.target.closest('.prod-card'); const ovBtn = e.target.closest('.ov-btn'); if (!ovBtn) document.querySelectorAll('.prod-card.touch-active').forEach(c => { if (c !== card) c.classList.remove('touch-active'); }); if (card && !ovBtn) card.classList.toggle('touch-active'); else if (!card) document.querySelectorAll('.prod-card.touch-active').forEach(c => c.classList.remove('touch-active')); }, { passive: true });
+
+// Inicialización
+(async function init() {
+  if (localStorage.getItem('gl_auth') === '1') showApp();
+  await loadData();
+  loadTheme();
+  loadGhCfg();
+  loadImgbbCfg();
+  fillSettings();
+  renderAll();
+  const lastPub = localStorage.getItem('gl_last_publish');
+  if (!lastPub || Date.now() - parseInt(lastPub) > 5000) {
+    document.getElementById('save-banner').classList.add('show');
+  }
+})();
 </script>
 </body>
 </html>
