@@ -470,7 +470,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .fact-line{width:1px;height:28px;background:var(--silver-line)}
 
 /* ═══════════════════════════════════════
-   MADERAS
+   MADERAS (SOLO Maderas reales del catálogo)
 ═══════════════════════════════════════ */
 .maderas-section{
   padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem);
@@ -817,7 +817,6 @@ footer{
 }
 
 /* ═══ HERO FORGE SCROLL ═══ */
-/* ═══ HERO FORGE SCROLL ═══ */
 .hero{
   height:550vh !important;
   min-height:unset;
@@ -828,7 +827,7 @@ footer{
   position:sticky;
   top:0;
   height:100vh;
-  display:block;          /* ← antes era grid 1fr 1fr */
+  display:block;          /* antes era grid 1fr 1fr */
   overflow:hidden;
 }
 .hero-sticky .hero-atmosphere{
@@ -1287,7 +1286,7 @@ footer{
   </div>
 </section>
 
-<!-- ═══════ MADERAS ═══════ -->
+<!-- ═══════ MADERAS (SOLO MADERAS REALES DEL CATÁLOGO) ═══════ -->
 <section class="maderas-section" id="maderas">
   <div class="maderas-inner">
     <div class="maderas-header rv">
@@ -1299,6 +1298,7 @@ footer{
       <p class="section-sub" style="margin-top:.8rem">Cada especie tiene su carácter. Todas seleccionadas a mano por dureza, veta y belleza.</p>
     </div>
     <div class="maderas-grid">
+      <!-- Lapacho -->
       <div class="madera-card rv">
         <div class="madera-swatch" style="background:linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10)"></div>
         <div class="madera-tag">Nativa Argentina</div>
@@ -1307,14 +1307,16 @@ footer{
         <div class="madera-desc">Una de las maderas más duras del mundo. Veta definida en tonos miel y caoba. Altamente resistente a la humedad.</div>
         <div class="madera-tags"><span class="madera-spec-tag">Dureza extrema</span><span class="madera-spec-tag">Anti-humedad</span><span class="madera-spec-tag">Veta pronunciada</span></div>
       </div>
+      <!-- Guayubira -->
       <div class="madera-card rv d1">
-        <div class="madera-swatch" style="background:linear-gradient(90deg,#1a0a04,#3d1c0a,#5c2e14,#3a1808)"></div>
+        <div class="madera-swatch" style="background:linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)"></div>
         <div class="madera-tag">Nativa Argentina</div>
-        <div class="madera-name">Quebracho</div>
-        <div class="madera-origin">Santiago del Estero · Chaco</div>
-        <div class="madera-desc">El árbol símbolo del norte. Tonos oscuros casi negros con reflejos rojizos. Peso y solidez incomparables.</div>
-        <div class="madera-tags"><span class="madera-spec-tag">Muy pesada</span><span class="madera-spec-tag">Longevidad</span><span class="madera-spec-tag">Tono oscuro</span></div>
+        <div class="madera-name">Guayubira</div>
+        <div class="madera-origin">Litoral · Mesopotamia</div>
+        <div class="madera-desc">Madera clara, textura homogénea. Tonos crema a miel pálido. Muy usada en facones y tradición gaucha.</div>
+        <div class="madera-tags"><span class="madera-spec-tag">Tono claro</span><span class="madera-spec-tag">Liviana</span><span class="madera-spec-tag">Tradición gaucha</span></div>
       </div>
+      <!-- Nogal -->
       <div class="madera-card rv d2">
         <div class="madera-swatch" style="background:linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)"></div>
         <div class="madera-tag">Clásica</div>
@@ -1323,31 +1325,26 @@ footer{
         <div class="madera-desc">El clásico de los cuchilleros. Marrón medio con veta suave. Equilibrio perfecto entre peso y elegancia.</div>
         <div class="madera-tags"><span class="madera-spec-tag">Equilibrada</span><span class="madera-spec-tag">Textura suave</span><span class="madera-spec-tag">Agarre premium</span></div>
       </div>
+      <!-- Olivo -->
       <div class="madera-card rv d3">
-        <div class="madera-swatch" style="background:linear-gradient(90deg,#4a1a0a,#7a2e14,#9b3c1e,#6b2810)"></div>
+        <div class="madera-swatch" style="background:linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020)"></div>
         <div class="madera-tag">Exótica</div>
-        <div class="madera-name">Caoba Africana</div>
-        <div class="madera-origin">África Occidental</div>
-        <div class="madera-desc">Rojiza intensa con destellos dorados. Veta irregular que crea patrones únicos. La más buscada para colección.</div>
-        <div class="madera-tags"><span class="madera-spec-tag">Color rojizo</span><span class="madera-spec-tag">Veta única</span><span class="madera-spec-tag">Colección</span></div>
+        <div class="madera-name">Olivo</div>
+        <div class="madera-origin">Mediterráneo</div>
+        <div class="madera-desc">Dorado verdoso con vetas oscuras. Muy buscado por su belleza natural y durabilidad. Versiones "burl" y premium.</div>
+        <div class="madera-tags"><span class="madera-spec-tag">Veta única</span><span class="madera-spec-tag">Colección</span><span class="madera-spec-tag">Durabilidad</span></div>
       </div>
+      <!-- Haya -->
       <div class="madera-card rv d1">
-        <div class="madera-swatch" style="background:linear-gradient(90deg,#3d3418,#6a5c2a,#8a7432,#4e4020)"></div>
-        <div class="madera-tag">Exclusiva</div>
-        <div class="madera-name">Burl Olivo</div>
-        <div class="madera-origin">Mediterráneo · Italia</div>
-        <div class="madera-desc">El burl genera patrones swirl imposibles de repetir. Dorado verdoso con motas oscuras. Altamente exclusivo.</div>
-        <div class="madera-tags"><span class="madera-spec-tag">Patrón único</span><span class="madera-spec-tag">Irrepetible</span><span class="madera-spec-tag">Colección</span></div>
+        <div class="madera-swatch" style="background:linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)"></div>
+        <div class="madera-tag">Europea</div>
+        <div class="madera-name">Haya</div>
+        <div class="madera-origin">Europa</div>
+        <div class="madera-desc">Madera clara y homogénea, muy estable. Proporciona un agarre cómodo y un acabado suave. Ideal para cocina.</div>
+        <div class="madera-tags"><span class="madera-spec-tag">Estable</span><span class="madera-spec-tag">Agarre cómodo</span><span class="madera-spec-tag">Cocina</span></div>
       </div>
+      <!-- Wengue -->
       <div class="madera-card rv d2">
-        <div class="madera-swatch" style="background:linear-gradient(90deg,#5a3c1a,#7a5424,#9a6c30,#6a4a1e)"></div>
-        <div class="madera-tag">Nativa Argentina</div>
-        <div class="madera-name">Palo Santo</div>
-        <div class="madera-origin">Gran Chaco · Norte Argentino</div>
-        <div class="madera-desc">Fragancia natural que perdura años. Tonos dorado-anaranjado. Muy buscado para piezas de regalo.</div>
-        <div class="madera-tags"><span class="madera-spec-tag">Aroma natural</span><span class="madera-spec-tag">Tono dorado</span><span class="madera-spec-tag">Regalo</span></div>
-      </div>
-      <div class="madera-card rv d3">
         <div class="madera-swatch" style="background:linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c)"></div>
         <div class="madera-tag">Exótica Premium</div>
         <div class="madera-name">Wengue</div>
@@ -1355,13 +1352,23 @@ footer{
         <div class="madera-desc">Negro profundo con vetas lineales en chocolate. Alta resistencia. El mango más oscuro de la colección.</div>
         <div class="madera-tags"><span class="madera-spec-tag">Negro intenso</span><span class="madera-spec-tag">Veta lineal</span><span class="madera-spec-tag">Alta densidad</span></div>
       </div>
+      <!-- Pau Ferro -->
+      <div class="madera-card rv d3">
+        <div class="madera-swatch" style="background:linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)"></div>
+        <div class="madera-tag">Sudamericana</div>
+        <div class="madera-name">Pau Ferro</div>
+        <div class="madera-origin">Brasil · Paraguay</div>
+        <div class="madera-desc">Madera dura de tonos rojizo a marrón oscuro. Veta fina y muy resistente al desgaste. Muy apreciada.</div>
+        <div class="madera-tags"><span class="madera-spec-tag">Resistente</span><span class="madera-spec-tag">Veta fina</span><span class="madera-spec-tag">Tono rojizo</span></div>
+      </div>
+      <!-- Micarta -->
       <div class="madera-card rv d4">
-        <div class="madera-swatch" style="background:linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)"></div>
-        <div class="madera-tag">Nativa Argentina</div>
-        <div class="madera-name">Guayubira</div>
-        <div class="madera-origin">Litoral · Mesopotamia</div>
-        <div class="madera-desc">Madera clara, textura homogénea. Tonos crema a miel pálido. Muy usada en facones y tradición gaucha.</div>
-        <div class="madera-tags"><span class="madera-spec-tag">Tono claro</span><span class="madera-spec-tag">Liviana</span><span class="madera-spec-tag">Tradición gaucha</span></div>
+        <div class="madera-swatch" style="background:linear-gradient(90deg,#1a1a1a,#2e2e2e,#404040,#1a1a1a)"></div>
+        <div class="madera-tag">Sintético</div>
+        <div class="madera-name">Micarta</div>
+        <div class="madera-origin">Industrial (EE.UU. / Europa)</div>
+        <div class="madera-desc">Resistente a la humedad, temperaturas extremas y golpes. Se presenta en colores clásicos (negro, marfil, naranja).</div>
+        <div class="madera-tags"><span class="madera-spec-tag">Anti-humedad</span><span class="madera-spec-tag">Durabilidad</span><span class="madera-spec-tag">Táctil</span></div>
       </div>
     </div>
   </div>
@@ -1455,7 +1462,7 @@ footer{
         </div>
         <div class="material-content">
           <div class="material-eyebrow">Maderas nobles</div>
-          <div class="material-name">Lapacho · Quebracho · Nogal · +20</div>
+          <div class="material-name">Lapacho · Guayubira · Nogal · +20</div>
           <div class="material-desc">Nativas, exóticas y exclusivas. Cada mango es único por definición — la veta natural garantiza que ninguna pieza se repite.</div>
           <div class="material-specs">
             <span class="material-spec">Nativas</span>
@@ -1842,23 +1849,15 @@ sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)}
 
 /* ═══════════════════════════════════════
    HERO FORGE SCROLL ANIMATION
-   Mapea el scrollY dentro del hero a 5
-   etapas de revelado de fotos.
-   Cada foto usa mix-blend-mode:screen
-   — el negro desaparece, las piezas se
-   fusionan visualmente sin cortes.
+   (idéntico al original, sin cambios)
 ═══════════════════════════════════════ */
 (function(){
-
 const TOTAL = 5;
 const photos = Array.from({length:TOTAL}, (_,i) => document.getElementById(`kp-${i+1}`));
 const dots   = Array.from({length:TOTAL}, (_,i) => document.getElementById(`fpd-${i+1}`));
 const fill   = document.getElementById('fp-fill');
 const sparksEl = document.getElementById('hero-sparks');
 const heroSection = document.getElementById('inicio');
-
-// Embed real images as data-src → src swap para asegurar carga
-// Las imágenes vienen de los uploads
 const IMG_SRCS = [
   'image_9640d180__1_.png',   // cuchillo completo
   'image_da36b34d__1_.png',   // punta macro
@@ -1866,21 +1865,14 @@ const IMG_SRCS = [
   'image_c6c4f98e__1_.png',   // mango metal
   'image_26afb88__1_.png',    // mango madera
 ];
-
-// Asignar srcs reales (ajustar paths según estructura del servidor)
 photos.forEach((ph, i) => {
   if(ph) {
     const img = ph.querySelector('img');
-    if(img) {
-      // Intentar ruta relativa (ajustar según donde estén las fotos)
-      img.src = IMG_SRCS[i];
-    }
+    if(img) img.src = IMG_SRCS[i];
   }
 });
-
 let lastRevealed = -1;
 let ticking = false;
-
 function getHeroProgress() {
   if(!heroSection) return 0;
   const rect  = heroSection.getBoundingClientRect();
@@ -1888,7 +1880,6 @@ function getHeroProgress() {
   if(total <= 0) return 1;
   return Math.max(0, Math.min(1, -rect.top / total));
 }
-
 function emitSparks() {
   if(!sparksEl) return;
   const r = sparksEl.getBoundingClientRect();
@@ -1911,17 +1902,10 @@ function emitSparks() {
     setTimeout(() => s.remove(), 800);
   }
 }
-
 function update() {
   const p      = getHeroProgress();
-  // Cuántas fotos mostrar: progreso 0→0 fotos, progreso 1→5 fotos
-  // Cada foto ocupa 1/5 del recorrido con un pequeño solapamiento
   const target = Math.min(TOTAL, Math.floor(p * TOTAL * 1.08));
-
-  // Barra de progreso
   if(fill) fill.style.height = (p * 100).toFixed(1) + '%';
-
-  // Revelar / ocultar fotos
   photos.forEach((ph, i) => {
     if(!ph) return;
     const shouldShow = i === target - 1;
@@ -1934,42 +1918,32 @@ function update() {
       }
     }
   });
-
-  // Puntos del indicador
   dots.forEach((d, i) => {
     if(!d) return;
     d.classList.toggle('fp-lit', i < target);
   });
-
   lastRevealed = target - 1;
   ticking = false;
 }
-
 window.addEventListener('scroll', () => {
   if(!ticking) {
     ticking = true;
     requestAnimationFrame(update);
   }
 }, {passive:true});
-
-// Correr al cargar
 requestAnimationFrame(update);
-
 })();
 
 /* ═══════════════════════════════════════
    ARTESANO MEDIA CROSSFADE
-   Alterna imagen ↔ video con transición suave
 ═══════════════════════════════════════ */
 (function(){
   const img   = document.getElementById('art-img');
   const vid   = document.getElementById('art-vid');
   const dots  = [document.getElementById('art-dot-0'), document.getElementById('art-dot-1')];
   if(!img || !vid) return;
-
-  let current = 0; // 0 = imagen, 1 = video
-  const SHOW_IMG_MS = 6000;   // cuánto tiempo se muestra la foto
-
+  let current = 0;
+  const SHOW_IMG_MS = 6000;
   function setActive(idx){
     current = idx;
     if(idx === 0){
@@ -1982,55 +1956,31 @@ requestAnimationFrame(update);
       vid.play().catch(()=>{});
       vid.classList.add('art-media--active');
     }
-    dots.forEach((d,i)=>{
-      d.classList.toggle('active', i === idx);
-    });
+    dots.forEach((d,i)=>{ d.classList.toggle('active', i === idx); });
   }
-
-  // Iniciar con imagen activa
   setActive(0);
-  dots[0].classList.add('active');
-
-  // Después de SHOW_IMG_MS, pasar al video
   let imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS);
-
-  // Cuando el video termina, volver a la imagen
   vid.addEventListener('ended', ()=>{
     setActive(0);
     clearTimeout(imgTimer);
     imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS);
   });
-
-  // Click en puntos para cambiar manualmente
   dots[0].addEventListener('click', ()=>{ clearTimeout(imgTimer); setActive(0); imgTimer = setTimeout(()=> setActive(1), SHOW_IMG_MS); });
   dots[1].addEventListener('click', ()=>{ clearTimeout(imgTimer); setActive(1); });
 })();
 
 /* ═══════════════════════════════════════
-   FORGE SPARKS CANVAS — fondo de chispas
-   Simula lluvia de chispas de forjado
-   detrás de las animaciones del cuchillo.
-   mix-blend-mode:screen → el negro
-   desaparece, solo brillan las chispas.
+   FORGE SPARKS CANVAS (fondo de chispas)
+   (idéntico al original)
 ═══════════════════════════════════════ */
 (function(){
   const canvas = document.getElementById('forge-sparks-canvas');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
-
-  // Colores de chispa: ember, gold, blanco caliente
-  const COLORS = [
-    'rgba(242,131,26,',   // ember naranja
-    'rgba(212,165,53,',   // gold
-    'rgba(255,200,80,',   // amarillo caliente
-    'rgba(255,240,200,',  // blanco caliente
-    'rgba(224,98,15,',    // ember oscuro
-  ];
-
+  const COLORS = ['rgba(242,131,26,','rgba(212,165,53,','rgba(255,200,80,','rgba(255,240,200,','rgba(224,98,15,'];
   let W, H;
   const sparks = [];
   const EMBERS = [];
-
   function resize(){
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = canvas.offsetWidth;
@@ -2041,12 +1991,8 @@ requestAnimationFrame(update);
   }
   resize();
   window.addEventListener('resize', resize, {passive:true});
-
-  // Punto de origen de las chispas: zona inferior-centro del hero-right
-  // (simula el yunque / la forja)
   function originX(){ return W * (0.35 + Math.random() * 0.35) }
   function originY(){ return H * (0.52 + Math.random() * 0.15) }
-
   class Spark {
     constructor(burst){
       this.reset(burst);
@@ -2054,34 +2000,25 @@ requestAnimationFrame(update);
     reset(burst){
       this.x  = originX();
       this.y  = originY();
-      const angle = -Math.PI * (0.15 + Math.random() * 0.7); // arco hacia arriba
-      const speed = burst
-        ? (2.5 + Math.random() * 5.5)
-        : (0.8 + Math.random() * 3.2);
+      const angle = -Math.PI * (0.15 + Math.random() * 0.7);
+      const speed = burst ? (2.5 + Math.random() * 5.5) : (0.8 + Math.random() * 3.2);
       this.vx  = Math.cos(angle) * speed * (Math.random() > .5 ? 1 : -1);
       this.vy  = Math.sin(angle) * speed - (burst ? 1.5 : 0.5);
       this.gravity = 0.06 + Math.random() * 0.05;
       this.life    = 0;
-      this.maxLife = burst
-        ? (55 + Math.random() * 80)
-        : (30 + Math.random() * 60);
-      this.size  = burst
-        ? (1.2 + Math.random() * 2.2)
-        : (0.6 + Math.random() * 1.6);
+      this.maxLife = burst ? (55 + Math.random() * 80) : (30 + Math.random() * 60);
+      this.size  = burst ? (1.2 + Math.random() * 2.2) : (0.6 + Math.random() * 1.6);
       this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
       this.trail = [];
       this.maxTrail = Math.floor(3 + Math.random() * 5);
-      this.drift = (Math.random() - .5) * 0.04; // deriva lateral suave
+      this.drift = (Math.random() - .5) * 0.04;
       this.twinkle = Math.random() > .6;
     }
     update(){
-      // guardar trail
       this.trail.push({x: this.x, y: this.y});
       if(this.trail.length > this.maxTrail) this.trail.shift();
-
       this.vx += this.drift;
       this.vy += this.gravity;
-      // pequeña resistencia del aire
       this.vx *= 0.992;
       this.vy *= 0.995;
       this.x  += this.vx;
@@ -2092,8 +2029,6 @@ requestAnimationFrame(update);
     draw(ctx){
       const t  = this.life / this.maxLife;
       const alpha = Math.max(0, 1 - t * t) * (this.twinkle ? (.5 + .5 * Math.sin(this.life * .4)) : 1);
-
-      // Trail
       for(let i = 0; i < this.trail.length; i++){
         const ta = (i / this.trail.length) * alpha * 0.4;
         ctx.beginPath();
@@ -2101,14 +2036,10 @@ requestAnimationFrame(update);
         ctx.fillStyle = this.color + ta + ')';
         ctx.fill();
       }
-
-      // Core
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
       ctx.fillStyle = this.color + alpha + ')';
       ctx.fill();
-
-      // Glow halo
       const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3.5);
       grd.addColorStop(0, this.color + (alpha * .45) + ')');
       grd.addColorStop(1, this.color + '0)');
@@ -2118,11 +2049,8 @@ requestAnimationFrame(update);
       ctx.fill();
     }
   }
-
   class Ember {
-    constructor(){
-      this.reset();
-    }
+    constructor(){ this.reset(); }
     reset(){
       this.x  = W * (.2 + Math.random() * .6);
       this.y  = H * (.3 + Math.random() * .5);
@@ -2148,57 +2076,26 @@ requestAnimationFrame(update);
       ctx.fill();
     }
   }
-
-  // Inicializar con un burst inicial
-  function burst(n){
-    for(let i = 0; i < n; i++) sparks.push(new Spark(true));
-  }
+  function burst(n){ for(let i = 0; i < n; i++) sparks.push(new Spark(true)); }
   burst(40);
-
-  // Pulsos periódicos (como golpes de martillo)
   let nextBurst = 0;
-  function scheduleBurst(){
-    nextBurst = Date.now() + 1800 + Math.random() * 2400;
-  }
+  function scheduleBurst(){ nextBurst = Date.now() + 1800 + Math.random() * 2400; }
   scheduleBurst();
-
-  // Inicializar brasas flotantes
   for(let i = 0; i < 18; i++) EMBERS.push(new Ember());
-
   let frame = 0;
   function loop(){
     requestAnimationFrame(loop);
     ctx.clearRect(0, 0, W, H);
-
     frame++;
-
-    // Agregar sparks continuos (flujo lento base)
-    if(frame % 4 === 0 && sparks.length < 120){
-      sparks.push(new Spark(false));
-    }
-
-    // Burst periódico
-    if(Date.now() > nextBurst){
-      burst(12 + Math.floor(Math.random() * 18));
-      scheduleBurst();
-    }
-
-    // Actualizar y dibujar sparks
+    if(frame % 4 === 0 && sparks.length < 120) sparks.push(new Spark(false));
+    if(Date.now() > nextBurst){ burst(12 + Math.floor(Math.random() * 18)); scheduleBurst(); }
     for(let i = sparks.length - 1; i >= 0; i--){
-      if(!sparks[i].update()){
-        sparks.splice(i, 1);
-      } else {
-        sparks[i].draw(ctx);
-      }
+      if(!sparks[i].update()) sparks.splice(i, 1);
+      else sparks[i].draw(ctx);
     }
-
-    // Actualizar y dibujar brasas flotantes
     for(let i = EMBERS.length - 1; i >= 0; i--){
-      if(!EMBERS[i].update()){
-        EMBERS[i].reset();
-      } else {
-        EMBERS[i].draw(ctx);
-      }
+      if(!EMBERS[i].update()) EMBERS[i].reset();
+      else EMBERS[i].draw(ctx);
     }
   }
   loop();
