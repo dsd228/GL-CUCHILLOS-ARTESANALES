@@ -215,7 +215,10 @@ padding:.22rem .55rem;background:rgba(8,8,8,.82);border:1px solid rgba(200,205,2
 backdrop-filter:blur(6px);color:rgba(232,224,208,.75);
 display:flex;align-items:center;gap:.3rem;white-space:nowrap;
 }
-
+/* SVG de la bandera argentina con colores oficiales (celeste y blanco) */
+.arg-flag-svg{
+width:14px;height:14px;display:inline-block;vertical-align:middle;
+}
 .prod-stock{position:absolute;bottom:.7rem;left:.7rem;font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .55rem;backdrop-filter:blur(8px);z-index:2}
 .prod-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--silver);transform:scaleX(0);transform-origin:left;transition:.5s var(--ease)}
 .prod-card:hover .prod-silver-line{transform:scaleX(1)}
@@ -701,7 +704,7 @@ function getFiltered() {
   return list;
 }
 
-/* ── RENDER PRODUCTS ── */
+/* ── RENDER PRODUCTS (con bandera SVG) ── */
 function renderProducts() {
   const list = getFiltered();
   const gridEl = document.getElementById('prod-grid');
@@ -735,15 +738,16 @@ function renderProducts() {
     // Wood info
     const empunadura = (p.details && p.details.empunadura) ? p.details.empunadura : (p.specs && p.specs[1] ? p.specs[1] : '');
     const woodGradient = getWoodGradient(empunadura);
-    const woodCircle = getWoodCircleColor(empunadura);
     const woodShortName = empunadura ? empunadura.split(',')[0].split('+')[0].trim() : '--';
 
     // WA messages
     const waPresupuesto = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola Gonzalo! Quiero consultar por "${p.name}" (N°${p.id}). ¿Podés darme un presupuesto o info sobre personalización?`)}`;
-    const waSeña = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola! Quiero dejar una seña por "${p.name}" (N°${p.id}). ¿Cómo lo coordinamos?`)}`;
 
     // Checkout link
     const checkoutLink = `checkout.html?id=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}`;
+
+    // SVG de la bandera argentina con colores oficiales
+    const argentinaFlagSVG = `<svg class="arg-flag-svg" viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#75AADB"/><rect y="2" width="9" height="2" fill="#FFFFFF"/><circle cx="4.5" cy="3" r="1.2" fill="#F7B229"/><circle cx="4.5" cy="3" r="0.9" fill="#FDB913"/><path d="M4.5 2.2 L4.5 3.8 M3.7 3 L5.3 3" stroke="#FDB913" stroke-width="0.2"/></svg>`;
 
     return `<div class="prod-card rv" style="transition-delay:${(i % 3) * .06}s" onclick="openProduct('${p.id}')">
       <div class="prod-wood-swatch" style="background:${woodGradient}"></div>
@@ -752,7 +756,7 @@ function renderProducts() {
         ${imgEl}
         <div class="prod-badge ${bc}">${bt}</div>
         <div class="prod-origin">
-          <span class="prod-flag">🇦🇷 Ind. Argentina</span>
+          <span class="prod-flag">${argentinaFlagSVG} Ind. Argentina</span>
           <span class="prod-flag">✈ Envíos</span>
         </div>
         ${p.promo ? `<div style="position:absolute;bottom:.7rem;right:.7rem;background:var(--silver);color:var(--jet);font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.26rem .62rem;z-index:2;">${p.promo}</div>` : ''}
