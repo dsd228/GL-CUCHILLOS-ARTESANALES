@@ -23,12 +23,14 @@ a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 
 :root{
---jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;--jet5:#222222;
---silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
---silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.16);
---cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
---serif:‘Playfair Display’,serif;--sans:‘Josefin Sans’,sans-serif;
---ease:cubic-bezier(.22,1,.36,1);
+  --jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;--jet5:#222222;
+  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
+  --silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.16);
+  --cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
+  --ember:#C8460A;--ember2:#E0620F;--ember3:#F2831A;--ember4:#FAA438;
+  --gold:#8A6520;--gold2:#B8882A;--gold3:#D4A535;
+  --serif:'Playfair Display',serif;--sans:'Josefin Sans',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
 }
 
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -263,7 +265,7 @@ display:inline-flex;align-items:center;justify-content:center;gap:.35rem;
 white-space:nowrap;text-align:center;cursor:pointer;
 }
 .prod-btn:hover{background:rgba(200,205,214,.12);border-color:var(--silver);color:var(--cream)}
-/* Pay button — Mercado Pago blue */
+/* Pay button -- Mercado Pago blue */
 .prod-btn-pay{
 background:rgba(0,158,227,.12);
 color:#5bc8f5;
@@ -274,7 +276,7 @@ background:rgba(0,158,227,.22);
 border-color:#00a8e0;
 color:#7dd8f8;
 }
-/* WA budget/personalización — green */
+/* WA budget/personalización -- green */
 .prod-btn-wa{
 background:rgba(37,211,102,.08);
 color:#4dcc7a;
@@ -436,7 +438,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
     </div>
     <h1 class="store-h1 rv d1">Colección <em>completa.</em><br>Piezas únicas.</h1>
     <div class="store-meta rv d2">
-      <span class="store-count">Mostrando <strong id="prod-count">—</strong> piezas</span>
+      <span class="store-count">Mostrando <strong id="prod-count">--</strong> piezas</span>
       <span style="width:1px;height:14px;background:var(--silver-line);display:inline-block"></span>
       <span class="store-count">🔨 Todas trabajadas a mano</span>
       <span style="width:1px;height:14px;background:var(--silver-line);display:inline-block"></span>
@@ -464,8 +466,8 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
         <span class="sort-label">Ordenar</span>
         <select id="store-sort">
           <option value="default">Destacados</option>
-          <option value="name-az">Nombre A–Z</option>
-          <option value="name-za">Nombre Z–A</option>
+          <option value="name-az">Nombre A--Z</option>
+          <option value="name-za">Nombre Z--A</option>
           <option value="avail">Disponibles primero</option>
           <option value="price-asc">Precio menor</option>
           <option value="price-desc">Precio mayor</option>
@@ -496,7 +498,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 
 <div class="cta-strip">
   <h2 class="cta-strip-h rv">¿No encontrás lo que buscás?<br><em>Lo hacemos a pedido.</em></h2>
-  <p class="cta-strip-p rv d1">Cada pieza que sale del taller es única. Si tenés algo en mente — un material, un uso, un regalo — hablemos y lo creamos juntos.</p>
+  <p class="cta-strip-p rv d1">Cada pieza que sale del taller es única. Si tenés algo en mente -- un material, un uso, un regalo -- hablemos y lo creamos juntos.</p>
   <div class="cta-strip-acts rv d2">
     <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20encargar%20una%20pieza%20personalizada" target="_blank" class="btn-wa">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
@@ -748,7 +750,7 @@ function renderProducts() {
     const empunadura = (p.details && p.details.empunadura) ? p.details.empunadura : (p.specs && p.specs[1] ? p.specs[1] : '');
     const woodGradient = getWoodGradient(empunadura);
     const woodCircle = getWoodCircleColor(empunadura);
-    const woodShortName = empunadura ? empunadura.split(',')[0].split('+')[0].trim() : '—';
+    const woodShortName = empunadura ? empunadura.split(',')[0].split('+')[0].trim() : '--';
 
     // WA messages
     const waPresupuesto = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola Gonzalo! Quiero consultar por "${p.name}" (N°${p.id}). ¿Podés darme un presupuesto o info sobre personalización?`)}`;
@@ -772,7 +774,7 @@ function renderProducts() {
         <div class="prod-silver-line"></div>
       </div>
       <div class="prod-body">
-        <p class="prod-cat">${p.category || '—'}</p>
+        <p class="prod-cat">${p.category || '--'}</p>
         <h3 class="prod-name">${p.name}</h3>
         <p class="prod-desc">${p.description || ''}</p>
         <div class="prod-specs">${specs}</div>
