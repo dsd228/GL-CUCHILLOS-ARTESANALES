@@ -913,6 +913,18 @@ footer{
   .hero-right{opacity:.5}
   .knife-photo img{object-fit:contain !important}
 }
+
+/* ── FORGE VIDEO BG (canvas sparks) ── */
+#forge-sparks-canvas{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:.72;
+  mix-blend-mode:screen;
+}
 </style>
 </head>
 <body>
@@ -1031,6 +1043,9 @@ footer{
     <svg class="hero-cut" viewBox="0 0 80 800" preserveAspectRatio="none">
       <polygon points="0,0 80,0 0,800" fill="#080808"/>
     </svg>
+
+    <!-- FORGE SPARKS CANVAS — fondo de chispas animadas -->
+    <canvas id="forge-sparks-canvas" aria-hidden="true"></canvas>
 
     <!-- FOTO STACK — 5 imágenes reales apiladas con mix-blend-mode:screen -->
     <div class="knife-photo-stack">
@@ -1893,6 +1908,202 @@ window.addEventListener('scroll', () => {
 // Correr al cargar
 requestAnimationFrame(update);
 
+})();
+
+/* ═══════════════════════════════════════
+   FORGE SPARKS CANVAS — fondo de chispas
+   Simula lluvia de chispas de forjado
+   detrás de las animaciones del cuchillo.
+   mix-blend-mode:screen → el negro
+   desaparece, solo brillan las chispas.
+═══════════════════════════════════════ */
+(function(){
+  const canvas = document.getElementById('forge-sparks-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Colores de chispa: ember, gold, blanco caliente
+  const COLORS = [
+    'rgba(242,131,26,',   // ember naranja
+    'rgba(212,165,53,',   // gold
+    'rgba(255,200,80,',   // amarillo caliente
+    'rgba(255,240,200,',  // blanco caliente
+    'rgba(224,98,15,',    // ember oscuro
+  ];
+
+  let W, H;
+  const sparks = [];
+  const EMBERS = [];
+
+  function resize(){
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    canvas.width  = W;
+    canvas.height = H;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  // Punto de origen de las chispas: zona inferior-centro del hero-right
+  // (simula el yunque / la forja)
+  function originX(){ return W * (0.35 + Math.random() * 0.35) }
+  function originY(){ return H * (0.52 + Math.random() * 0.15) }
+
+  class Spark {
+    constructor(burst){
+      this.reset(burst);
+    }
+    reset(burst){
+      this.x  = originX();
+      this.y  = originY();
+      const angle = -Math.PI * (0.15 + Math.random() * 0.7); // arco hacia arriba
+      const speed = burst
+        ? (2.5 + Math.random() * 5.5)
+        : (0.8 + Math.random() * 3.2);
+      this.vx  = Math.cos(angle) * speed * (Math.random() > .5 ? 1 : -1);
+      this.vy  = Math.sin(angle) * speed - (burst ? 1.5 : 0.5);
+      this.gravity = 0.06 + Math.random() * 0.05;
+      this.life    = 0;
+      this.maxLife = burst
+        ? (55 + Math.random() * 80)
+        : (30 + Math.random() * 60);
+      this.size  = burst
+        ? (1.2 + Math.random() * 2.2)
+        : (0.6 + Math.random() * 1.6);
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.trail = [];
+      this.maxTrail = Math.floor(3 + Math.random() * 5);
+      this.drift = (Math.random() - .5) * 0.04; // deriva lateral suave
+      this.twinkle = Math.random() > .6;
+    }
+    update(){
+      // guardar trail
+      this.trail.push({x: this.x, y: this.y});
+      if(this.trail.length > this.maxTrail) this.trail.shift();
+
+      this.vx += this.drift;
+      this.vy += this.gravity;
+      // pequeña resistencia del aire
+      this.vx *= 0.992;
+      this.vy *= 0.995;
+      this.x  += this.vx;
+      this.y  += this.vy;
+      this.life++;
+      return this.life < this.maxLife && this.y < H + 20;
+    }
+    draw(ctx){
+      const t  = this.life / this.maxLife;
+      const alpha = Math.max(0, 1 - t * t) * (this.twinkle ? (.5 + .5 * Math.sin(this.life * .4)) : 1);
+
+      // Trail
+      for(let i = 0; i < this.trail.length; i++){
+        const ta = (i / this.trail.length) * alpha * 0.4;
+        ctx.beginPath();
+        ctx.arc(this.trail[i].x, this.trail[i].y, this.size * .4, 0, Math.PI*2);
+        ctx.fillStyle = this.color + ta + ')';
+        ctx.fill();
+      }
+
+      // Core
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+      ctx.fillStyle = this.color + alpha + ')';
+      ctx.fill();
+
+      // Glow halo
+      const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3.5);
+      grd.addColorStop(0, this.color + (alpha * .45) + ')');
+      grd.addColorStop(1, this.color + '0)');
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 3.5, 0, Math.PI*2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+    }
+  }
+
+  class Ember {
+    constructor(){
+      this.reset();
+    }
+    reset(){
+      this.x  = W * (.2 + Math.random() * .6);
+      this.y  = H * (.3 + Math.random() * .5);
+      this.r  = .4 + Math.random() * 1.1;
+      this.life = 0;
+      this.maxLife = 60 + Math.random() * 120;
+      this.vx = (Math.random() - .5) * .3;
+      this.vy = -(0.05 + Math.random() * .25);
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    }
+    update(){
+      this.x  += this.vx;
+      this.y  += this.vy;
+      this.life++;
+      return this.life < this.maxLife;
+    }
+    draw(ctx){
+      const t = this.life / this.maxLife;
+      const alpha = Math.max(0, Math.sin(t * Math.PI)) * .6;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = this.color + alpha + ')';
+      ctx.fill();
+    }
+  }
+
+  // Inicializar con un burst inicial
+  function burst(n){
+    for(let i = 0; i < n; i++) sparks.push(new Spark(true));
+  }
+  burst(40);
+
+  // Pulsos periódicos (como golpes de martillo)
+  let nextBurst = 0;
+  function scheduleBurst(){
+    nextBurst = Date.now() + 1800 + Math.random() * 2400;
+  }
+  scheduleBurst();
+
+  // Inicializar brasas flotantes
+  for(let i = 0; i < 18; i++) EMBERS.push(new Ember());
+
+  let frame = 0;
+  function loop(){
+    requestAnimationFrame(loop);
+    ctx.clearRect(0, 0, W, H);
+
+    frame++;
+
+    // Agregar sparks continuos (flujo lento base)
+    if(frame % 4 === 0 && sparks.length < 120){
+      sparks.push(new Spark(false));
+    }
+
+    // Burst periódico
+    if(Date.now() > nextBurst){
+      burst(12 + Math.floor(Math.random() * 18));
+      scheduleBurst();
+    }
+
+    // Actualizar y dibujar sparks
+    for(let i = sparks.length - 1; i >= 0; i--){
+      if(!sparks[i].update()){
+        sparks.splice(i, 1);
+      } else {
+        sparks[i].draw(ctx);
+      }
+    }
+
+    // Actualizar y dibujar brasas flotantes
+    for(let i = EMBERS.length - 1; i >= 0; i--){
+      if(!EMBERS[i].update()){
+        EMBERS[i].reset();
+      } else {
+        EMBERS[i].draw(ctx);
+      }
+    }
+  }
+  loop();
 })();
 </script>
 </body>
