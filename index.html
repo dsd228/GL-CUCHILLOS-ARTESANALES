@@ -131,7 +131,6 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 
 .hero-eyebrow{
   display:flex;align-items:center;gap:14px;margin-bottom:32px;
-  animation:fadeIn .8s var(--ease) .2s both;
 }
 .eyebrow-line{width:28px;height:1px;background:var(--ember2)}
 .eyebrow-text{font-size:9.5px;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:var(--ember2)}
@@ -817,12 +816,22 @@ footer{
 }
 
 /* ═══════════════════════════════════════
-   HERO — NUEVA LÓGICA FULLSCREEN SCROLL
+   HERO — CINEMATIC FULLSCREEN SCROLL v2
+   
+   Estado inicial (p=0):
+   - Cuchillo SIN FONDO: centrado, tamaño épico (80vw), brilla solo
+   - Fondo con foto: INVISIBLE (opacity 0)
+   - Texto: INVISIBLE (opacity 0), escondido abajo
+
+   Al hacer scroll (p: 0→1):
+   - Cuchillo: se aleja hacia atrás (scale down), se desvanece
+   - Fondo con foto: emerge desde la oscuridad (opacity 0→1)
+   - Texto: aparece suavemente cuando el bg está listo
 ═══════════════════════════════════════ */
 
-/* Hero ocupa 250vh para tener margen de scroll */
+/* Hero ocupa 280vh para dar bastante recorrido */
 .hero {
-  height: 250vh !important;
+  height: 280vh !important;
   min-height: unset;
   display: block !important;
   overflow: visible !important;
@@ -836,6 +845,7 @@ footer{
   width: 100%;
   overflow: hidden;
   display: block;
+  background: #080808;
 }
 
 /* Atmosphere */
@@ -848,74 +858,73 @@ footer{
   animation: forgeBreath 5s ease-in-out infinite;
 }
 
-/* ── CAPA 1: imagen de fondo con overlay ── */
-/* Ocupa todo el hero-sticky, siempre presente */
+/* ── CAPA 1: imagen de fondo ── */
+/* Empieza en opacity 0 — aparece al scrollear */
 .hero-bg-layer {
   position: absolute;
   inset: 0;
   z-index: 1;
   overflow: hidden;
+  opacity: 0; /* JS la sube */
 }
 .hero-bg-layer img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 35%;
   display: block;
-  transform: scale(1.04); /* pequeño zoom para parallax */
-  transition: transform .1s linear;
+  transform: scale(1.08);
+  will-change: transform;
 }
-/* Overlay oscuro 50% */
+/* Overlay oscuro sobre la foto */
 .hero-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8,8,8,.50);
+  background: rgba(8,8,8,.45);
   z-index: 2;
 }
-/* Gradiente extra en la izquierda para legibilidad del texto */
+/* Gradiente izquierda para legibilidad del texto */
 .hero-bg-overlay::after {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(
     to right,
-    rgba(8,8,8,.70) 0%,
-    rgba(8,8,8,.35) 45%,
-    transparent 75%
+    rgba(8,8,8,.82) 0%,
+    rgba(8,8,8,.45) 42%,
+    transparent 72%
   );
 }
 
-/* ── CAPA 2: cuchillo sin fondo (nakiri) ── */
+/* ── CAPA 2: CUCHILLO SIN FONDO — Hero principal ── */
+/* En el estado inicial ocupa toda la pantalla, CENTRADO */
 .hero-knife-layer {
   position: absolute;
   inset: 0;
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;   /* centrado horizontal */
   pointer-events: none;
+  will-change: opacity, transform;
 }
 .hero-knife-layer img {
-  width: clamp(340px, 62%, 780px);
+  /* Ocupa prácticamente toda la pantalla */
+  width: min(88vw, 92vh);
   height: 100%;
   object-fit: contain;
   object-position: center;
   display: block;
   mix-blend-mode: screen;
   filter:
-    drop-shadow(0 0 60px rgba(200,70,10,.30))
-    drop-shadow(0 0 18px rgba(212,165,53,.22))
-    drop-shadow(0 24px 60px rgba(0,0,0,.8));
-  /* Animación de entrada */
-  animation: knifeReveal 1.5s cubic-bezier(.22,1,.36,1) .2s both;
+    drop-shadow(0 0 80px rgba(200,70,10,.45))
+    drop-shadow(0 0 30px rgba(212,165,53,.30))
+    drop-shadow(0 0 120px rgba(200,70,10,.20));
+  /* Animación de entrada épica */
+  animation: knifeReveal 1.8s cubic-bezier(.22,1,.36,1) .15s both;
   will-change: opacity, transform, filter;
-  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
-}
-
-/* Estado cuando hay scroll: el nakiri se va para atrás */
-.hero-knife-layer img.knife-recede {
-  /* se controla via JS con style directo */
 }
 
 /* ── CAPA 3: texto / hero-left ── */
+/* Empieza invisible — aparece al scrollear */
 .hero-left {
   position: absolute !important;
   top: 0; left: 0; bottom: 0;
@@ -925,6 +934,10 @@ footer{
   flex-direction: column;
   justify-content: center;
   padding: 120px clamp(2rem,5vw,5rem) 80px !important;
+  opacity: 0;        /* JS la sube */
+  transform: translateY(18px);
+  will-change: opacity, transform;
+  /* Sin transition CSS — el JS hace el update frame a frame */
 }
 
 /* ── SPARKS canvas (decorativo) ── */
@@ -933,7 +946,7 @@ footer{
   inset: 0; z-index: 5;
   width: 100%; height: 100%;
   pointer-events: none;
-  opacity: .50;
+  opacity: .55;
   mix-blend-mode: screen;
 }
 
@@ -944,6 +957,9 @@ footer{
   border: 1px solid var(--gold2);
   background: rgba(8,8,6,.88); backdrop-filter: blur(8px);
   padding: 12px 18px;
+  opacity: 0;    /* aparece con el texto */
+  transform: translateY(10px);
+  will-change: opacity, transform;
 }
 .hero-origin {
   position: absolute;
@@ -953,38 +969,119 @@ footer{
   font-size: 8.5px; font-weight: 500; letter-spacing: .3em;
   text-transform: uppercase; color: var(--muted);
   display: flex; align-items: center; gap: 8px;
+  opacity: 0;
 }
 .hero-origin::before {
   content: ''; display: block;
   width: 1px; height: 28px; background: var(--silver-line);
 }
 
-/* Animaciones cinematográficas */
-@keyframes knifeReveal {
-  0%   { opacity:0; transform: translateX(80px) scale(.9) rotate(-3deg); filter: blur(20px) brightness(0) drop-shadow(0 0 0 transparent); }
-  50%  { filter: blur(3px) brightness(.7); }
-  75%  { transform: translateX(-8px) scale(1.01) rotate(.3deg); }
-  100% { opacity:1; transform: translateX(0) scale(1) rotate(0); filter: drop-shadow(0 0 60px rgba(200,70,10,.30)) drop-shadow(0 0 18px rgba(212,165,53,.22)) drop-shadow(0 24px 60px rgba(0,0,0,.8)); }
+/* ── SCROLL INDICATOR — visible desde el inicio ── */
+.hero-scroll {
+  position: absolute !important;
+  bottom: 32px;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 1s var(--ease) 1.8s both;
+}
+.scroll-track {
+  width: 1px !important;
+  height: 40px !important;
+  background: transparent !important;
+  position: relative;
+  overflow: hidden;
+}
+.scroll-track::after {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: var(--ember2) !important;
+  animation: scrollLine 2s ease-in-out infinite !important;
+}
+@keyframes scrollLine {
+  0%  { top: -100% }
+  50% { top: 0%    }
+  100%{ top: 100%  }
+}
+.scroll-label {
+  font-size: 8px !important;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(200,188,168,.4);
 }
 
-/* Scan line de entrada */
+/* ── KEYFRAMES ── */
+@keyframes knifeReveal {
+  0%   {
+    opacity: 0;
+    transform: scale(1.25) rotate(-2deg);
+    filter: blur(32px) brightness(0);
+  }
+  30%  {
+    opacity: .7;
+    filter: blur(8px) brightness(.5)
+            drop-shadow(0 0 40px rgba(200,70,10,.2));
+  }
+  65%  {
+    transform: scale(1.04) rotate(.4deg);
+    filter: blur(2px) brightness(.9)
+            drop-shadow(0 0 60px rgba(200,70,10,.35));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter:
+      drop-shadow(0 0 80px rgba(200,70,10,.45))
+      drop-shadow(0 0 30px rgba(212,165,53,.30))
+      drop-shadow(0 0 120px rgba(200,70,10,.20));
+  }
+}
+
+@keyframes bgZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.0); }
+}
+
+/* Ocultar elementos heredados que no usamos */
 .hero-right { display: none !important; }
 .hero-cut { display: none !important; }
-
-/* Progreso barra — mantenemos para compatibilidad pero la ocultamos */
 .forge-progress-bar { display: none !important; }
 #hero-sparks { display: none !important; }
 
 /* ── MOBILE ── */
 @media(max-width:900px) {
-  .hero-left { width: 100% !important; padding: 80px 1.5rem 40px !important; background: rgba(8,8,8,.3); }
-  .hero-knife-layer img { width: 100%; opacity: .6; mix-blend-mode: screen; }
-  .hero-bg-layer img { object-position: 65% 40%; }
+  .hero-left {
+    width: 100% !important;
+    padding: 80px 1.5rem 200px !important;
+    background: rgba(8,8,8,.15);
+  }
+  .hero-knife-layer {
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .hero-knife-layer img {
+    width: 100%;
+    height: 65%;
+    opacity: .55;
+    mix-blend-mode: screen;
+  }
+  .hero-bg-layer img { object-position: 65% 30%; }
   .hero-badge { display: none; }
   .hero-origin { display: none; }
+  .hero-scroll {
+    bottom: 24px;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 }
 @media(max-width:480px) {
-  .hero-left { padding: 70px 1.2rem 40px !important; }
+  .hero-left { padding: 70px 1.2rem 180px !important; }
   .hero-headline { font-size: clamp(34px,9vw,52px) !important; }
   .hero-headline .big { font-size: clamp(46px,13vw,72px) !important; }
   .hero-sub { font-size: 16px !important; }
@@ -992,12 +1089,6 @@ footer{
   .stat { padding:10px 14px; }
   .hero-ctas { flex-direction:column; align-items:flex-start; }
   .btn-ember,.btn-ghost { width:100%; justify-content:center; }
-}
-
-/* ── CINEMATIC micro extras ── */
-@keyframes bgZoom {
-  from { transform: scale(1.04); }
-  to   { transform: scale(1.0); }
 }
 
 </style>
@@ -1843,17 +1934,32 @@ const io=new IntersectionObserver(entries=>{
 sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)});
 
 /* ═══════════════════════════════════════
-   HERO SCROLL — KNIFE RECEDE + BG REVEAL
+   HERO SCROLL — CINEMATIC v2
+   
+   p=0: Cuchillo centrado enorme, BG oscuro, Texto invisible
+   p→1: Cuchillo se aleja/desvanece, BG emerge, Texto aparece
 ═══════════════════════════════════════ */
 (function(){
-  const heroSection = document.getElementById('inicio');
-  const knifeImg    = document.getElementById('hero-knife-img');
-  const bgLayer     = document.getElementById('hero-bg-layer');
-  const bgImg       = document.getElementById('hero-bg-img');
+  const heroSection  = document.getElementById('inicio');
+  const knifeLayer   = document.querySelector('.hero-knife-layer');
+  const knifeImg     = document.getElementById('hero-knife-img');
+  const bgLayer      = document.getElementById('hero-bg-layer');
+  const bgImg        = document.getElementById('hero-bg-img');
+  const heroLeft     = document.querySelector('.hero-left');
+  const heroBadge    = document.querySelector('.hero-badge');
+  const heroOrigin   = document.querySelector('.hero-origin');
 
   if(!heroSection || !knifeImg || !bgLayer) return;
 
   let ticking = false;
+
+  // Easing suave
+  function easeInOut(t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
 
   function getProgress() {
     const rect  = heroSection.getBoundingClientRect();
@@ -1865,42 +1971,65 @@ sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)}
   function update() {
     const p = getProgress();
 
-    /*
-      p = 0  → inicio: knife pleno, bg invisible
-      p = 1  → final:  knife se fue, bg a full 50% overlay
+    /* ────────────────────────────────────────
+       FASE 1 (p: 0 → 0.45): KNIFE recede
+       El cuchillo comienza centrado y GRANDE,
+       luego escala hacia atrás y se desvanece.
+    ──────────────────────────────────────── */
+    const kP       = Math.min(1, p / 0.55);            // normalizado [0,1]
+    const kEased   = easeInOut(kP);
+    const kOpacity = Math.max(0, 1 - kEased * 1.15);   // fade rápido
+    const kScale   = 1 - kEased * 0.38;                // 1 → 0.62 (se aleja)
+    const kBlur    = kEased * 18;                       // blur creciente
+    // Deriva sutil hacia arriba (efecto de alejarse)
+    const kTransY  = kEased * -6;                       // % hacia arriba
+    const kGlowR   = (0.45 * (1 - kEased)).toFixed(2);
 
-      Transición del knife:
-        - 0→0.5: sigue visible, se aleja (scale down + fade)
-        - 0.5→1: desaparece
+    knifeImg.style.opacity   = Math.max(0, kOpacity).toFixed(3);
+    knifeImg.style.transform = `translateY(${kTransY.toFixed(2)}%) scale(${kScale.toFixed(4)})`;
+    knifeImg.style.filter    =
+      `drop-shadow(0 0 ${Math.round(80*(1-kEased))}px rgba(200,70,10,${kGlowR})) `
+    + `drop-shadow(0 0 ${Math.round(30*(1-kEased))}px rgba(212,165,53,${(0.30*(1-kEased)).toFixed(2)})) `
+    + `blur(${kBlur.toFixed(1)}px)`;
 
-      Transición del bg:
-        - 0→0.3: invisible
-        - 0.3→0.8: aparece
-        - 0.8→1:  a full
-    */
+    /* ────────────────────────────────────────
+       FASE 2 (p: 0.15 → 0.70): BG emerge
+       La imagen de fondo sale de la oscuridad.
+    ──────────────────────────────────────── */
+    const bgStart  = 0.15;
+    const bgDur    = 0.60;
+    const bgRaw    = Math.max(0, Math.min(1, (p - bgStart) / bgDur));
+    const bgEased  = easeOut(bgRaw);
+    bgLayer.style.opacity = bgEased.toFixed(3);
 
-    // ── KNIFE ──
-    const kP      = Math.min(1, p / 0.65);          // normalizado a [0,1] en primera mitad
-    const kOpacity = Math.max(0, 1 - kP * kP);       // cuadrática: cae rápido al final
-    const kScale   = 1 - kP * 0.22;                  // de 1 a 0.78
-    const kTransX  = kP * 12;                         // se desplaza ligeramente a la derecha (%)
-    const kBlur    = kP * 12;                         // blur progresivo
-
-    knifeImg.style.opacity   = kOpacity.toFixed(3);
-    knifeImg.style.transform = `translateX(${kTransX}%) scale(${kScale.toFixed(3)})`;
-    knifeImg.style.filter    = `drop-shadow(0 0 60px rgba(200,70,10,${(0.30*(1-kP)).toFixed(2)})) `
-                             + `drop-shadow(0 24px 60px rgba(0,0,0,.8)) `
-                             + `blur(${kBlur.toFixed(1)}px)`;
-
-    // ── BG ──
-    const bgStart = 0.25;
-    const bgP     = Math.max(0, Math.min(1, (p - bgStart) / 0.55));
-    bgLayer.style.opacity = bgP.toFixed(3);
-
-    // Parallax muy suave en bg img
+    // Parallax + zoom out del BG
     if(bgImg) {
-      const shift = p * 6;  // mueve 6% hacia arriba mientras scrolleas
-      bgImg.style.transform = `scale(1.04) translateY(-${shift.toFixed(1)}%)`;
+      const bgScale = 1.08 - bgRaw * 0.06;   // 1.08 → 1.02
+      const bgShift = p * 5;                  // leve movimiento parallax
+      bgImg.style.transform = `scale(${bgScale.toFixed(4)}) translateY(-${bgShift.toFixed(1)}%)`;
+    }
+
+    /* ────────────────────────────────────────
+       FASE 3 (p: 0.35 → 0.75): TEXTO aparece
+       El copy, badge y origin emergen.
+    ──────────────────────────────────────── */
+    const txtStart = 0.32;
+    const txtDur   = 0.45;
+    const txtRaw   = Math.max(0, Math.min(1, (p - txtStart) / txtDur));
+    const txtEased = easeOut(txtRaw);
+
+    if(heroLeft) {
+      heroLeft.style.opacity   = txtEased.toFixed(3);
+      heroLeft.style.transform = `translateY(${(18*(1-txtEased)).toFixed(2)}px)`;
+    }
+    if(heroBadge) {
+      const bP = Math.max(0, (txtRaw - 0.2) / 0.8);
+      const bE = easeOut(Math.min(1, bP));
+      heroBadge.style.opacity   = bE.toFixed(3);
+      heroBadge.style.transform = `translateY(${(10*(1-bE)).toFixed(2)}px)`;
+    }
+    if(heroOrigin) {
+      heroOrigin.style.opacity = Math.min(1, txtEased * 1.5).toFixed(3);
     }
 
     ticking = false;
@@ -1910,6 +2039,7 @@ sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)}
     if(!ticking){ ticking = true; requestAnimationFrame(update); }
   }, {passive:true});
 
+  // Estado inicial: aplicar en cuanto carga
   requestAnimationFrame(update);
 })();
 
