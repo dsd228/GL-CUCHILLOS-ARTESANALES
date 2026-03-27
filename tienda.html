@@ -74,6 +74,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   transition:background .2s,transform .15s;white-space:nowrap;
 }
 .nav-cta:hover{background:var(--silver2);transform:translateY(-1px)}
+.nav-cta svg{flex-shrink:0}
 .nav-burger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;background:none;border:none}
 .nav-burger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:.3s}
 #nav-overlay{
@@ -99,7 +100,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .left-col {
   flex: 1;
   max-width: 70%;
-  min-width: 0; /* permite que el grid se ajuste */
+  min-width: 0;
   background: var(--jet);
 }
 .right-col {
@@ -158,7 +159,6 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   border-color: var(--silver);
   box-shadow: 0 12px 28px rgba(0,0,0,0.7);
 }
-/* Título opcional en el carrusel */
 .carousel-label {
   position: absolute;
   bottom: 1rem;
@@ -177,7 +177,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   backdrop-filter: blur(8px);
 }
 
-/* ── SECCIONES (productos, filtros) dentro de left-col ── */
+/* ── SECCIONES (productos, filtros) dentro de left-col, con estilos originales de tienda ── */
 .section-eyebrow{
   display:flex;align-items:center;gap:14px;margin-bottom:20px;
 }
@@ -191,7 +191,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 }
 .section-headline em{font-style:italic;color:var(--silver3)}
 
-/* CATEGORY FILTERS (dentro de left-col) */
+/* CATEGORY FILTERS */
 .cat-filters{
   background:var(--jet2);
   border-bottom:1px solid var(--silver-line);
@@ -265,7 +265,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .view-btn{width:32px;height:32px;border:1px solid var(--silver-line);background:none;color:var(--muted);display:grid;place-items:center;transition:background .2s,color .2s;cursor:pointer}
 .view-btn.active{background:var(--silver);color:var(--jet);border-color:var(--silver)}
 
-/* PRODUCT GRID */
+/* PRODUCT GRID (exactamente como en tienda original) */
 .store-body{
   padding:1.5rem clamp(1rem,2vw,2rem) 2rem;
 }
@@ -383,7 +383,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAV (idéntico al index) -->
 <nav id="nav">
   <div class="nav-brand">
     <a href="index.html" aria-label="GL Cuchillos — Inicio">
@@ -434,12 +434,8 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 
 <!-- LAYOUT PRINCIPAL: IZQUIERDA (PRODUCTOS) / DERECHA (CARRUSEL VERTICAL) -->
 <div class="main-layout">
-  <!-- COLUMNA IZQUIERDA: Filtros + Productos -->
   <div class="left-col">
-    <!-- CATEGORY FILTERS -->
     <div class="cat-filters" id="cat-filters"><div class="cat-filters-inner" id="cat-tabs"></div></div>
-
-    <!-- TOOLBAR -->
     <div class="store-toolbar">
       <div class="store-toolbar-inner">
         <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="store-search" placeholder="Buscar pieza, madera, acero…" autocomplete="off"></div>
@@ -449,14 +445,10 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
         </div>
       </div>
     </div>
-
-    <!-- PRODUCT GRID -->
     <div class="store-body" id="catalogo">
       <div id="prod-grid"></div>
     </div>
   </div>
-
-  <!-- COLUMNA DERECHA: CARRUSEL VERTICAL INFINITO -->
   <div class="right-col">
     <div class="vertical-scroll-container">
       <div class="vertical-scroll-track" id="vertical-track"></div>
@@ -465,13 +457,11 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="mini-footer">
   <span class="mini-footer-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · 🇦🇷 Industria Argentina</span>
   <a href="index.html" class="mini-footer-back"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Volver al inicio</a>
 </footer>
 
-<!-- WA FLOAT -->
 <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="wa-float" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Consultar</a>
 <button id="back-top" aria-label="Volver arriba"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
@@ -506,7 +496,6 @@ const certImages = [
 const verticalTrack = document.getElementById('vertical-track');
 function buildVerticalScroller() {
   let html = '';
-  // Duplicamos 3 veces para un loop muy fluido
   for (let rep = 0; rep < 3; rep++) {
     certImages.forEach(img => {
       html += `<div class="scroll-item" onclick="window.open('${img}', '_blank')">
@@ -553,7 +542,43 @@ function getWoodCircleColor(emp) {
   return '#2a2a2a';
 }
 
-/* ── PRODUCT LOGIC (idéntico al tienda original) ── */
+/* ── PRODUCTOS AGREGADOS: LISTA COMPLETA ── */
+const productList = [
+  { id:"760", name:"Jamonero Nº760", category:"Parrilla & Asado", description:"Jamonero tradicional, ideal para cortes precisos.", specs:["Acero 1095","Quebracho","31 cm"], badge:"avail", price:"Consultar", active:true, stock:2, details:{empunadura:"Quebracho"} },
+  { id:"769", name:"Mini Cleaver Nº769", category:"Cocina Profesional", description:"Mini cleaver versátil, gran filo.", specs:["Acero 1095","Micarta","18 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"762", name:"Fighter Nº762", category:"Caza & Campo", description:"Diseño táctico robusto para exteriores.", specs:["Acero 1095","Guayubira","28 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira"} },
+  { id:"797", name:"Verijero M Nº797 — Grabado WD", category:"Diseño Exclusivo", description:"Verijero con grabado exclusivo WD.", specs:["Acero 1095","Guayubira","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Grabado"} },
+  { id:"800", name:"Capador Nº800", category:"Caza & Campo", description:"Capador clásico, mango ergonómico.", specs:["Acero 1095","Quebracho","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"804", name:"Cleaver M Nº804", category:"Cocina Profesional", description:"Cleaver tamaño medio para carnes y vegetales.", specs:["Acero 1095","Micarta","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"799", name:"Capador Nº799", category:"Caza & Campo", description:"Capador de campo, excelente balance.", specs:["Acero 1095","Quebracho","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"803", name:"Cleaver M Nº803 — Incienso", category:"Cocina Profesional", description:"Cleaver con mango de Incienso.", specs:["Acero 1095","Incienso","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Incienso"} },
+  { id:"802", name:"Cleaver M Nº802 — Haya", category:"Cocina Profesional", description:"Cleaver con mango de Haya clara.", specs:["Acero 1095","Haya","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Haya"} },
+  { id:"801", name:"Fileteador Nº801", category:"Cocina Profesional", description:"Fileteador flexible para pescados y carnes.", specs:["Acero 1095","Olivo","29 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"813", name:"Parrillero S Nº813", category:"Parrilla & Asado", description:"Parrillero pequeño, ágil en la parrilla.", specs:["Acero 1095","Quebracho","28 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"806", name:"Capador Nº806 — Micarta Naranja", category:"Caza & Campo", description:"Capador con micarta naranja, gran agarre.", specs:["Acero 1095","Micarta Naranja","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Naranja"} },
+  { id:"811", name:"Verijero S Nº811 — Nogal Premium", category:"Caza & Campo", description:"Verijero chico con nogal premium.", specs:["Acero 1095","Nogal Premium","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Nogal Premium"} },
+  { id:"808", name:"Capador Nº808 — Baquelita+Pau Ferro", category:"Caza & Campo", description:"Capador combinación Baquelita + Pau Ferro.", specs:["Acero 1095","Baquelita+Pau Ferro","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Baquelita+Pau Ferro"} },
+  { id:"818", name:"Parrillero M Nº818", category:"Parrilla & Asado", description:"Parrillero mediano, versátil y preciso.", specs:["Acero 1095","Guayubira","30 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira"} },
+  { id:"816", name:"Fileteador Nº816 — Olivo", category:"Cocina Profesional", description:"Fileteador con mango de olivo.", specs:["Acero 1095","Olivo","30 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"817", name:"Verijero S Nº817 — Haya Europea", category:"Caza & Campo", description:"Verijero pequeño, haya europea.", specs:["Acero 1095","Haya Europea","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Haya Europea"} },
+  { id:"815", name:"Cleaver M Nº815 — Chacaranda", category:"Cocina Profesional", description:"Cleaver con mango de Chacaranda.", specs:["Acero 1095","Chacaranda","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Chacaranda"} },
+  { id:"819", name:"Verijero M Nº819 — Guayubira Exótica", category:"Caza & Campo", description:"Verijero con guayubira exótica.", specs:["Acero 1095","Guayubira Exótica","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Exótica"} },
+  { id:"821", name:"Verijero M Nº821 — Guayubira Seleccionada", category:"Caza & Campo", description:"Guayubira seleccionada de alta densidad.", specs:["Acero 1095","Guayubira Seleccionada","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Seleccionada"} },
+  { id:"823", name:"Verijero S Nº823 — Roble Americano", category:"Caza & Campo", description:"Roble americano para un acabado elegante.", specs:["Acero 1095","Roble Americano","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Roble Americano"} },
+  { id:"820", name:"Verijero M Nº820 — Pau Ferro", category:"Caza & Campo", description:"Pau ferro de alta resistencia.", specs:["Acero 1095","Pau Ferro","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Pau Ferro"} },
+  { id:"822", name:"Parrillero XL Nº822", category:"Parrilla & Asado", description:"Parrillero extra grande, ideal para piezas grandes.", specs:["Acero 1095","Quebracho","34 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"828", name:"Verijero S Nº828 — Full Tang", category:"Diseño Exclusivo", description:"Full tang con micarta, máxima robustez.", specs:["Acero 1095","Micarta","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Full Tang"} },
+  { id:"829", name:"Verijero S Nº829 — Nogal+Purpleheart", category:"Diseño Exclusivo", description:"Combinación nogal y purpleheart.", specs:["Acero 1095","Nogal+Purpleheart","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Nogal+Purpleheart"} },
+  { id:"830", name:"Verijero S Nº830 — Micarta Marfil", category:"Diseño Exclusivo", description:"Micarta marfil, estética única.", specs:["Acero 1095","Micarta Marfil","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Marfil"} },
+  { id:"834", name:"Mini Táctico Nº834", category:"Diseño Exclusivo", description:"Mini táctico de porte discreto.", specs:["Acero 1095","Micarta","16 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"833", name:"Verijero M Nº833 — Incienso Jaspeado", category:"Caza & Campo", description:"Incienso jaspeado, veta única.", specs:["Acero 1095","Incienso Jaspeado","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Incienso Jaspeado"} },
+  { id:"831", name:"Verijero M Nº831 — Caoba Africana", category:"Diseño Exclusivo", description:"Caoba africana de gran belleza.", specs:["Acero 1095","Caoba Africana","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Caoba Africana"} },
+  { id:"827", name:"Tipo Tanto Nº827", category:"Diseño Exclusivo", description:"Geometría Tanto, filo recto y punta reforzada.", specs:["Acero 1095","Micarta","27 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"844", name:"Set Fileteador + Tenedor Nº844", category:"Parrilla & Asado", description:"Set completo fileteador + tenedor, mango olivo.", specs:["Acero 1095","Olivo","29+20 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"845", name:"Parrillero M Nº845 — Burl Olivo", category:"Parrilla & Asado", description:"Parrillero con burl de olivo, diseño exclusivo.", specs:["Acero 1095","Burl Olivo","31 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Burl Olivo"} }
+];
+
+/* ── PRODUCT LOGIC (merge con products.json si existe) ── */
 let allProducts = [];
 let currentCat = 'all';
 let searchTerm = '';
@@ -590,7 +615,6 @@ function renderProducts() {
   const list = getFiltered();
   const gridEl = document.getElementById('prod-grid');
   if(!gridEl) return;
-  document.getElementById('prod-count').textContent = list.length;
   if(!list.length){
     gridEl.innerHTML = `<div class="store-empty"><div class="store-empty-ico">🔪</div><h3 class="store-empty-h">No encontramos piezas</h3><p class="store-empty-p">${searchTerm?'Probá con otro término de búsqueda.':'No hay productos en esta categoría por ahora.'}</p><button onclick="filterCat('all')" class="btn-outline" style="margin:0 auto;">Ver todo</button></div>`;
     return;
@@ -633,23 +657,19 @@ function filterCat(cat){
 }
 document.getElementById('store-search').addEventListener('input',function(){searchTerm=this.value.trim();renderProducts();});
 document.getElementById('store-sort').addEventListener('change',function(){sortMode=this.value;renderProducts();});
-const fallback=[{id:'1',name:'Juego Parrillero XL',category:'Parrilla & Asado',description:'Set completo para asadores.',specs:['Acero 1075','Quebracho','30 cm'],badge:'avail',price:'Consultar',active:true,stock:2,details:{empunadura:'Quebracho'}}];
 (async function(){
   try{
     const res=await fetch('products.json?t='+Date.now());
-    if(!res.ok)throw new Error();
-    const data=await res.json();
-    allProducts=(data.products||[]).length?data.products:fallback;
-    const s=data.settings||{};
-    if(s.whatsapp){
-      const w=s.whatsapp.replace(/\D/g,'');
-      document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{a.href=a.href.replace(/wa\.me\/\d+/,'wa.me/'+w)});
-    }
-    if(s.instagram){
-      const ig=s.instagram.replace('@','');
-      document.querySelectorAll('a[href*="instagram.com"]').forEach(a=>{a.href='https://www.instagram.com/'+ig});
-    }
-  }catch{allProducts=fallback;}
+    if(res.ok){
+      const data=await res.json();
+      const fetched=data.products||[];
+      const merged=[...fetched];
+      productList.forEach(np=>{ if(!merged.some(p=>p.id===np.id)) merged.push(np); });
+      allProducts=merged;
+    } else throw new Error();
+  }catch{
+    allProducts=productList;
+  }
   renderTabs(allProducts);
   renderProducts();
 })();
