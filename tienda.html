@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="theme-color" content="#080808">
 <title>Tienda | GL Cuchillos Artesanales</title>
-<meta name="description" content="Todos los cuchillos artesanales de Gonzalo Londero. Nakiri, parrilleros, facones, caza. Filtrá por categoría y consultá por WhatsApp.">
+<meta name="description" content="Cuchillos artesanales de Gonzalo Londero. Catálogo completo en columna izquierda, carrusel vertical de certificados a la derecha.">
 <link rel="canonical" href="https://gl-cuchillos.artesanales.workers.dev/tienda.html">
 <meta property="og:title" content="Tienda · GL Cuchillos Artesanales">
 <meta property="og:description" content="Catálogo completo de cuchillos artesanales forjados a mano.">
-<meta property="og:url" content="https://gl-cuchillos.artesanales.workers.dev/tienda.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
@@ -75,7 +74,6 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   transition:background .2s,transform .15s;white-space:nowrap;
 }
 .nav-cta:hover{background:var(--silver2);transform:translateY(-1px)}
-.nav-cta svg{flex-shrink:0}
 .nav-burger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;background:none;border:none}
 .nav-burger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:.3s}
 #nav-overlay{
@@ -91,212 +89,95 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--cream2);font-size:1.4rem;cursor:pointer;line-height:1}
 
 /* ═══════════════════════════════════════
-   HERO CARRUSEL (con las imágenes subidas)
+   LAYOUT PRINCIPAL: IZQUIERDA (PRODUCTOS) | DERECHA (CARRUSEL VERTICAL)
 ═══════════════════════════════════════ */
-.hero-carousel{
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  overflow: hidden;
+.main-layout {
+  display: flex;
+  margin-top: 74px;
+  min-height: calc(100vh - 74px);
+}
+.left-col {
+  flex: 1;
+  max-width: 70%;
+  min-width: 0; /* permite que el grid se ajuste */
   background: var(--jet);
 }
-.carousel-container{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.carousel-slide{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.carousel-slide.active{
-  opacity: 1;
-}
-.carousel-overlay{
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.45) 50%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-.hero-left{
-  position: relative;
-  z-index: 4;
-  width: clamp(280px, 52%, 680px);
-  padding: 120px clamp(2rem, 5vw, 5rem) 80px;
-  height: 100%;
+.right-col {
+  width: 30%;
+  position: sticky;
+  top: 74px;
+  height: calc(100vh - 74px);
+  background: var(--jet2);
+  border-left: 1px solid var(--silver-line);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.hero-eyebrow{
-  display:flex;align-items:center;gap:14px;margin-bottom:32px;
+/* Contenedor del carrusel vertical */
+.vertical-scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
 }
-.eyebrow-line{width:28px;height:1px;background:var(--ember2)}
-.eyebrow-text{font-size:9.5px;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:var(--ember2)}
-.hero-headline{
-  font-family:var(--serif);
-  font-size:clamp(44px,5vw,68px);
-  font-weight:900;line-height:1.04;
-  color:var(--cream);
-  animation:fadeIn .9s var(--ease) .35s both;
+.vertical-scroll-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: verticalScroll 28s linear infinite;
+  width: 100%;
+  padding: 2rem 0;
 }
-.hero-headline em{font-style:italic;color:var(--ember3);font-weight:700}
-.hero-headline .big{
-  display:block;
-  font-family:var(--cormorant);
-  font-size:clamp(60px,7vw,96px);
-  font-weight:700;font-style:italic;
-  line-height:.9;letter-spacing:-1px;
-  color:var(--cream);
+.vertical-scroll-track:hover {
+  animation-play-state: paused;
 }
-.hero-rule{
-  width:72px;height:1px;
-  background:linear-gradient(to right,var(--ember2),transparent);
-  margin:28px 0;
-  animation:fadeIn .8s var(--ease) .5s both;
+.scroll-item {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
 }
-.hero-sub{
-  font-family:var(--cormorant);
-  font-size:18px;font-weight:300;font-style:italic;
-  color:rgba(200,188,168,.75);line-height:1.65;
-  max-width:380px;margin-bottom:40px;
-  animation:fadeIn .8s var(--ease) .6s both;
+.scroll-item:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
 }
-.hero-stats{
-  display:flex;align-items:stretch;gap:0;
-  margin-bottom:48px;
-  border:1px solid var(--silver-line);
-  width:fit-content;
-  animation:fadeIn .8s var(--ease) .7s both;
+.scroll-item img {
+  max-width: 85%;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  border: 1px solid rgba(200,205,214,0.2);
+  transition: all 0.3s;
 }
-.stat{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:14px 24px;
-  border-right:1px solid var(--silver-line);
+.scroll-item:hover img {
+  border-color: var(--silver);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.7);
 }
-.stat:last-child{border-right:none}
-.stat-num{
-  font-family:var(--serif);font-size:28px;font-weight:700;
-  color:var(--gold3);line-height:1;
-}
-.stat-label{
-  font-size:8px;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin-top:5px;
-}
-.hero-ctas{
-  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
-  animation:fadeIn .8s var(--ease) .85s both;
-}
-.btn-ember{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:15px 28px;
-  background:var(--ember);color:#fff;
-  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  transition:background .25s,transform .2s,box-shadow .25s;
-  position:relative;overflow:hidden;
-}
-.btn-ember::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--ember2),var(--ember3));
-  opacity:0;transition:opacity .25s;
-}
-.btn-ember:hover::after{opacity:1}
-.btn-ember:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,70,10,.35)}
-.btn-ember span,.btn-ember svg{position:relative;z-index:1}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 24px;
-  border:1px solid var(--silver-line);
-  color:rgba(200,188,168,.65);
-  font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  transition:border-color .25s,color .25s;
-}
-.btn-ghost:hover{border-color:var(--cream2);color:var(--cream)}
-.hero-scroll{
-  position:absolute;bottom:32px;left:clamp(2rem,5vw,5rem);
-  display:flex;align-items:center;gap:12px;z-index:5;
-  animation:fadeIn .6s var(--ease) 1.2s both;
-}
-.scroll-track{width:28px;height:1px;background:var(--silver-line);position:relative;overflow:hidden}
-.scroll-track::after{
-  content:'';position:absolute;top:0;left:-100%;
-  width:100%;height:100%;background:var(--ember2);
-  animation:scrollLine 2.4s ease-in-out infinite;
-}
-.scroll-label{font-size:8.5px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
-.carousel-controls{
-  position:absolute;
-  bottom:32px;
-  right:clamp(2rem,5vw,5rem);
-  z-index:5;
-  display:flex;
-  gap:12px;
-}
-.carousel-btn{
-  width:40px;
-  height:40px;
-  border:1px solid var(--silver-line);
-  background:rgba(8,8,8,.6);
-  backdrop-filter:blur(8px);
-  color:var(--silver);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:background .2s,color .2s;
-  cursor:pointer;
-}
-.carousel-btn:hover{
-  background:rgba(200,205,214,.2);
-  color:var(--cream);
-}
-.carousel-dots{
-  position:absolute;
-  bottom:32px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-  z-index:5;
-}
-.carousel-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:rgba(200,205,214,.3);
-  transition:background .3s,transform .3s;
-  cursor:pointer;
-}
-.carousel-dot.active{
-  background:var(--silver);
-  transform:scale(1.2);
-}
-@media (max-width: 900px) {
-  .hero-left {
-    width: 100%;
-    padding: 100px 1.5rem 60px;
-    background: rgba(8, 8, 8, 0.6);
-  }
-  .carousel-overlay {
-    background: linear-gradient(to bottom, rgba(8,8,8,0.7), rgba(8,8,8,0.5));
-  }
-  .hero-stats{
-    flex-wrap:wrap;
-  }
-  .carousel-controls, .carousel-dots{
-    bottom: 20px;
-  }
+/* Título opcional en el carrusel */
+.carousel-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(8,8,8,.6);
+  padding: 0.4rem;
+  z-index: 5;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
 }
 
-/* ── SECCIONES (productos, filtros, etc.) con estilo index ── */
+/* ── SECCIONES (productos, filtros) dentro de left-col ── */
 .section-eyebrow{
   display:flex;align-items:center;gap:14px;margin-bottom:20px;
 }
@@ -309,31 +190,28 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   color:var(--cream);
 }
 .section-headline em{font-style:italic;color:var(--silver3)}
-.section-sub{
-  font-family:var(--cormorant);
-  font-size:17px;font-weight:300;font-style:italic;
-  color:rgba(200,188,168,.65);line-height:1.7;
-  max-width:560px;
-}
 
-/* CATEGORY FILTERS */
+/* CATEGORY FILTERS (dentro de left-col) */
 .cat-filters{
   background:var(--jet2);
-  border-top:1px solid var(--silver-line);
   border-bottom:1px solid var(--silver-line);
   position:sticky;top:74px;z-index:500;
 }
 .cat-filters-inner{
-  max-width:1400px;margin:0 auto;
-  padding:0 clamp(1.5rem,4vw,4rem);
-  display:flex;align-items:center;gap:0;
-  overflow-x:auto;scrollbar-width:none;
+  max-width:100%;
+  margin:0 auto;
+  padding:0 clamp(1rem,2vw,2rem);
+  display:flex;
+  align-items:center;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
 }
 .cat-filters-inner::-webkit-scrollbar{display:none}
 .cat-btn{
   font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(200,205,214,.45);
-  padding:1.1rem 1.6rem;
+  padding:1rem 1.2rem;
   background:none;border:none;border-bottom:2px solid transparent;
   transition:color .2s,border-color .2s;white-space:nowrap;cursor:pointer;
   display:flex;align-items:center;gap:.5rem;
@@ -352,16 +230,21 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .store-toolbar{
   background:var(--jet);
   border-bottom:1px solid var(--silver-line);
-  padding:.8rem clamp(1.5rem,4vw,4rem);
+  padding:.8rem clamp(1rem,2vw,2rem);
 }
 .store-toolbar-inner{
-  max-width:1400px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  max-width:100%;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
 }
 .search-wrap{
   display:flex;align-items:center;gap:.6rem;
   border:1px solid var(--silver-line);
-  padding:.4rem 1rem;flex:1;max-width:340px;
+  padding:.4rem 1rem;flex:1;max-width:280px;
   background:var(--jet2);
 }
 .search-wrap svg{color:var(--silver3);flex-shrink:0}
@@ -370,7 +253,7 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   font-family:var(--sans);font-size:.82rem;font-weight:300;letter-spacing:.04em;
   width:100%;
 }
-#store-search::placeholder{color:rgba(200,205,214,.25);font-size:.78rem;letter-spacing:.1em}
+#store-search::placeholder{color:rgba(200,205,214,.25);font-size:.78rem}
 .sort-wrap{display:flex;align-items:center;gap:.6rem}
 .sort-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 #store-sort{
@@ -384,15 +267,13 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 
 /* PRODUCT GRID */
 .store-body{
-  max-width:1400px;margin:0 auto;
-  padding:2rem clamp(1.5rem,4vw,4rem) clamp(4rem,8vh,7rem);
+  padding:1.5rem clamp(1rem,2vw,2rem) 2rem;
 }
 #prod-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   border-left:1px solid var(--silver-line);
   border-top:1px solid var(--silver-line);
-  margin-top:2rem;
 }
 #prod-grid.grid-2{grid-template-columns:repeat(2,1fr)}
 #prod-grid.grid-1{grid-template-columns:1fr}
@@ -425,116 +306,41 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 .prod-stock{position:absolute;bottom:.7rem;left:.7rem;font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .55rem;backdrop-filter:blur(8px);z-index:2}
 .prod-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--silver);transform:scaleX(0);transform-origin:left;transition:.5s var(--ease)}
 .prod-card:hover .prod-silver-line{transform:scaleX(1)}
-.prod-body{padding:1.4rem 1.6rem 1.6rem;display:flex;flex-direction:column;flex:1}
-.prod-cat{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:.4rem}
-.prod-name{font-family:var(--sans);font-size:.9rem;font-weight:300;color:var(--cream);margin-bottom:.6rem;line-height:1.2;letter-spacing:.18em;text-transform:uppercase}
-.prod-desc{font-size:.8rem;font-weight:300;color:rgba(200,188,168,.52);line-height:1.75;margin-bottom:1rem}
-.prod-specs{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.9rem}
-.prod-spec{font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid var(--silver-line);color:var(--muted)}
-.prod-wood-detail{display:flex;align-items:center;gap:.6rem;padding:.55rem .75rem;background:rgba(200,205,214,.03);border:1px solid rgba(200,205,214,.08);margin-bottom:.9rem}
-.prod-wood-circle{width:18px;height:18px;border-radius:50%;flex-shrink:0;border:1px solid rgba(200,205,214,.15)}
-.prod-wood-label{font-size:7.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,205,214,.55)}
-.prod-wood-name{font-size:8px;font-weight:400;letter-spacing:.1em;color:var(--cream2);margin-left:auto}
-.prod-footer{margin-top:auto;border-top:1px solid var(--silver-line);padding-top:1rem}
-.prod-price-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.8rem}
-.prod-price{font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--silver)}
-.prod-price small{display:block;font-family:var(--sans);font-style:normal;font-size:.6rem;font-weight:400;letter-spacing:.1em;color:var(--muted);margin-top:.15rem}
-.prod-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:.35rem;align-items:stretch}
-.prod-btn{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.5rem .8rem;background:transparent;color:var(--cream2);border:1px solid rgba(200,205,214,.25);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;justify-content:center;gap:.35rem;white-space:nowrap;text-align:center;cursor:pointer;}
+.prod-body{padding:1.2rem 1.2rem 1.4rem;display:flex;flex-direction:column;flex:1}
+.prod-cat{font-size:7.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);margin-bottom:.4rem}
+.prod-name{font-family:var(--sans);font-size:.85rem;font-weight:300;color:var(--cream);margin-bottom:.5rem;line-height:1.2;letter-spacing:.14em;text-transform:uppercase}
+.prod-desc{font-size:.7rem;font-weight:300;color:rgba(200,188,168,.52);line-height:1.6;margin-bottom:.8rem}
+.prod-specs{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem}
+.prod-spec{font-size:6.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .45rem;border:1px solid var(--silver-line);color:var(--muted)}
+.prod-wood-detail{display:flex;align-items:center;gap:.5rem;padding:.4rem .6rem;background:rgba(200,205,214,.03);border:1px solid rgba(200,205,214,.08);margin-bottom:.8rem}
+.prod-wood-circle{width:16px;height:16px;border-radius:50%;flex-shrink:0;border:1px solid rgba(200,205,214,.15)}
+.prod-wood-label{font-size:7px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,205,214,.55)}
+.prod-wood-name{font-size:7px;font-weight:400;letter-spacing:.08em;color:var(--cream2);margin-left:auto}
+.prod-footer{margin-top:auto;border-top:1px solid var(--silver-line);padding-top:.8rem}
+.prod-price-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.6rem}
+.prod-price{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--silver)}
+.prod-price small{display:block;font-family:var(--sans);font-style:normal;font-size:.55rem;font-weight:400;letter-spacing:.08em;color:var(--muted);margin-top:.1rem}
+.prod-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:.25rem;align-items:stretch}
+.prod-btn{font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.35rem .6rem;background:transparent;color:var(--cream2);border:1px solid rgba(200,205,214,.25);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;justify-content:center;gap:.25rem;white-space:nowrap;text-align:center;cursor:pointer;}
 .prod-btn:hover{background:rgba(200,205,214,.12);border-color:var(--silver);color:var(--cream)}
 .prod-btn-pay{background:rgba(0,158,227,.12);color:#5bc8f5;border-color:rgba(0,158,227,.35)}
 .prod-btn-pay:hover{background:rgba(0,158,227,.22);border-color:#00a8e0;color:#7dd8f8}
 .prod-btn-wa{background:rgba(37,211,102,.08);color:#4dcc7a;border-color:rgba(37,211,102,.3)}
 .prod-btn-wa:hover{background:rgba(37,211,102,.18);border-color:#25D366;color:#5fe88c}
-.prod-btn-ig{padding:.5rem .65rem;border-color:rgba(200,205,214,.15)}
-.store-empty{grid-column:1/-1;padding:6rem 2rem;text-align:center}
-.store-empty-ico{font-size:3rem;margin-bottom:1.5rem;opacity:.4}
-.store-empty-h{font-family:var(--serif);font-size:1.4rem;font-style:italic;color:var(--silver);margin-bottom:.8rem}
-.store-empty-p{font-size:.88rem;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:2rem}
-.btn-outline{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.8rem 2.2rem;background:transparent;color:rgba(232,224,208,.6);border:1px solid rgba(200,205,214,.25);transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.6rem}
+.prod-btn-ig{padding:.35rem .5rem;border-color:rgba(200,205,214,.15)}
+.store-empty{grid-column:1/-1;padding:3rem 1rem;text-align:center}
+.store-empty-ico{font-size:2rem;margin-bottom:1rem;opacity:.4}
+.store-empty-h{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--silver);margin-bottom:.5rem}
+.store-empty-p{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.btn-outline{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.6rem 1.6rem;background:transparent;color:rgba(232,224,208,.6);border:1px solid rgba(200,205,214,.25);transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.5rem}
 .btn-outline:hover{border-color:var(--silver);color:var(--cream)}
 
-/* CTA STRIP */
-.cta-strip{
-  background:var(--jet2);border-top:1px solid var(--silver-line);
-  padding:clamp(3rem,6vh,5rem) clamp(1.5rem,5vw,5rem);
-  text-align:center;
-}
-.cta-strip-h{font-family:var(--sans);font-weight:200;font-size:clamp(1.6rem,3.5vw,3rem);color:var(--cream);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.8rem}
-.cta-strip-h em{font-weight:100;color:var(--silver)}
-.cta-strip-p{font-size:.9rem;font-weight:300;color:var(--cream2);max-width:480px;margin:0 auto 2rem;line-height:1.85}
-.cta-strip-acts{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-.btn-wa{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 2.2rem;background:#25D366;color:#fff;display:inline-flex;align-items:center;gap:.6rem;transition:background .2s,transform .2s}
-.btn-wa:hover{background:#1fbb59;transform:translateY(-2px)}
-
-/* ========== CARRUSEL VERTICAL INNOVADOR ========== */
-.vertical-scroll-section {
-  position: relative;
-  background: var(--jet);
-  border-top: 1px solid var(--silver-line);
-  overflow: hidden;
-  padding: 3rem 0;
-  margin-bottom: -1px;
-}
-.vertical-scroll-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  height: 360px;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-}
-.vertical-scroll-track {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  animation: verticalScroll 24s linear infinite;
-  width: 100%;
-}
-.vertical-scroll-track:hover {
-  animation-play-state: paused;
-}
-.scroll-item {
-  flex-shrink: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s, filter 0.2s;
-}
-.scroll-item:hover {
-  transform: scale(1.02);
-  filter: brightness(1.05);
-}
-.scroll-item img {
-  max-width: 280px;
-  width: 90%;
-  border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  border: 1px solid rgba(200,205,214,0.2);
-  transition: all 0.3s;
-}
-.scroll-item:hover img {
-  border-color: var(--silver);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.7);
-}
-/* duplicar el contenido para loop infinito */
-.vertical-scroll-track .clone {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  width: 100%;
-}
-@media (max-width: 768px) {
-  .vertical-scroll-container { height: 280px; }
-  .scroll-item img { max-width: 220px; }
-}
-
-/* FOOTER */
+/* FOOTER (se ubica debajo de las dos columnas) */
 .mini-footer{
   background:#050505;border-top:1px solid var(--silver-line);
   padding:1.5rem clamp(1.5rem,4vw,4rem);
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  clear: both;
 }
 .mini-footer-copy{font-size:.7rem;font-weight:300;color:rgba(200,205,214,.2);letter-spacing:.08em}
 .mini-footer-back{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,205,214,.35);display:flex;align-items:center;gap:.4rem;transition:color .2s}
@@ -544,23 +350,40 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
 #back-top{position:fixed;bottom:2rem;left:2rem;z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(--silver);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .35s var(--ease),transform .35s var(--ease),background .25s;cursor:pointer}
 #back-top.visible{opacity:1;pointer-events:auto;transform:none}
 #back-top:hover{background:var(--silver);color:var(--jet)}
-@media(max-width:1100px){#prod-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){
-  #prod-grid,#prod-grid.grid-2{grid-template-columns:1fr}
-  .store-toolbar-inner{flex-direction:column;align-items:flex-start;gap:.8rem}
-  .search-wrap{max-width:100%;width:100%}
+
+/* RESPONSIVE: en móvil, la columna derecha se oculta o pasa abajo */
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  .left-col {
+    max-width: 100%;
+  }
+  .right-col {
+    width: 100%;
+    position: relative;
+    top: 0;
+    height: 400px;
+    border-left: none;
+    border-top: 1px solid var(--silver-line);
+  }
+  .vertical-scroll-track {
+    gap: 1rem;
+  }
+  .scroll-item img {
+    max-width: 70%;
+  }
+}
+@media (max-width: 768px) {
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex}
-  .prod-actions{grid-template-columns:1fr auto;grid-template-rows:auto auto}
-  .prod-btn-pay{grid-column:1}
-  .prod-btn-wa{grid-column:1}
-  .prod-btn-ig{grid-row:1/3;grid-column:2}
+  #prod-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV (idéntico al index) -->
+<!-- NAV -->
 <nav id="nav">
   <div class="nav-brand">
     <a href="index.html" aria-label="GL Cuchillos — Inicio">
@@ -609,84 +432,35 @@ nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
   <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="btn-silver-mob" target="_blank">Consultar por WhatsApp →</a>
 </div>
 
-<!-- ═══════ HERO CARRUSEL (con las imágenes subidas) ═══════ -->
-<section class="hero-carousel" id="hero-carousel">
-  <div class="carousel-container" id="carousel-container"></div>
-  <div class="carousel-overlay"></div>
-  <div class="hero-left">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">Quimilí · Santiago del Estero · Colección 2025</span>
+<!-- LAYOUT PRINCIPAL: IZQUIERDA (PRODUCTOS) / DERECHA (CARRUSEL VERTICAL) -->
+<div class="main-layout">
+  <!-- COLUMNA IZQUIERDA: Filtros + Productos -->
+  <div class="left-col">
+    <!-- CATEGORY FILTERS -->
+    <div class="cat-filters" id="cat-filters"><div class="cat-filters-inner" id="cat-tabs"></div></div>
+
+    <!-- TOOLBAR -->
+    <div class="store-toolbar">
+      <div class="store-toolbar-inner">
+        <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="store-search" placeholder="Buscar pieza, madera, acero…" autocomplete="off"></div>
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div class="sort-wrap"><span class="sort-label">Ordenar</span><select id="store-sort"><option value="default">Destacados</option><option value="name-az">Nombre A--Z</option><option value="name-za">Nombre Z--A</option><option value="avail">Disponibles primero</option><option value="price-asc">Precio menor</option><option value="price-desc">Precio mayor</option></select></div>
+          <div class="view-btns"><button class="view-btn active" id="view-3" title="3 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="5" height="5"/><rect x="6.5" y="0" width="5" height="5"/><rect x="13" y="0" width="5" height="5"/><rect x="0" y="6.5" width="5" height="5"/><rect x="6.5" y="6.5" width="5" height="5"/><rect x="13" y="6.5" width="5" height="5"/></svg></button><button class="view-btn" id="view-2" title="2 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="7.5" height="7.5"/><rect x="10.5" y="0" width="7.5" height="7.5"/><rect x="0" y="10.5" width="7.5" height="7.5"/><rect x="10.5" y="10.5" width="7.5" height="7.5"/></svg></button><button class="view-btn" id="view-1" title="1 columna"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="18" height="7"/><rect x="0" y="9" width="18" height="7"/></svg></button></div>
+        </div>
+      </div>
     </div>
-    <h1 class="hero-headline">
-      La tienda del <em>filo</em>
-      <span class="big">artesanal.</span>
-    </h1>
-    <div class="hero-rule"></div>
-    <p class="hero-sub">
-      Cuchillos forjados uno a uno por <strong>Gonzalo Londero.</strong><br>
-      Aceros nobles, maderas autóctonas —<br>
-      piezas únicas con alma de taller.
-    </p>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">+10</span><span class="stat-label">Años de forja</span></div>
-      <div class="stat"><span class="stat-num">51</span><span class="stat-label">Modelos</span></div>
-      <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Países</span></div>
-      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Artesanal</span></div>
-    </div>
-    <div class="hero-ctas">
-      <a class="btn-ember" href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-        <span>Consultar por WhatsApp</span>
-      </a>
-      <a class="btn-ghost" href="#catalogo">Explorar catálogo ↓</a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-track"></div>
-      <span class="scroll-label">Tienda</span>
+
+    <!-- PRODUCT GRID -->
+    <div class="store-body" id="catalogo">
+      <div id="prod-grid"></div>
     </div>
   </div>
-  <div class="carousel-controls">
-    <button class="carousel-btn" id="carousel-prev">‹</button>
-    <button class="carousel-btn" id="carousel-next">›</button>
-  </div>
-  <div class="carousel-dots" id="carousel-dots"></div>
-</section>
 
-<!-- CATEGORY FILTERS (mismo comportamiento) -->
-<div class="cat-filters" id="cat-filters"><div class="cat-filters-inner" id="cat-tabs"></div></div>
-
-<!-- TOOLBAR -->
-<div class="store-toolbar">
-  <div class="store-toolbar-inner">
-    <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="store-search" placeholder="Buscar pieza, madera, acero…" autocomplete="off"></div>
-    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-      <div class="sort-wrap"><span class="sort-label">Ordenar</span><select id="store-sort"><option value="default">Destacados</option><option value="name-az">Nombre A--Z</option><option value="name-za">Nombre Z--A</option><option value="avail">Disponibles primero</option><option value="price-asc">Precio menor</option><option value="price-desc">Precio mayor</option></select></div>
-      <div class="view-btns"><button class="view-btn active" id="view-3" title="3 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="5" height="5"/><rect x="6.5" y="0" width="5" height="5"/><rect x="13" y="0" width="5" height="5"/><rect x="0" y="6.5" width="5" height="5"/><rect x="6.5" y="6.5" width="5" height="5"/><rect x="13" y="6.5" width="5" height="5"/></svg></button><button class="view-btn" id="view-2" title="2 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="7.5" height="7.5"/><rect x="10.5" y="0" width="7.5" height="7.5"/><rect x="0" y="10.5" width="7.5" height="7.5"/><rect x="10.5" y="10.5" width="7.5" height="7.5"/></svg></button><button class="view-btn" id="view-1" title="1 columna"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="18" height="7"/><rect x="0" y="9" width="18" height="7"/></svg></button></div>
-    </div>
-  </div>
-</div>
-
-<!-- PRODUCT GRID (id="prod-grid") -->
-<div class="store-body" id="catalogo">
-  <div id="prod-grid"></div>
-</div>
-
-<!-- CTA STRIP -->
-<div class="cta-strip">
-  <h2 class="cta-strip-h rv">¿No encontrás lo que buscás?<br><em>Lo hacemos a pedido.</em></h2>
-  <p class="cta-strip-p rv d1">Cada pieza que sale del taller es única. Si tenés algo en mente -- un material, un uso, un regalo -- hablemos y lo creamos juntos.</p>
-  <div class="cta-strip-acts rv d2">
-    <a href="https://wa.me/5493843458340?text=Hola!%20Quiero%20encargar%20una%20pieza%20personalizada" target="_blank" class="btn-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>Encargar por WhatsApp</a>
-    <a href="index.html#faq" class="btn-outline">Ver preguntas frecuentes</a>
-  </div>
-</div>
-
-<!-- ═══════ CARRUSEL VERTICAL INNOVADOR (corre de abajo del footer hacia arriba en la nav) ═══════ -->
-<div class="vertical-scroll-section">
-  <div class="vertical-scroll-container">
-    <div class="vertical-scroll-track" id="vertical-track">
-      <!-- las imágenes se insertan dinámicamente desde JS -->
+  <!-- COLUMNA DERECHA: CARRUSEL VERTICAL INFINITO -->
+  <div class="right-col">
+    <div class="vertical-scroll-container">
+      <div class="vertical-scroll-track" id="vertical-track"></div>
+      <div class="carousel-label">CERTIFICADOS · PIEZAS ÚNICAS</div>
     </div>
   </div>
 </div>
@@ -720,74 +494,7 @@ window.addEventListener('scroll',()=>bt.classList.toggle('visible',scrollY>500),
 bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
 /* ═══════════════════════════════════════
-   CARRUSEL DE IMÁGENES (hero)
-═══════════════════════════════════════ */
-const carouselImages = [
-  "cuchillo1.png",
-  "cuchillo2.png",
-  "cuchillo3.png",
-  "cuchillo4.png",
-  "cuchillo5.png"
-];
-
-let currentSlide = 0;
-let autoInterval = null;
-const container = document.getElementById('carousel-container');
-const dotsContainer = document.getElementById('carousel-dots');
-const prevBtn = document.getElementById('carousel-prev');
-const nextBtn = document.getElementById('carousel-next');
-
-function createSlides() {
-  container.innerHTML = '';
-  carouselImages.forEach((url, idx) => {
-    const slide = document.createElement('div');
-    slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
-    slide.style.backgroundImage = `url('${url}')`;
-    container.appendChild(slide);
-  });
-  updateDots();
-}
-function updateDots() {
-  dotsContainer.innerHTML = '';
-  carouselImages.forEach((_, idx) => {
-    const dot = document.createElement('div');
-    dot.className = 'carousel-dot' + (idx === currentSlide ? ' active' : '');
-    dot.addEventListener('click', () => goToSlide(idx));
-    dotsContainer.appendChild(dot);
-  });
-}
-function goToSlide(index) {
-  if (index < 0) index = carouselImages.length - 1;
-  if (index >= carouselImages.length) index = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  slides.forEach((s, i) => s.classList.toggle('active', i === index));
-  currentSlide = index;
-  const dots = document.querySelectorAll('.carousel-dot');
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
-  resetAutoSlide();
-}
-function nextSlide() { goToSlide(currentSlide + 1); }
-function prevSlide() { goToSlide(currentSlide - 1); }
-function startAutoSlide(intervalMs = 6000) {
-  if (autoInterval) clearInterval(autoInterval);
-  autoInterval = setInterval(nextSlide, intervalMs);
-}
-function resetAutoSlide() {
-  if (autoInterval) { clearInterval(autoInterval); startAutoSlide(); }
-}
-function stopAutoSlideOnHover() {
-  const hero = document.querySelector('.hero-carousel');
-  hero.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
-  hero.addEventListener('mouseleave', () => startAutoSlide());
-}
-createSlides();
-startAutoSlide();
-stopAutoSlideOnHover();
-prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-
-/* ═══════════════════════════════════════
-   CARRUSEL VERTICAL INNOVADOR (corre desde el footer hacia arriba)
+   CARRUSEL VERTICAL (columna derecha)
 ═══════════════════════════════════════ */
 const certImages = [
   "cuchillo1.png",
@@ -798,10 +505,9 @@ const certImages = [
 ];
 const verticalTrack = document.getElementById('vertical-track');
 function buildVerticalScroller() {
-  // Duplicamos el contenido para crear loop infinito
   let html = '';
-  // 2 repeticiones para que el loop sea fluido
-  for (let rep = 0; rep < 2; rep++) {
+  // Duplicamos 3 veces para un loop muy fluido
+  for (let rep = 0; rep < 3; rep++) {
     certImages.forEach(img => {
       html += `<div class="scroll-item" onclick="window.open('${img}', '_blank')">
         <img src="${img}" alt="Certificado GL Cuchillo" loading="lazy">
@@ -812,7 +518,7 @@ function buildVerticalScroller() {
 }
 buildVerticalScroller();
 
-/* ── WOOD COLORS (coherente con el index) ── */
+/* ── WOOD COLORS ── */
 const WOOD_COLORS = {
   'algarrobo':'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',
   'guayubira':'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',
