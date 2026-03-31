@@ -1606,4 +1606,15 @@ sections.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)}
     if(frame % 4 === 0 && sparks.length < 120) sparks.push(new Spark(false));
     if(Date.now() > nextBurst){ burst(12 + Math.floor(Math.random() * 18)); scheduleBurst(); }
     for(let i = sparks.length - 1; i >= 0; i--){
-      if(!sparks[i].update()) spa
+      if(!sparks[i].update()) sparks.splice(i,1); else sparks[i].draw(ctx);
+    }
+    for(let i = EMBERS.length - 1; i >= 0; i--){
+      if(!EMBERS[i].update()) EMBERS[i].reset(); else EMBERS[i].draw(ctx);
+    }
+  }
+  loop();
+})();
+
+</script>
+</body>
+</html>
