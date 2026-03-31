@@ -554,10 +554,14 @@ function openDB() {
 async function persistData() {
   try {
     const dbConn = await openDB();
-    const tx = dbConn.transaction('admin_data', 'readwrite');
-    const store = tx.objectStore('admin_data');
-    store.put({ id: 'data', value: data });
-    await tx.complete;
+    await new Promise((resolve, reject) => {
+      const tx = dbConn.transaction('admin_data', 'readwrite');
+      const store = tx.objectStore('admin_data');
+      const req = store.put({ id: 'data', value: data });
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error);
+    });
     updateStorageInfo();
     const lastPub = localStorage.getItem('gl_last_publish');
     if (!lastPub || Date.now() - parseInt(lastPub) > 5000) {
@@ -624,9 +628,12 @@ function updateStorageInfo() {
 async function resetData() {
   if (!confirm('⚠️ ¿Borrar TODOS los datos? Esta acción es irreversible.')) return;
   const dbConn = await openDB();
-  const tx = dbConn.transaction('admin_data', 'readwrite');
-  tx.objectStore('admin_data').clear();
-  await tx.complete;
+  await new Promise((resolve, reject) => {
+    const tx = dbConn.transaction('admin_data', 'readwrite');
+    tx.objectStore('admin_data').clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
   localStorage.removeItem('gl_data');
   localStorage.removeItem('gl_last_publish');
   location.reload();
