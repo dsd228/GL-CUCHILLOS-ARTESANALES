@@ -439,11 +439,6 @@ input,textarea,select{font-family:var(--sans);font-size:16px!important}
       <div class="cfg-card" style="grid-column:1/-1"><div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap"><div><h3>🖼️ imgbb — Hosting de imágenes <span class="imgbb-badge" id="imgbb-badge" style="display:none"><i class="fas fa-check"></i> Activo</span></h3><p>Subí imágenes a imgbb — el JSON queda liviano (solo URLs)</p></div><a href="https://api.imgbb.com/" target="_blank" class="btn btn-sm btn-ghost"><i class="fas fa-external-link-alt"></i> Obtener key</a></div>
         <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><div style="flex:1"><label class="form-label">API Key de imgbb</label><input type="text" class="form-input" id="imgbb-key" placeholder="Pegá tu API key acá"></div><div><button class="btn btn-sm btn-primary" onclick="saveImgbbKey()"><i class="fas fa-save"></i> Guardar</button><button class="btn btn-sm btn-ghost" onclick="testImgbb()"><i class="fas fa-plug"></i> Probar</button></div></div>
         <div class="imgbb-status" id="imgbb-ok"><i class="fas fa-check-circle"></i> imgbb configurado — fotos se suben automáticamente</div>
-        <div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
-          <div style="font-size:13px;font-weight:500;margin-bottom:4px"><i class="fas fa-images" style="color:var(--accent)"></i> Migrar fotos existentes a imgbb</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Si subiste fotos antes de configurar imgbb, están guardadas localmente como base64 y el JSON pesa demasiado para publicar a GitHub. Este botón las migra todas a imgbb automáticamente.</div>
-          <button class="btn btn-sm btn-success" id="btn-migrate-imgbb" onclick="migrateImagesToImgbb()"><i class="fas fa-cloud-upload-alt"></i> Migrar fotos a imgbb</button>
-        </div>
       </div>
     </div>
   </section>
@@ -559,14 +554,10 @@ function openDB() {
 async function persistData() {
   try {
     const dbConn = await openDB();
-    await new Promise((resolve, reject) => {
-      const tx = dbConn.transaction('admin_data', 'readwrite');
-      const store = tx.objectStore('admin_data');
-      const req = store.put({ id: 'data', value: data });
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error);
-    });
+    const tx = dbConn.transaction('admin_data', 'readwrite');
+    const store = tx.objectStore('admin_data');
+    store.put({ id: 'data', value: data });
+    await tx.complete;
     updateStorageInfo();
     const lastPub = localStorage.getItem('gl_last_publish');
     if (!lastPub || Date.now() - parseInt(lastPub) > 5000) {
@@ -633,12 +624,9 @@ function updateStorageInfo() {
 async function resetData() {
   if (!confirm('⚠️ ¿Borrar TODOS los datos? Esta acción es irreversible.')) return;
   const dbConn = await openDB();
-  await new Promise((resolve, reject) => {
-    const tx = dbConn.transaction('admin_data', 'readwrite');
-    tx.objectStore('admin_data').clear();
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  const tx = dbConn.transaction('admin_data', 'readwrite');
+  tx.objectStore('admin_data').clear();
+  await tx.complete;
   localStorage.removeItem('gl_data');
   localStorage.removeItem('gl_last_publish');
   location.reload();
@@ -661,47 +649,6 @@ function loadTheme() {
   setTheme(saved || (prefersDark ? 'dark' : 'light'));
 }
 
-// ==================== MIGRACIÓN MASIVA A IMGBB ====================
-async function migrateImagesToImgbb() {
-  const key = getImgbbKey();
-  if (!key) { toast('Configurá imgbb primero', 'err'); return; }
-  const base64Prods = data.products.filter(p =>
-    (p.image && p.image.startsWith('data:')) ||
-    (p.media && p.media.some(m => m.src && m.src.startsWith('data:')))
-  );
-  if (!base64Prods.length) { toast('No hay fotos base64 — todo OK ✓'); return; }
-  if (!confirm(`Se van a migrar ${base64Prods.length} productos con fotos base64 a imgbb.\n\nEsto puede tardar unos minutos. ¿Continuar?`)) return;
-
-  const btn = document.getElementById('btn-migrate-imgbb');
-  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Migrando...'; }
-  let ok = 0, fail = 0;
-  for (const p of base64Prods) {
-    // migrate media array
-    if (p.media && p.media.length) {
-      for (let i = 0; i < p.media.length; i++) {
-        const m = p.media[i];
-        if (m.src && m.src.startsWith('data:image')) {
-          const url = await uploadToImgbb(m.src, `prod-${p.id}-${i}`);
-          if (url) { p.media[i] = { src: url, type: 'image/webp' }; ok++; }
-          else fail++;
-        }
-      }
-      // sync image field from first media
-      if (p.media[0] && !p.media[0].src.startsWith('data:')) p.image = p.media[0].src;
-    } else if (p.image && p.image.startsWith('data:image')) {
-      const url = await uploadToImgbb(p.image, `prod-${p.id}`);
-      if (url) { p.image = url; ok++; }
-      else fail++;
-    }
-    // small delay to avoid rate limit
-    await new Promise(r => setTimeout(r, 300));
-  }
-  await persist(true);
-  if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Migrar fotos a imgbb'; }
-  if (fail === 0) toast(`✅ ${ok} fotos migradas a imgbb correctamente`);
-  else toast(`Migradas: ${ok} ✓ — Fallidas: ${fail} (reintentá)`, fail > 0 ? 'err' : '');
-}
-
 // ==================== GITHUB PUBLICACIÓN (CORREGIDA) ====================
 async function publishToGitHub() {
   const cfg = JSON.parse(localStorage.getItem('gl_gh') || '{}');
@@ -716,19 +663,9 @@ async function publishToGitHub() {
   const path = cfg.path?.trim() || 'products.json';
   const branch = cfg.branch?.trim() || 'main';
 
-  // Verificar si hay imágenes base64 que bloquearán la publicación
-  const base64Count = data.products.filter(p =>
-    (p.image && p.image.startsWith('data:')) ||
-    (p.media && p.media.some(m => m.src && m.src.startsWith('data:')))
-  ).length;
-  if (base64Count > 0) {
-    const go = confirm(`⚠️ ${base64Count} producto(s) tienen fotos guardadas localmente (base64) en vez de URLs de imgbb.\n\nEl archivo pesa demasiado para GitHub y la publicación fallará.\n\nAndá a Configuración → "Migrar fotos a imgbb" antes de publicar.\n\n¿Publicar igual? (solo funcionará si el archivo pesa menos de 1 MB)`);
-    if (!go) return;
-  }
-
   const jsonStr = JSON.stringify(data, null, 2);
   const sizeMB = new Blob([jsonStr]).size / (1024 * 1024);
-  if (sizeMB > 0.9 && !confirm(`El archivo pesa ${sizeMB.toFixed(1)} MB (límite GitHub: 1 MB).\n\nPrimero migrá las fotos a imgbb desde Configuración. ¿Publicar igual?`)) return;
+  if (sizeMB > 0.9 && !confirm(`El archivo pesa ${sizeMB.toFixed(1)} MB. ¿Publicar igual?`)) return;
 
   const btn = document.getElementById('btn-publish');
   btn.disabled = true;
@@ -981,7 +918,7 @@ function sortMediaByType() { const photos = currentMedia.filter(m => !m.type || 
 function toggleUrlPanel() { urlPanelOpen = !urlPanelOpen; const panel = document.getElementById('url-panel'); if (panel) { panel.style.display = urlPanelOpen ? 'block' : 'none'; if (urlPanelOpen) document.getElementById('edit-img-url').focus(); } }
 function addMediaUrl() { const urlEl = document.getElementById('edit-img-url'), url = urlEl.value.trim(); if (!url) return; const ext = url.split('?')[0].split('.').pop().toLowerCase(); currentMedia.push({ src: url, type: ['webm', 'mp4', 'ogg', 'mov'].includes(ext) ? 'video/' + ext : 'image/jpeg' }); urlEl.value = ''; renderMediaGrid(); toast('URL agregada ✓'); }
 function onFileChange(input) { const files = Array.from(input.files); if (!files.length) return; let processed = 0; const total = files.length; files.forEach(f => processFile(f, () => { processed++; if (processed === total) toast(`${total} archivo${total > 1 ? 's' : ''} agregado${total > 1 ? 's' : ''} ✓`); })); input.value = ''; }
-function processFile(f, done) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande (máx 10 MB)', 'err'); done && done(); return; } if (f.type.startsWith('video/')) { const r = new FileReader(); r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); done && done(); }; r.readAsDataURL(f); return; } compressImage(f, 1200, .82).then(async b64 => { if (getImgbbKey()) { const url = await uploadToImgbb(b64, f.name); if (url) { currentMedia.push({ src: url, type: 'image/webp' }); toast('Foto subida a imgbb ✓'); } else { currentMedia.push({ src: b64, type: 'image/webp' }); toast('⚠️ imgbb falló — foto guardada local (no se puede publicar a GitHub)', 'err'); } } else { currentMedia.push({ src: b64, type: 'image/webp' }); toast('⚠️ Sin imgbb configurado — foto guardada local (no se puede publicar)', 'err'); } renderMediaGrid(); done && done(); }); }
+function processFile(f, done) { if (f.size > 10 * 1024 * 1024) { toast('Archivo muy grande (máx 10 MB)', 'err'); done && done(); return; } if (f.type.startsWith('video/')) { const r = new FileReader(); r.onload = e => { currentMedia.push({ src: e.target.result, type: f.type }); renderMediaGrid(); done && done(); }; r.readAsDataURL(f); return; } compressImage(f, 1200, .82).then(async b64 => { if (getImgbbKey()) { const url = await uploadToImgbb(b64, f.name); if (url) { currentMedia.push({ src: url, type: 'image/webp' }); } else { currentMedia.push({ src: b64, type: 'image/webp' }); } } else currentMedia.push({ src: b64, type: 'image/webp' }); renderMediaGrid(); done && done(); }); }
 function compressImage(file, maxW, quality) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = ev => { const img = new Image(); img.onload = () => { let w = img.width, h = img.height; if (w > maxW || h > maxW) { if (w >= h) { h = Math.round(h * maxW / w); w = maxW; } else { w = Math.round(w * maxW / h); h = maxW; } } const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h); resolve(canvas.toDataURL('image/webp', quality)); }; img.onerror = reject; img.src = ev.target.result; }; reader.onerror = reject; reader.readAsDataURL(file); }); }
 function getImgbbKey() { return localStorage.getItem('gl_imgbb') || ''; }
 async function uploadToImgbb(fileOrB64, filename) { const key = getImgbbKey(); if (!key) return null; try { const fd = new FormData(); fd.append('key', key); fd.append('image', typeof fileOrB64 === 'string' ? (fileOrB64.includes(',') ? fileOrB64.split(',')[1] : fileOrB64) : fileOrB64); if (filename) fd.append('name', filename); const r = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: fd }); const d = await r.json(); return d.success ? d.data.url : null; } catch (e) { return null; } }
