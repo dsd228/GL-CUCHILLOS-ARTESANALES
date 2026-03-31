@@ -91,7 +91,7 @@ error: “Mercado Pago no configurado. Contactá al administrador.”,
 });
 }
 
-const frontend = process.env.FRONTEND_URL || “https://gl-cuchillos.artesanales.workers.dev”;
+const frontend = process.env.FRONTEND_URL || "https://gl-cuchillos-artesanales.pages.dev";
 
 try {
 const preference = new Preference(client);
