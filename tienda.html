@@ -1,33 +1,846 @@
-// Helper function to fetch JSON safely with a fallback
-async function fetchJsonSafe(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error(`Failed to fetch ${url}: ${error}`);
-        return [];
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="theme-color" content="#080808">
+<title>Tienda | GL Cuchillos Artesanales</title>
+<meta name="description" content="Cuchillos artesanales de Gonzalo Londero. Catálogo completo en columna izquierda, carrusel vertical de certificados a la derecha.">
+<link rel="canonical" href="https://gl-cuchillos.artesanales.workers.dev/tienda.html">
+<meta property="og:title" content="Tienda · GL Cuchillos Artesanales">
+<meta property="og:description" content="Catálogo completo de cuchillos artesanales forjados a mano.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Josefin Sans',sans-serif;background:#080808;color:#E8E0D0;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+:root{
+  --jet:#080808;--jet2:#0E0E0E;--jet3:#141414;--jet4:#1A1A1A;--jet5:#222222;
+  --silver:#C8CDD6;--silver2:#DDE1E8;--silver3:#8E96A2;
+  --silver-pale:rgba(200,205,214,.10);--silver-line:rgba(200,205,214,.13);
+  --cream:#E8E0D0;--cream2:#C8BCA8;--muted:#787060;
+  --ember:#C8460A;--ember2:#E0620F;--ember3:#F2831A;--ember4:#FAA438;
+  --gold:#8A6520;--gold2:#B8882A;--gold3:#D4A535;
+  --serif:'Playfair Display',serif;--cormorant:'Cormorant Garamond',serif;--sans:'Josefin Sans',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
 }
 
-// Helper function to load and merge multiple JSON sources
-async function loadCatalogMultiJson(...urls) {
-    const results = await Promise.all(urls.map(fetchJsonSafe));
-    return results.flat();
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
+@keyframes scrollLine{0%{left:-100%}50%{left:0%}100%{left:100%}}
+@keyframes verticalScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
 
-// Original logic modified to load multiple JSON
-async function loadProducts() {
-    const productList = await loadCatalogMultiJson(
-        'products.json',
-        'cocina.json',
-        'caza.json',
-        'parrilla.json',
-        'diseno.json',
-        'tradicion.json'
-    );
-    renderProducts(productList);
+/* ── HERO TIENDA ── */
+.store-hero{
+  position:relative;
+  width:70%;
+  height:clamp(320px,45vh,520px);
+  overflow:hidden;
+  display:flex;align-items:flex-end;
+  margin-top:74px;
+}
+.store-hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 40%;
+  filter:brightness(.45) saturate(.7);
+  transition:transform 8s ease;
+}
+.store-hero:hover .store-hero-img{transform:scale(1.04)}
+.store-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,8,8,.92) 0%,rgba(8,8,8,.45) 50%,rgba(8,8,8,.2) 100%);
+}
+.store-hero-side-line{
+  position:absolute;left:clamp(1.5rem,4vw,4rem);top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(200,205,214,.18) 30%,rgba(200,205,214,.18) 70%,transparent);
+}
+.store-hero-content{
+  position:relative;z-index:2;
+  padding:0 clamp(1.5rem,4vw,4rem) clamp(2rem,4vw,3.5rem);
+  width:100%;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.store-hero-left{}
+.store-hero-eyebrow{
+  display:flex;align-items:center;gap:12px;margin-bottom:14px;
+}
+.store-hero-eyebrow-line{width:20px;height:1px;background:var(--ember2)}
+.store-hero-eyebrow-text{font-size:9px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--ember2)}
+.store-hero-title{
+  font-family:var(--serif);
+  font-size:clamp(32px,5vw,68px);
+  font-weight:700;line-height:1.04;
+  color:var(--cream);
+  margin-bottom:.5rem;
+}
+.store-hero-title em{font-style:italic;color:var(--silver3)}
+.store-hero-sub{
+  font-size:clamp(.75rem,.95vw,1rem);
+  font-weight:300;letter-spacing:.06em;
+  color:rgba(200,188,168,.55);
+  line-height:1.6;
+  max-width:400px;
+}
+.store-hero-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:1rem;padding-bottom:.2rem;
+}
+.store-hero-stats{
+  display:flex;gap:2rem;align-items:flex-end;
+}
+.store-hero-stat{text-align:right}
+.store-hero-stat-num{
+  font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2.2rem);font-style:italic;font-weight:400;
+  color:var(--silver);display:block;line-height:1;
+}
+.store-hero-stat-label{
+  font-size:7.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-top:.3rem;display:block;
+}
+.store-hero-scroll{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(200,205,214,.3);
+}
+.store-hero-scroll-dot{
+  width:28px;height:1px;background:rgba(200,205,214,.25);position:relative;overflow:hidden;
+}
+.store-hero-scroll-dot::after{
+  content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;
+  background:var(--silver);animation:scrollLine 2.4s ease-in-out infinite;
 }
 
-loadProducts();
-// Other existing rendering logic is preserved...
+@media (max-width:768px){
+  .store-hero{height:clamp(260px,50vw,380px)}
+  .store-hero-right{display:none}
+  .store-hero-title{font-size:clamp(26px,7vw,42px)}
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,4vw,4rem);height:74px;
+  background:rgba(8,8,8,.96);border-bottom:1px solid var(--silver-line);
+  backdrop-filter:blur(24px);
+  transition:height .3s var(--ease),background .3s;
+}
+nav.scrolled{height:64px;background:rgba(6,6,6,.99)}
+.nav-brand{display:flex;align-items:center;gap:14px}
+.nav-logo-svg{width:44px;height:44px;flex-shrink:0;transition:transform .4s var(--ease)}
+.nav-logo-svg:hover{transform:rotate(8deg) scale(1.05)}
+.nav-brand-text{display:flex;flex-direction:column}
+.nav-brand-name{font-family:var(--serif);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--cream);line-height:1.1}
+.nav-brand-sub{font-size:8px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--silver3);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);list-style:none}
+.nav-links a{font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,224,208,.45);transition:color .25s;white-space:nowrap}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a.active{color:var(--silver)}
+.nav-divider{width:1px;height:16px;background:var(--silver-line)}
+.nav-cta{
+  display:flex;align-items:center;gap:8px;
+  font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--jet);background:var(--silver);padding:.55rem 1.4rem;
+  transition:background .2s,transform .15s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--silver2);transform:translateY(-1px)}
+.nav-cta svg{flex-shrink:0}
+.nav-burger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;background:none;border:none}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:.3s}
+#nav-overlay{
+  position:fixed;inset:0;z-index:850;
+  background:rgba(5,5,5,.98);backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  transform:translateX(100%);transition:transform .5s var(--ease);
+}
+#nav-overlay.open{transform:none}
+#nav-overlay a{font-family:var(--serif);font-size:2rem;font-style:italic;font-weight:300;color:var(--cream);transition:color .2s}
+#nav-overlay a:hover{color:var(--silver)}
+.btn-silver-mob{font-family:var(--sans)!important;font-size:.85rem!important;font-style:normal!important;background:var(--silver);color:var(--jet)!important;padding:.75rem 2rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600!important}
+.overlay-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--cream2);font-size:1.4rem;cursor:pointer;line-height:1}
+
+/* ═══════════════════════════════════════
+   LAYOUT PRINCIPAL: IZQUIERDA (PRODUCTOS) | DERECHA (CARRUSEL VERTICAL)
+═══════════════════════════════════════ */
+.main-layout {
+  margin-right: 30%;
+  min-height: calc(100vh - 74px);
+}
+.left-col {
+  width: 100%;
+  min-width: 0;
+  background: var(--jet);
+}
+.right-col {
+  position: fixed;
+  top: 74px;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+  background: var(--jet2);
+  border-left: 1px solid var(--silver-line);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+}
+/* Contenedor del carrusel vertical */
+.vertical-scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+}
+.vertical-scroll-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: verticalScroll 28s linear infinite;
+  width: 100%;
+  padding: 2rem 0;
+}
+.vertical-scroll-track:hover {
+  animation-play-state: paused;
+}
+.scroll-item {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+.scroll-item:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+.scroll-item img {
+  max-width: 85%;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  border: 1px solid rgba(200,205,214,0.2);
+  transition: all 0.3s;
+}
+.scroll-item:hover img {
+  border-color: var(--silver);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.7);
+}
+.carousel-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(8,8,8,.6);
+  padding: 0.4rem;
+  z-index: 5;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+/* ── SECCIONES (productos, filtros) dentro de left-col, con estilos originales de tienda ── */
+.section-eyebrow{
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+}
+.section-eyebrow-line{width:24px;height:1px;background:var(--ember2)}
+.section-eyebrow-text{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ember2)}
+.section-headline{
+  font-family:var(--serif);
+  font-size:clamp(28px,3.5vw,52px);
+  font-weight:700;line-height:1.08;
+  color:var(--cream);
+}
+.section-headline em{font-style:italic;color:var(--silver3)}
+
+/* CATEGORY FILTERS */
+.cat-filters{
+  background:var(--jet2);
+  border-bottom:1px solid var(--silver-line);
+  position:sticky;top:74px;z-index:500;
+}
+.cat-filters-inner{
+  max-width:100%;
+  margin:0 auto;
+  padding:0 clamp(1rem,2vw,2rem);
+  display:flex;
+  align-items:center;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.cat-filters-inner::-webkit-scrollbar{display:none}
+.cat-btn{
+  font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(200,205,214,.45);
+  padding:1rem 1.2rem;
+  background:none;border:none;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;white-space:nowrap;cursor:pointer;
+  display:flex;align-items:center;gap:.5rem;
+}
+.cat-btn:hover{color:var(--cream)}
+.cat-btn.active{color:var(--silver);border-bottom-color:var(--silver)}
+.cat-btn .cat-count{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:18px;height:18px;padding:0 4px;
+  background:rgba(200,205,214,.08);
+  font-size:7px;font-weight:700;letter-spacing:.1em;color:var(--silver3);
+}
+.cat-btn.active .cat-count{background:rgba(200,205,214,.18);color:var(--silver)}
+
+/* TOOLBAR */
+.store-toolbar{
+  background:var(--jet);
+  border-bottom:1px solid var(--silver-line);
+  padding:.8rem clamp(1rem,2vw,2rem);
+}
+.store-toolbar-inner{
+  max-width:100%;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.search-wrap{
+  display:flex;align-items:center;gap:.6rem;
+  border:1px solid var(--silver-line);
+  padding:.4rem 1rem;flex:1;max-width:280px;
+  background:var(--jet2);
+}
+.search-wrap svg{color:var(--silver3);flex-shrink:0}
+#store-search{
+  background:none;border:none;outline:none;color:var(--cream);
+  font-family:var(--sans);font-size:.82rem;font-weight:300;letter-spacing:.04em;
+  width:100%;
+}
+#store-search::placeholder{color:rgba(200,205,214,.25);font-size:.78rem}
+.sort-wrap{display:flex;align-items:center;gap:.6rem}
+.sort-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+#store-sort{
+  background:var(--jet2);border:1px solid var(--silver-line);color:var(--cream2);
+  font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.1em;
+  padding:.35rem .8rem;outline:none;cursor:pointer;
+}
+.view-btns{display:flex;gap:.3rem}
+.view-btn{width:32px;height:32px;border:1px solid var(--silver-line);background:none;color:var(--muted);display:grid;place-items:center;transition:background .2s,color .2s;cursor:pointer}
+.view-btn.active{background:var(--silver);color:var(--jet);border-color:var(--silver)}
+
+/* PRODUCT GRID (exactamente como en tienda original) */
+.store-body{
+  padding:1.5rem clamp(1rem,2vw,2rem) 2rem;
+}
+#prod-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-left:1px solid var(--silver-line);
+  border-top:1px solid var(--silver-line);
+}
+#prod-grid.grid-2{grid-template-columns:repeat(2,1fr)}
+#prod-grid.grid-1{grid-template-columns:1fr}
+.prod-card{
+  border-right:1px solid var(--silver-line);
+  border-bottom:1px solid var(--silver-line);
+  background:var(--jet);position:relative;overflow:hidden;
+  transition:background .35s;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.prod-card:hover{background:var(--jet3)}
+.prod-wood-swatch{height:5px;width:100%;display:block;flex-shrink:0;transition:height .3s var(--ease);}
+.prod-card:hover .prod-wood-swatch{height:8px}
+.prod-img{
+  aspect-ratio:1/1;background:var(--jet2);
+  position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+}
+.prod-img img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  transition:transform .6s var(--ease),filter .4s;
+}
+.prod-card:hover .prod-img img{transform:scale(1.05);filter:brightness(1.08)}
+.prod-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,205,214,.04) 0%,transparent 60%);transition:opacity .35s}
+.prod-card:hover .prod-img-bg{opacity:2}
+.prod-img svg.prod-art{width:42%;opacity:.16;color:var(--cream);transition:opacity .5s,transform .6s var(--ease)}
+.prod-card:hover .prod-img svg.prod-art{opacity:.28;transform:scale(1.04) translateY(-4px)}
+.prod-badge{position:absolute;top:.85rem;left:.85rem;font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.26rem .62rem;z-index:2}
+.badge-avail{background:var(--silver);color:var(--jet)}
+.badge-custom{background:transparent;color:var(--silver);border:1px solid rgba(200,205,214,.4)}
+.badge-intl{background:var(--jet4);color:var(--cream2);border:1px solid var(--silver-line)}
+.badge-unavail{background:transparent;color:var(--muted);border:1px solid rgba(120,112,96,.3)}
+.prod-origin{position:absolute;top:.85rem;right:.85rem;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;}
+.prod-flag{font-size:7.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .55rem;background:rgba(8,8,8,.82);border:1px solid rgba(200,205,214,.18);backdrop-filter:blur(6px);color:rgba(232,224,208,.75);display:flex;align-items:center;gap:.3rem;white-space:nowrap;}
+.arg-flag-svg{width:14px;height:14px;display:inline-block;vertical-align:middle;}
+.prod-stock{position:absolute;bottom:.7rem;left:.7rem;font-size:7.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .55rem;backdrop-filter:blur(8px);z-index:2}
+.prod-silver-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--silver);transform:scaleX(0);transform-origin:left;transition:.5s var(--ease)}
+.prod-card:hover .prod-silver-line{transform:scaleX(1)}
+.prod-body{padding:1.2rem 1.2rem 1.4rem;display:flex;flex-direction:column;flex:1}
+.prod-cat{font-size:7.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);margin-bottom:.4rem}
+.prod-name{font-family:var(--sans);font-size:.85rem;font-weight:300;color:var(--cream);margin-bottom:.5rem;line-height:1.2;letter-spacing:.14em;text-transform:uppercase}
+.prod-desc{font-size:.7rem;font-weight:300;color:rgba(200,188,168,.52);line-height:1.6;margin-bottom:.8rem}
+.prod-specs{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem}
+.prod-spec{font-size:6.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .45rem;border:1px solid var(--silver-line);color:var(--muted)}
+.prod-wood-detail{display:flex;align-items:center;gap:.5rem;padding:.4rem .6rem;background:rgba(200,205,214,.03);border:1px solid rgba(200,205,214,.08);margin-bottom:.8rem}
+.prod-wood-circle{width:16px;height:16px;border-radius:50%;flex-shrink:0;border:1px solid rgba(200,205,214,.15)}
+.prod-wood-label{font-size:7px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,205,214,.55)}
+.prod-wood-name{font-size:7px;font-weight:400;letter-spacing:.08em;color:var(--cream2);margin-left:auto}
+.prod-footer{margin-top:auto;border-top:1px solid var(--silver-line);padding-top:.8rem}
+.prod-price-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.6rem}
+.prod-price{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--silver)}
+.prod-price small{display:block;font-family:var(--sans);font-style:normal;font-size:.55rem;font-weight:400;letter-spacing:.08em;color:var(--muted);margin-top:.1rem}
+.prod-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:.25rem;align-items:stretch}
+.prod-btn{font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.35rem .6rem;background:transparent;color:var(--cream2);border:1px solid rgba(200,205,214,.25);transition:background .2s,color .2s,border-color .2s;display:inline-flex;align-items:center;justify-content:center;gap:.25rem;white-space:nowrap;text-align:center;cursor:pointer;}
+.prod-btn:hover{background:rgba(200,205,214,.12);border-color:var(--silver);color:var(--cream)}
+.prod-btn-pay{background:rgba(0,158,227,.12);color:#5bc8f5;border-color:rgba(0,158,227,.35)}
+.prod-btn-pay:hover{background:rgba(0,158,227,.22);border-color:#00a8e0;color:#7dd8f8}
+.prod-btn-wa{background:rgba(37,211,102,.08);color:#4dcc7a;border-color:rgba(37,211,102,.3)}
+.prod-btn-wa:hover{background:rgba(37,211,102,.18);border-color:#25D366;color:#5fe88c}
+.prod-btn-ig{padding:.35rem .5rem;border-color:rgba(200,205,214,.15)}
+.store-empty{grid-column:1/-1;padding:3rem 1rem;text-align:center}
+.store-empty-ico{font-size:2rem;margin-bottom:1rem;opacity:.4}
+.store-empty-h{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--silver);margin-bottom:.5rem}
+.store-empty-p{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.btn-outline{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.6rem 1.6rem;background:transparent;color:rgba(232,224,208,.6);border:1px solid rgba(200,205,214,.25);transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--silver);color:var(--cream)}
+
+/* FOOTER (se ubica debajo de las dos columnas) */
+.mini-footer{
+  background:#050505;border-top:1px solid var(--silver-line);
+  padding:1.5rem clamp(1.5rem,4vw,4rem);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  clear: both;
+  margin-right: 30%;
+}
+.mini-footer-copy{font-size:.7rem;font-weight:300;color:rgba(200,205,214,.2);letter-spacing:.08em}
+.mini-footer-back{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,205,214,.35);display:flex;align-items:center;gap:.4rem;transition:color .2s}
+.mini-footer-back:hover{color:var(--silver)}
+.wa-float{position:fixed;bottom:2rem;left:2rem;z-index:600;display:flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;padding:.7rem 1.4rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 28px rgba(37,211,102,.3);transition:transform .2s,box-shadow .2s;animation:pulse 2.5s 2s ease-in-out infinite}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(37,211,102,.4)}
+#back-top{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(12px);z-index:600;width:44px;height:44px;border:1px solid rgba(200,205,214,.25);background:rgba(8,8,8,.9);backdrop-filter:blur(12px);display:grid;place-items:center;color:var(--silver);opacity:0;pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease),background .25s;cursor:pointer}
+#back-top.visible{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+#back-top:hover{background:var(--silver);color:var(--jet)}
+
+/* RESPONSIVE: en móvil, la columna derecha se oculta */
+@media (max-width: 900px) {
+  .store-hero {
+    width: 100%;
+    margin-right: 0;
+  }
+  .main-layout {
+    margin-right: 0;
+  }
+  .right-col {
+    display: none;
+  }
+  .mini-footer {
+    margin-right: 0;
+  }
+  .wa-float {
+    left: auto;
+    right: 2rem;
+  }
+  #back-top {
+    left: 2rem;
+    transform: translateY(12px);
+  }
+  #back-top.visible {
+    transform: none;
+  }
+}
+@media (max-width: 768px) {
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+  #prod-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV (idéntico al index) -->
+<nav id="nav">
+  <div class="nav-brand">
+    <a href="index.html" aria-label="GL Cuchillos — Inicio">
+      <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="nav-logo-svg">
+        <circle cx="110" cy="110" r="100" stroke="#C8CDD6" stroke-width="1.5" opacity=".7"/>
+        <circle cx="110" cy="110" r="88" stroke="rgba(200,205,214,0.3)" stroke-width="0.5"/>
+        <text x="110" y="126" text-anchor="middle" font-family="Playfair Display, serif" font-size="62" fill="#C8CDD6" font-style="italic" font-weight="500">GL</text>
+        <path id="navTopArc" d="M 28 110 A 82 82 0 0 1 192 110" fill="none"/>
+        <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+          <textPath href="#navTopArc" startOffset="50%" text-anchor="middle">CUCHILLOS ARTESANALES</textPath>
+        </text>
+        <path id="navBottomArc" d="M 28 110 A 82 82 0 0 0 192 110" fill="none"/>
+        <text font-family="Josefin Sans,sans-serif" font-size="9" fill="rgba(200,205,214,0.7)" letter-spacing="4" font-weight="600">
+          <textPath href="#navBottomArc" startOffset="50%" text-anchor="middle">IND. ARGENTINA</textPath>
+        </text>
+      </svg>
+    </a>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Cuchillos Artesanales</span>
+      <span class="nav-brand-sub">Santiago del Estero · Argentina</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="tienda.html" class="active">Tienda</a></li>
+    <li><a href="index.html#historia">Artesano</a></li>
+    <li><a href="index.html#proceso">Proceso</a></li>
+    <li><a href="index.html#testimonios">Testimonios</a></li>
+    <div class="nav-divider"></div>
+  </ul>
+  <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="nav-cta" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+    Consultar
+  </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE OVERLAY -->
+<div id="nav-overlay">
+  <button class="overlay-close" id="overlay-close">✕</button>
+  <a href="index.html">Inicio</a>
+  <a href="tienda.html">Tienda</a>
+  <a href="index.html#historia">Artesano</a>
+  <a href="index.html#proceso">Proceso</a>
+  <a href="index.html#testimonios">Testimonios</a>
+  <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="btn-silver-mob" target="_blank">Consultar por WhatsApp →</a>
+</div>
+
+<!-- HERO TIENDA -->
+<section class="store-hero">
+  <img
+    class="store-hero-img"
+    src="capador835.png"
+    alt="Cuchillos artesanales GL — tienda"
+    loading="eager"
+  >
+  <div class="store-hero-overlay"></div>
+  <div class="store-hero-side-line"></div>
+  <div class="store-hero-content">
+    <div class="store-hero-left">
+      <div class="store-hero-eyebrow">
+        <span class="store-hero-eyebrow-line"></span>
+        <span class="store-hero-eyebrow-text">Tienda · Catálogo 2025</span>
+      </div>
+      <h1 class="store-hero-title">Cada pieza,<br><em>única.</em></h1>
+      <p class="store-hero-sub">Forjadas una a una por Gonzalo Londero.<br>Quimilí · Santiago del Estero · Ind. Argentina</p>
+    </div>
+    <div class="store-hero-right">
+      <div class="store-hero-stats">
+        <div class="store-hero-stat">
+          <span class="store-hero-stat-num">51</span>
+          <span class="store-hero-stat-label">Modelos</span>
+        </div>
+        <div class="store-hero-stat">
+          <span class="store-hero-stat-num">100%</span>
+          <span class="store-hero-stat-label">Artesanal</span>
+        </div>
+        <div class="store-hero-stat">
+          <span class="store-hero-stat-num">+10</span>
+          <span class="store-hero-stat-label">Años de forja</span>
+        </div>
+      </div>
+      <div class="store-hero-scroll">
+        <span class="store-hero-scroll-dot"></span>
+        Explorar catálogo
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARRUSEL FIJO — panel derecho, toda la altura desde la nav -->
+<aside class="right-col">
+  <div class="vertical-scroll-container">
+    <div class="vertical-scroll-track" id="vertical-track"></div>
+    <div class="carousel-label">CERTIFICADOS · PIEZAS ÚNICAS</div>
+  </div>
+</aside>
+
+<!-- LAYOUT PRINCIPAL -->
+<div class="main-layout">
+  <div class="left-col">
+    <!-- BANNER ENCARGOS -->
+    <div style="background:var(--jet3);border-bottom:1px solid var(--silver-line);padding:.8rem clamp(1rem,2vw,2rem);display:flex;align-items:center;flex-wrap:wrap;gap:1.5rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <svg width="13" height="13" fill="none" stroke="var(--ember2)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <span style="font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cream2);">Plazo de entrega: <span style="color:var(--ember4)">15 a 20 días hábiles</span></span>
+      </div>
+      <div style="width:1px;height:16px;background:var(--silver-line);flex-shrink:0"></div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <svg width="13" height="13" fill="none" stroke="var(--ember2)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <span style="font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cream2);">Seña: <span style="color:var(--ember4)">70% al confirmar</span> · Saldo al terminar</span>
+      </div>
+      <div style="width:1px;height:16px;background:var(--silver-line);flex-shrink:0"></div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <svg width="13" height="13" fill="none" stroke="var(--ember2)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.93 5.93l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
+        <a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Quiero%20consultar%20un%20encargo" target="_blank" style="font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ember3);text-decoration:none;">Coordinar por WhatsApp →</a>
+      </div>
+    </div>
+    <!-- FIN BANNER -->
+    <div class="cat-filters" id="cat-filters"><div class="cat-filters-inner" id="cat-tabs"></div></div>
+    <div class="store-toolbar">
+      <div class="store-toolbar-inner">
+        <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="store-search" placeholder="Buscar pieza, madera, acero…" autocomplete="off"></div>
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div class="sort-wrap"><span class="sort-label">Ordenar</span><select id="store-sort"><option value="default">Destacados</option><option value="name-az">Nombre A--Z</option><option value="name-za">Nombre Z--A</option><option value="avail">Disponibles primero</option><option value="price-asc">Precio menor</option><option value="price-desc">Precio mayor</option></select></div>
+          <div class="view-btns"><button class="view-btn active" id="view-3" title="3 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="5" height="5"/><rect x="6.5" y="0" width="5" height="5"/><rect x="13" y="0" width="5" height="5"/><rect x="0" y="6.5" width="5" height="5"/><rect x="6.5" y="6.5" width="5" height="5"/><rect x="13" y="6.5" width="5" height="5"/></svg></button><button class="view-btn" id="view-2" title="2 columnas"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="7.5" height="7.5"/><rect x="10.5" y="0" width="7.5" height="7.5"/><rect x="0" y="10.5" width="7.5" height="7.5"/><rect x="10.5" y="10.5" width="7.5" height="7.5"/></svg></button><button class="view-btn" id="view-1" title="1 columna"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><rect x="0" y="0" width="18" height="7"/><rect x="0" y="9" width="18" height="7"/></svg></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="store-body" id="catalogo">
+      <div id="prod-grid"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="mini-footer">
+  <span class="mini-footer-copy">© 2025 GL Cuchillos Artesanales · Gonzalo Londero · 🇦🇷 Industria Argentina</span>
+  <a href="index.html" class="mini-footer-back"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Volver al inicio</a>
+</footer>
+
+<a href="https://wa.me/5493843458340?text=Hola%20Gonzalo!%20Vi%20la%20tienda%20y%20quiero%20consultar" class="wa-float" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Consultar</a>
+<button id="back-top" aria-label="Volver arriba"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<script>
+/* ── NAV SCROLL ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+/* ── NAV BURGER ── */
+const burger=document.getElementById('nav-burger'),overlay=document.getElementById('nav-overlay');
+burger.addEventListener('click',()=>{overlay.classList.add('open');document.body.style.overflow='hidden'});
+document.getElementById('overlay-close').addEventListener('click',()=>{overlay.classList.remove('open');document.body.style.overflow=''});
+overlay.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{overlay.classList.remove('open');document.body.style.overflow=''}));
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.05,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('vis')}),100);
+/* ── BACK TO TOP ── */
+const bt=document.getElementById('back-top');
+window.addEventListener('scroll',()=>bt.classList.toggle('visible',scrollY>500),{passive:true});
+bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ═══════════════════════════════════════
+   CARRUSEL VERTICAL (columna derecha)
+═══════════════════════════════════════ */
+const certImages = [
+  "cuchillo1.png",
+  "cuchillo2.png",
+  "cuchillo3.png",
+  "cuchillo4.png",
+  "cuchillo5.png"
+];
+const verticalTrack = document.getElementById('vertical-track');
+function buildVerticalScroller() {
+  let html = '';
+  for (let rep = 0; rep < 3; rep++) {
+    certImages.forEach(img => {
+      html += `<div class="scroll-item" onclick="window.open('${img}', '_blank')">
+        <img src="${img}" alt="Certificado GL Cuchillo" loading="lazy">
+      </div>`;
+    });
+  }
+  verticalTrack.innerHTML = html;
+}
+buildVerticalScroller();
+
+/* ── WOOD COLORS ── */
+const WOOD_COLORS = {
+  'algarrobo':'linear-gradient(90deg,#3a2010,#5c3818,#7a5028,#483010)',
+  'guayubira':'linear-gradient(90deg,#2a1e0e,#4e3820,#6e5030,#3c2a16)',
+  'lapacho':'linear-gradient(90deg,#3d1f0a,#6b3a1a,#8b4e22,#5c2e10)',
+  'nogal':'linear-gradient(90deg,#2d1a0e,#4a2c1a,#6b4228,#3d2614)',
+  'haya':'linear-gradient(90deg,#c8a878,#ddbf90,#c09060,#b08050)',
+  'wengue':'linear-gradient(90deg,#0e0906,#1e1410,#2c1e18,#160e0c)',
+  'pau ferro':'linear-gradient(90deg,#1c1408,#3a2a10,#5a4020,#2c2010)',
+  'olivo':'linear-gradient(90deg,#3d3418,#5c4e24,#7a6830,#4e4020)',
+  'micarta':'linear-gradient(90deg,#1a1a1a,#2e2e2e,#404040,#1a1a1a)',
+  'ebano':'linear-gradient(90deg,#080604,#100c08,#1a1410,#0c0a06)',
+  'ébano':'linear-gradient(90deg,#080604,#100c08,#1a1410,#0c0a06)',
+  'caoba':'linear-gradient(90deg,#3a1a10,#622c1a,#8a4228,#4e2418)',
+  'rosewood':'linear-gradient(90deg,#1e1008,#382016,#502e20,#2c1810)',
+  'palo de rosa':'linear-gradient(90deg,#1e1008,#382016,#502e20,#2c1810)',
+  'default':'linear-gradient(90deg,#1a1a1a,#2a2a2a,#3a3a3a,#222222)'
+};
+function getWoodGradient(emp) {
+  if(!emp) return WOOD_COLORS['default'];
+  const s = emp.toLowerCase();
+  const keys = Object.keys(WOOD_COLORS).filter(k=>k!=='default').sort((a,b)=>b.length-a.length);
+  for(let k of keys) if(s.includes(k)) return WOOD_COLORS[k];
+  return WOOD_COLORS['default'];
+}
+function getWoodCircleColor(emp) {
+  if(!emp) return '#2a2a2a';
+  const s = emp.toLowerCase();
+  if(s.includes('algarrobo')) return '#6a4020';
+  if(s.includes('guayubira')) return '#5e4828';
+  if(s.includes('lapacho')) return '#7a4220';
+  if(s.includes('nogal')) return '#5a3820';
+  if(s.includes('haya')) return '#c8a060';
+  if(s.includes('wengue')) return '#201810';
+  if(s.includes('pau ferro')) return '#483018';
+  if(s.includes('olivo')) return '#6a5828';
+  if(s.includes('micarta')) return '#303030';
+  return '#2a2a2a';
+}
+
+/* ── PRODUCTOS AGREGADOS: LISTA COMPLETA ── */
+const productList = [
+  { id:"760", name:"Jamonero Nº760", category:"Parrilla & Asado", description:"Jamonero tradicional, ideal para cortes precisos.", specs:["Acero 1095","Quebracho","31 cm"], badge:"avail", price:"Consultar", active:true, stock:2, details:{empunadura:"Quebracho"} },
+  { id:"769", name:"Mini Cleaver Nº769", category:"Cocina Profesional", description:"Mini cleaver versátil, gran filo.", specs:["Acero 1095","Micarta","18 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"762", name:"Fighter Nº762", category:"Caza & Campo", description:"Diseño táctico robusto para exteriores.", specs:["Acero 1095","Guayubira","28 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira"} },
+  { id:"797", name:"Verijero M Nº797 — Grabado WD", category:"Diseño Exclusivo", description:"Verijero con grabado exclusivo WD.", specs:["Acero 1095","Guayubira","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Grabado"} },
+  { id:"800", name:"Capador Nº800", category:"Caza & Campo", description:"Capador clásico, mango ergonómico.", specs:["Acero 1095","Quebracho","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"804", name:"Cleaver M Nº804", category:"Cocina Profesional", description:"Cleaver tamaño medio para carnes y vegetales.", specs:["Acero 1095","Micarta","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"799", name:"Capador Nº799", category:"Caza & Campo", description:"Capador de campo, excelente balance.", specs:["Acero 1095","Quebracho","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"803", name:"Cleaver M Nº803 — Incienso", category:"Cocina Profesional", description:"Cleaver con mango de Incienso.", specs:["Acero 1095","Incienso","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Incienso"} },
+  { id:"802", name:"Cleaver M Nº802 — Haya", category:"Cocina Profesional", description:"Cleaver con mango de Haya clara.", specs:["Acero 1095","Haya","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Haya"} },
+  { id:"801", name:"Fileteador Nº801", category:"Cocina Profesional", description:"Fileteador flexible para pescados y carnes.", specs:["Acero 1095","Olivo","29 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"813", name:"Parrillero S Nº813", category:"Parrilla & Asado", description:"Parrillero pequeño, ágil en la parrilla.", specs:["Acero 1095","Quebracho","28 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"806", name:"Capador Nº806 — Micarta Naranja", category:"Caza & Campo", description:"Capador con micarta naranja, gran agarre.", specs:["Acero 1095","Micarta Naranja","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Naranja"} },
+  { id:"811", name:"Verijero S Nº811 — Nogal Premium", category:"Caza & Campo", description:"Verijero chico con nogal premium.", specs:["Acero 1095","Nogal Premium","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Nogal Premium"} },
+  { id:"808", name:"Capador Nº808 — Baquelita+Pau Ferro", category:"Caza & Campo", description:"Capador combinación Baquelita + Pau Ferro.", specs:["Acero 1095","Baquelita+Pau Ferro","26 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Baquelita+Pau Ferro"} },
+  { id:"818", name:"Parrillero M Nº818", category:"Parrilla & Asado", description:"Parrillero mediano, versátil y preciso.", specs:["Acero 1095","Guayubira","30 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira"} },
+  { id:"816", name:"Fileteador Nº816 — Olivo", category:"Cocina Profesional", description:"Fileteador con mango de olivo.", specs:["Acero 1095","Olivo","30 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"817", name:"Verijero S Nº817 — Haya Europea", category:"Caza & Campo", description:"Verijero pequeño, haya europea.", specs:["Acero 1095","Haya Europea","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Haya Europea"} },
+  { id:"815", name:"Cleaver M Nº815 — Chacaranda", category:"Cocina Profesional", description:"Cleaver con mango de Chacaranda.", specs:["Acero 1095","Chacaranda","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Chacaranda"} },
+  { id:"819", name:"Verijero M Nº819 — Guayubira Exótica", category:"Caza & Campo", description:"Verijero con guayubira exótica.", specs:["Acero 1095","Guayubira Exótica","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Exótica"} },
+  { id:"821", name:"Verijero M Nº821 — Guayubira Seleccionada", category:"Caza & Campo", description:"Guayubira seleccionada de alta densidad.", specs:["Acero 1095","Guayubira Seleccionada","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Guayubira Seleccionada"} },
+  { id:"823", name:"Verijero S Nº823 — Roble Americano", category:"Caza & Campo", description:"Roble americano para un acabado elegante.", specs:["Acero 1095","Roble Americano","22 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Roble Americano"} },
+  { id:"820", name:"Verijero M Nº820 — Pau Ferro", category:"Caza & Campo", description:"Pau ferro de alta resistencia.", specs:["Acero 1095","Pau Ferro","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Pau Ferro"} },
+  { id:"822", name:"Parrillero XL Nº822", category:"Parrilla & Asado", description:"Parrillero extra grande, ideal para piezas grandes.", specs:["Acero 1095","Quebracho","34 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Quebracho"} },
+  { id:"828", name:"Verijero S Nº828 — Full Tang", category:"Diseño Exclusivo", description:"Full tang con micarta, máxima robustez.", specs:["Acero 1095","Micarta","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Full Tang"} },
+  { id:"829", name:"Verijero S Nº829 — Nogal+Purpleheart", category:"Diseño Exclusivo", description:"Combinación nogal y purpleheart.", specs:["Acero 1095","Nogal+Purpleheart","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Nogal+Purpleheart"} },
+  { id:"830", name:"Verijero S Nº830 — Micarta Marfil", category:"Diseño Exclusivo", description:"Micarta marfil, estética única.", specs:["Acero 1095","Micarta Marfil","23 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta Marfil"} },
+  { id:"834", name:"Mini Táctico Nº834", category:"Diseño Exclusivo", description:"Mini táctico de porte discreto.", specs:["Acero 1095","Micarta","16 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"833", name:"Verijero M Nº833 — Incienso Jaspeado", category:"Caza & Campo", description:"Incienso jaspeado, veta única.", specs:["Acero 1095","Incienso Jaspeado","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Incienso Jaspeado"} },
+  { id:"831", name:"Verijero M Nº831 — Caoba Africana", category:"Diseño Exclusivo", description:"Caoba africana de gran belleza.", specs:["Acero 1095","Caoba Africana","24 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Caoba Africana"} },
+  { id:"827", name:"Tipo Tanto Nº827", category:"Diseño Exclusivo", description:"Geometría Tanto, filo recto y punta reforzada.", specs:["Acero 1095","Micarta","27 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Micarta"} },
+  { id:"844", name:"Set Fileteador + Tenedor Nº844", category:"Parrilla & Asado", description:"Set completo fileteador + tenedor, mango olivo.", specs:["Acero 1095","Olivo","29+20 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Olivo"} },
+  { id:"845", name:"Parrillero M Nº845 — Burl Olivo", category:"Parrilla & Asado", description:"Parrillero con burl de olivo, diseño exclusivo.", specs:["Acero 1095","Burl Olivo","31 cm"], badge:"avail", price:"Consultar", active:true, stock:1, details:{empunadura:"Burl Olivo"} }
+];
+
+/* ── PRODUCT LOGIC (merge con products.json si existe) ── */
+let allProducts = [];
+let currentCat = 'all';
+let searchTerm = '';
+let sortMode = 'default';
+const urlCat = new URLSearchParams(location.search).get('cat');
+if (urlCat) currentCat = decodeURIComponent(urlCat);
+function renderTabs(products) {
+  const tabsEl = document.getElementById('cat-tabs');
+  if (!tabsEl) return;
+  const counts = {};
+  products.filter(p => p.active !== false).forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1 });
+  const total = products.filter(p => p.active !== false).length;
+  const cats = [{ id: 'all', label: 'Todos', count: total }];
+  Object.entries(counts).sort((a,b)=>b[1]-a[1]).forEach(([cat,n])=>cats.push({id:cat,label:cat,count:n}));
+  tabsEl.innerHTML = cats.map(c => `<button class="cat-btn ${currentCat===c.id?'active':''}" data-cat="${c.id}">${c.label}<span class="cat-count">${c.count}</span></button>`).join('');
+  tabsEl.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>filterCat(btn.dataset.cat)));
+}
+function getFiltered() {
+  let list = allProducts.filter(p=>p.active!==false);
+  if(currentCat!=='all') list = list.filter(p=>p.category===currentCat);
+  if(searchTerm){
+    const s=searchTerm.toLowerCase();
+    list = list.filter(p=>(p.name+' '+p.category+' '+(p.description||'')+' '+(p.specs||[]).join(' ')+(p.details?.empunadura||'')).toLowerCase().includes(s));
+  }
+  if(sortMode==='name-az') list.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sortMode==='name-za') list.sort((a,b)=>b.name.localeCompare(a.name));
+  else if(sortMode==='avail') list.sort((a,b)=>(b.stock>0?1:-1)-(a.stock>0?1:-1));
+  else if(sortMode==='price-asc') list.sort((a,b)=>(parseInt((a.price||'').replace(/[^0-9]/g,''))||0)-(parseInt((b.price||'').replace(/[^0-9]/g,''))||0));
+  else if(sortMode==='price-desc') list.sort((a,b)=>(parseInt((b.price||'').replace(/[^0-9]/g,''))||0)-(parseInt((a.price||'').replace(/[^0-9]/g,''))||0));
+  return list;
+}
+const knifeArts = [`<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 25 L205 145 Q214 162 204 174 L110 170Z" fill="currentColor" opacity=".8"/><rect x="102" y="165" width="16" height="8" rx="1" fill="currentColor"/><path d="M104 173 Q103 230 106 310 L116 310 Q119 230 118 173Z" fill="currentColor" opacity=".6"/><circle cx="110" cy="205" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="245" r="3" fill="currentColor" opacity=".9"/><circle cx="110" cy="285" r="3" fill="currentColor" opacity=".9"/></svg>`,`<svg class="prod-art" viewBox="0 0 220 400" fill="none"><path d="M110 30 L210 160 Q218 178 208 190 L110 184Z" fill="currentColor" opacity=".7"/><path d="M107 182 Q106 236 108 298 L114 298 Q116 236 114 182Z" fill="currentColor" opacity=".5"/><rect x="103" y="178" width="14" height="8" rx="1" fill="currentColor"/><ellipse cx="110" cy="218" rx="4" ry="3" fill="currentColor" opacity=".85"/><ellipse cx="110" cy="258" rx="4" ry="3" fill="currentColor" opacity=".85"/></svg>`,`<svg class="prod-art" viewBox="0 0 240 360" fill="none"><path d="M50 120 L190 80 Q210 78 210 96 L190 130 L50 144 Z" fill="currentColor" opacity=".75"/><rect x="44" y="118" width="10" height="28" rx="1" fill="currentColor" opacity=".6"/><path d="M26 146 Q24 204 28 280 L40 280 Q42 204 40 146Z" fill="currentColor" opacity=".55"/><circle cx="33" cy="180" r="3.5" fill="currentColor" opacity=".9"/><circle cx="33" cy="225" r="3.5" fill="currentColor" opacity=".9"/></svg>`];
+function renderProducts() {
+  const list = getFiltered();
+  const gridEl = document.getElementById('prod-grid');
+  if(!gridEl) return;
+  if(!list.length){
+    gridEl.innerHTML = `<div class="store-empty"><div class="store-empty-ico">🔪</div><h3 class="store-empty-h">No encontramos piezas</h3><p class="store-empty-p">${searchTerm?'Probá con otro término de búsqueda.':'No hay productos en esta categoría por ahora.'}</p><button onclick="filterCat('all')" class="btn-outline" style="margin:0 auto;">Ver todo</button></div>`;
+    return;
+  }
+  const waNum = '5493843458340';
+  const badgeCls = { avail: 'badge-avail', custom: 'badge-custom', intl: 'badge-intl', unavail: 'badge-unavail' };
+  const badgeTxt = { avail: 'Disponible', custom: 'A pedido', intl: 'Internacional', unavail: 'Sin stock' };
+  const argentinaFlagSVG = `<svg class="arg-flag-svg" viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#75AADB"/><rect y="2" width="9" height="2" fill="#FFFFFF"/><circle cx="4.5" cy="3" r="1.2" fill="#F7B229"/><circle cx="4.5" cy="3" r="0.9" fill="#FDB913"/><path d="M4.5 2.2 L4.5 3.8 M3.7 3 L5.3 3" stroke="#FDB913" stroke-width="0.2"/></svg>`;
+  gridEl.innerHTML = list.map((p,i)=>{
+    const bc = badgeCls[p.badge]||'badge-avail';
+    const bt = p.badgeText||(badgeTxt[p.badge]||'Disponible');
+    const specs = (p.specs||[]).map(s=>`<span class="prod-spec">${s}</span>`).join('');
+    const imgEl = p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : (knifeArts[i%knifeArts.length]);
+    const stockN = typeof p.stock === 'number' ? p.stock : -1;
+    const stockLabel = stockN<0 ? 'Consultar stock' : stockN>0 ? `${stockN} disponible${stockN===1?'':'s'}` : 'Sin stock';
+    const stockColor = stockN===0 ? 'rgba(200,80,80,.9)' : stockN>0 ? 'rgba(80,200,120,.9)' : 'rgba(200,205,214,.45)';
+    const empunadura = (p.details?.empunadura) ? p.details.empunadura : (p.specs&&p.specs[1]?p.specs[1]:'');
+    const woodGradient = getWoodGradient(empunadura);
+    const woodShortName = empunadura ? empunadura.split(',')[0].split('+')[0].trim() : '--';
+    const waPresupuesto = `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola Gonzalo! Quiero consultar por "${p.name}" (N°${p.id}). ¿Podés darme un presupuesto o info sobre personalización?`)}`;
+    const checkoutLink = `checkout.html?id=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}`;
+    return `<div class="prod-card rv" onclick="openProduct('${p.id}')">
+      <div class="prod-wood-swatch" style="background:${woodGradient}"></div>
+      <div class="prod-img"><div class="prod-img-bg"></div>${imgEl}<div class="prod-badge ${bc}">${bt}</div><div class="prod-origin"><span class="prod-flag">${argentinaFlagSVG} Ind. Argentina</span><span class="prod-flag">✈ Envíos</span></div>${p.promo?`<div style="position:absolute;bottom:.7rem;right:.7rem;background:var(--silver);color:var(--jet);font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.26rem .62rem;z-index:2;">${p.promo}</div>`:''}<div class="prod-stock" style="background:rgba(8,8,8,.85);border:1px solid ${stockColor};color:${stockColor};">${stockLabel}</div><div class="prod-silver-line"></div></div>
+      <div class="prod-body"><p class="prod-cat">${p.category||'--'}</p><h3 class="prod-name">${p.name}</h3><p class="prod-desc">${p.description||''}</p><div class="prod-specs">${specs}</div><div class="prod-wood-detail"><div class="prod-wood-circle" style="background:${woodGradient};border-color:rgba(200,205,214,.2)"></div><span class="prod-wood-label">Mango ·</span><span class="prod-wood-name">${woodShortName}</span></div><div class="prod-footer" onclick="event.stopPropagation()"><div class="prod-price-row"><div class="prod-price">${p.price||'Consultar'}${p.priceNote?`<small>${p.priceNote}</small>`:''}</div></div><div class="prod-actions"><a href="${checkoutLink}" class="prod-btn prod-btn-pay" title="Pagar con Mercado Pago" onclick="event.stopPropagation()"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagar · MP</a><a href="${waPresupuesto}" class="prod-btn prod-btn-wa" target="_blank" title="Presupuesto / Personalización" onclick="event.stopPropagation()"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.26 5.26 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>Presupuesto</a><a href="https://www.instagram.com/cuchillos.artesanales.24" class="prod-btn prod-btn-ig" target="_blank" title="Ver en Instagram" onclick="event.stopPropagation()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div></div></div>`;
+  }).join('');
+  gridEl.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+  setTimeout(checkVis,80);
+}
+function openProduct(id){ window.location.href='producto.html?id='+encodeURIComponent(id); }
+function filterCat(cat){
+  currentCat=cat;
+  renderTabs(allProducts);
+  renderProducts();
+  const u=new URL(location.href);
+  if(cat==='all') u.searchParams.delete('cat'); else u.searchParams.set('cat',cat);
+  history.replaceState(null,'',u.toString());
+  const filtersEl=document.getElementById('cat-filters');
+  if(filtersEl) window.scrollTo({top:filtersEl.offsetTop-80,behavior:'smooth'});
+}
+document.getElementById('store-search').addEventListener('input',function(){searchTerm=this.value.trim();renderProducts();});
+document.getElementById('store-sort').addEventListener('change',function(){sortMode=this.value;renderProducts();});
+(async function(){
+  try{
+    const res=await fetch('products.json?t='+Date.now());
+    if(res.ok){
+      const data=await res.json();
+      const fetched=data.products||[];
+      const merged=[...fetched];
+      productList.forEach(np=>{ if(!merged.some(p=>p.id===np.id)) merged.push(np); });
+      allProducts=merged;
+    } else throw new Error();
+  }catch{
+    allProducts=productList;
+  }
+  renderTabs(allProducts);
+  renderProducts();
+})();
+function checkVis(){document.querySelectorAll('.rv:not(.vis)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight+100)el.classList.add('vis')})}
+window.addEventListener('scroll',checkVis,{passive:true});
+/* view switcher */
+const grid=document.getElementById('prod-grid');
+document.getElementById('view-3').addEventListener('click',function(){grid.className='';document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');});
+document.getElementById('view-2').addEventListener('click',function(){grid.className='grid-2';document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');});
+document.getElementById('view-1').addEventListener('click',function(){grid.className='grid-1';document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');});
+</script>
+</body>
+</html>
