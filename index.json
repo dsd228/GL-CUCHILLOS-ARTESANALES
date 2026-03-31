@@ -1,0 +1,7 @@
+{
+  "categories": [
+    {"id": "cocina", "name": "Cocina", "image": "/images/cocina.jpg"},
+    {"id": "caza", "name": "Caza", "image": "/images/caza.jpg"},
+    {"id": "supervivencia", "name": "Supervivencia", "image": "/images/supervivencia.jpg"}
+  ]
+}
